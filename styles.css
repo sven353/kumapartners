@@ -94,6 +94,11 @@ header.site{
 .hero h1{font-size:3.1rem; max-width:880px;}
 .hero .subhead{display:block; font-size:1.3rem; max-width:680px; margin-bottom:34px;}
 .hero-ctas{display:flex; align-items:center; gap:28px; flex-wrap:wrap;}
+.badge-pill{
+  display:inline-flex; align-items:center; gap:8px; background:#fff; border:1px solid var(--teal);
+  color:var(--teal); font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:.78rem;
+  letter-spacing:.04em; text-transform:uppercase; padding:8px 16px; border-radius:999px; margin-bottom:22px;
+}
 
 /* Proof bar */
 .proof{padding:40px 0; border-top:1px solid rgba(40,64,80,.1); border-bottom:1px solid rgba(40,64,80,.1);}
@@ -130,6 +135,10 @@ header.site{
 .compare td.kuma, .compare th.kuma{background:var(--navy); color:#fff;}
 .compare th.kuma{color:#fff;}
 .compare-wrap{overflow-x:auto;}
+.compare td.row-label{
+  font-family:'Montserrat',Arial,sans-serif; font-weight:600; color:var(--navy); background:rgba(88,128,136,.06);
+  white-space:nowrap;
+}
 
 /* Engagements */
 .tier-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:44px; align-items:stretch;}
