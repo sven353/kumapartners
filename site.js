@@ -87,6 +87,49 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  // --- Contact form: AJAX submit to Netlify Forms with inline success/error states ---
+  var contactForm = document.querySelector('[data-contact-form]');
+  if (contactForm) {
+    var contactShell = contactForm.closest('.contact-form-shell');
+    var contactSuccess = contactShell ? contactShell.querySelector('[data-contact-success]') : null;
+    var contactError = contactForm.querySelector('[data-contact-error]');
+    var contactSubmitBtn = contactForm.querySelector('[data-contact-submit]');
+    var contactBtnLabel = contactSubmitBtn ? contactSubmitBtn.querySelector('[data-btn-label]') : null;
+    var originalBtnText = contactBtnLabel ? contactBtnLabel.textContent : '';
+
+    function encodeFormData(form) {
+      return Array.prototype.map.call(form.elements, function (el) {
+        if (!el.name || el.disabled) return '';
+        if ((el.type === 'checkbox' || el.type === 'radio') && !el.checked) return '';
+        return encodeURIComponent(el.name) + '=' + encodeURIComponent(el.value);
+      }).filter(Boolean).join('&');
+    }
+
+    contactForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (contactError) contactError.hidden = true;
+      if (contactSubmitBtn) contactSubmitBtn.disabled = true;
+      if (contactBtnLabel) contactBtnLabel.textContent = 'Sending…';
+
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encodeFormData(contactForm)
+      }).then(function (response) {
+        if (!response.ok) throw new Error('Form submission failed with status ' + response.status);
+        contactForm.hidden = true;
+        if (contactSuccess) {
+          contactSuccess.hidden = false;
+          contactSuccess.focus();
+        }
+      }).catch(function () {
+        if (contactSubmitBtn) contactSubmitBtn.disabled = false;
+        if (contactBtnLabel) contactBtnLabel.textContent = originalBtnText;
+        if (contactError) contactError.hidden = false;
+      });
+    });
+  }
+
   // --- Investor CTA: pre-select the contact form's persona field ---
   if (window.location.hash === '#contact-investor') {
     var personaSelect = document.getElementById('persona');

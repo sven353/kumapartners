@@ -538,7 +538,23 @@ body.scan-modal-locked{overflow:hidden;}
 .contact-section .eyebrow::before{background:var(--teal);}
 .contact-grid{display:grid; grid-template-columns:1fr 1fr; gap:56px; margin-top:44px; align-items:start;}
 .contact-copy p{color:rgba(255,255,255,.8); font-size:1.05rem;}
-.contact-form{background:#fff; padding:34px; border-radius:2px;}
+.contact-reassurance{list-style:none; margin:28px 0 0; padding:0;}
+.contact-reassurance li{
+  display:flex; align-items:flex-start; gap:12px; margin-bottom:16px;
+  color:rgba(255,255,255,.85); font-size:.95rem; line-height:1.55;
+}
+.contact-reassurance li::before{
+  content:"✓"; color:var(--teal); font-weight:700; flex-shrink:0; margin-top:2px;
+}
+.contact-reassurance li strong{color:#fff; font-family:'Lato',Arial,sans-serif; font-weight:700;}
+.contact-direct-email{
+  margin-top:28px; padding-top:20px; border-top:1px solid rgba(255,255,255,.15);
+  font-size:.9rem; color:rgba(255,255,255,.65);
+}
+.contact-direct-email a{color:var(--teal); text-decoration:underline; text-underline-offset:3px;}
+.contact-direct-email a:hover{color:#fff;}
+
+.contact-form-shell{background:#fff; padding:34px; border-radius:2px; border:1px solid #E2DDD4;}
 .contact-form label{
   display:block; font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.8rem;
   text-transform:uppercase; letter-spacing:.04em; color:var(--navy); margin-bottom:6px;
@@ -549,8 +565,16 @@ body.scan-modal-locked{overflow:hidden;}
   font-family:'Lato',Arial,sans-serif; font-size:.95rem; color:var(--ink); background:#fff;
 }
 .contact-form textarea{min-height:100px; resize:vertical;}
-.contact-form .btn-primary{width:100%; justify-content:center;}
-.contact-note{font-size:.82rem; color:rgba(255,255,255,.6); margin-top:16px;}
+.contact-form .btn{width:100%; justify-content:center;}
+.btn-teal{background:var(--teal); color:#fff; border-color:var(--teal);}
+.btn-teal:hover{background:#47686f; border-color:#47686f;}
+.btn-teal:disabled{opacity:.65; cursor:not-allowed;}
+.contact-form-microcopy{font-size:.78rem; color:rgba(40,64,80,.55); text-align:center; margin:14px 0 0;}
+.contact-form-error{font-size:.85rem; color:#b3261e; text-align:center; margin:14px 0 0;}
+.contact-form-error a{color:inherit; text-decoration:underline;}
+.contact-success{text-align:center; padding:24px 8px;}
+.contact-success h3{color:var(--navy); font-size:1.4rem; margin-bottom:12px;}
+.contact-success p{color:rgba(26,26,26,.75); font-size:1rem; margin:0; max-width:420px; margin:0 auto;}
 
 /* Footer */
 footer.site{padding:60px 0 40px; border-top:1px solid rgba(40,64,80,.12);}
