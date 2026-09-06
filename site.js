@@ -50,6 +50,10 @@ document.addEventListener('DOMContentLoaded', function () {
 
     if (acceptBtn) acceptBtn.addEventListener('click', function () { dismiss('all'); });
     if (essentialBtn) essentialBtn.addEventListener('click', function () { dismiss('essential'); });
+
+    document.querySelectorAll('[data-cookie-preferences]').forEach(function (btn) {
+      btn.addEventListener('click', function () { banner.classList.add('show'); });
+    });
   }
 
   // --- Investor CTA: pre-select the contact form's persona field ---
