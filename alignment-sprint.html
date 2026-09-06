@@ -22,7 +22,7 @@
       <li><a href="partners.html">Partners</a></li>
     </ul>
     <div class="nav-cta">
-      <a href="index.html#contact" class="btn btn-primary btn-sm">Book a Friction Scan</a>
+      <button type="button" class="btn btn-primary btn-sm" data-open-scan-modal>Book a Friction Scan</button>
     </div>
   </nav>
 </header>
@@ -34,7 +34,7 @@
       <h1>The 60–90 Day Executive Alignment Sprint</h1>
       <p style="max-width:680px; font-size:1.15rem;">Where the Friction Scan diagnoses the problem, the Alignment Sprint fixes it. A hands-on, multi-partner intervention that rebuilds how your executive team actually makes decisions together.</p>
       <div class="hero-ctas" style="margin-top:28px;">
-        <a href="index.html#contact" class="btn btn-primary">Talk to a partner</a>
+        <button type="button" class="btn btn-primary" data-open-scan-modal>Talk to a partner</button>
         <a href="friction-scan.html" class="btn-link">Start with a Friction Scan →</a>
       </div>
     </div>
@@ -94,7 +94,7 @@
         <div class="eyebrow" style="margin-bottom:8px;">Investment</div>
         <div class="amount">€50,000 – €90,000</div>
         <p style="margin-top:12px; max-width:560px;">Scoped to team size and the number of partners required. Most engagements start with a Friction Scan; existing Scan clients get a defined path into the Sprint.</p>
-        <a href="index.html#contact" class="btn btn-primary">Talk to a partner</a>
+        <button type="button" class="btn btn-primary" data-open-scan-modal>Talk to a partner</button>
       </div>
     </div>
   </section>
@@ -133,6 +133,67 @@
     </div>
   </div>
 </footer>
+
+<!-- QUALIFYING BOOKING MODAL -->
+<div class="scan-modal-overlay" id="scan-modal-overlay" hidden>
+  <div class="scan-modal" role="dialog" aria-modal="true" aria-labelledby="scan-modal-title">
+    <button type="button" class="scan-modal-close" data-scan-close aria-label="Close">&times;</button>
+
+    <div class="scan-modal-step" data-modal-step="1">
+      <h3 id="scan-modal-title">Schedule a Confidential Diagnostic Call</h3>
+      <p class="scan-modal-subtitle">Select your current stage and leadership inflection point so we can connect you with the appropriate Managing Partner.</p>
+      <form data-scan-form novalidate>
+        <div class="field">
+          <label for="scan-name">Full name</label>
+          <input type="text" id="scan-name" required>
+        </div>
+        <div class="field">
+          <label for="scan-email">Work email</label>
+          <input type="email" id="scan-email" required>
+          <span class="scan-field-error" data-scan-email-error>Please use your business email address, not a personal inbox.</span>
+        </div>
+        <div class="field">
+          <label for="scan-company">Company name &amp; website</label>
+          <input type="text" id="scan-company" placeholder="Acme Inc., acme.com" required>
+        </div>
+        <div class="field">
+          <label for="scan-stage">Headcount &amp; funding stage</label>
+          <select id="scan-stage">
+            <option>Series A (25–50 headcount)</option>
+            <option>Series B–C (50–150+ headcount)</option>
+            <option>Private Equity / Late Stage</option>
+            <option>Investor / Board Director</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="scan-inflection">Primary inflection point</label>
+          <select id="scan-inflection">
+            <option>Co-Founder / Executive Alignment Friction</option>
+            <option>Decision Drag &amp; Scaling Execution Bottlenecks</option>
+            <option>C-Suite Restructuring or Transition</option>
+            <option>Portfolio Company Diagnostic (For VCs/PE)</option>
+          </select>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Continue to Calendar</button>
+      </form>
+    </div>
+
+    <div class="scan-modal-step" data-modal-step="2" hidden>
+      <h3>Schedule Your Diagnostic Call</h3>
+      <p class="scan-modal-reassurance">Confidential 30-minute introductory debrief with a Kuma Managing Partner.</p>
+      <div class="scan-recap">
+        <div><strong>Name:</strong> <span data-recap-name></span></div>
+        <div><strong>Email:</strong> <span data-recap-email></span></div>
+        <div><strong>Company:</strong> <span data-recap-company></span></div>
+      </div>
+      <!-- Replace this placeholder with your Cal.com, HubSpot Meetings, or Chili Piper embed snippet (iframe or script embed). The URL below already carries the lead's name, email, and company as query parameters, ready to drop into your scheduler's booking link. -->
+      <div class="scan-embed-placeholder">
+        <p>Calendar embed goes here. Swap this block for your Cal.com, HubSpot Meetings, or Chili Piper embed, prefilled with the parameters below.</p>
+        <input type="text" class="scan-embed-url" data-scan-embed-url readonly>
+      </div>
+    </div>
+  </div>
+</div>
 
 <div class="cookie-banner" id="cookie-banner">
   <div class="wrap">
