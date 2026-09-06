@@ -138,6 +138,16 @@ document.addEventListener('DOMContentLoaded', function () {
     if (contactSection) contactSection.scrollIntoView();
   }
 
+  // --- Offsite module CTA: pre-select the contact form's challenge field ---
+  document.querySelectorAll('[data-offsite-cta]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var challengeSelect = document.getElementById('challenge');
+      if (challengeSelect) challengeSelect.value = 'Offsite Facilitation';
+      var contactSection = document.getElementById('contact');
+      if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
   // --- Leadership Friction Scorecard ---
   var scorecard = document.getElementById('scorecard-widget');
   if (scorecard) {
