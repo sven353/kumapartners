@@ -56,6 +56,37 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  // --- Tier 1 interactive timeline & deliverables drawer ---
+  var scanDrawer = document.getElementById('scan-timeline-drawer');
+  if (scanDrawer) {
+    var scanDrawerTriggers = document.querySelectorAll('[data-scan-timeline-toggle]');
+
+    function setScanDrawerOpen(isOpen) {
+      scanDrawer.classList.toggle('open', isOpen);
+      scanDrawer.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+      scanDrawerTriggers.forEach(function (btn) {
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        var arrow = btn.querySelector('[data-toggle-arrow]');
+        if (arrow) arrow.textContent = isOpen ? '↑' : '↓';
+      });
+    }
+
+    var scanDrawerAnchor = scanDrawerTriggers[0];
+    scanDrawerTriggers.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var willOpen = !scanDrawer.classList.contains('open');
+        setScanDrawerOpen(willOpen);
+        if (willOpen) {
+          setTimeout(function () {
+            scanDrawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }, 320);
+        } else if (scanDrawerAnchor) {
+          scanDrawerAnchor.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+      });
+    });
+  }
+
   // --- Investor CTA: pre-select the contact form's persona field ---
   if (window.location.hash === '#contact-investor') {
     var personaSelect = document.getElementById('persona');
