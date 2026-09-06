@@ -30,6 +30,7 @@ h1,h2,h3,h4{
 h1{font-size:2.75rem;}
 h2{font-size:2rem;}
 h3{font-size:1.25rem;}
+.brk-responsive{display:inline;}
 p{margin:0 0 1em;}
 a{color:var(--navy);}
 .italic-serif, .subhead{
@@ -681,4 +682,5 @@ footer.site{padding:60px 0 40px; border-top:1px solid rgba(40,64,80,.12);}
   .scan-drawer-steps, .scan-drawer-deliverables{grid-template-columns:1fr; gap:24px;}
   .scan-drawer-card{padding:30px 24px;}
   .scan-drawer-footer{flex-direction:column; align-items:flex-start;}
+  .brk-responsive{display:none;}
 }
