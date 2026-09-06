@@ -106,10 +106,28 @@ header.site{
   text-align:center; font-family:'Lato',Arial,sans-serif; font-size:.85rem;
   letter-spacing:.06em; text-transform:uppercase; color:rgba(26,26,26,.55); margin-bottom:24px;
 }
-.logo-strip{display:flex; flex-wrap:wrap; justify-content:center; gap:40px 52px;}
-.logo-strip span{
+.marquee{
+  width:100%; overflow:hidden;
+  -webkit-mask-image:linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  mask-image:linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+.marquee-track{
+  display:flex; align-items:center; width:max-content;
+  animation:marquee 40s linear infinite;
+  will-change:transform;
+}
+.marquee:hover .marquee-track{animation-play-state:paused;}
+.marquee-track span{
   font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:1.1rem;
-  color:rgba(40,64,80,.45); letter-spacing:.02em;
+  color:var(--teal); letter-spacing:.02em; white-space:nowrap; flex-shrink:0;
+  padding:0 44px;
+}
+@keyframes marquee{
+  from{transform:translateX(0);}
+  to{transform:translateX(-50%);}
+}
+@media (prefers-reduced-motion: reduce){
+  .marquee-track{animation:none;}
 }
 
 /* Problem cards */
@@ -308,6 +326,8 @@ header.site{
 
 @media (max-width: 860px){
   .case-grid{grid-template-columns:1fr;}
+  .marquee-track span{padding:0 26px; font-size:1rem;}
+  .marquee-track{animation-duration:28s;}
   .cookie-banner .wrap{flex-direction:column; align-items:flex-start;}
   .cookie-actions{width:100%;}
   .cookie-actions button{flex:1;}
