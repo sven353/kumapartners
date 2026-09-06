@@ -434,6 +434,112 @@
     </div>
   </section>
 
+  <!-- LEADERSHIP FRICTION SCORECARD -->
+  <section id="scorecard">
+    <div class="wrap">
+      <div class="section-head" style="text-align:center; max-width:640px; margin:0 auto;">
+        <div class="eyebrow" style="justify-content:center;">Free self-assessment</div>
+        <h2>Where Is Your Leadership Team Losing Speed?</h2>
+        <p>A 60-second diagnostic for founders, CEOs, and boards who suspect the bottleneck isn't strategy, it's the room.</p>
+      </div>
+
+      <div class="scorecard-card" id="scorecard-widget">
+
+        <div class="scorecard-progress" hidden>
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        </div>
+
+        <!-- INTRO -->
+        <div class="sc-step" data-step="intro">
+          <h3 class="sc-title">Assess Your Leadership Team's Friction Score</h3>
+          <p class="sc-subtitle">Answer 4 questions to evaluate executive decision velocity and organizational drag. Takes 60 seconds.</p>
+          <button type="button" class="btn btn-primary" data-start>Start Assessment</button>
+        </div>
+
+        <!-- Q1 -->
+        <div class="sc-step" data-step="q1" hidden>
+          <div class="sc-qnum">Question 1 of 4</div>
+          <h3 class="sc-title">Where do the real strategic debates happen?</h3>
+          <button type="button" class="scorecard-option" data-value="low">In the open executive room, where decisions are finalized immediately.</button>
+          <button type="button" class="scorecard-option" data-value="moderate">Behind closed doors, in 1:1 side-channels before or after meetings.</button>
+          <button type="button" class="scorecard-option" data-value="acute">They don't happen. Hard topics are avoided to keep polite peace.</button>
+        </div>
+
+        <!-- Q2 -->
+        <div class="sc-step" data-step="q2" hidden>
+          <div class="sc-qnum">Question 2 of 4</div>
+          <h3 class="sc-title">How fast does the C-suite execute critical decisions (hiring, roadmap pivots)?</h3>
+          <button type="button" class="scorecard-option" data-value="low">Within 48 hours, with clear ownership.</button>
+          <button type="button" class="scorecard-option" data-value="moderate">Weeks of deliberation, with lingering ambiguity.</button>
+          <button type="button" class="scorecard-option" data-value="acute">Decisions are made, reopened, and stalled repeatedly.</button>
+        </div>
+
+        <!-- Q3 -->
+        <div class="sc-step" data-step="q3" hidden>
+          <div class="sc-qnum">Question 3 of 4</div>
+          <h3 class="sc-title">What is the current alignment between co-founders and key executives?</h3>
+          <button type="button" class="scorecard-option" data-value="low">High trust, complementary roles, mutual accountability.</button>
+          <button type="button" class="scorecard-option" data-value="moderate">Occasional territorial tension, but generally functional.</button>
+          <button type="button" class="scorecard-option" data-value="acute">Significant unspoken tension, siloed teams, or eroded trust.</button>
+        </div>
+
+        <!-- Q4 -->
+        <div class="sc-step" data-step="q4" hidden>
+          <div class="sc-qnum">Question 4 of 4</div>
+          <h3 class="sc-title">What is your current team size and funding stage?</h3>
+          <button type="button" class="scorecard-option" data-value="seed">Seed to Series A (20–49 headcount)</button>
+          <button type="button" class="scorecard-option" data-value="seriesbc">Series B to Series C (50–150+ headcount)</button>
+          <button type="button" class="scorecard-option" data-value="enterprise">Private Equity / Enterprise Scale</button>
+        </div>
+
+        <!-- GATE -->
+        <div class="sc-step" data-step="gate" hidden>
+          <h3 class="sc-title">Almost there. Where should we send your diagnostic?</h3>
+          <p class="sc-subtitle">Your results are tailored to your answers and won't be shared.</p>
+          <form data-gate-form novalidate>
+            <div class="field">
+              <label for="sc-email">Work email</label>
+              <input type="email" id="sc-email" required>
+            </div>
+            <div class="field">
+              <label for="sc-company">Company name</label>
+              <input type="text" id="sc-company" required>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Reveal Diagnostic Assessment</button>
+          </form>
+        </div>
+
+        <!-- RESULT -->
+        <div class="sc-step" data-step="result" hidden>
+
+          <div class="sc-result-tier" data-tier="A" hidden>
+            <span class="sc-tier-pill sc-tier-a">Low Drag</span>
+            <h3 class="sc-title">Tier A · High Decision Velocity</h3>
+            <p>Your executive team is currently making decisions fast, with clear ownership and few unspoken tensions. That's rare at your stage, and worth protecting. The patterns that quietly break teams at the next stage of growth usually start exactly where you are now.</p>
+          </div>
+
+          <div class="sc-result-tier" data-tier="B" hidden>
+            <span class="sc-tier-pill sc-tier-b">Moderate Drag</span>
+            <h3 class="sc-title">Tier B · Emerging Scaling Friction</h3>
+            <p>Your answers point to real, measurable drag: decisions that take longer than they should, tension that's managed rather than resolved. This is the exact profile of a company where a 14-Day Friction Scan finds the one or two blockers before they cost a hire, a round, or a co-founder.</p>
+          </div>
+
+          <div class="sc-result-tier" data-tier="C" hidden>
+            <span class="sc-tier-pill sc-tier-c">Critical Drag</span>
+            <h3 class="sc-title">Tier C · Acute Executive Fracture</h3>
+            <p>Your answers describe a leadership team under real strain: avoided conversations, stalled decisions, eroded trust. Left alone, this is the pattern that stalls fundraising and burns out founders. It's also the exact situation our Friction Scan and Alignment Sprint are built to intervene in, directly and confidentially.</p>
+          </div>
+
+          <button type="button" class="btn btn-primary" data-scorecard-cta>Book a 14-Day Friction Scan to Fix This</button>
+          <div style="margin-top:14px;">
+            <a href="#" class="btn-link" data-scorecard-restart style="font-size:.85rem;">Retake the assessment</a>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
   <!-- CONTACT -->
   <section id="contact" class="contact-section">
     <div class="wrap">
