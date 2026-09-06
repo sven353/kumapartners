@@ -42,4 +42,12 @@ document.addEventListener('DOMContentLoaded', function () {
     if (essentialBtn) essentialBtn.addEventListener('click', function () { dismiss('essential'); });
   }
 
+  // --- Investor CTA: pre-select the contact form's persona field ---
+  if (window.location.hash === '#contact-investor') {
+    var personaSelect = document.getElementById('persona');
+    if (personaSelect) personaSelect.value = 'investor';
+    var contactSection = document.getElementById('contact');
+    if (contactSection) contactSection.scrollIntoView();
+  }
+
 });
