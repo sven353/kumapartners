@@ -90,6 +90,10 @@ section[id]{scroll-margin-top:79px;}
   color:var(--navy); text-decoration:underline; text-underline-offset:4px;
   font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.95rem;
 }
+.team-link{transition:color .2s ease;}
+.team-link .arrow{display:inline-block; transition:transform .2s ease;}
+.team-link:hover{color:var(--teal);}
+.team-link:hover .arrow{transform:translateX(4px);}
 .btn-sm{padding:10px 18px; font-size:.82rem;}
 
 /* Hero */
@@ -279,6 +283,7 @@ section[id]{scroll-margin-top:79px;}
 
 /* Partners */
 .partner-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:44px;}
+.partner-grid.partner-grid-2col{grid-template-columns:repeat(2,1fr); max-width:820px; margin-left:auto; margin-right:auto;}
 .partner-card{background:#fff; border:1px solid rgba(40,64,80,.1); padding:32px 28px; border-radius:2px;}
 .partner-card .avatar{
   width:64px; height:64px; border-radius:50%; background:var(--navy); color:#fff;
@@ -756,6 +761,7 @@ footer.site{padding:60px 0 40px; border-top:1px solid rgba(40,64,80,.12);}
 @media (max-width: 860px){
   .nav-links{display:none;}
   .card-grid, .tier-grid, .partner-grid, .phase-grid, .case-grid, .fit-grid{grid-template-columns:1fr;}
+  .partner-grid.partner-grid-2col{grid-template-columns:1fr; max-width:420px;}
   .phase{border-left:1px solid rgba(40,64,80,.12) !important; border-bottom:none;}
   .phase:last-child{border-bottom:1px solid rgba(40,64,80,.12);}
   .contact-grid, .two-col{grid-template-columns:1fr;}
