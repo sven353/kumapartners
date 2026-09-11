@@ -87,6 +87,20 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  // --- Contact form: reveal free-text field when "Other / Specific mandate" is chosen ---
+  var challengeSelectEl = document.getElementById('challenge');
+  var challengeOtherField = document.querySelector('[data-challenge-other-field]');
+  var challengeOtherInput = document.getElementById('challenge-other');
+  if (challengeSelectEl && challengeOtherField) {
+    function toggleChallengeOther() {
+      var isOther = challengeSelectEl.value === 'Other / Specific mandate';
+      challengeOtherField.hidden = !isOther;
+      if (!isOther && challengeOtherInput) challengeOtherInput.value = '';
+    }
+    challengeSelectEl.addEventListener('change', toggleChallengeOther);
+    toggleChallengeOther();
+  }
+
   // --- Contact form: AJAX submit to Netlify Forms with inline success/error states ---
   var contactForm = document.querySelector('[data-contact-form]');
   if (contactForm) {
@@ -168,7 +182,10 @@ document.addEventListener('DOMContentLoaded', function () {
   document.querySelectorAll('[data-offsite-cta]').forEach(function (btn) {
     btn.addEventListener('click', function () {
       var challengeSelect = document.getElementById('challenge');
-      if (challengeSelect) challengeSelect.value = 'Offsite Facilitation';
+      if (challengeSelect) {
+        challengeSelect.value = 'Upcoming high-stakes leadership offsite';
+        challengeSelect.dispatchEvent(new Event('change'));
+      }
       var contactSection = document.getElementById('contact');
       if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
     });
@@ -215,7 +232,11 @@ document.addEventListener('DOMContentLoaded', function () {
     function setSelectValueByText(select, text) {
       if (!select) return;
       for (var i = 0; i < select.options.length; i++) {
-        if (select.options[i].text === text) { select.value = select.options[i].value || text; return; }
+        if (select.options[i].text === text) {
+          select.value = select.options[i].value || text;
+          select.dispatchEvent(new Event('change'));
+          return;
+        }
       }
     }
 
@@ -355,22 +376,26 @@ document.addEventListener('DOMContentLoaded', function () {
         var emailField = document.getElementById('email');
         var companyField = document.getElementById('company');
         var personaField = document.getElementById('persona');
-        var stageField = document.getElementById('stage');
+        var headcountField = document.getElementById('headcount');
+        var stageField = document.getElementById('funding-stage');
         var challengeField = document.getElementById('challenge');
 
         if (emailField) emailField.value = respondent.email;
         if (companyField) companyField.value = respondent.company;
         if (personaField) personaField.value = respondent.mode;
 
-        var stageText = { seed: 'Seed – Series A', seriesbc: 'Series B – C', growth: 'PE-backed' }[answers.q7];
+        var headcountText = { seed: '25 – 75 people', seriesbc: '75 – 150 people', growth: '150+ people' }[answers.q7];
+        if (headcountText) setSelectValueByText(headcountField, headcountText);
+
+        var stageText = { seed: 'Seed – Series A', seriesbc: 'Series B – Series C', growth: 'Growth / PE-Backed' }[answers.q7];
         if (stageText) setSelectValueByText(stageField, stageText);
 
         var results = computeResults();
         var maxLevel = Math.max(results.velocityLevel, results.candorLevel, results.governanceLevel);
-        var challengeText = 'Decision drag';
-        if (results.governanceLevel === maxLevel) challengeText = 'Executive restructuring';
-        else if (results.candorLevel === maxLevel) challengeText = 'Co-founder misalignment';
-        else if (results.velocityLevel === maxLevel) challengeText = 'Decision drag';
+        var challengeText = 'Decision latency & execution drag';
+        if (results.governanceLevel === maxLevel) challengeText = 'Board / Governance dynamics';
+        else if (results.candorLevel === maxLevel) challengeText = 'Co-founder or C-suite misalignment';
+        else if (results.velocityLevel === maxLevel) challengeText = 'Decision latency & execution drag';
         setSelectValueByText(challengeField, challengeText);
 
         var contactSection = document.getElementById('contact');

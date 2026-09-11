@@ -641,7 +641,7 @@
             <li><strong>Strict Confidentiality:</strong> All initial diagnostics and conversations are covered under mutual non-disclosure.</li>
             <li><strong>24-Hour Turnaround:</strong> We review your company context and respond within one business day.</li>
           </ul>
-          <p class="contact-direct-email">Prefer direct email? Reach the partners directly at <a href="mailto:contact@kuma.partners">contact@kuma.partners</a></p>
+          <p class="contact-direct-email">Prefer direct email? Reach the partners directly at <a href="mailto:vincent@kuma.partners">vincent@kuma.partners</a></p>
         </div>
         <div class="contact-form-shell">
           <form class="contact-form" name="contact" method="POST" action="/#contact" data-netlify="true" netlify-honeypot="bot-field" id="contact-form" data-contact-form>
@@ -665,24 +665,42 @@
               <label for="email">Work email</label>
               <input type="email" id="email" name="email" required>
             </div>
-            <div class="field">
-              <label for="stage">Headcount / funding stage</label>
-              <select id="stage" name="stage">
-                <option>Seed – Series A</option>
-                <option>Series B – C</option>
-                <option>Enterprise</option>
-                <option>PE-backed</option>
-              </select>
+            <div class="field-row">
+              <div class="field">
+                <label for="headcount">Headcount</label>
+                <select id="headcount" name="headcount" required>
+                  <option>&lt; 25 people</option>
+                  <option selected>25 – 75 people</option>
+                  <option>75 – 150 people</option>
+                  <option>150+ people</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="funding-stage">Funding stage</label>
+                <select id="funding-stage" name="funding_stage" required>
+                  <option>Bootstrapped / Profitable</option>
+                  <option selected>Seed – Series A</option>
+                  <option>Series B – Series C</option>
+                  <option>Growth / PE-Backed</option>
+                  <option>VC / PE Fund Representative</option>
+                </select>
+              </div>
             </div>
             <div class="field">
               <label for="challenge">Primary challenge</label>
               <select id="challenge" name="challenge">
-                <option>Co-founder misalignment</option>
-                <option>Decision drag</option>
-                <option>Scaling bottleneck</option>
-                <option>Executive restructuring</option>
-                <option>Offsite Facilitation</option>
+                <option>Co-founder or C-suite misalignment</option>
+                <option>Decision latency &amp; execution drag</option>
+                <option>Cross-functional friction (Product vs. GTM silos)</option>
+                <option>Post-fundraise or scaling integration strain</option>
+                <option>Upcoming high-stakes leadership offsite</option>
+                <option>Board / Governance dynamics</option>
+                <option>Other / Specific mandate</option>
               </select>
+            </div>
+            <div class="field" data-challenge-other-field hidden>
+              <label for="challenge-other">Tell us more</label>
+              <input type="text" id="challenge-other" name="challenge_other" placeholder="Briefly describe the core situation...">
             </div>
             <button type="submit" class="btn btn-teal" data-contact-submit>
               <span data-btn-label>Schedule a Partner Conversation</span>
