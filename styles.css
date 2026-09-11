@@ -101,8 +101,8 @@ section[id]{scroll-margin-top:79px;}
   padding:110px 0 90px;
   background:linear-gradient(180deg, rgba(88,128,136,.08), transparent 60%);
 }
-.hero .wrap{max-width:920px;}
-.hero h1{font-size:3.1rem; max-width:880px;}
+.hero .wrap{max-width:1040px;}
+.hero h1{font-size:3.1rem; max-width:1000px;}
 .hero .subhead{display:block; font-size:1.3rem; max-width:680px; margin-bottom:34px;}
 .hero-ctas{display:flex; align-items:center; gap:28px; flex-wrap:wrap;}
 .badge-pill{
@@ -206,10 +206,7 @@ section[id]{scroll-margin-top:79px;}
   font-family:'Lato',Arial,sans-serif; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
   font-size:.72rem; color:var(--teal); margin-bottom:12px;
 }
-.tier-card h3{font-size:1.35rem;}
-.tier-card .price{
-  font-family:'Montserrat',Arial,sans-serif; font-weight:600; color:var(--navy); font-size:1.05rem; margin:16px 0 20px;
-}
+.tier-card h3{font-size:1.35rem; margin-bottom:16px;}
 .tier-card ul{list-style:none; margin:0 0 28px; padding-left:0; font-size:.92rem;}
 .tier-card ul li{
   display:flex; align-items:flex-start; gap:12px; margin-bottom:12px; line-height:1.6;
@@ -268,13 +265,6 @@ section[id]{scroll-margin-top:79px;}
   font-size:.7rem; color:var(--navy); margin-bottom:6px;
 }
 .offsite-specs-row p{margin:0; font-size:.92rem; line-height:1.5;}
-.offsite-specs-price{
-  font-family:'Montserrat',Arial,sans-serif; font-weight:700; color:var(--navy); font-size:1.15rem;
-}
-.offsite-specs-price span{
-  display:block; font-family:'Lato',Arial,sans-serif; font-weight:400; text-transform:none; letter-spacing:normal;
-  color:rgba(26,26,26,.6); font-size:.82rem; margin-top:2px;
-}
 .offsite-specs-note{
   margin-top:20px; padding-top:18px; border-top:1px solid #E2DDD4;
   font-size:.85rem; color:rgba(26,26,26,.65); line-height:1.55;

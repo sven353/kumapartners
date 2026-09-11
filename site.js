@@ -131,12 +131,20 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // --- Investor CTA: pre-select the contact form's persona field ---
-  if (window.location.hash === '#contact-investor') {
+  function selectInvestorPersona() {
     var personaSelect = document.getElementById('persona');
     if (personaSelect) personaSelect.value = 'investor';
     var contactSection = document.getElementById('contact');
-    if (contactSection) contactSection.scrollIntoView();
+    if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
   }
+  if (window.location.hash === '#contact-investor') {
+    selectInvestorPersona();
+  }
+  document.querySelectorAll('[data-investor-cta]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      selectInvestorPersona();
+    });
+  });
 
   // --- Offsite module CTA: pre-select the contact form's challenge field ---
   document.querySelectorAll('[data-offsite-cta]').forEach(function (btn) {
