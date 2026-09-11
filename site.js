@@ -146,6 +146,24 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  // --- Executive Briefing CTA (from partners.html): bring the role field into focus ---
+  function focusBriefingPersona() {
+    var contactSection = document.getElementById('contact');
+    if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
+    var personaSelect = document.getElementById('persona');
+    if (personaSelect) {
+      setTimeout(function () { personaSelect.focus(); }, 400);
+    }
+  }
+  if (window.location.hash === '#contact-briefing') {
+    focusBriefingPersona();
+  }
+  document.querySelectorAll('[data-briefing-cta]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      focusBriefingPersona();
+    });
+  });
+
   // --- Offsite module CTA: pre-select the contact form's challenge field ---
   document.querySelectorAll('[data-offsite-cta]').forEach(function (btn) {
     btn.addEventListener('click', function () {
