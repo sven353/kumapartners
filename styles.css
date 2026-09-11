@@ -326,7 +326,7 @@ section[id]{scroll-margin-top:79px;}
 
 /* Advisor network grid */
 .advisor-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:22px; margin-top:44px;}
-.advisor-card{background:#fff; border:1px solid rgba(40,64,80,.1); padding:26px 24px; border-radius:2px; text-align:left;}
+.advisor-card{background:#fff; border:1px solid rgba(40,64,80,.1); border-top:3px solid var(--navy); padding:26px 24px; border-radius:2px; text-align:left;}
 .advisor-photo{
   width:56px; height:56px; border-radius:50%; background:var(--cream); border:1px solid rgba(40,64,80,.15);
   display:flex; align-items:center; justify-content:center; overflow:hidden; margin-bottom:14px;
