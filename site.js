@@ -156,14 +156,43 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // --- Leadership Friction Scorecard ---
+  // --- Leadership Friction Diagnostic ---
   var scorecard = document.getElementById('scorecard-widget');
   if (scorecard) {
-    var QUESTION_ORDER = ['q1', 'q2', 'q3', 'q4'];
-    var answers = { q1: null, q2: null, q3: null, q4: null };
-    var respondent = { email: '', company: '' };
+    var QUESTION_ORDER = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6', 'q7'];
+    var SCORED_QUESTIONS = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6'];
+    var SCORE_MAP = { low: 1, moderate: 2, acute: 3 };
+    var LEVEL_CLASS = { 1: 'optimal', 2: 'moderate', 3: 'high' };
+    var VELOCITY_LABELS = { 1: 'High', 2: 'At Risk', 3: 'Stalled' };
+    var CANDOR_LABELS = { 1: 'Transparent', 2: 'Guarded', 3: 'Fragmented' };
+    var GOVERNANCE_LABELS = { 1: 'Unified', 2: 'Politicized', 3: 'Fractured' };
+    var BADGE_COPY = {
+      optimal: 'OPTIMAL DECISION VELOCITY',
+      moderate: 'MODERATE EXECUTION DRAG',
+      high: 'HIGH LEADERSHIP FRICTION'
+    };
+    var CTA_COPY = {
+      founder: 'Initiate a 14-Day Friction Scan to Fix This',
+      investor: 'Request a Confidential Portfolio Debrief'
+    };
+    var SYNTHESIS_COPY = {
+      founder: {
+        optimal: "Your responses point to a leadership team moving fast, with clear ownership and low unspoken tension. That's rare at any stage, and worth protecting deliberately as you scale. The patterns that quietly erode this later usually start exactly where you are now.",
+        moderate: "Your responses point to real, measurable drag: decisions that take longer than they should, tension that gets managed rather than resolved. This is the exact profile our 14-Day Friction Scan is built to catch early, before it costs a hire, a round, or a co-founder.",
+        high: "Your responses indicate a leadership team experiencing acute decision latency and structural misalignments. Left unaddressed, this pattern stalls strategic momentum, burns out founders, and erodes runway. This is the exact inflection point our 14-Day Friction Scan and Alignment Sprint are built to resolve."
+      },
+      investor: {
+        optimal: "Your answers describe a portfolio company with fast decision velocity and low executive friction, a genuine asset heading into its next growth phase. Worth protecting deliberately as headcount and board pressure scale.",
+        moderate: "Your answers point to emerging friction: decisions that take longer than they should, tension that's managed rather than resolved. Left alone at scale, this is the pattern that quietly erodes execution velocity well before it shows up in the numbers.",
+        high: "Your answers reflect significant executive friction that risks leaking into board milestones, hiring retention, and delivery timelines. Kuma Partners acts as a senior operator intervention to resolve leadership drag while fully preserving founder trust."
+      }
+    };
+
+    var answers = { q1: null, q2: null, q3: null, q4: null, q5: null, q6: null, q7: null };
+    var respondent = { email: '', company: '', mode: 'founder' };
     var progressWrap = scorecard.querySelector('.scorecard-progress');
-    var dots = progressWrap ? progressWrap.querySelectorAll('.dot') : [];
+    var progressText = scorecard.querySelector('[data-progress-text]');
+    var progressFill = scorecard.querySelector('[data-progress-fill]');
 
     function setSelectValueByText(select, text) {
       if (!select) return;
@@ -172,19 +201,46 @@ document.addEventListener('DOMContentLoaded', function () {
       }
     }
 
+    function applyLens() {
+      var isFounder = respondent.mode === 'founder';
+      scorecard.querySelectorAll('[data-lens-founder]').forEach(function (el) { el.hidden = !isFounder; });
+      scorecard.querySelectorAll('[data-lens-investor]').forEach(function (el) { el.hidden = isFounder; });
+    }
+
     function showStep(stepId) {
       var steps = scorecard.querySelectorAll('.sc-step');
       steps.forEach(function (el) { el.hidden = el.getAttribute('data-step') !== stepId; });
 
       var qIndex = QUESTION_ORDER.indexOf(stepId);
+      var isLensStep = stepId === 'lens';
       if (progressWrap) {
-        progressWrap.hidden = qIndex === -1;
-        dots.forEach(function (dot, i) { dot.classList.toggle('active', i <= qIndex); });
+        progressWrap.hidden = qIndex === -1 && !isLensStep;
+        if (qIndex !== -1) {
+          if (progressText) progressText.textContent = 'Step ' + (qIndex + 1) + ' of ' + QUESTION_ORDER.length;
+          if (progressFill) progressFill.style.width = (((qIndex + 1) / QUESTION_ORDER.length) * 100) + '%';
+        } else if (isLensStep) {
+          if (progressText) progressText.textContent = '';
+          if (progressFill) progressFill.style.width = '0%';
+        }
       }
     }
 
     var startBtn = scorecard.querySelector('[data-start]');
-    if (startBtn) startBtn.addEventListener('click', function () { showStep('q1'); });
+    if (startBtn) startBtn.addEventListener('click', function () { showStep('lens'); });
+
+    var lensStep = scorecard.querySelector('.sc-step[data-step="lens"]');
+    if (lensStep) {
+      var lensOptions = lensStep.querySelectorAll('[data-mode]');
+      lensOptions.forEach(function (opt) {
+        opt.addEventListener('click', function () {
+          lensOptions.forEach(function (o) { o.classList.remove('selected'); });
+          opt.classList.add('selected');
+          respondent.mode = opt.getAttribute('data-mode');
+          applyLens();
+          setTimeout(function () { showStep('q1'); }, 250);
+        });
+      });
+    }
 
     QUESTION_ORDER.forEach(function (qid) {
       var step = scorecard.querySelector('.sc-step[data-step="' + qid + '"]');
@@ -204,6 +260,62 @@ document.addEventListener('DOMContentLoaded', function () {
       });
     });
 
+    function computeResults() {
+      var sum = SCORED_QUESTIONS.reduce(function (total, qid) { return total + (SCORE_MAP[answers[qid]] || 0); }, 0);
+      var pct = Math.round(((sum - SCORED_QUESTIONS.length) / (SCORED_QUESTIONS.length * 2)) * 100);
+      pct = Math.max(0, Math.min(100, pct));
+      var tier = pct < 35 ? 'optimal' : (pct <= 65 ? 'moderate' : 'high');
+
+      var velocityLevel = SCORE_MAP[answers.q2] || 1;
+      var candorLevel = Math.round(((SCORE_MAP[answers.q1] || 1) + (SCORE_MAP[answers.q4] || 1) + (SCORE_MAP[answers.q5] || 1)) / 3);
+      var governanceLevel = Math.round(((SCORE_MAP[answers.q3] || 1) + (SCORE_MAP[answers.q6] || 1)) / 2);
+
+      return { pct: pct, tier: tier, velocityLevel: velocityLevel, candorLevel: candorLevel, governanceLevel: governanceLevel };
+    }
+
+    function paintSubmetric(key, level, labels) {
+      var valueEl = scorecard.querySelector('[data-submetric="' + key + '"]');
+      if (!valueEl) return;
+      var levelClass = LEVEL_CLASS[level] || 'optimal';
+      valueEl.textContent = labels[level] || labels[1];
+      valueEl.className = 'sc-submetric-value ' + levelClass;
+      var wrapper = valueEl.closest('.sc-submetric');
+      if (wrapper) {
+        var ticks = wrapper.querySelectorAll('.sc-submetric-tick');
+        ticks.forEach(function (tick, i) {
+          tick.className = 'sc-submetric-tick' + (i < level ? ' on-' + levelClass : '');
+        });
+      }
+    }
+
+    function renderResults() {
+      var results = computeResults();
+
+      var badge = scorecard.querySelector('[data-score-badge]');
+      if (badge) {
+        badge.className = 'sc-score-badge sc-badge-' + results.tier;
+        badge.textContent = BADGE_COPY[results.tier];
+      }
+
+      var headline = scorecard.querySelector('[data-score-headline]');
+      if (headline) {
+        var label = respondent.mode === 'founder' ? 'Executive Drag Index' : 'Portfolio Risk Index';
+        headline.textContent = label + ': ' + results.pct + '/100';
+      }
+
+      paintSubmetric('velocity', results.velocityLevel, VELOCITY_LABELS);
+      paintSubmetric('candor', results.candorLevel, CANDOR_LABELS);
+      paintSubmetric('governance', results.governanceLevel, GOVERNANCE_LABELS);
+
+      var synthesisEl = scorecard.querySelector('[data-synthesis]');
+      if (synthesisEl) synthesisEl.textContent = (SYNTHESIS_COPY[respondent.mode] || SYNTHESIS_COPY.founder)[results.tier];
+
+      var ctaBtn = scorecard.querySelector('[data-scorecard-cta]');
+      if (ctaBtn) ctaBtn.textContent = CTA_COPY[respondent.mode] || CTA_COPY.founder;
+
+      return results;
+    }
+
     var gateForm = scorecard.querySelector('[data-gate-form]');
     if (gateForm) {
       gateForm.addEventListener('submit', function (e) {
@@ -214,14 +326,7 @@ document.addEventListener('DOMContentLoaded', function () {
         respondent.company = companyInput ? companyInput.value.trim() : '';
         if (!respondent.email || !respondent.company) return;
 
-        var scoreMap = { low: 1, moderate: 2, acute: 3 };
-        var score = (scoreMap[answers.q1] || 0) + (scoreMap[answers.q2] || 0) + (scoreMap[answers.q3] || 0);
-        var tier = score <= 4 ? 'A' : (score <= 7 ? 'B' : 'C');
-
-        scorecard.querySelectorAll('.sc-result-tier').forEach(function (el) {
-          el.hidden = el.getAttribute('data-tier') !== tier;
-        });
-
+        renderResults();
         showStep('result');
       });
     }
@@ -231,16 +336,23 @@ document.addEventListener('DOMContentLoaded', function () {
       ctaBtn.addEventListener('click', function () {
         var emailField = document.getElementById('email');
         var companyField = document.getElementById('company');
+        var personaField = document.getElementById('persona');
         var stageField = document.getElementById('stage');
         var challengeField = document.getElementById('challenge');
 
         if (emailField) emailField.value = respondent.email;
         if (companyField) companyField.value = respondent.company;
+        if (personaField) personaField.value = respondent.mode;
 
-        var stageText = { seed: 'Seed – Series A', seriesbc: 'Series B – C', enterprise: 'Enterprise' }[answers.q4];
+        var stageText = { seed: 'Seed – Series A', seriesbc: 'Series B – C', growth: 'PE-backed' }[answers.q7];
         if (stageText) setSelectValueByText(stageField, stageText);
 
-        var challengeText = answers.q1 === 'acute' || answers.q3 === 'acute' ? 'Co-founder misalignment' : 'Decision drag';
+        var results = computeResults();
+        var maxLevel = Math.max(results.velocityLevel, results.candorLevel, results.governanceLevel);
+        var challengeText = 'Decision drag';
+        if (results.governanceLevel === maxLevel) challengeText = 'Executive restructuring';
+        else if (results.candorLevel === maxLevel) challengeText = 'Co-founder misalignment';
+        else if (results.velocityLevel === maxLevel) challengeText = 'Decision drag';
         setSelectValueByText(challengeField, challengeText);
 
         var contactSection = document.getElementById('contact');
@@ -252,13 +364,17 @@ document.addEventListener('DOMContentLoaded', function () {
     if (restartLink) {
       restartLink.addEventListener('click', function (e) {
         e.preventDefault();
-        answers = { q1: null, q2: null, q3: null, q4: null };
+        answers = { q1: null, q2: null, q3: null, q4: null, q5: null, q6: null, q7: null };
+        respondent.mode = 'founder';
         scorecard.querySelectorAll('.scorecard-option').forEach(function (o) { o.classList.remove('selected'); });
         var gateFormEl = scorecard.querySelector('[data-gate-form]');
         if (gateFormEl) gateFormEl.reset();
+        applyLens();
         showStep('intro');
       });
     }
+
+    applyLens();
   }
 
   // --- Qualifying booking modal/drawer ---

@@ -464,13 +464,13 @@ section[id]{scroll-margin-top:79px;}
   max-width:640px; margin:44px auto 0; padding:44px 40px;
   box-shadow:0 24px 50px -32px rgba(40,64,80,.35);
 }
-.scorecard-progress{display:flex; gap:8px; justify-content:center; margin-bottom:32px;}
-.scorecard-progress .dot{width:8px; height:8px; border-radius:50%; background:rgba(40,64,80,.15);}
-.scorecard-progress .dot.active{background:var(--teal);}
-.sc-qnum{
-  font-family:'Lato',Arial,sans-serif; font-weight:700; letter-spacing:.08em; text-transform:uppercase;
-  font-size:.72rem; color:var(--teal); margin-bottom:10px;
+.scorecard-progress{margin-bottom:32px;}
+.sc-progress-text{
+  display:block; text-align:center; font-family:'Lato',Arial,sans-serif; font-weight:700; letter-spacing:.08em;
+  text-transform:uppercase; font-size:.72rem; color:var(--teal); margin-bottom:10px; min-height:1em;
 }
+.sc-progress-bar{height:4px; border-radius:999px; background:rgba(40,64,80,.1); overflow:hidden;}
+.sc-progress-bar-fill{height:100%; width:0%; background:var(--teal); transition:width .25s ease;}
 .sc-title{font-size:1.4rem; margin-bottom:10px;}
 .sc-subtitle{color:rgba(26,26,26,.75); margin-bottom:26px;}
 .scorecard-option{
@@ -481,6 +481,8 @@ section[id]{scroll-margin-top:79px;}
 }
 .scorecard-option:hover{border-color:var(--teal); background:rgba(88,128,136,.06);}
 .scorecard-option.selected{border-color:var(--teal); background:rgba(88,128,136,.12); font-weight:700;}
+.sc-lens-option{text-align:center; font-weight:700;}
+.sc-lens-sub{display:block; font-weight:400; font-size:.85rem; color:rgba(26,26,26,.6); margin-top:4px;}
 .sc-step .field{margin-bottom:18px;}
 .sc-step label{
   display:block; font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.8rem;
@@ -490,13 +492,33 @@ section[id]{scroll-margin-top:79px;}
   width:100%; padding:12px 14px; border:1px solid rgba(40,64,80,.25); border-radius:2px;
   font-family:'Lato',Arial,sans-serif; font-size:.95rem; color:var(--ink); background:#fff;
 }
-.sc-tier-pill{
-  display:inline-block; font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.72rem;
+.sc-generate-btn{
+  display:inline-flex; align-items:center; justify-content:center; gap:8px; border:none; cursor:pointer;
+  font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.95rem; padding:14px 22px; border-radius:2px;
+  background:var(--navy); color:#fff; transition:background .15s ease;
+}
+.sc-generate-btn:hover{background:var(--teal);}
+.sc-score-badge{
+  display:inline-flex; align-items:center; font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.72rem;
   letter-spacing:.06em; text-transform:uppercase; padding:6px 14px; border-radius:999px; margin-bottom:14px;
 }
-.sc-tier-a{background:rgba(88,128,136,.12); color:var(--teal); border:1px solid var(--teal);}
-.sc-tier-b{background:rgba(40,64,80,.08); color:var(--navy); border:1px solid var(--navy);}
-.sc-tier-c{background:var(--navy); color:#fff; border:1px solid var(--navy);}
+.sc-badge-optimal{background:rgba(46,125,91,.12); color:#2E7D5B; border:1px solid #2E7D5B;}
+.sc-badge-moderate{background:rgba(184,134,11,.14); color:#8A6100; border:1px solid #B8860B;}
+.sc-badge-high{background:var(--navy); color:#fff; border:1px solid var(--navy); box-shadow:inset 3px 0 0 #C1502E;}
+.sc-score-headline{font-size:1.5rem; margin-bottom:22px;}
+.sc-submetrics{display:flex; flex-direction:column; gap:16px; margin-bottom:24px; padding:20px; background:rgba(40,64,80,.04); border-radius:4px;}
+.sc-submetric{display:flex; align-items:center; gap:14px; flex-wrap:wrap;}
+.sc-submetric-label{flex:1 1 170px; font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.85rem; color:var(--navy);}
+.sc-submetric-bar{display:flex; gap:3px;}
+.sc-submetric-tick{width:20px; height:6px; border-radius:2px; background:rgba(40,64,80,.15);}
+.sc-submetric-tick.on-optimal{background:#2E7D5B;}
+.sc-submetric-tick.on-moderate{background:#B8860B;}
+.sc-submetric-tick.on-high{background:#C1502E;}
+.sc-submetric-value{font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.85rem; min-width:100px; text-align:right;}
+.sc-submetric-value.optimal{color:#2E7D5B;}
+.sc-submetric-value.moderate{color:#8A6100;}
+.sc-submetric-value.high{color:#C1502E;}
+.sc-synthesis{color:rgba(26,26,26,.8); line-height:1.6; margin-bottom:26px;}
 #scorecard .sc-step[data-step="result"] .btn{width:100%; justify-content:center;}
 
 /* Qualifying booking modal / drawer */
