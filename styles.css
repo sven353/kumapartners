@@ -102,7 +102,7 @@ section[id]{scroll-margin-top:79px;}
   background:linear-gradient(180deg, rgba(88,128,136,.08), transparent 60%);
 }
 .hero .wrap{max-width:1040px;}
-.hero h1{font-size:3.1rem; max-width:1000px;}
+.hero h1{font-size:3.1rem; max-width:1000px; text-wrap:balance;}
 .hero .subhead{display:block; font-size:1.3rem; max-width:680px; margin-bottom:34px;}
 .hero-ctas{display:flex; align-items:center; gap:28px; flex-wrap:wrap;}
 .badge-pill{
