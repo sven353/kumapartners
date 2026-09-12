@@ -13,6 +13,48 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('scroll', updateHeaderScrollState, { passive: true });
   }
 
+  // --- Engagements / Offsites tab switcher ---
+  var tabAdvisoryBtn = document.getElementById('tab-advisory-btn');
+  var tabOffsitesBtn = document.getElementById('tab-offsites-btn');
+  var advisoryPanel = document.querySelector('[data-engage-panel="advisory"]');
+  var offsitesPanel = document.querySelector('[data-engage-panel="offsites"]');
+
+  if (tabAdvisoryBtn && tabOffsitesBtn && advisoryPanel && offsitesPanel) {
+    function activateEngageTab(which) {
+      var isOffsites = which === 'offsites';
+      advisoryPanel.hidden = isOffsites;
+      offsitesPanel.hidden = !isOffsites;
+      tabAdvisoryBtn.classList.toggle('active', !isOffsites);
+      tabOffsitesBtn.classList.toggle('active', isOffsites);
+    }
+
+    tabAdvisoryBtn.addEventListener('click', function () { activateEngageTab('advisory'); });
+    tabOffsitesBtn.addEventListener('click', function () { activateEngageTab('offsites'); });
+
+    // Keep the tab switcher in sync with #offsites / #tier-1..3 links (header nav, deep links).
+    // The target panel must be un-hidden before it can be scrolled to, so the browser's own
+    // native jump-on-load silently fails when the hash points into the hidden panel — re-do it
+    // ourselves once the right panel is visible (instant on load, smooth on later in-page clicks).
+    function routeEngageHash(scrollBehavior) {
+      var hash = window.location.hash.replace('#', '');
+      if (!hash) return;
+      if (hash === 'offsites') {
+        activateEngageTab('offsites');
+      } else if (hash === 'tier-1' || hash === 'tier-2' || hash === 'tier-3') {
+        activateEngageTab('advisory');
+      } else {
+        return;
+      }
+      if (scrollBehavior) {
+        var target = document.getElementById(hash);
+        if (target) target.scrollIntoView({ behavior: scrollBehavior, block: 'start' });
+      }
+    }
+
+    routeEngageHash('auto'); // sync tab + jump instantly on initial load, matching the native (failed) jump
+    window.addEventListener('hashchange', function () { routeEngageHash('smooth'); });
+  }
+
   // --- Mobile nav toggle + Engagements accordion ---
   if (siteHeader) {
     var navToggle = siteHeader.querySelector('.nav-toggle');
@@ -20,11 +62,18 @@ document.addEventListener('DOMContentLoaded', function () {
     var iconMenu = siteHeader.querySelector('.nav-toggle .icon-menu');
     var iconClose = siteHeader.querySelector('.nav-toggle .icon-close');
 
+    // SVG elements don't reflect the `.hidden` IDL property to the attribute in every browser,
+    // so toggle the actual attribute directly rather than the (unreliable, for <svg>) JS property.
+    function setSvgHidden(el, isHidden) {
+      if (!el) return;
+      if (isHidden) el.setAttribute('hidden', ''); else el.removeAttribute('hidden');
+    }
+
     function closeMobileNav() {
       siteHeader.classList.remove('nav-open');
       if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
-      if (iconMenu) iconMenu.hidden = false;
-      if (iconClose) iconClose.hidden = true;
+      setSvgHidden(iconMenu, false);
+      setSvgHidden(iconClose, true);
       var openDropdown = siteHeader.querySelector('.nav-item-dropdown.nav-dropdown-open');
       if (openDropdown) openDropdown.classList.remove('nav-dropdown-open');
     }
@@ -33,8 +82,8 @@ document.addEventListener('DOMContentLoaded', function () {
       navToggle.addEventListener('click', function () {
         var isOpen = siteHeader.classList.toggle('nav-open');
         navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-        if (iconMenu) iconMenu.hidden = isOpen;
-        if (iconClose) iconClose.hidden = !isOpen;
+        setSvgHidden(iconMenu, isOpen);
+        setSvgHidden(iconClose, !isOpen);
       });
     }
 

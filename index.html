@@ -117,54 +117,30 @@
   </section>
 
   <!-- PROBLEM -->
-  <section id="problem">
+  <section id="problem" style="background:#fff; border-bottom:1px solid #E2DDD4;">
     <div class="wrap">
       <div class="section-head">
         <div class="eyebrow">The problem</div>
         <h2>What breaks when fast-growing companies hit pressure</h2>
       </div>
-      <div class="card-grid">
-        <div class="problem-card">
-          <svg class="problem-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="12" cy="13" r="8"></circle>
-            <path d="M12 9v4l3 2"></path>
-            <path d="M9 2h6"></path>
-            <path d="M12 2v3"></path>
-          </svg>
-          <div>
-            <div class="problem-tag">01 · Velocity Drag</div>
-            <h3>Decision Latency</h3>
-            <p>Key hires, product pivots, and capital deployments stall because the leadership team avoids the hard call. Everyone can see the decision that needs to be made. No one is making it.</p>
-          </div>
-          <div class="problem-impact">Impact: Burned runway and second-guessing at the board table.</div>
+      <div class="problem-grid">
+        <div class="problem-col">
+          <span class="problem-index">01 &middot; Velocity Drag</span>
+          <h3>Decision Latency</h3>
+          <p>Key hires, product pivots, and capital deployments stall because the leadership team avoids the hard call. Everyone can see the decision that needs to be made. No one is making it.</p>
+          <div class="problem-callout">Impact: Burned runway and second-guessing at the board table.</div>
         </div>
-        <div class="problem-card">
-          <svg class="problem-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <circle cx="18" cy="6" r="2"></circle>
-            <circle cx="18" cy="18" r="2"></circle>
-            <circle cx="6" cy="12" r="2"></circle>
-            <path d="M8 12c3-2 7-4 8-5.5"></path>
-            <path d="M8 12c3 2 7 4 8 5.5"></path>
-          </svg>
-          <div>
-            <div class="problem-tag">02 · Latent Conflict</div>
-            <h3>Co-Founder &amp; C-Suite Fracture</h3>
-            <p>Unspoken disagreements and eroded trust between founders or C-suite peers turn into political silos. Meetings get politer. Execution gets slower.</p>
-          </div>
-          <div class="problem-impact">Impact: High-performer attrition and hidden operational drag.</div>
+        <div class="problem-col">
+          <span class="problem-index">02 &middot; Latent Conflict</span>
+          <h3>Co-Founder &amp; C-Suite Fracture</h3>
+          <p>Unspoken disagreements and eroded trust between founders or C-suite peers turn into political silos. Meetings get politer. Execution gets slower.</p>
+          <div class="problem-callout">Impact: High-performer attrition and hidden operational drag.</div>
         </div>
-        <div class="problem-card">
-          <svg class="problem-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-            <rect x="4" y="14" width="4" height="6"></rect>
-            <rect x="10" y="10" width="4" height="10"></rect>
-            <rect x="16" y="5" width="4" height="15"></rect>
-          </svg>
-          <div>
-            <div class="problem-tag">03 · Structural Strain</div>
-            <h3>The Scaling Bottleneck</h3>
-            <p>The informal operating habits that worked at 20 people actively suffocate the company at 75+. The org chart expanded. Decision governance didn't.</p>
-          </div>
-          <div class="problem-impact">Impact: Founder overload and missed milestone execution.</div>
+        <div class="problem-col">
+          <span class="problem-index">03 &middot; Structural Strain</span>
+          <h3>The Scaling Bottleneck</h3>
+          <p>The informal operating habits that worked at 20 people actively suffocate the company at 75+. The org chart expanded. Decision governance didn't.</p>
+          <div class="problem-callout">Impact: Founder overload and missed milestone execution.</div>
         </div>
       </div>
     </div>
@@ -221,7 +197,15 @@
         <h2>Three Structured Engagements.<br>Built for Scale.</h2>
         <p class="tier-subhead">Predictable scope. Defined milestones. Zero open-ended consulting retainers.</p>
       </div>
-      <div class="tier-grid">
+
+      <div class="engage-tabs">
+        <div class="engage-tabs-inner">
+          <button type="button" id="tab-advisory-btn" class="engage-tab-btn active" data-engage-tab="advisory">Leadership Engagements (Tiers 1&ndash;3)</button>
+          <button type="button" id="tab-offsites-btn" class="engage-tab-btn" data-engage-tab="offsites">Strategic &amp; Executive Offsites</button>
+        </div>
+      </div>
+
+      <div class="tier-grid" data-engage-panel="advisory">
         <div class="tier-card tier-featured" id="tier-1">
           <span class="tier-badge-pill">Recommended Entry Point</span>
           <div class="tier-label">Tier 1 · The door-opener</div>
@@ -329,7 +313,7 @@
         </div>
       </div>
 
-      <div class="offsite-module" id="offsites">
+      <div class="offsite-module" id="offsites" data-engage-panel="offsites" hidden>
         <span class="offsite-badge-pill">Strategic and Executive Offsites</span>
         <div class="offsite-grid">
           <div class="offsite-narrative">
