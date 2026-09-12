@@ -13,6 +13,34 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('scroll', updateHeaderScrollState, { passive: true });
   }
 
+  // --- Case studies tab switcher (cross-fade) ---
+  var caseTabs = document.querySelectorAll('.case-tab');
+  var casePanels = document.querySelectorAll('.case-docket-panel');
+  if (caseTabs.length && casePanels.length) {
+    function activateCase(key) {
+      caseTabs.forEach(function (btn) {
+        btn.classList.toggle('active', btn.getAttribute('data-case') === key);
+      });
+      casePanels.forEach(function (panel) {
+        if (panel.getAttribute('data-case-panel') === key) {
+          panel.hidden = false;
+          panel.classList.remove('is-active');
+          // Double rAF: let the browser paint the "just un-hidden, opacity 0" frame first,
+          // so the class change below actually transitions instead of being coalesced away.
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () { panel.classList.add('is-active'); });
+          });
+        } else {
+          panel.classList.remove('is-active');
+          panel.hidden = true;
+        }
+      });
+    }
+    caseTabs.forEach(function (btn) {
+      btn.addEventListener('click', function () { activateCase(btn.getAttribute('data-case')); });
+    });
+  }
+
   // --- Engagements / Offsites tab switcher ---
   var tabAdvisoryBtn = document.getElementById('tab-advisory-btn');
   var tabOffsitesBtn = document.getElementById('tab-offsites-btn');
