@@ -16,14 +16,43 @@
       <img src="assets/logo-lockup.png" alt="Kuma Partners">
     </a>
     <ul class="nav-links">
-      <li><a href="#problem">Problem</a></li>
-      <li><a href="#approach">Approach</a></li>
-      <li><a href="#engagements">Engagements</a></li>
+      <li><a href="#problem">For Founders &amp; CEOs</a></li>
+      <li><a href="#investors">For Investors</a></li>
+      <li class="nav-item-dropdown">
+        <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+          <span>Engagements</span>
+          <svg class="nav-dropdown-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 9l-7 7-7-7"></path></svg>
+        </button>
+        <div class="nav-dropdown-panel">
+          <div class="nav-dropdown-panel-inner">
+            <a href="#tier-1" class="nav-dropdown-link">
+              <span class="nav-dropdown-tier">Tier 1 &middot; Door-opener</span>
+              <span class="nav-dropdown-name">The 14-Day Friction Scan</span>
+            </a>
+            <a href="#tier-2" class="nav-dropdown-link">
+              <span class="nav-dropdown-tier">Tier 2 &middot; Intervention</span>
+              <span class="nav-dropdown-name">Executive Alignment Sprint</span>
+            </a>
+            <a href="#tier-3" class="nav-dropdown-link">
+              <span class="nav-dropdown-tier">Tier 3 &middot; Anchor</span>
+              <span class="nav-dropdown-name">Strategic Scaling Advisory</span>
+            </a>
+          </div>
+        </div>
+      </li>
+      <li><a href="#offsites">Offsites</a></li>
       <li><a href="partners.html">Partners</a></li>
+      <li class="nav-mobile-only">
+        <button type="button" class="btn btn-primary btn-sm" data-open-scan-modal>Book a Friction Scan</button>
+      </li>
     </ul>
     <div class="nav-cta">
       <button type="button" class="btn btn-primary btn-sm" data-open-scan-modal>Book a Friction Scan</button>
     </div>
+    <button type="button" class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" hidden><path d="M6 6l12 12M18 6L6 18"></path></svg>
+    </button>
   </nav>
 </header>
 
@@ -193,7 +222,7 @@
         <p class="tier-subhead">Predictable scope. Defined milestones. Zero open-ended consulting retainers.</p>
       </div>
       <div class="tier-grid">
-        <div class="tier-card tier-featured">
+        <div class="tier-card tier-featured" id="tier-1">
           <span class="tier-badge-pill">Recommended Entry Point</span>
           <div class="tier-label">Tier 1 · The door-opener</div>
           <h3>The 14-Day Leadership Friction Scan</h3>
@@ -226,7 +255,7 @@
             </button>
           </div>
         </div>
-        <div class="tier-card">
+        <div class="tier-card" id="tier-2">
           <div class="tier-label">Tier 2 · The intervention</div>
           <h3>The 60–90 Day Executive Alignment Sprint</h3>
           <p>Hands-on co-founder mediation, executive team restructuring, decision-governance redesign, and cross-functional facilitation.</p>
@@ -240,7 +269,7 @@
             <a href="alignment-sprint.html#phases" class="tier-cta-sub">Review the three delivery phases →</a>
           </div>
         </div>
-        <div class="tier-card">
+        <div class="tier-card" id="tier-3">
           <div class="tier-label">Tier 3 · The anchor</div>
           <h3>Strategic Scaling Advisory</h3>
           <p>Embedded strategic counsel and executive sparring for CEOs and key executives through hyper-growth or M&amp;A transitions.</p>
@@ -300,7 +329,7 @@
         </div>
       </div>
 
-      <div class="offsite-module">
+      <div class="offsite-module" id="offsites">
         <span class="offsite-badge-pill">Strategic and Executive Offsites</span>
         <div class="offsite-grid">
           <div class="offsite-narrative">
@@ -309,7 +338,7 @@
             <p>Most executive offsites default to polite status updates, vague brainstorms, and zero operational accountability. We step into the room to design the strategic agenda, surface the unspoken tensions, and facilitate the hard commercial debates that your team has been avoiding.</p>
             <ul class="offsite-included">
               <li><div><strong>Pre-Offsite Stakeholder Intake</strong><p>Confidential 1:1 interviews with each attendee to map hidden misalignments in advance.</p></div></li>
-              <li><div><strong>In-the-Room Operator Moderation</strong><p>1 to 2 days of direct facilitation by former C-suite operators, keeping debate focused on execution and P&amp;L reality.</p></div></li>
+              <li><div><strong>In-the-Room Operator Moderation</strong><p>1 to 5 days of direct facilitation by former C-suite operators, keeping debate focused on execution and P&amp;L reality.</p></div></li>
               <li><div><strong>Post-Offsite Binding Compact</strong><p>Transforming open discussion into explicit decision rights, resource trade-offs, and 90-day commitments.</p></div></li>
             </ul>
           </div>

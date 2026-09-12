@@ -13,6 +13,61 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('scroll', updateHeaderScrollState, { passive: true });
   }
 
+  // --- Mobile nav toggle + Engagements accordion ---
+  if (siteHeader) {
+    var navToggle = siteHeader.querySelector('.nav-toggle');
+    var navLinks = siteHeader.querySelector('.nav-links');
+    var iconMenu = siteHeader.querySelector('.nav-toggle .icon-menu');
+    var iconClose = siteHeader.querySelector('.nav-toggle .icon-close');
+
+    function closeMobileNav() {
+      siteHeader.classList.remove('nav-open');
+      if (navToggle) navToggle.setAttribute('aria-expanded', 'false');
+      if (iconMenu) iconMenu.hidden = false;
+      if (iconClose) iconClose.hidden = true;
+      var openDropdown = siteHeader.querySelector('.nav-item-dropdown.nav-dropdown-open');
+      if (openDropdown) openDropdown.classList.remove('nav-dropdown-open');
+    }
+
+    if (navToggle) {
+      navToggle.addEventListener('click', function () {
+        var isOpen = siteHeader.classList.toggle('nav-open');
+        navToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        if (iconMenu) iconMenu.hidden = isOpen;
+        if (iconClose) iconClose.hidden = !isOpen;
+      });
+    }
+
+    // Engagements dropdown: click-to-expand on mobile, hover/focus handles desktop via CSS.
+    var dropdownItem = siteHeader.querySelector('.nav-item-dropdown');
+    var dropdownTrigger = siteHeader.querySelector('.nav-dropdown-trigger');
+    if (dropdownItem && dropdownTrigger) {
+      dropdownTrigger.addEventListener('click', function () {
+        if (window.innerWidth > 860) return; // desktop uses hover/focus
+        var isOpen = dropdownItem.classList.toggle('nav-dropdown-open');
+        dropdownTrigger.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      });
+    }
+
+    // Close the mobile menu after choosing a link.
+    if (navLinks) {
+      navLinks.querySelectorAll('a').forEach(function (link) {
+        link.addEventListener('click', closeMobileNav);
+      });
+    }
+
+    // Close on outside click, Escape, or resize past the mobile breakpoint.
+    document.addEventListener('click', function (e) {
+      if (siteHeader.classList.contains('nav-open') && !siteHeader.contains(e.target)) closeMobileNav();
+    });
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape' && siteHeader.classList.contains('nav-open')) closeMobileNav();
+    });
+    window.addEventListener('resize', function () {
+      if (window.innerWidth > 860 && siteHeader.classList.contains('nav-open')) closeMobileNav();
+    });
+  }
+
   // --- FAQ accordion ---
   var faqItems = document.querySelectorAll('.faq-item');
   faqItems.forEach(function (item) {
