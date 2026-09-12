@@ -173,20 +173,19 @@ section[id]{scroll-margin-top:79px;}
   font-family:'Montserrat',Arial,sans-serif; font-weight:600; color:var(--navy); background:rgba(88,128,136,.08);
 }
 .compare td.kuma, .compare th.kuma{
-  background:var(--navy); color:#fff;
-  border-color:rgba(255,255,255,.15);
-  box-shadow:8px 0 20px -14px rgba(40,64,80,.5);
+  background:#fff; color:var(--navy);
+  border-left:2px solid var(--navy); border-right:2px solid var(--navy);
   position:relative;
 }
 .compare th.kuma{
-  color:#fff; font-weight:700; border-top:3px solid var(--teal);
+  color:var(--navy); font-weight:700; font-size:1.15rem; border-top:2px solid var(--navy);
   border-top-right-radius:8px;
 }
-.compare td.kuma p, .compare td.kuma{line-height:1.65;}
-.compare tbody tr:last-child td.kuma{border-bottom-right-radius:8px;}
+.compare td.kuma p, .compare td.kuma{line-height:1.65; font-weight:600;}
+.compare tbody tr:last-child td.kuma{border-bottom:2px solid var(--navy); border-bottom-right-radius:8px;}
 .th-badge{
-  display:block; width:max-content; margin-top:10px; background:#fff; color:var(--teal);
-  border:1px solid var(--teal); font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.62rem;
+  display:block; width:max-content; margin-top:10px; background:var(--teal); color:#fff;
+  border:none; font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.62rem;
   letter-spacing:.06em; text-transform:uppercase; padding:5px 11px; border-radius:999px;
 }
 .compare-wrap{overflow-x:auto; padding:4px 0 4px 4px;}
@@ -204,14 +203,15 @@ section[id]{scroll-margin-top:79px;}
   display:flex; flex-direction:column;
 }
 .tier-card.tier-featured{
-  background:#fff; border:1px solid #D5CEBF; border-top:4px solid var(--teal);
-  box-shadow:0 10px 24px -16px rgba(40,64,80,.28);
+  background:#fff; border:1px solid var(--navy);
+  box-shadow:0 18px 40px -24px rgba(40,64,80,.35); padding-top:44px;
 }
 .tier-badge-pill{
-  display:inline-block; margin-bottom:16px;
-  background:rgba(88,128,136,.15); color:var(--navy); white-space:nowrap;
-  font-family:'Montserrat',Arial,sans-serif; font-weight:700; font-size:.66rem;
-  letter-spacing:.08em; text-transform:uppercase; padding:7px 16px; border-radius:999px;
+  position:absolute; top:-15px; left:50%; transform:translateX(-50%);
+  background:var(--teal); color:#fff; white-space:nowrap;
+  font-family:'Montserrat',Arial,sans-serif; font-weight:700; font-size:.68rem;
+  letter-spacing:.08em; text-transform:uppercase; padding:7px 18px; border-radius:999px;
+  box-shadow:0 6px 16px -6px rgba(40,64,80,.4);
 }
 .tier-card .tier-label{
   font-family:'Lato',Arial,sans-serif; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
@@ -256,6 +256,7 @@ section[id]{scroll-margin-top:79px;}
   text-decoration:none; cursor:pointer;
 }
 .tier-cta-sub:hover{text-decoration:underline; text-underline-offset:3px;}
+.tier-featured .tier-cta-primary:hover{background:#1E2F38; border-color:#1E2F38;}
 
 /* High-Stakes Executive Offsite module */
 .offsite-module{
