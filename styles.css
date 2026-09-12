@@ -204,14 +204,15 @@ section[id]{scroll-margin-top:79px;}
   display:flex; flex-direction:column;
 }
 .tier-card.tier-featured{
-  border:2px solid var(--navy); box-shadow:0 18px 40px -24px rgba(40,64,80,.35); padding-top:44px;
+  background:var(--navy); border:1px solid #3A5364; border-top:4px solid var(--teal);
+  border-radius:8px; box-shadow:0 22px 44px -22px rgba(20,32,40,.55);
 }
 .tier-badge-pill{
-  position:absolute; top:-15px; left:50%; transform:translateX(-50%);
-  background:var(--teal); color:#fff; white-space:nowrap;
-  font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:.66rem;
-  letter-spacing:.08em; text-transform:uppercase; padding:7px 18px; border-radius:999px;
-  box-shadow:0 6px 16px -6px rgba(40,64,80,.4);
+  display:inline-block; margin-bottom:16px;
+  background:#fff; color:var(--navy); white-space:nowrap;
+  font-family:'Montserrat',Arial,sans-serif; font-weight:800; font-size:.66rem;
+  letter-spacing:.08em; text-transform:uppercase; padding:7px 16px; border-radius:999px;
+  box-shadow:0 2px 6px rgba(0,0,0,.15);
 }
 .tier-card .tier-label{
   font-family:'Lato',Arial,sans-serif; font-weight:700; letter-spacing:.1em; text-transform:uppercase;
@@ -256,6 +257,21 @@ section[id]{scroll-margin-top:79px;}
   text-decoration:none; cursor:pointer;
 }
 .tier-cta-sub:hover{text-decoration:underline; text-underline-offset:3px;}
+
+/* Tier 1 flagship card: inverted light-on-navy typography */
+.tier-featured .tier-label{color:#9FC2C7;}
+.tier-featured h3{color:#fff;}
+.tier-featured > p{color:rgba(244,241,235,.82);}
+.tier-featured ul li{color:rgba(244,241,235,.92);}
+.tier-featured .tier-mini-timeline{border-top-color:rgba(255,255,255,.15);}
+.tier-featured .tier-mini-step{color:rgba(244,241,235,.65);}
+.tier-featured .tier-mini-line{background:rgba(255,255,255,.2);}
+.tier-featured .tier-mini-dot{background:var(--teal);}
+.tier-featured .tier-mini-dot-final{background:#fff;}
+.tier-featured .tier-mini-final{color:#fff;}
+.tier-featured .tier-cta-primary{background:var(--cream); color:var(--navy); border-color:var(--cream);}
+.tier-featured .tier-cta-primary:hover{background:#fff;}
+.tier-featured .tier-cta-sub{color:#9FC2C7;}
 
 /* High-Stakes Executive Offsite module */
 .offsite-module{
