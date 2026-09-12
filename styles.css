@@ -165,7 +165,7 @@ section[id]{scroll-margin-top:79px;}
 .section-head h2{margin-bottom:14px;}
 
 /* Comparison table */
-.compare{width:100%; border-collapse:collapse; margin-top:44px; background:#fff;}
+.compare{width:100%; border-collapse:collapse; margin-top:24px; background:#fff;}
 .compare th, .compare td{
   text-align:left; padding:18px 22px; border:1px solid rgba(40,64,80,.12); vertical-align:top; font-size:.95rem;
 }
@@ -174,21 +174,27 @@ section[id]{scroll-margin-top:79px;}
 }
 .compare td.kuma, .compare th.kuma{
   background:#fff; color:var(--navy);
-  border-left:2px solid var(--navy); border-right:2px solid var(--navy);
+  box-shadow:inset 2px 0 0 var(--navy), inset -2px 0 0 var(--navy);
   position:relative;
 }
 .compare th.kuma{
-  color:var(--navy); font-weight:700; font-size:1.15rem; border-top:2px solid var(--navy);
-  border-top-right-radius:8px;
+  color:var(--navy); font-weight:700; font-size:1.15rem; padding-top:32px;
+  box-shadow:inset 2px 0 0 var(--navy), inset -2px 0 0 var(--navy), inset 0 2px 0 var(--navy);
+  border-top-left-radius:8px; border-top-right-radius:8px;
 }
 .compare td.kuma p, .compare td.kuma{line-height:1.65; font-weight:600;}
-.compare tbody tr:last-child td.kuma{border-bottom:2px solid var(--navy); border-bottom-right-radius:8px;}
-.th-badge{
-  display:block; width:max-content; margin-top:10px; background:var(--teal); color:#fff;
-  border:none; font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.62rem;
-  letter-spacing:.06em; text-transform:uppercase; padding:5px 11px; border-radius:999px;
+.compare tbody tr:last-child td.kuma{
+  box-shadow:inset 2px 0 0 var(--navy), inset -2px 0 0 var(--navy), inset 0 -2px 0 var(--navy);
+  border-bottom-left-radius:8px; border-bottom-right-radius:8px;
 }
-.compare-wrap{overflow-x:auto; padding:4px 0 4px 4px;}
+.th-badge{
+  position:absolute; top:-14px; left:50%; transform:translateX(-50%);
+  background:var(--teal); color:#fff; white-space:nowrap;
+  font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.62rem;
+  letter-spacing:.06em; text-transform:uppercase; padding:6px 14px; border-radius:999px;
+  box-shadow:0 6px 16px -6px rgba(40,64,80,.4); z-index:2;
+}
+.compare-wrap{overflow-x:auto; padding:20px 0 4px 4px;}
 .compare td.row-label{
   font-family:'Montserrat',Arial,sans-serif; font-weight:600; color:var(--navy); background:rgba(88,128,136,.06);
   white-space:nowrap;
