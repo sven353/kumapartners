@@ -283,6 +283,9 @@ document.addEventListener('DOMContentLoaded', function () {
     var progressWrap = scorecard.querySelector('.scorecard-progress');
     var progressText = scorecard.querySelector('[data-progress-text]');
     var progressFill = scorecard.querySelector('[data-progress-fill]');
+    var navRow = scorecard.querySelector('.sc-nav-row');
+    var backBtn = scorecard.querySelector('[data-back-btn]');
+    var BACK_TARGET = { q2: 'q1', q3: 'q2', q4: 'q3', q5: 'q4', q6: 'q5', q7: 'q6', gate: 'q7' };
 
     function setSelectValueByText(select, text) {
       if (!select) return;
@@ -317,6 +320,31 @@ document.addEventListener('DOMContentLoaded', function () {
           if (progressFill) progressFill.style.width = '0%';
         }
       }
+
+      var canGoBack = Object.prototype.hasOwnProperty.call(BACK_TARGET, stepId);
+      if (navRow) navRow.hidden = !canGoBack;
+      if (backBtn) backBtn.hidden = !canGoBack;
+    }
+
+    if (backBtn) {
+      backBtn.addEventListener('click', function () {
+        var current = scorecard.querySelector('.sc-step:not([hidden])');
+        var currentId = current ? current.getAttribute('data-step') : null;
+        var target = BACK_TARGET[currentId];
+        if (!target) return;
+
+        showStep(target);
+
+        var targetStep = scorecard.querySelector('.sc-step[data-step="' + target + '"]');
+        if (targetStep) {
+          targetStep.querySelectorAll('.scorecard-option').forEach(function (o) { o.classList.remove('selected'); });
+          var prevValue = answers[target];
+          if (prevValue) {
+            var match = targetStep.querySelector('.scorecard-option[data-value="' + prevValue + '"]');
+            if (match) match.classList.add('selected');
+          }
+        }
+      });
     }
 
     var startBtn = scorecard.querySelector('[data-start]');

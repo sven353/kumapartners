@@ -578,10 +578,18 @@ header.site.scrolled .nav{padding:10px 0;}
 
 /* Leadership Friction Scorecard */
 .scorecard-card{
-  background:#fff; border:1px solid rgba(40,64,80,.12); border-radius:4px;
-  max-width:640px; margin:44px auto 0; padding:44px 40px;
-  box-shadow:0 24px 50px -32px rgba(40,64,80,.35);
+  background:#fff; border:1px solid var(--navy); border-radius:2px;
+  max-width:640px; margin:44px auto 0; padding:40px;
+  box-shadow:0 18px 40px -24px rgba(40,64,80,.35);
 }
+.sc-nav-row{margin-top:24px; padding-top:20px; border-top:1px solid rgba(40,64,80,.1);}
+.sc-back-btn{
+  display:inline-flex; align-items:center; gap:6px; background:none; border:none; cursor:pointer; padding:6px 4px;
+  font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.8rem; color:var(--teal);
+  transition:color .15s ease;
+}
+.sc-back-btn:hover{color:var(--navy);}
+.sc-back-btn svg{width:14px; height:14px;}
 .scorecard-progress{margin-bottom:32px;}
 .sc-progress-text{
   display:block; text-align:center; font-family:'Lato',Arial,sans-serif; font-weight:700; letter-spacing:.08em;
@@ -926,6 +934,7 @@ footer.site{padding:60px 0 40px; border-top:1px solid rgba(40,64,80,.12);}
   .scan-drawer-card{padding:30px 24px;}
   .scan-drawer-footer{flex-direction:column; align-items:flex-start;}
   .offsite-module{padding:32px 24px 28px; margin-top:48px;}
+  .scorecard-card{padding:32px 24px; margin-top:32px;}
   .offsite-grid{grid-template-columns:1fr; gap:32px;}
   .brk-responsive{display:none;}
 }
