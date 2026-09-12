@@ -144,12 +144,14 @@ section[id]{scroll-margin-top:79px;}
 /* Problem cards */
 .card-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:44px;}
 .problem-card{
+  position:relative;
   background:#fff; border:1px solid rgba(40,64,80,.1); border-top:3px solid var(--navy);
   padding:34px 30px; border-radius:2px;
   display:flex; flex-direction:column; justify-content:space-between; height:100%;
   transition:box-shadow .2s ease;
 }
 .problem-card:hover{box-shadow:0 12px 28px -18px rgba(40,64,80,.35);}
+.problem-icon{position:absolute; top:26px; right:26px; width:24px; height:24px; color:var(--teal); opacity:.85;}
 .problem-tag{
   font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.72rem;
   color:var(--teal); margin-bottom:16px; letter-spacing:.08em; text-transform:uppercase;
@@ -223,6 +225,20 @@ section[id]{scroll-margin-top:79px;}
 .tier-card ul li::before{
   content:"✓"; flex-shrink:0; color:var(--teal); font-weight:700; line-height:1.6;
 }
+.tier-mini-timeline{
+  display:flex; align-items:flex-start; justify-content:space-between;
+  padding-top:20px; margin-bottom:24px; border-top:1px solid rgba(40,64,80,.1);
+}
+.tier-mini-step{
+  display:flex; flex-direction:column; align-items:center; text-align:center; gap:6px;
+  flex:0 0 auto; max-width:92px;
+  font-family:'Lato',Arial,sans-serif; font-size:.7rem; font-weight:600; line-height:1.35;
+  color:rgba(40,64,80,.55);
+}
+.tier-mini-dot{width:8px; height:8px; border-radius:50%; background:var(--teal); flex-shrink:0;}
+.tier-mini-dot-final{background:var(--navy);}
+.tier-mini-final{color:var(--navy); font-weight:700;}
+.tier-mini-line{flex:1; height:1px; background:rgba(40,64,80,.15); margin:4px 10px 0;}
 .tier-actions{margin-top:auto; display:flex; flex-direction:column; gap:10px;}
 .tier-cta{
   display:block; width:100%; text-align:center; box-sizing:border-box;
@@ -403,6 +419,15 @@ section[id]{scroll-margin-top:79px;}
 .case-block p{font-size:.9rem; margin:0;}
 .case-outcome{margin-top:auto; padding-top:16px; border-top:1px solid #E2DDD4;}
 .case-outcome .label{color:var(--teal);}
+.case-stat{display:flex; align-items:baseline; gap:8px; margin:8px 0 10px; flex-wrap:wrap;}
+.case-stat-value{
+  font-family:'Montserrat',Arial,sans-serif; font-weight:800; font-size:1.85rem;
+  color:var(--navy); letter-spacing:-.01em; line-height:1;
+}
+.case-stat-label{
+  font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.66rem;
+  text-transform:uppercase; letter-spacing:.06em; color:rgba(40,64,80,.5);
+}
 .case-outcome p{font-size:.9rem; line-height:1.55; color:var(--navy); font-weight:500; margin:0; min-height:5.6rem;}
 
 /* FAQ accordion */
@@ -445,11 +470,22 @@ section[id]{scroll-margin-top:79px;}
 .cookie-actions .btn-essential{background:transparent; color:var(--cream); border:1px solid rgba(244,241,235,.4);}
 .cookie-actions .btn-essential:hover{border-color:var(--cream);}
 
-/* Investor / VC & PE value grid */
+/* Investor / VC & PE section: high-contrast dark panel */
+#investors{background:#1E2F38; padding:76px 0;}
+#investors .badge-pill{background:transparent; border-color:rgba(255,255,255,.35); color:rgba(255,255,255,.9);}
+#investors h2{color:#fff;}
+#investors .wrap > p{color:rgba(226,221,212,.8);}
+#investors .btn-primary{background:var(--cream); color:var(--navy);}
+#investors .btn-primary:hover{background:#fff;}
+
 .value-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:36px;}
-.value-card{background:#fff; border:1px solid #E2DDD4; border-radius:2px; padding:28px 26px;}
-.value-card h3{font-size:1.05rem; margin-bottom:10px;}
-.value-card p{font-size:.92rem; margin:0;}
+.value-card{
+  background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:2px;
+  padding:28px 26px; transition:border-color .2s ease;
+}
+.value-card:hover{border-color:rgba(255,255,255,.22);}
+.value-card h3{font-size:1.05rem; margin-bottom:10px; color:#fff;}
+.value-card p{font-size:.92rem; margin:0; color:rgba(226,221,212,.8);}
 
 /* Tier 1 interactive timeline & deliverables drawer */
 .scan-drawer{
