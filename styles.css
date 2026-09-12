@@ -191,6 +191,32 @@ header.site.scrolled .nav{padding:10px 0;}
 .section-head{max-width:760px;}
 .section-head h2{margin-bottom:14px;}
 
+/* Team teaser — editorial curiosity callout */
+.team-teaser{border-top:1px solid rgba(40,64,80,.1); border-bottom:1px solid rgba(40,64,80,.1);}
+.team-teaser-lead{
+  border-left:2px solid var(--navy); padding:6px 0 6px 30px; margin-bottom:48px;
+}
+.team-teaser-lead h2{font-size:2.4rem; max-width:620px; margin-bottom:16px;}
+.team-teaser-lead p{font-size:1.05rem; color:rgba(26,26,26,.75); max-width:660px; line-height:1.65; margin-bottom:0;}
+.team-pillars{
+  display:grid; grid-template-columns:repeat(3,1fr); gap:40px;
+  padding-top:32px; border-top:1px solid rgba(40,64,80,.15); margin-bottom:40px;
+}
+.team-pillar-index{
+  display:block; font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.72rem;
+  letter-spacing:.1em; text-transform:uppercase; color:var(--teal); margin-bottom:10px;
+}
+.team-pillar p{font-size:.92rem; line-height:1.6; color:rgba(26,26,26,.72); margin-bottom:0;}
+.team-cta{
+  display:flex; align-items:center; justify-content:space-between; gap:28px; flex-wrap:wrap;
+  background:#fff; border:1px solid #E2DDD4; border-radius:6px; padding:28px 32px;
+}
+.team-cta-title{font-family:'Montserrat',Arial,sans-serif; font-weight:700; font-size:1.02rem; color:var(--navy); margin-bottom:6px;}
+.team-cta-sub{font-size:.85rem; color:rgba(26,26,26,.6);}
+.team-cta .btn{white-space:nowrap;}
+.team-cta .btn .arrow{display:inline-block; transition:transform .2s ease;}
+.team-cta .btn:hover .arrow{transform:translateX(4px);}
+
 /* Comparison table */
 .compare{width:100%; border-collapse:collapse; margin-top:24px; background:#fff;}
 .compare th, .compare td{
@@ -941,8 +967,13 @@ footer.site{padding:60px 0 40px; border-top:1px solid rgba(40,64,80,.12);}
   .nav-dropdown-link{padding:10px 0;}
   .nav-mobile-only{display:block; margin-top:16px;}
   .nav-mobile-only .btn{width:100%; justify-content:center;}
-  .problem-grid, .tier-grid, .partner-grid, .phase-grid, .case-docket-panel, .fit-grid{grid-template-columns:1fr;}
+  .problem-grid, .tier-grid, .partner-grid, .phase-grid, .case-docket-panel, .fit-grid, .team-pillars{grid-template-columns:1fr;}
   .problem-grid{gap:36px;}
+  .team-pillars{gap:28px;}
+  .team-teaser-lead h2{font-size:1.9rem;}
+  .team-teaser-lead{padding-left:20px;}
+  .team-cta{flex-direction:column; align-items:flex-start; padding:24px;}
+  .team-cta .btn{width:100%; justify-content:center;}
   .partner-grid.partner-grid-2col{grid-template-columns:1fr; max-width:420px;}
   .phase{border-left:1px solid rgba(40,64,80,.12) !important; border-bottom:none;}
   .phase:last-child{border-bottom:1px solid rgba(40,64,80,.12);}
