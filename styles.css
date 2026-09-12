@@ -562,10 +562,13 @@ header.site.scrolled .nav{padding:10px 0;}
   display:flex; align-items:center; justify-content:center; font-size:1rem; line-height:1; transition:transform .25s ease;
 }
 .faq-item.open .faq-question .icon{transform:rotate(45deg);}
-.faq-answer{display:grid; grid-template-rows:0fr; transition:grid-template-rows .3s ease;}
+.faq-answer{
+  display:grid; grid-template-rows:0fr; overflow:hidden; transition:grid-template-rows .3s ease;
+}
 .faq-item.open .faq-answer{grid-template-rows:1fr;}
+.faq-answer-inner{overflow:hidden; min-height:0;}
 .faq-answer p{
-  overflow:hidden; min-height:0; margin:0; padding:0 4px 22px; font-size:.95rem; max-width:680px; color:rgba(26,26,26,.85);
+  margin:0; padding:0 4px 22px; font-size:.95rem; max-width:680px; color:rgba(26,26,26,.85);
 }
 
 /* Cookie consent banner */
