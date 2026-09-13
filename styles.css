@@ -684,6 +684,7 @@ header.site.scrolled .nav{padding:10px 0;}
   display:inline-block; background:rgba(88,128,136,.1); border:1px solid var(--teal); color:var(--navy);
   font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.85rem; padding:10px 18px; border-radius:999px;
 }
+.scan-metric-badge-cream{background:var(--cream); border-color:#E2DDD4;}
 .scan-drawer-close{
   background:none; border:none; padding:0; cursor:pointer;
   font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.9rem; color:var(--teal);

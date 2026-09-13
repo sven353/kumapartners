@@ -410,7 +410,9 @@
           </ul>
           <div class="tier-actions">
             <a href="alignment-sprint.html" class="tier-cta tier-cta-outline">Explore Alignment Sprint</a>
-            <a href="alignment-sprint.html#phases" class="tier-cta-sub">Review the three delivery phases →</a>
+            <button type="button" class="tier-cta-sub tier-cta-sub-btn" data-sprint-drawer-toggle aria-expanded="false" aria-controls="sprint-phases-drawer">
+              See 3 delivery phases &amp; deliverables <span data-toggle-arrow>↓</span>
+            </button>
           </div>
         </div>
         <div class="tier-card" id="tier-3">
@@ -468,6 +470,50 @@
             <div class="scan-drawer-footer">
               <span class="scan-metric-badge">Fixed Scope. Rapid Delivery. Minimal C-Suite Disruption.</span>
               <button type="button" class="scan-drawer-close" data-scan-timeline-toggle aria-expanded="false" aria-controls="scan-timeline-drawer">Close details ↑</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scan-drawer" id="sprint-phases-drawer" data-scan-drawer aria-hidden="true">
+        <div class="scan-drawer-inner">
+          <div class="scan-drawer-card">
+            <div class="scan-drawer-steps">
+              <div class="scan-drawer-step">
+                <div class="scan-drawer-days">Phase 01 &middot; Weeks 1&ndash;2</div>
+                <h4>Diagnose</h4>
+                <p>Deepen Friction Scan findings. Pinpoint latent co-founder conflict, decision bottlenecks, and board-level risk.</p>
+              </div>
+              <div class="scan-drawer-step">
+                <div class="scan-drawer-days">Phase 02 &middot; Weeks 3&ndash;6</div>
+                <h4>Align</h4>
+                <p>Direct operator-led mediation. Rebuild working agreements, eliminate unspoken tension, and redesign decision rights.</p>
+              </div>
+              <div class="scan-drawer-step">
+                <div class="scan-drawer-days">Phase 03 &middot; Weeks 7&ndash;12</div>
+                <h4>Embed</h4>
+                <p>Live-fire stress-testing. Install permanent operating cadences, escalation paths, and binding peer-level compacts.</p>
+              </div>
+            </div>
+
+            <div class="scan-drawer-deliverables">
+              <div class="scan-drawer-deliverable">
+                <h4>Operational Governance Map</h4>
+                <p>Clear decision-rights framework replacing informal bottlenecks.</p>
+              </div>
+              <div class="scan-drawer-deliverable">
+                <h4>Binding Peer Compacts</h4>
+                <p>Signed behavioral and operational agreements between founders/executives.</p>
+              </div>
+              <div class="scan-drawer-deliverable">
+                <h4>Board-Ready Alignment Memo</h4>
+                <p>Objective readout on restored decision velocity and stabilized leadership.</p>
+              </div>
+            </div>
+
+            <div class="scan-drawer-footer">
+              <span class="scan-metric-badge scan-metric-badge-cream">Fixed-Scope Intervention &middot; Multi-Partner Delivery &middot; Zero Slide Fluff</span>
+              <button type="button" class="scan-drawer-close" data-sprint-drawer-toggle aria-expanded="false" aria-controls="sprint-phases-drawer">Close details ↑</button>
             </div>
           </div>
         </div>

@@ -188,36 +188,53 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
-  // --- Tier 1 interactive timeline & deliverables drawer ---
-  var scanDrawer = document.getElementById('scan-timeline-drawer');
-  if (scanDrawer) {
-    var scanDrawerTriggers = document.querySelectorAll('[data-scan-timeline-toggle]');
+  // --- Tier 1 & Tier 2 interactive timeline / phases drawers (mutually exclusive) ---
+  (function () {
+    var drawerConfigs = [
+      { drawer: document.getElementById('scan-timeline-drawer'), triggerAttr: 'data-scan-timeline-toggle' },
+      { drawer: document.getElementById('sprint-phases-drawer'), triggerAttr: 'data-sprint-drawer-toggle' }
+    ].filter(function (cfg) { return !!cfg.drawer; });
 
-    function setScanDrawerOpen(isOpen) {
-      scanDrawer.classList.toggle('open', isOpen);
-      scanDrawer.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
-      scanDrawerTriggers.forEach(function (btn) {
+    if (!drawerConfigs.length) return;
+
+    drawerConfigs.forEach(function (cfg) {
+      cfg.triggers = document.querySelectorAll('[' + cfg.triggerAttr + ']');
+    });
+
+    function setDrawerOpen(cfg, isOpen) {
+      cfg.drawer.classList.toggle('open', isOpen);
+      cfg.drawer.setAttribute('aria-hidden', isOpen ? 'false' : 'true');
+      cfg.triggers.forEach(function (btn) {
         btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
         var arrow = btn.querySelector('[data-toggle-arrow]');
         if (arrow) arrow.textContent = isOpen ? '↑' : '↓';
       });
     }
 
-    var scanDrawerAnchor = scanDrawerTriggers[0];
-    scanDrawerTriggers.forEach(function (btn) {
-      btn.addEventListener('click', function () {
-        var willOpen = !scanDrawer.classList.contains('open');
-        setScanDrawerOpen(willOpen);
-        if (willOpen) {
-          setTimeout(function () {
-            scanDrawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-          }, 320);
-        } else if (scanDrawerAnchor) {
-          scanDrawerAnchor.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-        }
+    drawerConfigs.forEach(function (cfg) {
+      var anchor = cfg.triggers[0];
+      cfg.triggers.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          var willOpen = !cfg.drawer.classList.contains('open');
+
+          // Keep drawers mutually exclusive: opening one collapses any other that's open.
+          drawerConfigs.forEach(function (other) {
+            if (other !== cfg) setDrawerOpen(other, false);
+          });
+
+          setDrawerOpen(cfg, willOpen);
+
+          if (willOpen) {
+            setTimeout(function () {
+              cfg.drawer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }, 320);
+          } else if (anchor) {
+            anchor.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        });
       });
     });
-  }
+  })();
 
   // --- Contact form: reveal free-text field when "Other / Specific mandate" is chosen ---
   var challengeSelectEl = document.getElementById('challenge');
