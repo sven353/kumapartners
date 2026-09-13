@@ -387,9 +387,10 @@ header.site.scrolled .nav{padding:10px 0;}
 
 /* Offsite proof strip */
 .offsite-proof{margin-top:48px; padding-top:32px; border-top:1px solid #E2DDD4;}
+.offsite-proof-shell{border:1px solid #E2DDD4; background:#fff;}
 .offsite-proof-header{
   display:flex; align-items:flex-end; justify-content:space-between; gap:24px;
-  margin-bottom:20px;
+  padding:24px 24px 20px;
 }
 .offsite-proof-eyebrow{
   font-family:'Lato',Arial,sans-serif; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
@@ -406,20 +407,26 @@ header.site.scrolled .nav{padding:10px 0;}
   font-size:1.05rem; line-height:1; cursor:pointer; transition:background .2s ease, color .2s ease, border-color .2s ease;
 }
 .offsite-proof-arrow:hover:not(:disabled){background:var(--navy); color:#fff; border-color:var(--navy);}
-.offsite-proof-arrow:disabled{opacity:.3; cursor:not-allowed;}
+.offsite-proof-arrow:disabled{opacity:.3; cursor:not-allowed; pointer-events:none;}
 .offsite-proof-page{
   font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.68rem; letter-spacing:.08em;
   color:rgba(26,26,26,.5); font-variant-numeric:tabular-nums; min-width:64px; text-align:center;
 }
+/* Single flat 4-column grid, one row, uniform 1px hairline dividers via gap+background-fill.
+   (Chosen over a literal border-based divide-x/divide-y port: that approach needs different
+   nth-child math at every breakpoint to avoid stray borders on wrapped rows — exactly the kind
+   of irregular split this component must not have. Gap-fill self-adjusts to any column count.) */
 .offsite-proof-grid{
   display:grid; grid-template-columns:repeat(4,1fr); gap:1px;
-  background:#E2DDD4; border:1px solid #E2DDD4;
+  background:#E2DDD4; border-top:1px solid #E2DDD4;
 }
 .offsite-proof-grid[hidden]{display:none;}
-.offsite-proof-item{margin:0; background:#fff;}
-.offsite-proof-item img{display:block; width:100%; aspect-ratio:4/3; object-fit:cover;}
+.offsite-proof-item{margin:0; background:#fff; display:flex; flex-direction:column;}
+.offsite-proof-item-media{width:100%; aspect-ratio:4/3; overflow:hidden;}
+.offsite-proof-item-media img{display:block; width:100%; height:100%; object-fit:cover;}
 .offsite-proof-item figcaption{
-  padding:10px 12px; border-top:1px solid #E2DDD4;
+  min-height:48px; padding:10px 12px; border-top:1px solid #E2DDD4;
+  display:flex; align-items:center;
   font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.64rem;
   letter-spacing:.05em; text-transform:uppercase; color:var(--navy); line-height:1.4;
 }
@@ -1098,6 +1105,6 @@ footer.site{padding:60px 0 40px; border-top:1px solid rgba(40,64,80,.12);}
 
 @media (max-width:640px){
   .offsite-proof-grid{grid-template-columns:1fr;}
-  .offsite-proof-header{flex-direction:column; align-items:flex-start; gap:14px;}
+  .offsite-proof-header{flex-direction:column; align-items:flex-start; gap:14px; padding:20px 20px 18px;}
   .offsite-proof-nav{align-self:flex-start;}
 }
