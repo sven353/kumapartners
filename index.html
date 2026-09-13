@@ -426,7 +426,7 @@
           </ul>
           <div class="tier-actions">
             <a href="#contact" class="tier-cta tier-cta-outline">Inquire About Advisory</a>
-            <button type="button" class="tier-cta-sub tier-cta-sub-btn" data-open-scan-modal>Schedule partner debrief →</button>
+            <button type="button" class="tier-cta-sub tier-cta-sub-btn" data-open-debrief-modal>Schedule partner debrief →</button>
           </div>
         </div>
       </div>
@@ -1153,66 +1153,90 @@
             </p>
             <input type="hidden" id="company" name="company">
             <div class="field">
-              <label for="persona">I am a</label>
-              <select id="persona" name="persona">
-                <option value="founder">Founder / CEO</option>
-                <option value="investor">Lead Investor / Board Director</option>
-              </select>
+              <label for="brought-here">What brought you here?</label>
+              <div class="select-shell">
+                <select id="brought-here" name="brought_here" required>
+                  <option value="" disabled selected hidden>Select one</option>
+                  <option>Co-founder or C-suite alignment is breaking down</option>
+                  <option>Decisions are getting stuck</option>
+                  <option>Leadership team friction is slowing execution</option>
+                  <option>Product, GTM or functional silos are creating drag</option>
+                  <option>We're navigating a major scaling or post-fundraise transition</option>
+                  <option>We need a high-stakes leadership offsite</option>
+                  <option>Board / CEO / governance dynamics need attention</option>
+                  <option>I have a specific situation I want to discuss</option>
+                </select>
+                <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+              </div>
             </div>
             <div class="field">
-              <label for="name">Full name</label>
-              <input type="text" id="name" name="name" required>
+              <label for="role">What's your role?</label>
+              <div class="select-shell">
+                <select id="role" name="role" required>
+                  <option value="" disabled selected hidden>Select one</option>
+                  <option value="founder">Founder / CEO</option>
+                  <option value="csuite">C-Suite Executive</option>
+                  <option value="board">Board Director</option>
+                  <option value="investor">Lead Investor / Operating Partner</option>
+                  <option value="other">Other</option>
+                </select>
+                <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+              </div>
             </div>
             <div class="field">
-              <label for="email">Work email</label>
-              <input type="email" id="email" name="email" required>
+              <label for="situation">What's happening?</label>
+              <span class="field-helper">Give us the version you'd tell a trusted advisor.</span>
+              <textarea id="situation" name="situation" rows="3" placeholder="Describe the dynamic, the bottlenecks, or the specific conflict..."></textarea>
+            </div>
+            <div class="field">
+              <label for="urgency">How urgent is it?</label>
+              <div class="select-shell">
+                <select id="urgency" name="urgency" required>
+                  <option value="" disabled selected hidden>Select one</option>
+                  <option>We're dealing with it now</option>
+                  <option>We need to address it within the next 30 days</option>
+                  <option>We see something developing and want to get ahead of it</option>
+                  <option>We're exploring options</option>
+                </select>
+                <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+              </div>
+            </div>
+            <div class="field">
+              <label for="journey">Where are you in the journey?</label>
+              <div class="select-shell">
+                <select id="journey" name="journey" required>
+                  <option value="" disabled selected hidden>Select one</option>
+                  <option>Bootstrapped / Profitable</option>
+                  <option>Seed / Series A</option>
+                  <option>Series B / Series C</option>
+                  <option>Growth / PE-backed</option>
+                  <option>VC / PE fund</option>
+                  <option>Other</option>
+                </select>
+                <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+              </div>
             </div>
             <div class="field-row">
               <div class="field">
-                <label for="headcount">Headcount</label>
-                <select id="headcount" name="headcount" required>
-                  <option>&lt; 25 people</option>
-                  <option selected>25 – 75 people</option>
-                  <option>75 – 150 people</option>
-                  <option>150+ people</option>
-                </select>
+                <label for="name">Full name</label>
+                <input type="text" id="name" name="name" required>
               </div>
               <div class="field">
-                <label for="funding-stage">Funding stage</label>
-                <select id="funding-stage" name="funding_stage" required>
-                  <option>Bootstrapped / Profitable</option>
-                  <option selected>Seed – Series A</option>
-                  <option>Series B – Series C</option>
-                  <option>Growth / PE-Backed</option>
-                  <option>VC / PE Fund Representative</option>
-                </select>
+                <label for="email">Work email</label>
+                <input type="email" id="email" name="email" required>
               </div>
             </div>
-            <div class="field">
-              <label for="challenge">Primary challenge</label>
-              <select id="challenge" name="challenge">
-                <option>Co-founder or C-suite misalignment</option>
-                <option>Decision latency &amp; execution drag</option>
-                <option>Cross-functional friction (Product vs. GTM silos)</option>
-                <option>Post-fundraise or scaling integration strain</option>
-                <option>Upcoming high-stakes leadership offsite</option>
-                <option>Board / Governance dynamics</option>
-                <option>Other / Specific mandate</option>
-              </select>
-            </div>
-            <div class="field" data-challenge-other-field hidden>
-              <label for="challenge-other">Tell us more</label>
-              <input type="text" id="challenge-other" name="challenge_other" placeholder="Briefly describe the core situation...">
-            </div>
-            <button type="submit" class="btn btn-teal" data-contact-submit>
-              <span data-btn-label>Schedule a Partner Conversation</span>
+            <button type="submit" class="btn btn-primary" data-contact-submit>
+              <span data-btn-label>Talk to a Managing Partner</span>
             </button>
-            <p class="contact-form-microcopy">Zero spam. Protected by European GDPR standards.</p>
+            <p class="contact-form-microcopy">Your information is treated confidentially. We review every inquiry personally and typically respond within 24 business hours.</p>
             <p class="contact-form-error" data-contact-error hidden>Something went wrong sending your message. Please try again, or email us directly at <a href="mailto:contact@kuma.partners">contact@kuma.partners</a>.</p>
           </form>
           <div class="contact-success" data-contact-success hidden tabindex="-1">
             <h3>Thank you.</h3>
-            <p>Your inquiry has been routed to our Managing Partners. We will review your context and reply within 24 business hours.</p>
+            <p>Your context has been received by the Kuma Partners team.</p>
+            <p>A Managing Partner will review it personally and come back to you within 24 business hours.</p>
+            <p>If the situation is one we can genuinely help with, we'll suggest the most useful next conversation.</p>
           </div>
         </div>
       </div>
@@ -1281,21 +1305,27 @@
         </div>
         <div class="field">
           <label for="scan-stage">Headcount &amp; funding stage</label>
-          <select id="scan-stage">
-            <option>Series A (25–50 headcount)</option>
-            <option>Series B–C (50–150+ headcount)</option>
-            <option>Private Equity / Late Stage</option>
-            <option>Investor / Board Director</option>
-          </select>
+          <div class="select-shell">
+            <select id="scan-stage">
+              <option>Series A (25–50 headcount)</option>
+              <option>Series B–C (50–150+ headcount)</option>
+              <option>Private Equity / Late Stage</option>
+              <option>Investor / Board Director</option>
+            </select>
+            <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+          </div>
         </div>
         <div class="field">
           <label for="scan-inflection">Primary inflection point</label>
-          <select id="scan-inflection">
-            <option>Co-Founder / Executive Alignment Friction</option>
-            <option>Decision Drag &amp; Scaling Execution Bottlenecks</option>
-            <option>C-Suite Restructuring or Transition</option>
-            <option>Portfolio Company Diagnostic (For VCs/PE)</option>
-          </select>
+          <div class="select-shell">
+            <select id="scan-inflection">
+              <option>Co-Founder / Executive Alignment Friction</option>
+              <option>Decision Drag &amp; Scaling Execution Bottlenecks</option>
+              <option>C-Suite Restructuring or Transition</option>
+              <option>Portfolio Company Diagnostic (For VCs/PE)</option>
+            </select>
+            <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+          </div>
         </div>
         <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Continue to Calendar</button>
       </form>
@@ -1314,6 +1344,119 @@
         <p>Calendar embed goes here. Swap this block for your Cal.com, HubSpot Meetings, or Chili Piper embed, prefilled with the parameters below.</p>
         <input type="text" class="scan-embed-url" data-scan-embed-url readonly>
       </div>
+    </div>
+  </div>
+</div>
+
+<!-- PARTNER DEBRIEF MODAL (Tier 3 diagnostic dossier form) -->
+<div class="debrief-modal-overlay" id="debrief-modal-overlay" hidden>
+  <div class="debrief-modal" role="dialog" aria-modal="true" aria-labelledby="debrief-modal-title">
+    <button type="button" class="debrief-modal-close" data-debrief-close aria-label="Close">&times;</button>
+
+    <div class="debrief-modal-header">
+      <h3 id="debrief-modal-title">Let's talk about what's happening in the room.</h3>
+      <p class="debrief-modal-subhead">Leadership challenges rarely announce themselves as strategy problems.</p>
+      <p class="debrief-modal-context">Tell us what you're seeing. We'll review it personally and decide whether Kuma can genuinely help.</p>
+    </div>
+
+    <form class="debrief-form" name="partner-debrief" method="POST" action="/#tier-3" data-netlify="true" netlify-honeypot="bot-field" id="debrief-form" data-debrief-form>
+      <input type="hidden" name="form-name" value="partner-debrief">
+      <p class="hp-field" hidden>
+        <label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+      </p>
+
+      <div class="field">
+        <label for="debrief-brought-here">What brought you here?</label>
+        <div class="select-shell">
+          <select id="debrief-brought-here" name="brought_here" required>
+            <option value="" disabled selected hidden>Select one</option>
+            <option>Co-founder or C-suite alignment is breaking down</option>
+            <option>Decisions are getting stuck</option>
+            <option>Leadership team friction is slowing execution</option>
+            <option>Product, GTM or functional silos are creating drag</option>
+            <option>We're navigating a major scaling or post-fundraise transition</option>
+            <option>We need a high-stakes leadership offsite</option>
+            <option>Board / CEO / governance dynamics need attention</option>
+            <option>I have a specific situation I want to discuss</option>
+          </select>
+          <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="debrief-role">What's your role?</label>
+        <div class="select-shell">
+          <select id="debrief-role" name="role" required>
+            <option value="" disabled selected hidden>Select one</option>
+            <option value="founder">Founder / CEO</option>
+            <option value="csuite">C-Suite Executive</option>
+            <option value="board">Board Director</option>
+            <option value="investor">Lead Investor / Operating Partner</option>
+            <option value="other">Other</option>
+          </select>
+          <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="debrief-situation">What's happening?</label>
+        <span class="field-helper">Give us the version you'd tell a trusted advisor.</span>
+        <textarea id="debrief-situation" name="situation" rows="3" placeholder="Describe the dynamic, the bottlenecks, or the specific conflict..."></textarea>
+      </div>
+
+      <div class="field">
+        <label for="debrief-urgency">How urgent is it?</label>
+        <div class="select-shell">
+          <select id="debrief-urgency" name="urgency" required>
+            <option value="" disabled selected hidden>Select one</option>
+            <option>We're dealing with it now</option>
+            <option>We need to address it within the next 30 days</option>
+            <option>We see something developing and want to get ahead of it</option>
+            <option>We're exploring options</option>
+          </select>
+          <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="debrief-journey">Where are you in the journey?</label>
+        <div class="select-shell">
+          <select id="debrief-journey" name="journey" required>
+            <option value="" disabled selected hidden>Select one</option>
+            <option>Bootstrapped / Profitable</option>
+            <option>Seed / Series A</option>
+            <option>Series B / Series C</option>
+            <option>Growth / PE-backed</option>
+            <option>VC / PE fund</option>
+            <option>Other</option>
+          </select>
+          <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="debrief-name">Full name</label>
+          <input type="text" id="debrief-name" name="name" required>
+        </div>
+        <div class="field">
+          <label for="debrief-email">Work email</label>
+          <input type="email" id="debrief-email" name="email" required>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" data-debrief-submit>
+        <span data-btn-label>Talk to a Managing Partner</span>
+      </button>
+      <p class="debrief-form-microcopy">Your information is treated confidentially. We review every inquiry personally and typically respond within 24 business hours.</p>
+      <p class="debrief-form-error" data-debrief-error hidden>Something went wrong sending your message. Please try again, or email us directly at <a href="mailto:contact@kuma.partners">contact@kuma.partners</a>.</p>
+    </form>
+
+    <div class="debrief-success" data-debrief-success hidden tabindex="-1">
+      <h3>Thank you.</h3>
+      <p>Your context has been received by the Kuma Partners team.</p>
+      <p>A Managing Partner will review it personally and come back to you within 24 business hours.</p>
+      <p>If the situation is one we can genuinely help with, we'll suggest the most useful next conversation.</p>
     </div>
   </div>
 </div>

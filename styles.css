@@ -798,10 +798,11 @@ header.site.scrolled .nav{padding:10px 0;}
   text-transform:uppercase; letter-spacing:.04em; color:var(--navy); margin-bottom:6px;
 }
 .scan-modal input, .scan-modal select{
-  width:100%; padding:12px 14px; border:1px solid rgba(40,64,80,.25); border-radius:2px;
-  font-family:'Lato',Arial,sans-serif; font-size:.95rem; color:var(--ink); background:#fff;
+  width:100%; padding:12px 14px; border:1px solid #E2DDD4; border-radius:6px; outline:none;
+  font-family:'Lato',Arial,sans-serif; font-size:.95rem; color:var(--navy); background:#fff;
+  transition:border-color .2s ease;
 }
-.scan-modal input:focus, .scan-modal select:focus{outline:2px solid var(--teal); outline-offset:1px;}
+.scan-modal input:focus, .scan-modal select:focus{outline:none; border-color:var(--navy);}
 .scan-field-error{color:#a3402f; font-size:.8rem; margin-top:6px; display:none;}
 .scan-field-error.show{display:block;}
 .scan-modal-reassurance{
@@ -939,9 +940,11 @@ body.scan-modal-locked{overflow:hidden;}
 .contact-form .field-row{display:grid; grid-template-columns:1fr 1fr; gap:16px 18px; margin-bottom:18px;}
 .contact-form .field-row .field{margin-bottom:0;}
 .contact-form input, .contact-form select, .contact-form textarea{
-  width:100%; padding:12px 14px; border:1px solid rgba(40,64,80,.25); border-radius:2px;
-  font-family:'Lato',Arial,sans-serif; font-size:.95rem; color:var(--ink); background:#fff;
+  width:100%; padding:12px 14px; border:1px solid #E2DDD4; border-radius:6px; outline:none;
+  font-family:'Lato',Arial,sans-serif; font-size:.95rem; color:var(--navy); background:#fff;
+  transition:border-color .2s ease;
 }
+.contact-form input:focus, .contact-form select:focus, .contact-form textarea:focus{outline:none; border-color:var(--navy);}
 .contact-form textarea{min-height:100px; resize:vertical;}
 .contact-form .btn{width:100%; justify-content:center;}
 .btn-teal{background:var(--teal); color:#fff; border-color:var(--teal);}
@@ -952,7 +955,89 @@ body.scan-modal-locked{overflow:hidden;}
 .contact-form-error a{color:inherit; text-decoration:underline;}
 .contact-success{text-align:center; padding:24px 8px;}
 .contact-success h3{color:var(--navy); font-size:1.4rem; margin-bottom:12px;}
-.contact-success p{color:rgba(26,26,26,.75); font-size:1rem; margin:0; max-width:420px; margin:0 auto;}
+.contact-success p{color:rgba(26,26,26,.75); font-size:1rem; margin:0 auto; max-width:420px;}
+.contact-success p + p{margin-top:10px;}
+.field-helper{
+  display:block; font-family:'Lato',Arial,sans-serif; font-size:.78rem; color:rgba(40,64,80,.6);
+  margin:-4px 0 8px; font-style:italic;
+}
+
+/* Global input styling fix: thin Swiss chevron + no native appearance, no default focus ring.
+   .select-shell owns the visual box (border/radius/bg); the <select> inside goes transparent
+   and appearance:none, so this cleanly overrides the broader .scan-modal/.contact-form select
+   rules above regardless of which form the field lives in. */
+.select-shell{
+  position:relative; border:1px solid #E2DDD4; border-radius:6px; background:#fff;
+  transition:border-color .2s ease;
+}
+.select-shell:focus-within{border-color:var(--navy);}
+.select-shell select{
+  appearance:none; -webkit-appearance:none; -moz-appearance:none;
+  width:100%; padding:12px 40px 12px 14px; border:none; border-radius:6px; background:transparent;
+  font-family:'Lato',Arial,sans-serif; font-size:.95rem; color:var(--navy); cursor:pointer;
+}
+.select-shell select:focus{outline:none;}
+.select-shell select::-ms-expand{display:none;}
+.select-chevron{
+  position:absolute; right:14px; top:50%; transform:translateY(-50%);
+  width:16px; height:16px; color:#588088; pointer-events:none;
+}
+
+/* Partner Debrief modal (Tier 3 diagnostic dossier form) */
+.debrief-modal-overlay{
+  position:fixed; inset:0; z-index:300; padding:16px;
+  background:rgba(30,47,56,.6); -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px);
+  display:flex; align-items:center; justify-content:center;
+  opacity:0; pointer-events:none; transition:opacity .25s ease;
+}
+.debrief-modal-overlay.open{opacity:1; pointer-events:auto;}
+.debrief-modal{
+  background:#fff; width:100%; max-width:560px; max-height:calc(100vh - 32px); overflow-y:auto;
+  border-radius:8px; padding:44px 40px; position:relative;
+  transform:translateY(12px) scale(.98); transition:transform .3s ease;
+  box-shadow:0 30px 70px -20px rgba(20,30,36,.45);
+}
+.debrief-modal-overlay.open .debrief-modal{transform:translateY(0) scale(1);}
+.debrief-modal-close{
+  position:absolute; top:20px; right:20px; width:36px; height:36px; border-radius:50%;
+  background:#fff; border:1px solid rgba(40,64,80,.15); color:var(--navy); font-size:1.3rem; line-height:1;
+  cursor:pointer; display:flex; align-items:center; justify-content:center; transition:background .2s ease, color .2s ease;
+}
+.debrief-modal-close:hover{background:var(--navy); color:#fff; border-color:var(--navy);}
+.debrief-modal-header{margin-bottom:28px; padding-right:32px;}
+.debrief-modal-header h3{font-size:1.4rem; color:var(--navy); margin:0 0 10px; line-height:1.3;}
+.debrief-modal-subhead{
+  font-family:'Montserrat',Arial,sans-serif; font-style:italic; color:var(--teal); font-size:1rem; margin:0 0 12px;
+}
+.debrief-modal-context{color:rgba(26,26,26,.7); font-size:.92rem; margin:0; line-height:1.55;}
+.debrief-form .field{margin-bottom:18px;}
+.debrief-form .field-row{display:grid; grid-template-columns:1fr 1fr; gap:16px 18px; margin-bottom:18px;}
+.debrief-form .field-row .field{margin-bottom:0;}
+.debrief-form label{
+  display:block; font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.8rem;
+  text-transform:uppercase; letter-spacing:.04em; color:var(--navy); margin-bottom:6px;
+}
+.debrief-form input, .debrief-form select, .debrief-form textarea{
+  width:100%; padding:12px 14px; border:1px solid #E2DDD4; border-radius:6px; outline:none;
+  font-family:'Lato',Arial,sans-serif; font-size:.95rem; color:var(--navy); background:#fff;
+  transition:border-color .2s ease;
+}
+.debrief-form input:focus, .debrief-form select:focus, .debrief-form textarea:focus{outline:none; border-color:var(--navy);}
+.debrief-form textarea{min-height:76px; resize:vertical;}
+.debrief-form .btn{width:100%; justify-content:center;}
+.debrief-form-microcopy{font-size:.78rem; color:rgba(40,64,80,.55); text-align:center; margin:14px 0 0;}
+.debrief-form-error{font-size:.85rem; color:#b3261e; text-align:center; margin:14px 0 0;}
+.debrief-form-error a{color:inherit; text-decoration:underline;}
+.debrief-success{text-align:center; padding:12px 4px;}
+.debrief-success h3{color:var(--navy); font-size:1.5rem; margin-bottom:14px;}
+.debrief-success p{color:rgba(26,26,26,.75); font-size:1rem; margin:0 auto; max-width:420px;}
+.debrief-success p + p{margin-top:10px;}
+body.debrief-modal-locked{overflow:hidden;}
+
+@media (max-width:640px){
+  .debrief-modal{padding:32px 24px; border-radius:6px;}
+  .debrief-form .field-row{grid-template-columns:1fr;}
+}
 
 /* Footer */
 footer.site{padding:60px 0 40px; border-top:1px solid rgba(40,64,80,.12);}

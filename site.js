@@ -236,18 +236,45 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   })();
 
-  // --- Contact form: reveal free-text field when "Other / Specific mandate" is chosen ---
-  var challengeSelectEl = document.getElementById('challenge');
-  var challengeOtherField = document.querySelector('[data-challenge-other-field]');
-  var challengeOtherInput = document.getElementById('challenge-other');
-  if (challengeSelectEl && challengeOtherField) {
-    function toggleChallengeOther() {
-      var isOther = challengeSelectEl.value === 'Other / Specific mandate';
-      challengeOtherField.hidden = !isOther;
-      if (!isOther && challengeOtherInput) challengeOtherInput.value = '';
-    }
-    challengeSelectEl.addEventListener('change', toggleChallengeOther);
-    toggleChallengeOther();
+  // --- Shared helper: URL-encode a form's fields for a Netlify Forms AJAX POST ---
+  function encodeFormData(form) {
+    return Array.prototype.map.call(form.elements, function (el) {
+      if (!el.name || el.disabled) return '';
+      if ((el.type === 'checkbox' || el.type === 'radio') && !el.checked) return '';
+      return encodeURIComponent(el.name) + '=' + encodeURIComponent(el.value);
+    }).filter(Boolean).join('&');
+  }
+
+  // --- Shared helper: wire a Netlify form to submit via fetch() with inline success/error states ---
+  function wireAjaxForm(form, successEl, errorEl) {
+    if (!form) return;
+    var submitBtn = form.querySelector('[data-contact-submit], [data-debrief-submit]');
+    var btnLabel = submitBtn ? submitBtn.querySelector('[data-btn-label]') : null;
+    var originalBtnText = btnLabel ? btnLabel.textContent : '';
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (errorEl) errorEl.hidden = true;
+      if (submitBtn) submitBtn.disabled = true;
+      if (btnLabel) btnLabel.textContent = 'Sending…';
+
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: encodeFormData(form)
+      }).then(function (response) {
+        if (!response.ok) throw new Error('Form submission failed with status ' + response.status);
+        form.hidden = true;
+        if (successEl) {
+          successEl.hidden = false;
+          successEl.focus();
+        }
+      }).catch(function () {
+        if (submitBtn) submitBtn.disabled = false;
+        if (btnLabel) btnLabel.textContent = originalBtnText;
+        if (errorEl) errorEl.hidden = false;
+      });
+    });
   }
 
   // --- Contact form: AJAX submit to Netlify Forms with inline success/error states ---
@@ -256,47 +283,13 @@ document.addEventListener('DOMContentLoaded', function () {
     var contactShell = contactForm.closest('.contact-form-shell');
     var contactSuccess = contactShell ? contactShell.querySelector('[data-contact-success]') : null;
     var contactError = contactForm.querySelector('[data-contact-error]');
-    var contactSubmitBtn = contactForm.querySelector('[data-contact-submit]');
-    var contactBtnLabel = contactSubmitBtn ? contactSubmitBtn.querySelector('[data-btn-label]') : null;
-    var originalBtnText = contactBtnLabel ? contactBtnLabel.textContent : '';
-
-    function encodeFormData(form) {
-      return Array.prototype.map.call(form.elements, function (el) {
-        if (!el.name || el.disabled) return '';
-        if ((el.type === 'checkbox' || el.type === 'radio') && !el.checked) return '';
-        return encodeURIComponent(el.name) + '=' + encodeURIComponent(el.value);
-      }).filter(Boolean).join('&');
-    }
-
-    contactForm.addEventListener('submit', function (e) {
-      e.preventDefault();
-      if (contactError) contactError.hidden = true;
-      if (contactSubmitBtn) contactSubmitBtn.disabled = true;
-      if (contactBtnLabel) contactBtnLabel.textContent = 'Sending…';
-
-      fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: encodeFormData(contactForm)
-      }).then(function (response) {
-        if (!response.ok) throw new Error('Form submission failed with status ' + response.status);
-        contactForm.hidden = true;
-        if (contactSuccess) {
-          contactSuccess.hidden = false;
-          contactSuccess.focus();
-        }
-      }).catch(function () {
-        if (contactSubmitBtn) contactSubmitBtn.disabled = false;
-        if (contactBtnLabel) contactBtnLabel.textContent = originalBtnText;
-        if (contactError) contactError.hidden = false;
-      });
-    });
+    wireAjaxForm(contactForm, contactSuccess, contactError);
   }
 
-  // --- Investor CTA: pre-select the contact form's persona field ---
+  // --- Investor CTA: pre-select the contact form's "What's your role?" field ---
   function selectInvestorPersona() {
-    var personaSelect = document.getElementById('persona');
-    if (personaSelect) personaSelect.value = 'investor';
+    var roleSelect = document.getElementById('role');
+    if (roleSelect) roleSelect.value = 'investor';
     var contactSection = document.getElementById('contact');
     if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
   }
@@ -313,9 +306,9 @@ document.addEventListener('DOMContentLoaded', function () {
   function focusBriefingPersona() {
     var contactSection = document.getElementById('contact');
     if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
-    var personaSelect = document.getElementById('persona');
-    if (personaSelect) {
-      setTimeout(function () { personaSelect.focus(); }, 400);
+    var roleSelect = document.getElementById('role');
+    if (roleSelect) {
+      setTimeout(function () { roleSelect.focus(); }, 400);
     }
   }
   if (window.location.hash === '#contact-briefing') {
@@ -327,13 +320,13 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // --- Offsite module CTA: pre-select the contact form's challenge field ---
+  // --- Offsite module CTA: pre-select the contact form's "What brought you here?" field ---
   document.querySelectorAll('[data-offsite-cta]').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      var challengeSelect = document.getElementById('challenge');
-      if (challengeSelect) {
-        challengeSelect.value = 'Upcoming high-stakes leadership offsite';
-        challengeSelect.dispatchEvent(new Event('change'));
+      var broughtHereSelect = document.getElementById('brought-here');
+      if (broughtHereSelect) {
+        broughtHereSelect.value = 'We need a high-stakes leadership offsite';
+        broughtHereSelect.dispatchEvent(new Event('change'));
       }
       var contactSection = document.getElementById('contact');
       if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
@@ -552,28 +545,24 @@ document.addEventListener('DOMContentLoaded', function () {
       ctaBtn.addEventListener('click', function () {
         var emailField = document.getElementById('email');
         var companyField = document.getElementById('company');
-        var personaField = document.getElementById('persona');
-        var headcountField = document.getElementById('headcount');
-        var stageField = document.getElementById('funding-stage');
-        var challengeField = document.getElementById('challenge');
+        var roleField = document.getElementById('role');
+        var journeyField = document.getElementById('journey');
+        var broughtHereField = document.getElementById('brought-here');
 
         if (emailField) emailField.value = respondent.email;
         if (companyField) companyField.value = respondent.company;
-        if (personaField) personaField.value = respondent.mode;
+        if (roleField) roleField.value = respondent.mode;
 
-        var headcountText = { seed: '25 – 75 people', seriesbc: '75 – 150 people', growth: '150+ people' }[answers.q7];
-        if (headcountText) setSelectValueByText(headcountField, headcountText);
-
-        var stageText = { seed: 'Seed – Series A', seriesbc: 'Series B – Series C', growth: 'Growth / PE-Backed' }[answers.q7];
-        if (stageText) setSelectValueByText(stageField, stageText);
+        var journeyText = { seed: 'Seed / Series A', seriesbc: 'Series B / Series C', growth: 'Growth / PE-backed' }[answers.q7];
+        if (journeyText) setSelectValueByText(journeyField, journeyText);
 
         var results = computeResults();
         var maxLevel = Math.max(results.velocityLevel, results.candorLevel, results.governanceLevel);
-        var challengeText = 'Decision latency & execution drag';
-        if (results.governanceLevel === maxLevel) challengeText = 'Board / Governance dynamics';
-        else if (results.candorLevel === maxLevel) challengeText = 'Co-founder or C-suite misalignment';
-        else if (results.velocityLevel === maxLevel) challengeText = 'Decision latency & execution drag';
-        setSelectValueByText(challengeField, challengeText);
+        var broughtHereText = 'Decisions are getting stuck';
+        if (results.governanceLevel === maxLevel) broughtHereText = 'Board / CEO / governance dynamics need attention';
+        else if (results.candorLevel === maxLevel) broughtHereText = 'Co-founder or C-suite alignment is breaking down';
+        else if (results.velocityLevel === maxLevel) broughtHereText = 'Decisions are getting stuck';
+        setSelectValueByText(broughtHereField, broughtHereText);
 
         var contactSection = document.getElementById('contact');
         if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
@@ -713,6 +702,82 @@ document.addEventListener('DOMContentLoaded', function () {
         if (heading) { heading.setAttribute('tabindex', '-1'); heading.focus(); }
       });
     }
+  }
+
+  // --- Partner Debrief modal (Tier 3 diagnostic dossier form) ---
+  var debriefOverlay = document.getElementById('debrief-modal-overlay');
+  if (debriefOverlay) {
+    var debriefModal = debriefOverlay.querySelector('.debrief-modal');
+    var debriefForm = debriefOverlay.querySelector('[data-debrief-form]');
+    var debriefCloseBtn = debriefOverlay.querySelector('[data-debrief-close]');
+    var debriefSuccess = debriefOverlay.querySelector('[data-debrief-success]');
+    var debriefError = debriefOverlay.querySelector('[data-debrief-error]');
+    var debriefLastFocusedEl = null;
+
+    function debriefIsPartiallyFilled() {
+      var fields = debriefOverlay.querySelectorAll('input, select, textarea');
+      for (var i = 0; i < fields.length; i++) {
+        if (fields[i].type === 'select-one') { if (fields[i].selectedIndex > 0) return true; }
+        else if (fields[i].value && fields[i].value.trim() !== '') return true;
+      }
+      return false;
+    }
+
+    function debriefGetFocusable() {
+      return Array.prototype.slice.call(
+        debriefModal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
+      ).filter(function (el) { return !el.disabled && el.offsetParent !== null; });
+    }
+
+    function debriefTrapFocus(e) {
+      if (e.key !== 'Tab') return;
+      var focusable = debriefGetFocusable();
+      if (!focusable.length) return;
+      var first = focusable[0], last = focusable[focusable.length - 1];
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+
+    function debriefOnKeydown(e) {
+      if (e.key === 'Escape') { debriefAttemptClose(false); }
+      else { debriefTrapFocus(e); }
+    }
+
+    function debriefOpenModal(triggerEl) {
+      debriefLastFocusedEl = triggerEl || document.activeElement;
+      debriefOverlay.classList.add('open');
+      debriefOverlay.hidden = false;
+      document.body.classList.add('debrief-modal-locked');
+      document.addEventListener('keydown', debriefOnKeydown);
+      setTimeout(function () {
+        var focusable = debriefGetFocusable();
+        if (focusable.length) focusable[0].focus();
+      }, 50);
+    }
+
+    function debriefAttemptClose(force) {
+      if (!force && debriefForm && !debriefForm.hidden && debriefIsPartiallyFilled()) {
+        var stay = !window.confirm('Discard your notes? Closing now will lose what you\'ve entered.');
+        if (stay) return;
+      }
+      debriefOverlay.classList.remove('open');
+      document.body.classList.remove('debrief-modal-locked');
+      document.removeEventListener('keydown', debriefOnKeydown);
+      setTimeout(function () { debriefOverlay.hidden = true; }, 260);
+      if (debriefLastFocusedEl) debriefLastFocusedEl.focus();
+    }
+
+    document.querySelectorAll('[data-open-debrief-modal]').forEach(function (btn) {
+      btn.addEventListener('click', function () { debriefOpenModal(btn); });
+    });
+
+    if (debriefCloseBtn) debriefCloseBtn.addEventListener('click', function () { debriefAttemptClose(true); });
+
+    debriefOverlay.addEventListener('click', function (e) {
+      if (e.target === debriefOverlay) debriefAttemptClose(false);
+    });
+
+    wireAjaxForm(debriefForm, debriefSuccess, debriefError);
   }
 
   // Offsite proof strip: two-view paginated image mosaic
