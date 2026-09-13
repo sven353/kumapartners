@@ -698,4 +698,36 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
+  // Offsite proof strip: two-view paginated image mosaic
+  (function () {
+    var prevBtn = document.querySelector('[data-offsite-prev]');
+    var nextBtn = document.querySelector('[data-offsite-next]');
+    var pageLabel = document.querySelector('[data-offsite-page]');
+    var views = document.querySelectorAll('.offsite-proof-grid[data-offsite-view]');
+    if (!prevBtn || !nextBtn || !views.length) return;
+
+    var total = views.length;
+    var current = 1;
+
+    function pad(n) { return n < 10 ? '0' + n : String(n); }
+
+    function render() {
+      views.forEach(function (view) {
+        view.hidden = Number(view.getAttribute('data-offsite-view')) !== current;
+      });
+      if (pageLabel) pageLabel.textContent = '[ ' + pad(current) + ' / ' + pad(total) + ' ]';
+      prevBtn.disabled = current === 1;
+      nextBtn.disabled = current === total;
+    }
+
+    prevBtn.addEventListener('click', function () {
+      if (current > 1) { current -= 1; render(); }
+    });
+    nextBtn.addEventListener('click', function () {
+      if (current < total) { current += 1; render(); }
+    });
+
+    render();
+  })();
+
 });
