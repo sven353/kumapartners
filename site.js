@@ -715,7 +715,7 @@ document.addEventListener('DOMContentLoaded', function () {
     var debriefLastFocusedEl = null;
 
     function debriefIsPartiallyFilled() {
-      var fields = debriefOverlay.querySelectorAll('input, select, textarea');
+      var fields = debriefOverlay.querySelectorAll('input:not([type="hidden"]), select, textarea');
       for (var i = 0; i < fields.length; i++) {
         if (fields[i].type === 'select-one') { if (fields[i].selectedIndex > 0) return true; }
         else if (fields[i].value && fields[i].value.trim() !== '') return true;
