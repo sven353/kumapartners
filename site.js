@@ -246,7 +246,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // --- Shared helper: wire a Netlify form to submit via fetch() with inline success/error states ---
-  function wireAjaxForm(form, successEl, errorEl) {
+  function wireAjaxForm(form, successEl, errorEl, onSuccess) {
     if (!form) return;
     var submitBtn = form.querySelector('[data-contact-submit], [data-debrief-submit]');
     var btnLabel = submitBtn ? submitBtn.querySelector('[data-btn-label]') : null;
@@ -269,6 +269,7 @@ document.addEventListener('DOMContentLoaded', function () {
           successEl.hidden = false;
           successEl.focus();
         }
+        if (typeof onSuccess === 'function') onSuccess();
       }).catch(function () {
         if (submitBtn) submitBtn.disabled = false;
         if (btnLabel) btnLabel.textContent = originalBtnText;
@@ -708,10 +709,14 @@ document.addEventListener('DOMContentLoaded', function () {
   var debriefOverlay = document.getElementById('debrief-modal-overlay');
   if (debriefOverlay) {
     var debriefModal = debriefOverlay.querySelector('.debrief-modal');
+    var debriefIntro = debriefOverlay.querySelector('.debrief-modal-intro');
     var debriefForm = debriefOverlay.querySelector('[data-debrief-form]');
-    var debriefCloseBtn = debriefOverlay.querySelector('[data-debrief-close]');
+    var debriefCloseBtns = debriefOverlay.querySelectorAll('[data-debrief-close]');
     var debriefSuccess = debriefOverlay.querySelector('[data-debrief-success]');
     var debriefError = debriefOverlay.querySelector('[data-debrief-error]');
+    var debriefSubmitBtn = debriefOverlay.querySelector('[data-debrief-submit]');
+    var debriefBtnLabel = debriefSubmitBtn ? debriefSubmitBtn.querySelector('[data-btn-label]') : null;
+    var debriefOriginalBtnText = debriefBtnLabel ? debriefBtnLabel.textContent : '';
     var debriefLastFocusedEl = null;
 
     function debriefIsPartiallyFilled() {
@@ -755,6 +760,20 @@ document.addEventListener('DOMContentLoaded', function () {
       }, 50);
     }
 
+    function debriefResetState() {
+      if (debriefForm) {
+        debriefForm.reset();
+        debriefForm.hidden = false;
+      }
+      if (debriefIntro) debriefIntro.hidden = false;
+      if (debriefSuccess) debriefSuccess.hidden = true;
+      if (debriefError) debriefError.hidden = true;
+      if (debriefSubmitBtn) debriefSubmitBtn.disabled = false;
+      if (debriefBtnLabel) debriefBtnLabel.textContent = debriefOriginalBtnText;
+      var body = debriefOverlay.querySelector('.debrief-modal-body');
+      if (body) body.scrollTop = 0;
+    }
+
     function debriefAttemptClose(force) {
       if (!force && debriefForm && !debriefForm.hidden && debriefIsPartiallyFilled()) {
         var stay = !window.confirm('Discard your notes? Closing now will lose what you\'ve entered.');
@@ -763,7 +782,10 @@ document.addEventListener('DOMContentLoaded', function () {
       debriefOverlay.classList.remove('open');
       document.body.classList.remove('debrief-modal-locked');
       document.removeEventListener('keydown', debriefOnKeydown);
-      setTimeout(function () { debriefOverlay.hidden = true; }, 260);
+      setTimeout(function () {
+        debriefOverlay.hidden = true;
+        debriefResetState();
+      }, 260);
       if (debriefLastFocusedEl) debriefLastFocusedEl.focus();
     }
 
@@ -771,13 +793,17 @@ document.addEventListener('DOMContentLoaded', function () {
       btn.addEventListener('click', function () { debriefOpenModal(btn); });
     });
 
-    if (debriefCloseBtn) debriefCloseBtn.addEventListener('click', function () { debriefAttemptClose(true); });
+    debriefCloseBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () { debriefAttemptClose(true); });
+    });
 
     debriefOverlay.addEventListener('click', function (e) {
       if (e.target === debriefOverlay) debriefAttemptClose(false);
     });
 
-    wireAjaxForm(debriefForm, debriefSuccess, debriefError);
+    wireAjaxForm(debriefForm, debriefSuccess, debriefError, function () {
+      if (debriefIntro) debriefIntro.hidden = true;
+    });
   }
 
   // Offsite proof strip: two-view paginated image mosaic
