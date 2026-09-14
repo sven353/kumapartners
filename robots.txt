@@ -18,5 +18,5 @@ User-agent: Google-Extended
 Allow: /
 
 # Sitemap & LLM Declaration
-Sitemap: https://kumapartners.eu/sitemap.xml
-# llms.txt reference for AI agents: https://kumapartners.eu/llms.txt
+Sitemap: https://www.kuma.partners/sitemap.xml
+# llms.txt reference for AI agents: https://www.kuma.partners/llms.txt

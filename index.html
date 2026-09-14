@@ -1,404 +1,1465 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Kuma Sanctuary, Austria · An Invitation-Only Retreat for Chief Executives</title>
-<meta name="description" content="A private gathering for ten to fourteen chief executives. 15 to 18 October, the Austrian Alps. Hosted by Kuma Partners." />
-<meta property="og:title" content="Kuma Sanctuary, Austria" />
-<meta property="og:description" content="A private gathering for ten to fourteen chief executives. 15 to 18 October, the Austrian Alps. Hosted by Kuma Partners." />
-<meta property="og:type" content="website" />
-<link rel="icon" href="/favicon.ico?v=2" sizes="any">
-<link rel="icon" href="/favicon.svg?v=2" type="image/svg+xml">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=2">
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;1,500&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet" />
-<link rel="stylesheet" href="css/style.css?v=10" />
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kuma Partners | Leadership Friction Advisory for Scale-Stage Companies</title>
+<meta name="description" content="Kuma Partners embeds former CEOs and senior operators with founders, executive teams, and investors to resolve the leadership friction that stalls fast-growing companies.">
+<link rel="icon" type="image/png" href="assets/logo-icon.png">
+<link rel="stylesheet" href="styles.css">
+
+<!-- Structured Data: Organization, Professional Services & FAQ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://www.kuma.partners/#organization",
+      "name": "Kuma Partners",
+      "url": "https://www.kuma.partners",
+      "logo": "https://www.kuma.partners/assets/logo-lockup.png",
+      "description": "Executive advisory and leadership alignment practice embedding former CEOs and operators inside scale-stage leadership teams and VC portfolio companies.",
+      "email": "contact@kuma.partners",
+      "areaServed": "Worldwide",
+      "knowsLanguage": ["en", "de", "fr", "pt", "es"],
+      "founder": [
+        {
+          "@type": "Person",
+          "name": "Dr. Sven Mulfinger",
+          "jobTitle": "Managing Partner, Strategic Alliances & Key Accounts",
+          "email": "sven@kuma.partners",
+          "description": "Leads Kuma's strategic advisory engagements and relationships with founders, boards, and European investors. Holds the CEO-to-CEO sparring conversations that define and open each mandate."
+        },
+        {
+          "@type": "Person",
+          "name": "Vincent Azé",
+          "jobTitle": "Managing Partner, Commercial Strategy & Execution",
+          "email": "vincent@kuma.partners",
+          "description": "Directs commercial diagnostics and high-stakes alignment sprints. Having carried board-facing targets himself, he translates boardroom friction into clear, actionable operating cadences teams can execute."
+        }
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Executive Advisory & Interventions",
+        "itemListElement": [
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "The 14-Day Leadership Friction Scan",
+              "description": "8 to 10 confidential executive interviews, a team communication pulse check, and a facilitated C-suite/board debrief, culminating in a concrete 90-day execution roadmap."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "The 60-90 Day Executive Alignment Sprint",
+              "description": "Hands-on co-founder mediation, executive team restructuring, decision-governance redesign, and cross-functional facilitation."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Strategic Scaling Advisory",
+              "description": "Embedded strategic counsel and executive sparring for CEOs and key executives through hyper-growth or M&A transitions."
+            }
+          },
+          {
+            "@type": "Offer",
+            "itemOffered": {
+              "@type": "Service",
+              "name": "Strategic & Executive Offsites",
+              "description": "1 to 5 days of on-site operator moderation and intellectual architecture worldwide, for annual strategy planning, post-fundraise roadmaps, and co-founder or C-suite re-alignment."
+            }
+          }
+        ]
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.kuma.partners/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How does Kuma Partners handle multicultural and cross-border leadership dynamics?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Executive friction is rarely purely operational. It is often cultural. Nuance, directness, and confrontation carry vastly different meanings across American, British, DACH, French, and Southern European executive cultures. Our Managing Partners are native speakers across 5 languages (English, Deutsch, Français, Português, and Español) who have built and scaled international enterprises. We mediate high-stakes tensions within their cultural context, ensuring communication breakdowns do not turn into operational deadlocks."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you address leadership friction in distributed or remote-first executive teams?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "In distributed and remote scale-ups, leadership misalignment remains hidden longer. Without physical proximity, tensions surface as passive friction: silent Slack channels, delayed roadmap decisions, and avoidance of tough commercial trade-offs. We adapt our diagnostics specifically for asynchronous environments by auditing communication cadences, information flow, and decision ownership before bringing remote C-suites into targeted, in-person offsites or structured virtual alignment sprints."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between Kuma Partners, traditional consultancies, and executive coaches?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We deploy former operators inside the room, not junior analysts or isolated mindset coaches. Traditional management consultancies deploy junior associates to build 100-page slide decks often prepared with AI from the sidelines. Generic executive coaches focus on isolated, 1-on-1 personal reflection detached from commercial reality. Every Kuma partner is a former CEO or C-suite operator who diagnoses operational friction, mediates founder stalemates, and establishes binding governance compacts tied directly to runway, P&L, and board milestones."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "When is the ideal moment for a CEO or board to initiate an intervention?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The optimal window is pre-emptive: immediately post-raise, during phases of aggressive hypergrowth, or during an M&A transition before cultural divergence impacts board KPIs. If key decisions are stalling for more than 48 hours or unspoken co-founder disagreements are causing departmental silos, a 14-Day Scan quickly surfaces root causes without disrupting daily operations."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you protect confidentiality between co-founders, the CEO, and the board?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Total discretion is the foundation of our practice. 1:1 interviews conducted during our diagnostics are strictly confidential. We synthesize friction themes, decision latency points, and governance bottlenecks without attributing sensitive quotes to specific individuals. This creates a psychologically safe environment where executives can surface real commercial tensions without fear of political backlash or compromised board standing."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can we engage Kuma Partners solely for an Executive Offsite without a long-term advisory retainer?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. We frequently moderate standalone 1 to 5-day executive offsites worldwide for annual strategy planning, post-fundraise roadmaps, or co-founder realignments. We handle the intellectual architecture, pre-offsite stakeholder intake, and in-room moderation to ensure the session yields binding 90-day compacts rather than vague brainstorms. Should deeper operational restructuring be required, teams can seamlessly transition into a 60–90 Day Executive Alignment Sprint."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does Kuma Partners support VC and PE firms beyond direct crisis interventions?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We design and facilitate high-conviction Portfolio Founders Days and confidential Peer Masterminds for venture capital and private equity firms. Rather than generic panels or celebratory networking, our Masterminds bring portfolio CEOs together in curated, closed-door environments moderated by former operators. We facilitate candid, P&L-grounded discussions around cash runway management, executive team restructurings, and board governance dynamics, turning passive investor portfolio events into active leadership de-risking sessions."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you address the risk of C-suite or key executive attrition during an intervention?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Our process stabilizes leadership teams rather than destabilizing them. Executive turnover during scaling typically stems from unexpressed friction, role ambiguity, or lack of clear decision authority. By establishing objective governance compacts and clarifying decision rights during our 14-Day Scan and 60–90 Day Sprint, we eliminate the silent political friction that drives top-tier executives to resign. In our previous interventions, leadership teams have achieved 100% key executive retention through their scaling milestones."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can Kuma Partners facilitate a smooth, dignified executive or co-founder transition if alignment fails?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes. When our diagnostic reveals irreconcilable vision fractures or an executive who cannot scale with the company's growth stage, we help founders and boards manage the transition without organizational whiplash. Because our partners have executed executive exits as CEOs, we mediate role redesigns, equity transitions, or dignified exits while maintaining company morale, operational continuity, and board alignment."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How do you measure the ROI and success of a leadership alignment sprint?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "We measure success through operational velocity and board-level KPIs, not subjective satisfaction scores. Key benchmarks include concrete reductions in decision latency (e.g., deliberation cycles dropping from weeks to under 48 hours), 100% executive sign-off on 90-day governance compacts, stabilization of cross-functional delivery roadmaps, and the elimination of second-guessing at the board table."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
-<header class="site-header">
-  <div class="container">
-    <a href="index.html" class="brand-lockup" aria-label="Kuma Partners">
-      <img src="assets/kuma-partners-logo.png" alt="Kuma Partners" class="brand-logo" loading="eager" />
-      <span class="brand-caption">Sanctuary &middot; Austria 2026</span>
+<header class="site">
+  <nav class="wrap nav">
+    <a href="/" class="logo">
+      <img src="assets/logo-lockup.png" alt="Kuma Partners">
     </a>
-    <nav class="header-nav">
-      <a href="#tension" class="nav-link">The Premise</a>
-      <a href="#pillars" class="nav-link">The Work</a>
-      <a href="#standards" class="nav-link">The Cohort</a>
-      <a href="#cadence" class="nav-link">The Days</a>
-      <a href="next-offsites.html" class="nav-link">Upcoming</a>
-      <span class="lang-switch">
-        <span class="lang-current">EN</span>
-        <span class="lang-sep" aria-hidden="true">|</span>
-        <a href="/es/">ES</a>
-      </span>
-      <a href="#apply" class="header-cta">Request an Invitation</a>
-    </nav>
-  </div>
+    <ul class="nav-links">
+      <li><a href="#problem">For Founders &amp; CEOs</a></li>
+      <li><a href="#investors">For Investors</a></li>
+      <li class="nav-item-dropdown">
+        <button type="button" class="nav-dropdown-trigger" aria-expanded="false" aria-haspopup="true">
+          <span>Engagements</span>
+          <svg class="nav-dropdown-caret" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 9l-7 7-7-7"></path></svg>
+        </button>
+        <div class="nav-dropdown-panel">
+          <div class="nav-dropdown-panel-inner">
+            <a href="#tier-1" class="nav-dropdown-link">
+              <span class="nav-dropdown-tier">Tier 1 &middot; Door-opener</span>
+              <span class="nav-dropdown-name">The 14-Day Friction Scan</span>
+            </a>
+            <a href="#tier-2" class="nav-dropdown-link">
+              <span class="nav-dropdown-tier">Tier 2 &middot; Intervention</span>
+              <span class="nav-dropdown-name">Executive Alignment Sprint</span>
+            </a>
+            <a href="#tier-3" class="nav-dropdown-link">
+              <span class="nav-dropdown-tier">Tier 3 &middot; Anchor</span>
+              <span class="nav-dropdown-name">Strategic Scaling Advisory</span>
+            </a>
+          </div>
+        </div>
+      </li>
+      <li><a href="#offsites">Offsites</a></li>
+      <li><a href="partners.html">Partners</a></li>
+      <li class="nav-mobile-only">
+        <button type="button" class="btn btn-primary btn-sm" data-open-scan-modal>Book a Friction Scan</button>
+      </li>
+    </ul>
+    <div class="nav-cta">
+      <button type="button" class="btn btn-primary btn-sm" data-open-scan-modal>Book a Friction Scan</button>
+    </div>
+    <button type="button" class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" hidden><path d="M6 6l12 12M18 6L6 18"></path></svg>
+    </button>
+  </nav>
 </header>
 
-<section class="hero">
-  <div class="container">
-    <div class="hero-inner">
-      <div class="hero-eyebrow">
-        <span class="eyebrow">By invitation only &middot; Kuma Partners</span>
-      </div>
-      <h1>A room for the decisions you carry <em>alone</em>.</h1>
-      <p class="lede">Kuma Sanctuary is a private four-day gathering for ten to fourteen chief executives who have run out of people to be unguarded with. No agenda beyond the one the room builds together. No audience. Nothing to perform.</p>
+<main>
 
-      <div class="hero-meta">
-        <div>
-          <span class="label">Dates</span>
-          <span class="value">15&ndash;18 October 2026</span>
-        </div>
-        <div>
-          <span class="label">Location</span>
-          <span class="value">Private estate, the Austrian Alps</span>
-        </div>
-        <div>
-          <span class="label">Cohort</span>
-          <span class="value">10&ndash;14 chief executives</span>
-        </div>
-        <div>
-          <span class="label">Governed by</span>
-          <span class="value">The Chatham House Rule</span>
-        </div>
-      </div>
-
-      <figure class="hero-banner">
-        <img
-          src="assets/retreat-banner-1x.webp"
-          srcset="assets/retreat-banner-1x.webp 760w, assets/retreat-banner-2x.webp 1520w"
-          sizes="(min-width: 760px) 760px, 100vw"
-          alt="Private estate in the Austrian Alps, seen from the Kuma Sanctuary grounds"
-          width="760" height="326"
-          loading="eager"
-        />
-      </figure>
-
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <span class="badge-pill">Executive Advisory &amp; Leadership Alignment</span>
+      <h1>When rapid scale stalls execution,<br class="brk-responsive"> we resolve the leadership friction.</h1>
+      <span class="subhead">We embed former CEOs and senior operators with founders, executive teams, and investors to resolve the hidden tensions that stall decisions and threaten growth.</span>
       <div class="hero-ctas">
-        <a href="#apply" class="btn btn-primary">Request an Invitation</a>
-        <a href="#tension" class="btn btn-ghost">What this is</a>
+        <button type="button" class="btn btn-primary" data-open-scan-modal>Initiate a 14-Day Scan</button>
+        <a href="#engagements" class="btn-link">Explore our engagements →</a>
       </div>
-      <p class="hero-note">No public application. No pricing published here. Every seat is confirmed through a private conversation with a Kuma partner.</p>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="tension" class="section-navy">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">The Premise</span>
-      <h2>The higher the seat, the fewer people can be honest with you in it.</h2>
+  <!-- PROOF BAR -->
+  <section class="proof">
+    <div class="wrap">
+      <p>Partner operating pedigree spans leadership at scale</p>
     </div>
-    <div class="tension-grid">
-      <div class="tension-item">
-        <span class="num">01</span>
-        <h3>The isolation is structural</h3>
-        <p>Your board wants confidence. Your team wants certainty. Your peers outside the company can't see the whole picture. There is often no one inside the system who can tell you the truth without a stake in your answer.</p>
-      </div>
-      <div class="tension-item">
-        <span class="num">02</span>
-        <h3>The calendar never volunteers the time</h3>
-        <p>Reflection loses to operational fires by default. Left alone, a leader's schedule will always choose the urgent over the important. It has to be built by someone else, or it doesn't happen.</p>
-      </div>
-      <div class="tension-item">
-        <span class="num">03</span>
-        <h3>Generic reflection isn't the gap</h3>
-        <p>You don't need another sounding board or a facilitated workshop. You need operators who have held the seat themselves, in a room built for the specific weight of running something.</p>
+    <div class="marquee">
+      <div class="marquee-track">
+        <span>TikTok</span>
+        <span>P&amp;G</span>
+        <span>IBM</span>
+        <span>Netflix</span>
+        <span>Bloomberg</span>
+        <span>Bosch</span>
+        <span>FIS</span>
+        <span>constellr</span>
+        <span>RootstockLabs</span>
+        <span>PepsiCo</span>
+        <span>Novartis</span>
+        <span>BBVA</span>
+        <span>Unilever</span>
+        <span>Bridgestone</span>
+        <span>Microsoft</span>
+        <span>Booking.com</span>
+        <span>Michelin</span>
+        <span aria-hidden="true">TikTok</span>
+        <span aria-hidden="true">P&amp;G</span>
+        <span aria-hidden="true">IBM</span>
+        <span aria-hidden="true">Netflix</span>
+        <span aria-hidden="true">Bloomberg</span>
+        <span aria-hidden="true">Bosch</span>
+        <span aria-hidden="true">FIS</span>
+        <span aria-hidden="true">constellr</span>
+        <span aria-hidden="true">RootstockLabs</span>
+        <span aria-hidden="true">PepsiCo</span>
+        <span aria-hidden="true">Novartis</span>
+        <span aria-hidden="true">BBVA</span>
+        <span aria-hidden="true">Unilever</span>
+        <span aria-hidden="true">Bridgestone</span>
+        <span aria-hidden="true">Microsoft</span>
+        <span aria-hidden="true">Booking.com</span>
+        <span aria-hidden="true">Michelin</span>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="pillars">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">The Work</span>
-      <h2>Three days, three levels of the same question.</h2>
-      <p>Kuma Sanctuary moves deliberately between the person carrying the role, the professional practicing it, and the enterprise depending on it. Each is treated as its own subject, not a warm-up for the next.</p>
-    </div>
-    <div class="pillars">
-      <div class="pillar">
-        <div class="pillar-mark">
-          <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="12.5" fill="none" stroke="#588088" stroke-width="1.4"/><circle cx="14" cy="14" r="4" fill="#588088"/></svg>
-        </div>
-        <span class="pillar-sub">Pillar One</span>
-        <h3>The Person</h3>
-        <p>A cognitive reset away from the operating rhythm that has likely run unchecked for years. Nervous-system restoration, unhurried self-reflection, and the kind of quiet that a full calendar rarely allows.</p>
+  <!-- PROBLEM -->
+  <section id="problem" style="background:#fff; border-bottom:1px solid #E2DDD4;">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">The problem</div>
+        <h2>What breaks when fast-growing companies hit pressure</h2>
       </div>
-      <div class="pillar">
-        <div class="pillar-mark">
-          <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="12.5" fill="none" stroke="#588088" stroke-width="1.4"/><rect x="9" y="9" width="10" height="10" fill="none" stroke="#588088" stroke-width="1.3"/></svg>
+      <div class="problem-grid">
+        <div class="problem-col">
+          <span class="problem-index">01 &middot; Velocity Drag</span>
+          <h3>Decision Latency</h3>
+          <p>Key hires, product pivots, and capital deployments stall because the leadership team avoids the hard call. Everyone can see the decision that needs to be made. No one is making it.</p>
+          <div class="problem-callout">Impact: Burned runway and second-guessing at the board table.</div>
         </div>
-        <span class="pillar-sub">Pillar Two</span>
-        <h3>The Professional</h3>
-        <p>Blind spots surfaced by peers who carry equivalent weight elsewhere, not by consultants observing from outside it. Direct, private challenge on how you actually lead, not how you describe leading.</p>
-      </div>
-      <div class="pillar">
-        <div class="pillar-mark">
-          <svg width="28" height="28" viewBox="0 0 28 28" aria-hidden="true"><circle cx="14" cy="14" r="12.5" fill="none" stroke="#588088" stroke-width="1.4"/><path d="M8 18 L14 9 L20 18 Z" fill="none" stroke="#588088" stroke-width="1.3"/></svg>
+        <div class="problem-col">
+          <span class="problem-index">02 &middot; Latent Conflict</span>
+          <h3>Co-Founder &amp; C-Suite Fracture</h3>
+          <p>Unspoken disagreements and eroded trust between founders or C-suite peers turn into political silos. Meetings get politer. Execution gets slower.</p>
+          <div class="problem-callout">Impact: High-performer attrition and hidden operational drag.</div>
         </div>
-        <span class="pillar-sub">Pillar Three</span>
-        <h3>The Enterprise</h3>
-        <p>The long-view questions that rarely survive a quarterly cycle. Capital allocation, board dynamics, succession, and the resilience decisions that are easiest to defer and costliest to.</p>
+        <div class="problem-col">
+          <span class="problem-index">03 &middot; Structural Strain</span>
+          <h3>The Scaling Bottleneck</h3>
+          <p>The informal operating habits that worked at 20 people actively suffocate the company at 75+. The org chart expanded. Decision governance didn't.</p>
+          <div class="problem-callout">Impact: Founder overload and missed milestone execution.</div>
+        </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="standards" class="section-navy">
-  <div class="container">
-    <div class="standards-layout">
+  <!-- APPROACH -->
+  <section id="approach">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">The operator difference</div>
+        <h2>Not outside theorists.<br>Operators inside the room.</h2>
+        <p>Traditional consultancies deliver 100-page slide decks from the sidelines. Generic executive coaches ask reflective questions detached from your P&amp;L. Kuma Partners embeds former CEOs and operators inside the high-stakes decisions to fix leadership friction and restore execution velocity.</p>
+      </div>
+      <div class="compare-wrap">
+        <table class="compare">
+          <thead>
+            <tr>
+              <th></th>
+              <th>Traditional consultancies</th>
+              <th>Generic coaching collectives</th>
+              <th class="kuma">Kuma Partners<span class="th-badge">The Kuma Standard</span></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="row-label">Who delivers</td>
+              <td>Junior analysts, staffed off a bench</td>
+              <td>Solo mindset coaches, working in isolation</td>
+              <td class="kuma">Former CEOs, CROs, and enterprise operators</td>
+            </tr>
+            <tr>
+              <td class="row-label">The focus</td>
+              <td>Theoretical 100-page slide decks</td>
+              <td>Isolated one-to-one reflection, detached from the P&amp;L</td>
+              <td class="kuma">High-stakes operational mediation and strategic alignment, in the same room</td>
+            </tr>
+            <tr>
+              <td class="row-label">Speed to value</td>
+              <td>Six-month discovery studies</td>
+              <td>Open-ended hourly retainers with no end date</td>
+              <td class="kuma kuma-last">14-day scans and 60-day alignment sprints</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- ENGAGEMENTS -->
+  <section id="engagements" style="background:#fff;">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">How we engage</div>
+        <h2>Structured Interventions.<br>Built for Scale.</h2>
+        <p class="tier-subhead">Predictable scope. Defined milestones. Zero open-ended consulting retainers.</p>
+      </div>
+
+      <div class="engage-tabs">
+        <div class="engage-tabs-inner">
+          <button type="button" id="tab-advisory-btn" class="engage-tab-btn active" data-engage-tab="advisory">Leadership Engagements (Tiers 1&ndash;3)</button>
+          <button type="button" id="tab-offsites-btn" class="engage-tab-btn" data-engage-tab="offsites">Strategic &amp; Executive Offsites</button>
+        </div>
+      </div>
+
+      <div class="tier-grid" data-engage-panel="advisory">
+        <div class="tier-card tier-featured" id="tier-1">
+          <span class="tier-badge-pill">Recommended Entry Point</span>
+          <div class="tier-label">Tier 1 · The door-opener</div>
+          <h3>The 14-Day Leadership Friction Scan</h3>
+          <p>8–10 confidential executive interviews, team communication pulse check, and a facilitated C-suite/board debrief.</p>
+          <ul>
+            <li>Surfaces normalized friction patterns and cross-functional silos</li>
+            <li>Identifies decision bottlenecks and unaddressed board exposure</li>
+            <li>Delivers a concrete 90-day execution roadmap (no passive slide decks)</li>
+          </ul>
+          <div class="tier-mini-timeline">
+            <div class="tier-mini-step">
+              <span class="tier-mini-dot"></span>
+              <span>Days 1&ndash;5<br>Intake</span>
+            </div>
+            <div class="tier-mini-line"></div>
+            <div class="tier-mini-step">
+              <span class="tier-mini-dot"></span>
+              <span>Days 6&ndash;10<br>Synthesis</span>
+            </div>
+            <div class="tier-mini-line"></div>
+            <div class="tier-mini-step">
+              <span class="tier-mini-dot tier-mini-dot-final"></span>
+              <span class="tier-mini-final">Day 14<br>Debrief</span>
+            </div>
+          </div>
+          <div class="tier-actions">
+            <button type="button" class="tier-cta tier-cta-primary" data-open-scan-modal>Book a Friction Scan</button>
+            <button type="button" class="tier-cta-sub tier-cta-sub-btn" data-scan-timeline-toggle aria-expanded="false" aria-controls="scan-timeline-drawer">
+              See 14-day timeline &amp; deliverables <span data-toggle-arrow>↓</span>
+            </button>
+          </div>
+        </div>
+        <div class="tier-card" id="tier-2">
+          <div class="tier-label">Tier 2 · The intervention</div>
+          <h3>The 60–90 Day Executive Alignment Sprint</h3>
+          <p>Hands-on co-founder mediation, executive team restructuring, decision-governance redesign, and cross-functional facilitation.</p>
+          <ul>
+            <li>Rebuilt operating cadences the leadership team actually keeps</li>
+            <li>Binding behavioral &amp; governance compacts between C-suite peers</li>
+            <li>Restored decision velocity measured against board KPIs</li>
+          </ul>
+          <div class="tier-actions">
+            <a href="alignment-sprint.html" class="tier-cta tier-cta-outline">Explore Alignment Sprint</a>
+            <button type="button" class="tier-cta-sub tier-cta-sub-btn" data-sprint-drawer-toggle aria-expanded="false" aria-controls="sprint-phases-drawer">
+              See 3 delivery phases &amp; deliverables <span data-toggle-arrow>↓</span>
+            </button>
+          </div>
+        </div>
+        <div class="tier-card" id="tier-3">
+          <div class="tier-label">Tier 3 · The anchor</div>
+          <h3>Strategic Scaling Advisory</h3>
+          <p>Embedded strategic counsel and executive sparring for CEOs and key executives through hyper-growth or M&amp;A transitions.</p>
+          <ul>
+            <li>Confidential sounding board for fundraising and capital allocation</li>
+            <li>Direct partner access between board cycles, not just quarterly reviews</li>
+            <li>Continuity through high-stakes inflection points that break newer advisors</li>
+          </ul>
+          <div class="tier-actions">
+            <a href="#contact" class="tier-cta tier-cta-outline">Inquire About Advisory</a>
+            <button type="button" class="tier-cta-sub tier-cta-sub-btn" data-open-debrief-modal>Schedule partner debrief →</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="scan-drawer" id="scan-timeline-drawer" data-scan-drawer aria-hidden="true">
+        <div class="scan-drawer-inner">
+          <div class="scan-drawer-card">
+            <div class="scan-drawer-steps">
+              <div class="scan-drawer-step">
+                <div class="scan-drawer-days">Days 1–5</div>
+                <h4>Deep Intake</h4>
+                <p>8–10 confidential 1:1 executive interviews, pulse diagnostic, board benchmark.</p>
+              </div>
+              <div class="scan-drawer-step">
+                <div class="scan-drawer-days">Days 6–10</div>
+                <h4>Cross-Synthesis</h4>
+                <p>Mapping communication bottlenecks, decision drag, and structural friction.</p>
+              </div>
+              <div class="scan-drawer-step">
+                <div class="scan-drawer-days">Days 11–14</div>
+                <h4>Debrief &amp; Action</h4>
+                <p>Facilitated 2-hour C-suite alignment debrief + prioritized 90-Day Action Plan.</p>
+              </div>
+            </div>
+
+            <div class="scan-drawer-deliverables">
+              <div class="scan-drawer-deliverable">
+                <h4>Executive Friction Matrix</h4>
+                <p>Relational &amp; strategic blocker map</p>
+              </div>
+              <div class="scan-drawer-deliverable">
+                <h4>Decision Rights Compact</h4>
+                <p>RACI &amp; governance boundaries</p>
+              </div>
+              <div class="scan-drawer-deliverable">
+                <h4>90-Day Execution Roadmap</h4>
+                <p>Board-ready priority plan</p>
+              </div>
+            </div>
+
+            <div class="scan-drawer-footer">
+              <span class="scan-metric-badge">Fixed Scope. Rapid Delivery. Minimal C-Suite Disruption.</span>
+              <button type="button" class="scan-drawer-close" data-scan-timeline-toggle aria-expanded="false" aria-controls="scan-timeline-drawer">Close details ↑</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="scan-drawer" id="sprint-phases-drawer" data-scan-drawer aria-hidden="true">
+        <div class="scan-drawer-inner">
+          <div class="scan-drawer-card">
+            <div class="scan-drawer-steps">
+              <div class="scan-drawer-step">
+                <div class="scan-drawer-days">Phase 01 &middot; Weeks 1&ndash;2</div>
+                <h4>Diagnose</h4>
+                <p>Deepen Friction Scan findings. Pinpoint latent co-founder conflict, decision bottlenecks, and board-level risk.</p>
+              </div>
+              <div class="scan-drawer-step">
+                <div class="scan-drawer-days">Phase 02 &middot; Weeks 3&ndash;6</div>
+                <h4>Align</h4>
+                <p>Direct operator-led mediation. Rebuild working agreements, eliminate unspoken tension, and redesign decision rights.</p>
+              </div>
+              <div class="scan-drawer-step">
+                <div class="scan-drawer-days">Phase 03 &middot; Weeks 7&ndash;12</div>
+                <h4>Embed</h4>
+                <p>Live-fire stress-testing. Install permanent operating cadences, escalation paths, and binding peer-level compacts.</p>
+              </div>
+            </div>
+
+            <div class="scan-drawer-deliverables">
+              <div class="scan-drawer-deliverable">
+                <h4>Operational Governance Map</h4>
+                <p>Clear decision-rights framework replacing informal bottlenecks.</p>
+              </div>
+              <div class="scan-drawer-deliverable">
+                <h4>Binding Peer Compacts</h4>
+                <p>Signed behavioral and operational agreements between founders/executives.</p>
+              </div>
+              <div class="scan-drawer-deliverable">
+                <h4>Board-Ready Alignment Memo</h4>
+                <p>Objective readout on restored decision velocity and stabilized leadership.</p>
+              </div>
+            </div>
+
+            <div class="scan-drawer-footer">
+              <span class="scan-metric-badge scan-metric-badge-cream">Fixed-Scope Intervention &middot; Multi-Partner Delivery &middot; Zero Slide Fluff</span>
+              <button type="button" class="scan-drawer-close" data-sprint-drawer-toggle aria-expanded="false" aria-controls="sprint-phases-drawer">Close details ↑</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="offsite-module" id="offsites" data-engage-panel="offsites" hidden>
+        <span class="offsite-badge-pill">Strategic and Executive Offsites</span>
+        <div class="offsite-grid">
+          <div class="offsite-narrative">
+            <div class="offsite-badge">Focused Intervention</div>
+            <h3>The High-Stakes Executive Offsite.<br class="brk-responsive"> Designed &amp; Moderated by Operators.</h3>
+            <p>Most executive offsites default to polite status updates, vague brainstorms, and zero operational accountability. We step into the room to design the strategic agenda, surface the unspoken tensions, and facilitate the hard commercial debates that your team has been avoiding.</p>
+            <ul class="offsite-included">
+              <li><div><strong>Pre-Offsite Stakeholder Intake</strong><p>Confidential 1:1 interviews with each attendee to map hidden misalignments in advance.</p></div></li>
+              <li><div><strong>In-the-Room Operator Moderation</strong><p>1 to 5 days of direct facilitation by former C-suite operators, keeping debate focused on execution and P&amp;L reality.</p></div></li>
+              <li><div><strong>Post-Offsite Binding Compact</strong><p>Transforming open discussion into explicit decision rights, resource trade-offs, and 90-day commitments.</p></div></li>
+            </ul>
+          </div>
+          <div class="offsite-specs">
+            <div class="offsite-specs-body">
+              <div class="offsite-specs-row">
+                <span class="offsite-specs-label">Ideal For</span>
+                <p>Annual Strategy Planning &middot; Post-Fundraise Roadmaps &middot; Co-Founder / C-Suite Re-alignment</p>
+              </div>
+              <div class="offsite-specs-row">
+                <span class="offsite-specs-label">Duration</span>
+                <p>1 to 5 days on-site (Worldwide)</p>
+              </div>
+              <div class="offsite-specs-row">
+                <span class="offsite-specs-label">Investment</span>
+                <p>Fixed scope tailored to executive team size &amp; offsite duration</p>
+              </div>
+              <p class="offsite-specs-note">We handle the intellectual architecture, strategic mediation, and alignment outcomes. Your team or Chief of Staff manages venue and travel logistics, unless you need us to step in.</p>
+            </div>
+            <button type="button" class="tier-cta tier-cta-primary" data-offsite-cta>Design Your Leadership Offsite</button>
+          </div>
+        </div>
+
+        <div class="offsite-proof">
+          <div class="offsite-proof-header">
+            <div class="offsite-proof-heading">
+              <div class="offsite-proof-eyebrow">On-Site Reality &middot; High-Stakes Alignment</div>
+              <h4 class="offsite-proof-title">Where Strategic Alignment Happens: Inside the Room &amp; On-Site</h4>
+            </div>
+            <div class="offsite-proof-nav">
+              <button type="button" class="offsite-proof-arrow" data-offsite-prev aria-label="Previous images">
+                <svg class="offsite-proof-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M15.75 19.5L8.25 12l7.5-7.5" /></svg>
+              </button>
+              <span class="offsite-proof-page" data-offsite-page aria-live="polite">[ 01 / 02 ]</span>
+              <button type="button" class="offsite-proof-arrow" data-offsite-next aria-label="Next images">
+                <svg class="offsite-proof-arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" /></svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="offsite-proof-grid" data-offsite-view="1">
+            <div class="offsite-proof-item">
+              <img src="assets/offsites/alpine-workshop.jpeg" alt="Kuma Partners C-suite offsite session at a mountain hub venue" loading="lazy">
+            </div>
+            <div class="offsite-proof-item">
+              <img src="assets/offsites/masia-pirreneus.jpg" alt="Alpine hub masia venue used by Kuma Partners for cross-border executive team offsites" loading="lazy">
+            </div>
+            <div class="offsite-proof-item">
+              <img src="assets/offsites/in-room-moderation.jpeg" alt="Kuma Partners operator moderating a closed-room executive offsite session" loading="lazy">
+            </div>
+            <div class="offsite-proof-item">
+              <img src="assets/offsites/masia-solsona.jpg" alt="Secluded private estate grounds in Solsona, Catalonia used for Kuma Partners offsites" loading="lazy">
+            </div>
+          </div>
+
+          <div class="offsite-proof-grid" data-offsite-view="2" hidden>
+            <div class="offsite-proof-item">
+              <img src="assets/offsites/Workshop.jpeg" alt="Kuma Partners team writing individual retrospective notes during a company offsite" loading="lazy">
+            </div>
+            <div class="offsite-proof-item">
+              <img src="assets/offsites/board%20offsite%20kuma%20partners.png" alt="Kuma Partners board offsite session with facilitators addressing the full room" loading="lazy">
+            </div>
+            <div class="offsite-proof-item">
+              <img src="assets/offsites/strategic-workshop.jpeg" alt="Structured strategic workshop and operational alignment session led by Kuma Partners" loading="lazy">
+            </div>
+            <div class="offsite-proof-item">
+              <img src="assets/offsites/Csuite%20offsite%20kuma%20partners.jpeg" alt="Kuma Partners C-suite offsite working session mapping the execution plan" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CASE STUDIES -->
+  <section id="case-studies" style="background:#fff; border-bottom:1px solid #E2DDD4;">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Proof of impact</div>
+        <h2>Proven Impact Inside Critical Inflection Points</h2>
+        <p>How we help scale-stage leadership teams protect decision velocity and resolve operational bottlenecks.</p>
+      </div>
+
+      <div class="case-tabs">
+        <button type="button" class="case-tab active" data-case="series-a">Post-Series A Growth</button>
+        <button type="button" class="case-tab" data-case="industrial">Industrial Tech Scale-Up</button>
+        <button type="button" class="case-tab" data-case="b2b-saas">Venture-Backed B2B SaaS</button>
+      </div>
+
+      <div class="case-docket">
+
+        <div class="case-docket-panel is-active" data-case-panel="series-a">
+          <div class="case-docket-context">
+            <span class="case-docket-badge">Post-Series A FinTech &middot; Scaling 45 to 120</span>
+            <h3>Scaling From 45 to 120 Employees</h3>
+            <div class="case-block">
+              <span class="label">The challenge</span>
+              <p>Decision latency increased significantly following a &euro;25M round. Founders were caught in tactical execution, and strategic product pivots were delayed by 4 months due to unexpressed executive friction.</p>
+            </div>
+            <div class="case-block">
+              <span class="label">The intervention</span>
+              <p>Deployed a 14-Day Leadership Friction Scan followed by a 60-Day Executive Alignment Sprint. Clarified decision governance and restructured C-suite reporting lines.</p>
+            </div>
+          </div>
+          <div class="case-docket-outcome">
+            <span class="case-docket-stat">48 Hours</span>
+            <span class="case-docket-label">Decision Velocity Restored</span>
+            <p>Deliberation time on core product decisions dropped from weeks to 48 hours. Key executive retention reached 100% through the scaling phase.</p>
+          </div>
+        </div>
+
+        <div class="case-docket-panel" data-case-panel="industrial" hidden>
+          <div class="case-docket-context">
+            <span class="case-docket-badge">Industrial Tech Scale-Up &middot; Post-Acquisition</span>
+            <h3>Post-Acquisition Integration</h3>
+            <div class="case-block">
+              <span class="label">The challenge</span>
+              <p>Cultural divergence and executive distrust between original founders and acquired leadership slowed integration, eroding customer delivery timelines.</p>
+            </div>
+            <div class="case-block">
+              <span class="label">The intervention</span>
+              <p>Implemented systemic leadership diagnostics across both teams, redesigned operating cadences, and established unified leadership accountability.</p>
+            </div>
+          </div>
+          <div class="case-docket-outcome">
+            <span class="case-docket-stat">3 Months</span>
+            <span class="case-docket-label">Faster Integration Velocity</span>
+            <p>Eliminated cross-team friction, accelerated integration milestones by 3 months, and protected operational delivery.</p>
+          </div>
+        </div>
+
+        <div class="case-docket-panel" data-case-panel="b2b-saas" hidden>
+          <div class="case-docket-context">
+            <span class="case-docket-badge">Venture-Backed B2B SaaS &middot; Co-Founder Stalemate</span>
+            <h3>Co-Founder Alignment &amp; Executive Compact</h3>
+            <div class="case-block">
+              <span class="label">The challenge</span>
+              <p>Silent conflict between technical and commercial co-founders over commercial roadmap priorities led to conflicting signals across engineering and sales, threatening runway.</p>
+            </div>
+            <div class="case-block">
+              <span class="label">The intervention</span>
+              <p>Embedded multi-practitioner mediation. Facilitated structured, candid alignment sessions to uncover underlying assumptions and draft a binding operational compact.</p>
+            </div>
+          </div>
+          <div class="case-docket-outcome">
+            <span class="case-docket-stat">3 Weeks</span>
+            <span class="case-docket-label">To Executive Compact</span>
+            <p>Realigned executive roadmaps within 3 weeks, re-established founder trust, and unlocked board approval for international expansion.</p>
+          </div>
+        </div>
+
+      </div>
+      <p class="case-disclaimer">Client details anonymized to protect confidentiality.</p>
+    </div>
+  </section>
+
+  <!-- INVESTOR / VC & PE TRACK -->
+  <section id="investors">
+    <div class="wrap">
+      <span class="badge-pill">For Lead Investors &amp; Board Directors</span>
+      <h2 style="max-width:680px;">Protect the Investment.<br>Stabilize the Team.</h2>
+      <p style="max-width:700px; font-size:1.05rem;">Most venture scale-ups do not stall on technology. They stall when co-founder relationships fracture, C-suite communication breaks down, and decision velocity collapses. We act as confidential intervention partners for VC and PE operating partners, deploying inside portfolio companies to stabilize executive teams and protect runway.</p>
+      <div class="value-grid">
+        <div class="value-card">
+          <h3>Pre-Emptive Diagnostics</h3>
+          <p>Identifying leadership friction around Series A/B before it impacts board metrics.</p>
+        </div>
+        <div class="value-card">
+          <h3>Co-Founder Realignment</h3>
+          <p>Mediating high-stakes structural disagreements and equity or role friction.</p>
+        </div>
+        <div class="value-card">
+          <h3>Executive Transitions</h3>
+          <p>Supporting smooth, dignified C-suite restructuring without organizational whiplash.</p>
+        </div>
+      </div>
+      <div style="margin-top:36px;">
+        <a href="#contact-investor" class="btn btn-primary" data-investor-cta>Schedule an Investor Briefing</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- PARTNERS -->
+  <section id="partners" class="team-teaser">
+    <div class="wrap">
+
+      <div class="team-teaser-lead">
+        <div class="eyebrow">The operator bench</div>
+        <h2>Led by practitioners,<br class="brk-responsive"> not career consultants.</h2>
+        <p>Every Kuma engagement is directly led by former CEOs and senior C-suite operators who have sat in the primary seat, navigating board revolts, founder stalemates, hyper-growth, and restructurings, before advising others.</p>
+      </div>
+
+      <div class="team-pillars">
+        <div class="team-pillar">
+          <div class="team-pillar-index">01 · Direct Partner Delivery</div>
+          <p>No hand-offs to junior associates or analysts. The partner you meet on day one delivers the engagement, start to finish.</p>
+        </div>
+        <div class="team-pillar">
+          <div class="team-pillar-index">02 · Specialized Senior Bench</div>
+          <p>Backed by trusted senior advisors across organizational culture, board governance, and executive team design.</p>
+        </div>
+        <div class="team-pillar">
+          <div class="team-pillar-index">03 · Global Operator Reach</div>
+          <p>Combined leadership experience across New York, London, Paris, Munich, Barcelona, and Lisbon.</p>
+        </div>
+      </div>
+
+      <div class="team-cta">
+        <div>
+          <div class="team-cta-title">Explore the Managing Partners and Senior Advisor Network</div>
+          <div class="team-cta-sub">Review operator backgrounds, prior track records, and functional advisory domains.</div>
+        </div>
+        <a href="partners.html" class="btn btn-primary">Meet the full team <span class="arrow">→</span></a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section id="faq">
+    <div class="wrap">
+      <div class="faq-layout">
+
+        <div class="faq-intro">
+          <div class="eyebrow">Questions &amp; dynamics</div>
+          <h2>Frequently Asked Questions.</h2>
+          <p class="faq-intro-sub">Direct answers on diagnostic scope, VC portfolio support, discretion, and operational velocity.</p>
+          <div class="faq-bridge">
+            <p>Have a specific or sensitive situation?</p>
+            <a href="#contact" class="faq-bridge-link">Speak directly with a Managing Partner <span class="arrow">→</span></a>
+          </div>
+        </div>
+
+        <div class="faq">
+
+          <div class="faq-item open">
+            <button class="faq-question" aria-expanded="true">
+              How does Kuma Partners handle multicultural and cross-border leadership dynamics?
+              <span class="icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                <p>Executive friction is rarely purely operational. It is often cultural. Nuance, directness, and confrontation carry vastly different meanings across American, British, DACH, French, and Southern European executive cultures. Our Managing Partners are native speakers across 5 languages (English, Deutsch, Français, Português, and Español) who have built and scaled international enterprises. We mediate high-stakes tensions within their cultural context, ensuring communication breakdowns do not turn into operational deadlocks.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              How do you address leadership friction in distributed or remote-first executive teams?
+              <span class="icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                <p>In distributed and remote scale-ups, leadership misalignment remains hidden longer. Without physical proximity, tensions surface as passive friction: silent Slack channels, delayed roadmap decisions, and avoidance of tough commercial trade-offs. We adapt our diagnostics specifically for asynchronous environments by auditing communication cadences, information flow, and decision ownership before bringing remote C-suites into targeted, in-person offsites or structured virtual alignment sprints.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              What is the difference between Kuma Partners, traditional consultancies, and executive coaches?
+              <span class="icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                <p>We deploy former operators inside the room, not junior analysts or isolated mindset coaches. Traditional management consultancies deploy junior associates to build 100-page slide decks often prepared with AI from the sidelines. Generic executive coaches focus on isolated, 1-on-1 personal reflection detached from commercial reality. Every Kuma partner is a former CEO or C-suite operator who diagnoses operational friction, mediates founder stalemates, and establishes binding governance compacts tied directly to runway, P&amp;L, and board milestones.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              When is the ideal moment for a CEO or board to initiate an intervention?
+              <span class="icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                <p>The optimal window is pre-emptive: immediately post-raise, during phases of aggressive hypergrowth, or during an M&amp;A transition before cultural divergence impacts board KPIs. If key decisions are stalling for more than 48 hours or unspoken co-founder disagreements are causing departmental silos, a 14-Day Scan quickly surfaces root causes without disrupting daily operations.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              How do you protect confidentiality between co-founders, the CEO, and the board?
+              <span class="icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                <p>Total discretion is the foundation of our practice. 1:1 interviews conducted during our diagnostics are strictly confidential. We synthesize friction themes, decision latency points, and governance bottlenecks without attributing sensitive quotes to specific individuals. This creates a psychologically safe environment where executives can surface real commercial tensions without fear of political backlash or compromised board standing.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              Can we engage Kuma Partners solely for an Executive Offsite without a long-term advisory retainer?
+              <span class="icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                <p>Yes. We frequently moderate standalone 1 to 5-day executive offsites worldwide for annual strategy planning, post-fundraise roadmaps, or co-founder realignments. We handle the intellectual architecture, pre-offsite stakeholder intake, and in-room moderation to ensure the session yields binding 90-day compacts rather than vague brainstorms. Should deeper operational restructuring be required, teams can seamlessly transition into a 60&ndash;90 Day Executive Alignment Sprint.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              How does Kuma Partners support VC and PE firms beyond direct crisis interventions?
+              <span class="icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                <p>We design and facilitate high-conviction Portfolio Founders Days and confidential Peer Masterminds for venture capital and private equity firms. Rather than generic panels or celebratory networking, our Masterminds bring portfolio CEOs together in curated, closed-door environments moderated by former operators. We facilitate candid, P&amp;L-grounded discussions around cash runway management, executive team restructurings, and board governance dynamics, turning passive investor portfolio events into active leadership de-risking sessions.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              How do you address the risk of C-suite or key executive attrition during an intervention?
+              <span class="icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                <p>Our process stabilizes leadership teams rather than destabilizing them. Executive turnover during scaling typically stems from unexpressed friction, role ambiguity, or lack of clear decision authority. By establishing objective governance compacts and clarifying decision rights during our 14-Day Scan and 60&ndash;90 Day Sprint, we eliminate the silent political friction that drives top-tier executives to resign. In our previous interventions, leadership teams have achieved 100% key executive retention through their scaling milestones.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              Can Kuma Partners facilitate a smooth, dignified executive or co-founder transition if alignment fails?
+              <span class="icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                <p>Yes. When our diagnostic reveals irreconcilable vision fractures or an executive who cannot scale with the company's growth stage, we help founders and boards manage the transition without organizational whiplash. Because our partners have executed executive exits as CEOs, we mediate role redesigns, equity transitions, or dignified exits while maintaining company morale, operational continuity, and board alignment.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="faq-item">
+            <button class="faq-question" aria-expanded="false">
+              How do you measure the ROI and success of a leadership alignment sprint?
+              <span class="icon">+</span>
+            </button>
+            <div class="faq-answer">
+              <div class="faq-answer-inner">
+                <p>We measure success through operational velocity and board-level KPIs, not subjective satisfaction scores. Key benchmarks include concrete reductions in decision latency (e.g., deliberation cycles dropping from weeks to under 48 hours), 100% executive sign-off on 90-day governance compacts, stabilization of cross-functional delivery roadmaps, and the elimination of second-guessing at the board table.</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- LEADERSHIP FRICTION SCORECARD -->
+  <section id="scorecard">
+    <div class="wrap">
+      <div class="section-head" style="text-align:center; max-width:640px; margin:0 auto;">
+        <div class="eyebrow" style="justify-content:center;">Free self-assessment</div>
+        <h2>Where Is Your Leadership Team<br class="brk-responsive"> Losing Speed?</h2>
+        <p>A 90-second diagnostic for founders, CEOs, and boards to identify the leadership dynamics quietly putting execution, alignment, and runway at risk.</p>
+      </div>
+
+      <div class="scorecard-card" id="scorecard-widget">
+
+        <div class="scorecard-progress" hidden>
+          <span class="sc-progress-text" data-progress-text></span>
+          <div class="sc-progress-bar"><div class="sc-progress-bar-fill" data-progress-fill></div></div>
+        </div>
+
+        <!-- INTRO -->
+        <div class="sc-step" data-step="intro">
+          <h3 class="sc-title">Assess Your Leadership Team's Friction Score</h3>
+          <p class="sc-subtitle">Answer 7 short questions to evaluate executive decision velocity, candor, and governance. Takes about 90 seconds.</p>
+          <button type="button" class="btn btn-primary" data-start>Start Assessment</button>
+        </div>
+
+        <!-- SCREEN 0: PERSPECTIVE SELECTOR -->
+        <div class="sc-step" data-step="lens" hidden>
+          <h3 class="sc-title">Whose leadership dynamics are you evaluating today?</h3>
+          <button type="button" class="scorecard-option sc-lens-option" data-mode="founder">My own leadership team<span class="sc-lens-sub">Founder / CEO / C-Suite</span></button>
+          <button type="button" class="scorecard-option sc-lens-option" data-mode="investor">A portfolio company / investment<span class="sc-lens-sub">VC / Operating Partner / Board Director</span></button>
+        </div>
+
+        <!-- Q1 -->
+        <div class="sc-step" data-step="q1" hidden>
+          <h3 class="sc-title">Where do the real strategic debates happen?</h3>
+          <button type="button" class="scorecard-option" data-value="low">In the open executive room, where disagreements are aired and decisions finalized.</button>
+          <button type="button" class="scorecard-option" data-value="moderate">Behind closed doors in 1:1 side-channels before or after leadership meetings.</button>
+          <button type="button" class="scorecard-option" data-value="acute">They don't happen. Hard topics are avoided to keep polite peace.</button>
+        </div>
+
+        <!-- Q2 -->
+        <div class="sc-step" data-step="q2" hidden>
+          <h3 class="sc-title">How fast does <span data-lens-founder>your</span><span data-lens-investor hidden>the</span> leadership team execute critical calls (pivots, key hires, capital allocation)?</h3>
+          <button type="button" class="scorecard-option" data-value="low">Within 48 hours, with explicit ownership and immediate execution.</button>
+          <button type="button" class="scorecard-option" data-value="moderate">Weeks of deliberation and analysis, leaving lingering ambiguity.</button>
+          <button type="button" class="scorecard-option" data-value="acute">Decisions are made, reopened, and stalled repeatedly.</button>
+        </div>
+
+        <!-- Q3 -->
+        <div class="sc-step" data-step="q3" hidden>
+          <h3 class="sc-title">What is the current state of trust between key leadership peers?</h3>
+          <button type="button" class="scorecard-option" data-value="low">High trust, clear complementary lanes, and genuine mutual accountability.</button>
+          <button type="button" class="scorecard-option" data-value="moderate">Occasional territorial tension and protective silos, but functional.</button>
+          <button type="button" class="scorecard-option" data-value="acute">Significant unspoken tension, siloed communication, or eroded trust.</button>
+        </div>
+
+        <!-- Q4 -->
+        <div class="sc-step" data-step="q4" hidden>
+          <h3 class="sc-title">Who actively challenges the CEO's assumptions on high-stakes decisions?</h3>
+          <button type="button" class="scorecard-option" data-value="low">Multiple executives actively push back in the room until consensus or a clear call is reached.</button>
+          <button type="button" class="scorecard-option" data-value="moderate">One co-founder or trusted advisor does so privately, but rarely in front of the team.</button>
+          <button type="button" class="scorecard-option" data-value="acute">Almost no one. The room defaults to passive compliance, followed by quiet drag.</button>
+        </div>
+
+        <!-- Q5 -->
+        <div class="sc-step" data-step="q5" hidden>
+          <h3 class="sc-title">When core targets or delivery deadlines slip, how does the executive team react?</h3>
+          <button type="button" class="scorecard-option" data-value="low">Collective ownership: the C-suite realigns resources and solves the root bottleneck.</button>
+          <button type="button" class="scorecard-option" data-value="moderate">Polite resignation: leaders defend their department while missing shared company goals.</button>
+          <button type="button" class="scorecard-option" data-value="acute">Cross-functional friction: sales blames product, and product blames go-to-market execution.</button>
+        </div>
+
+        <!-- Q6 -->
+        <div class="sc-step" data-step="q6" hidden>
+          <h3 class="sc-title">How are operational friction and execution misses handled with the board?</h3>
+          <button type="button" class="scorecard-option" data-value="low">Proactively and transparently, aligning on hard trade-offs prior to board cycles.</button>
+          <button type="button" class="scorecard-option" data-value="moderate">Carefully managed: bad news is softened to prevent triggering investor anxiety.</button>
+          <button type="button" class="scorecard-option" data-value="acute">Reactively: board meetings frequently surface peer misalignments or defensive stances.</button>
+        </div>
+
+        <!-- Q7 -->
+        <div class="sc-step" data-step="q7" hidden>
+          <h3 class="sc-title">Where is growth creating the most organizational strain?</h3>
+          <button type="button" class="scorecard-option" data-value="seed">Translating founder vision into VP-level execution (Seed to Series A / 20–49 team)</button>
+          <button type="button" class="scorecard-option" data-value="seriesbc">Departmental silos and execution drag across scaling functions (Series B to C / 50–150+ team)</button>
+          <button type="button" class="scorecard-option" data-value="growth">Board performance pressure colliding with leadership restructuring (Growth / PE Scale)</button>
+        </div>
+
+        <!-- GATE -->
+        <div class="sc-step" data-step="gate" hidden>
+          <h3 class="sc-title">Where should we send your full diagnostic breakdown?</h3>
+          <p class="sc-subtitle">Your diagnostic index will appear immediately on-screen. A confidential benchmark summary will be sent to your work email.</p>
+          <form data-gate-form novalidate>
+            <div class="field">
+              <label for="sc-email">Work email</label>
+              <input type="email" id="sc-email" required>
+            </div>
+            <div class="field">
+              <label for="sc-company">Company name</label>
+              <input type="text" id="sc-company" required>
+            </div>
+            <button type="submit" class="btn sc-generate-btn" style="width:100%; justify-content:center;">Generate Diagnostic Assessment →</button>
+          </form>
+        </div>
+
+        <!-- RESULT -->
+        <div class="sc-step" data-step="result" hidden>
+
+          <span class="sc-score-badge" data-score-badge></span>
+          <h3 class="sc-title sc-score-headline" data-score-headline></h3>
+
+          <div class="sc-submetrics">
+            <div class="sc-submetric">
+              <span class="sc-submetric-label">Decision Velocity</span>
+              <span class="sc-submetric-bar"><span class="sc-submetric-tick"></span><span class="sc-submetric-tick"></span><span class="sc-submetric-tick"></span></span>
+              <span class="sc-submetric-value" data-submetric="velocity"></span>
+            </div>
+            <div class="sc-submetric">
+              <span class="sc-submetric-label">Cross-Functional Candor</span>
+              <span class="sc-submetric-bar"><span class="sc-submetric-tick"></span><span class="sc-submetric-tick"></span><span class="sc-submetric-tick"></span></span>
+              <span class="sc-submetric-value" data-submetric="candor"></span>
+            </div>
+            <div class="sc-submetric">
+              <span class="sc-submetric-label">Governance &amp; Alignment</span>
+              <span class="sc-submetric-bar"><span class="sc-submetric-tick"></span><span class="sc-submetric-tick"></span><span class="sc-submetric-tick"></span></span>
+              <span class="sc-submetric-value" data-submetric="governance"></span>
+            </div>
+          </div>
+
+          <p class="sc-synthesis" data-synthesis></p>
+
+          <button type="button" class="btn btn-primary" data-scorecard-cta></button>
+          <div style="margin-top:14px;">
+            <a href="#" class="btn-link" data-scorecard-restart style="font-size:.85rem;">Retake the assessment</a>
+          </div>
+        </div>
+
+        <div class="sc-nav-row" hidden>
+          <button type="button" class="sc-back-btn" data-back-btn hidden>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 19l-7-7 7-7"></path></svg>
+            Back
+          </button>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- QUALIFICATION & FIT -->
+  <section id="fit" style="background:#fff;">
+    <div class="wrap">
+      <div class="section-head" style="max-width:720px;">
+        <div class="eyebrow">Partnership fit</div>
+        <h2>We do not work with everyone.<br>By design.</h2>
+        <p>Our interventions are high-touch, direct, and senior-led. We protect our focus by partnering only where we can move the needle on executive execution.</p>
+      </div>
+
+      <div class="fit-grid">
+        <div class="fit-card fit-card-yes">
+          <span class="fit-pill fit-pill-yes">Ideal Engagements</span>
+          <h3>Who We Partner With</h3>
+          <ul class="fit-list fit-list-yes">
+            <li><div><strong>Series A–C Tech Scale-Ups</strong><p>Leadership teams scaling from 25 to 150+ headcount where execution velocity has started to drag under complexity.</p></div></li>
+            <li><div><strong>Founders Committed to Candor</strong><p>CEOs and co-founders willing to put real strategic tensions on the table and be held personally accountable in the room.</p></div></li>
+            <li><div><strong>Executive Teams Doing the Work</strong><p>Leadership groups ready to actively reset operating cadences and behavioral contracts, not outsource accountability to HR.</p></div></li>
+            <li><div><strong>VC &amp; PE Operating Partners</strong><p>Funds looking for a trusted, rapid-intervention operator to de-risk high-stakes portfolio deployments.</p></div></li>
+          </ul>
+        </div>
+
+        <div class="fit-card fit-card-no">
+          <span class="fit-pill fit-pill-no">Not a Fit</span>
+          <h3>Who We Do Not Serve</h3>
+          <ul class="fit-list fit-list-no">
+            <li><div><strong>Pre-Product Market Fit</strong><p>Early seed teams still iterating on core product viability rather than executive scaling bottlenecks.</p></div></li>
+            <li><div><strong>Looking for "Scattered Coaching"</strong><p>Leaders seeking passive, open-ended 1:1 reflection with no commercial milestones or P&amp;L grounding.</p></div></li>
+            <li><div><strong>Consulting as Air Cover</strong><p>Founders or boards seeking a rubber-stamp report to justify predetermined layoffs or political maneuvers.</p></div></li>
+            <li><div><strong>Delegated Initiatives</strong><p>Organizations where the CEO and core C-suite are unwilling to actively participate in the diagnostic debrief.</p></div></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="fit-transition">
+        <p>If your leadership team meets this standard of readiness, we can help.</p>
+        <a href="#contact" class="fit-transition-link">Schedule a conversation ↓</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- GLOBAL PRESENCE & NATIVE DELIVERY -->
+  <section class="global-strip">
+    <div class="wrap">
+      <div class="global-strip-grid">
+        <div class="global-strip-col">
+          <div class="global-strip-label">International Operating Footprint</div>
+          <div class="global-strip-cities">
+            <span>New York</span>
+            <span>Los Angeles</span>
+            <span>London</span>
+            <span>Paris</span>
+            <span>Munich</span>
+            <span>Barcelona</span>
+            <span>Lisbon</span>
+          </div>
+          <p class="global-strip-note">Deploying in person worldwide for high-stakes scans, interventions, and offsites.</p>
+        </div>
+        <div class="global-strip-col">
+          <div class="global-strip-label">Native Executive Delivery</div>
+          <div class="global-strip-langs">
+            <span>English</span>
+            <span>Deutsch</span>
+            <span>Français</span>
+            <span>Português</span>
+            <span>Español</span>
+          </div>
+          <p class="global-strip-note">Executive nuance and conflict resolution delivered in your leadership team's own language.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact" class="contact-section">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div class="contact-copy">
+          <div class="eyebrow">Get in touch</div>
+          <h2>Unblock your executive execution.</h2>
+          <p>Schedule a confidential 30-minute introductory conversation with a Kuma Managing Partner to assess your leadership team's current friction points.</p>
+          <ul class="contact-reassurance">
+            <li><strong>Direct Partner Access:</strong> No junior sales reps or account managers. You speak directly with Sven or Vincent.</li>
+            <li><strong>Strict Confidentiality:</strong> All initial diagnostics and conversations are covered under mutual non-disclosure.</li>
+            <li><strong>24-Hour Turnaround:</strong> We review your company context and respond within one business day.</li>
+          </ul>
+          <p class="contact-direct-email">Prefer direct email? Reach the partners directly at <a href="mailto:vincent@kuma.partners">vincent@kuma.partners</a></p>
+        </div>
+        <div class="contact-form-shell">
+          <form class="contact-form" name="contact" method="POST" action="/#contact" data-netlify="true" netlify-honeypot="bot-field" id="contact-form" data-contact-form>
+            <input type="hidden" name="form-name" value="contact">
+            <p class="hp-field" hidden>
+              <label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+            </p>
+            <input type="hidden" id="company" name="company">
+            <div class="field">
+              <label for="brought-here">What brought you here?</label>
+              <div class="select-shell">
+                <select id="brought-here" name="brought_here" required>
+                  <option value="" disabled selected hidden>Select one</option>
+                  <option>Co-founder or C-suite alignment is breaking down</option>
+                  <option>Decisions are getting stuck</option>
+                  <option>Leadership team friction is slowing execution</option>
+                  <option>Product, GTM or functional silos are creating drag</option>
+                  <option>We're navigating a major scaling or post-fundraise transition</option>
+                  <option>We need a high-stakes leadership offsite</option>
+                  <option>Board / CEO / governance dynamics need attention</option>
+                  <option>I have a specific situation I want to discuss</option>
+                </select>
+                <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+              </div>
+            </div>
+            <div class="field">
+              <label for="role">What's your role?</label>
+              <div class="select-shell">
+                <select id="role" name="role" required>
+                  <option value="" disabled selected hidden>Select one</option>
+                  <option value="founder">Founder / CEO</option>
+                  <option value="csuite">C-Suite Executive</option>
+                  <option value="board">Board Director</option>
+                  <option value="investor">Lead Investor / Operating Partner</option>
+                  <option value="other">Other</option>
+                </select>
+                <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+              </div>
+            </div>
+            <div class="field">
+              <label for="situation">What's happening?</label>
+              <span class="field-helper">Give us the version you'd tell a trusted advisor.</span>
+              <textarea id="situation" name="situation" rows="3" placeholder="Describe the dynamic, the bottlenecks, or the specific conflict..."></textarea>
+            </div>
+            <div class="field">
+              <label for="urgency">How urgent is it?</label>
+              <div class="select-shell">
+                <select id="urgency" name="urgency" required>
+                  <option value="" disabled selected hidden>Select one</option>
+                  <option>We're dealing with it now</option>
+                  <option>We need to address it within the next 30 days</option>
+                  <option>We see something developing and want to get ahead of it</option>
+                  <option>We're exploring options</option>
+                </select>
+                <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+              </div>
+            </div>
+            <div class="field">
+              <label for="journey">Where are you in the journey?</label>
+              <div class="select-shell">
+                <select id="journey" name="journey" required>
+                  <option value="" disabled selected hidden>Select one</option>
+                  <option>Bootstrapped / Profitable</option>
+                  <option>Seed / Series A</option>
+                  <option>Series B / Series C</option>
+                  <option>Growth / PE-backed</option>
+                  <option>VC / PE fund</option>
+                  <option>Other</option>
+                </select>
+                <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+              </div>
+            </div>
+            <div class="field-row">
+              <div class="field">
+                <label for="name">Full name</label>
+                <input type="text" id="name" name="name" required>
+              </div>
+              <div class="field">
+                <label for="email">Work email</label>
+                <input type="email" id="email" name="email" required>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary" data-contact-submit>
+              <span data-btn-label>Talk to a Managing Partner</span>
+            </button>
+            <p class="contact-form-microcopy">Your information is treated confidentially. We review every inquiry personally and typically respond within 24 business hours.</p>
+            <p class="contact-form-error" data-contact-error hidden>Something went wrong sending your message. Please try again, or email us directly at <a href="mailto:contact@kuma.partners">contact@kuma.partners</a>.</p>
+          </form>
+          <div class="contact-success" data-contact-success hidden tabindex="-1">
+            <h3>Thank you.</h3>
+            <p>Your context has been received by the Kuma Partners team.</p>
+            <p>A Managing Partner will review it personally and come back to you within 24 business hours.</p>
+            <p>If the situation is one we can genuinely help with, we'll suggest the most useful next conversation.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="footer-grid">
       <div>
-        <span class="eyebrow">The Cohort</span>
-        <h2 style="margin-top:18px; margin-bottom:32px; font-size:clamp(1.7rem,3vw,2.3rem); line-height:1.18;">Every seat is vetted. That is what protects the room.</h2>
-        <ul class="standards-list">
-          <li>
-            <span class="mark">01</span>
-            <div>
-              <h4>Confidentiality, without exception</h4>
-              <p>The Chatham House Rule governs every conversation. What is said in the room stays in the room, and is never attributed outside it.</p>
-            </div>
-          </li>
-          <li>
-            <span class="mark">02</span>
-            <div>
-              <h4>No vendors, no pitches</h4>
-              <p>This is not a origination channel for anyone in the room, Kuma included. No selling, no soliciting, no exchange of business under the pretense of peer conversation.</p>
-            </div>
-          </li>
-          <li>
-            <span class="mark">03</span>
-            <div>
-              <h4>Deliberate composition</h4>
-              <p>Each cohort is built by hand for non-competing sectors, comparable stakes, and genuine peer standing, not simply seniority or company size.</p>
-            </div>
-          </li>
-          <li>
-            <span class="mark">04</span>
-            <div>
-              <h4>Senior facilitation throughout</h4>
-              <p>The room is led by Kuma partners who have run a P&amp;L and sat in the seat themselves, not professional facilitators observing from the sidelines.</p>
-            </div>
-          </li>
-        </ul>
-      </div>
-      <div class="standards-aside">
-        <span class="eyebrow">In their words</span>
-        <blockquote>&ldquo;It was the first room in years where I didn't have to manage how I was being perceived. That alone was worth the four days.&rdquo;</blockquote>
-        <cite>Chief Executive, venture-backed technology company</cite>
-        <div class="stat-row">
-          <div>
-            <span class="stat-num">4.9/5</span>
-            <span class="stat-label">Average participant rating across Kuma facilitation engagements</span>
-          </div>
-          <div>
-            <span class="stat-num">100%</span>
-            <span class="stat-label">Founder and CEO peer attendance across all closed sessions</span>
-          </div>
-          <div>
-            <span class="stat-num">10&ndash;14</span>
-            <span class="stat-label">Seats per cohort, held deliberately small</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="panoramic-divider">
-  <img
-    src="assets/retreat-divider-1x.webp"
-    srcset="assets/retreat-divider-1x.webp 1600w, assets/retreat-divider-2x.webp 3200w"
-    sizes="100vw"
-    alt="Panoramic view of the Austrian Alps, peaks and cloud layer above the valley"
-    width="1600" height="533"
-    loading="lazy"
-  />
-</div>
-
-<section id="cadence">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">The Days</span>
-      <h2>Structured enough to hold the work. Open enough to breathe.</h2>
-      <p>There is no minute-by-minute schedule. Executives at this level don't need one, and a packed itinerary works against the purpose. What follows is the shape of the four days, not a script.</p>
-    </div>
-    <div class="cadence-list">
-      <div class="cadence-row">
-        <span class="day">Day One</span>
-        <div>
-          <h4>Arrival and unhurried grounding</h4>
-          <p>Private arrival through the afternoon and evening. No sessions, no introductions to perform. Dinner together, off the record, with the first quiet stretch of unscheduled time most participants have had in months.</p>
-        </div>
-      </div>
-      <div class="cadence-row">
-        <span class="day">Day Two</span>
-        <div>
-          <h4>Closed-door advisory circles</h4>
-          <p>Small-group sessions where each executive brings one real, unresolved decision to the room and leaves with the peer challenge and clarity that no internal conversation could offer. Long, unstructured breaks between.</p>
-        </div>
-      </div>
-      <div class="cadence-row">
-        <span class="day">Day Three</span>
-        <div>
-          <h4>Strategic architecture and personal equilibrium</h4>
-          <p>The morning is held for private, unhurried solo reflection and unstructured movement across the alpine grounds. The afternoon moves into deep enterprise stress-testing, closed-door deconstruction of capital allocation, succession, and governance resilience. The day concludes with an extended private dinner.</p>
-          <figure class="cadence-photo">
-            <img
-              src="assets/retreat-reflection-1x.webp"
-              srcset="assets/retreat-reflection-1x.webp 860w, assets/retreat-reflection-2x.webp 1720w"
-              sizes="(min-width: 900px) 860px, 90vw"
-              alt="Executives at a private table, writing in unhurried reflection during the morning session"
-              width="860" height="484"
-              loading="lazy"
-            />
-          </figure>
-        </div>
-      </div>
-      <div class="cadence-row">
-        <span class="day">Day Four</span>
-        <div>
-          <h4>Departure with something to carry</h4>
-          <p>A closing circle, not a summary deck. Each participant leaves with a small number of private commitments to themselves, not a slide to bring back to the office.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="apply" class="section-navy">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow">Requesting an Invitation</span>
-      <h2>A two-step conversation, not an application form.</h2>
-      <p>There is no self-serve checkout for a room like this. The process exists to protect the people already confirmed in it, and it moves quickly once a fit is clear.</p>
-    </div>
-
-    <div class="funnel-steps">
-      <div class="funnel-step">
-        <span class="step-num">Step One</span>
-        <h4>Tell us briefly who you are</h4>
-        <p>A short private note below. No lengthy application, no essay questions. We read every submission personally within two business days.</p>
-      </div>
-      <div class="funnel-step">
-        <span class="step-num">Step Two</span>
-        <h4>A conversation with a Kuma partner</h4>
-        <p>A private call to confirm mutual fit and cohort composition. If it's a match, your seat is confirmed and full program details, including the investment, are shared directly.</p>
-      </div>
-    </div>
-
-    <form name="sanctuary-application" method="POST" data-netlify="true" netlify-honeypot="company-website" class="apply-form" action="/success.html">
-      <input type="hidden" name="form-name" value="sanctuary-application" />
-      <input type="hidden" name="cohort" value="Austria, 15-18 October 2026" />
-      <p class="hp-field">
-        <label>Leave this field blank<input name="company-website" /></label>
-      </p>
-
-      <div class="form-row">
-        <div class="form-field">
-          <label for="full-name">Full name</label>
-          <input type="text" id="full-name" name="full-name" required />
-        </div>
-        <div class="form-field">
-          <label for="email">Email</label>
-          <input type="email" id="email" name="email" required />
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-field">
-          <label for="company">Company</label>
-          <input type="text" id="company" name="company" required />
-        </div>
-        <div class="form-field">
-          <label for="title">Title</label>
-          <input type="text" id="title" name="title" required placeholder="CEO, Founder, etc." />
-        </div>
-      </div>
-
-      <div class="form-row">
-        <div class="form-field">
-          <label for="org-scale">Organization scale</label>
-          <select id="org-scale" name="org-scale">
-            <option value="">Select one</option>
-            <option value="20-50 employees">20&ndash;50 employees</option>
-            <option value="50-200 employees">50&ndash;200 employees</option>
-            <option value="200+ employees">200+ employees</option>
-            <option value="$10M+ enterprise">$10M+ enterprise</option>
-          </select>
-        </div>
-        <div class="form-field">
-          <label for="referral">Invitation source / referred by</label>
-          <input type="text" id="referral" name="referral" placeholder="A peer, Kuma Partner, Vistage, LinkedIn..." />
-        </div>
-      </div>
-
-      <div class="form-field">
-        <label for="context">What's drawing you to this room, in a sentence or two</label>
-        <textarea id="context" name="context"></textarea>
-      </div>
-
-      <button type="submit" class="btn btn-submit">Request a Private Conversation</button>
-      <p class="form-disclaimer">Submitting this note does not confirm a seat. We respond privately, by email, to arrange a conversation. Nothing here is shared beyond the Kuma partners reviewing your request.</p>
-    </form>
-  </div>
-</section>
-
-<section id="upcoming">
-  <div class="container">
-    <div class="upcoming-strip">
-      <div>
-        <span class="label">Also this year</span>
-        <h3>Kuma Sanctuary returns to Mallorca, 12&ndash;20 November</h3>
-      </div>
-      <a href="next-offsites.html" class="btn btn-ghost">See Upcoming Sanctuaries</a>
-    </div>
-  </div>
-</section>
-
-<footer class="site-footer">
-  <div class="container">
-    <div class="footer-top">
-      <div class="footer-brand">
-        <a href="index.html" class="brand-lockup" aria-label="Kuma Partners">
-          <img src="assets/kuma-partners-logo.png" alt="Kuma Partners" class="brand-logo brand-logo-footer" loading="lazy" />
+        <a href="/" class="logo footer-logo" style="margin-bottom:14px;">
+          <img src="assets/logo-lockup.png" alt="Kuma Partners">
         </a>
-        <p>Executive Advisory &amp; Leadership Alignment for Scale-Stage Leadership Teams.</p>
-        <a href="mailto:contact@kuma.partners" class="footer-contact">contact@kuma.partners</a>
+        <p style="font-size:.92rem; color:rgba(26,26,26,.6); max-width:280px;">Executive Advisory &amp; Leadership Alignment for Scale-Stage Leadership Teams.</p>
+        <a href="mailto:contact@kuma.partners" class="footer-email">contact@kuma.partners</a>
       </div>
-      <div class="footer-links">
-        <h5>Engagements</h5>
+      <div>
+        <h4>Engagements</h4>
         <ul>
-          <li><a href="https://www.kuma.partners/#scan">The 14-Day Scan</a></li>
-          <li><a href="https://www.kuma.partners/#sprint">Executive Alignment Sprint</a></li>
-          <li><a href="https://www.kuma.partners/#advisory">Strategic Advisory</a></li>
-          <li><a href="https://www.kuma.partners/#partners">The Partners</a></li>
+          <li><a href="friction-scan.html">The 14-Day Scan</a></li>
+          <li><a href="alignment-sprint.html">Executive Alignment Sprint</a></li>
+          <li><a href="#engagements">Strategic Advisory</a></li>
+          <li><a href="partners.html">The Partners</a></li>
         </ul>
       </div>
-      <div class="footer-links">
-        <h5>Compliance</h5>
+      <div>
+        <h4>Compliance</h4>
         <ul>
-          <li><a href="https://www.kuma.partners/privacy">Privacy Policy</a></li>
-          <li><a href="/imprint">Imprint</a></li>
-          <li><button type="button" class="cookie-prefs">Cookie Preferences</button></li>
+          <li><a href="privacy.html">Privacy Policy (GDPR)</a></li>
+          <li><a href="legal.html">Legal Notice / Imprint</a></li>
+          <li><button type="button" class="footer-link-btn" data-cookie-preferences>Cookie Preferences</button></li>
         </ul>
       </div>
     </div>
-    <div class="footer-hubs">
-      <span class="label">International Presence</span>
-      <span class="hub-list">New York &nbsp;&middot;&nbsp; Los Angeles &nbsp;&middot;&nbsp; London &nbsp;&middot;&nbsp; Paris &nbsp;&middot;&nbsp; Munich &nbsp;&middot;&nbsp; Barcelona &nbsp;&middot;&nbsp; Lisbon</span>
-    </div>
+
     <div class="footer-bottom">
-      <span>&copy; 2026 Kuma Partners. All rights reserved.</span>
-      <span>kuma.partners &middot; Operating across the world</span>
+      <span>© 2026 Kuma Partners. All rights reserved.</span>
+      <span>kuma.partners · Operating across the world</span>
     </div>
   </div>
 </footer>
 
+<!-- QUALIFYING BOOKING MODAL -->
+<div class="scan-modal-overlay" id="scan-modal-overlay" hidden>
+  <div class="scan-modal" role="dialog" aria-modal="true" aria-labelledby="scan-modal-title">
+    <button type="button" class="scan-modal-close" data-scan-close aria-label="Close">&times;</button>
+
+    <div class="scan-modal-step" data-modal-step="1">
+      <h3 id="scan-modal-title">Schedule a Confidential Diagnostic Call</h3>
+      <p class="scan-modal-subtitle">Select your current stage and leadership inflection point so we can connect you with the appropriate Managing Partner.</p>
+      <form data-scan-form novalidate>
+        <div class="field">
+          <label for="scan-name">Full name</label>
+          <input type="text" id="scan-name" required>
+        </div>
+        <div class="field">
+          <label for="scan-email">Work email</label>
+          <input type="email" id="scan-email" required>
+          <span class="scan-field-error" data-scan-email-error>Please use your business email address, not a personal inbox.</span>
+        </div>
+        <div class="field">
+          <label for="scan-company">Company name &amp; website</label>
+          <input type="text" id="scan-company" placeholder="Acme Inc., acme.com" required>
+        </div>
+        <div class="field">
+          <label for="scan-stage">Headcount &amp; funding stage</label>
+          <div class="select-shell">
+            <select id="scan-stage">
+              <option>Series A (25–50 headcount)</option>
+              <option>Series B–C (50–150+ headcount)</option>
+              <option>Private Equity / Late Stage</option>
+              <option>Investor / Board Director</option>
+            </select>
+            <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+          </div>
+        </div>
+        <div class="field">
+          <label for="scan-inflection">Primary inflection point</label>
+          <div class="select-shell">
+            <select id="scan-inflection">
+              <option>Co-Founder / Executive Alignment Friction</option>
+              <option>Decision Drag &amp; Scaling Execution Bottlenecks</option>
+              <option>C-Suite Restructuring or Transition</option>
+              <option>Portfolio Company Diagnostic (For VCs/PE)</option>
+            </select>
+            <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Continue to Calendar</button>
+      </form>
+    </div>
+
+    <div class="scan-modal-step" data-modal-step="2" hidden>
+      <h3>Schedule Your Diagnostic Call</h3>
+      <p class="scan-modal-reassurance">Confidential 30-minute introductory debrief with a Kuma Managing Partner.</p>
+      <div class="scan-recap">
+        <div><strong>Name:</strong> <span data-recap-name></span></div>
+        <div><strong>Email:</strong> <span data-recap-email></span></div>
+        <div><strong>Company:</strong> <span data-recap-company></span></div>
+      </div>
+      <!-- Replace this placeholder with your Cal.com, HubSpot Meetings, or Chili Piper embed snippet (iframe or script embed). The URL below already carries the lead's name, email, and company as query parameters, ready to drop into your scheduler's booking link. -->
+      <div class="scan-embed-placeholder">
+        <p>Calendar embed goes here. Swap this block for your Cal.com, HubSpot Meetings, or Chili Piper embed, prefilled with the parameters below.</p>
+        <input type="text" class="scan-embed-url" data-scan-embed-url readonly>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- PARTNER DEBRIEF MODAL (Tier 3 diagnostic dossier form) -->
+<div class="debrief-modal-overlay" id="debrief-modal-overlay" hidden>
+  <div class="debrief-modal" role="dialog" aria-modal="true" aria-labelledby="debrief-modal-title">
+    <div class="debrief-modal-header">
+      <span class="debrief-modal-eyebrow">Confidential Partner Intake</span>
+      <button type="button" class="debrief-modal-close" data-debrief-close aria-label="Close">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M6 18L18 6M6 6l12 12"/></svg>
+      </button>
+    </div>
+
+    <div class="debrief-modal-body">
+    <div class="debrief-modal-intro">
+      <h3 id="debrief-modal-title">Let's talk about what's happening in the room.</h3>
+      <p class="debrief-modal-subhead">Leadership challenges rarely announce themselves as strategy problems.</p>
+      <p class="debrief-modal-context">Tell us what you're seeing. We'll review it personally and decide whether Kuma can genuinely help.</p>
+    </div>
+
+    <form class="debrief-form" name="partner-debrief" method="POST" action="/#tier-3" data-netlify="true" netlify-honeypot="bot-field" id="debrief-form" data-debrief-form>
+      <input type="hidden" name="form-name" value="partner-debrief">
+      <p class="hp-field" hidden>
+        <label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+      </p>
+
+      <div class="field">
+        <label for="debrief-brought-here">What brought you here?</label>
+        <div class="select-shell">
+          <select id="debrief-brought-here" name="brought_here" required>
+            <option value="" disabled selected hidden>Select one</option>
+            <option>Co-founder or C-suite alignment is breaking down</option>
+            <option>Decisions are getting stuck</option>
+            <option>Leadership team friction is slowing execution</option>
+            <option>Product, GTM or functional silos are creating drag</option>
+            <option>We're navigating a major scaling or post-fundraise transition</option>
+            <option>We need a high-stakes leadership offsite</option>
+            <option>Board / CEO / governance dynamics need attention</option>
+            <option>I have a specific situation I want to discuss</option>
+          </select>
+          <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="debrief-role">What's your role?</label>
+        <div class="select-shell">
+          <select id="debrief-role" name="role" required>
+            <option value="" disabled selected hidden>Select one</option>
+            <option value="founder">Founder / CEO</option>
+            <option value="csuite">C-Suite Executive</option>
+            <option value="board">Board Director</option>
+            <option value="investor">Lead Investor / Operating Partner</option>
+            <option value="other">Other</option>
+          </select>
+          <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="debrief-situation">What's happening?</label>
+        <span class="field-helper">Give us the version you'd tell a trusted advisor.</span>
+        <textarea id="debrief-situation" name="situation" rows="3" placeholder="Describe the dynamic, the bottlenecks, or the specific conflict..."></textarea>
+      </div>
+
+      <div class="field">
+        <label for="debrief-urgency">How urgent is it?</label>
+        <div class="select-shell">
+          <select id="debrief-urgency" name="urgency" required>
+            <option value="" disabled selected hidden>Select one</option>
+            <option>We're dealing with it now</option>
+            <option>We need to address it within the next 30 days</option>
+            <option>We see something developing and want to get ahead of it</option>
+            <option>We're exploring options</option>
+          </select>
+          <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </div>
+      </div>
+
+      <div class="field">
+        <label for="debrief-journey">Where are you in the journey?</label>
+        <div class="select-shell">
+          <select id="debrief-journey" name="journey" required>
+            <option value="" disabled selected hidden>Select one</option>
+            <option>Bootstrapped / Profitable</option>
+            <option>Seed / Series A</option>
+            <option>Series B / Series C</option>
+            <option>Growth / PE-backed</option>
+            <option>VC / PE fund</option>
+            <option>Other</option>
+          </select>
+          <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </div>
+      </div>
+
+      <div class="field-row">
+        <div class="field">
+          <label for="debrief-name">Full name</label>
+          <input type="text" id="debrief-name" name="name" required>
+        </div>
+        <div class="field">
+          <label for="debrief-email">Work email</label>
+          <input type="email" id="debrief-email" name="email" required>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary" data-debrief-submit>
+        <span data-btn-label>Talk to a Managing Partner</span>
+      </button>
+      <p class="debrief-form-microcopy">Your information is treated confidentially. We review every inquiry personally and typically respond within 24 business hours.</p>
+      <p class="debrief-form-error" data-debrief-error hidden>Something went wrong sending your message. Please try again, or email us directly at <a href="mailto:contact@kuma.partners">contact@kuma.partners</a>.</p>
+    </form>
+
+    <div class="debrief-success" data-debrief-success hidden tabindex="-1">
+      <div class="debrief-success-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.5 12.75l6 6 9-13.5"/></svg>
+      </div>
+      <h3>Thank you.</h3>
+      <p>Your context has been received by the Kuma Partners team.</p>
+      <p>A Managing Partner will review it personally and come back to you within 24 business hours.</p>
+      <p class="debrief-success-note">If the situation is one we can genuinely help with, we'll suggest the most useful next conversation.</p>
+      <button type="button" class="debrief-success-close" data-debrief-close>Close window</button>
+    </div>
+    </div>
+  </div>
+</div>
+
+<div class="cookie-banner" id="cookie-banner">
+  <div class="wrap">
+    <p>We use essential cookies to ensure our site functions properly and to analyze aggregate traffic in accordance with our <a href="privacy.html">Privacy Policy</a>.</p>
+    <div class="cookie-actions">
+      <button class="btn-essential" id="cookie-essential">Essential Only</button>
+      <button class="btn-accept" id="cookie-accept">Accept All</button>
+    </div>
+  </div>
+</div>
+
+<script src="site.js"></script>
 </body>
 </html>
