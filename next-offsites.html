@@ -1,0 +1,197 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Upcoming Kuma Sanctuaries · Kuma Partners</title>
+<meta name="description" content="Upcoming editions of Kuma Sanctuary, the invitation-only retreat for chief executives hosted by Kuma Partners." />
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,600;0,700;1,500&family=Lato:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/style.css?v=10" />
+</head>
+<body>
+
+<header class="site-header">
+  <div class="container">
+    <a href="index.html" class="brand-lockup" aria-label="Kuma Partners">
+      <img src="assets/kuma-partners-logo.png" alt="Kuma Partners" class="brand-logo" loading="eager" />
+      <span class="brand-caption">Upcoming Sanctuaries</span>
+    </a>
+    <nav class="header-nav">
+      <a href="index.html" class="nav-link">Austria, October</a>
+      <a href="#mallorca" class="nav-link">Mallorca, November</a>
+      <a href="index.html#apply" class="header-cta">Request an Invitation</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero" style="padding-bottom: 40px;">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-eyebrow">
+        <span class="eyebrow">By invitation only &middot; Kuma Partners</span>
+      </div>
+      <h1>Upcoming editions of the <em>Sanctuary</em>.</h1>
+      <p class="lede">Kuma Sanctuary runs a small number of times a year, each cohort capped at ten to fourteen chief executives. Every edition follows the same standards of confidentiality and composition, in a different setting.</p>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="container">
+    <div class="retreat-grid">
+
+      <div class="retreat-card is-open">
+        <span class="retreat-status">Now accepting requests</span>
+        <h3>Austria</h3>
+        <span class="retreat-dates">15&ndash;18 October 2026</span>
+        <p>A private alpine estate. Four days. The first Kuma Sanctuary of the year, built around closed-door advisory circles and the enterprise-level questions that rarely survive a quarterly cycle.</p>
+        <a href="index.html#apply" class="btn btn-ghost">View the Austria Sanctuary</a>
+      </div>
+
+      <div id="mallorca" class="retreat-card is-open">
+        <span class="retreat-status">Now accepting requests</span>
+        <h3>Mallorca</h3>
+        <span class="retreat-dates">12&ndash;20 November 2026</span>
+        <p>An extended eight-day edition on Mallorca's coast, for chief executives who want more room between sessions than a standard four-day gathering allows. Same cohort standards, same confidentiality, a longer stretch of unstructured time.</p>
+        <a href="#apply" class="btn btn-primary">Request an Invitation</a>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<section class="section-navy">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Mallorca &middot; 12&ndash;20 November 2026</span>
+      <h2>Eight days, for the leaders who need the longer stretch.</h2>
+      <p>The Mallorca edition follows the same three pillars as every Kuma Sanctuary, the person, the professional, and the enterprise, across a longer, less compressed arc. It suits chief executives coming off a demanding stretch who need more than four days to actually land.</p>
+    </div>
+    <div class="stat-row" style="border-top:none; padding-top:0; margin-top:0;">
+      <div>
+        <span class="stat-num">10&ndash;14</span>
+        <span class="stat-label">Seats, held to the same standard as every edition</span>
+      </div>
+      <div>
+        <span class="stat-num">8 Days</span>
+        <span class="stat-label">The longest Kuma Sanctuary offered this year</span>
+      </div>
+      <div>
+        <span class="stat-num">1</span>
+        <span class="stat-label">Cohort, deliberately not run in parallel tracks</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="apply">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">Requesting an Invitation</span>
+      <h2>Tell us briefly who you are.</h2>
+      <p>The same private, two-step process as every Kuma Sanctuary. A short note below, then a conversation with a Kuma partner to confirm fit and cohort composition.</p>
+    </div>
+
+    <form name="sanctuary-application" method="POST" data-netlify="true" netlify-honeypot="company-website" class="apply-form" action="/success.html">
+      <input type="hidden" name="form-name" value="sanctuary-application" />
+      <input type="hidden" name="cohort" value="Mallorca, 12-20 November 2026" />
+      <p class="hp-field">
+        <label>Leave this field blank<input name="company-website" /></label>
+      </p>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label for="full-name">Full name</label>
+          <input type="text" id="full-name" name="full-name" required />
+        </div>
+        <div class="form-field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label for="company">Company</label>
+          <input type="text" id="company" name="company" required />
+        </div>
+        <div class="form-field">
+          <label for="title">Title</label>
+          <input type="text" id="title" name="title" required placeholder="CEO, Founder, etc." />
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-field">
+          <label for="org-scale">Organization scale</label>
+          <select id="org-scale" name="org-scale">
+            <option value="">Select one</option>
+            <option value="20-50 employees">20&ndash;50 employees</option>
+            <option value="50-200 employees">50&ndash;200 employees</option>
+            <option value="200+ employees">200+ employees</option>
+            <option value="$10M+ enterprise">$10M+ enterprise</option>
+          </select>
+        </div>
+        <div class="form-field">
+          <label for="referral">Invitation source / referred by</label>
+          <input type="text" id="referral" name="referral" placeholder="A peer, Kuma Partner, Vistage, LinkedIn..." />
+        </div>
+      </div>
+
+      <div class="form-field">
+        <label for="context">What's drawing you to this room, in a sentence or two</label>
+        <textarea id="context" name="context"></textarea>
+      </div>
+
+      <button type="submit" class="btn btn-submit">Request a Private Conversation</button>
+      <p class="form-disclaimer">Submitting this note does not confirm a seat. We respond privately, by email, to arrange a conversation. Nothing here is shared beyond the Kuma partners reviewing your request.</p>
+    </form>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <a href="index.html" class="brand-lockup" aria-label="Kuma Partners">
+          <img src="assets/kuma-partners-logo.png" alt="Kuma Partners" class="brand-logo brand-logo-footer" loading="lazy" />
+        </a>
+        <p>Executive Advisory &amp; Leadership Alignment for Scale-Stage Leadership Teams.</p>
+        <a href="mailto:contact@kuma.partners" class="footer-contact">contact@kuma.partners</a>
+      </div>
+      <div class="footer-links">
+        <h5>Engagements</h5>
+        <ul>
+          <li><a href="https://www.kuma.partners/#scan">The 14-Day Scan</a></li>
+          <li><a href="https://www.kuma.partners/#sprint">Executive Alignment Sprint</a></li>
+          <li><a href="https://www.kuma.partners/#advisory">Strategic Advisory</a></li>
+          <li><a href="https://www.kuma.partners/#partners">The Partners</a></li>
+        </ul>
+      </div>
+      <div class="footer-links">
+        <h5>Compliance</h5>
+        <ul>
+          <li><a href="https://www.kuma.partners/privacy">Privacy Policy</a></li>
+          <li><a href="/imprint">Imprint</a></li>
+          <li><button type="button" class="cookie-prefs">Cookie Preferences</button></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-hubs">
+      <span class="label">International Presence</span>
+      <span class="hub-list">New York &nbsp;&middot;&nbsp; Los Angeles &nbsp;&middot;&nbsp; London &nbsp;&middot;&nbsp; Paris &nbsp;&middot;&nbsp; Munich &nbsp;&middot;&nbsp; Barcelona &nbsp;&middot;&nbsp; Lisbon</span>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Kuma Partners. All rights reserved.</span>
+      <span>kuma.partners &middot; Operating across the world</span>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
