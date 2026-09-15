@@ -360,9 +360,10 @@
       </div>
 
       <div class="engage-tabs">
-        <div class="engage-tabs-inner">
-          <button type="button" id="tab-advisory-btn" class="engage-tab-btn active" data-engage-tab="advisory">Leadership Engagements (Tiers 1&ndash;3)</button>
-          <button type="button" id="tab-offsites-btn" class="engage-tab-btn" data-engage-tab="offsites">Strategic &amp; Executive Offsites</button>
+        <div class="engage-tabs-inner" role="tablist" aria-label="How we engage">
+          <button type="button" id="tab-advisory-btn" class="engage-tab-btn active" data-engage-tab="advisory" role="tab" aria-selected="true">Leadership Engagements (Tiers 1&ndash;3)</button>
+          <button type="button" id="tab-offsites-btn" class="engage-tab-btn" data-engage-tab="offsites" role="tab" aria-selected="false">Strategic &amp; Executive Offsites</button>
+          <button type="button" id="tab-ai-transition-btn" class="engage-tab-btn" data-engage-tab="ai-transition" role="tab" aria-selected="false">AI Leadership Transition</button>
         </div>
       </div>
 
@@ -597,6 +598,50 @@
             </div>
             <div class="offsite-proof-item">
               <img src="assets/offsites/Csuite%20offsite%20kuma%20partners.jpeg" alt="Kuma Partners C-suite offsite working session mapping the execution plan" loading="lazy">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ai-transition-panel" id="ai-transition" data-engage-panel="ai-transition" hidden>
+        <div class="ai-tab-intro">
+          <div class="eyebrow">Organizational Velocity in the AI Era</div>
+          <h3 class="ai-tab-headline">The AI bottleneck is rarely the technology. It is executive alignment.</h3>
+          <p class="tier-subhead">Tools and models fail when the leadership room is split by territorial fear, opaque governance, and outdated KPI incentives. Former CEOs embed directly with your C-suite to build an AI-native operational cadence.</p>
+        </div>
+
+        <div class="tier-grid ai-tier-grid">
+          <div class="tier-card tier-featured" id="tier-ai-1">
+            <span class="tier-badge-pill">Recommended Entry Point</span>
+            <div class="tier-label">Tier 1 &middot; The 14-Day Scan</div>
+            <h3>The 14-Day AI Leadership Friction Scan</h3>
+            <p>8&ndash;10 confidential executive interviews across functional leads, an audit of current informal AI usage vs. board expectations, and a facilitated executive debrief to surface hidden organizational resistance, political roadblocks, and decision paralysis.</p>
+            <div class="tier-deliverable">
+              <span class="tier-deliverable-label">Deliverable</span>
+              <p>High-impact Friction Matrix, Executive Alignment Scorecard, and a 90-day operational action plan.</p>
+            </div>
+            <div class="tier-actions">
+              <button type="button" class="tier-cta tier-cta-primary" data-open-scan-modal>Schedule a Friction Scan</button>
+            </div>
+          </div>
+          <div class="tier-card" id="tier-ai-2">
+            <div class="tier-label">Tier 2 &middot; Operating Sprint</div>
+            <h3>The AI Operating Model Redesign</h3>
+            <p>4&ndash;8 week hands-on sprint embedding former operators inside your leadership team. We restructure decision rights, rewrite functional KPIs, and redesign cross-functional workflows so teams can deploy AI without crashing organizational velocity or culture.</p>
+            <div class="tier-deliverable">
+              <span class="tier-deliverable-label">Deliverable</span>
+              <p>Concrete governance boundaries, updated operational RACI, and redesigned workflows tied to EBITDA metrics.</p>
+            </div>
+            <div class="tier-actions">
+              <button type="button" class="tier-cta tier-cta-outline" data-open-debrief-modal>Discuss an Operating Sprint</button>
+            </div>
+          </div>
+          <div class="tier-card" id="tier-ai-3">
+            <div class="tier-label">Tier 3 &middot; Embedded Execution</div>
+            <h3>Fractional AI Transition Partner</h3>
+            <p>A dedicated former CEO/COO embedded inside the room 1&ndash;2 days per week for 3&ndash;6 months. Acts as the CEO&rsquo;s high-conviction sparring partner to hold department heads accountable, resolve emerging cross-department friction, and ensure execution velocity remains high.</p>
+            <div class="tier-actions">
+              <button type="button" class="tier-cta tier-cta-outline" data-open-debrief-modal>Explore Embedded Partnership</button>
             </div>
           </div>
         </div>

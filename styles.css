@@ -348,6 +348,19 @@ header.site.scrolled .nav{padding:10px 0;}
 .tier-cta-sub:hover{text-decoration:underline; text-underline-offset:3px;}
 .tier-featured .tier-cta-primary:hover{background:#1E2F38; border-color:#1E2F38;}
 
+/* AI Leadership Transition tab */
+.ai-transition-panel{margin-top:44px;}
+.ai-tab-intro{max-width:760px;}
+.ai-tab-intro .eyebrow{margin-bottom:14px;}
+.ai-tab-headline{font-size:1.7rem; margin-bottom:14px;}
+.ai-tier-grid{margin-top:36px;}
+.tier-deliverable{margin:0 0 28px; padding-top:16px; border-top:1px solid rgba(40,64,80,.1);}
+.tier-deliverable-label{
+  display:block; font-family:'Lato',Arial,sans-serif; font-weight:700; letter-spacing:.08em;
+  text-transform:uppercase; font-size:.68rem; color:var(--teal); margin-bottom:6px;
+}
+.tier-deliverable p{font-size:.92rem; line-height:1.6; color:rgba(26,26,26,.85); margin:0;}
+
 /* High-Stakes Executive Offsite module */
 .offsite-module{
   position:relative;
@@ -1231,27 +1244,37 @@ footer.site{padding:60px 0 40px; border-top:1px solid rgba(40,64,80,.12);}
    ========================================================================== */
 @media (max-width: 768px){
 
-  /* --- Issue 1: Engagements/Offsites pill toggle -----------------------
-     The existing 860px rule (.engage-tabs-inner{flex-wrap:wrap}) lets the
-     second tab drop onto its own line on narrow phones, where it reads as
-     inert body text instead of a tab. This block wins at <=768px (it is
-     declared later in the cascade) and forces the pair back onto one row
-     as two equal-width, tappable segments. */
+  /* --- Issue 1: Engagements/Offsites/AI-Transition pill toggle ----------
+     The existing 860px rule (.engage-tabs-inner{flex-wrap:wrap}) lets tabs
+     drop onto their own line on narrow phones, where they read as inert
+     body text instead of tabs. This block wins at <=768px (it is declared
+     later in the cascade). With 3 segments now in play (and labels too
+     long to share a row without truncating into ugly fragments), the
+     switcher becomes a single-row, horizontally-scrollable strip of
+     fixed-width pill segments instead of forcing an equal-thirds squeeze. */
   .engage-tabs-inner{
     display:flex; flex-direction:row; flex-wrap:nowrap;
-    width:100%; max-width:460px; margin:0 auto;
+    width:100%; max-width:100%; margin:0 auto;
     padding:3px; gap:3px;
+    overflow-x:auto; -webkit-overflow-scrolling:touch;
+    scrollbar-width:none; -ms-overflow-style:none;
   }
+  .engage-tabs-inner::-webkit-scrollbar{display:none;}
   .engage-tab-btn{
-    flex:1 1 50%; min-width:0;
-    padding:10px 8px;
+    flex:0 0 auto; min-width:0;
+    padding:10px 18px;
     font-size:.8rem; line-height:1.2;
-    text-align:center; white-space:normal;
+    text-align:center; white-space:nowrap;
   }
   .engage-tab-btn:not(.active){
     background:rgba(255,255,255,.7);
     box-shadow:inset 0 0 0 1px rgba(40,64,80,.14);
   }
+
+  /* --- AI Leadership Transition tab content, mobile sizing -------------- */
+  .ai-transition-panel{margin-top:32px;}
+  .ai-tab-headline{font-size:1.4rem;}
+  .ai-tier-grid{margin-top:28px;}
 
   /* --- Issue 2: Comparison table horizontal scroll (Option B) ---------- */
   .mobile-scroll-hint{
