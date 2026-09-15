@@ -63,18 +63,19 @@ document.addEventListener('DOMContentLoaded', function () {
       tab.btn.addEventListener('click', function () { activateEngageTab(tab.key); });
     });
 
-    // Keep the tab switcher in sync with #offsites / #tier-1..3 / #ai-transition / #tier-ai-1..3
-    // links (header nav, deep links). The target panel must be un-hidden before it can be
-    // scrolled to, so the browser's own native jump-on-load silently fails when the hash points
-    // into a hidden panel — re-do it ourselves once the right panel is visible (instant on load,
-    // smooth on later in-page clicks).
+    // Keep the tab switcher in sync with #engagements / #offsites / #tier-1..3 / #ai-transition /
+    // #tier-ai-1..3 links (header nav dropdown, deep links). The target panel must be un-hidden
+    // before it can be scrolled to, so the browser's own native jump-on-load silently fails when
+    // the hash points into a hidden panel — re-do it ourselves once the right panel is visible
+    // (instant on load, smooth on later in-page clicks, including a dropdown link clicked while
+    // already on the page).
     function routeEngageHash(scrollBehavior) {
       var hash = window.location.hash.replace('#', '');
       if (!hash) return;
       var which;
       if (hash === 'offsites') {
         which = 'offsites';
-      } else if (hash === 'tier-1' || hash === 'tier-2' || hash === 'tier-3') {
+      } else if (hash === 'engagements' || hash === 'tier-1' || hash === 'tier-2' || hash === 'tier-3') {
         which = 'advisory';
       } else if (hash === 'ai-transition' || hash === 'tier-ai-1' || hash === 'tier-ai-2' || hash === 'tier-ai-3') {
         which = 'ai-transition';
