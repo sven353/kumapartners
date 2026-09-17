@@ -542,6 +542,13 @@ header.site.scrolled .nav{padding:10px 0;}
 .bench-invite p{font-size:.98rem; color:rgba(26,26,26,.75); max-width:600px; margin:0 auto 22px; line-height:1.65;}
 .bench-invite a.btn-link{font-weight:700;}
 
+/* Governance & Conscious Leadership strip */
+.governance-strip{border-top:1px solid #E2DDD4; padding:64px 0 0; text-align:center;}
+.governance-strip .eyebrow{justify-content:center; margin-bottom:16px;}
+.governance-strip h3{font-size:1.35rem; max-width:620px; margin:0 auto 16px;}
+.governance-strip p{font-size:.98rem; color:rgba(26,26,26,.75); max-width:640px; margin:0 auto; line-height:1.65;}
+.governance-strip p strong{color:var(--navy); font-weight:700;}
+
 /* Navy callout (full-bleed) */
 .moat-section{background:var(--navy); color:var(--cream); padding:72px 0;}
 .moat-section .eyebrow{font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:.72rem;}
@@ -1098,20 +1105,6 @@ body.debrief-modal-locked{overflow:hidden;}
   .debrief-modal-body{padding:24px 20px 32px;}
   .debrief-form .field-row{grid-template-columns:1fr;}
 }
-
-/* Governance / Conscious Leadership strip */
-.governance-strip{
-  background:var(--cream); border-top:1px solid #E2DDD4;
-  padding:44px 0; text-align:center;
-}
-.governance-title{
-  color:var(--navy); font-size:1.05rem; margin-bottom:12px;
-}
-.governance-copy{
-  color:rgba(26,26,26,.65); font-size:.92rem; line-height:1.65;
-  max-width:720px; margin:0 auto;
-}
-.governance-copy strong{color:var(--navy); font-weight:700;}
 
 /* Footer */
 footer.site{padding:60px 0 40px; border-top:1px solid rgba(40,64,80,.12);}
