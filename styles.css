@@ -210,7 +210,7 @@ header.site.scrolled .nav{padding:10px 0;}
   align-items:start;
 }
 .problem-stat-figure{
-  grid-column:span 4; display:flex; flex-direction:column;
+  grid-column:span 5; display:flex; flex-direction:column;
 }
 .problem-stat-number{
   font-family:'Montserrat',Arial,sans-serif; font-weight:800; font-size:4.6rem; line-height:1;
@@ -221,7 +221,7 @@ header.site.scrolled .nav{padding:10px 0;}
   line-height:1.35; color:var(--ink);
 }
 .problem-stat-narrative{
-  grid-column:span 8; display:flex; flex-direction:column; justify-content:space-between;
+  grid-column:span 7; display:flex; flex-direction:column; justify-content:space-between;
   height:100%;
 }
 .problem-stat-body{font-size:1.05rem; color:rgba(26,26,26,.7); line-height:1.65; margin:0;}
