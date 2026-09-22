@@ -160,11 +160,12 @@ header.site.scrolled .nav{padding:10px 0;}
   letter-spacing:.04em; text-transform:uppercase; padding:8px 16px; border-radius:999px; margin-bottom:22px;
 }
 
-/* Proof bar */
-.proof{background:#fff; padding:40px 0; border-top:1px solid rgba(40,64,80,.1); border-bottom:1px solid rgba(40,64,80,.1);}
+/* Proof bar — one of the site's 3 designated navy blocks (with #scorecard and #contact),
+   so the pedigree strip reads as a credibility beat rather than a plain content section. */
+.proof{background:var(--navy); padding:40px 0; border-top:1px solid rgba(255,255,255,.08); border-bottom:1px solid rgba(255,255,255,.08);}
 .proof p{
   text-align:center; font-family:'Lato',Arial,sans-serif; font-size:.85rem;
-  letter-spacing:.06em; text-transform:uppercase; color:rgba(26,26,26,.55); margin-bottom:24px;
+  letter-spacing:.06em; text-transform:uppercase; color:rgba(244,241,235,.6); margin-bottom:24px;
 }
 .marquee{
   width:100%; overflow:hidden;
@@ -179,7 +180,7 @@ header.site.scrolled .nav{padding:10px 0;}
 .marquee:hover .marquee-track{animation-play-state:paused;}
 .marquee-track span{
   font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:1.1rem;
-  color:var(--teal); letter-spacing:.02em; white-space:nowrap; flex-shrink:0;
+  color:rgba(255,255,255,.85); letter-spacing:.02em; white-space:nowrap; flex-shrink:0;
   padding:0 44px;
 }
 @keyframes marquee{
@@ -266,10 +267,9 @@ header.site.scrolled .nav{padding:10px 0;}
 .section-head{max-width:760px;}
 .section-head h2{margin-bottom:14px;}
 
-/* Team teaser — editorial curiosity callout */
-/* White buffer between the dark #investors strip and the cream #faq section below,
-   so the cadence keeps alternating instead of stacking two dark or two cream sections. */
-.team-teaser{background:#fff; border-top:1px solid rgba(40,64,80,.1); border-bottom:1px solid rgba(40,64,80,.1);}
+/* Team teaser — editorial curiosity callout. Cream tier: sits between the now-white
+   #investors above and the white #faq below, keeping the cadence alternating. */
+.team-teaser{background:var(--cream); border-top:1px solid rgba(40,64,80,.1); border-bottom:1px solid rgba(40,64,80,.1);}
 .team-teaser-lead{margin-bottom:48px;}
 .team-teaser-lead h2{font-size:2.4rem; max-width:620px; margin-bottom:16px;}
 .team-teaser-lead p{font-size:1.05rem; color:rgba(26,26,26,.75); max-width:660px; line-height:1.65; margin-bottom:0;}
@@ -295,7 +295,7 @@ header.site.scrolled .nav{padding:10px 0;}
 /* Operator difference (comparison table) — white tier, sits between the cream #problem
    and #engagements sections so the cadence alternates instead of running two cream
    sections together. */
-#approach{background:#fff; border-bottom:1px solid #E2DDD4;}
+#approach{background:var(--cream); border-bottom:1px solid #E2DDD4;}
 
 /* Comparison table */
 .compare{width:100%; border-collapse:collapse; margin-top:24px; background:#fff;}
@@ -668,7 +668,7 @@ header.site.scrolled .nav{padding:10px 0;}
 .case-docket-panel[hidden]{display:none;}
 
 /* FAQ */
-#faq{background:var(--cream); border-bottom:1px solid #E2DDD4;}
+#faq{background:#fff; border-bottom:1px solid #E2DDD4;}
 .faq-layout{display:grid; grid-template-columns:minmax(260px,320px) 1fr; gap:64px; margin-top:44px; align-items:start;}
 .faq-intro{position:sticky; top:104px;}
 .faq-intro .eyebrow{margin-bottom:14px;}
@@ -746,14 +746,16 @@ header.site.scrolled .nav{padding:10px 0;}
 /* Investor / VC & PE section: high-contrast dark panel */
 /* Warm stone, not navy: navy is reserved for the two action strips (assessment, contact).
    This section reads as a quieter, confidential-briefing tone for the investor audience. */
-/* #scorecard above is navy, so a faint seam here keeps the two dark sections from
-   reading as one uninterrupted block even though their tones already differ. */
-#investors{background:#332F2A; padding:76px 0; border-top:1px solid rgba(255,255,255,.08);}
-#investors .badge-pill{background:transparent; border-color:rgba(255,255,255,.35); color:rgba(255,255,255,.9);}
-#investors h2{color:#fff;}
-#investors .wrap > p{color:rgba(226,221,212,.8);}
-#investors .btn-primary{background:rgba(255,255,255,.08); color:#fff; border:1px solid rgba(255,255,255,.35);}
-#investors .btn-primary:hover{background:rgba(255,255,255,.16);}
+/* #investors is white, not a second dark tone: #scorecard right above it is already one
+   of the site's 3 navy blocks, and stacking a second dark strip under it read as an
+   unbranded, uncoordinated dark rather than a deliberate one. White also keeps navy down
+   to exactly 3 sections site-wide (proof, scorecard, contact), per the strict cadence rule. */
+#investors{background:#fff; padding:76px 0; border-top:1px solid #E2DDD4;}
+#investors .badge-pill{background:var(--cream); border-color:#E2DDD4; color:var(--navy);}
+#investors h2{color:var(--ink);}
+#investors .wrap > p{color:rgba(26,26,26,.7);}
+#investors .btn-primary{background:var(--navy); color:#fff; border:1px solid var(--navy);}
+#investors .btn-primary:hover{background:var(--teal); border-color:var(--teal);}
 
 /* Free self-assessment: the second (and only other) navy action strip on the page */
 #scorecard{background:var(--navy); padding:76px 0;}
@@ -764,12 +766,12 @@ header.site.scrolled .nav{padding:10px 0;}
 
 .value-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:36px;}
 .value-card{
-  background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1); border-radius:2px;
+  background:var(--cream); border:1px solid #E2DDD4; border-radius:2px;
   padding:28px 26px; transition:border-color .2s ease;
 }
-.value-card:hover{border-color:rgba(255,255,255,.22);}
-.value-card h3{font-size:1.05rem; margin-bottom:10px; color:#fff;}
-.value-card p{font-size:.92rem; margin:0; color:rgba(226,221,212,.8);}
+.value-card:hover{border-color:var(--teal);}
+.value-card h3{font-size:1.05rem; margin-bottom:10px; color:var(--navy);}
+.value-card p{font-size:.92rem; margin:0; color:rgba(26,26,26,.7);}
 
 /* Tier 1 interactive timeline & deliverables drawer */
 .scan-drawer{
@@ -1002,7 +1004,7 @@ body.scan-modal-locked{overflow:hidden;}
 .fit-transition-link:hover{text-decoration:underline; text-underline-offset:3px;}
 
 /* Global presence & native delivery trust strip */
-.global-strip{background:var(--cream); padding:56px 0; border-top:1px solid #E2DDD4; border-bottom:1px solid #E2DDD4;}
+.global-strip{background:#fff; padding:56px 0; border-top:1px solid #E2DDD4; border-bottom:1px solid #E2DDD4;}
 .global-strip-grid{display:grid; grid-template-columns:1fr 1fr; gap:48px;}
 .global-strip-grid .global-strip-col + .global-strip-col{border-left:1px solid #E2DDD4; padding-left:48px;}
 .global-strip-label{
