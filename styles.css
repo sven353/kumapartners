@@ -737,12 +737,21 @@ header.site.scrolled .nav{padding:10px 0;}
 .cookie-actions .btn-essential:hover{border-color:var(--cream);}
 
 /* Investor / VC & PE section: high-contrast dark panel */
-#investors{background:#1E2F38; padding:76px 0;}
+/* Warm stone, not navy: navy is reserved for the two action strips (assessment, contact).
+   This section reads as a quieter, confidential-briefing tone for the investor audience. */
+#investors{background:#332F2A; padding:76px 0;}
 #investors .badge-pill{background:transparent; border-color:rgba(255,255,255,.35); color:rgba(255,255,255,.9);}
 #investors h2{color:#fff;}
 #investors .wrap > p{color:rgba(226,221,212,.8);}
-#investors .btn-primary{background:var(--cream); color:var(--navy);}
-#investors .btn-primary:hover{background:#fff;}
+#investors .btn-primary{background:rgba(255,255,255,.08); color:#fff; border:1px solid rgba(255,255,255,.35);}
+#investors .btn-primary:hover{background:rgba(255,255,255,.16);}
+
+/* Free self-assessment: the second (and only other) navy action strip on the page */
+#scorecard{background:var(--navy); padding:76px 0;}
+#scorecard h2{color:#fff;}
+#scorecard .eyebrow{color:rgba(255,255,255,.7);}
+#scorecard .eyebrow::before{background:var(--teal);}
+#scorecard .section-head p{color:rgba(255,255,255,.8);}
 
 .value-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:36px;}
 .value-card{
