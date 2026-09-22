@@ -989,15 +989,11 @@ body.scan-modal-locked{overflow:hidden;}
 .fit-pill-no{background:transparent; color:#738A96; border:1px solid rgba(115,138,150,.4);}
 .fit-list{list-style:none; margin:0; padding:0;}
 .fit-list li{
-  display:flex; align-items:flex-start; gap:12px; margin-bottom:20px; font-size:.95rem; color:var(--ink);
+  position:relative; padding-left:26px; margin-bottom:16px; font-size:.96rem; line-height:1.5; color:var(--ink);
 }
 .fit-list li:last-child{margin-bottom:0;}
-.fit-list li::before{flex-shrink:0; font-weight:700; line-height:1.5;}
-.fit-list li strong{
-  display:block; font-family:'Montserrat',Arial,sans-serif; font-weight:600; color:var(--navy);
-  font-size:.98rem; margin-bottom:4px;
-}
-.fit-list li p{margin:0; line-height:1.6;}
+.fit-list li::before{position:absolute; left:0; top:0; font-weight:700; line-height:1.5;}
+.fit-list li strong{font-family:'Montserrat',Arial,sans-serif; font-weight:600; color:var(--navy);}
 .fit-list-yes li::before{content:"✓"; color:var(--teal);}
 .fit-list-no li::before{content:"×"; color:#738A96;}
 .fit-card-no li strong{color:rgba(26,26,26,.8);}
