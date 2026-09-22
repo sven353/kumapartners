@@ -1,0 +1,643 @@
+/* =========================================================================
+   configurator.css: supplementary styles ONLY.
+   Everything else on this page (header, nav, hero, proof/marquee, problem
+   grid, tier grid, partner grid, footer) uses the real, unmodified
+   styles.css from www.kuma.partners as-is. This file adds only what that
+   stylesheet doesn't already have: the co-branded logo lockup (real Kuma
+   mark image + hairline divider + "NONAMEYET" text wordmark), the photo
+   cards in the places grid, the cinema filmstrip in the experience gallery,
+   image treatment for the format cards, the language-delivery pills on the
+   operator cards, the monospace step-numbering prefix inside the
+   configurator, and the blueprint output layout. Everything reuses
+   --navy/--teal/--cream/--ink/--hairline-color where it can; the exceptions
+   are called out where they diverge from a token.
+   ========================================================================= */
+
+/* Co-branded header/footer lockup: the real Kuma Partners mark (an <img>,
+   transparent PNG) plus a hairline divider plus a plain-text "NONAMEYET"
+   wordmark, laid out as siblings rather than pre-composited into one
+   image, so each piece stays crisp and independently styleable. */
+.logo-jv{display:inline-flex; align-items:center; text-decoration:none;}
+.logo-lockup-track{display:inline-flex; align-items:center; gap:16px;}
+.logo-kuma{height:36px; width:auto; display:block; object-fit:contain;}
+.logo-divider{
+  display:inline-block; width:1px; height:28px; flex-shrink:0;
+  /* Slightly warmer/darker than --hairline-color (#E2DDD4) so it reads
+     against the frosted header background; not a design-system token. */
+  background:#D5D0C7;
+}
+.logo-nonameyet{
+  font-family:'Montserrat',Arial,sans-serif; font-weight:700; font-size:1.05rem;
+  letter-spacing:.12em; display:inline-block; line-height:1;
+  /* Deeper than --teal (#588088) to match the reference lockup; a
+     one-off, not a new token. */
+  color:#385E66;
+  text-decoration:underline; text-underline-offset:4px; text-decoration-thickness:1.5px;
+}
+@media (max-width:860px){
+  .logo-kuma{height:30px;}
+  .logo-divider{height:22px;}
+  .logo-nonameyet{font-size:.9rem;}
+}
+
+/* Configurator: monospace two-digit numbering prefix on each scorecard-option,
+   the base .scorecard-option styling (border, hover, selected state) is
+   entirely reused from styles.css untouched. */
+.scorecard-option{display:flex; align-items:flex-start; gap:14px;}
+.sc-option-num{
+  font-family:'SFMono-Regular', Consolas, Menlo, monospace; font-size:.82rem; font-weight:700;
+  color:var(--teal); flex-shrink:0; padding-top:1px;
+}
+.scorecard-option.selected .sc-option-num{color:var(--navy);}
+.sc-option-body{display:flex; flex-direction:column; gap:4px;}
+.sc-option-title{font-family:'Montserrat',Arial,sans-serif; font-weight:600; color:var(--navy); font-size:.98rem;}
+.sc-option-meta{
+  font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.76rem; color:var(--teal);
+  text-transform:uppercase; letter-spacing:.06em;
+}
+.sc-option-desc{font-size:.85rem; line-height:1.55; color:rgba(26,26,26,.68); font-weight:400;}
+
+/* Blueprint output, reusing the scorecard-card shell but wider */
+.blueprint-card{max-width:820px;}
+.blueprint-title{
+  font-family:'Montserrat',Arial,sans-serif; font-style:italic; font-weight:600;
+  font-size:1.9rem; color:var(--navy); text-align:center; margin-bottom:24px; text-wrap:balance;
+}
+.blueprint-pills{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-bottom:8px;}
+
+/* Reuses .offsite-specs-row / .offsite-specs-label pattern from styles.css
+   for the 4-block "Recommended Setting / Intellectual Lead / Key Monday
+   Deliverable / Hospitality Model" summary. */
+.blueprint-specs{
+  background:var(--cream); border:1px solid var(--hairline-color); border-radius:6px;
+  padding:28px 26px; margin:28px 0;
+}
+
+.restart-link{
+  display:block; text-align:center; font-size:.85rem; color:var(--navy);
+  text-decoration:none; border-bottom:1px solid rgba(40,64,80,.3); width:max-content;
+  margin:8px auto 0; padding-bottom:2px;
+}
+.restart-link:hover{border-bottom-color:var(--navy);}
+
+/* Places grid (#places): photo-topped cards, one per environment. Follows
+   the same visual language as .tier-card (white fill, 1px hairline
+   border, 2px radius, hover lift) but built as its own component since
+   the image needs to bleed to the card's outer edge rather than sit
+   inset like .tier-card-media does on the format cards. */
+.places-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px; align-items:stretch;}
+.place-card{
+  background:#fff; border:1px solid var(--hairline-color); border-radius:2px;
+  overflow:hidden; display:flex; flex-direction:column;
+  transition:box-shadow .2s ease, border-color .2s ease;
+}
+.place-card:hover{border-color:rgba(40,64,80,.25); box-shadow:0 16px 36px -20px rgba(40,64,80,.25);}
+.place-image{width:100%; aspect-ratio:16/10; overflow:hidden; background:var(--hairline-color);}
+.place-image img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .35s ease;}
+.place-card:hover .place-image img{transform:scale(1.03);}
+.place-body{padding:28px 24px; display:flex; flex-direction:column; flex:1;}
+.place-index{
+  display:block; font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.72rem;
+  letter-spacing:.12em; text-transform:uppercase; color:var(--teal); margin-bottom:12px;
+}
+.place-setting{font-size:.92rem; line-height:1.5; color:var(--navy); margin-bottom:12px;}
+.place-setting strong{font-family:'Montserrat',Arial,sans-serif; font-weight:600;}
+.place-desc{font-size:.92rem; line-height:1.6; color:rgba(26,26,26,.72); margin-bottom:20px;}
+.place-amenity{
+  margin-top:auto; padding-left:14px; border-left:1px solid var(--teal);
+  font-size:.85rem; line-height:1.5; color:var(--navy);
+}
+.place-amenity strong{font-family:'Montserrat',Arial,sans-serif; font-weight:600; display:inline;}
+@media (max-width:860px){
+  .places-grid{grid-template-columns:1fr; gap:32px;}
+}
+
+/* Experience gallery (#experience-gallery): a full-bleed cinema filmstrip of two
+   auto-scrolling photo tracks. The scroll/fade mechanism is the real stylesheet's
+   own .marquee/.marquee-track technique (linear-mask edge fade + a linear-infinite
+   keyframe translateX loop, paused on hover, see styles.css) — not reinvented here,
+   only re-scaled for photography and split into two opposing directions. The dark
+   navy treatment matches the site's existing full-bleed dark sections (.moat-section,
+   .contact-section in styles.css) rather than introducing a new section style. */
+.cinema-section{background:var(--navy); padding:96px 0 100px; overflow:hidden;}
+.cinema-section .eyebrow{color:rgba(255,255,255,.7);}
+.cinema-section .eyebrow::before{background:var(--teal);}
+.cinema-section h2{color:#fff;}
+
+.filmstrip-container{
+  width:100%; overflow:hidden; margin-top:36px;
+  -webkit-mask-image:linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  mask-image:linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+.filmstrip-container + .filmstrip-container{margin-top:20px;}
+.filmstrip-track{
+  display:flex; align-items:stretch; gap:20px; width:max-content;
+  will-change:transform;
+}
+.filmstrip-track-left{animation:filmstripScrollLeft 48s linear infinite;}
+.filmstrip-track-right{animation:filmstripScrollRight 48s linear infinite;}
+.filmstrip-container:hover .filmstrip-track{animation-play-state:paused;}
+
+.filmstrip-frame{
+  position:relative; flex-shrink:0; width:360px; aspect-ratio:16/10;
+  border-radius:2px; overflow:hidden; border:1px solid rgba(244,241,235,.15);
+}
+.filmstrip-frame img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  transition:transform .5s ease;
+}
+.filmstrip-frame:hover img{transform:scale(1.05);}
+.filmstrip-overlay{
+  position:absolute; left:0; right:0; bottom:0; padding:18px 18px 16px;
+  display:flex; flex-direction:column; gap:2px;
+  background:linear-gradient(to top, rgba(20,28,34,.82), rgba(20,28,34,0) 70%);
+}
+.filmstrip-tag{
+  font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.68rem;
+  letter-spacing:.1em; text-transform:uppercase; color:#fff;
+}
+.filmstrip-caption{
+  font-family:'Montserrat',Arial,sans-serif; font-style:italic; font-weight:400;
+  font-size:.88rem; color:rgba(244,241,235,.85);
+}
+
+@keyframes filmstripScrollLeft{
+  from{transform:translateX(0);}
+  to{transform:translateX(-50%);}
+}
+@keyframes filmstripScrollRight{
+  from{transform:translateX(-50%);}
+  to{transform:translateX(0);}
+}
+@media (prefers-reduced-motion: reduce){
+  .filmstrip-track-left, .filmstrip-track-right{animation:none;}
+}
+@media (max-width:860px){
+  .filmstrip-frame{width:260px;}
+  .filmstrip-track-left, .filmstrip-track-right{animation-duration:34s;}
+}
+
+/* Operators (#collective): the card architecture itself (.partner-card-lg,
+   .partner-photo, .track-record, .client-badges, .social-row, .team-cta) is
+   all real and already existed in styles.css, dormant on this build until
+   now — the same pattern as .problem-stat and .marquee elsewhere on this
+   page. Only the bio paragraph size (to match the sibling .advisor-bio
+   pattern) and the language-delivery pills are genuinely new. */
+.partner-card-lg p{font-size:.9rem; line-height:1.55; color:rgba(26,26,26,.75); margin:0 0 4px;}
+.operator-languages{
+  display:flex; align-items:center; flex-wrap:wrap; gap:7px;
+  margin-top:2px;
+}
+.operator-languages-label{
+  font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:.78rem;
+  color:var(--navy); margin-right:2px;
+}
+.lang-pill{
+  font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.72rem;
+  letter-spacing:.04em; text-transform:uppercase; color:var(--navy);
+  background:var(--cream); border:1px solid var(--hairline-color);
+  padding:3px 8px; border-radius:2px;
+}
+
+/* Principal partner cards (v22): bottom-locking the language/social-row footer so
+   cards with different bio lengths (Sven's five-language block vs. Luisa's two)
+   still line up at the same baseline across a row, on both #collective (index.html)
+   and the Principal Partners grid on partners.html. .partner-card-lg's own look
+   (white fill, navy top border, padding) is real and untouched; only the flex
+   mechanics needed for bottom-locking are added here, not the brief's own
+   background/border/padding redesign, which would have fought the real
+   stylesheet's established card look. .partner-photo is sized up slightly
+   (56px -> 72px) for every card that uses it, including Vincent Az&eacute;'s
+   initials fallback on partners.html, so all four cards share one baseline. */
+.partner-card-lg{display:flex; flex-direction:column; height:100%;}
+.partner-photo{width:72px; height:72px; margin-bottom:16px;}
+.card-bottom-lock{margin-top:auto; width:100%;}
+
+/* Hero editorial variant (.hero-editorial): the desktop layout (badge, title,
+   subhead) is set with inline styles directly on the markup, matching how
+   every other section on this page handles one-off spacing and width (see
+   .subhead overrides in #places, #problem, #collective). Only the typeface
+   treatment and the mobile breakpoints, which need to win over those inline
+   desktop styles, are genuinely new rules and live here rather than in
+   styles.css. The !important flags in the mobile block are load-bearing,
+   not a habit: an inline style attribute always outranks an external
+   stylesheet rule on specificity alone, !important or not, so without it
+   these breakpoints would have no effect against the inline desktop
+   values. */
+.hero-editorial .hero-title{
+  font-family:'Montserrat',Arial,sans-serif;
+  font-weight:700;
+  letter-spacing:-0.01em;
+}
+
+@media (max-width:860px){
+  .hero-editorial{
+    padding:64px 0 48px !important;
+  }
+  .hero-editorial .hero-title{
+    font-size:2.35rem !important;
+    line-height:1.18 !important;
+  }
+  .hero-editorial .subhead{
+    font-size:1.1rem !important;
+    margin-bottom:28px !important;
+  }
+}
+
+/* Hero geographic radius strip (v20). Replaces the old 4-column
+   .hero-metrics-strip, which mixed the "5 Languages" metric in with three
+   location facts. Facilitator language coverage already has its own home in
+   #collective (.operator-languages-label / .lang-pill), so this strip now
+   carries only the three-ring geography story: city center, wine country
+   and coast, mountain seclusion. Built as real classes rather than inline
+   styles, since this component has clean, reusable structure (unlike the
+   hero title/subhead/badge above, which stay one-off) and belongs in
+   configurator.css rather than styles.css since it is new markup, not part
+   of the real kuma.partners stylesheet. */
+.hero-geo-strip{
+  margin-top:56px; padding-top:28px; border-top:1px solid var(--hairline-color);
+  display:grid; grid-template-columns:repeat(3,1fr); gap:32px;
+}
+.geo-col{
+  position:relative;
+}
+.geo-col:not(:first-child){
+  border-left:1px solid var(--hairline-color); padding-left:32px;
+}
+.geo-tag{
+  display:block; font-family:'Lato',Arial,sans-serif; font-size:.72rem;
+  font-weight:700; text-transform:uppercase; letter-spacing:.08em;
+  color:var(--teal); margin-bottom:4px;
+}
+.geo-title{
+  display:block; font-family:'Montserrat',Arial,sans-serif; font-size:1.15rem;
+  font-weight:700; color:var(--navy); margin-bottom:6px; line-height:1.25;
+}
+.geo-desc{
+  font-size:.85rem; line-height:1.5; color:rgba(26,26,26,.75); margin:0;
+}
+
+@media (max-width:860px){
+  .hero-geo-strip{
+    grid-template-columns:1fr; gap:24px; margin-top:40px;
+  }
+  .geo-col:not(:first-child){
+    border-left:none; padding-left:0; border-top:1px solid var(--hairline-color);
+    padding-top:20px;
+  }
+}
+
+/* Operators (#collective), v13 refactor. Going from two cards to three needed no new
+   grid CSS at all: .partner-grid's own base rule is already a 3-column grid (see
+   styles.css) and .partner-grid-2col was only ever a narrowing modifier on top of it,
+   so dropping that modifier class is the whole change. Luisa Ábalo's card uses the
+   real, already-built .partner-photo .initials fallback (styles.css) instead of an
+   <img>, since no headshot exists for her yet; see the README for why an AI-generated
+   photo of a real, named person was not the answer here. */
+.superpower-badge{
+  display:inline-block; font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.72rem;
+  letter-spacing:.06em; text-transform:uppercase; color:var(--teal);
+  background:rgba(40,64,80,.06); padding:3px 8px; border-radius:2px; margin-bottom:6px;
+}
+
+/* Dual-facilitator delivery-standard banner under the partner grid. Nothing in the real
+   stylesheet does a full-width label+heading+paragraph notice box: .problem-callout is a
+   single-line micro-note built for inside a 3-col card, and .offsite-specs-note is a
+   footer line inside an existing box, neither fits a standalone banner, so this is
+   genuinely new, styled to match the site's existing hairline/cream/teal-accent notice
+   vocabulary (the same left-accent-border idea .problem-callout already uses). */
+.standard-banner{
+  margin-top:40px; padding:24px 28px; background:var(--cream);
+  border:1px solid var(--hairline-color); border-left:3px solid var(--teal); border-radius:2px;
+}
+.standard-banner-head{display:flex; align-items:baseline; gap:10px; margin-bottom:6px; flex-wrap:wrap;}
+.standard-banner-label{
+  font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.72rem; text-transform:uppercase;
+  letter-spacing:.08em; color:var(--teal);
+}
+.standard-banner h4{
+  font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:1.05rem; color:var(--navy); margin:0;
+}
+.standard-banner p{margin:0; font-size:.92rem; line-height:1.55; color:rgba(26,26,26,.8); max-width:980px;}
+
+/* Social anchors (#immersions). The whole card shell is the real, already-thrice-used
+   .tier-grid/.tier-card (formats, cadence, engagement-models) with plain <p> body copy,
+   same as the engagement-models cards. The pill row reuses .client-badges verbatim for
+   its visual treatment (monochrome, uppercase, bordered) and only gains the bottom-pin
+   + top-hairline behavior here, via a second class on the same element so both rules
+   apply; .client-badges' own margin-top:16px is overridden by source order (this file
+   loads after styles.css), no !important needed. */
+.immersion-meta{margin-top:auto; padding-top:18px; border-top:1px solid rgba(40,64,80,.1);}
+
+/* Calibrated Formats (#formats), v17 refactor. The card shell, badge, label,
+   subhead, image treatment, and action row are all the real, already-live
+   .tier-grid/.tier-card/.tier-badge-pill/.tier-label/.tier-subhead/
+   .place-image/.tier-actions components (formats was their original use
+   back in v3; cadence and engagement-models reuse the same system). The
+   list checkmarks are the real .tier-card ul li::before{content:"✓"} rule
+   in styles.css, not a new bullet glyph. The only genuinely new element is
+   the italic one-line mandate summary under the subhead on each card. */
+.tier-mandate{
+  font-family:'Montserrat',Arial,sans-serif; font-style:italic; font-weight:400;
+  font-size:.88rem; line-height:1.55; color:rgba(26,26,26,.8);
+  margin:0 0 18px; padding-bottom:16px; border-bottom:1px solid var(--hairline-color);
+}
+
+/* Calibrated Formats detail drawer, v23 refactor, card shell reworked in
+   v25. Each format card's own four-item checkmark list moved out of the
+   card and into a single full-width panel below the grid (v23), so a
+   reader scans three short cards first and opens one deep-spec panel
+   rather than reading four dense lists at once.
+
+   v25 polish pass: the card shell moved from .tier-card (padded on all
+   sides, requiring a hand-tuned negative-margin hack per card to bleed
+   the image to the top edge, -36px on plain cards vs -44px on the
+   featured one to clear its extra badge padding) to the real .place-card
+   /.place-image/.place-body system built for #places in v5: zero padding
+   on the outer card plus overflow:hidden does the bleed natively, so
+   every card gets the same aspect-ratio and corner-rounding with no
+   per-card inline math to keep in sync. [data-format] only needs
+   position:relative added here so the featured card's absolutely
+   positioned "Most Requested" .tier-badge-pill still has something to
+   position against; nothing else about .place-card's real styling
+   changed. The "currently selected" highlight (a border/shadow addition)
+   is the same real one-off from v23, its selector just widened from
+   .tier-card[data-format] to plain [data-format] since data-format only
+   ever appears on these three cards anywhere on the site, so the class
+   swap didn't need a second copy of the rule. The metric row went
+   through two treatments before landing on its current one:
+   .client-badges first (the grey partner-logo pill look, v23), then
+   .lang-pill (navy-on-cream chips from #collective's language row,
+   v26). Both were horizontal flex-wrap rows, and both could still wrap
+   a long tag awkwardly mid phrase across two lines at card width, with
+   three differently-wrapping rows next to each other reading as
+   uneven. v27 replaces the pill row with a plain vertical 3-item
+   checklist instead, reusing the real, dormant .outcomes-list
+   checkmark styling verbatim, the same component already powering the
+   drawer's own spec lists below (via its .outcomes-list-1col
+   single-column modifier, also already built, v23), so a card and its
+   own open drawer panel now share one checkmark language instead of
+   two. .pill-metrics-row is removed as dead code along with the
+   .lang-pill markup on these three cards (.lang-pill itself stays live
+   and untouched at #collective). The one addition is
+   `.card-bottom-lock .outcomes-list`, which zeroes out the plain
+   <ul>'s own default browser margin and indent so the list sits flush
+   in the card body instead of carrying the wide left indent and top
+   margin built for the full-width drawer panel it was designed for.
+
+   The two competing CTAs each card used to carry (a plain-text "Inspect
+   full scope" toggle plus a separate solid "Build this format" button)
+   are now one button: the real .btn/.btn-secondary/.btn-primary/.btn-sm
+   system already used for "Build this format" is reused as the toggle
+   itself, swapping between the outline (.btn-secondary) and solid
+   (.btn-primary) variants in app.js as the open/closed state changes,
+   so "the button is filled in" IS the state indicator, using classes
+   that already exist rather than a new .btn-card-toggle/.active-btn
+   pair. Losing the direct "Build this format" shortcut is a deliberate
+   trade, not an oversight: the drawer's own "Configure this format"
+   button (unchanged since v23) is the only way to jump straight to the
+   configurator from this section now, once a card's detail is open.
+   The old .format-inspect-toggle/.format-inspect-arrow rules (a
+   rotating-arrow animation) are removed as dead code: the button now
+   swaps its whole label, arrow glyph included, so there's nothing left
+   to rotate, and the arrow's spacing comes from .btn's own
+   `gap:8px` rather than a dedicated flex rule. The panel eyebrow reuses
+   the real, equally-unused .case-docket-badge label from the dormant
+   case-study docket component. The two-column spec lists reuse the
+   real, dormant .outcomes-list checkmark styling; .outcomes-list-1col
+   only overrides its native two-column grid down to one column per
+   labeled group, since each format needs two separately headed lists,
+   not one flat checklist. The drawer shell itself, its header row, and
+   the column grid are genuinely new, there's no full-width detail-panel
+   component anywhere in the real stylesheet to borrow. */
+[data-format]{position:relative;}
+[data-format].format-card-active,
+[data-cadence].format-card-active{
+  border-color: var(--teal);
+  box-shadow: 0 16px 36px -18px rgba(40,64,80,.28);
+}
+.card-bottom-lock .outcomes-list{margin:0 0 18px; padding-left:0;}
+
+/* #cadence, v28 refactor. Sven asked for the exact interaction pattern
+   #formats already runs: compact cards up top, one full-width detail
+   drawer below the grid with a concrete day-by-day agenda for whichever
+   cadence is open, and a single toggle button whose fill/label/arrow is
+   the open-closed indicator. Rather than build a parallel
+   .cadence-summary-card/.cadence-detail-drawer/.agenda-schedule system
+   as proposed, the #cadence cards stay exactly what they already were
+   (.tier-card, unchanged since v3/v12/v25, no shell swap needed since
+   these cards were never the ones with the pill-wrapping problem
+   #formats had), and the drawer itself is the real #formats drawer
+   (.format-detail/.format-detail-head/.format-detail-columns/
+   .case-docket-badge/.outcomes-list, all v23) reused wholesale for a
+   second section, not rebuilt under cadence-specific names. A card and
+   its own open agenda panel, and a format card and its own open scope
+   panel, now share one visual language site-wide instead of two.
+   [data-cadence].format-card-active reuses the exact v26
+   [data-format].format-card-active "currently open" highlight, just
+   widened to also match cadence cards; .tier-card already carries its
+   own position:relative (styles.css), so no [data-cadence]{position:
+   relative} rule was needed the way [data-format] needed one.
+   .format-detail-columns-3col is the one new rule: the 3-day agenda
+   needs three day-columns side by side where every other agenda (2-day,
+   5-day) needs two, so it's a sibling of the real .outcomes-list-1col
+   modifier pattern rather than a redesign of .format-detail-columns
+   itself; the existing 860px collapse rule for .format-detail-columns
+   already catches it too, since both classes land on the same element
+   and the media rule comes later in source. The toggle button reuses
+   .btn/.btn-secondary/.btn-primary/.btn-sm exactly as #formats' v26
+   consolidated toggle does, not the brief's .btn-cadence-toggle/
+   .active-btn pair, for the same reason: the state is already carried
+   by which real button class is applied, nothing new to add. Losing
+   each card's direct "Select N-Day Cadence" one-click jump is the same
+   trade-off v26 made for "Build this format": the drawer's own "Select
+   N-Day Cadence" button (in .format-detail-head, same slot #formats'
+   "Configure this format" sits in) is now the only way to lock in a
+   cadence from this section, once its agenda is open. */
+.format-detail{
+  margin-top:32px; background:#fff; border:1px solid var(--hairline-color);
+  border-top:3px solid var(--teal); border-radius:2px; padding:40px 40px 44px;
+}
+.format-detail-panel[hidden]{display:none;}
+.format-detail-head{
+  display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap;
+  padding-bottom:20px; margin-bottom:24px; border-bottom:1px solid var(--hairline-color);
+}
+.format-detail-head h3{font-size:1.4rem; margin:0;}
+.format-detail-columns{display:grid; grid-template-columns:1fr 1fr; gap:44px;}
+.format-detail-columns-3col{grid-template-columns:repeat(3,1fr);}
+.format-detail-col{display:flex; flex-direction:column; height:100%;}
+.format-detail-col h4{
+  font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:1rem; color:var(--navy);
+  margin:0 0 14px;
+}
+.outcomes-list-1col{grid-template-columns:1fr; gap:14px;}
+
+@media (max-width:860px){
+  .format-detail{padding:28px 24px 32px;}
+  .format-detail-columns{grid-template-columns:1fr; gap:28px;}
+}
+
+/* #cadence drawer agendas, v35. Sven asked to redesign the sample agendas
+   into a proper executive timeline: a dedicated monospace time column
+   instead of checkmark bullets, Day 0 pulled out of the day cards into
+   its own full-width arrival banner above the grid, and every day card
+   in a row locked to equal height regardless of how much text it holds.
+
+   The brief supplied full replacement agenda copy alongside the
+   restructure. That copy wasn't used verbatim: the real content already
+   live (written in v28, rewritten in v30, and still flagged in Open
+   items as invented sample scheduling pending a factual pass with Sven)
+   was kept as-is and only reformatted into the new time/title/
+   description split, so this round doesn't quietly introduce a second,
+   slightly different version of content that's still waiting on sign-off.
+   Day 0's two old bullets per cadence were condensed into one banner
+   description each, same facts, no new times or venues invented.
+
+   Two genuinely new components, since nothing in styles.css or this file
+   already does a timeline layout: .cadence-arrival-banner (a full-width
+   cream strip with a teal left accent, replacing the old nested
+   .case-docket-badge/plain-paragraph Day 0 treatment) and
+   .agenda-timeline/.agenda-item (a CSS grid list: a fixed monospace time
+   column, then a title-plus-description stack). The real v30
+   .format-detail-col-boxed box moved from a cream fill to white with a
+   2px navy top accent and gained display:flex/height:100% so a short day
+   and a long day in the same row read at the same height. Its old
+   ".format-detail-col-boxed + .format-detail-col-boxed" stacking rule
+   came out as dead code: Day 0 moving to the banner means no column
+   stacks two boxes anymore. ".format-detail-col-boxed h4" came out too,
+   since the heading now lives inside the new .agenda-day-header instead
+   of sitting directly in the box. .format-detail-head/.format-detail-
+   columns/.format-detail-columns-3col/.lang-pill/.case-docket-badge/
+   .cadence-meta are untouched, same real/already-reused components as
+   v28 and v30. */
+.cadence-arrival-banner{
+  background:var(--cream); border:1px solid var(--hairline-color);
+  border-left:3px solid var(--teal); border-radius:2px;
+  padding:16px 20px; margin-bottom:24px;
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;
+}
+.cadence-arrival-tag{
+  font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.72rem;
+  letter-spacing:.08em; text-transform:uppercase; color:var(--teal);
+}
+.cadence-arrival-title{
+  font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:.95rem;
+  color:var(--navy); margin:0;
+}
+.cadence-arrival-desc{font-size:.88rem; color:rgba(26,26,26,.75); margin:0;}
+
+.format-detail-col-boxed{
+  background:#fff; border:1px solid var(--hairline-color); border-top:2px solid var(--navy);
+  border-radius:2px; padding:24px 22px; display:flex; flex-direction:column; height:100%;
+}
+.cadence-meta{margin-top:10px;}
+
+.agenda-day-header{margin-bottom:20px; padding-bottom:14px; border-bottom:1px solid var(--hairline-color);}
+.agenda-day-eyebrow{
+  display:block; font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.68rem;
+  letter-spacing:.1em; text-transform:uppercase; color:var(--teal); margin-bottom:4px;
+}
+.agenda-day-header h4{
+  font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:1.1rem; color:var(--navy); margin:0;
+}
+.agenda-timeline{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:16px; flex:1;}
+.agenda-item{display:grid; grid-template-columns:56px 1fr; gap:14px; align-items:start;}
+.agenda-time{
+  font-family:'SFMono-Regular',Consolas,Menlo,monospace; font-size:.8rem; font-weight:700;
+  color:var(--teal); padding-top:2px; letter-spacing:.02em;
+}
+.agenda-content{display:flex; flex-direction:column; gap:3px;}
+.agenda-title{font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:.92rem; color:var(--navy); line-height:1.35;}
+.agenda-desc{font-size:.86rem; line-height:1.5; color:rgba(26,26,26,.72); margin:0;}
+
+@media (max-width:860px){
+  .cadence-arrival-banner{flex-direction:column; align-items:flex-start;}
+}
+
+/* #cadence drawer agendas, v36. Sven resent the same restructure brief
+   with refined agenda copy, taken this time as confirmation to apply his
+   specific wording rather than keep the old content reformatted under it
+   (v35's call). The HTML content across all three cadence panels was
+   swapped to his copy verbatim, house-style normalized (en-dash for
+   Barcelona-El Prat, no slashes, no em-dashes). This is still invented
+   sample scheduling, same as v28/v30/v35: which wording is live changed,
+   the open item asking Sven for a factual pass on times/venues has not.
+
+   One structural addition: .format-detail-col above now gets its own
+   display:flex/flex-direction:column/height:100% so a short column and a
+   long column in the same row both stretch to the row's height, on top of
+   .format-detail-col-boxed's own equal-height rule from v35. This is
+   shared with #formats' own drawer, but it only reinforces the grid's
+   existing default stretch behavior, so no visual change there.
+
+   Not applied: the brief's .format-detail-columns gap change from the
+   real 44px to 32px. That rule is shared with #formats too, and unlike
+   the flex addition above, a gap change is visibly different, not just a
+   reinforcement, so changing it would move #formats' own drawer without
+   Sven asking for that specifically. Left at 44px pending confirmation. */
+
+/* #contact "Direct Partner Intake" left-column refactor, v37. Brief asked for an
+   avatar cluster and trust badges replacing the loose checkmark list, plus a
+   restructured form on the right. Checked styles.css first per house habit, and most
+   of this was already real and dormant: .select-shell already reserves 40px of right
+   padding for a chevron via its own .select-chevron rule (position/size/teal color
+   all already defined), just never once given a matching SVG element in eleven
+   .select-shell instances across this build until now; .btn-teal sits right after
+   .contact-form .btn in the real stylesheet, built for exactly this button and never
+   referenced anywhere; .value-card/.value-grid (#investors, itself fully dormant) is
+   already the translucent glass tile the brief asked for, rgba(255,255,255,.05) fill,
+   hairline border, a border-brighten hover; and .contact-direct-email already does
+   the bordered footer-link treatment the brief's own .intake-channels was reaching
+   for. None of those needed new CSS, only new markup using what was already there.
+
+   Two things are genuinely new, since nothing in the real stylesheet does an
+   overlapping avatar cluster: .intake-partner-cluster/.intake-avatar-stack/
+   .intake-partner-meta/.intake-partner-label/.intake-partner-names, sized and
+   colored off the same tokens the real .partner-photo circles already use. The trust
+   tiles reuse .value-card as-is, background/border/hover all real, with one small
+   additive layer, .intake-trust-grid, that stacks them in a single column instead of
+   .value-grid's 3-up row (this sits in a narrow half-width column, not a full-width
+   section) and adds the teal left-border accent this build already uses for meta
+   call-outs elsewhere (.cadence-arrival-banner, .standard-banner) rather than the
+   brief's own from-scratch glass recipe. .contact-form-shell picked up a resting
+   shadow it didn't have before, using the site's own navy-tinted shadow formula
+   (rgba(40,64,80,...), the same family .partner-card-lg's hover shadow and the
+   scrolled header's shadow already use) instead of the brief's plain black
+   rgba(0,0,0,.35), plus the brief's own mobile padding reduction. */
+.intake-partner-cluster{display:flex; align-items:center; gap:14px; margin-bottom:22px;}
+.intake-avatar-stack{display:flex; align-items:center;}
+.intake-avatar-stack img{
+  width:40px; height:40px; border-radius:50%; object-fit:cover;
+  border:2px solid var(--navy); margin-left:-10px; background:var(--cream); display:block;
+}
+.intake-avatar-stack img:first-child{margin-left:0;}
+.intake-partner-meta{display:flex; flex-direction:column; gap:2px;}
+.intake-partner-label{
+  font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.68rem;
+  letter-spacing:.1em; text-transform:uppercase; color:var(--teal);
+}
+.intake-partner-names{font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:.92rem; color:#fff;}
+
+.intake-trust-grid{display:flex; flex-direction:column; gap:12px; margin:28px 0 24px;}
+.intake-trust-grid .value-card{border-left:3px solid var(--teal); padding:14px 18px;}
+.intake-trust-grid .value-card h3{font-size:.92rem; margin-bottom:3px;}
+.intake-trust-grid .value-card p{font-size:.86rem;}
+
+.contact-form-shell{box-shadow:0 20px 48px -20px rgba(40,64,80,.4);}
+
+@media (max-width:860px){
+  .contact-form-shell{padding:28px 20px;}
+}
+
+/* partners.html manifesto pull-quote. The dark full-bleed shell itself is the
+   real, dormant .moat-section (eyebrow/h2/p on navy, already defined in
+   styles.css, never used on this build until now), reused as-is rather than
+   the new .manifesto-section the brief proposed. Nothing in the real
+   stylesheet does a set-off pull-quote though, so this one small rule is
+   genuinely new: a left-border teal accent on an italic paragraph, matching
+   the accent-border vocabulary .standard-banner already uses elsewhere. */
+.moat-pull-quote{
+  border-left:3px solid var(--teal); padding-left:20px; font-style:italic;
+  color:rgba(255,255,255,.9); font-size:1.1rem; line-height:1.6; margin-top:8px;
+}

@@ -1,7 +1,7 @@
 User-agent: *
 Allow: /
 
-# Explicit AI Search & Assistant Crawlers
+# Explicit AI search & discovery crawlers
 User-agent: GPTBot
 Allow: /
 
@@ -11,12 +11,10 @@ Allow: /
 User-agent: PerplexityBot
 Allow: /
 
-User-agent: Applebot-Extended
-Allow: /
-
 User-agent: Google-Extended
 Allow: /
 
-# Sitemap & LLM Declaration
-Sitemap: https://www.kuma.partners/sitemap.xml
-# llms.txt reference for AI agents: https://www.kuma.partners/llms.txt
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://offsite.kuma.partners/sitemap.xml

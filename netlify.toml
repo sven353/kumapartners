@@ -1,0 +1,18 @@
+[build]
+  publish = "."
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+
+# Netlify Forms: two forms on this site, both submissions land under Site
+# configuration -> Forms in the Netlify dashboard, no extra config needed.
+# - "offsite-blueprint", the configurator's lead-capture form, is detected
+#   from the hidden static <form name="offsite-blueprint" data-netlify="true">
+#   in index.html, since the real form only exists after app.js renders it.
+# - "discovery-call", the #contact section's intake form, is written
+#   directly into the static HTML on both index.html and partners.html, so
+#   it needs no hidden duplicate; Netlify treats the two pages' identical
+#   <form name="discovery-call"> as one form and merges their submissions.
