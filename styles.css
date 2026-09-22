@@ -1005,6 +1005,8 @@ body.scan-modal-locked{overflow:hidden;}
 .fit-transition-link:hover{text-decoration:underline; text-underline-offset:3px;}
 
 /* Global presence & native delivery trust strip */
+/* Global footprint / native delivery strip. Now sits between the navy #contact section
+   and the cream footer, white keeps the cadence alternating on both sides. */
 .global-strip{background:#fff; padding:56px 0; border-top:1px solid #E2DDD4; border-bottom:1px solid #E2DDD4;}
 .global-strip-grid{display:grid; grid-template-columns:1fr 1fr; gap:48px;}
 .global-strip-grid .global-strip-col + .global-strip-col{border-left:1px solid #E2DDD4; padding-left:48px;}
@@ -1024,7 +1026,7 @@ body.scan-modal-locked{overflow:hidden;}
   font-family:'Lato',Arial,sans-serif; font-weight:500; font-size:.75rem; color:var(--navy);
   background:#fff; border:1px solid #E2DDD4; padding:6px 12px; border-radius:2px;
 }
-.global-strip-note{font-size:.82rem; color:rgba(26,26,26,.55); margin:14px 0 0;}
+.global-strip-note{font-size:.82rem; color:rgba(26,26,26,.65); margin:14px 0 0;}
 
 /* Contact */
 .contact-section{background:var(--navy); color:#fff;}
