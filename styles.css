@@ -237,10 +237,31 @@ header.site.scrolled .nav{padding:10px 0;}
 }
 .problem-col h3{font-weight:700; margin-bottom:12px;}
 .problem-col p{font-size:.92rem; line-height:1.65; color:rgba(26,26,26,.7); margin-bottom:18px;}
+
+/* Diagnostic signal quote: the one-line symptom hook that opens each card */
+.problem-signal{
+  font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-style:italic; font-size:.98rem;
+  color:var(--ink); line-height:1.45; border-left:2px solid var(--teal); padding-left:14px; margin:0 0 18px;
+}
+
+/* Manifestation points: compact symptom bullets, subtle teal dot marker */
+.problem-points{list-style:none; margin:0 0 20px; padding:0;}
+.problem-points li{
+  position:relative; padding-left:16px; font-size:.86rem; line-height:1.6; color:rgba(26,26,26,.65);
+  margin-bottom:8px;
+}
+.problem-points li::before{
+  content:''; position:absolute; left:0; top:.6em; width:4px; height:4px; border-radius:50%; background:var(--teal);
+}
+
 .problem-callout{
   font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.78rem; color:var(--navy);
   background:var(--cream); padding:12px 14px; border-left:1px solid var(--teal); border-radius:2px;
   margin-top:auto;
+}
+.problem-callout-label{
+  display:block; font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.62rem;
+  letter-spacing:.1em; text-transform:uppercase; color:rgba(40,64,80,.55); margin-bottom:3px;
 }
 .section-head{max-width:760px;}
 .section-head h2{margin-bottom:14px;}
