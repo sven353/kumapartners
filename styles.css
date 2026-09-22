@@ -161,7 +161,7 @@ header.site.scrolled .nav{padding:10px 0;}
 }
 
 /* Proof bar */
-.proof{padding:40px 0; border-top:1px solid rgba(40,64,80,.1); border-bottom:1px solid rgba(40,64,80,.1);}
+.proof{background:#fff; padding:40px 0; border-top:1px solid rgba(40,64,80,.1); border-bottom:1px solid rgba(40,64,80,.1);}
 .proof p{
   text-align:center; font-family:'Lato',Arial,sans-serif; font-size:.85rem;
   letter-spacing:.06em; text-transform:uppercase; color:rgba(26,26,26,.55); margin-bottom:24px;
@@ -267,7 +267,9 @@ header.site.scrolled .nav{padding:10px 0;}
 .section-head h2{margin-bottom:14px;}
 
 /* Team teaser — editorial curiosity callout */
-.team-teaser{border-top:1px solid rgba(40,64,80,.1); border-bottom:1px solid rgba(40,64,80,.1);}
+/* White buffer between the dark #investors strip and the cream #faq section below,
+   so the cadence keeps alternating instead of stacking two dark or two cream sections. */
+.team-teaser{background:#fff; border-top:1px solid rgba(40,64,80,.1); border-bottom:1px solid rgba(40,64,80,.1);}
 .team-teaser-lead{margin-bottom:48px;}
 .team-teaser-lead h2{font-size:2.4rem; max-width:620px; margin-bottom:16px;}
 .team-teaser-lead p{font-size:1.05rem; color:rgba(26,26,26,.75); max-width:660px; line-height:1.65; margin-bottom:0;}
@@ -289,6 +291,11 @@ header.site.scrolled .nav{padding:10px 0;}
 .team-cta .btn{white-space:nowrap;}
 .team-cta .btn .arrow{display:inline-block; transition:transform .2s ease;}
 .team-cta .btn:hover .arrow{transform:translateX(4px);}
+
+/* Operator difference (comparison table) — white tier, sits between the cream #problem
+   and #engagements sections so the cadence alternates instead of running two cream
+   sections together. */
+#approach{background:#fff; border-bottom:1px solid #E2DDD4;}
 
 /* Comparison table */
 .compare{width:100%; border-collapse:collapse; margin-top:24px; background:#fff;}
@@ -661,7 +668,7 @@ header.site.scrolled .nav{padding:10px 0;}
 .case-docket-panel[hidden]{display:none;}
 
 /* FAQ */
-#faq{background:#fff; border-bottom:1px solid #E2DDD4;}
+#faq{background:var(--cream); border-bottom:1px solid #E2DDD4;}
 .faq-layout{display:grid; grid-template-columns:minmax(260px,320px) 1fr; gap:64px; margin-top:44px; align-items:start;}
 .faq-intro{position:sticky; top:104px;}
 .faq-intro .eyebrow{margin-bottom:14px;}
@@ -739,7 +746,9 @@ header.site.scrolled .nav{padding:10px 0;}
 /* Investor / VC & PE section: high-contrast dark panel */
 /* Warm stone, not navy: navy is reserved for the two action strips (assessment, contact).
    This section reads as a quieter, confidential-briefing tone for the investor audience. */
-#investors{background:#332F2A; padding:76px 0;}
+/* #scorecard above is navy, so a faint seam here keeps the two dark sections from
+   reading as one uninterrupted block even though their tones already differ. */
+#investors{background:#332F2A; padding:76px 0; border-top:1px solid rgba(255,255,255,.08);}
 #investors .badge-pill{background:transparent; border-color:rgba(255,255,255,.35); color:rgba(255,255,255,.9);}
 #investors h2{color:#fff;}
 #investors .wrap > p{color:rgba(226,221,212,.8);}
@@ -1174,7 +1183,7 @@ body.debrief-modal-locked{overflow:hidden;}
 }
 
 /* Footer */
-footer.site{padding:60px 0 40px; border-top:1px solid rgba(40,64,80,.12);}
+footer.site{background:var(--cream); padding:60px 0 40px; border-top:1px solid rgba(40,64,80,.12);}
 .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px; margin-bottom:40px;}
 .footer-grid h4{
   font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.78rem; text-transform:uppercase;
