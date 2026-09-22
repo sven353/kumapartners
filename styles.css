@@ -175,7 +175,9 @@ header.site.scrolled .nav{padding:10px 0;}
 }
 .marquee-track{
   display:flex; align-items:center; width:max-content;
-  animation:marquee 40s linear infinite;
+  /* Duration scaled up with the track: 17 -> 27 logos, so 40s stretched to 55s keeps the
+     same calm per-logo pace instead of speeding up under the added content. */
+  animation:marquee 55s linear infinite;
   will-change:transform;
 }
 .marquee:hover .marquee-track{animation-play-state:paused;}
@@ -957,7 +959,7 @@ body.scan-modal-locked{overflow:hidden;}
   .case-docket-panel, .value-grid, .deliverable-grid{grid-template-columns:1fr;}
   .case-docket-panel{gap:28px;}
   .marquee-track span{padding:0 26px; font-size:1rem;}
-  .marquee-track{animation-duration:28s;}
+  .marquee-track{animation-duration:38s;}
   .cookie-banner .wrap{flex-direction:column; align-items:flex-start;}
   .cookie-actions{width:100%;}
   .cookie-actions button{flex:1;}
