@@ -890,6 +890,12 @@
             </div>
           </div>
 
+          <!-- Questions 5-10 stay fully rendered in the static HTML (for search/AI crawlers and GEO),
+               just visually collapsed behind the toggle below using the same 0fr/1fr grid-rows reveal
+               as .scan-drawer, rather than being fetched or injected on click. -->
+          <div class="faq-extended" id="faq-extended">
+          <div class="faq-extended-inner">
+
           <div class="faq-item">
             <button class="faq-question" aria-expanded="false">
               How do you protect confidentiality between co-founders, the CEO, and the board?
@@ -961,6 +967,14 @@
               </div>
             </div>
           </div>
+
+          </div>
+          </div>
+
+          <button type="button" class="faq-toggle" id="faq-toggle" aria-expanded="false" aria-controls="faq-extended">
+            <span data-faq-toggle-text>View all 10 questions</span>
+            <span class="arrow" data-faq-toggle-arrow>&darr;</span>
+          </button>
 
         </div>
 

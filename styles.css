@@ -691,6 +691,20 @@ header.site.scrolled .nav{padding:10px 0;}
   margin:0; padding:0 4px 22px; font-size:.95rem; max-width:680px; color:rgba(26,26,26,.85);
 }
 
+/* FAQ "view all" reveal: questions 5-10 stay in the DOM always (crawlers/GEO), this just
+   controls whether they're visually shown. Same 0fr/1fr grid-rows mechanism as .scan-drawer. */
+.faq-extended{display:grid; grid-template-rows:0fr; transition:grid-template-rows .35s ease;}
+.faq-extended.open{grid-template-rows:1fr;}
+.faq-extended-inner{overflow:hidden;}
+.faq-toggle{
+  display:flex; align-items:center; justify-content:center; gap:6px; width:100%;
+  background:none; border:none; border-top:1px solid rgba(40,64,80,.12); cursor:pointer;
+  font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.85rem; color:var(--navy);
+  padding:22px 4px 4px; transition:color .2s ease;
+}
+.faq-toggle:hover{color:var(--teal);}
+.faq-toggle .arrow{display:inline-block;}
+
 /* Cookie consent banner */
 .cookie-banner{
   position:fixed; left:0; right:0; bottom:0; z-index:200; background:var(--navy); color:var(--cream);
