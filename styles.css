@@ -143,7 +143,11 @@ header.site.scrolled .nav{padding:10px 0;}
 
 /* Hero */
 .hero{
-  padding:110px 0 90px;
+  /* Bottom padding tightened from 90px (v32: was tuned for the now-removed .north-star-strip
+     to add its own 32px top padding beneath this). .proof's own top padding is already a tight
+     40px by design, so 64px here reads as one continuous transition into the logo bar instead
+     of two stacked gaps. */
+  padding:110px 0 64px;
   background:linear-gradient(180deg, rgba(88,128,136,.08), transparent 60%);
 }
 .hero .wrap{max-width:1040px;}
@@ -155,22 +159,6 @@ header.site.scrolled .nav{padding:10px 0;}
   color:var(--teal); font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:.78rem;
   letter-spacing:.04em; text-transform:uppercase; padding:8px 16px; border-radius:999px; margin-bottom:22px;
 }
-
-/* North Star benchmark strip */
-.north-star-strip{
-  background:var(--cream); border-top:1px solid #E2DDD4; border-bottom:1px solid #E2DDD4;
-  padding:32px 0; text-align:center;
-}
-.north-star-label{
-  display:block; font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.72rem;
-  letter-spacing:.14em; text-transform:uppercase; color:var(--teal); margin-bottom:10px;
-}
-.north-star-metric{
-  font-family:'Montserrat',Arial,sans-serif; font-weight:700; font-size:1.3rem; color:var(--navy);
-  margin:0 0 8px;
-}
-.north-star-metric-sub{font-weight:500; color:rgba(40,64,80,.65); font-size:1rem;}
-.north-star-desc{font-size:.92rem; color:rgba(26,26,26,.65); max-width:620px; margin:0 auto;}
 
 /* Proof bar */
 .proof{padding:40px 0; border-top:1px solid rgba(40,64,80,.1); border-bottom:1px solid rgba(40,64,80,.1);}
