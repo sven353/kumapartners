@@ -756,7 +756,7 @@ header.site.scrolled .nav{padding:10px 0;}
    of the site's 3 navy blocks, and stacking a second dark strip under it read as an
    unbranded, uncoordinated dark rather than a deliberate one. White also keeps navy down
    to exactly 3 sections site-wide (proof, scorecard, contact), per the strict cadence rule. */
-#investors{background:#fff; padding:76px 0; border-top:1px solid #E2DDD4;}
+#investors{background:#fff; padding:90px 0; border-top:1px solid #E2DDD4;}
 #investors .badge-pill{background:var(--cream); border-color:#E2DDD4; color:var(--navy);}
 #investors h2{color:var(--ink);}
 #investors .wrap > p{color:rgba(26,26,26,.7);}
@@ -770,14 +770,19 @@ header.site.scrolled .nav{padding:10px 0;}
 #scorecard .eyebrow::before{background:var(--teal);}
 #scorecard .section-head p{color:rgba(255,255,255,.8);}
 
-.value-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px; margin-top:36px;}
+.value-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:24px; margin-top:36px;}
 .value-card{
   background:var(--cream); border:1px solid #E2DDD4; border-radius:2px;
   padding:28px 26px; transition:border-color .2s ease;
+  display:flex; flex-direction:column; height:100%;
 }
 .value-card:hover{border-color:var(--teal);}
-.value-card h3{font-size:1.05rem; margin-bottom:10px; color:var(--navy);}
-.value-card p{font-size:.92rem; margin:0; color:rgba(26,26,26,.7);}
+.value-tag{
+  font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.72rem;
+  text-transform:uppercase; letter-spacing:.08em; color:var(--teal); margin-bottom:12px;
+}
+.value-card h3{font-size:1.2rem; margin-bottom:10px; color:var(--navy);}
+.value-card p{font-size:.94rem; margin:0; color:rgba(26,26,26,.7);}
 
 /* Tier 1 interactive timeline & deliverables drawer */
 .scan-drawer{
