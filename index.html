@@ -1208,84 +1208,56 @@
               <label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
             </p>
             <input type="hidden" id="company" name="company">
+            <!-- Context fields kept out of the visible form (v30 streamline: 7 fields down to 3) but still
+                 real <select> elements, not removed, because several existing CTAs still set them before
+                 scrolling here: the investor CTA and the friction-scan scorecard set #role, the offsite-module
+                 CTA and the scorecard set #brought-here via setSelectValueByText (which reads .options and
+                 throws if the element isn't a <select>), and the scorecard also sets #journey the same way.
+                 Hidden, not deleted, so that context still reaches the partner reviewing the submission. -->
+            <select id="role" name="role" hidden aria-hidden="true" tabindex="-1">
+              <option value="" selected></option>
+              <option value="founder">Founder / CEO</option>
+              <option value="csuite">C-Suite Executive</option>
+              <option value="board">Board Director</option>
+              <option value="investor">Lead Investor / Operating Partner</option>
+              <option value="other">Other</option>
+            </select>
+            <select id="journey" name="journey" hidden aria-hidden="true" tabindex="-1">
+              <option value="" selected></option>
+              <option>Bootstrapped / Profitable</option>
+              <option>Seed / Series A</option>
+              <option>Series B / Series C</option>
+              <option>Growth / PE-backed</option>
+              <option>VC / PE fund</option>
+              <option>Other</option>
+            </select>
+            <select id="brought-here" name="brought_here" hidden aria-hidden="true" tabindex="-1">
+              <option value="" selected></option>
+              <option>Co-founder or C-suite alignment is breaking down</option>
+              <option>Decisions are getting stuck</option>
+              <option>Leadership team friction is slowing execution</option>
+              <option>Product, GTM or functional silos are creating drag</option>
+              <option>We're navigating a major scaling or post-fundraise transition</option>
+              <option>We need a high-stakes leadership offsite</option>
+              <option>Board / CEO / governance dynamics need attention</option>
+              <option>I have a specific situation I want to discuss</option>
+            </select>
             <div class="field">
-              <label for="brought-here">What brought you here?</label>
-              <div class="select-shell">
-                <select id="brought-here" name="brought_here" required>
-                  <option value="" disabled selected hidden>Select one</option>
-                  <option>Co-founder or C-suite alignment is breaking down</option>
-                  <option>Decisions are getting stuck</option>
-                  <option>Leadership team friction is slowing execution</option>
-                  <option>Product, GTM or functional silos are creating drag</option>
-                  <option>We're navigating a major scaling or post-fundraise transition</option>
-                  <option>We need a high-stakes leadership offsite</option>
-                  <option>Board / CEO / governance dynamics need attention</option>
-                  <option>I have a specific situation I want to discuss</option>
-                </select>
-                <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
-              </div>
+              <label for="email">Work email</label>
+              <input type="email" id="email" name="email" required placeholder="name@company.com">
             </div>
             <div class="field">
-              <label for="role">What's your role?</label>
-              <div class="select-shell">
-                <select id="role" name="role" required>
-                  <option value="" disabled selected hidden>Select one</option>
-                  <option value="founder">Founder / CEO</option>
-                  <option value="csuite">C-Suite Executive</option>
-                  <option value="board">Board Director</option>
-                  <option value="investor">Lead Investor / Operating Partner</option>
-                  <option value="other">Other</option>
-                </select>
-                <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
-              </div>
+              <label for="role-stage">Your role &amp; stage</label>
+              <input type="text" id="role-stage" name="role_stage" required placeholder="e.g. Co-Founder / CEO &middot; Series B">
             </div>
             <div class="field">
-              <label for="situation">What's happening?</label>
-              <span class="field-helper">Give us the version you'd tell a trusted advisor.</span>
-              <textarea id="situation" name="situation" rows="3" placeholder="Describe the dynamic, the bottlenecks, or the specific conflict..."></textarea>
-            </div>
-            <div class="field">
-              <label for="urgency">How urgent is it?</label>
-              <div class="select-shell">
-                <select id="urgency" name="urgency" required>
-                  <option value="" disabled selected hidden>Select one</option>
-                  <option>We're dealing with it now</option>
-                  <option>We need to address it within the next 30 days</option>
-                  <option>We see something developing and want to get ahead of it</option>
-                  <option>We're exploring options</option>
-                </select>
-                <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
-              </div>
-            </div>
-            <div class="field">
-              <label for="journey">Where are you in the journey?</label>
-              <div class="select-shell">
-                <select id="journey" name="journey" required>
-                  <option value="" disabled selected hidden>Select one</option>
-                  <option>Bootstrapped / Profitable</option>
-                  <option>Seed / Series A</option>
-                  <option>Series B / Series C</option>
-                  <option>Growth / PE-backed</option>
-                  <option>VC / PE fund</option>
-                  <option>Other</option>
-                </select>
-                <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
-              </div>
-            </div>
-            <div class="field-row">
-              <div class="field">
-                <label for="name">Full name</label>
-                <input type="text" id="name" name="name" required>
-              </div>
-              <div class="field">
-                <label for="email">Work email</label>
-                <input type="email" id="email" name="email" required>
-              </div>
+              <label for="situation">What is blocking execution?</label>
+              <textarea id="situation" name="situation" rows="3" placeholder="Give us the candid picture: co-founder friction, decision latency, scaling drag, or board pressure..."></textarea>
             </div>
             <button type="submit" class="btn btn-primary" data-contact-submit>
-              <span data-btn-label>Talk to a Managing Partner</span>
+              <span data-btn-label>Request Confidential Briefing &rarr;</span>
             </button>
-            <p class="contact-form-microcopy">Your information is treated confidentially. We review every inquiry personally and typically respond within 24 business hours.</p>
+            <p class="contact-form-microcopy">Strict confidentiality. Direct partner review within 24 hours.</p>
             <p class="contact-form-error" data-contact-error hidden>Something went wrong sending your message. Please try again, or email us directly at <a href="mailto:contact@kuma.partners">contact@kuma.partners</a>.</p>
           </form>
           <div class="contact-success" data-contact-success hidden tabindex="-1">
