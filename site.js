@@ -170,8 +170,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
-  // --- FAQ "view all" toggle: questions 5-10 are always present in the static HTML
-  // (crawlers/GEO see all 10 regardless of JS), this just shows/hides them for visitors.
+  // --- FAQ "view all" toggle: questions 5-14 are always present in the static HTML
+  // (crawlers/GEO see all 14 regardless of JS), this just shows/hides them for visitors.
   var faqExtended = document.getElementById('faq-extended');
   var faqToggle = document.getElementById('faq-toggle');
   if (faqExtended && faqToggle) {
@@ -180,7 +180,7 @@ document.addEventListener('DOMContentLoaded', function () {
     faqToggle.addEventListener('click', function () {
       var isOpen = faqExtended.classList.toggle('open');
       faqToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-      if (faqToggleText) faqToggleText.textContent = isOpen ? 'Show fewer questions' : 'View all 10 questions';
+      if (faqToggleText) faqToggleText.textContent = isOpen ? 'Show fewer questions' : 'View all 14 questions';
       if (faqToggleArrow) faqToggleArrow.textContent = isOpen ? '↑' : '↓';
     });
   }
