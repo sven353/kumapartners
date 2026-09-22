@@ -163,9 +163,10 @@ header.site.scrolled .nav{padding:10px 0;}
 /* Proof bar — one of the site's 3 designated navy blocks (with #scorecard and #contact),
    so the pedigree strip reads as a credibility beat rather than a plain content section. */
 .proof{background:var(--navy); padding:40px 0; border-top:1px solid rgba(255,255,255,.08); border-bottom:1px solid rgba(255,255,255,.08);}
-.proof p{
-  text-align:center; font-family:'Lato',Arial,sans-serif; font-size:.85rem;
-  letter-spacing:.06em; text-transform:uppercase; color:rgba(244,241,235,.6); margin-bottom:24px;
+.proof-label{
+  text-align:center; font-family:'Lato',Arial,sans-serif; font-size:.78rem; font-weight:600;
+  letter-spacing:.09em; text-transform:uppercase; color:rgba(251,249,245,.75);
+  line-height:1.4; margin:0 0 14px;
 }
 .marquee{
   width:100%; overflow:hidden;
@@ -180,7 +181,7 @@ header.site.scrolled .nav{padding:10px 0;}
 .marquee:hover .marquee-track{animation-play-state:paused;}
 .marquee-track span{
   font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:1.1rem;
-  color:rgba(255,255,255,.85); letter-spacing:.02em; white-space:nowrap; flex-shrink:0;
+  color:rgba(255,255,255,.88); letter-spacing:.02em; white-space:nowrap; flex-shrink:0;
   padding:0 44px;
 }
 @keyframes marquee{
