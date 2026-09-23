@@ -1439,64 +1439,69 @@
   <div class="scan-modal" role="dialog" aria-modal="true" aria-labelledby="scan-modal-title">
     <button type="button" class="scan-modal-close" data-scan-close aria-label="Close">&times;</button>
 
-    <div class="scan-modal-step" data-modal-step="1">
-      <h3 id="scan-modal-title">Schedule a Confidential Diagnostic Call</h3>
-      <p class="scan-modal-subtitle">Select your current stage and leadership inflection point so we can connect you with the appropriate Managing Partner.</p>
-      <form data-scan-form novalidate>
-        <div class="field">
-          <label for="scan-name">Full name</label>
-          <input type="text" id="scan-name" required>
-        </div>
-        <div class="field">
-          <label for="scan-email">Work email</label>
-          <input type="email" id="scan-email" required>
-          <span class="scan-field-error" data-scan-email-error>Please use your business email address, not a personal inbox.</span>
-        </div>
-        <div class="field">
-          <label for="scan-company">Company name &amp; website</label>
-          <input type="text" id="scan-company" placeholder="Acme Inc., acme.com" required>
-        </div>
-        <div class="field">
-          <label for="scan-stage">Headcount &amp; funding stage</label>
-          <div class="select-shell">
-            <select id="scan-stage">
-              <option>Series A (25–50 headcount)</option>
-              <option>Series B–C (50–150+ headcount)</option>
-              <option>Private Equity / Late Stage</option>
-              <option>Investor / Board Director</option>
-            </select>
-            <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
-          </div>
-        </div>
-        <div class="field">
-          <label for="scan-inflection">Primary inflection point</label>
-          <div class="select-shell">
-            <select id="scan-inflection">
-              <option>Co-Founder / Executive Alignment Friction</option>
-              <option>Decision Drag &amp; Scaling Execution Bottlenecks</option>
-              <option>C-Suite Restructuring or Transition</option>
-              <option>Portfolio Company Diagnostic (For VCs/PE)</option>
-            </select>
-            <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
-          </div>
-        </div>
-        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;">Continue to Calendar</button>
-      </form>
-    </div>
+    <span class="scan-modal-badge">Confidential Operator-to-Operator</span>
+    <h3 id="scan-modal-title">Request a Confidential Diagnostic Call</h3>
+    <p class="scan-modal-subtitle">Select your current stage and leadership inflection point so we can connect you with the appropriate Managing Partner.</p>
 
-    <div class="scan-modal-step" data-modal-step="2" hidden>
-      <h3>Schedule Your Diagnostic Call</h3>
-      <p class="scan-modal-reassurance">Confidential 30-minute introductory debrief with a Kuma Managing Partner.</p>
-      <div class="scan-recap">
-        <div><strong>Name:</strong> <span data-recap-name></span></div>
-        <div><strong>Email:</strong> <span data-recap-email></span></div>
-        <div><strong>Company:</strong> <span data-recap-company></span></div>
+    <form class="scan-form" name="friction-scan" method="POST" action="/#engagements" data-netlify="true" netlify-honeypot="bot-field" id="scan-form" data-scan-form>
+      <input type="hidden" name="form-name" value="friction-scan">
+      <p class="hp-field" hidden>
+        <label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+      </p>
+      <div class="field">
+        <label for="scan-name">Full name</label>
+        <input type="text" id="scan-name" name="name" required>
       </div>
-      <!-- Replace this placeholder with your Cal.com, HubSpot Meetings, or Chili Piper embed snippet (iframe or script embed). The URL below already carries the lead's name, email, and company as query parameters, ready to drop into your scheduler's booking link. -->
-      <div class="scan-embed-placeholder">
-        <p>Calendar embed goes here. Swap this block for your Cal.com, HubSpot Meetings, or Chili Piper embed, prefilled with the parameters below.</p>
-        <input type="text" class="scan-embed-url" data-scan-embed-url readonly>
+      <div class="field">
+        <label for="scan-email">Work email</label>
+        <input type="email" id="scan-email" name="email" required>
+        <span class="scan-field-error" data-scan-email-error>Please use your business email address, not a personal inbox.</span>
       </div>
+      <div class="field">
+        <label for="scan-company">Company name &amp; website</label>
+        <input type="text" id="scan-company" name="company" placeholder="Acme Inc., acme.com" required>
+      </div>
+      <div class="field">
+        <label for="scan-stage">Headcount &amp; funding stage</label>
+        <div class="select-shell">
+          <select id="scan-stage" name="stage">
+            <option>Series A (25–50 headcount)</option>
+            <option>Series B–C (50–150+ headcount)</option>
+            <option>Enterprise Scale (150–400+ headcount)</option>
+            <option>Post-M&amp;A / PE-Backed Portfolio Company</option>
+            <option>Investor / Operating Partner (Portfolio Triage)</option>
+          </select>
+          <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </div>
+      </div>
+      <div class="field">
+        <label for="scan-inflection">Primary inflection point</label>
+        <div class="select-shell">
+          <select id="scan-inflection" name="inflection">
+            <option>Co-Founder / Executive Alignment Friction</option>
+            <option>Post-Merger Leadership &amp; Cultural Integration</option>
+            <option>Decision Drag &amp; Scaling Execution Bottlenecks</option>
+            <option>C-Suite Restructuring or Transition</option>
+            <option>Portfolio Company Diagnostic (For VCs/PE)</option>
+          </select>
+          <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;" data-scan-submit>
+        <span data-btn-label>Request Confidential Briefing &rarr;</span>
+      </button>
+      <p class="scan-form-microcopy">Direct response from a Managing Partner within 24 business hours, under strict discretion.</p>
+      <p class="scan-form-error" data-scan-error hidden>Something went wrong sending your request. Please try again, or email us directly at <a href="mailto:contact@kuma.partners">contact@kuma.partners</a>.</p>
+    </form>
+
+    <div class="scan-success" data-scan-success hidden tabindex="-1">
+      <div class="scan-success-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.5 12.75l6 6 9-13.5"/></svg>
+      </div>
+      <h3>Thank you.</h3>
+      <p>Your inquiry has been routed directly to a Managing Partner.</p>
+      <p>We will be in touch within 24 business hours, in strict confidence.</p>
+      <button type="button" class="scan-success-close" data-scan-close>Close window</button>
     </div>
   </div>
 </div>

@@ -271,14 +271,17 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // --- Shared helper: wire a Netlify form to submit via fetch() with inline success/error states ---
-  function wireAjaxForm(form, successEl, errorEl, onSuccess) {
+  // `validate`, if given, runs before the network request; returning false aborts the submit
+  // (used by the scan form to block free-email domains without duplicating this whole flow).
+  function wireAjaxForm(form, successEl, errorEl, onSuccess, validate) {
     if (!form) return;
-    var submitBtn = form.querySelector('[data-contact-submit], [data-debrief-submit]');
+    var submitBtn = form.querySelector('[data-contact-submit], [data-debrief-submit], [data-scan-submit]');
     var btnLabel = submitBtn ? submitBtn.querySelector('[data-btn-label]') : null;
     var originalBtnText = btnLabel ? btnLabel.textContent : '';
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+      if (typeof validate === 'function' && !validate()) return;
       if (errorEl) errorEl.hidden = true;
       if (submitBtn) submitBtn.disabled = true;
       if (btnLabel) btnLabel.textContent = 'Sending…';
@@ -617,14 +620,19 @@ document.addEventListener('DOMContentLoaded', function () {
   if (scanOverlay) {
     var scanModal = scanOverlay.querySelector('.scan-modal');
     var scanForm = scanOverlay.querySelector('[data-scan-form]');
-    var scanCloseBtn = scanOverlay.querySelector('[data-scan-close]');
+    var scanCloseBtns = scanOverlay.querySelectorAll('[data-scan-close]');
     var scanEmailInput = document.getElementById('scan-email');
     var scanEmailError = scanOverlay.querySelector('[data-scan-email-error]');
+    var scanSuccess = scanOverlay.querySelector('[data-scan-success]');
+    var scanError = scanOverlay.querySelector('[data-scan-error]');
+    var scanSubmitBtn = scanOverlay.querySelector('[data-scan-submit]');
+    var scanBtnLabel = scanSubmitBtn ? scanSubmitBtn.querySelector('[data-btn-label]') : null;
+    var scanOriginalBtnText = scanBtnLabel ? scanBtnLabel.textContent : '';
     var FREE_EMAIL_DOMAINS = ['gmail.com', 'yahoo.com', 'hotmail.com', 'outlook.com', 'icloud.com', 'aol.com', 'live.com', 'msn.com', 'proton.me', 'protonmail.com'];
     var lastFocusedEl = null;
 
     function isFormPartiallyFilled() {
-      var fields = scanOverlay.querySelectorAll('input, select');
+      var fields = scanOverlay.querySelectorAll('input:not([type="hidden"]), select');
       for (var i = 0; i < fields.length; i++) {
         if (fields[i].type === 'select-one') { if (fields[i].selectedIndex > 0) return true; }
         else if (fields[i].value && fields[i].value.trim() !== '') return true;
@@ -664,15 +672,27 @@ document.addEventListener('DOMContentLoaded', function () {
       }, 50);
     }
 
+    function resetState() {
+      if (scanForm) {
+        scanForm.reset();
+        scanForm.hidden = false;
+      }
+      if (scanSuccess) scanSuccess.hidden = true;
+      if (scanError) scanError.hidden = true;
+      if (scanEmailError) scanEmailError.classList.remove('show');
+      if (scanSubmitBtn) scanSubmitBtn.disabled = false;
+      if (scanBtnLabel) scanBtnLabel.textContent = scanOriginalBtnText;
+    }
+
     function attemptClose(force) {
-      if (!force && isFormPartiallyFilled() && scanOverlay.querySelector('[data-modal-step="1"]').hidden === false) {
+      if (!force && scanForm && !scanForm.hidden && isFormPartiallyFilled()) {
         var stay = !window.confirm('Save your spot? Closing now will lose what you\'ve entered.');
         if (stay) return;
       }
       scanOverlay.classList.remove('open');
       document.body.classList.remove('scan-modal-locked');
       document.removeEventListener('keydown', onKeydown);
-      setTimeout(function () { scanOverlay.hidden = true; }, 260);
+      setTimeout(function () { scanOverlay.hidden = true; resetState(); }, 260);
       if (lastFocusedEl) lastFocusedEl.focus();
     }
 
@@ -680,7 +700,9 @@ document.addEventListener('DOMContentLoaded', function () {
       btn.addEventListener('click', function () { openModal(btn); });
     });
 
-    if (scanCloseBtn) scanCloseBtn.addEventListener('click', function () { attemptClose(true); });
+    scanCloseBtns.forEach(function (btn) {
+      btn.addEventListener('click', function () { attemptClose(true); });
+    });
 
     scanOverlay.addEventListener('click', function (e) {
       if (e.target === scanOverlay) attemptClose(false);
@@ -690,44 +712,18 @@ document.addEventListener('DOMContentLoaded', function () {
       scanEmailInput.addEventListener('input', function () { scanEmailError.classList.remove('show'); });
     }
 
-    if (scanForm) {
-      scanForm.addEventListener('submit', function (e) {
-        e.preventDefault();
-        if (!scanForm.checkValidity()) { scanForm.reportValidity(); return; }
-
-        var email = scanEmailInput.value.trim();
-        var domain = email.split('@')[1] ? email.split('@')[1].toLowerCase() : '';
-        if (FREE_EMAIL_DOMAINS.indexOf(domain) !== -1) {
-          if (scanEmailError) scanEmailError.classList.add('show');
-          scanEmailInput.focus();
-          return;
-        }
-
-        var name = document.getElementById('scan-name').value.trim();
-        var company = document.getElementById('scan-company').value.trim();
-        var stage = document.getElementById('scan-stage').value;
-        var inflection = document.getElementById('scan-inflection').value;
-
-        var recapName = scanOverlay.querySelector('[data-recap-name]');
-        var recapEmail = scanOverlay.querySelector('[data-recap-email]');
-        var recapCompany = scanOverlay.querySelector('[data-recap-company]');
-        if (recapName) recapName.textContent = name;
-        if (recapEmail) recapEmail.textContent = email;
-        if (recapCompany) recapCompany.textContent = company;
-
-        var embedUrlInput = scanOverlay.querySelector('[data-scan-embed-url]');
-        if (embedUrlInput) {
-          var params = new URLSearchParams({ name: name, email: email, company: company, stage: stage, inflection: inflection });
-          embedUrlInput.value = 'https://cal.com/kuma-partners/friction-scan-intro?' + params.toString();
-        }
-
-        scanOverlay.querySelector('[data-modal-step="1"]').hidden = true;
-        var step2 = scanOverlay.querySelector('[data-modal-step="2"]');
-        step2.hidden = false;
-        var heading = step2.querySelector('h3');
-        if (heading) { heading.setAttribute('tabindex', '-1'); heading.focus(); }
-      });
+    function scanValidateEmail() {
+      var email = scanEmailInput.value.trim();
+      var domain = email.split('@')[1] ? email.split('@')[1].toLowerCase() : '';
+      if (FREE_EMAIL_DOMAINS.indexOf(domain) !== -1) {
+        if (scanEmailError) scanEmailError.classList.add('show');
+        scanEmailInput.focus();
+        return false;
+      }
+      return true;
     }
+
+    wireAjaxForm(scanForm, scanSuccess, scanError, null, scanValidateEmail);
   }
 
   // --- Partner Debrief modal (Tier 3 diagnostic dossier form) ---
