@@ -578,8 +578,10 @@ header.site.scrolled .nav{padding:10px 0;}
 
 /* Team page: managing partner cards (normalized to bench-card architecture) */
 .partner-card-lg{
-  background:#fff; border:1px solid rgba(11,21,35,.1); border-top:1px solid var(--navy);
-  border-radius:var(--radius-xs); padding:26px 24px; text-align:left; transition:box-shadow .2s ease;
+  background:linear-gradient(180deg, #FFFFFF 0%, #F9FAFB 100%);
+  border:1px solid var(--hairline-color); border-top:1px solid var(--navy);
+  border-radius:var(--radius-md); padding:26px 24px; text-align:left; transition:box-shadow .2s ease;
+  box-shadow:var(--card-sheen);
 }
 .partner-card-lg:hover{box-shadow:0 18px 40px -24px rgba(11,21,35,.35);}
 .partner-photo{
@@ -614,7 +616,12 @@ header.site.scrolled .nav{padding:10px 0;}
 
 /* Advisor network grid */
 .advisor-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:22px; margin-top:44px;}
-.advisor-card{background:#fff; border:1px solid rgba(11,21,35,.1); border-top:1px solid var(--navy); padding:26px 24px; border-radius:var(--radius-xs); text-align:left;}
+.advisor-card{
+  background:linear-gradient(180deg, #FFFFFF 0%, #F9FAFB 100%);
+  border:1px solid var(--hairline-color); border-top:1px solid var(--navy);
+  padding:26px 24px; border-radius:var(--radius-md); text-align:left;
+  box-shadow:var(--card-sheen);
+}
 .advisor-photo{
   width:56px; height:56px; border-radius:50%; background:var(--cream); border:1px solid rgba(11,21,35,.15);
   display:flex; align-items:center; justify-content:center; overflow:hidden; margin-bottom:14px;
@@ -646,7 +653,7 @@ header.site.scrolled .nav{padding:10px 0;}
 .governance-strip p strong{color:var(--navy); font-weight:700;}
 
 /* Navy callout (full-bleed) */
-.moat-section{background:var(--navy); color:var(--cream); padding:72px 0;}
+.moat-section{background:radial-gradient(120% 85% at 50% 0%, #152740 0%, var(--navy) 100%); color:var(--cream); padding:72px 0;}
 .moat-section .eyebrow{font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:.72rem;}
 .moat-section h2{color:#fff; font-size:1.8rem; max-width:720px;}
 .moat-section p{color:rgba(248,249,250,.85); max-width:640px; font-size:1.05rem;}
@@ -1500,6 +1507,12 @@ footer.site{background:var(--cream); padding:60px 0 40px; border-top:1px solid r
 .reveal-stagger > *:nth-child(2){transition-delay:90ms;}
 .reveal-stagger > *:nth-child(3){transition-delay:180ms;}
 .reveal-stagger > *:nth-child(4){transition-delay:270ms;}
+
+/* .advisor-grid runs to 10 cards in a 2-column layout, past the 4-step stagger
+   above. An odd/even alternation scales to any row count instead of leaving
+   cards 5+ with no delay at all. */
+.advisor-grid.reveal-stagger > *:nth-child(odd){transition-delay:0ms;}
+.advisor-grid.reveal-stagger > *:nth-child(even){transition-delay:90ms;}
 
 /* .value-card already carries its own hover transition (border-color); this
    compound rule keeps that transition alongside the reveal one instead of
