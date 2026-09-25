@@ -189,6 +189,33 @@ document.addEventListener('DOMContentLoaded', function () {
     spySections.forEach(function (section) { spyObserver.observe(section); });
   })();
 
+  // --- Scroll reveal: subtle fade + rise for .reveal-on-scroll elements as they enter view ---
+  (function () {
+    var revealEls = document.querySelectorAll('.reveal-on-scroll');
+    if (!revealEls.length) return;
+
+    var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (typeof IntersectionObserver === 'undefined' || prefersReducedMotion) {
+      revealEls.forEach(function (el) { el.classList.add('is-visible'); });
+      return;
+    }
+
+    var revealObserver = new IntersectionObserver(function (entries, observer) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, {
+      root: null,
+      rootMargin: '0px 0px -40px 0px',
+      threshold: 0.1
+    });
+
+    revealEls.forEach(function (el) { revealObserver.observe(el); });
+  })();
+
   // --- FAQ accordion ---
   var faqItems = document.querySelectorAll('.faq-item');
   faqItems.forEach(function (item) {
