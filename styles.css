@@ -34,6 +34,13 @@
   --radius-md: 6px;
   --radius-lg: 8px;
   --radius-pill: 999px;
+
+  /* Card sheen: a faint top-light inset plus a soft contact shadow, used on
+     white cards that sit directly on a white or near-white section background
+     and would otherwise read as a flat, edgeless rectangle. Not applied to
+     cards that already carry a deliberate tint against their section (see
+     .value-card). */
+  --card-sheen: inset 0 1px 0 rgba(255,255,255,.9), 0 1px 3px rgba(11,21,35,.04);
 }
 
 *{box-sizing:border-box;}
@@ -796,7 +803,7 @@ header.site.scrolled .nav{padding:10px 0;}
 #investors .btn-primary:hover{background:var(--teal); border-color:var(--teal);}
 
 /* Free self-assessment: the second (and only other) navy action strip on the page */
-#scorecard{background:var(--navy); padding:76px 0;}
+#scorecard{background:radial-gradient(120% 85% at 50% 0%, #152740 0%, var(--navy) 100%); padding:76px 0;}
 #scorecard h2{color:#fff;}
 #scorecard .eyebrow{color:rgba(255,255,255,.7);}
 #scorecard .eyebrow::before{background:var(--teal);}
@@ -1017,8 +1024,8 @@ body.scan-modal-locked{overflow:hidden;}
 /* Qualification & Fit */
 .fit-grid{display:grid; grid-template-columns:1fr 1fr; gap:28px; margin-top:44px; align-items:stretch;}
 .fit-card{
-  background:#fff; border:1px solid #E2E8F0; border-radius:var(--radius-md); padding:36px 32px;
-  display:flex; flex-direction:column;
+  background:linear-gradient(180deg, #FFFFFF 0%, #F9FAFB 100%); border:1px solid #E2E8F0; border-radius:var(--radius-md); padding:36px 32px;
+  display:flex; flex-direction:column; box-shadow:var(--card-sheen);
 }
 .fit-card h3{font-size:1.3rem; color:var(--ink); margin-bottom:20px;}
 .fit-pill{
@@ -1076,7 +1083,7 @@ body.scan-modal-locked{overflow:hidden;}
 .global-strip-note{font-size:.82rem; color:rgba(26,26,26,.65); margin:14px 0 0;}
 
 /* Contact */
-.contact-section{background:var(--navy); color:#fff;}
+.contact-section{background:linear-gradient(180deg, #0E1B2C 0%, var(--navy) 100%); color:#fff;}
 .contact-section h2{color:#fff;}
 .contact-section .eyebrow{color:rgba(255,255,255,.7);}
 .contact-section .eyebrow::before{background:var(--teal);}
