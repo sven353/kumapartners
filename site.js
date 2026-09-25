@@ -155,6 +155,40 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   }
 
+  // --- Scrollspy: highlight the nav item for whichever section is currently in view ---
+  // Nav items are a mix of plain <a href="#id"> links and the Engagements dropdown's
+  // <button data-nav-section="engagements">, so matching falls back to the data attribute
+  // when there's no href. A JS-only virtual anchor like #offsites (a hidden tab panel
+  // inside #engagements, not its own top-level section) is never one of the observed
+  // targets below, so it can't fight the #engagements highlight.
+  (function () {
+    var spySections = document.querySelectorAll('section[id]');
+    var spyNavLinks = document.querySelectorAll('.nav-links .nav-link');
+    if (!spySections.length || !spyNavLinks.length || typeof IntersectionObserver === 'undefined') return;
+
+    function activateNavFor(id) {
+      spyNavLinks.forEach(function (link) {
+        var target = link.getAttribute('href') || link.getAttribute('data-nav-section');
+        var isMatch = target === ('#' + id) || target === id;
+        link.classList.toggle('active', isMatch);
+        if (isMatch) link.setAttribute('aria-current', 'true');
+        else link.removeAttribute('aria-current');
+      });
+    }
+
+    var spyObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) activateNavFor(entry.target.id);
+      });
+    }, {
+      root: null,
+      rootMargin: '-20% 0px -65% 0px', // active band: top 20% to top 35% of the viewport
+      threshold: 0
+    });
+
+    spySections.forEach(function (section) { spyObserver.observe(section); });
+  })();
+
   // --- FAQ accordion ---
   var faqItems = document.querySelectorAll('.faq-item');
   faqItems.forEach(function (item) {
