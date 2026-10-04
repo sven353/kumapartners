@@ -1041,22 +1041,42 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!stickyBar || !heroEl) return;
 
     var ticking = false;
+    var lastY = window.scrollY;
+    var settleTimer = null;
+
+    function setVisible(show) {
+      stickyBar.classList.toggle('is-visible', show);
+      stickyBar.setAttribute('aria-hidden', show ? 'false' : 'true');
+    }
 
     function updateStickyBar() {
       ticking = false;
 
       if (window.innerWidth > 768) {
-        stickyBar.classList.remove('is-visible');
+        setVisible(false);
         document.body.classList.remove('has-mobile-sticky-cta');
-        stickyBar.setAttribute('aria-hidden', 'true');
         stickyBar.style.bottom = '';
+        lastY = window.scrollY;
         return;
       }
 
-      var past = window.scrollY > heroEl.offsetHeight * 0.75;
-      stickyBar.classList.toggle('is-visible', past);
+      var currentY = window.scrollY;
+      var scrollingDown = currentY > lastY + 2;
+      lastY = currentY;
+
+      var past = currentY > heroEl.offsetHeight * 0.75;
       document.body.classList.toggle('has-mobile-sticky-cta', past);
-      stickyBar.setAttribute('aria-hidden', past ? 'false' : 'true');
+
+      // Tuck the bar away while the user is actively scrolling down, so it
+      // can't end up sitting on top of a card's own CTA mid-scroll (tall
+      // cards like the Tier 1 engagement card run past one screen height).
+      // It comes back as soon as they scroll up, or pause for a moment.
+      setVisible(past && !scrollingDown);
+
+      if (settleTimer) clearTimeout(settleTimer);
+      settleTimer = setTimeout(function () {
+        setVisible(window.scrollY > heroEl.offsetHeight * 0.75);
+      }, 200);
 
       var bannerShowing = cookieBannerEl && cookieBannerEl.classList.contains('show');
       stickyBar.style.bottom = bannerShowing ? cookieBannerEl.offsetHeight + 'px' : '0';

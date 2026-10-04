@@ -1547,7 +1547,7 @@ footer.site{background:var(--cream); padding:60px 0 40px; border-top:1px solid r
   .kos-grid, .tier-grid, .value-grid{
     display:flex; flex-wrap:nowrap; align-items:stretch;
     overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
-    gap:16px; margin:28px -32px 0; padding:4px 32px 22px;
+    gap:16px; margin:8px -32px 0; padding:24px 32px 22px;
     scrollbar-width:none; -ms-overflow-style:none;
   }
   .kos-grid::-webkit-scrollbar, .tier-grid::-webkit-scrollbar, .value-grid::-webkit-scrollbar{
