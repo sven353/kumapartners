@@ -920,4 +920,162 @@ document.addEventListener('DOMContentLoaded', function () {
     render();
   })();
 
+  // --- Tier card bullet-list accordion (mobile only; CSS keeps the list
+  // permanently expanded above the 768px breakpoint regardless of this) ---
+  (function () {
+    var toggles = document.querySelectorAll('[data-tier-features-toggle]');
+    if (!toggles.length) return;
+
+    toggles.forEach(function (btn) {
+      var list = document.getElementById(btn.getAttribute('aria-controls'));
+      if (!list) return;
+      var arrow = btn.querySelector('[data-toggle-arrow]');
+
+      btn.addEventListener('click', function () {
+        var isOpen = list.classList.toggle('is-expanded');
+        btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        if (arrow) arrow.textContent = isOpen ? '↑' : '↓';
+      });
+    });
+  })();
+
+  // --- Mobile segmented card for the comparison table. Reads the real
+  // table's own cells so the collapsed mobile view and the desktop table
+  // can never drift out of sync with each other. ---
+  (function () {
+    var table = document.querySelector('.comparison-table');
+    var container = document.querySelector('[data-mobile-comparison]');
+    if (!table || !container) return;
+
+    var headRow = table.querySelector('thead tr');
+    if (!headRow) return;
+
+    var columns = [];
+    Array.prototype.slice.call(headRow.children).forEach(function (cell, index) {
+      if (index === 0) return; // the "Dimension" header, not a data column
+      var isKuma = cell.classList.contains('col-kuma');
+      var titleEl = isKuma ? cell.querySelector('.kuma-title-header') : null;
+      columns.push({
+        index: index,
+        label: titleEl ? titleEl.textContent.trim() : cell.textContent.trim(),
+        isKuma: isKuma
+      });
+    });
+
+    var rows = Array.prototype.slice.call(table.querySelectorAll('tbody tr')).map(function (tr) {
+      var cells = Array.prototype.slice.call(tr.children);
+      return {
+        dimension: cells[0] ? cells[0].textContent.trim() : '',
+        values: cells.map(function (cell) { return cell.textContent.trim(); })
+      };
+    });
+
+    if (!columns.length || !rows.length) return;
+
+    var pillsEl = document.createElement('div');
+    pillsEl.className = 'mobile-segment-pills';
+    pillsEl.setAttribute('role', 'tablist');
+    pillsEl.setAttribute('aria-label', 'Compare by');
+
+    var cardEl = document.createElement('div');
+    cardEl.className = 'mobile-matrix-card';
+
+    function renderCard(col) {
+      cardEl.innerHTML = '';
+      rows.forEach(function (row) {
+        var rowEl = document.createElement('div');
+        rowEl.className = 'mobile-matrix-row';
+
+        var dim = document.createElement('span');
+        dim.className = 'matrix-dimension';
+        dim.textContent = row.dimension;
+
+        var val = document.createElement('p');
+        val.className = 'matrix-value';
+        val.textContent = row.values[col.index] || '';
+
+        rowEl.appendChild(dim);
+        rowEl.appendChild(val);
+        cardEl.appendChild(rowEl);
+      });
+    }
+
+    function activate(col, btn) {
+      Array.prototype.slice.call(pillsEl.children).forEach(function (pill) {
+        pill.classList.remove('active');
+        pill.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      renderCard(col);
+    }
+
+    // Kuma leads the pill row and is active by default; the comparison
+    // columns follow in their original table order.
+    var ordered = columns.slice().sort(function (a, b) { return (b.isKuma ? 1 : 0) - (a.isKuma ? 1 : 0); });
+
+    ordered.forEach(function (col, i) {
+      var btn = document.createElement('button');
+      btn.type = 'button';
+      btn.className = 'segment-pill';
+      btn.setAttribute('role', 'tab');
+      btn.setAttribute('aria-selected', 'false');
+      btn.textContent = col.label;
+      btn.addEventListener('click', function () { activate(col, btn); });
+      pillsEl.appendChild(btn);
+      if (i === 0) activate(col, btn);
+    });
+
+    container.appendChild(pillsEl);
+    container.appendChild(cardEl);
+  })();
+
+  // --- Mobile sticky thumb-zone CTA bar: revealed once the user has
+  // scrolled past the hero, and nudged above the cookie-consent banner
+  // whenever both are visible at once so the two fixed bottom bars never
+  // overlap. ---
+  (function () {
+    var stickyBar = document.getElementById('mobileStickyBar');
+    var heroEl = document.querySelector('.hero');
+    var cookieBannerEl = document.getElementById('cookie-banner');
+    if (!stickyBar || !heroEl) return;
+
+    var ticking = false;
+
+    function updateStickyBar() {
+      ticking = false;
+
+      if (window.innerWidth > 768) {
+        stickyBar.classList.remove('is-visible');
+        document.body.classList.remove('has-mobile-sticky-cta');
+        stickyBar.setAttribute('aria-hidden', 'true');
+        stickyBar.style.bottom = '';
+        return;
+      }
+
+      var past = window.scrollY > heroEl.offsetHeight * 0.75;
+      stickyBar.classList.toggle('is-visible', past);
+      document.body.classList.toggle('has-mobile-sticky-cta', past);
+      stickyBar.setAttribute('aria-hidden', past ? 'false' : 'true');
+
+      var bannerShowing = cookieBannerEl && cookieBannerEl.classList.contains('show');
+      stickyBar.style.bottom = bannerShowing ? cookieBannerEl.offsetHeight + 'px' : '0';
+    }
+
+    function onScrollOrResize() {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(updateStickyBar);
+    }
+
+    window.addEventListener('scroll', onScrollOrResize, { passive: true });
+    window.addEventListener('resize', onScrollOrResize);
+
+    if (cookieBannerEl && window.MutationObserver) {
+      new MutationObserver(updateStickyBar).observe(cookieBannerEl, { attributes: true, attributeFilter: ['class'] });
+    }
+
+    updateStickyBar();
+  })();
+
 });

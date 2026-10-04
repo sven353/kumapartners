@@ -411,7 +411,6 @@
         <h2>Not outside theorists.<br>Operators inside the room.</h2>
         <p style="max-width:620px; font-size:1.05rem; line-height:1.6; color:rgba(26,26,26,.78); margin-bottom:32px;">We embed battle-tested former CEOs and operators directly inside your leadership room to dismantle friction, restore decision velocity, and protect runway. Zero theoretical slide decks. Zero open-ended retainers.</p>
       </div>
-      <div class="mobile-scroll-hint" aria-hidden="true">&larr; Swipe to compare &rarr;</div>
       <div class="comparison-matrix-wrapper">
         <table class="comparison-table">
           <thead>
@@ -447,6 +446,7 @@
           </tbody>
         </table>
       </div>
+      <div class="mobile-comparison-container" data-mobile-comparison></div>
     </div>
   </section>
 
@@ -519,7 +519,8 @@
           <div class="tier-label">Tier 1 · The door-opener</div>
           <h3>The 14-Day Leadership Friction Scan</h3>
           <p>8–10 confidential executive interviews, team communication pulse check, and a facilitated C-suite/board debrief.</p>
-          <ul>
+          <button type="button" class="tier-cta-sub tier-features-toggle" data-tier-features-toggle aria-expanded="false" aria-controls="tier-1-features">What it surfaces <span data-toggle-arrow>↓</span></button>
+          <ul class="tier-features" id="tier-1-features">
             <li>Surfaces normalized friction patterns and cross-functional silos</li>
             <li>Identifies decision bottlenecks and unaddressed board exposure</li>
             <li>Delivers a concrete 90-day execution roadmap (no passive slide decks)</li>
@@ -551,7 +552,8 @@
           <div class="tier-label">Tier 2 · The intervention</div>
           <h3>The 60–90 Day Executive Alignment Sprint</h3>
           <p>Hands-on co-founder mediation, executive team restructuring, decision-governance redesign, and cross-functional facilitation.</p>
-          <ul>
+          <button type="button" class="tier-cta-sub tier-features-toggle" data-tier-features-toggle aria-expanded="false" aria-controls="tier-2-features">What it surfaces <span data-toggle-arrow>↓</span></button>
+          <ul class="tier-features" id="tier-2-features">
             <li>Rebuilt operating cadences the leadership team actually keeps</li>
             <li>Binding behavioral &amp; governance compacts between C-suite peers</li>
             <li>Unifies bifurcated leadership teams post-acquisition under a single decision framework</li>
@@ -568,7 +570,8 @@
           <div class="tier-label">Tier 3 · The anchor</div>
           <h3>Strategic Scaling Advisory</h3>
           <p>Embedded strategic counsel and executive sparring for CEOs and key executives through hyper-growth or M&amp;A transitions.</p>
-          <ul>
+          <button type="button" class="tier-cta-sub tier-features-toggle" data-tier-features-toggle aria-expanded="false" aria-controls="tier-3-features">What it surfaces <span data-toggle-arrow>↓</span></button>
+          <ul class="tier-features" id="tier-3-features">
             <li>Confidential sounding board for fundraising and capital allocation</li>
             <li>Direct partner access between board cycles, not just quarterly reviews</li>
             <li>Continuity through high-stakes inflection points that break newer advisors</li>
@@ -1721,6 +1724,10 @@
     </div>
   </div>
 </div>
+
+<aside class="mobile-sticky-cta" id="mobileStickyBar" aria-hidden="true">
+  <button type="button" class="mobile-cta-btn" data-open-scan-modal>Request a Confidential Briefing &rarr;</button>
+</aside>
 
 <div class="cookie-banner" id="cookie-banner">
   <div class="wrap">
