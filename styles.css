@@ -343,41 +343,47 @@ header.site.scrolled .nav{padding:10px 0;}
 #approach{background:var(--cream); border-bottom:1px solid #E2E8F0;}
 
 /* Comparison table */
-.compare{width:100%; border-collapse:collapse; margin-top:24px; background:#fff;}
-.compare th, .compare td{
-  text-align:left; padding:18px 22px; border:1px solid rgba(11,21,35,.12); vertical-align:top; font-size:.95rem;
+.comparison-matrix-wrapper{overflow-x:auto; padding:28px 0 4px 4px;}
+.comparison-table{
+  width:100%; border-collapse:separate; border-spacing:0; margin-top:0; background:#fff;
+  border-radius:var(--radius-md); overflow:hidden;
 }
-.compare th{
+.comparison-table th, .comparison-table td{
+  text-align:left; padding:18px 22px; border:1px solid var(--hairline-color); vertical-align:middle; font-size:.95rem;
+  border-left:none; border-top:none;
+}
+.comparison-table th:first-child, .comparison-table td:first-child{border-left:1px solid var(--hairline-color);}
+.comparison-table thead th{border-top:1px solid var(--hairline-color);}
+.comparison-table .col-dimension{
+  font-family:'Montserrat',Arial,sans-serif; font-weight:600; color:var(--navy); background:rgba(29,111,138,.06);
+  white-space:nowrap; width:18%;
+}
+.comparison-table thead .col-dimension{background:rgba(29,111,138,.08); white-space:normal;}
+.comparison-table .col-competitor{width:27%; color:#738A96;}
+.comparison-table thead .col-competitor{
   font-family:'Montserrat',Arial,sans-serif; font-weight:600; color:var(--navy); background:rgba(29,111,138,.08);
 }
-.compare td.kuma, .compare th.kuma{
-  background:#fff; color:var(--navy);
-  box-shadow:inset 2px 0 0 var(--navy), inset -2px 0 0 var(--navy);
-  position:relative;
+.comparison-table .col-kuma{
+  width:28%; background:#fff; color:var(--navy); font-weight:600; line-height:1.65;
+  border-left:2px solid var(--teal); border-right:2px solid var(--teal);
 }
-.compare th.kuma{
-  color:var(--navy); font-weight:700; font-size:1.15rem; padding-top:32px;
-  box-shadow:inset 2px 0 0 var(--navy), inset -2px 0 0 var(--navy), inset 0 2px 0 var(--navy);
-  border-top-left-radius:8px; border-top-right-radius:8px;
+.comparison-table thead .col-kuma{
+  text-align:center; padding-top:16px; padding-bottom:16px;
+  border-top:2px solid var(--teal); border-top-left-radius:var(--radius-md); border-top-right-radius:var(--radius-md);
 }
-.compare td.kuma p, .compare td.kuma{line-height:1.65; font-weight:600;}
-.compare tbody tr:last-child td.kuma{
-  box-shadow:inset 2px 0 0 var(--navy), inset -2px 0 0 var(--navy), inset 0 -2px 0 var(--navy);
-  border-bottom-left-radius:8px; border-bottom-right-radius:8px;
+.comparison-table tbody tr:last-child .col-kuma{
+  border-bottom:2px solid var(--teal); border-bottom-left-radius:var(--radius-md); border-bottom-right-radius:var(--radius-md);
 }
-.th-badge{
-  position:absolute; top:-14px; left:50%; transform:translateX(-50%);
-  background:var(--teal); color:#fff; white-space:nowrap;
+.kuma-badge-header{
+  display:block; background:var(--teal); color:#fff; white-space:nowrap;
   font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.62rem;
   letter-spacing:.06em; text-transform:uppercase; padding:6px 14px; border-radius:var(--radius-pill);
-  box-shadow:0 6px 16px -6px rgba(11,21,35,.4); z-index:2;
+  margin:0 auto 10px; width:fit-content;
 }
-.compare-wrap{overflow-x:auto; padding:20px 0 4px 4px;}
+.kuma-title-header{
+  display:block; font-family:'Montserrat',Arial,sans-serif; font-weight:700; font-size:1.15rem; color:var(--navy);
+}
 .mobile-scroll-hint{display:none;} /* mobile-only utility; shown at <=768px, see media query below */
-.compare td.row-label{
-  font-family:'Montserrat',Arial,sans-serif; font-weight:600; color:var(--navy); background:rgba(29,111,138,.06);
-  white-space:nowrap;
-}
 
 /* Kuma Operating System (KOS) */
 .section-system{background:var(--cream); padding:100px 0; border-top:1px solid var(--hairline-color); border-bottom:1px solid var(--hairline-color);}
@@ -1506,13 +1512,13 @@ footer.site{background:var(--cream); padding:60px 0 40px; border-top:1px solid r
     letter-spacing:.06em; text-transform:uppercase; color:var(--teal);
     margin-top:18px;
   }
-  .compare-wrap{
+  .comparison-matrix-wrapper{
     -webkit-overflow-scrolling:touch;
   }
-  .compare th:not(:first-child), .compare td:not(.row-label){
+  .comparison-table th:not(.col-dimension), .comparison-table td:not(.col-dimension){
     min-width:180px;
   }
-  .compare thead th:first-child, .compare td.row-label{
+  .comparison-table thead .col-dimension, .comparison-table tbody .col-dimension{
     position:sticky; left:0; z-index:2;
     background:var(--cream);
     box-shadow:2px 0 6px rgba(0,0,0,.06);
