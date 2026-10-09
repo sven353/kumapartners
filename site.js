@@ -331,6 +331,22 @@ document.addEventListener('DOMContentLoaded', function () {
     }).filter(Boolean).join('&');
   }
 
+  // --- Anti-bot checks shared by every Netlify form: a hidden honeypot field (company_tax_id) that
+  // humans never see, plus a minimum time between the form becoming usable (page load, or the
+  // moment its modal opens) and the submit. Nothing is shown to a human, and no captcha. ---
+  var MIN_FORM_FILL_MS = 2500;
+
+  function resetFormReadyTime(form) {
+    if (form) form.setAttribute('data-ready-at', String(Date.now()));
+  }
+
+  function looksLikeBot(form) {
+    var trap = form.querySelector('[name="company_tax_id"]');
+    if (trap && trap.value.trim() !== '') return true;
+    var readyAt = parseInt(form.getAttribute('data-ready-at') || '0', 10);
+    return readyAt > 0 && (Date.now() - readyAt) < MIN_FORM_FILL_MS;
+  }
+
   // --- Shared helper: wire a Netlify form to submit via fetch() with inline success/error states ---
   // `validate`, if given, runs before the network request; returning false aborts the submit
   // (used by the scan form to block free-email domains without duplicating this whole flow).
@@ -339,10 +355,24 @@ document.addEventListener('DOMContentLoaded', function () {
     var submitBtn = form.querySelector('[data-contact-submit], [data-debrief-submit], [data-scan-submit]');
     var btnLabel = submitBtn ? submitBtn.querySelector('[data-btn-label]') : null;
     var originalBtnText = btnLabel ? btnLabel.textContent : '';
+    resetFormReadyTime(form);
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (typeof validate === 'function' && !validate()) return;
+
+      // Anti-bot: a filled honeypot or an implausibly fast submit never reaches the network.
+      // The visitor gets the normal success state so a bot has no error signal to retry on.
+      if (looksLikeBot(form)) {
+        form.hidden = true;
+        if (successEl) {
+          successEl.hidden = false;
+          successEl.focus();
+        }
+        if (typeof onSuccess === 'function') onSuccess();
+        return;
+      }
+
       if (errorEl) errorEl.hidden = true;
       if (submitBtn) submitBtn.disabled = true;
       if (btnLabel) btnLabel.textContent = 'Sending…';
@@ -723,6 +753,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function openModal(triggerEl) {
       lastFocusedEl = triggerEl || document.activeElement;
+      resetFormReadyTime(scanForm);
       scanOverlay.classList.add('open');
       scanOverlay.hidden = false;
       document.body.classList.add('scan-modal-locked');
@@ -832,6 +863,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function debriefOpenModal(triggerEl) {
       debriefLastFocusedEl = triggerEl || document.activeElement;
+      resetFormReadyTime(debriefForm);
       debriefOverlay.classList.add('open');
       debriefOverlay.hidden = false;
       document.body.classList.add('debrief-modal-locked');

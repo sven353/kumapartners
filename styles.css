@@ -849,6 +849,14 @@ header.site.scrolled .nav{padding:10px 0;}
 .cookie-banner a{color:var(--cream); text-decoration:underline;}
 .cookie-actions{display:flex; gap:12px; flex-shrink:0;}
 
+/* Anti-bot honeypot: kept in the layout flow's blind spot (zero-size, absolutely positioned, clipped)
+   rather than display:none, because many bots skip display:none fields but still fill anything that
+   merely looks like a normal input. Humans, screen readers and tab order never reach it. */
+.hp-wrapper{
+  position:absolute; top:0; left:0; width:0; height:0; margin:0; padding:0; border:0;
+  opacity:0; overflow:hidden; pointer-events:none; z-index:-1;
+}
+
 /* Mobile sticky thumb-zone CTA bar */
 .mobile-sticky-cta{display:none;} /* mobile-only; see media query below, offsets above the cookie banner in site.js */
 .cookie-actions button{
