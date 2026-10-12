@@ -1,5 +1,7 @@
 Vendored brand marks for the partners page.
 
+Two sources. The SVGs come from Simple Icons (below). The PNGs (BBVA, Bkstg, BSH, CaixaBank, Coca-Cola, ICF, Michelin, Microsoft, Santander, Shiseido, Talkspace) were supplied by Kuma as raster images, cropped to the artwork, converted to a single slate tone with the luminance mapped to transparency, and exported at 2x display size.
+
 Source: Simple Icons (CC0 1.0), via the @iconify-json/simple-icons package. Each file is a single path, viewBox cropped to the artwork, fill baked to #5F7380 to match the site's muted slate.
 
 The marks remain trademarks of their owners and are shown only to indicate where a partner has worked.

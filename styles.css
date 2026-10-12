@@ -646,13 +646,12 @@ header.site.scrolled .nav{padding:10px 0;}
 .social-row a:hover{color:var(--teal);}
 
 /* Client / background marks (monochrome)
-   Three kinds of item share one row: vendored SVG logos (img.client-logo),
+   Three kinds of item share one row: vendored logos (img.client-logo, SVG or PNG, sized by their width/height attributes),
    typographic names where no vetted logo exists (.client-name) and
    non-company credentials (.credential-tag). All sit on one optical baseline. */
 .client-badges{display:flex; flex-wrap:wrap; align-items:center; gap:12px 20px; margin-top:16px;}
-.client-badges .client-logo{display:block; height:20px; width:auto; max-width:88px; flex:0 0 auto;}
-.client-badges .client-logo--wide{height:16px;}
-.client-badges .client-logo--script{height:22px; max-width:64px;}
+.client-badges .client-logo{display:block; flex:0 0 auto; max-width:100%; height:auto; opacity:.85; transition:opacity .2s ease;}
+.client-badges .client-logo:hover{opacity:1;}
 .client-badges .client-name{
   font-family:'Lato',Arial,sans-serif; font-size:.82rem; font-weight:700; letter-spacing:.01em; line-height:20px;
   color:#5F7380; white-space:nowrap;
