@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (timeInput) timeInput.value = new Date().toISOString();
     if (errorEl) errorEl.hidden = true;
     var original = submitBtn ? submitBtn.innerHTML : '';
-    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Sending…'; }
+    if (submitBtn) { submitBtn.disabled = true; submitBtn.textContent = 'Transmitting debrief\u2026'; }
 
     fetch('/', {
       method: 'POST',

@@ -18,11 +18,13 @@
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
 <header class="review-minimal-header">
-  <div class="wrap review-header-flex">
-    <a href="/" class="logo" title="Kuma Partners homepage">
-      <img width="768" height="173" src="assets/logo-lockup.png" alt="Kuma Partners">
-    </a>
-    <span class="review-badge">Confidential<span class="review-badge-long"> leadership portal</span></span>
+  <div class="review-header-flex">
+    <div class="co-brand-lockup">
+      <a href="/" class="co-brand-kuma" title="Kuma Partners homepage"><img src="assets/logo-lockup.png" alt="Kuma Partners" width="115" height="26"></a>
+      <span class="co-brand-sep" aria-hidden="true">&times;</span>
+      <img src="assets/logos/constellr.png" alt="constellr" class="co-brand-client" width="75" height="22">
+    </div>
+    <span class="review-badge"><span class="status-dot" aria-hidden="true"></span>Confidential<span class="review-badge-long"> executive portal</span></span>
   </div>
 </header>
 
@@ -33,9 +35,20 @@
       <div class="review-header-wrapper">
         <div class="eyebrow">Confidential engagement debrief</div>
         <h1 id="dynamic-review-heading">constellr executive debrief.</h1>
+        <p class="review-subtitle">A 90-second reflection on strategic clarity, operational velocity and organisational momentum.</p>
+
         <div class="intro-message-card">
           <p class="intro-lead">Thank you for the focus, rigour and openness you brought to our sessions.</p>
-          <p class="intro-body">Leading a company through frontier-scale growth takes strategic clarity and the courage to hold principled tension. Working alongside the constellr leadership team has been a privilege. This 90-second debrief captures your view of the decision speed, behavioural shifts and momentum we built together.</p>
+          <p class="intro-body">Leading through frontier-scale growth demands ruthless strategic clarity and the courage to hold principled tension. Working alongside the leadership team at constellr has been a privilege. As we conclude this chapter, your reflections directly inform our ongoing synthesis.</p>
+        </div>
+
+        <div class="anonymity-protocol-card">
+          <div class="protocol-header">
+            <svg class="protocol-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5c0 4.5-3 8.3-7 10-4-1.7-7-5.5-7-10V6l7-3z"></path><path d="M9 12l2 2 4-4"></path></svg>
+            <span class="protocol-title">Executive discretion and anonymity protocol</span>
+          </div>
+          <p class="protocol-text">Individual responses are held in strict confidence by the Kuma Partners managing partners. Results are synthesised into an aggregated, anonymous readout for constellr leadership that highlights systemic patterns, decision velocity and team alignment.</p>
+          <p class="protocol-text protocol-emphasis">Your name and role are recorded only to verify participation and prevent duplicate submissions. Individual scores and private reflections are never attributed.</p>
         </div>
       </div>
 
@@ -51,7 +64,7 @@
 
           <div class="review-identity-grid">
             <div class="form-group">
-              <label for="field-name" class="input-label">Your name</label>
+              <label for="field-name" class="input-label">Executive name <span class="label-hint">for participation verification only</span></label>
               <input type="text" id="field-name" name="executive_name" required autocomplete="name" placeholder="First and last name" class="form-input">
             </div>
             <div class="form-group">
@@ -81,16 +94,16 @@
         <legend class="review-question-label" id="q2-label">2. Behavioural shift and team alignment</legend>
         <p class="question-explainer">How visible is the shift in your leadership behaviour and in alignment with your executive peers?</p>
         <div class="scale-selector-strip" role="radiogroup" aria-labelledby="q2-label">
-          <span class="scale-option"><input type="radio" id="q2-1" name="q2_behavioural_shift" value="1" required><label for="q2-1">1</label></span>
-          <span class="scale-option"><input type="radio" id="q2-2" name="q2_behavioural_shift" value="2"><label for="q2-2">2</label></span>
-          <span class="scale-option"><input type="radio" id="q2-3" name="q2_behavioural_shift" value="3"><label for="q2-3">3</label></span>
-          <span class="scale-option"><input type="radio" id="q2-4" name="q2_behavioural_shift" value="4"><label for="q2-4">4</label></span>
-          <span class="scale-option"><input type="radio" id="q2-5" name="q2_behavioural_shift" value="5"><label for="q2-5">5</label></span>
-          <span class="scale-option"><input type="radio" id="q2-6" name="q2_behavioural_shift" value="6"><label for="q2-6">6</label></span>
-          <span class="scale-option"><input type="radio" id="q2-7" name="q2_behavioural_shift" value="7"><label for="q2-7">7</label></span>
-          <span class="scale-option"><input type="radio" id="q2-8" name="q2_behavioural_shift" value="8"><label for="q2-8">8</label></span>
-          <span class="scale-option"><input type="radio" id="q2-9" name="q2_behavioural_shift" value="9"><label for="q2-9">9</label></span>
-          <span class="scale-option"><input type="radio" id="q2-10" name="q2_behavioural_shift" value="10"><label for="q2-10">10</label></span>
+          <span class="scale-option"><input type="radio" id="q2-1" name="q2_behaviour_alignment" value="1" required><label for="q2-1">1</label></span>
+          <span class="scale-option"><input type="radio" id="q2-2" name="q2_behaviour_alignment" value="2"><label for="q2-2">2</label></span>
+          <span class="scale-option"><input type="radio" id="q2-3" name="q2_behaviour_alignment" value="3"><label for="q2-3">3</label></span>
+          <span class="scale-option"><input type="radio" id="q2-4" name="q2_behaviour_alignment" value="4"><label for="q2-4">4</label></span>
+          <span class="scale-option"><input type="radio" id="q2-5" name="q2_behaviour_alignment" value="5"><label for="q2-5">5</label></span>
+          <span class="scale-option"><input type="radio" id="q2-6" name="q2_behaviour_alignment" value="6"><label for="q2-6">6</label></span>
+          <span class="scale-option"><input type="radio" id="q2-7" name="q2_behaviour_alignment" value="7"><label for="q2-7">7</label></span>
+          <span class="scale-option"><input type="radio" id="q2-8" name="q2_behaviour_alignment" value="8"><label for="q2-8">8</label></span>
+          <span class="scale-option"><input type="radio" id="q2-9" name="q2_behaviour_alignment" value="9"><label for="q2-9">9</label></span>
+          <span class="scale-option"><input type="radio" id="q2-10" name="q2_behaviour_alignment" value="10"><label for="q2-10">10</label></span>
         </div>
         <div class="scale-anchor-labels" aria-hidden="true"><span>1 = Not noticeable</span><span>10 = Visible across the team</span></div>
       </fieldset>
@@ -112,7 +125,7 @@
         <div class="scale-anchor-labels" aria-hidden="true"><span>1 = Low return</span><span>10 = Exceptional return</span></div>
       </fieldset>
       <fieldset class="review-field-group">
-        <legend class="review-question-label" id="q4-label">4. Sustaining the momentum</legend>
+        <legend class="review-question-label" id="q4-label">4. Sustaining momentum and team expansion</legend>
         <p class="question-explainer">How important is it to sustain this momentum, through continued one-to-one sparring or by cascading these frameworks across the leadership team?</p>
         <div class="scale-selector-strip" role="radiogroup" aria-labelledby="q4-label">
           <span class="scale-option"><input type="radio" id="q4-1" name="q4_momentum" value="1" required><label for="q4-1">1</label></span>
@@ -150,22 +163,22 @@
           <div class="review-field-group review-field-last">
             <label for="field-qualitative" class="review-question-label">6. Key breakthrough <span class="optional-tag">optional</span></label>
             <p class="question-explainer">What was the single most valuable mindset shift, operating principle or habit you adopted?</p>
-            <textarea id="field-qualitative" name="breakthrough_reflection" rows="4" placeholder="A decision unblocked, a habit shifted, a dynamic resolved." class="form-textarea"></textarea>
+            <textarea id="field-qualitative" name="key_breakthrough" rows="4" placeholder="A decision unblocked, a habit shifted, a dynamic resolved." class="form-textarea"></textarea>
           </div>
 
           <p class="review-error" data-review-error role="alert" hidden>Something went wrong sending your debrief. Please try again, or email <a href="mailto:sven@kuma.partners">sven@kuma.partners</a>.</p>
           <button type="submit" class="btn-submit-debrief" data-review-submit>Submit debrief &rarr;</button>
-          <p class="review-privacy-note">Your answers go only to the Kuma Partners managing partners and are handled under our <a href="privacy.html">privacy policy</a>.</p>
+          <p class="review-privacy-note"><svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Sent over an encrypted connection and handled in strict confidence by the Kuma Partners managing partners, under our <a href="privacy.html">privacy policy</a>.</p>
         </form>
 
         <div id="review-success-panel" class="review-success-panel" tabindex="-1" hidden>
           <div class="success-icon-badge" aria-hidden="true">&#10003;</div>
           <h2 class="success-title">Thank you for the candid perspective.</h2>
-          <p class="success-message">Leadership clarity is an ongoing discipline, not a one-off milestone. Your reflections directly shape how we support leaders through non-linear scale.</p>
-          <div class="expansion-bridge-card">
+          <p class="success-message">Your reflection has been recorded. Individual entries stay strictly confidential with Kuma Partners. Observations reach the constellr executive team only in an aggregated, anonymous readout of systemic patterns and momentum.</p>
+          <div class="upsell-bridge-block">
             <span class="bridge-tag">Organisational expansion</span>
             <h3 class="bridge-heading">Sustaining team velocity and organisational alignment</h3>
-            <p class="bridge-text">Individual sparring creates personal clarity. Cascading it across co-founders and C-suite peers removes executive drag across the whole company.</p>
+            <p class="bridge-text">Individual sparring unlocks personal focus. Cascading these frameworks across co-founders and executive peers removes cross-functional drag across the whole business.</p>
             <div class="bridge-actions">
               <a href="index.html#offsites" class="btn btn-primary">Explore leadership offsites and team operating systems &rarr;</a>
               <a href="/" class="btn-link">Return to the Kuma Partners overview</a>
