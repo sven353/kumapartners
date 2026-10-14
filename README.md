@@ -82,6 +82,13 @@ All colors are CSS custom properties defined once on `:root` in `styles.css`.
 | `--teal` | `#1D6F8A` | Accent: eyebrows, links, icons, hover states |
 | `--ink` | `#1A1A1A` | Body text |
 | `--shadow-card-subtle` / `--shadow-card-hover` | soft navy shadows | Lift for white cards sitting on a chalk section |
+| `--hairline-color` / `--hairline-subtle` | `rgba(11,21,35,.08)` / `.05` | Every 1px border and divider (semi-transparent ink, so it reads the same on white and chalk) |
+
+Border weights: every line is 1px, with two exceptions, the 1.5px teal outline on the Kuma column of the comparison table and the 2px teal outline on the featured tier card. Eyebrow dashes are 14px by 1.5px.
+
+Headings are in British sentence case. Product, tool and people names keep their capitals (the 14-Day Leadership Friction Scan, Friction Matrix, Kuma Operating System). The only two booking calls to action are "Initiate a 14-Day Scan" and "Book a Partner Debrief".
+
+Every page carries the same header navigation as the homepage, including the mobile menu toggle. On subpages the links point to `index.html#section`, and Team points to `partners.html`. If you change the homepage menu, copy it to the other five pages.
 
 Homepage light sections alternate pure white and chalk so no two neighbours share a tone: hero white, `.proof` navy, `#problem` chalk, `#approach` white, `#partners` chalk, `#system` white, `#engagements` chalk, `#case-studies` white, `#scorecard` dark, `#investors` chalk, `#faq` white, `#fit` chalk, `#contact` dark, `.global-strip` white, footer dark. Cards placed on a chalk section are white with a hairline border and `--shadow-card-subtle`. If you add or move a section, keep the alternation; the order is also written as a comment above `#problem` in `styles.css`.
 
