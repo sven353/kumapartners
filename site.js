@@ -388,7 +388,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
       if (errorEl) errorEl.hidden = true;
       if (submitBtn) submitBtn.disabled = true;
-      if (btnLabel) btnLabel.textContent = 'Sending…';
+      if (btnLabel) { originalBtnText = btnLabel.textContent; btnLabel.textContent = 'Sending…'; }
 
       fetch('/', {
         method: 'POST',
@@ -419,8 +419,26 @@ document.addEventListener('DOMContentLoaded', function () {
     wireAjaxForm(contactForm, contactSuccess, contactError);
   }
 
+  // --- Intake track: the contact form's "14-Day Scan" / "Partner Debrief" selector. It submits as the
+  // intake_track field and relabels the submit button. Path B entry points (investor, executive briefing,
+  // offsite, assessment in investor mode, the Standards of Fit link) switch it to Partner Debrief. ---
+  var INTAKE_LABELS = { scan: 'Initiate a 14-Day Scan \u2192', advisory: 'Book a Partner Debrief \u2192' };
+  function setIntakeTrack(track) {
+    var radios = document.querySelectorAll('input[name="intake_track"]');
+    radios.forEach(function (r) { r.checked = r.getAttribute('data-track') === track; });
+    var label = document.querySelector('[data-contact-submit] [data-btn-label]');
+    if (label && !document.querySelector('[data-contact-submit]').disabled) label.textContent = INTAKE_LABELS[track] || INTAKE_LABELS.scan;
+  }
+  document.querySelectorAll('input[name="intake_track"]').forEach(function (r) {
+    r.addEventListener('change', function () { if (r.checked) setIntakeTrack(r.getAttribute('data-track')); });
+  });
+  document.querySelectorAll('[data-intake-track]').forEach(function (el) {
+    el.addEventListener('click', function () { setIntakeTrack(el.getAttribute('data-intake-track')); });
+  });
+
   // --- Investor CTA: pre-select the contact form's "What's your role?" field ---
   function selectInvestorPersona() {
+    setIntakeTrack('advisory');
     var roleSelect = document.getElementById('role');
     if (roleSelect) roleSelect.value = 'investor';
     var contactSection = document.getElementById('contact');
@@ -437,6 +455,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   // --- Executive Briefing CTA (from partners.html): bring the role field into focus ---
   function focusBriefingPersona() {
+    setIntakeTrack('advisory');
     var contactSection = document.getElementById('contact');
     if (contactSection) contactSection.scrollIntoView({ behavior: 'smooth' });
     var roleSelect = document.getElementById('role');
@@ -456,6 +475,7 @@ document.addEventListener('DOMContentLoaded', function () {
   // --- Offsite module CTA: pre-select the contact form's "What brought you here?" field ---
   document.querySelectorAll('[data-offsite-cta]').forEach(function (btn) {
     btn.addEventListener('click', function () {
+      setIntakeTrack('advisory');
       var broughtHereSelect = document.getElementById('brought-here');
       if (broughtHereSelect) {
         broughtHereSelect.value = 'We need a high-stakes leadership offsite';
@@ -688,6 +708,7 @@ document.addEventListener('DOMContentLoaded', function () {
           return;
         }
         e.stopImmediatePropagation();
+        setIntakeTrack('advisory');
         var emailField = document.getElementById('email');
         var companyField = document.getElementById('company');
         var roleField = document.getElementById('role');

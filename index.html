@@ -1468,7 +1468,7 @@
 
       <div class="fit-transition">
         <p>If your leadership team meets this standard of readiness, we can help.</p>
-        <a href="#contact" class="fit-transition-link">Schedule a conversation ↓</a>
+        <a href="#contact" class="fit-transition-link" data-intake-track="advisory">Schedule a conversation ↓</a>
       </div>
     </div>
   </section>
@@ -1478,9 +1478,9 @@
     <div class="wrap">
       <div class="contact-grid">
         <div class="contact-copy">
-          <div class="eyebrow">Get in touch</div>
-          <h2>Unblock your executive execution.</h2>
-          <p>Schedule a confidential 30-minute introductory conversation with a Kuma Managing Partner to assess your leadership team's current friction points.</p>
+          <div class="eyebrow">Confidential C-Suite Intake</div>
+          <h2>Stop executive drag from stalling your growth.</h2>
+          <p>Whether you are resolving co-founder gridlock, preparing a post-M&amp;A leadership team or unblocking decision latency, we begin with diagnostic telemetry.</p>
           <ul class="contact-reassurance">
             <li><strong>Direct Partner Access:</strong> No junior sales reps or account managers. You speak directly with Sven or Vincent.</li>
             <li><strong>Strict Confidentiality:</strong> All initial diagnostics and conversations are covered under mutual non-disclosure.</li>
@@ -1529,6 +1529,17 @@
               <option>Board / CEO / governance dynamics need attention</option>
               <option>I have a specific situation I want to discuss</option>
             </select>
+            <fieldset class="intake-track">
+              <legend class="intake-track-legend">What would you like to book?</legend>
+              <label class="intake-track-option">
+                <input type="radio" name="intake_track" value="14-Day Scan" data-track="scan" checked>
+                <span>14-Day Scan</span>
+              </label>
+              <label class="intake-track-option">
+                <input type="radio" name="intake_track" value="Partner Debrief" data-track="advisory">
+                <span>Partner Debrief</span>
+              </label>
+            </fieldset>
             <div class="field">
               <label for="email">Work email</label>
               <input type="email" id="email" name="email" required placeholder="name@company.com">
@@ -1546,7 +1557,7 @@
               <input type="text" name="company_tax_id" id="hp-tax-id-contact" tabindex="-1" autocomplete="off" value="">
             </div>
             <button type="submit" class="btn btn-primary" data-contact-submit>
-              <span data-btn-label>Book a Partner Debrief &rarr;</span>
+              <span data-btn-label>Initiate a 14-Day Scan &rarr;</span>
             </button>
             <p class="contact-form-microcopy">Strict confidentiality. Direct partner review within 24 hours.</p>
             <p class="contact-form-error" data-contact-error hidden>Something went wrong sending your message. Please try again, or email us directly at <a href="mailto:contact@kuma.partners">contact@kuma.partners</a>.</p>
