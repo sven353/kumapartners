@@ -1,4 +1,5 @@
 # Executive offsites live on their own Netlify site and are served here under /offsite/.
-# The first rule adds the trailing slash so the offsite pages resolve their relative CSS, images and links inside /offsite/.
-/offsite    /offsite/    301!
+# Do not add a rule redirecting /offsite to /offsite/: Netlify treats both as the same
+# path, so such a rule redirects to itself and causes ERR_TOO_MANY_REDIRECTS.
+# The offsite site adds the missing trailing slash itself with a small script.
 /offsite/*  https://offsite.kuma.partners/:splat    200!
