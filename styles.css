@@ -208,9 +208,15 @@ header.site.scrolled .nav{padding:10px 0;}
   letter-spacing:.09em; text-transform:uppercase; color:rgba(251,249,245,.75);
   line-height:1.4; margin:0 0 14px;
 }
-.proof-static-grid{
-  display:flex; flex-wrap:wrap; justify-content:center; align-items:center;
-  gap:28px 56px; max-width:560px; margin:8px auto 0;
+/* 5 over 4: enterprise anchors on top, scale-up and infrastructure leaders below */
+.proof-static-grid{display:flex; flex-direction:column; align-items:center; gap:28px; max-width:880px; margin:18px auto 0;}
+.proof-row{display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:24px 56px; width:100%;}
+.proof-row-bottom{max-width:680px;}
+@media (max-width:639px){
+  /* Phones: both rows flow into one 2-column grid, the ninth logo centred on its own line */
+  .proof-static-grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:26px 20px; justify-items:center; align-items:center;}
+  .proof-row{display:contents;}
+  .proof-row-bottom .static-logo:last-child{grid-column:span 2;}
 }
 .static-logo{display:block; height:auto; max-width:100%; filter:brightness(0) invert(1); opacity:.7; transition:opacity .2s;}
 .static-logo:hover{opacity:1;}
@@ -1050,7 +1056,7 @@ body.scan-modal-locked{overflow:hidden;}
 @media (max-width: 860px){
   .case-docket-panel, .value-grid, .deliverable-grid{grid-template-columns:1fr;}
   .case-docket-panel{gap:28px;}
-  .proof-static-grid{gap:22px 36px;}
+  .proof-row{gap:22px 36px;}
   .cookie-banner .wrap{flex-direction:column; align-items:flex-start;}
   .cookie-actions{width:100%;}
   .cookie-actions button{flex:1;}
