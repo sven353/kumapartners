@@ -1,7 +1,7 @@
 /* =========================================================================
-   The Barcelona Offsite Configurator + landing page — app.js
+   The Barcelona Offsite Configurator + landing page: app.js
    Two independent pieces:
-   1. Shared site chrome (header scroll state, mobile nav toggle) — this is
+   1. Shared site chrome (header scroll state, mobile nav toggle): this is
       the same behavior as the live www.kuma.partners site.js, reproduced
       here rather than linked cross-origin.
    2. The configurator: step data, state, blueprint compilation, and the
