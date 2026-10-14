@@ -44,7 +44,7 @@
   --card-sheen: inset 0 1px 0 rgba(255,255,255,.9), 0 1px 3px rgba(11,21,35,.04);
 
   /* Elevation for white cards sitting on a chalk (--cream) section */
-  --shadow-card-subtle: 0 4px 20px -4px rgba(11,21,35,.04);
+  --shadow-card-subtle: 0 4px 20px -4px rgba(11,21,35,.05);
   --shadow-card-hover: 0 12px 28px -8px rgba(11,21,35,.08);
 
   /* Ambient overhead light for the dark anchor sections (#scorecard, #contact) */
