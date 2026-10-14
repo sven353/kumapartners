@@ -1,5 +1,5 @@
 // Private constellr debrief page (constellr-review.html): URL prefill and Netlify Forms AJAX submit.
-// Personalised link: /constellr-review?name=Max&role=Co-Founder%20%26%20CEO
+// Personalised link: /constellr-review?name=Max&role=Co-Founder%20%26%20CEO&coach=Sven
 document.addEventListener('DOMContentLoaded', function () {
   var params = new URLSearchParams(window.location.search);
   var nameParam = (params.get('name') || '').trim().slice(0, 80);
@@ -32,6 +32,16 @@ document.addEventListener('DOMContentLoaded', function () {
     if (heading) heading.textContent = nameParam + ' · constellr debrief.';
   }
   if (roleParam && roleInput) roleInput.value = roleParam;
+
+  // ?coach=Sven or ?coach=Vincent pre-selects the matching coach (case-insensitive, matches any part of the name)
+  var coachParam = (params.get('coach') || '').trim().toLowerCase();
+  var coachSelect = document.getElementById('field-coach');
+  if (coachParam && coachSelect) {
+    for (var i = 0; i < coachSelect.options.length; i++) {
+      var opt = coachSelect.options[i];
+      if (opt.value && opt.value.toLowerCase().indexOf(coachParam) !== -1) { coachSelect.value = opt.value; break; }
+    }
+  }
 
   if (!form) return;
 

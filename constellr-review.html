@@ -53,24 +53,37 @@
       </div>
 
       <div class="review-card-container">
-        <form name="constellr-executive-debrief" method="POST" action="/constellr-review?submitted=1" data-netlify="true" netlify-honeypot="bot-field" id="constellr-review-form" class="review-form">
-          <input type="hidden" name="form-name" value="constellr-executive-debrief">
+        <form name="constellr-debrief-v3" method="POST" action="/constellr-review?submitted=1" data-netlify="true" netlify-honeypot="bot-field" id="constellr-review-form" class="review-form">
+          <input type="hidden" name="form-name" value="constellr-debrief-v3">
           <p class="review-honeypot" aria-hidden="true"><input name="bot-field" tabindex="-1" autocomplete="off" aria-label="Leave this empty"></p>
 
           <input type="hidden" name="Client Account" value="constellr">
           <input type="hidden" name="Mandate Type" value="Executive coaching and sparring">
-          <input type="hidden" name="Lead Partner" value="Sven Mulfinger">
           <input type="hidden" name="Submission Timestamp" id="field-submission-time">
 
           <div class="review-identity-grid">
-            <div class="form-group">
-              <label for="field-name" class="input-label">Executive Name</label>
-              <span class="label-hint label-hint-below">For participation verification only</span>
+            <div class="identity-field">
+              <div class="label-row">
+                <label for="field-name" class="input-label">Executive Name</label>
+                <span class="field-micro-hint">Confidential verification</span>
+              </div>
               <input type="text" id="field-name" name="Executive Name" required autocomplete="name" placeholder="First and last name" class="form-input">
             </div>
-            <div class="form-group">
-              <label for="field-role" class="input-label">Role or Functional Domain</label>
-              <input type="text" id="field-role" name="Role or Functional Domain" required autocomplete="organization-title" placeholder="e.g. CTO, VP Programme" class="form-input">
+            <div class="identity-field">
+              <div class="label-row">
+                <label for="field-role" class="input-label">Role or Domain</label>
+              </div>
+              <input type="text" id="field-role" name="Role or Domain" required autocomplete="organization-title" placeholder="e.g. CTO, CPO" class="form-input">
+            </div>
+            <div class="identity-field">
+              <div class="label-row">
+                <label for="field-coach" class="input-label">Lead Coach</label>
+              </div>
+              <select id="field-coach" name="Lead Coach" required class="form-input form-select">
+                <option value="" disabled selected>Select coach</option>
+                <option value="Sven Mulfinger">Sven Mulfinger</option>
+                <option value="Vincent Az&eacute;">Vincent Az&eacute;</option>
+              </select>
             </div>
           </div>
 
