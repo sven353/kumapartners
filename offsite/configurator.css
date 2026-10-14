@@ -687,8 +687,8 @@ header.site.scrolled .nav{padding:8px 32px;}
 
 /* =========================================================================
    Section cadence (index.html): backgrounds alternate off-white and white,
-   with the proof strip one step deeper and two dark navy anchors (gallery,
-   contact). Set here by id, not inline, so the order is readable in one place.
+   with the proof strip one step deeper and three dark navy anchors
+   (configurator right after #formats, gallery, contact). Set here by id, not inline, so the order is readable in one place.
    ========================================================================= */
 /* Soft vertical gradients (Oct 2026): each light section fades between white
    and --section-tint, and neighbours meet on the same colour, so the page
