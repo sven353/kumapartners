@@ -1735,3 +1735,32 @@ main:focus{outline:none;}
   .operator-bench-strip{grid-template-columns:1fr; grid-template-areas:"label" "items" "link"; padding:18px 20px;}
   .bench-items{flex-direction:column; gap:12px;}
 }
+
+/* Standards of Fit: collapsed by default */
+.section-fit{padding:72px 0;}
+.section-fit .fit-transition{margin-top:40px; padding-top:32px;}
+.fit-accordion{margin-top:32px; background:#fff; border:1px solid var(--hairline-color); border-radius:8px; overflow:hidden;}
+.fit-accordion-trigger{
+  width:100%; min-height:56px; display:flex; justify-content:space-between; align-items:center; gap:16px;
+  padding:16px 24px; background:#fff; border:0; cursor:pointer; text-align:left;
+  font-family:'Montserrat',Arial,sans-serif; font-weight:700; font-size:1rem; color:var(--navy);
+}
+.fit-accordion-trigger:hover{background:var(--cream);}
+.fit-accordion-trigger:focus-visible{outline:2px solid var(--teal); outline-offset:-2px;}
+.fit-accordion-icon{font-size:1.5rem; font-weight:700; line-height:1; color:var(--teal); flex:none;}
+.fit-accordion-icon::before{content:"+";}
+.fit-accordion-trigger[aria-expanded="true"] .fit-accordion-icon::before{content:"\2212";}
+.fit-accordion-panel{padding:28px 24px; border-top:1px solid var(--hairline-color); background:var(--cream);}
+.fit-accordion-panel[hidden]{display:none;}
+.fit-accordion-panel .fit-grid{margin-top:0;}
+@media (max-width:640px){
+  .section-fit{padding:56px 0;}
+  .fit-accordion-panel{padding:20px 16px;}
+}
+
+/* Case studies: the metric leads. Desktop puts the outcome card on the left, mobile puts it above the narrative. */
+.case-docket-panel{grid-template-columns:1fr 1.5fr;}
+.case-docket-outcome{order:-1;}
+@media (max-width:860px){
+  .case-docket-panel{grid-template-columns:1fr;}
+}

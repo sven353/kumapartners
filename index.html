@@ -1426,7 +1426,7 @@
   </section>
 
   <!-- QUALIFICATION & FIT -->
-  <section id="fit" style="background:var(--cream); border-bottom:1px solid #E2E8F0;">
+  <section id="fit" class="section-fit" style="background:var(--cream); border-bottom:1px solid #E2E8F0;">
     <div class="wrap">
       <div class="section-head reveal-on-scroll" style="max-width:720px;">
         <div class="eyebrow">Standards of Fit &middot; Qualifying Your Readiness</div>
@@ -1434,27 +1434,35 @@
         <p>Our interventions are high-touch, direct, and senior-led. We protect our focus by partnering only where we can move the needle on executive execution.</p>
       </div>
 
-      <div class="fit-grid reveal-stagger">
-        <div class="fit-card fit-card-yes reveal-on-scroll">
-          <span class="fit-pill fit-pill-yes">Ideal Engagements</span>
-          <h3>Who We Partner With</h3>
-          <ul class="fit-list fit-list-yes">
-            <li><strong>Series A–C scale-ups &amp; merged entities</strong> hitting decision drag</li>
-            <li><strong>Founders &amp; CEOs</strong> committed to radical candor in the room</li>
-            <li><strong>Executive teams</strong> ready to reset operating habits, not delegate to HR</li>
-            <li><strong>VC &amp; PE operating partners</strong> stabilizing high-stakes portfolio growth</li>
-          </ul>
-        </div>
+      <div class="fit-accordion reveal-on-scroll">
+        <button type="button" class="fit-accordion-trigger" id="fit-trigger" aria-expanded="false" aria-controls="fit-panel" data-disclosure-toggle>
+          <span>Who we partner with and who we do not serve</span>
+          <span class="fit-accordion-icon" aria-hidden="true"></span>
+        </button>
+        <div class="fit-accordion-panel" id="fit-panel" role="region" aria-labelledby="fit-trigger" hidden>
+          <div class="fit-grid reveal-stagger">
+            <div class="fit-card fit-card-yes reveal-on-scroll">
+              <span class="fit-pill fit-pill-yes">Ideal Engagements</span>
+              <h3>Who We Partner With</h3>
+              <ul class="fit-list fit-list-yes">
+                <li><strong>Series A–C scale-ups &amp; merged entities</strong> hitting decision drag</li>
+                <li><strong>Founders &amp; CEOs</strong> committed to radical candor in the room</li>
+                <li><strong>Executive teams</strong> ready to reset operating habits, not delegate to HR</li>
+                <li><strong>VC &amp; PE operating partners</strong> stabilizing high-stakes portfolio growth</li>
+              </ul>
+            </div>
 
-        <div class="fit-card fit-card-no reveal-on-scroll">
-          <span class="fit-pill fit-pill-no">Not a Fit</span>
-          <h3>Who We Do Not Serve</h3>
-          <ul class="fit-list fit-list-no">
-            <li><strong>Pre-product-market fit</strong> or early-stage exploratory teams</li>
-            <li><strong>Passive mindset coaching</strong> detached from commercial P&amp;L reality</li>
-            <li><strong>Back-office IT/PMI</strong> or political air cover for layoffs</li>
-            <li><strong>Delegated initiatives</strong> where the CEO and C-suite will not participate</li>
-          </ul>
+            <div class="fit-card fit-card-no reveal-on-scroll">
+              <span class="fit-pill fit-pill-no">Not a Fit</span>
+              <h3>Who We Do Not Serve</h3>
+              <ul class="fit-list fit-list-no">
+                <li><strong>Pre-product-market fit</strong> or early-stage exploratory teams</li>
+                <li><strong>Passive mindset coaching</strong> detached from commercial P&amp;L reality</li>
+                <li><strong>Back-office IT/PMI</strong> or political air cover for layoffs</li>
+                <li><strong>Delegated initiatives</strong> where the CEO and C-suite will not participate</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </div>
 

@@ -13,6 +13,19 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('scroll', updateHeaderScrollState, { passive: true });
   }
 
+  // --- Generic disclosure toggle (Standards of Fit accordion): the button's aria-controls
+  // names the panel; aria-expanded and the panel's hidden attribute move together, so it works
+  // with Enter and Space on a native <button>. ---
+  document.querySelectorAll('[data-disclosure-toggle]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var panel = document.getElementById(btn.getAttribute('aria-controls'));
+      if (!panel) return;
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+      panel.hidden = open;
+    });
+  });
+
   // --- Case studies tab switcher (cross-fade) ---
   var caseTabs = document.querySelectorAll('.case-tab');
   var casePanels = document.querySelectorAll('.case-docket-panel');
