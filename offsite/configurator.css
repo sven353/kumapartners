@@ -1273,35 +1273,61 @@ footer.site{background:#fff; border-top:1px solid var(--hairline-color);}
 }
 
 /* =========================================================================
-   Standalone calibrator page (/offsite/configurator): no site navigation,
-   just the lockup, a status badge, the dark configurator stage and a
-   one-line footer.
+   Standalone calibrator page (/offsite/configurator): dark canvas from top
+   to bottom, compact intro so Step 01 sits above the fold, no pricing cards
+   (the blueprint carries the fee structure), and a quiet trust row under
+   the card.
    ========================================================================= */
 .calibrator-page{background:var(--navy); padding-top:0;}
-.calibrator-header{background:#fff; border-bottom:1px solid rgba(11,21,35,.08);}
-.calibrator-header-inner{display:flex; align-items:center; justify-content:space-between; gap:16px; padding-top:16px; padding-bottom:16px;}
-.calibrator-header-meta{display:flex; align-items:center; gap:20px;}
+.calibrator-header{background:rgba(11,21,35,.95); border-bottom:1px solid rgba(255,255,255,.1);}
+.calibrator-header-inner{display:flex; align-items:center; justify-content:space-between; gap:16px; padding-top:14px; padding-bottom:14px;}
+.calibrator-header .logo-divider{background:rgba(255,255,255,.22); height:26px;}
+.calibrator-logo-kuma{height:26px;}
+.calibrator-logo-nonameyet{height:36px; filter:brightness(0) invert(1);}
+.calibrator-header-meta{display:flex; align-items:center; gap:18px;}
 .calibrator-badge{
-  display:inline-flex; align-items:center; gap:8px; font-family:'Lato',Arial,sans-serif; font-size:.7rem; font-weight:700;
-  letter-spacing:.08em; text-transform:uppercase; color:var(--navy); border:1px solid rgba(11,21,35,.14);
+  display:inline-flex; align-items:center; gap:8px; font-family:'Lato',Arial,sans-serif; font-size:.68rem; font-weight:700;
+  letter-spacing:.08em; text-transform:uppercase; color:rgba(248,249,250,.85); border:1px solid rgba(255,255,255,.18);
   border-radius:999px; padding:6px 12px; white-space:nowrap;
 }
-.calibrator-badge::before{content:""; width:6px; height:6px; border-radius:50%; background:#1D6F8A;}
-.calibrator-back{font-size:.85rem; color:rgba(11,21,35,.6); text-decoration:none; white-space:nowrap;}
-.calibrator-back:hover{color:var(--navy); text-decoration:underline;}
-.calibrator-stage{padding-top:64px; padding-bottom:80px; min-height:calc(100vh - 140px);}
-#configurator > .wrap > h1.calibrator-title{color:#fff; font-size:clamp(1.9rem, 4vw, 2.6rem); margin:10px 0 14px;}
-.calibrator-footer{background:#060E17; color:rgba(248,249,250,.55); font-size:.82rem;}
+.calibrator-badge::before{content:""; width:6px; height:6px; border-radius:50%; background:#5FB3CC;}
+.calibrator-back{font-size:.85rem; color:rgba(248,249,250,.65); text-decoration:none; white-space:nowrap;}
+.calibrator-back:hover{color:#fff; text-decoration:underline;}
+
+.calibrator-stage{padding-top:36px; padding-bottom:64px; min-height:calc(100vh - 120px); border-bottom:none;}
+.calibrator-intro{text-align:center; max-width:640px; margin:0 auto 24px;}
+.calibrator-eyebrow{display:block; font-family:'Lato',Arial,sans-serif; font-size:.72rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#5FB3CC; margin-bottom:10px;}
+.calibrator-page h1.calibrator-title{color:#fff; font-size:2.2rem; line-height:1.2; margin:0 0 8px;}
+.calibrator-page .calibrator-sub{font-size:.98rem; color:rgba(248,249,250,.8); margin:0;}
+
+.calibrator-page #configurator-app{
+  margin:0 auto; padding:36px; border-radius:var(--radius-md); border:1px solid #E2E8F0;
+  box-shadow:0 24px 48px -24px rgba(0,0,0,.55), 0 2px 6px rgba(0,0,0,.12);
+}
+
+.calibrator-trust{
+  list-style:none; margin:28px auto 0; padding:0; max-width:760px;
+  display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
+}
+.calibrator-trust li{display:flex; align-items:flex-start; gap:10px; font-size:.8rem; line-height:1.45; color:rgba(248,249,250,.6);}
+.calibrator-trust svg{width:18px; height:18px; flex:none; margin-top:1px; color:#5FB3CC;}
+.calibrator-trust strong{display:block; color:rgba(248,249,250,.88); font-weight:700;}
+
+.calibrator-footer{background:#060E17; color:rgba(248,249,250,.55); font-size:.82rem; border-top:1px solid rgba(255,255,255,.06);}
 .calibrator-footer-inner{display:flex; justify-content:space-between; align-items:center; gap:16px; padding-top:22px; padding-bottom:22px; flex-wrap:wrap;}
 .calibrator-footer-links{display:flex; gap:20px;}
 .calibrator-footer a{color:rgba(248,249,250,.7); text-decoration:none;}
 .calibrator-footer a:hover{color:#fff; text-decoration:underline;}
 @media (max-width:639px){
-  .calibrator-header-inner{flex-direction:column; align-items:flex-start; gap:12px;}
-  .calibrator-header-meta{width:100%; flex-wrap:wrap; justify-content:space-between; gap:10px 12px;}
-  .calibrator-back{white-space:normal;}
-  .calibrator-stage{padding-top:32px; padding-bottom:56px;}
-  /* Phones: Step 01 first, pricing pillars after the widget */
-  .calibrator-stage > .wrap{display:flex; flex-direction:column;}
-  .calibrator-stage .pricing-architecture{order:2; margin:28px 0 0;}
+  .calibrator-header-inner{gap:10px;}
+  .calibrator-badge{display:none;}
+  .calibrator-logo-kuma{height:20px;}
+  .calibrator-logo-nonameyet{height:28px;}
+  .calibrator-header .logo-divider{height:20px;}
+  .calibrator-stage{padding-top:24px; padding-bottom:48px;}
+  .calibrator-intro{margin-bottom:18px;}
+  .calibrator-page h1.calibrator-title{font-size:1.65rem;}
+  .calibrator-page .calibrator-sub{font-size:.92rem;}
+  .calibrator-page #configurator-app{padding:20px;}
+  .calibrator-trust{grid-template-columns:1fr; gap:14px; max-width:420px;}
 }
