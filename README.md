@@ -4,7 +4,7 @@ The production codebase for the Kuma Partners marketing and advisory site: "When
 
 Built as a static site with no build step: semantic HTML, one shared stylesheet, one shared script. Optimized for fast load times and for being read cleanly by both search crawlers and AI answer engines (GEO).
 
-Maintainer note: this repo occasionally gets confused with `offsite.kuma.partners`, a separate joint-venture landing page project that lives in its own repository. The `assets/offsites/` folder below holds real photography for Kuma's own Executive Offsite service line and belongs here. Nothing in this repo should reference the offsite.kuma.partners sub-brand, its configurator, or its retreat logistics. If a pull request touches any of that, it does not belong in this repository.
+Maintainer note: the executive offsite offering (formerly the separate site offsite.kuma.partners) now lives in this repo under `offsite/` and is served at www.kuma.partners/offsite/. The old subdomain is only a 301 redirect, run by the old Netlify project `offsitekumapartners` from the repo `sven353/offsite.kuma.partners`, which holds nothing but that redirect rule. The `assets/offsites/` folder holds photography for the main site's own Executive Offsites section.
 
 ## 1. Stack
 
@@ -114,15 +114,17 @@ Netlify deploys straight from the `main` branch of this repository. There is no 
 
 `constellr-review.html` (served at `/constellr-review`) is an unlisted debrief form for constellr coachees. It carries `noindex, nofollow`, and it is deliberately absent from the navigation, footers, `sitemap.xml`, `llms.txt` and `robots.txt` (a Disallow line would advertise the URL). It submits to the Netlify form `constellr-debrief-v5` through `review-portal.js`, which also prefills name, role and lead coach from the link (the coach match ignores accents and case, so `?coach=Marcio` finds Márcio Marcos), for example `/constellr-review?name=Max&role=Co-Founder%20%26%20CEO&coach=Sven`. To add a coach, add an `<option>` to the Lead Coach select. Set the notification email for that form in the Netlify dashboard under Forms. Netlify labels each field in its emails with the text of the field's `<label>` element when there is one, and falls back to the `name` only when there is none. So the scale buttons and the question 5 tick options deliberately have no `<label>`. The question 5 boxes also have no `name`: the script writes the ticked options into one hidden field, `5. Potential next steps`, as a comma-separated list (the radio covers its cell invisibly and is `aria-labelledby` the number), and every remaining label's text is identical to its field's name (for example `1. Strategic clarity and decision speed`). Giving the scale numbers `<label>` elements again would collapse questions 1 to 5 into a single field called `1` in the email. Netlify only stores fields that existed in the form when it was deployed, so redeploy after renaming any field.
 
-## 9. Offsites under /offsite
-
-`kuma.partners/offsite/` serves the separate offsite site (repo `sven353/offsite.kuma.partners`, live at `offsite.kuma.partners`) through two rules in `_redirects`: `/offsite` gets a 301 to `/offsite/`, then `/offsite/*` is proxied with a 200 so the address bar keeps `kuma.partners/offsite/...`. The trailing slash matters: the offsite pages use relative links for CSS, images and pages, which only resolve inside `/offsite/` when the URL ends in a slash. For the same reason, any new link on the offsite site must be relative (`partners.html`, `../insights/`), never root-relative (`/partners.html`), or it will land on this site. The header links to `/offsite/` as Offsites and the footer as Executive Offsites. The header switches to the burger menu below 1024px (CSS and the two `innerWidth > 1023` checks in `site.js`) because eight items plus the CTA no longer fit on one line.
-
-
-## Executive offsites (/offsite/)
+## 9. Executive offsites (/offsite/)
 
 The offsite site lives in the `offsite/` folder and is served directly at www.kuma.partners/offsite/. It used to be a separate Netlify site (offsite.kuma.partners) proxied in through `_redirects`; that proxy is gone, and the old subdomain now only redirects here.
 
 - All links inside `offsite/` are relative, so the folder works as it is.
 - Its two Netlify forms are `offsite-blueprint` (configurator) and `discovery-call` (partners page). Form names must stay unique across the whole site.
 - Its pages are listed in the main `sitemap.xml`.
+- `offsite/configurator.html` (served at `/offsite/configurator`) is a stripped-down page with only the configurator, for outbound links. It loads its CSS, images and `app.js` from root-absolute `/offsite/...` paths so it renders with or without a trailing slash, and it carries its own hidden copy of the `offsite-blueprint` form.
+- The header links to `/offsite/` as Offsites and the footer as Executive Offsites. The header switches to the burger menu below 1024px (CSS and the two `innerWidth > 1023` checks in `site.js`) because eight items plus the CTA no longer fit on one line.
+- Never add a rule redirecting `/offsite` to `/offsite/` in `_redirects`: Netlify treats both as the same path, so the rule loops. `offsite/index.html` adds the missing slash with a small script instead.
+
+## 10. Kuma Sanctuary pages
+
+`next-offsites.html`, `es/index.html`, `es/aviso-legal.html`, `imprint.html` and `success.html`, styled by `css/style.css`, are the Kuma Sanctuary campaign pages (CEO Sanctuary, Austria). They are not linked from the main navigation and are shared by direct link. Their application form is `sanctuary-application`, which redirects to `success.html`.

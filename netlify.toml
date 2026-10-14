@@ -7,12 +7,11 @@
     X-Frame-Options = "DENY"
     X-Content-Type-Options = "nosniff"
 
-# Netlify Forms: two forms on this site, both submissions land under Site
-# configuration -> Forms in the Netlify dashboard, no extra config needed.
-# - "offsite-blueprint", the configurator's lead-capture form, is detected
-#   from the hidden static <form name="offsite-blueprint" data-netlify="true">
-#   in index.html, since the real form only exists after app.js renders it.
-# - "discovery-call", the #contact section's intake form, is written
-#   directly into the static HTML on both index.html and partners.html, so
-#   it needs no hidden duplicate; Netlify treats the two pages' identical
-#   <form name="discovery-call"> as one form and merges their submissions.
+# Netlify Forms: every form on the site is detected at deploy time from the
+# static HTML (form detection is on). Submissions land under Forms in the
+# Netlify dashboard. Form names must stay unique across the whole site:
+# contact, friction-scan, partner-debrief (index.html), constellr-debrief-v5
+# (constellr-review.html), offsite-blueprint (offsite/index.html and
+# offsite/configurator.html, hidden copies because app.js renders the real
+# form), discovery-call (offsite/partners.html) and sanctuary-application
+# (next-offsites.html, es/index.html).
