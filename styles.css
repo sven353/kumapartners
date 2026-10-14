@@ -1860,6 +1860,9 @@ main:focus{outline:none;}
 .protocol-text + .protocol-text{margin-top:8px;}
 .protocol-emphasis{font-weight:700;}
 .label-hint{text-transform:none; letter-spacing:0; font-weight:400; color:#475569; margin-left:4px;}
+.label-hint-below{display:block; margin:6px 0 0; font-size:.75rem;}
+.review-question-row{display:flex; align-items:baseline; gap:6px; flex-wrap:wrap;}
+.review-question-row .review-question-label{margin-bottom:4px;}
 .lock-icon{width:13px; height:13px; vertical-align:-2px; margin-right:6px;}
 .intro-message-card{background:#fff; border:1px solid var(--hairline-color); border-left:1px solid var(--teal); border-radius:var(--radius-md); padding:20px 24px; box-shadow:var(--shadow-card-subtle);}
 .intro-lead{font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:1rem; color:var(--navy); margin:0 0 8px;}
@@ -1881,11 +1884,13 @@ main:focus{outline:none;}
 
 .scale-selector-strip{display:flex; gap:4px;}
 .scale-option{flex:1; position:relative; min-width:0;}
-.scale-option input[type="radio"]{position:absolute; opacity:0; width:1px; height:1px; margin:0;}
-.scale-option label{display:flex; align-items:center; justify-content:center; height:44px; background:var(--cream); border:1px solid var(--hairline-color); border-radius:var(--radius-sm); font-size:.9rem; font-weight:700; color:var(--navy); cursor:pointer; transition:background-color .15s ease, border-color .15s ease, color .15s ease;}
-.scale-option label:hover{border-color:var(--teal);}
-.scale-option input[type="radio"]:checked + label{background:var(--teal); border-color:var(--teal); color:#fff;}
-.scale-option input[type="radio"]:focus-visible + label{outline:2px solid var(--teal); outline-offset:2px;}
+/* No <label> elements on the scale buttons: Netlify names email fields after label text, so the
+   radio itself covers the cell invisibly and the number is a span it is aria-labelledby. */
+.scale-option input[type="radio"]{position:absolute; inset:0; width:100%; height:100%; margin:0; opacity:0; cursor:pointer; z-index:1;}
+.scale-num{display:flex; align-items:center; justify-content:center; height:44px; background:var(--cream); border:1px solid var(--hairline-color); border-radius:var(--radius-sm); font-size:.9rem; font-weight:700; color:var(--navy); transition:background-color .15s ease, border-color .15s ease, color .15s ease;}
+.scale-option:hover .scale-num{border-color:var(--teal);}
+.scale-option input[type="radio"]:checked + .scale-num{background:var(--teal); border-color:var(--teal); color:#fff;}
+.scale-option input[type="radio"]:focus-visible + .scale-num{outline:2px solid var(--teal); outline-offset:2px;}
 .scale-anchor-labels{display:flex; justify-content:space-between; gap:12px; margin-top:8px; font-size:.75rem; color:#475569;}
 
 .review-error{margin:0 0 16px; padding:12px 14px; border:1px solid rgba(180,35,24,.3); background:#FEF3F2; color:#912018; border-radius:var(--radius-md); font-size:.9rem;}
@@ -1929,5 +1934,5 @@ main:focus{outline:none;}
   .bridge-actions .btn{width:100%; justify-content:center; text-align:center;}
 }
 @media (prefers-reduced-motion: reduce){
-  .scale-option label, .btn-submit-debrief{transition:none;}
+  .scale-num, .btn-submit-debrief{transition:none;}
 }
