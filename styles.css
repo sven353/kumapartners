@@ -226,8 +226,8 @@ header.site.scrolled .nav{padding:10px 0;}
   .proof-row{display:contents;}
   .proof-row-bottom .static-logo:last-child{grid-column:span 2;}
 }
-.static-logo{display:block; height:auto; max-width:100%; filter:brightness(0) invert(1); opacity:.7; transition:opacity .2s;}
-.static-logo:hover{opacity:1;}
+.static-logo{display:block; height:auto; max-width:100%; filter:brightness(0) invert(1); opacity:.55; transition:opacity .2s ease, transform .2s ease;}
+.static-logo:hover{opacity:.95; transform:translateY(-1px);}
 
 /* Homepage tonal cadence. Light sections alternate pure white and chalk (--cream) so no two
    neighbours share a tone; the three dark anchors (.proof, #scorecard, #contact) break the

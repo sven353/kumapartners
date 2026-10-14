@@ -1,6 +1,6 @@
 Vendored brand marks for the partners page.
 
-Two sources. The SVGs are either from Simple Icons (below, including the Netflix N mark) or supplied by Kuma (FIS, Glownet), recoloured to slate with metadata removed. The PNGs (AstraZeneca, BBVA, Bertelsmann, BMW, EIT Health, FC Barcelona, Porsche, Qatar Airways, Bkstg, Bloomberg, BSH, Cellnex, CaixaBank, Coca-Cola, constellr, CPCC (CTI), ESADE, Harvard, ICF, Landmark, L'Oréal, Michelin, Microsoft, Nestlé, Novartis, OpenExO, P&G, Rootstock Labs, Santander, Shiseido, Strands, Talkspace, Vistage) were supplied by Kuma as raster images, cropped to the artwork, converted to a single slate tone with the luminance mapped to transparency, and exported at 2x display size.
+Two sources. The SVGs are either from Simple Icons (below, including the Netflix N mark, now unused) or supplied by Kuma (FIS, Glownet, IESE), recoloured to slate with metadata removed. The PNGs (AstraZeneca, BBVA, Bertelsmann, BMW, EIT Health, FC Barcelona, Porsche, Qatar Airways, Bkstg, Bloomberg, BSH, Cellnex, CaixaBank, Coca-Cola, constellr, CPCC (CTI), ESADE, Harvard, ICF, Landmark, L'Oréal, Michelin, Microsoft, Nestlé, Netflix (wordmark), Novartis, OpenExO, P&G, Rootstock Labs, Santander, Shiseido, Strands, Talkspace, Vistage) were supplied by Kuma as raster images, cropped to the artwork, converted to a single slate tone with the luminance mapped to transparency, and exported at 2x display size.
 
 Source: Simple Icons (CC0 1.0), via the @iconify-json/simple-icons package. Each file is a single path, viewBox cropped to the artwork, fill baked to #5F7380 to match the site's muted slate.
 
@@ -12,4 +12,4 @@ To add another logo: save a single-path SVG here, bake in fill="#5F7380", then i
 
 Sizing: every logo is sized so its ink area is roughly equal, within 22px height and 88px width, then written as width/height attributes in partners.html. Very thin wordmarks (Porsche, Bertelsmann) hit the width cap and end up shorter.
 
-Homepage proof strip: index.html .proof uses microsoft, santander, bmw-group, bloomberg and novartis on the top row, netflix, constellr, rootstock-labs and cellnex on the bottom row. There the logos are filtered to white on navy in CSS, so the slate fill in the file does not show.
+Homepage proof strip: index.html .proof uses microsoft, santander, bmw-group, bloomberg and iese on the top row, netflix.png, constellr, rootstock-labs and cellnex on the bottom row. There the logos are filtered to white on navy in CSS, so the slate fill in the file does not show.
