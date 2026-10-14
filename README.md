@@ -46,7 +46,7 @@ There is no `assets/brand/` or `assets/clients/` folder. The client pedigree str
 3. Proof bar. The text client marquee.
 4. `#problem`. A 65 percent leadership-friction stat lockup next to a three-card diagnostic grid.
 5. `#approach`, labeled "The operator difference" on the page. A comparison table contrasting Kuma against traditional consultancies and generic coaching collectives.
-6. `#partners`, "Executive leadership". The single team module: two managing partner cards (Sven Mulfinger and Vincent Azé) and the specialised senior advisor network as a 3x3 grid of nine real advisors, linking to `partners.html#advisors`. The nav "Team" link points here.
+6. `#partners`, "Executive leadership". The single team module: two managing partner cards (Sven Mulfinger and Vincent Azé) and the specialised senior advisor network as a 3x3 grid of nine real advisors, linking to `partners.html#advisors`, then the international footprint and native-language bar (`.leadership-footprint-bar`). The nav "Team" link points here.
 7. `#system`, the Kuma Operating System (KOS) wheel and six operating tools. The nav labels it Methodology.
 8. `#engagements`. A tabbed section. The default tab holds the three paid tiers (the 14-Day Friction Scan, the 60-90 Day Alignment Sprint, and Strategic Scaling Advisory); the other two tabs cover Strategic and Executive Offsites and the AI Leadership Transition offer.
 9. `#case-studies`, labeled "Proof of impact." Three tabbed case studies, including the 48-hour decision-velocity benchmark.
@@ -54,7 +54,7 @@ There is no `assets/brand/` or `assets/clients/` folder. The client pedigree str
 11. `#investors`. Addressed to VC and PE operating partners: pre-emptive diagnostics, co-founder realignment, and portfolio triage.
 12. `#faq`. Ten questions total. The first four render open by default; a "View all 10 questions" toggle reveals the rest. All ten stay present in the static markup either way, so crawlers and AI agents see the full set regardless of JavaScript.
 13. `#fit`, "We do not work with everyone. By design." Ideal client profile against out-of-scope mandates.
-14. A client-logo strip (`.global-strip`), then `#contact`: the streamlined three-field executive intake form.
+14. `#contact`: the executive intake form, straight above the dark footer.
 15. Footer.
 
 ### partners.html
@@ -75,7 +75,7 @@ All colors are CSS custom properties defined once on `:root` in `styles.css`.
 
 | Token | Value | Role |
 |---|---|---|
-| `--cream` | `#F8F9FA` | Chalk: the off-white tier for alternating sections |
+| `--cream` | `#F4F6F8` | Chalk: the off-white tier for alternating sections |
 | `--navy` | `#0B1523` | Midnight: the `.proof` logo bar, and text and headings |
 | `--bg-dark-ambient` | radial `#17324B` to `#0B1523` | Overhead ambient light on the dark anchors `#scorecard` and `#contact` |
 | `--footer-dark` | `#060E17` | Footer base on every page |
@@ -90,7 +90,7 @@ Headings are in British sentence case. Product, tool and people names keep their
 
 Every page carries the same header navigation as the homepage, including the mobile menu toggle. On subpages the links point to `index.html#section`, and Team points to `partners.html`. If you change the homepage menu, copy it to the other five pages.
 
-Homepage light sections alternate pure white and chalk so no two neighbours share a tone: hero white, `.proof` navy, `#problem` chalk, `#approach` white, `#partners` chalk, `#system` white, `#engagements` chalk, `#case-studies` white, `#scorecard` dark, `#investors` chalk, `#faq` white, `#fit` chalk, `#contact` dark, `.global-strip` white, footer dark. Cards placed on a chalk section are white with a hairline border and `--shadow-card-subtle`. If you add or move a section, keep the alternation; the order is also written as a comment above `#problem` in `styles.css`.
+Homepage light sections alternate pure white and chalk so no two neighbours share a tone: hero white, `.proof` navy, `#problem` chalk, `#approach` white, `#partners` chalk, `#system` white, `#engagements` chalk, `#case-studies` white, `#scorecard` dark, `#investors` chalk, `#faq` white, `#fit` chalk, `#contact` dark, footer dark. Cards placed on a chalk section are white with a hairline border and `--shadow-card-subtle`. If you add or move a section, keep the alternation; the order is also written as a comment above `#problem` in `styles.css`.
 
 ## 5. Forms and lead routing
 

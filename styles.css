@@ -8,7 +8,7 @@
      the old hex values), so updating them here recolors the entire site. */
   --navy:#0B1523;
   --teal:#1D6F8A;
-  --cream:#F8F9FA;
+  --cream:#F4F6F8;          /* chalk: cool architectural off-white, visibly distinct from white */
   --ink:#1A1A1A;
   --navy-rgb: 11,21,35;
   --teal-rgb: 29,111,138;
@@ -96,7 +96,7 @@ section{padding:96px 0;}
 body{padding-top:79px;}
 header.site{
   position:fixed; top:0; left:0; right:0; z-index:50;
-  background:rgba(248,249,250,.9);
+  background:rgba(244,246,248,.9);
   -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
   border-bottom:1px solid var(--hairline-color);
   transition:padding .25s ease, box-shadow .25s ease;
@@ -235,7 +235,7 @@ header.site.scrolled .nav{padding:10px 0;}
    neighbours share a tone; the three dark anchors (.proof, #scorecard, #contact) break the
    rhythm deliberately. Order: hero white, proof navy, problem chalk, approach white,
    partners chalk, system white, engagements chalk, case studies white, scorecard dark,
-   investors chalk, faq white, fit chalk, contact dark, global strip white, footer dark. */
+   investors chalk, faq white, fit chalk, contact dark, footer dark. */
 #problem, #engagements{background:var(--cream); border-bottom:1px solid var(--hairline-color);}
 #case-studies{background:#fff; border-bottom:1px solid var(--hairline-color);}
 
@@ -685,7 +685,7 @@ header.site.scrolled .nav{padding:10px 0;}
 .moat-section{background:var(--bg-dark-ambient); color:var(--cream); padding:72px 0;}
 .moat-section .eyebrow{font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:.75rem;}
 .moat-section h2{color:#fff; font-size:1.8rem; max-width:720px;}
-.moat-section p{color:rgba(248,249,250,.85); max-width:640px; font-size:1.05rem;}
+.moat-section p{color:rgba(244,246,248,.85); max-width:640px; font-size:1.05rem;}
 .proof-badges{display:flex; flex-wrap:wrap; gap:12px; margin-top:28px;}
 .proof-badges span{
   display:inline-block;
@@ -833,7 +833,7 @@ header.site.scrolled .nav{padding:10px 0;}
 .cookie-banner.show{transform:translateY(0);}
 .cookie-banner .wrap{display:flex; align-items:center; justify-content:space-between; gap:28px; flex-wrap:wrap;}
 .cookie-banner p{
-  margin:0; font-size:.88rem; color:rgba(248,249,250,.9); max-width:620px; line-height:1.5;
+  margin:0; font-size:.88rem; color:rgba(244,246,248,.9); max-width:620px; line-height:1.5;
 }
 .cookie-banner a{color:var(--cream); text-decoration:underline;}
 .cookie-actions{display:flex; gap:12px; flex-shrink:0;}
@@ -854,7 +854,7 @@ header.site.scrolled .nav{padding:10px 0;}
 }
 .cookie-actions .btn-accept{background:var(--teal); color:#fff; border:1px solid var(--teal);}
 .cookie-actions .btn-accept:hover{background:#15556B;}
-.cookie-actions .btn-essential{background:transparent; color:var(--cream); border:1px solid rgba(248,249,250,.4);}
+.cookie-actions .btn-essential{background:transparent; color:var(--cream); border:1px solid rgba(244,246,248,.4);}
 .cookie-actions .btn-essential:hover{border-color:var(--cream);}
 
 /* Investor / VC & PE section: high-contrast dark panel */
@@ -1127,29 +1127,6 @@ body.scan-modal-locked{overflow:hidden;}
 }
 .fit-transition-link:hover{text-decoration:underline; text-underline-offset:3px;}
 
-/* Global presence & native delivery trust strip */
-/* Global footprint / native delivery strip. Now sits between the navy #contact section
-   and the dark footer, white keeps the cadence alternating on both sides. */
-.global-strip{background:#fff; padding:56px 0; border-top:1px solid var(--hairline-color); border-bottom:1px solid var(--hairline-color);}
-.global-strip-grid{display:grid; grid-template-columns:1fr 1fr; gap:48px;}
-.global-strip-grid .global-strip-col + .global-strip-col{border-left:1px solid var(--hairline-color); padding-left:48px;}
-.global-strip-label{
-  font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.75rem;
-  letter-spacing:.12em; text-transform:uppercase; color:var(--teal); margin-bottom:14px;
-}
-.global-strip-cities{display:flex; flex-wrap:wrap; align-items:center; row-gap:8px;}
-.global-strip-cities span{
-  font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:.92rem; color:var(--navy);
-  display:flex; align-items:center;
-}
-.global-strip-cities span::after{content:"·"; display:inline-block; margin:0 12px; color:rgba(11,21,35,.35); font-weight:400;}
-.global-strip-cities span:last-child::after{display:none;}
-.global-strip-langs{display:flex; flex-wrap:wrap; gap:8px;}
-.global-strip-langs span{
-  font-family:'Lato',Arial,sans-serif; font-weight:500; font-size:.75rem; color:var(--navy);
-  background:#fff; border:1px solid var(--hairline-color); padding:6px 12px; border-radius:var(--radius-xs);
-}
-.global-strip-note{font-size:.82rem; color:rgba(26,26,26,.65); margin:14px 0 0;}
 
 /* Contact */
 .contact-section{background:var(--bg-dark-ambient); color:#fff;}
@@ -1432,11 +1409,6 @@ footer.site .footer-logo img{filter:brightness(0) invert(1);}
   .faq-layout{grid-template-columns:1fr; gap:0;}
   .faq-intro{position:static; margin-bottom:32px;}
   .faq-bridge{display:none;}
-  .global-strip{padding:40px 0;}
-  .global-strip-grid{grid-template-columns:1fr; gap:28px;}
-  .global-strip-grid .global-strip-col + .global-strip-col{
-    border-left:none; padding-left:0; border-top:1px solid var(--hairline-color); padding-top:28px;
-  }
   .contact-form .field-row{grid-template-columns:1fr;}
   .footer-grid{grid-template-columns:1fr;}
   .footer-hubs{flex-direction:column; align-items:flex-start; row-gap:16px;}
@@ -1752,6 +1724,29 @@ main:focus{outline:none;}
   .bench-view-all{display:none;}
   .bench-view-all-mobile{display:block; grid-area:mobile; text-align:center; margin-top:22px; padding-top:18px; border-top:1px solid var(--hairline-color);}
   .bench-items{grid-template-columns:1fr; gap:16px;}
+}
+
+/* International footprint and native-language bar, under the advisor network in #partners */
+.leadership-footprint-bar{
+  max-width:760px; margin:24px auto 0; background:#fff; border:1px solid var(--hairline-color);
+  border-radius:var(--radius-lg); padding:24px 32px; box-shadow:var(--shadow-card-subtle);
+  display:grid; grid-template-columns:1.2fr 1fr; gap:40px;
+}
+.footprint-col{display:flex; flex-direction:column; min-width:0;}
+.footprint-col + .footprint-col{border-left:1px solid var(--hairline-color); padding-left:40px;}
+.footprint-eyebrow{
+  display:block; font-family:'Lato',Arial,sans-serif; font-size:.75rem; font-weight:700;
+  letter-spacing:.08em; text-transform:uppercase; color:var(--teal); margin-bottom:10px;
+}
+.footprint-cities{display:flex; flex-wrap:wrap; align-items:center; row-gap:6px; font-size:.875rem; font-weight:600; color:var(--navy); line-height:1.4;}
+.footprint-cities span::after{content:"\00B7"; margin:0 8px; color:rgba(11,21,35,.3); font-weight:400;}
+.footprint-cities span:last-child::after{content:none;}
+.language-badges{display:flex; flex-wrap:wrap; gap:6px;}
+.lang-pill{font-size:.75rem; font-weight:600; color:var(--navy); background:var(--cream); border:1px solid var(--hairline-color); padding:3px 9px; border-radius:var(--radius-sm);}
+.footprint-note{margin:10px 0 0; font-size:.8125rem; line-height:1.45; color:#475569;}
+@media (max-width:860px){
+  .leadership-footprint-bar{grid-template-columns:1fr; gap:22px; padding:22px 20px;}
+  .footprint-col + .footprint-col{border-left:none; padding-left:0; border-top:1px solid var(--hairline-color); padding-top:22px;}
 }
 
 /* Standards of Fit: collapsed by default */
