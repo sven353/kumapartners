@@ -2,3 +2,9 @@
 # The old proxy to offsite.kuma.partners has been removed on purpose.
 # Do not add a rule redirecting /offsite to /offsite/: Netlify treats both as the same
 # path, so such a rule redirects to itself and causes ERR_TOO_MANY_REDIRECTS.
+
+# Standalone offsite configurator for outbound links. Netlify already serves
+# configurator.html for /offsite/configurator; this 200 rewrite also covers the
+# trailing-slash form (Netlify matches rules with or without the slash). It is a
+# rewrite to a file, never a redirect, so it cannot loop.
+/offsite/configurator   /offsite/configurator.html   200

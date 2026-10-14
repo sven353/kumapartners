@@ -114,7 +114,7 @@ header.site.scrolled .nav{padding:8px 32px;}
 /* Experience gallery (#experience-gallery): a full-bleed cinema filmstrip of two
    auto-scrolling photo tracks. The scroll/fade mechanism is the real stylesheet's
    own .marquee/.marquee-track technique (linear-mask edge fade + a linear-infinite
-   keyframe translateX loop, paused on hover, see styles.css) — not reinvented here,
+   keyframe translateX loop, paused on hover, see styles.css), not reinvented here,
    only re-scaled for photography and split into two opposing directions. The dark
    navy treatment matches the site's existing full-bleed dark sections (.moat-section,
    .contact-section in styles.css) rather than introducing a new section style. */
@@ -179,7 +179,7 @@ header.site.scrolled .nav{padding:8px 32px;}
 /* Operators (#collective): the card architecture itself (.partner-card-lg,
    .partner-photo, .track-record, .client-badges, .social-row, .team-cta) is
    all real and already existed in styles.css, dormant on this build until
-   now — the same pattern as .problem-stat and .marquee elsewhere on this
+   now, the same pattern as .problem-stat and .marquee elsewhere on this
    page. Only the bio paragraph size (to match the sibling .advisor-bio
    pattern) and the language-delivery pills are genuinely new. */
 .partner-card-lg p{font-size:.9rem; line-height:1.55; color:rgba(26,26,26,.75); margin:0 0 4px;}
@@ -1270,4 +1270,38 @@ footer.site{background:#fff; border-top:1px solid var(--hairline-color);}
 @media (max-width:900px){
   .contact-concierge-card{grid-template-columns:1fr; gap:32px; padding:36px 24px;}
   .contact-concierge-left h2{font-size:1.8rem;}
+}
+
+/* =========================================================================
+   Standalone calibrator page (/offsite/configurator): no site navigation,
+   just the lockup, a status badge, the dark configurator stage and a
+   one-line footer.
+   ========================================================================= */
+.calibrator-page{background:var(--navy); padding-top:0;}
+.calibrator-header{background:#fff; border-bottom:1px solid rgba(11,21,35,.08);}
+.calibrator-header-inner{display:flex; align-items:center; justify-content:space-between; gap:16px; padding-top:16px; padding-bottom:16px;}
+.calibrator-header-meta{display:flex; align-items:center; gap:20px;}
+.calibrator-badge{
+  display:inline-flex; align-items:center; gap:8px; font-family:'Lato',Arial,sans-serif; font-size:.7rem; font-weight:700;
+  letter-spacing:.08em; text-transform:uppercase; color:var(--navy); border:1px solid rgba(11,21,35,.14);
+  border-radius:999px; padding:6px 12px; white-space:nowrap;
+}
+.calibrator-badge::before{content:""; width:6px; height:6px; border-radius:50%; background:#1D6F8A;}
+.calibrator-back{font-size:.85rem; color:rgba(11,21,35,.6); text-decoration:none; white-space:nowrap;}
+.calibrator-back:hover{color:var(--navy); text-decoration:underline;}
+.calibrator-stage{padding-top:64px; padding-bottom:80px; min-height:calc(100vh - 140px);}
+#configurator > .wrap > h1.calibrator-title{color:#fff; font-size:clamp(1.9rem, 4vw, 2.6rem); margin:10px 0 14px;}
+.calibrator-footer{background:#060E17; color:rgba(248,249,250,.55); font-size:.82rem;}
+.calibrator-footer-inner{display:flex; justify-content:space-between; align-items:center; gap:16px; padding-top:22px; padding-bottom:22px; flex-wrap:wrap;}
+.calibrator-footer-links{display:flex; gap:20px;}
+.calibrator-footer a{color:rgba(248,249,250,.7); text-decoration:none;}
+.calibrator-footer a:hover{color:#fff; text-decoration:underline;}
+@media (max-width:639px){
+  .calibrator-header-inner{flex-direction:column; align-items:flex-start; gap:12px;}
+  .calibrator-header-meta{width:100%; flex-wrap:wrap; justify-content:space-between; gap:10px 12px;}
+  .calibrator-back{white-space:normal;}
+  .calibrator-stage{padding-top:32px; padding-bottom:56px;}
+  /* Phones: Step 01 first, pricing pillars after the widget */
+  .calibrator-stage > .wrap{display:flex; flex-direction:column;}
+  .calibrator-stage .pricing-architecture{order:2; margin:28px 0 0;}
 }

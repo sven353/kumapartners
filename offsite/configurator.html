@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!--
+  Standalone configurator for outbound links (LinkedIn, cold email, investor notes).
+  Served at /offsite/configurator. Paths are root-absolute (/offsite/...) on purpose,
+  so the page renders the same with or without a trailing slash on the URL.
+-->
+<title>Executive Offsite Calibrator | Kuma Partners &times; Nonameyet</title>
+<meta name="description" content="Calibrate your leadership offsite room size, core mandate and governance depth in 60 seconds. Confidential blueprint reviewed directly by senior operators.">
+<link rel="canonical" href="https://www.kuma.partners/offsite/configurator">
+<meta name="robots" content="index, follow">
+
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.kuma.partners/offsite/configurator">
+<meta property="og:title" content="Executive Offsite Calibrator">
+<meta property="og:description" content="Five questions. One tailored offsite blueprint, reviewed under NDA by senior operators within 24 business hours.">
+<meta property="og:image" content="https://www.kuma.partners/offsite/assets/environments/masia-barcelona.jpeg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Executive Offsite Calibrator">
+<meta name="twitter:description" content="Five questions. One tailored offsite blueprint, reviewed under NDA by senior operators within 24 business hours.">
+<meta name="twitter:image" content="https://www.kuma.partners/offsite/assets/environments/masia-barcelona.jpeg">
+
+<link rel="icon" href="/offsite/assets/logo-icon.png">
+<link rel="stylesheet" href="/offsite/styles.css">
+<link rel="stylesheet" href="/offsite/configurator.css">
+</head>
+<body class="calibrator-page">
+
+<!--
+  Netlify form detection: the real lead form is rendered by app.js once the
+  blueprint is compiled. Same hidden duplicate as /offsite/index.html; keep the
+  field names in sync with renderLeadForm in app.js.
+-->
+<form name="offsite-blueprint" data-netlify="true" netlify-honeypot="company_tax_id" hidden>
+  <input type="hidden" name="form-name" value="offsite-blueprint">
+  <input type="text" name="company_tax_id">
+  <input type="hidden" name="blueprint_title">
+  <input type="hidden" name="selection_role">
+  <input type="hidden" name="selection_mandate">
+  <input type="hidden" name="selection_budget">
+  <input type="hidden" name="selection_location">
+  <input type="hidden" name="selection_facilitation">
+  <input type="text" name="name">
+  <input type="email" name="email">
+  <input type="text" name="company">
+  <select name="group_size"><option value="2-6">2-6</option></select>
+  <select name="timeline"><option value="Q1 2027">Q1 2027</option></select>
+  <textarea name="context"></textarea>
+</form>
+
+<header class="calibrator-header">
+  <div class="wrap calibrator-header-inner">
+    <a href="/offsite/" class="logo-jv" aria-label="Kuma Partners × Nonameyet offsites">
+      <div class="logo-lockup-track">
+        <img src="/offsite/assets/logo-lockup.png" alt="Kuma Partners" class="logo-kuma">
+        <span class="logo-divider" aria-hidden="true"></span>
+        <img src="/offsite/assets/logo-nonameyet.png" alt="Nonameyet" class="logo-nonameyet" width="577" height="360">
+      </div>
+    </a>
+    <div class="calibrator-header-meta">
+      <span class="calibrator-badge">Confidential scope calibrator</span>
+      <a href="/offsite/" class="calibrator-back">&larr; Back to the full offsite overview</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="configurator" class="calibrator-stage">
+    <div class="wrap" style="text-align:center;">
+      <div class="eyebrow" style="justify-content:center;">Executive Scoping Tool</div>
+      <h1 class="calibrator-title">Calibrate Your Leadership Offsite</h1>
+      <p style="max-width:640px; margin:0 auto;">Five questions. One tailored blueprint. Evaluated under strict bilateral NDA by Sven, Farid or Luisa within 24 business hours.</p>
+
+      <div class="pricing-architecture">
+        <div class="pricing-pillar">
+          <span class="pricing-pillar-label">01 &middot; Advisory</span>
+          <h4>Fixed facilitation fee</h4>
+          <p>One fixed fee covering intake, agenda design, in-room facilitation and the post-offsite review cadence.</p>
+        </div>
+        <div class="pricing-pillar">
+          <span class="pricing-pillar-label">02 &middot; Hospitality</span>
+          <h4>Passed through at cost</h4>
+          <p>Venue buyout, private dining, ground logistics and experiences such as a sunset catamaran are billed at cost, with no agency markup.</p>
+        </div>
+      </div>
+
+      <div class="scorecard-card" id="configurator-app">
+        <div class="scorecard-progress">
+          <span class="sc-progress-text">Step 01 of 05</span>
+          <div class="sc-progress-bar"><div class="sc-progress-bar-fill"></div></div>
+        </div>
+        <div id="sc-steps"></div>
+        <div class="sc-nav-row" hidden>
+          <button type="button" class="sc-back-btn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"></path></svg>
+            Back
+          </button>
+        </div>
+        <div id="sc-blueprint" class="blueprint-card" hidden></div>
+      </div>
+
+    </div>
+  </section>
+</main>
+
+<footer class="calibrator-footer">
+  <div class="wrap calibrator-footer-inner">
+    <span>&copy; 2026 Kuma Partners &times; Nonameyet</span>
+    <span class="calibrator-footer-links">
+      <a href="https://kuma.partners/privacy.html">Privacy policy</a>
+      <a href="https://kuma.partners/legal.html">Legal notice</a>
+    </span>
+  </div>
+</footer>
+
+<script src="/offsite/app.js"></script>
+</body>
+</html>
