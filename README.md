@@ -75,13 +75,15 @@ All colors are CSS custom properties defined once on `:root` in `styles.css`.
 
 | Token | Value | Role |
 |---|---|---|
-| `--cream` | `#F4F1EB` | Warm stone base for narrative and diagnostic sections |
-| `--navy` | `#284050` | High-conversion action strips only: `#scorecard` and `#contact` |
-| (unnamed, set per section) | `#332F2A` | Executive slate, `#investors` only |
-| `--teal` | `#588088` | Accent color: eyebrows, links, icons, hover states |
+| `--cream` | `#F8F9FA` | Chalk: the off-white tier for alternating sections |
+| `--navy` | `#0B1523` | Midnight: the `.proof` logo bar, and text and headings |
+| `--bg-dark-ambient` | radial `#17324B` to `#0B1523` | Overhead ambient light on the dark anchors `#scorecard` and `#contact` |
+| `--footer-dark` | `#060E17` | Footer base on every page |
+| `--teal` | `#1D6F8A` | Accent: eyebrows, links, icons, hover states |
 | `--ink` | `#1A1A1A` | Body text |
+| `--shadow-card-subtle` / `--shadow-card-hover` | soft navy shadows | Lift for white cards sitting on a chalk section |
 
-Sections alternate between the cream tier and a plain white tier (`.proof`, `#approach`, `#case-studies`, `#investors`, `#fit`) so that no two adjacent sections share a background, with the two navy strips and the one slate strip breaking the rhythm deliberately at the highest-stakes points on the page. The slate tone for `#investors` was chosen specifically to stay warm and distinct from `--navy`, so it should not be merged into the navy token even though both read as dark.
+Homepage light sections alternate pure white and chalk so no two neighbours share a tone: hero white, `.proof` navy, `#problem` chalk, `#approach` white, `#partners` chalk, `#system` white, `#engagements` chalk, `#case-studies` white, `#scorecard` dark, `#investors` chalk, `#faq` white, `#fit` chalk, `#contact` dark, `.global-strip` white, footer dark. Cards placed on a chalk section are white with a hairline border and `--shadow-card-subtle`. If you add or move a section, keep the alternation; the order is also written as a comment above `#problem` in `styles.css`.
 
 ## 5. Forms and lead routing
 
