@@ -1,0 +1,1333 @@
+/* =========================================================================
+   configurator.css: supplementary styles ONLY.
+   Everything else on this page (header, nav, hero, proof/marquee, problem
+   grid, tier grid, partner grid, footer) uses the real, unmodified
+   styles.css from www.kuma.partners as-is. This file adds only what that
+   stylesheet doesn't already have: the co-branded logo lockup (real Kuma
+   mark image + hairline divider + "NONAMEYET" text wordmark), the photo
+   cards in the places grid, the cinema filmstrip in the experience gallery,
+   image treatment for the format cards, the language-delivery pills on the
+   operator cards, the monospace step-numbering prefix inside the
+   configurator, and the blueprint output layout. Everything reuses
+   --navy/--teal/--cream/--ink/--hairline-color where it can; the exceptions
+   are called out where they diverge from a token.
+   ========================================================================= */
+
+/* Co-branded header/footer lockup: the Kuma Partners mark, a hairline
+   divider and the Nonameyet logo, each its own transparent PNG so every
+   piece stays crisp. The Nonameyet logo is a three-line stacked mark, so it
+   runs taller than the Kuma lockup to keep its lettering legible. */
+.logo-jv{display:inline-flex; align-items:center; text-decoration:none;}
+.logo-lockup-track{display:inline-flex; align-items:center; gap:16px;}
+.logo-kuma{height:36px; width:auto; display:block; object-fit:contain;}
+.logo-divider{
+  display:inline-block; width:1px; height:32px; flex-shrink:0;
+  /* Slightly darker than --hairline-color so it reads against the frosted
+     header background; not a design-system token. */
+  background:#CBD5E1;
+}
+.logo-nonameyet{height:44px; width:auto; display:block; object-fit:contain;}
+/* The header bar is <nav class="wrap nav">, and .nav's "padding:16px 0" was
+   cancelling .wrap's side gutters: the logo sat flush against the screen edge
+   on phones and 32px left of the page content on desktop. Gutters restored. */
+header.site .nav{padding:12px 32px;}
+header.site.scrolled .nav{padding:8px 32px;}
+@media (max-width:860px){
+  .logo-kuma{height:28px;}
+  .logo-divider{height:26px;}
+  .logo-nonameyet{height:36px;}
+  .logo-lockup-track{gap:12px;}
+}
+
+/* Configurator: monospace two-digit numbering prefix on each scorecard-option,
+   the base .scorecard-option styling (border, hover, selected state) is
+   entirely reused from styles.css untouched. */
+.scorecard-option{display:flex; align-items:flex-start; gap:14px;}
+.sc-option-num{
+  font-family:'SFMono-Regular', Consolas, Menlo, monospace; font-size:.82rem; font-weight:700;
+  color:var(--teal); flex-shrink:0; padding-top:1px;
+}
+.scorecard-option.selected .sc-option-num{color:var(--navy);}
+.sc-option-body{display:flex; flex-direction:column; gap:4px;}
+.sc-option-title{font-family:'Montserrat',Arial,sans-serif; font-weight:600; color:var(--navy); font-size:.98rem;}
+.sc-option-meta{
+  font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.76rem; color:var(--teal);
+  text-transform:uppercase; letter-spacing:.06em;
+}
+.sc-option-desc{font-size:.85rem; line-height:1.55; color:rgba(26,26,26,.68); font-weight:400;}
+
+/* Blueprint output, reusing the scorecard-card shell but wider */
+.blueprint-card{max-width:820px;}
+.blueprint-title{
+  font-family:'Montserrat',Arial,sans-serif; font-style:italic; font-weight:600;
+  font-size:1.9rem; color:var(--navy); text-align:center; margin-bottom:24px; text-wrap:balance;
+}
+.blueprint-pills{display:flex; flex-wrap:wrap; gap:8px; justify-content:center; margin-bottom:8px;}
+
+/* Reuses .offsite-specs-row / .offsite-specs-label pattern from styles.css
+   for the 4-block "Recommended Setting / Intellectual Lead / Key Monday
+   Deliverable / Hospitality Model" summary. */
+.blueprint-specs{
+  background:var(--cream); border:1px solid var(--hairline-color); border-radius:var(--radius-md);
+  padding:28px 26px; margin:28px 0;
+}
+
+.restart-link{
+  display:block; text-align:center; font-size:.85rem; color:var(--navy);
+  text-decoration:none; border-bottom:1px solid rgba(11,21,35,.3); width:max-content;
+  margin:8px auto 0; padding-bottom:2px;
+}
+.restart-link:hover{border-bottom-color:var(--navy);}
+
+/* Places grid (#places): photo-topped cards, one per environment. Follows
+   the same visual language as .tier-card (white fill, 1px hairline
+   border, 2px radius, hover lift) but built as its own component since
+   the image needs to bleed to the card's outer edge rather than sit
+   inset like .tier-card-media does on the format cards. */
+.places-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:28px; align-items:stretch;}
+.place-card{
+  background:#fff; border:1px solid var(--hairline-color); border-radius:var(--radius-xs);
+  overflow:hidden; display:flex; flex-direction:column;
+  transition:box-shadow .2s ease, border-color .2s ease;
+}
+.place-card:hover{border-color:rgba(11,21,35,.25); box-shadow:0 16px 36px -20px rgba(11,21,35,.25);}
+.place-image{width:100%; aspect-ratio:16/10; overflow:hidden; background:var(--hairline-color);}
+.place-image img{width:100%; height:100%; object-fit:cover; display:block; transition:transform .35s ease;}
+.place-card:hover .place-image img{transform:scale(1.03);}
+.place-body{padding:28px 24px; display:flex; flex-direction:column; flex:1;}
+.place-index{
+  display:block; font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.72rem;
+  letter-spacing:.12em; text-transform:uppercase; color:var(--teal); margin-bottom:12px;
+}
+.place-setting{font-size:.92rem; line-height:1.5; color:var(--navy); margin-bottom:12px;}
+.place-setting strong{font-family:'Montserrat',Arial,sans-serif; font-weight:600;}
+.place-desc{font-size:.92rem; line-height:1.6; color:rgba(26,26,26,.72); margin-bottom:20px;}
+.place-amenity{
+  margin-top:auto; padding-left:14px; border-left:1px solid var(--teal);
+  font-size:.85rem; line-height:1.5; color:var(--navy);
+}
+.place-amenity strong{font-family:'Montserrat',Arial,sans-serif; font-weight:600; display:inline;}
+@media (max-width:860px){
+  .places-grid{grid-template-columns:1fr; gap:32px;}
+}
+
+/* Experience gallery (#experience-gallery): a full-bleed cinema filmstrip of two
+   auto-scrolling photo tracks. The scroll/fade mechanism is the real stylesheet's
+   own .marquee/.marquee-track technique (linear-mask edge fade + a linear-infinite
+   keyframe translateX loop, paused on hover, see styles.css), not reinvented here,
+   only re-scaled for photography and split into two opposing directions. The dark
+   navy treatment matches the site's existing full-bleed dark sections (.moat-section,
+   .contact-section in styles.css) rather than introducing a new section style. */
+.cinema-section{background:var(--bg-dark-ambient); padding:96px 0 100px; overflow:hidden;}
+.cinema-section .eyebrow{color:rgba(255,255,255,.7);}
+.cinema-section .eyebrow::before{background:var(--teal);}
+.cinema-section h2{color:#fff;}
+
+.filmstrip-container{
+  width:100%; overflow:hidden; margin-top:36px;
+  -webkit-mask-image:linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+  mask-image:linear-gradient(to right, transparent, black 8%, black 92%, transparent);
+}
+.filmstrip-container + .filmstrip-container{margin-top:20px;}
+.filmstrip-track{
+  display:flex; align-items:stretch; gap:20px; width:max-content;
+  will-change:transform;
+}
+.filmstrip-track-left{animation:filmstripScrollLeft 48s linear infinite;}
+.filmstrip-track-right{animation:filmstripScrollRight 48s linear infinite;}
+.filmstrip-container:hover .filmstrip-track{animation-play-state:paused;}
+
+.filmstrip-frame{
+  position:relative; flex-shrink:0; width:360px; aspect-ratio:16/10;
+  border-radius:var(--radius-xs); overflow:hidden; border:1px solid rgba(248,249,250,.15);
+}
+.filmstrip-frame img{
+  width:100%; height:100%; object-fit:cover; display:block;
+  transition:transform .5s ease;
+}
+.filmstrip-frame:hover img{transform:scale(1.05);}
+.filmstrip-overlay{
+  position:absolute; left:0; right:0; bottom:0; padding:18px 18px 16px;
+  display:flex; flex-direction:column; gap:2px;
+  background:linear-gradient(to top, rgba(20,28,34,.82), rgba(20,28,34,0) 70%);
+}
+.filmstrip-tag{
+  font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.68rem;
+  letter-spacing:.1em; text-transform:uppercase; color:#fff;
+}
+.filmstrip-caption{
+  font-family:'Montserrat',Arial,sans-serif; font-style:italic; font-weight:400;
+  font-size:.88rem; color:rgba(248,249,250,.85);
+}
+
+@keyframes filmstripScrollLeft{
+  from{transform:translateX(0);}
+  to{transform:translateX(-50%);}
+}
+@keyframes filmstripScrollRight{
+  from{transform:translateX(-50%);}
+  to{transform:translateX(0);}
+}
+@media (prefers-reduced-motion: reduce){
+  .filmstrip-track-left, .filmstrip-track-right{animation:none;}
+}
+@media (max-width:860px){
+  .filmstrip-frame{width:260px;}
+  .filmstrip-track-left, .filmstrip-track-right{animation-duration:34s;}
+}
+
+/* Operators (#collective): the card architecture itself (.partner-card-lg,
+   .partner-photo, .track-record, .client-badges, .social-row, .team-cta) is
+   all real and already existed in styles.css, dormant on this build until
+   now, the same pattern as .problem-stat and .marquee elsewhere on this
+   page. Only the bio paragraph size (to match the sibling .advisor-bio
+   pattern) and the language-delivery pills are genuinely new. */
+.partner-card-lg p{font-size:.9rem; line-height:1.55; color:rgba(26,26,26,.75); margin:0 0 4px;}
+.operator-languages{
+  display:flex; align-items:center; flex-wrap:wrap; gap:7px;
+  margin-top:2px;
+}
+.operator-languages-label{
+  font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:.78rem;
+  color:var(--navy); margin-right:2px;
+}
+.lang-pill{
+  font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.72rem;
+  letter-spacing:.04em; text-transform:uppercase; color:var(--navy);
+  background:var(--cream); border:1px solid var(--hairline-color);
+  padding:3px 8px; border-radius:var(--radius-xs);
+}
+
+/* Principal partner cards (v22): bottom-locking the language/social-row footer so
+   cards with different bio lengths (Sven's five-language block vs. Luisa's two)
+   still line up at the same baseline across a row, on both #collective (index.html)
+   and the Principal Partners grid on partners.html. .partner-card-lg's own look
+   (white fill, navy top border, padding) is real and untouched; only the flex
+   mechanics needed for bottom-locking are added here, not the brief's own
+   background/border/padding redesign, which would have fought the real
+   stylesheet's established card look. .partner-photo is sized up slightly
+   (56px -> 72px) for every card that uses it, including Vincent Az&eacute;'s
+   initials fallback on partners.html, so all four cards share one baseline. */
+.partner-card-lg{display:flex; flex-direction:column; height:100%;}
+.partner-photo{width:72px; height:72px; margin-bottom:16px;}
+.card-bottom-lock{margin-top:auto; width:100%;}
+
+/* Hero editorial variant (.hero-editorial): the desktop layout (badge, title,
+   subhead) is set with inline styles directly on the markup, matching how
+   every other section on this page handles one-off spacing and width (see
+   .subhead overrides in #places, #problem, #collective). Only the typeface
+   treatment and the mobile breakpoints, which need to win over those inline
+   desktop styles, are genuinely new rules and live here rather than in
+   styles.css. The !important flags in the mobile block are load-bearing,
+   not a habit: an inline style attribute always outranks an external
+   stylesheet rule on specificity alone, !important or not, so without it
+   these breakpoints would have no effect against the inline desktop
+   values. */
+.hero-editorial .hero-title{
+  font-family:'Montserrat',Arial,sans-serif;
+  font-weight:700;
+  letter-spacing:-0.01em;
+}
+
+@media (max-width:860px){
+  .hero-editorial{
+    padding:64px 0 48px !important;
+  }
+  .hero-editorial .hero-title{
+    font-size:2.35rem !important;
+    line-height:1.18 !important;
+  }
+  .hero-editorial .subhead{
+    font-size:1.1rem !important;
+    margin-bottom:28px !important;
+  }
+}
+
+/* Hero geographic radius strip (v20). Replaces the old 4-column
+   .hero-metrics-strip, which mixed the "5 Languages" metric in with three
+   location facts. Facilitator language coverage already has its own home in
+   #collective (.operator-languages-label / .lang-pill), so this strip now
+   carries only the three-ring geography story: city center, wine country
+   and coast, mountain seclusion. Built as real classes rather than inline
+   styles, since this component has clean, reusable structure (unlike the
+   hero title/subhead/badge above, which stay one-off) and belongs in
+   configurator.css rather than styles.css since it is new markup, not part
+   of the real kuma.partners stylesheet. */
+.hero-geo-strip{
+  margin-top:56px; padding-top:28px; border-top:1px solid var(--hairline-color);
+  display:grid; grid-template-columns:repeat(3,1fr); gap:32px;
+}
+.geo-col{
+  position:relative;
+}
+.geo-col:not(:first-child){
+  border-left:1px solid var(--hairline-color); padding-left:32px;
+}
+.geo-tag{
+  display:block; font-family:'Lato',Arial,sans-serif; font-size:.72rem;
+  font-weight:700; text-transform:uppercase; letter-spacing:.08em;
+  color:var(--teal); margin-bottom:4px;
+}
+.geo-title{
+  display:block; font-family:'Montserrat',Arial,sans-serif; font-size:1.15rem;
+  font-weight:700; color:var(--navy); margin-bottom:6px; line-height:1.25;
+}
+.geo-desc{
+  font-size:.85rem; line-height:1.5; color:rgba(26,26,26,.75); margin:0;
+}
+
+@media (max-width:860px){
+  .hero-geo-strip{
+    grid-template-columns:1fr; gap:24px; margin-top:40px;
+  }
+  .geo-col:not(:first-child){
+    border-left:none; padding-left:0; border-top:1px solid var(--hairline-color);
+    padding-top:20px;
+  }
+}
+
+/* Operators (#collective), v13 refactor. Going from two cards to three needed no new
+   grid CSS at all: .partner-grid's own base rule is already a 3-column grid (see
+   styles.css) and .partner-grid-2col was only ever a narrowing modifier on top of it,
+   so dropping that modifier class is the whole change. Luisa Ábalo's card uses the
+   real, already-built .partner-photo .initials fallback (styles.css) instead of an
+   <img>, since no headshot exists for her yet; see the README for why an AI-generated
+   photo of a real, named person was not the answer here. */
+.superpower-badge{
+  display:inline-block; font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.72rem;
+  letter-spacing:.06em; text-transform:uppercase; color:var(--teal);
+  background:rgba(11,21,35,.06); padding:3px 8px; border-radius:var(--radius-xs); margin-bottom:6px;
+}
+
+/* Dual-facilitator delivery-standard banner under the partner grid. Nothing in the real
+   stylesheet does a full-width label+heading+paragraph notice box: .problem-callout is a
+   single-line micro-note built for inside a 3-col card, and .offsite-specs-note is a
+   footer line inside an existing box, neither fits a standalone banner, so this is
+   genuinely new, styled to match the site's existing hairline/cream/teal-accent notice
+   vocabulary (the same left-accent-border idea .problem-callout already uses). */
+.standard-banner{
+  margin-top:40px; padding:24px 28px; background:var(--cream);
+  border:1px solid var(--hairline-color); border-left:3px solid var(--teal); border-radius:var(--radius-xs);
+}
+.standard-banner-head{display:flex; align-items:baseline; gap:10px; margin-bottom:6px; flex-wrap:wrap;}
+.standard-banner-label{
+  font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.72rem; text-transform:uppercase;
+  letter-spacing:.08em; color:var(--teal);
+}
+.standard-banner h4{
+  font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:1.05rem; color:var(--navy); margin:0;
+}
+.standard-banner p{margin:0; font-size:.92rem; line-height:1.55; color:rgba(26,26,26,.8); max-width:980px;}
+
+/* Social anchors (#immersions). The whole card shell is the real, already-thrice-used
+   .tier-grid/.tier-card (formats, cadence, engagement-models) with plain <p> body copy,
+   same as the engagement-models cards. The pill row reuses .client-badges verbatim for
+   its visual treatment (monochrome, uppercase, bordered) and only gains the bottom-pin
+   + top-hairline behavior here, via a second class on the same element so both rules
+   apply; .client-badges' own margin-top:16px is overridden by source order (this file
+   loads after styles.css), no !important needed. */
+.immersion-meta{margin-top:auto; padding-top:18px; border-top:1px solid rgba(11,21,35,.1);}
+
+/* Calibrated Formats (#formats), v17 refactor. The card shell, badge, label,
+   subhead, image treatment, and action row are all the real, already-live
+   .tier-grid/.tier-card/.tier-badge-pill/.tier-label/.tier-subhead/
+   .place-image/.tier-actions components (formats was their original use
+   back in v3; cadence and engagement-models reuse the same system). The
+   list checkmarks are the real .tier-card ul li::before{content:"✓"} rule
+   in styles.css, not a new bullet glyph. The only genuinely new element is
+   the italic one-line mandate summary under the subhead on each card. */
+.tier-mandate{
+  font-family:'Montserrat',Arial,sans-serif; font-style:italic; font-weight:400;
+  font-size:.88rem; line-height:1.55; color:rgba(26,26,26,.8);
+  margin:0 0 18px; padding-bottom:16px; border-bottom:1px solid var(--hairline-color);
+}
+
+/* Calibrated Formats detail drawer, v23 refactor, card shell reworked in
+   v25. Each format card's own four-item checkmark list moved out of the
+   card and into a single full-width panel below the grid (v23), so a
+   reader scans three short cards first and opens one deep-spec panel
+   rather than reading four dense lists at once.
+
+   v25 polish pass: the card shell moved from .tier-card (padded on all
+   sides, requiring a hand-tuned negative-margin hack per card to bleed
+   the image to the top edge, -36px on plain cards vs -44px on the
+   featured one to clear its extra badge padding) to the real .place-card
+   /.place-image/.place-body system built for #places in v5: zero padding
+   on the outer card plus overflow:hidden does the bleed natively, so
+   every card gets the same aspect-ratio and corner-rounding with no
+   per-card inline math to keep in sync. [data-format] only needs
+   position:relative added here so the featured card's absolutely
+   positioned "Most Requested" .tier-badge-pill still has something to
+   position against; nothing else about .place-card's real styling
+   changed. The "currently selected" highlight (a border/shadow addition)
+   is the same real one-off from v23, its selector just widened from
+   .tier-card[data-format] to plain [data-format] since data-format only
+   ever appears on these three cards anywhere on the site, so the class
+   swap didn't need a second copy of the rule. The metric row went
+   through two treatments before landing on its current one:
+   .client-badges first (the grey partner-logo pill look, v23), then
+   .lang-pill (navy-on-cream chips from #collective's language row,
+   v26). Both were horizontal flex-wrap rows, and both could still wrap
+   a long tag awkwardly mid phrase across two lines at card width, with
+   three differently-wrapping rows next to each other reading as
+   uneven. v27 replaces the pill row with a plain vertical 3-item
+   checklist instead, reusing the real, dormant .outcomes-list
+   checkmark styling verbatim, the same component already powering the
+   drawer's own spec lists below (via its .outcomes-list-1col
+   single-column modifier, also already built, v23), so a card and its
+   own open drawer panel now share one checkmark language instead of
+   two. .pill-metrics-row is removed as dead code along with the
+   .lang-pill markup on these three cards (.lang-pill itself stays live
+   and untouched at #collective). The one addition is
+   `.card-bottom-lock .outcomes-list`, which zeroes out the plain
+   <ul>'s own default browser margin and indent so the list sits flush
+   in the card body instead of carrying the wide left indent and top
+   margin built for the full-width drawer panel it was designed for.
+
+   The two competing CTAs each card used to carry (a plain-text "Inspect
+   full scope" toggle plus a separate solid "Build this format" button)
+   are now one button: the real .btn/.btn-secondary/.btn-primary/.btn-sm
+   system already used for "Build this format" is reused as the toggle
+   itself, swapping between the outline (.btn-secondary) and solid
+   (.btn-primary) variants in app.js as the open/closed state changes,
+   so "the button is filled in" IS the state indicator, using classes
+   that already exist rather than a new .btn-card-toggle/.active-btn
+   pair. Losing the direct "Build this format" shortcut is a deliberate
+   trade, not an oversight: the drawer's own "Configure this format"
+   button (unchanged since v23) is the only way to jump straight to the
+   configurator from this section now, once a card's detail is open.
+   The old .format-inspect-toggle/.format-inspect-arrow rules (a
+   rotating-arrow animation) are removed as dead code: the button now
+   swaps its whole label, arrow glyph included, so there's nothing left
+   to rotate, and the arrow's spacing comes from .btn's own
+   `gap:8px` rather than a dedicated flex rule. The panel eyebrow reuses
+   the real, equally-unused .case-docket-badge label from the dormant
+   case-study docket component. The two-column spec lists reuse the
+   real, dormant .outcomes-list checkmark styling; .outcomes-list-1col
+   only overrides its native two-column grid down to one column per
+   labeled group, since each format needs two separately headed lists,
+   not one flat checklist. The drawer shell itself, its header row, and
+   the column grid are genuinely new, there's no full-width detail-panel
+   component anywhere in the real stylesheet to borrow. */
+[data-format]{position:relative;}
+[data-format].format-card-active,
+[data-cadence].format-card-active{
+  border-color: var(--teal);
+  box-shadow: 0 16px 36px -18px rgba(11,21,35,.28);
+}
+.card-bottom-lock .outcomes-list{margin:0 0 18px; padding-left:0;}
+
+/* #cadence, v28 refactor. Sven asked for the exact interaction pattern
+   #formats already runs: compact cards up top, one full-width detail
+   drawer below the grid with a concrete day-by-day agenda for whichever
+   cadence is open, and a single toggle button whose fill/label/arrow is
+   the open-closed indicator. Rather than build a parallel
+   .cadence-summary-card/.cadence-detail-drawer/.agenda-schedule system
+   as proposed, the #cadence cards stay exactly what they already were
+   (.tier-card, unchanged since v3/v12/v25, no shell swap needed since
+   these cards were never the ones with the pill-wrapping problem
+   #formats had), and the drawer itself is the real #formats drawer
+   (.format-detail/.format-detail-head/.format-detail-columns/
+   .case-docket-badge/.outcomes-list, all v23) reused wholesale for a
+   second section, not rebuilt under cadence-specific names. A card and
+   its own open agenda panel, and a format card and its own open scope
+   panel, now share one visual language site-wide instead of two.
+   [data-cadence].format-card-active reuses the exact v26
+   [data-format].format-card-active "currently open" highlight, just
+   widened to also match cadence cards; .tier-card already carries its
+   own position:relative (styles.css), so no [data-cadence]{position:
+   relative} rule was needed the way [data-format] needed one.
+   .format-detail-columns-3col is the one new rule: the 3-day agenda
+   needs three day-columns side by side where every other agenda (2-day,
+   5-day) needs two, so it's a sibling of the real .outcomes-list-1col
+   modifier pattern rather than a redesign of .format-detail-columns
+   itself; the existing 860px collapse rule for .format-detail-columns
+   already catches it too, since both classes land on the same element
+   and the media rule comes later in source. The toggle button reuses
+   .btn/.btn-secondary/.btn-primary/.btn-sm exactly as #formats' v26
+   consolidated toggle does, not the brief's .btn-cadence-toggle/
+   .active-btn pair, for the same reason: the state is already carried
+   by which real button class is applied, nothing new to add. Losing
+   each card's direct "Select N-Day Cadence" one-click jump is the same
+   trade-off v26 made for "Build this format": the drawer's own "Select
+   N-Day Cadence" button (in .format-detail-head, same slot #formats'
+   "Configure this format" sits in) is now the only way to lock in a
+   cadence from this section, once its agenda is open. */
+.format-detail{
+  margin-top:32px; background:#fff; border:1px solid var(--hairline-color);
+  border-top:3px solid var(--teal); border-radius:var(--radius-xs); padding:40px 40px 44px;
+}
+.format-detail-panel[hidden]{display:none;}
+.format-detail-head{
+  display:flex; align-items:center; justify-content:space-between; gap:20px; flex-wrap:wrap;
+  padding-bottom:20px; margin-bottom:24px; border-bottom:1px solid var(--hairline-color);
+}
+.format-detail-head h3{font-size:1.4rem; margin:0;}
+.format-detail-columns{display:grid; grid-template-columns:1fr 1fr; gap:44px;}
+.format-detail-columns-3col{grid-template-columns:repeat(3,1fr);}
+.format-detail-col{display:flex; flex-direction:column; height:100%;}
+.format-detail-col h4{
+  font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:1rem; color:var(--navy);
+  margin:0 0 14px;
+}
+.outcomes-list-1col{grid-template-columns:1fr; gap:14px;}
+
+@media (max-width:860px){
+  .format-detail{padding:28px 24px 32px;}
+  .format-detail-columns{grid-template-columns:1fr; gap:28px;}
+}
+
+/* #cadence drawer agendas, v35. Sven asked to redesign the sample agendas
+   into a proper executive timeline: a dedicated monospace time column
+   instead of checkmark bullets, Day 0 pulled out of the day cards into
+   its own full-width arrival banner above the grid, and every day card
+   in a row locked to equal height regardless of how much text it holds.
+
+   The brief supplied full replacement agenda copy alongside the
+   restructure. That copy wasn't used verbatim: the real content already
+   live (written in v28, rewritten in v30, and still flagged in Open
+   items as invented sample scheduling pending a factual pass with Sven)
+   was kept as-is and only reformatted into the new time/title/
+   description split, so this round doesn't quietly introduce a second,
+   slightly different version of content that's still waiting on sign-off.
+   Day 0's two old bullets per cadence were condensed into one banner
+   description each, same facts, no new times or venues invented.
+
+   Two genuinely new components, since nothing in styles.css or this file
+   already does a timeline layout: .cadence-arrival-banner (a full-width
+   cream strip with a teal left accent, replacing the old nested
+   .case-docket-badge/plain-paragraph Day 0 treatment) and
+   .agenda-timeline/.agenda-item (a CSS grid list: a fixed monospace time
+   column, then a title-plus-description stack). The real v30
+   .format-detail-col-boxed box moved from a cream fill to white with a
+   2px navy top accent and gained display:flex/height:100% so a short day
+   and a long day in the same row read at the same height. Its old
+   ".format-detail-col-boxed + .format-detail-col-boxed" stacking rule
+   came out as dead code: Day 0 moving to the banner means no column
+   stacks two boxes anymore. ".format-detail-col-boxed h4" came out too,
+   since the heading now lives inside the new .agenda-day-header instead
+   of sitting directly in the box. .format-detail-head/.format-detail-
+   columns/.format-detail-columns-3col/.lang-pill/.case-docket-badge/
+   .cadence-meta are untouched, same real/already-reused components as
+   v28 and v30. */
+.cadence-arrival-banner{
+  background:var(--cream); border:1px solid var(--hairline-color);
+  border-left:3px solid var(--teal); border-radius:var(--radius-xs);
+  padding:16px 20px; margin-bottom:24px;
+  display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;
+}
+.cadence-arrival-tag{
+  font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.72rem;
+  letter-spacing:.08em; text-transform:uppercase; color:var(--teal);
+}
+.cadence-arrival-title{
+  font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:.95rem;
+  color:var(--navy); margin:0;
+}
+.cadence-arrival-desc{font-size:.88rem; color:rgba(26,26,26,.75); margin:0;}
+
+.format-detail-col-boxed{
+  background:#fff; border:1px solid var(--hairline-color); border-top:2px solid var(--navy);
+  border-radius:var(--radius-xs); padding:24px 22px; display:flex; flex-direction:column; height:100%;
+}
+.cadence-meta{margin-top:10px;}
+
+.agenda-day-header{margin-bottom:20px; padding-bottom:14px; border-bottom:1px solid var(--hairline-color);}
+.agenda-day-eyebrow{
+  display:block; font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.68rem;
+  letter-spacing:.1em; text-transform:uppercase; color:var(--teal); margin-bottom:4px;
+}
+.agenda-day-header h4{
+  font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:1.1rem; color:var(--navy); margin:0;
+}
+.agenda-timeline{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:16px; flex:1;}
+.agenda-item{display:grid; grid-template-columns:56px 1fr; gap:14px; align-items:start;}
+.agenda-time{
+  font-family:'SFMono-Regular',Consolas,Menlo,monospace; font-size:.8rem; font-weight:700;
+  color:var(--teal); padding-top:2px; letter-spacing:.02em;
+}
+.agenda-content{display:flex; flex-direction:column; gap:3px;}
+.agenda-title{font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:.92rem; color:var(--navy); line-height:1.35;}
+.agenda-desc{font-size:.86rem; line-height:1.5; color:rgba(26,26,26,.72); margin:0;}
+
+@media (max-width:860px){
+  .cadence-arrival-banner{flex-direction:column; align-items:flex-start;}
+}
+
+/* #cadence drawer agendas, v36. Sven resent the same restructure brief
+   with refined agenda copy, taken this time as confirmation to apply his
+   specific wording rather than keep the old content reformatted under it
+   (v35's call). The HTML content across all three cadence panels was
+   swapped to his copy verbatim, house-style normalized (en-dash for
+   Barcelona-El Prat, no slashes, no em-dashes). This is still invented
+   sample scheduling, same as v28/v30/v35: which wording is live changed,
+   the open item asking Sven for a factual pass on times/venues has not.
+
+   One structural addition: .format-detail-col above now gets its own
+   display:flex/flex-direction:column/height:100% so a short column and a
+   long column in the same row both stretch to the row's height, on top of
+   .format-detail-col-boxed's own equal-height rule from v35. This is
+   shared with #formats' own drawer, but it only reinforces the grid's
+   existing default stretch behavior, so no visual change there.
+
+   Not applied: the brief's .format-detail-columns gap change from the
+   real 44px to 32px. That rule is shared with #formats too, and unlike
+   the flex addition above, a gap change is visibly different, not just a
+   reinforcement, so changing it would move #formats' own drawer without
+   Sven asking for that specifically. Left at 44px pending confirmation. */
+
+/* #contact "Direct Partner Intake" left-column refactor, v37. Brief asked for an
+   avatar cluster and trust badges replacing the loose checkmark list, plus a
+   restructured form on the right. Checked styles.css first per house habit, and most
+   of this was already real and dormant: .select-shell already reserves 40px of right
+   padding for a chevron via its own .select-chevron rule (position/size/teal color
+   all already defined), just never once given a matching SVG element in eleven
+   .select-shell instances across this build until now; .btn-teal sits right after
+   .contact-form .btn in the real stylesheet, built for exactly this button and never
+   referenced anywhere; .value-card/.value-grid (#investors, itself fully dormant) is
+   already the translucent glass tile the brief asked for, rgba(255,255,255,.05) fill,
+   hairline border, a border-brighten hover; and .contact-direct-email already does
+   the bordered footer-link treatment the brief's own .intake-channels was reaching
+   for. None of those needed new CSS, only new markup using what was already there.
+
+   Two things are genuinely new, since nothing in the real stylesheet does an
+   overlapping avatar cluster: .intake-partner-cluster/.intake-avatar-stack/
+   .intake-partner-meta/.intake-partner-label/.intake-partner-names, sized and
+   colored off the same tokens the real .partner-photo circles already use. The trust
+   tiles reuse .value-card as-is, background/border/hover all real, with one small
+   additive layer, .intake-trust-grid, that stacks them in a single column instead of
+   .value-grid's 3-up row (this sits in a narrow half-width column, not a full-width
+   section) and adds the teal left-border accent this build already uses for meta
+   call-outs elsewhere (.cadence-arrival-banner, .standard-banner) rather than the
+   brief's own from-scratch glass recipe. .contact-form-shell picked up a resting
+   shadow it didn't have before, using the site's own navy-tinted shadow formula
+   (rgba(11,21,35,...), the same family .partner-card-lg's hover shadow and the
+   scrolled header's shadow already use) instead of the brief's plain black
+   rgba(0,0,0,.35), plus the brief's own mobile padding reduction. */
+.intake-partner-cluster{display:flex; align-items:center; gap:14px; margin-bottom:22px;}
+.intake-avatar-stack{display:flex; align-items:center;}
+.intake-avatar-stack img{
+  width:40px; height:40px; border-radius:50%; object-fit:cover;
+  border:2px solid var(--navy); margin-left:-10px; background:var(--cream); display:block;
+}
+.intake-avatar-stack img:first-child{margin-left:0;}
+.intake-partner-meta{display:flex; flex-direction:column; gap:2px;}
+.intake-partner-label{
+  font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.68rem;
+  letter-spacing:.1em; text-transform:uppercase; color:var(--teal);
+}
+.intake-partner-names{font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:.92rem; color:#fff;}
+
+.intake-trust-grid{display:flex; flex-direction:column; gap:12px; margin:28px 0 24px;}
+.intake-trust-grid .value-card{border-left:3px solid var(--teal); padding:14px 18px;}
+.intake-trust-grid .value-card h3{font-size:.92rem; margin-bottom:3px;}
+.intake-trust-grid .value-card p{font-size:.86rem;}
+
+.contact-form-shell{box-shadow:0 20px 48px -20px rgba(11,21,35,.4);}
+
+@media (max-width:860px){
+  .contact-form-shell{padding:28px 20px;}
+}
+
+/* partners.html manifesto pull-quote. The dark full-bleed shell itself is the
+   real, dormant .moat-section (eyebrow/h2/p on navy, already defined in
+   styles.css, never used on this build until now), reused as-is rather than
+   the new .manifesto-section the brief proposed. Nothing in the real
+   stylesheet does a set-off pull-quote though, so this one small rule is
+   genuinely new: a left-border teal accent on an italic paragraph, matching
+   the accent-border vocabulary .standard-banner already uses elsewhere. */
+.moat-pull-quote{
+  border-left:3px solid var(--teal); padding-left:20px; font-style:italic;
+  color:rgba(255,255,255,.9); font-size:1.1rem; line-height:1.6; margin-top:8px;
+}
+
+/* =========================================================================
+   How It Works: 3-step process strip (#process)
+   ========================================================================= */
+.process-strip{background:var(--cream); border-bottom:1px solid var(--hairline-color);}
+.process-intro{font-size:1.05rem; line-height:1.6; color:rgba(26,26,26,.7); margin:0;}
+.process-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:32px; margin-top:44px;}
+.process-card{
+  background:#fff; border:1px solid var(--hairline-color); border-top:1px solid var(--teal);
+  border-radius:var(--radius-xs); padding:30px 26px; display:flex; flex-direction:column;
+}
+.process-step-num{
+  font-family:'Lato',Arial,sans-serif; font-size:.74rem; font-weight:700;
+  letter-spacing:.1em; text-transform:uppercase; color:var(--teal); margin-bottom:8px;
+}
+.process-card h3{font-size:1.25rem; color:var(--navy); margin:0 0 8px;}
+.process-timeframe{
+  font-family:'Lato',Arial,sans-serif; font-size:.76rem; font-weight:700;
+  letter-spacing:.06em; text-transform:uppercase; color:rgba(var(--navy-rgb),.65); margin-bottom:14px;
+}
+.process-card p{font-size:.92rem; line-height:1.6; color:rgba(26,26,26,.75); margin:0 0 18px;}
+.process-deliverable{
+  margin-top:auto; padding-top:14px; border-top:1px solid rgba(var(--navy-rgb),.12);
+  font-size:.86rem; line-height:1.5; color:var(--navy);
+}
+.process-deliverable strong{
+  display:block; margin-bottom:3px; font-family:'Lato',Arial,sans-serif; font-size:.7rem;
+  letter-spacing:.08em; text-transform:uppercase; color:var(--teal);
+}
+@media (max-width:860px){
+  .process-grid{grid-template-columns:1fr; gap:20px;}
+}
+
+/* =========================================================================
+   Card finish aligned with www.kuma.partners: white cards that sit on a
+   white or near-white section get the top-light gradient and --card-sheen,
+   and share the --radius-md corner.
+   ========================================================================= */
+.place-card, .process-card, .tier-card, .partner-card-lg, .partner-card, .advisor-card, .partner-card-editorial{
+  background:linear-gradient(180deg, #FFFFFF 0%, #F9FAFB 100%);
+  border-radius:var(--radius-md);
+  box-shadow:var(--card-sheen);
+}
+.contact-form-shell, .format-detail, .scorecard-card{border-radius:var(--radius-lg);}
+
+/* =========================================================================
+   Section cadence (index.html): backgrounds alternate off-white and white,
+   with the proof strip one step deeper and three dark navy anchors
+   (configurator right after #formats, gallery, contact). Set here by id, not inline, so the order is readable in one place.
+   ========================================================================= */
+/* Soft vertical gradients (Oct 2026): each light section fades between white
+   and --section-tint, and neighbours meet on the same colour, so the page
+   shifts tone gradually with no hard band or hairline between light sections.
+   Hairlines stay only where a light section meets the proof strip. */
+:root{--section-tint:#F1F4F8;}
+.hero-editorial{
+  background:linear-gradient(180deg, rgba(var(--teal-rgb),.08) 0%, rgba(var(--teal-rgb),0) 60%), var(--cream);
+  border-bottom:1px solid var(--hairline-color);
+}
+#problem, #formats, #dossier, #collective{background:linear-gradient(180deg, #FFFFFF 0%, var(--section-tint) 100%);}
+#process, #cadence, #faq{background:linear-gradient(180deg, var(--section-tint) 0%, #FFFFFF 100%);}
+footer.site{background:#fff; border-top:1px solid var(--hairline-color);}
+
+.proof{
+  background:#EDF2F7; padding:36px 0;
+  border-top:1px solid var(--hairline-color); border-bottom:1px solid var(--hairline-color);
+}
+.proof p{font-size:.76rem; font-weight:700; letter-spacing:.12em; color:var(--teal); margin-bottom:20px;}
+.marquee-track span{font-size:1.05rem; color:var(--navy); padding:0 40px;}
+
+/* =========================================================================
+   Progressive disclosure: tabbed section (#dossier) holding the venues,
+   social anchors and ways-to-work content, plus the FAQ "show all" toggle.
+   All panels stay in the HTML; only their visibility changes.
+   ========================================================================= */
+.dossier-section{padding:72px 0 88px;}
+.dossier-tabs-nav{display:flex; justify-content:center; margin:0 0 48px;}
+.dossier-tabs-pill{
+  display:inline-flex; gap:4px; padding:4px; background:var(--cream);
+  border:1px solid var(--hairline-color); border-radius:var(--radius-pill);
+}
+.dossier-tab-btn{
+  border:none; background:transparent; cursor:pointer; border-radius:var(--radius-pill);
+  padding:10px 22px; font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.88rem;
+  letter-spacing:.02em; color:var(--navy); transition:background .18s ease, color .18s ease;
+}
+.dossier-tab-btn:hover{color:var(--teal);}
+.dossier-tab-btn.active{background:var(--navy); color:#fff;}
+.dossier-tab-btn:focus-visible, .faq-expand-btn:focus-visible{outline:2px solid var(--teal); outline-offset:2px;}
+.dossier-tab-panel{animation:fadeInPanel .25s ease;}
+.dossier-tab-panel[hidden]{display:none;}
+@keyframes fadeInPanel{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+@media (prefers-reduced-motion: reduce){.dossier-tab-panel, .faq-item-secondary.is-revealed{animation:none;}}
+
+.format-detail[hidden]{display:none;}
+
+.faq-item-secondary{display:none;}
+.faq-item-secondary.is-revealed{display:block; animation:fadeInPanel .2s ease;}
+.faq-expand-wrap{border-top:1px solid rgba(var(--navy-rgb),.12); padding-top:28px; text-align:center;}
+.faq-expand-btn{
+  display:inline-flex; align-items:center; gap:8px; background:#fff; border:1px solid var(--hairline-color);
+  color:var(--navy); font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.88rem;
+  padding:12px 24px; border-radius:var(--radius-pill); cursor:pointer; transition:border-color .2s ease, color .2s ease;
+}
+.faq-expand-btn:hover{border-color:var(--teal); color:var(--teal);}
+
+@media (max-width:768px){
+  .dossier-tabs-pill{flex-wrap:wrap; justify-content:center; border-radius:var(--radius-md);}
+  .dossier-tab-btn{font-size:.78rem; padding:9px 10px;}
+}
+
+/* =========================================================================
+   Sample 90-day compact: trigger in #process step 03 and its dialog.
+   ========================================================================= */
+.compact-preview-btn{
+  display:inline-block; background:transparent; border:none; padding:0; margin-top:10px;
+  color:var(--teal); font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.84rem;
+  cursor:pointer; text-decoration:underline; text-underline-offset:3px; text-align:left;
+}
+.compact-preview-btn:hover{color:var(--navy);}
+.compact-preview-btn:focus-visible, .compact-modal-close:focus-visible{outline:2px solid var(--teal); outline-offset:2px;}
+
+.compact-modal-overlay{
+  position:fixed; inset:0; z-index:400; background:rgba(var(--navy-rgb),.65);
+  -webkit-backdrop-filter:blur(4px); backdrop-filter:blur(4px);
+  display:flex; align-items:center; justify-content:center; padding:24px;
+  opacity:0; visibility:hidden; transition:opacity .25s ease, visibility 0s linear .25s;
+}
+.compact-modal-overlay.is-open{opacity:1; visibility:visible; transition:opacity .25s ease;}
+.compact-modal{
+  background:#fff; border:1px solid var(--hairline-color); border-radius:var(--radius-lg);
+  width:100%; max-width:780px; max-height:90vh; overflow-y:auto; outline:none;
+  box-shadow:0 24px 60px -20px rgba(var(--navy-rgb),.4);
+  transform:translateY(12px); transition:transform .25s ease;
+}
+.compact-modal-overlay.is-open .compact-modal{transform:none;}
+.compact-modal-header{
+  display:flex; align-items:center; justify-content:space-between; gap:16px; padding:18px 28px;
+  border-bottom:1px solid var(--hairline-color); background:var(--cream);
+}
+.compact-modal-title{font-size:1.05rem; margin:0;}
+.compact-modal-close{
+  background:#fff; border:1px solid var(--hairline-color); border-radius:var(--radius-sm);
+  width:34px; height:34px; display:flex; align-items:center; justify-content:center;
+  font-size:1.2rem; line-height:1; cursor:pointer; color:var(--navy); flex-shrink:0;
+}
+.compact-modal-close:hover{background:var(--navy); color:#fff;}
+
+.compact-sheet{padding:30px 36px 34px;}
+.compact-sheet-badge{
+  display:inline-block; font-family:'Lato',Arial,sans-serif; font-size:.7rem; font-weight:700;
+  letter-spacing:.08em; text-transform:uppercase; color:var(--teal);
+  background:rgba(var(--teal-rgb),.08); border:1px solid rgba(var(--teal-rgb),.2);
+  padding:4px 10px; border-radius:var(--radius-sm); margin-bottom:14px;
+}
+.compact-sheet h4{font-size:1.35rem; margin:0 0 8px;}
+.compact-sheet-intro{font-size:.9rem; line-height:1.55; color:rgba(26,26,26,.7); margin:0 0 22px;}
+.compact-table-wrap{overflow-x:auto; border:1px solid var(--hairline-color); border-radius:var(--radius-sm); margin-bottom:22px;}
+.compact-table{width:100%; min-width:520px; border-collapse:collapse; font-size:.86rem; text-align:left;}
+.compact-table thead th{
+  background:var(--cream); color:var(--navy); font-weight:700; padding:10px 14px;
+  border-bottom:1px solid var(--hairline-color); letter-spacing:.05em; text-transform:uppercase; font-size:.7rem;
+}
+.compact-table td, .compact-table tbody th{
+  padding:12px 14px; border-bottom:1px solid var(--hairline-color); color:var(--navy);
+  vertical-align:top; line-height:1.45;
+}
+.compact-table tbody th{font-weight:700;}
+.compact-table tbody tr:last-child td, .compact-table tbody tr:last-child th{border-bottom:none;}
+.compact-sheet-footer{
+  display:grid; grid-template-columns:1fr 1fr; gap:20px; padding:18px 20px;
+  background:var(--cream); border:1px solid var(--hairline-color); border-radius:var(--radius-sm);
+}
+.compact-footer-col strong{
+  display:block; font-size:.7rem; text-transform:uppercase; letter-spacing:.08em; color:var(--teal); margin-bottom:4px;
+}
+.compact-footer-col p{font-size:.86rem; line-height:1.45; margin:0; color:var(--navy);}
+@media (prefers-reduced-motion: reduce){.compact-modal-overlay, .compact-modal{transition:none;}}
+@media (max-width:860px){
+  .compact-modal-overlay{padding:12px;}
+  .compact-modal{max-height:94vh;}
+  .compact-modal-header{padding:16px 20px;}
+  .compact-sheet{padding:24px 20px;}
+  .compact-sheet-footer{grid-template-columns:1fr;}
+}
+
+/* =========================================================================
+   MOBILE-ONLY REFINEMENTS (<= 768px). Additive: nothing here applies above
+   768px, except the sticky bar being hidden by default.
+   ========================================================================= */
+.mobile-sticky-bar{display:none;}
+
+@media (max-width:768px){
+
+  /* 1. Hero: full-width CTAs, venue strip as a horizontal swipe row */
+  .hero-ctas{flex-direction:column; align-items:stretch; gap:12px;}
+  .hero-ctas .btn{width:100%; min-height:48px; justify-content:center;}
+  .hero-ctas .btn-link{align-self:center; margin-top:6px;}
+
+  .hero-geo-strip{
+    display:flex; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+    gap:14px; margin:36px -32px 0; padding:20px 32px 12px; scroll-padding-left:32px;
+    scrollbar-width:none;
+  }
+  .hero-geo-strip::-webkit-scrollbar{display:none;}
+  .hero-geo-strip .geo-col, .hero-geo-strip .geo-col:not(:first-child){
+    flex:0 0 82%; scroll-snap-align:start; background:#fff;
+    border:1px solid var(--hairline-color); border-radius:var(--radius-md);
+    padding:18px 16px; box-shadow:var(--card-sheen);
+  }
+
+  /* 2. Format and agenda summary cards: swipe row, next card peeking */
+  #formats .tier-grid, #cadence .tier-grid{
+    display:flex; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch;
+    gap:14px; margin-left:-32px; margin-right:-32px; padding:20px 32px 20px; scroll-padding-left:32px;
+    scrollbar-width:none;
+  }
+  #formats .tier-grid::-webkit-scrollbar, #cadence .tier-grid::-webkit-scrollbar{display:none;}
+  #formats .tier-grid > .place-card, #cadence .tier-grid > .tier-card{
+    flex:0 0 85%; scroll-snap-align:start; margin-top:0;
+  }
+
+  /* 3. Problem stat: figure and label side by side */
+  .problem-stat{display:flex; flex-direction:column; gap:18px; padding:24px 0;}
+  .problem-stat-figure{display:flex; flex-direction:row; align-items:center; gap:16px;}
+  .problem-stat-number{font-size:3rem; line-height:1;}
+  .problem-stat-label{margin-top:0; font-size:.95rem; line-height:1.35;}
+
+  /* 4. Contact form: tighter vertical rhythm */
+  .contact-form-shell{padding:24px 18px;}
+  .contact-form .field, .contact-form .field-row{margin-bottom:12px;}
+  .contact-form .field-row{gap:12px;}
+  .contact-form textarea{min-height:72px;}
+  .contact-form button[type="submit"]{min-height:48px;}
+
+  /* 5. Sticky action bar: slides up after the hero, steps aside over the
+     configurator and the contact form so it never covers their buttons. */
+  .mobile-sticky-bar{
+    display:flex; align-items:center; justify-content:space-between; gap:12px;
+    position:fixed; left:0; right:0; bottom:0; z-index:100;
+    padding:10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+    background:rgba(var(--navy-rgb),.96); -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+    border-top:1px solid rgba(255,255,255,.12);
+    transform:translateY(100%); visibility:hidden;
+    transition:transform .3s cubic-bezier(.16,1,.3,1), visibility 0s linear .3s;
+  }
+  .mobile-sticky-bar.is-visible{transform:none; visibility:visible; transition:transform .3s cubic-bezier(.16,1,.3,1);}
+  .mobile-sticky-meta{display:flex; flex-direction:column; gap:1px; min-width:0;}
+  .mobile-sticky-label{
+    font-family:'Lato',Arial,sans-serif; font-size:.66rem; font-weight:700;
+    letter-spacing:.08em; text-transform:uppercase; color:rgba(255,255,255,.65);
+  }
+  .mobile-sticky-title{font-family:'Montserrat',Arial,sans-serif; font-size:.82rem; font-weight:600; color:#fff; white-space:nowrap;}
+  .mobile-sticky-btn{
+    background:var(--teal); color:#fff; border:none; border-radius:var(--radius-xs); cursor:pointer;
+    font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.84rem;
+    min-height:44px; padding:10px 16px; white-space:nowrap; flex-shrink:0;
+  }
+  footer.site{padding-bottom:104px;}
+}
+@media (max-width:768px) and (prefers-reduced-motion: reduce){
+  .mobile-sticky-bar, .mobile-sticky-bar.is-visible{transition:none;}
+}
+
+@media (max-width:640px){
+  /* 6. Agenda rows: time as a chip above the session title */
+  .agenda-item{display:flex; flex-direction:column; gap:4px;}
+  .agenda-time{
+    display:inline-block; width:max-content; background:rgba(var(--teal-rgb),.08);
+    border:1px solid rgba(var(--teal-rgb),.2); border-radius:var(--radius-xs);
+    padding:2px 6px; font-size:.74rem; margin-bottom:2px;
+  }
+}
+
+/* =========================================================================
+   Conversion pass: dark configurator stage, pricing pillars, tension arc
+   in #process and the hero language line.
+   ========================================================================= */
+#configurator{
+  background:var(--bg-dark-ambient);
+  color:#fff; border-bottom:1px solid rgba(255,255,255,.1);
+}
+#configurator > .wrap > .eyebrow{color:rgba(255,255,255,.7);}
+#configurator > .wrap > h2{color:#fff;}
+#configurator > .wrap > p{color:rgba(248,249,250,.8);}
+#configurator .scorecard-card{color:var(--ink); text-align:left;}
+
+.pricing-architecture{
+  display:grid; grid-template-columns:1fr 1fr; gap:20px; max-width:820px; margin:36px auto 16px; text-align:left;
+}
+.pricing-pillar{
+  background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12); border-top:1px solid #5FB3CC;
+  border-radius:var(--radius-md); padding:22px 20px;
+}
+.pricing-pillar-label{
+  display:block; font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.68rem;
+  letter-spacing:.08em; text-transform:uppercase; color:#7CC4DA; margin-bottom:4px;
+}
+.pricing-pillar h4{font-size:1.05rem; color:#fff; margin:0 0 8px;}
+.pricing-pillar p{font-size:.88rem; line-height:1.55; color:rgba(248,249,250,.78); margin:0;}
+#configurator > .wrap > p.pricing-range{max-width:820px; margin:0 auto; font-size:.9rem; color:rgba(248,249,250,.7);}
+
+.diagnostic-arc-wrap{margin-top:44px; padding-top:32px; border-top:1px solid var(--hairline-color);}
+.diagnostic-arc-title{font-size:1.05rem; margin:0 0 20px;}
+.diagnostic-arc{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(4,1fr); gap:16px;}
+.arc-step{
+  background:linear-gradient(180deg, #FFFFFF 0%, #F9FAFB 100%); border:1px solid var(--hairline-color);
+  border-radius:var(--radius-md); padding:18px 18px 20px; box-shadow:var(--card-sheen);
+}
+.arc-step-num{
+  display:block; font-family:'Lato',Arial,sans-serif; font-size:.72rem; font-weight:700;
+  letter-spacing:.1em; color:var(--teal); margin-bottom:6px;
+}
+.arc-step h4{font-size:.96rem; margin:0 0 6px;}
+.arc-step p{font-size:.86rem; line-height:1.5; color:rgba(26,26,26,.72); margin:0;}
+
+.hero-languages{
+  margin:22px 0 0; font-family:'Lato',Arial,sans-serif; font-size:.82rem; font-weight:700;
+  letter-spacing:.02em; color:var(--navy);
+}
+.hero-languages span{
+  color:var(--teal); text-transform:uppercase; letter-spacing:.08em; font-size:.72rem; margin-right:6px;
+}
+
+@media (max-width:860px){
+  .pricing-architecture{grid-template-columns:1fr;}
+  .diagnostic-arc{grid-template-columns:1fr 1fr; gap:12px;}
+  .arc-step{padding:14px 14px 16px;}
+}
+@media (max-width:768px){
+  .hero-languages{text-align:center; line-height:1.6;}
+  .hero-languages span{display:block; margin:0 0 2px;}
+}
+
+/* =========================================================================
+   Insights hub (/insights/) and article pages.
+   ========================================================================= */
+.insights-hero{background:var(--cream); border-bottom:1px solid var(--hairline-color); padding:88px 0 64px;}
+.insights-hero-inner{max-width:860px;}
+.insights-hero h1{font-size:2.8rem; line-height:1.15; margin:0 0 16px;}
+.insights-hero .subhead{font-size:1.2rem; line-height:1.6; margin:0;}
+.insights-list{background:#fff; padding:72px 0 96px;}
+.insights-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:32px;}
+.insight-card{padding:36px 32px; display:flex; flex-direction:column;}
+.insight-card h2{font-size:1.35rem; line-height:1.3; margin:0 0 12px;}
+.insight-card h2 a{color:var(--navy); text-decoration:none;}
+.insight-card h2 a:hover{color:var(--teal);}
+.insight-card p{font-size:.94rem; line-height:1.6; color:rgba(26,26,26,.75); margin:0 0 24px;}
+.insight-card-foot{margin-top:auto; border-top:1px solid var(--hairline-color); padding-top:16px;}
+.insight-card-upcoming{background:var(--cream); box-shadow:none;}
+.insight-card-upcoming h2{color:rgba(var(--navy-rgb),.75);}
+
+.article{background:#fff; padding:64px 0 100px;}
+.article-wrap{max-width:780px;}
+.article-back{
+  display:block; width:max-content; margin-bottom:24px; font-family:'Lato',Arial,sans-serif; font-weight:700;
+  font-size:.85rem; color:var(--teal); text-decoration:none;
+}
+.article-back:hover{color:var(--navy);}
+.article h1{font-size:2.6rem; line-height:1.15; margin:0 0 16px; text-wrap:balance;}
+.article-byline{
+  font-family:'Lato',Arial,sans-serif; font-size:.8rem; font-weight:700; text-transform:uppercase;
+  letter-spacing:.06em; color:var(--teal); margin:0 0 36px;
+}
+.article-byline a{color:inherit;}
+.article-body{font-size:1.05rem; line-height:1.7; color:var(--ink);}
+.article-body p{margin:0 0 18px;}
+.article-lead{font-size:1.25rem; line-height:1.55; font-weight:700; color:var(--navy);}
+.article-body h2{font-size:1.5rem; line-height:1.25; margin:44px 0 14px;}
+.article-body ul, .article-body ol{margin:0 0 18px; padding-left:22px;}
+.article-body li{margin-bottom:10px;}
+.article-table-wrap{overflow-x:auto; margin:26px 0 30px; border:1px solid var(--hairline-color); border-radius:var(--radius-sm);}
+.article-table{width:100%; min-width:620px; border-collapse:collapse; font-size:.9rem; line-height:1.45; text-align:left;}
+.article-table thead th{
+  background:var(--cream); color:var(--navy); font-size:.72rem; letter-spacing:.05em; text-transform:uppercase;
+  padding:11px 14px; border-bottom:1px solid var(--hairline-color);
+}
+.article-table td, .article-table tbody th{padding:13px 14px; border-bottom:1px solid var(--hairline-color); vertical-align:top;}
+.article-table tbody th{font-weight:700; color:var(--navy);}
+.article-table tbody tr:last-child td, .article-table tbody tr:last-child th{border-bottom:none;}
+.article-cta{
+  background:var(--cream); border:1px solid var(--hairline-color); border-left:1px solid var(--teal);
+  border-radius:var(--radius-md); padding:26px 26px 28px; margin:44px 0 0;
+}
+.article-cta h3{font-size:1.2rem; margin:0 0 8px;}
+.article-cta p{font-size:.96rem; margin:0 0 18px;}
+.article-cta p a, .article-body > p a, .article-body li a{color:var(--teal);}
+@media (max-width:768px){
+  .insights-hero{padding:56px 0 44px;}
+  .insights-hero h1{font-size:2.1rem;}
+  .insights-grid{grid-template-columns:1fr; gap:20px;}
+  .insight-card{padding:28px 24px;}
+  .article{padding:44px 0 72px;}
+  .article h1{font-size:2rem;}
+  .article-body{font-size:1rem;}
+  .article-lead{font-size:1.12rem;}
+}
+
+/* =========================================================================
+   Scroll reveal: fade and rise as an element enters the viewport. Same
+   timing as www.kuma.partners. The classes are added by app.js, so with
+   JavaScript off (or reduced motion on) nothing is ever hidden. app.js
+   removes them again once the transition has run, which hands each card
+   back its own hover transition.
+   ========================================================================= */
+.reveal-item{
+  opacity:0; transform:translateY(24px);
+  transition:opacity 650ms cubic-bezier(.2,.8,.2,1), transform 650ms cubic-bezier(.2,.8,.2,1);
+}
+.reveal-item.is-revealed{opacity:1; transform:none;}
+@media (prefers-reduced-motion: reduce){
+  .reveal-item{opacity:1; transform:none; transition:none;}
+}
+@media print{.reveal-item{opacity:1; transform:none;}}
+
+/* Partners page: the specialist bench had its three columns set inline, so
+   it never collapsed and pushed the third column off screen on phones. Now a
+   class: three columns, two at 860px and below, one at 480px and below. */
+.advisor-grid-3{grid-template-columns:repeat(3,1fr);}
+@media (max-width:860px){
+  .advisor-grid-3{grid-template-columns:1fr 1fr; gap:16px;}
+}
+@media (max-width:480px){
+  .advisor-grid-3{grid-template-columns:1fr;}
+}
+
+/* =========================================================================
+   Seven-item top nav ("Insights" added). Links sit closer together and never
+   wrap, and the hamburger menu now takes over at 1180px instead of 860px:
+   between those widths the bar had already been wrapping onto two lines.
+   ========================================================================= */
+.nav-links{gap:18px;}
+.nav-links a{white-space:nowrap;}
+@media (max-width:1180px){
+  .nav-cta{display:none;}
+  .nav-toggle{display:flex;}
+  .nav-links{
+    display:none; position:absolute; top:100%; left:0; right:0;
+    flex-direction:column; align-items:stretch; gap:0;
+    background:var(--cream); border-bottom:1px solid var(--hairline-color);
+    padding:6px 32px 24px; box-shadow:0 20px 40px -28px rgba(var(--navy-rgb),.35);
+    max-height:calc(100vh - 79px); overflow-y:auto;
+  }
+  header.site.nav-open .nav-links{display:flex;}
+  .nav-links li{width:100%;}
+  .nav-links > li > a{display:block; width:100%; padding:15px 0; border-bottom:1px solid rgba(var(--navy-rgb),.08);}
+  .nav-mobile-only{display:block; margin-top:16px;}
+  .nav-mobile-only .btn{width:100%; justify-content:center;}
+}
+
+/* Contextual links from the landing page into the insights guides */
+.inline-guide-link{color:var(--teal); font-weight:700; text-decoration:underline; text-underline-offset:3px; white-space:nowrap;}
+.inline-guide-link:hover{color:var(--navy);}
+.inline-guide-link-block{display:block; width:max-content; margin-top:8px; font-size:.84rem;}
+
+/* Partner cards: columns could not shrink below their widest unbroken row, so
+   between 861px and about 1000px the grid pushed the page wider than the
+   screen. Columns may now shrink, link rows wrap, and the grid stacks from
+   1000px down. */
+.partner-grid{grid-template-columns:repeat(3,minmax(0,1fr));}
+.partner-card-lg .social-row{flex-wrap:wrap; row-gap:6px;}
+@media (max-width:1000px){
+  .partner-grid{grid-template-columns:1fr;}
+}
+
+/* =========================================================================
+   Hairline pass: every border on the site is 1px (focus outlines excepted).
+   Cards share the hairline colour on all four sides; the featured card and
+   the open card keep a darker 1px edge plus a soft shadow.
+   ========================================================================= */
+.tier-card, .place-card, .partner-card-lg, .advisor-card, .format-detail-col-boxed{
+  border:1px solid var(--hairline-color);
+}
+.tier-card.tier-featured{
+  border:1px solid rgba(var(--navy-rgb),.28);
+  box-shadow:0 16px 32px -16px rgba(var(--navy-rgb),.14);
+}
+.format-detail{border-top:1px solid var(--teal);}
+.standard-banner, .cadence-arrival-banner, .intake-trust-grid .value-card, .moat-pull-quote{border-left-width:1px;}
+.intake-avatar-stack img{border-width:1px;}
+.btn-secondary.btn-sm{border-color:rgba(var(--navy-rgb),.4);}
+.btn-secondary.btn-sm:hover{border-color:var(--navy);}
+
+/* =========================================================================
+   Operator cards on index.html (#collective): four editorial cards, compact
+   at rest. With a mouse (1101px and wider) the bio opens directly under the
+   role on hover or keyboard focus, and the footer rides down with it.
+   Each card sits in a .partner-card-slot. app.js pins the slots to the
+   resting height (.is-pinned), so the open card grows over the content below
+   and the page itself never moves. Without JavaScript the card simply grows
+   in place. On touch screens and narrower layouts the bio is always open.
+   ========================================================================= */
+.partner-grid-4{grid-template-columns:repeat(4,minmax(0,1fr)); gap:20px; align-items:stretch;}
+.partner-card-slot{position:relative; display:flex;}
+.partner-card-editorial{
+  flex:1; display:flex; flex-direction:column; justify-content:space-between; height:auto;
+  padding:24px 22px; background:linear-gradient(180deg, #FFFFFF 0%, #F9FAFB 100%); border-radius:var(--radius-md); box-shadow:var(--card-sheen);
+  transition:border-color .25s ease, box-shadow .25s ease;
+}
+.partner-card-editorial:hover, .partner-card-editorial:focus-within{
+  border-color:rgba(var(--navy-rgb),.25); box-shadow:0 16px 36px -16px rgba(var(--navy-rgb),.14);
+}
+.partner-card-top{display:flex; flex-direction:column;}
+.partner-card-editorial .partner-photo{width:56px; height:56px; margin-bottom:16px;}
+.partner-superpower{
+  display:block; font-family:'Lato',Arial,sans-serif; font-size:.68rem; font-weight:700;
+  text-transform:uppercase; letter-spacing:.08em; line-height:1.45; color:var(--teal); margin-bottom:6px;
+}
+.partner-card-editorial h3{font-size:1.15rem; line-height:1.25; margin:0 0 4px;}
+.partner-card-editorial .role{
+  display:block; font-family:'Lato',Arial,sans-serif; font-size:.8rem; font-weight:700; line-height:1.4;
+  color:rgba(var(--navy-rgb),.65); margin-bottom:12px;
+}
+.partner-bio-drawer{display:grid; grid-template-rows:1fr;}
+.partner-bio-drawer-inner{overflow:hidden; min-height:0;}
+.partner-card-editorial .partner-bio{
+  font-size:.86rem; line-height:1.55; color:rgba(26,26,26,.78);
+  margin:0; padding:10px 0 14px; border-top:1px solid var(--hairline-color);
+}
+.partner-card-bottom{
+  margin-top:auto; padding-top:14px; border-top:1px solid var(--hairline-color);
+  display:flex; flex-direction:column; gap:10px;
+}
+.partner-languages-line{font-family:'Lato',Arial,sans-serif; font-size:.74rem; font-weight:700; letter-spacing:.02em; color:var(--teal); white-space:nowrap;}
+.partner-languages-line span{
+  font-size:.66rem; text-transform:uppercase; letter-spacing:.08em; color:rgba(var(--navy-rgb),.5); margin-right:4px;
+}
+.partner-languages-line abbr{text-decoration:none; cursor:help;}
+.partner-links-line{display:flex; align-items:center; flex-wrap:wrap; gap:6px 16px;}
+.partner-links-line a{
+  font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.8rem; color:var(--navy);
+  text-decoration:none; transition:color .15s ease;
+}
+.partner-links-line a:hover{color:var(--teal);}
+
+@media (hover:hover) and (pointer:fine) and (min-width:1101px){
+  .partner-bio-drawer{grid-template-rows:0fr; transition:grid-template-rows .35s cubic-bezier(.16,1,.3,1);}
+  .partner-card-editorial:hover .partner-bio-drawer,
+  .partner-card-editorial:focus-within .partner-bio-drawer{grid-template-rows:1fr;}
+  .is-pinned .partner-card-editorial{position:absolute; top:0; left:0; right:0; min-height:100%;}
+  .is-pinned .partner-card-editorial:hover,
+  .is-pinned .partner-card-editorial:focus-within{z-index:10;}
+  /* used by app.js for one frame while it measures the resting height */
+  .is-measuring .partner-card-editorial{position:static; min-height:0;}
+  .is-measuring .partner-bio-drawer{grid-template-rows:0fr !important; transition:none;}
+}
+@media (max-width:1100px){
+  .partner-grid-4{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+@media (max-width:640px){
+  .partner-grid-4{grid-template-columns:1fr;}
+}
+@media (prefers-reduced-motion: reduce){
+  .partner-bio-drawer{transition:none !important;}
+}
+
+/* =========================================================================
+   partners.html: both card grids use the editorial card from index.html
+   (.partner-card-editorial in a .partner-card-slot), including the inline
+   bio on hover. The bench (.bench-grid) is three across, with the client
+   badges in the card footer under the language line.
+   ========================================================================= */
+.bench-grid{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; align-items:stretch;}
+.partner-card-editorial h4{font-size:1.1rem; line-height:1.25; margin:0 0 12px;}
+.partner-card-editorial .client-badges{margin-top:0;}
+.partner-card-editorial[tabindex]:focus-visible{outline:2px solid var(--teal); outline-offset:2px;}
+@media (max-width:1100px){
+  .bench-grid{grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px;}
+}
+@media (max-width:640px){
+  .bench-grid{grid-template-columns:1fr;}
+}
+
+/* =========================================================================
+   Leaner summary cards (#formats, #cadence). The format cards' italic
+   paragraph and the agenda cards' three bullets now open the matching
+   drawer instead of sitting on the card. Nothing was deleted.
+   ========================================================================= */
+.format-detail-intro{font-size:1rem; line-height:1.6; font-style:italic; color:rgba(26,26,26,.75); max-width:820px; margin:0 0 28px;}
+.cadence-detail-highlights{display:flex; flex-wrap:wrap; gap:6px 32px; margin:0 0 24px; padding:0;}
+.cadence-detail-highlights li{margin:0;}
+#formats .place-body .tier-subhead{margin-bottom:18px;}
+#cadence .tier-card .tier-mandate{margin-bottom:22px; padding-bottom:0; border-bottom:none;}
+/* The "Most Requested" badge sits half above its card; the card's
+   overflow:hidden (there to round the photo) was cutting it in half. */
+#formats .place-card{overflow:visible;}
+#formats .place-card .place-image{border-radius:var(--radius-md) var(--radius-md) 0 0;}
+
+/* =========================================================================
+   Direct contact block on index.html (#contact), replacing the old intake
+   form. The configurator is now the only form on the home page.
+   ========================================================================= */
+.section-contact{background:linear-gradient(180deg, #FFFFFF 0%, var(--section-tint) 100%); padding:80px 0 100px;}
+.contact-concierge-card{
+  display:grid; grid-template-columns:1.4fr 1fr; gap:48px; align-items:center;
+  padding:56px 48px; border-radius:var(--radius-lg); color:#fff;
+  background:var(--bg-dark-ambient);
+  box-shadow:0 24px 48px -18px rgba(var(--navy-rgb),.25);
+}
+.badge-pill.badge-pill-inverse{background:transparent; border-color:rgba(255,255,255,.35); color:#fff;}
+.contact-concierge-left h2{color:#fff; font-size:2.2rem; line-height:1.2; margin:16px 0 12px;}
+.contact-concierge-left .subhead{color:rgba(255,255,255,.82); font-size:1.05rem; line-height:1.6; margin:0;}
+.concierge-guarantees{list-style:none; margin:28px 0 0; padding:0; display:flex; flex-direction:column; gap:18px;}
+.guarantee-item{display:flex; gap:14px; align-items:flex-start;}
+.guarantee-bullet{color:#7CC4DA; font-size:1.4rem; line-height:1;}
+.guarantee-item strong{display:block; font-size:.95rem; color:#fff; margin-bottom:2px;}
+.guarantee-item p{margin:0; font-size:.86rem; line-height:1.5; color:rgba(255,255,255,.72);}
+.concierge-action-box{
+  background:#fff; color:var(--navy); text-align:center; border-radius:var(--radius-md);
+  padding:36px 30px; box-shadow:0 16px 32px -12px rgba(0,0,0,.2);
+}
+.concierge-action-box h3{font-size:1.25rem; margin:0 0 8px;}
+.concierge-action-box p{font-size:.9rem; line-height:1.5; color:rgba(26,26,26,.75); margin:0 0 22px;}
+.btn.btn-block{display:flex; width:100%; justify-content:center;}
+.concierge-email{display:block; margin-top:10px; font-size:.82rem; color:rgba(var(--navy-rgb),.6);}
+.concierge-divider{
+  display:flex; align-items:center; margin:20px 0 16px; color:rgba(var(--navy-rgb),.45);
+  font-size:.72rem; text-transform:uppercase; letter-spacing:.08em;
+}
+.concierge-divider::before, .concierge-divider::after{content:""; flex:1; border-bottom:1px solid var(--hairline-color);}
+.concierge-divider span{padding:0 12px;}
+.concierge-meta{display:block; margin-top:12px; font-size:.76rem; color:rgba(var(--navy-rgb),.55);}
+.field-optional{font-weight:400; text-transform:none; letter-spacing:0; color:rgba(var(--navy-rgb),.5);}
+.debrief-form textarea{
+  width:100%; padding:12px 14px; border:1px solid var(--hairline-color); border-radius:var(--radius-xs);
+  font-family:'Lato',Arial,sans-serif; font-size:.95rem; color:var(--navy); background:#fff; resize:vertical;
+}
+@media (max-width:900px){
+  .contact-concierge-card{grid-template-columns:1fr; gap:32px; padding:36px 24px;}
+  .contact-concierge-left h2{font-size:1.8rem;}
+}
+
+/* =========================================================================
+   Standalone calibrator page (/offsite/configurator): dark canvas from top
+   to bottom, compact intro so Step 01 sits above the fold, no pricing cards
+   (the blueprint carries the fee structure), and a quiet trust row under
+   the card.
+   ========================================================================= */
+.calibrator-page{background:var(--navy); padding-top:0;}
+.calibrator-header{background:rgba(11,21,35,.95); border-bottom:1px solid rgba(255,255,255,.1);}
+.calibrator-header-inner{display:flex; align-items:center; justify-content:space-between; gap:16px; padding-top:14px; padding-bottom:14px;}
+.calibrator-header .logo-divider{background:rgba(255,255,255,.22); height:26px;}
+.calibrator-logo-kuma{height:26px;}
+.calibrator-logo-nonameyet{height:36px; filter:brightness(0) invert(1);}
+.calibrator-header-meta{display:flex; align-items:center; gap:18px;}
+.calibrator-badge{
+  display:inline-flex; align-items:center; gap:8px; font-family:'Lato',Arial,sans-serif; font-size:.68rem; font-weight:700;
+  letter-spacing:.08em; text-transform:uppercase; color:rgba(248,249,250,.85); border:1px solid rgba(255,255,255,.18);
+  border-radius:999px; padding:6px 12px; white-space:nowrap;
+}
+.calibrator-badge::before{content:""; width:6px; height:6px; border-radius:50%; background:#5FB3CC;}
+.calibrator-back{font-size:.85rem; color:rgba(248,249,250,.65); text-decoration:none; white-space:nowrap;}
+.calibrator-back:hover{color:#fff; text-decoration:underline;}
+
+.calibrator-stage{padding-top:36px; padding-bottom:64px; min-height:calc(100vh - 120px); border-bottom:none;}
+.calibrator-intro{text-align:center; max-width:640px; margin:0 auto 24px;}
+.calibrator-eyebrow{display:block; font-family:'Lato',Arial,sans-serif; font-size:.72rem; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:#5FB3CC; margin-bottom:10px;}
+.calibrator-page h1.calibrator-title{color:#fff; font-size:2.2rem; line-height:1.2; margin:0 0 8px;}
+.calibrator-page .calibrator-sub{font-size:.98rem; color:rgba(248,249,250,.8); margin:0;}
+
+.calibrator-page #configurator-app{
+  margin:0 auto; padding:36px; border-radius:var(--radius-md); border:1px solid var(--hairline-color);
+  box-shadow:0 24px 48px -24px rgba(0,0,0,.55), 0 2px 6px rgba(0,0,0,.12);
+}
+
+.calibrator-trust{
+  list-style:none; margin:28px auto 0; padding:0; max-width:760px;
+  display:grid; grid-template-columns:repeat(3,1fr); gap:20px;
+}
+.calibrator-trust li{display:flex; align-items:flex-start; gap:10px; font-size:.8rem; line-height:1.45; color:rgba(248,249,250,.6);}
+.calibrator-trust svg{width:18px; height:18px; flex:none; margin-top:1px; color:#5FB3CC;}
+.calibrator-trust strong{display:block; color:rgba(248,249,250,.88); font-weight:700;}
+
+.calibrator-footer{background:#060E17; color:rgba(248,249,250,.55); font-size:.82rem; border-top:1px solid rgba(255,255,255,.06);}
+.calibrator-footer-inner{display:flex; justify-content:space-between; align-items:center; gap:16px; padding-top:22px; padding-bottom:22px; flex-wrap:wrap;}
+.calibrator-footer-links{display:flex; gap:20px;}
+.calibrator-footer a{color:rgba(248,249,250,.7); text-decoration:none;}
+.calibrator-footer a:hover{color:#fff; text-decoration:underline;}
+@media (max-width:639px){
+  .calibrator-header-inner{gap:10px;}
+  .calibrator-badge{display:none;}
+  .calibrator-logo-kuma{height:20px;}
+  .calibrator-logo-nonameyet{height:28px;}
+  .calibrator-header .logo-divider{height:20px;}
+  .calibrator-stage{padding-top:24px; padding-bottom:48px;}
+  .calibrator-intro{margin-bottom:18px;}
+  .calibrator-page h1.calibrator-title{font-size:1.65rem;}
+  .calibrator-page .calibrator-sub{font-size:.92rem;}
+  .calibrator-page #configurator-app{padding:20px;}
+  .calibrator-trust{grid-template-columns:1fr; gap:14px; max-width:420px;}
+}
