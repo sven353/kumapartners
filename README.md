@@ -90,7 +90,7 @@ Headings are in British sentence case. Product, tool and people names keep their
 
 Every page carries the same header navigation as the homepage, including the mobile menu toggle. On subpages the links point to `index.html#section`, and Team points to `partners.html`. If you change the homepage menu, copy it to the other five pages.
 
-Homepage light sections alternate pure white and chalk so no two neighbours share a tone: hero white, `.proof` navy, `#problem` chalk, `#approach` white, `#partners` chalk, `#system` white, `#engagements` chalk, `#case-studies` white, `#scorecard` dark, `#investors` chalk, `#faq` white, `#fit` chalk, `#contact` dark, footer dark. Cards placed on a chalk section are white with a hairline border and `--shadow-card-subtle`. If you add or move a section, keep the alternation; the order is also written as a comment above `#problem` in `styles.css`.
+Homepage light sections are soft vertical ramps (`--ramp-chalk` #F4F6F8 to #EEF2F6, `--ramp-white` white to #F8F9FA, `--ramp-inverse` #F8F9FA to white) that alternate between chalk and white so no two neighbours share a tone: hero white, `.proof` navy, `#problem` chalk, `#approach` white, `#partners` chalk, `#system` white, `#engagements` chalk, `#case-studies` white, `#scorecard` dark, `#investors` chalk, `#faq` white, `#fit` chalk, `#contact` dark, footer dark. Cards placed on a chalk section are white with a hairline border and `--shadow-card-subtle`. If you add or move a section, keep the alternation; the order is also written as a comment above `#problem` in `styles.css`.
 
 ## 5. Forms and lead routing
 
