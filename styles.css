@@ -112,6 +112,7 @@ header.site.scrolled .nav{padding:10px 0;}
 .logo{display:flex; align-items:center; text-decoration:none;}
 .logo img{height:37px; width:auto; display:block;}
 .logo.footer-logo img{height:40px;}
+.logo.footer-logo img.footer-logo-img{height:32px; width:auto; display:block; image-rendering:-webkit-optimize-contrast;}
 .nav-links{display:flex; align-items:center; gap:32px; list-style:none; margin:0; padding:0;}
 .nav-links a{
   text-decoration:none; color:var(--navy); font-size:.875rem; font-weight:400; white-space:nowrap;
@@ -224,15 +225,13 @@ header.site.scrolled .nav{padding:10px 0;}
   letter-spacing:.09em; text-transform:uppercase; color:rgba(251,249,245,.75);
   line-height:1.4; margin:0 0 14px;
 }
-/* 5 over 4: enterprise anchors on top, scale-up and infrastructure leaders below */
+/* 5 over 5: enterprise anchors on top, media, scale-up and infrastructure leaders below */
 .proof-static-grid{display:flex; flex-direction:column; align-items:center; gap:28px; max-width:880px; margin:18px auto 0;}
 .proof-row{display:flex; flex-wrap:wrap; justify-content:center; align-items:center; gap:24px 56px; width:100%;}
-.proof-row-bottom{max-width:680px;}
 @media (max-width:639px){
-  /* Phones: both rows flow into one 2-column grid, the ninth logo centred on its own line */
+  /* Phones: both rows flow into one 2-column grid, five rows of two */
   .proof-static-grid{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:26px 20px; justify-items:center; align-items:center;}
   .proof-row{display:contents;}
-  .proof-row-bottom .static-logo:last-child{grid-column:span 2;}
 }
 .static-logo{display:block; height:auto; max-width:100%; filter:brightness(0) invert(1); opacity:.55; transition:opacity .2s ease, transform .2s ease;}
 .static-logo:hover{opacity:.95; transform:translateY(-1px);}
@@ -1297,7 +1296,7 @@ body.debrief-modal-locked{overflow:hidden;}
 
 /* Footer: institutional dark base, shared by every page */
 footer.site{background:var(--footer-dark); padding:60px 0 40px; border-top:1px solid rgba(255,255,255,.08); color:rgba(255,255,255,.75);}
-footer.site .footer-logo img{filter:brightness(0) invert(1);}
+footer.site .footer-logo img:not(.footer-logo-img){filter:brightness(0) invert(1);}
 .footer-tagline{font-size:.92rem; color:rgba(255,255,255,.65); max-width:280px;}
 .footer-grid{display:grid; grid-template-columns:1.4fr 1fr 1fr; gap:40px; margin-bottom:40px;}
 .footer-grid h4{
@@ -1657,8 +1656,13 @@ main:focus{outline:none;}
 .operator-name{font-family:'Montserrat',Arial,sans-serif; font-size:1.25rem; font-weight:700; color:var(--navy); margin:0;}
 .operator-role{font-size:.8rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--slate);}
 .operator-bio{font-size:.9rem; line-height:1.55; color:rgba(26,26,26,.78); margin:4px 0 8px;}
-.operator-focus{display:flex; flex-wrap:wrap; gap:8px; margin-top:auto;}
-.focus-tag{font-size:.75rem; font-weight:700; letter-spacing:.04em; color:var(--navy); background:var(--cream); border:1px solid var(--hairline-color); border-radius:var(--radius-sm); padding:4px 10px;}
+/* Core advisory focus: typographic list in place of pill tags */
+.partner-expertise-block{margin-top:1.5rem; padding-top:1.25rem; border-top:1px solid var(--hairline-color); text-align:left;}
+.expertise-header{display:block; font-size:.6875rem; text-transform:uppercase; letter-spacing:.08em; font-weight:700; color:var(--teal); margin-bottom:.75rem;}
+.expertise-list{list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:.5rem;}
+.expertise-list li{font-size:.8125rem; line-height:1.45; color:#475569; position:relative; padding-left:1rem;}
+.expertise-list li::before{content:"\2022"; position:absolute; left:0; color:var(--teal); font-weight:700;}
+.expertise-list strong{color:var(--navy); font-weight:600;}
 @media (max-width: 768px){
   .section-operators-strip{padding:64px 0;}
   .operators-grid{display:flex; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; gap:16px; margin:0 -32px; padding:0 32px 16px; max-width:none; scrollbar-width:thin;}

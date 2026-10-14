@@ -29,7 +29,8 @@ sitemap.xml               # Production URL list
 llms.txt                  # Plain-language site summary for AI agents (GEO)
 assets/
   logo-icon.png            # Favicon
-  logo-lockup.png           # Header and footer wordmark
+  logo-lockup.png           # Header wordmark (dark on light)
+  kuma-partners-logo-white.png  # Footer wordmark, white on transparent, 4x for retina (shown at 32px high)
   og-image.jpg               # Social share image
   team/                       # Headshots for partners and the specialist bench
   offsites/                    # Photography for the Executive Offsites service
@@ -76,7 +77,7 @@ All colors are CSS custom properties defined once on `:root` in `styles.css`.
 | Token | Value | Role |
 |---|---|---|
 | `--cream` | `#F4F6F8` | Chalk: the off-white tier for alternating sections |
-| `--navy` | `#0B1523` | Midnight: the `.proof` logo bar, and text and headings |
+| `--navy` | `#0B1523` | Midnight: the `.proof` logo bar (five over five: Microsoft, Santander, BMW Group, Bloomberg, IESE / Bertelsmann, Netflix, constellr, Rootstock, Cellnex), and text and headings |
 | `--bg-dark-ambient` | radial `#17324B` to `#0B1523` | Overhead ambient light on the dark anchors `#scorecard` and `#contact` |
 | `--footer-dark` | `#060E17` | Footer base on every page |
 | `--teal` | `#1D6F8A` | Accent: eyebrows, links, icons, hover states |
