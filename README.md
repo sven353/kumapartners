@@ -117,3 +117,12 @@ Netlify deploys straight from the `main` branch of this repository. There is no 
 ## 9. Offsites under /offsite
 
 `kuma.partners/offsite/` serves the separate offsite site (repo `sven353/offsite.kuma.partners`, live at `offsite.kuma.partners`) through two rules in `_redirects`: `/offsite` gets a 301 to `/offsite/`, then `/offsite/*` is proxied with a 200 so the address bar keeps `kuma.partners/offsite/...`. The trailing slash matters: the offsite pages use relative links for CSS, images and pages, which only resolve inside `/offsite/` when the URL ends in a slash. For the same reason, any new link on the offsite site must be relative (`partners.html`, `../insights/`), never root-relative (`/partners.html`), or it will land on this site. The header links to `/offsite/` as Offsites and the footer as Executive Offsites. The header switches to the burger menu below 1024px (CSS and the two `innerWidth > 1023` checks in `site.js`) because eight items plus the CTA no longer fit on one line.
+
+
+## Executive offsites (/offsite/)
+
+The offsite site lives in the `offsite/` folder and is served directly at www.kuma.partners/offsite/. It used to be a separate Netlify site (offsite.kuma.partners) proxied in through `_redirects`; that proxy is gone, and the old subdomain now only redirects here.
+
+- All links inside `offsite/` are relative, so the folder works as it is.
+- Its two Netlify forms are `offsite-blueprint` (configurator) and `discovery-call` (partners page). Form names must stay unique across the whole site.
+- Its pages are listed in the main `sitemap.xml`.

@@ -1,5 +1,4 @@
-# Executive offsites live on their own Netlify site and are served here under /offsite/.
+# Executive offsites now live in the /offsite/ folder of this repo and are served directly.
+# The old proxy to offsite.kuma.partners has been removed on purpose.
 # Do not add a rule redirecting /offsite to /offsite/: Netlify treats both as the same
 # path, so such a rule redirects to itself and causes ERR_TOO_MANY_REDIRECTS.
-# The offsite site adds the missing trailing slash itself with a small script.
-/offsite/*  https://offsite.kuma.partners/:splat    200!
