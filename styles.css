@@ -208,31 +208,12 @@ header.site.scrolled .nav{padding:10px 0;}
   letter-spacing:.09em; text-transform:uppercase; color:rgba(251,249,245,.75);
   line-height:1.4; margin:0 0 14px;
 }
-.marquee{
-  width:100%; overflow:hidden;
-  -webkit-mask-image:linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-  mask-image:linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+.proof-static-grid{
+  display:flex; flex-wrap:wrap; justify-content:center; align-items:center;
+  gap:28px 56px; max-width:720px; margin:8px auto 0;
 }
-.marquee-track{
-  display:flex; align-items:center; width:max-content;
-  /* Duration scaled up with the track: 17 -> 27 logos, so 40s stretched to 55s keeps the
-     same calm per-logo pace instead of speeding up under the added content. */
-  animation:marquee 55s linear infinite;
-  will-change:transform;
-}
-.marquee:hover .marquee-track{animation-play-state:paused;}
-.marquee-track span{
-  font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:1.1rem;
-  color:rgba(255,255,255,.88); letter-spacing:.02em; white-space:nowrap; flex-shrink:0;
-  padding:0 44px;
-}
-@keyframes marquee{
-  from{transform:translateX(0);}
-  to{transform:translateX(-50%);}
-}
-@media (prefers-reduced-motion: reduce){
-  .marquee-track{animation:none;}
-}
+.static-logo{display:block; height:auto; max-width:100%; filter:brightness(0) invert(1); opacity:.7; transition:opacity .2s;}
+.static-logo:hover{opacity:1;}
 
 /* Problem — stat lockup */
 .problem-stat{
@@ -1117,8 +1098,7 @@ body.scan-modal-locked{overflow:hidden;}
 @media (max-width: 860px){
   .case-docket-panel, .value-grid, .deliverable-grid{grid-template-columns:1fr;}
   .case-docket-panel{gap:28px;}
-  .marquee-track span{padding:0 26px; font-size:1rem;}
-  .marquee-track{animation-duration:38s;}
+  .proof-static-grid{gap:22px 36px;}
   .cookie-banner .wrap{flex-direction:column; align-items:flex-start;}
   .cookie-actions{width:100%;}
   .cookie-actions button{flex:1;}
@@ -1696,3 +1676,29 @@ footer.site{background:var(--cream); padding:60px 0 40px; border-top:1px solid r
 }
 .skip-link:focus{top:1rem; outline:2px solid var(--teal-on-dark); outline-offset:2px;}
 main:focus{outline:none;}
+
+/* Operators strip */
+.section-operators-strip{background:#fff; padding:88px 0; border-top:1px solid var(--hairline-color); border-bottom:1px solid var(--hairline-color);}
+.operators-head{text-align:center; max-width:680px; margin:0 auto 48px;}
+.operators-head .eyebrow{display:block; text-align:center;}
+.operators-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:32px; max-width:760px; margin:0 auto;}
+.operator-card{background:#fff; border:1px solid var(--hairline-color); border-radius:var(--radius-md); overflow:hidden; display:flex; flex-direction:column; transition:transform .25s ease, box-shadow .25s ease;}
+.operator-card:hover{transform:translateY(-3px); box-shadow:0 10px 28px rgba(11,21,35,.08);}
+.operator-image-wrapper{aspect-ratio:4/4.5; overflow:hidden; background:#E2E8F0;}
+.operator-img{display:block; width:100%; height:100%; object-fit:cover; object-position:center top; filter:grayscale(1); transition:filter .3s ease;}
+.operator-card:hover .operator-img{filter:grayscale(0);}
+.operator-content{padding:24px; display:flex; flex-direction:column; gap:8px; flex:1;}
+.operator-name{font-family:'Montserrat',Arial,sans-serif; font-size:1.25rem; font-weight:700; color:var(--navy); margin:0;}
+.operator-role{font-size:.8rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; color:var(--slate);}
+.operator-bio{font-size:.95rem; line-height:1.6; color:var(--ink); margin:4px 0 8px;}
+.operator-focus{display:flex; flex-wrap:wrap; gap:8px; margin-top:auto;}
+.focus-tag{font-size:.75rem; font-weight:700; letter-spacing:.04em; color:var(--navy); background:var(--cream); border:1px solid var(--hairline-color); border-radius:var(--radius-sm); padding:4px 10px;}
+@media (max-width: 768px){
+  .section-operators-strip{padding:64px 0;}
+  .operators-grid{display:flex; overflow-x:auto; scroll-snap-type:x mandatory; -webkit-overflow-scrolling:touch; gap:16px; margin:0 -32px; padding:0 32px 16px; max-width:none; scrollbar-width:thin;}
+  .operator-card{flex:0 0 85%; scroll-snap-align:start;}
+}
+@media (prefers-reduced-motion: reduce){
+  .operator-card, .operator-img, .static-logo{transition:none;}
+  .operator-card:hover{transform:none;}
+}
