@@ -54,8 +54,8 @@
       </div>
 
       <div class="review-card-container">
-        <form name="constellr-debrief-v4" method="POST" action="/constellr-review?submitted=1" data-netlify="true" netlify-honeypot="bot-field" id="constellr-review-form" class="review-form">
-          <input type="hidden" name="form-name" value="constellr-debrief-v4">
+        <form name="constellr-debrief-v5" method="POST" action="/constellr-review?submitted=1" data-netlify="true" netlify-honeypot="bot-field" id="constellr-review-form" class="review-form">
+          <input type="hidden" name="form-name" value="constellr-debrief-v5">
           <p class="review-honeypot" aria-hidden="true"><input name="bot-field" tabindex="-1" autocomplete="off" aria-label="Leave this empty"></p>
 
           <input type="hidden" name="Client Account" value="constellr">
@@ -170,13 +170,14 @@
       <fieldset class="review-field-group">
         <legend class="review-question-label" id="q5-label">5. Potential next steps</legend>
         <p class="question-explainer">Where do you see the greatest opportunity to strengthen leadership effectiveness or execution velocity across constellr? Select all that apply.</p>
+        <input type="hidden" name="5. Potential next steps" id="field-next-steps" value="">
         <div class="priority-checkbox-grid" role="group" aria-labelledby="q5-label">
-          <span class="checkbox-pill"><input type="checkbox" id="q5-exec-alignment" name="5. Next step: Executive team alignment and strategic cadence" value="Yes" aria-labelledby="q5-exec-alignment-t"><span class="pill-check" aria-hidden="true"></span><span class="pill-label" id="q5-exec-alignment-t">Executive team alignment and strategic cadence</span></span>
-          <span class="checkbox-pill"><input type="checkbox" id="q5-cross-functional" name="5. Next step: Cross-functional collaboration and hand-offs" value="Yes" aria-labelledby="q5-cross-functional-t"><span class="pill-check" aria-hidden="true"></span><span class="pill-label" id="q5-cross-functional-t">Cross-functional collaboration and hand-offs</span></span>
-          <span class="checkbox-pill"><input type="checkbox" id="q5-decision-rights" name="5. Next step: Decision-making rights and clarity of accountability" value="Yes" aria-labelledby="q5-decision-rights-t"><span class="pill-check" aria-hidden="true"></span><span class="pill-label" id="q5-decision-rights-t">Decision-making rights and clarity of accountability</span></span>
-          <span class="checkbox-pill"><input type="checkbox" id="q5-sparring" name="5. Next step: Continued one-to-one executive sparring for key leaders" value="Yes" aria-labelledby="q5-sparring-t"><span class="pill-check" aria-hidden="true"></span><span class="pill-label" id="q5-sparring-t">Continued one-to-one executive sparring for key leaders</span></span>
-          <span class="checkbox-pill"><input type="checkbox" id="q5-middle-mgmt" name="5. Next step: Developing leadership capabilities across middle management" value="Yes" aria-labelledby="q5-middle-mgmt-t"><span class="pill-check" aria-hidden="true"></span><span class="pill-label" id="q5-middle-mgmt-t">Developing leadership capabilities across middle management</span></span>
-          <span class="checkbox-pill"><input type="checkbox" id="q5-none" name="5. Next step: No immediate need for further external support" value="Yes" aria-labelledby="q5-none-t"><span class="pill-check" aria-hidden="true"></span><span class="pill-label" id="q5-none-t">No immediate need for further external support</span></span>
+          <span class="checkbox-pill"><input type="checkbox" id="q5-exec-alignment" value="Executive team alignment and strategic cadence" data-next-step aria-labelledby="q5-exec-alignment-t"><span class="pill-check" aria-hidden="true"></span><span class="pill-label" id="q5-exec-alignment-t">Executive team alignment and strategic cadence</span></span>
+          <span class="checkbox-pill"><input type="checkbox" id="q5-cross-functional" value="Cross-functional collaboration and hand-offs" data-next-step aria-labelledby="q5-cross-functional-t"><span class="pill-check" aria-hidden="true"></span><span class="pill-label" id="q5-cross-functional-t">Cross-functional collaboration and hand-offs</span></span>
+          <span class="checkbox-pill"><input type="checkbox" id="q5-decision-rights" value="Decision-making rights and clarity of accountability" data-next-step aria-labelledby="q5-decision-rights-t"><span class="pill-check" aria-hidden="true"></span><span class="pill-label" id="q5-decision-rights-t">Decision-making rights and clarity of accountability</span></span>
+          <span class="checkbox-pill"><input type="checkbox" id="q5-sparring" value="Continued one-to-one executive sparring for key leaders" data-next-step aria-labelledby="q5-sparring-t"><span class="pill-check" aria-hidden="true"></span><span class="pill-label" id="q5-sparring-t">Continued one-to-one executive sparring for key leaders</span></span>
+          <span class="checkbox-pill"><input type="checkbox" id="q5-middle-mgmt" value="Developing leadership capabilities across middle management" data-next-step aria-labelledby="q5-middle-mgmt-t"><span class="pill-check" aria-hidden="true"></span><span class="pill-label" id="q5-middle-mgmt-t">Developing leadership capabilities across middle management</span></span>
+          <span class="checkbox-pill"><input type="checkbox" id="q5-none" value="No immediate need for further external support" data-next-step aria-labelledby="q5-none-t"><span class="pill-check" aria-hidden="true"></span><span class="pill-label" id="q5-none-t">No immediate need for further external support</span></span>
         </div>
       </fieldset>
 

@@ -47,8 +47,22 @@ document.addEventListener('DOMContentLoaded', function () {
 
   if (!form) return;
 
+  // Question 5: the tick boxes carry no name of their own. Their selected values are written into one
+  // hidden field, "5. Potential next steps", as a comma-separated list, so the Netlify email shows a
+  // single line with only what was ticked.
+  var nextStepsField = document.getElementById('field-next-steps');
+  var nextStepBoxes = form.querySelectorAll('[data-next-step]');
+  function syncNextSteps() {
+    if (!nextStepsField) return;
+    nextStepsField.value = Array.prototype.filter.call(nextStepBoxes, function (b) { return b.checked; })
+      .map(function (b) { return b.value; }).join(', ');
+  }
+  Array.prototype.forEach.call(nextStepBoxes, function (b) { b.addEventListener('change', syncNextSteps); });
+  syncNextSteps();
+
   form.addEventListener('submit', function (e) {
     e.preventDefault();
+    syncNextSteps();
     if (timeInput) timeInput.value = new Date().toISOString();
     if (errorEl) errorEl.hidden = true;
     var original = submitBtn ? submitBtn.innerHTML : '';
