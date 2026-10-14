@@ -1738,7 +1738,7 @@ main:focus{outline:none;}
 .leadership-footprint-bar{
   max-width:760px; margin:24px auto 0; background:#fff; border:1px solid var(--hairline-color);
   border-radius:var(--radius-lg); padding:24px 32px; box-shadow:var(--shadow-card-subtle);
-  display:grid; grid-template-columns:1.2fr 1fr; gap:40px;
+  display:grid; grid-template-columns:1fr 1fr; gap:40px;
 }
 .footprint-col{display:flex; flex-direction:column; min-width:0;}
 .footprint-col + .footprint-col{border-left:1px solid var(--hairline-color); padding-left:40px;}
@@ -1746,12 +1746,10 @@ main:focus{outline:none;}
   display:block; font-family:'Lato',Arial,sans-serif; font-size:.75rem; font-weight:700;
   letter-spacing:.08em; text-transform:uppercase; color:var(--teal); margin-bottom:10px;
 }
-.footprint-cities{display:flex; flex-wrap:wrap; align-items:center; row-gap:6px; font-size:.875rem; font-weight:600; color:var(--navy); line-height:1.4;}
-.footprint-cities span::after{content:"\00B7"; margin:0 8px; color:rgba(11,21,35,.3); font-weight:400;}
-.footprint-cities span:last-child::after{content:none;}
-.language-badges{display:flex; flex-wrap:wrap; gap:6px;}
-.lang-pill{font-size:.75rem; font-weight:600; color:var(--navy); background:var(--cream); border:1px solid var(--hairline-color); padding:3px 9px; border-radius:var(--radius-sm);}
-.footprint-note{margin:10px 0 0; font-size:.8125rem; line-height:1.45; color:#475569;}
+.footprint-items{display:flex; flex-wrap:wrap; align-items:center; row-gap:6px; font-size:.9375rem; font-weight:700; letter-spacing:-.01em; color:var(--navy); line-height:1.45;}
+.footprint-items span::after{content:"\00B7"; margin:0 9px; color:rgba(11,21,35,.25); font-weight:400;}
+.footprint-items span:last-child::after{content:none;}
+.footprint-note{margin:12px 0 0; font-size:.8125rem; line-height:1.45; color:#475569;}
 @media (max-width:860px){
   .leadership-footprint-bar{grid-template-columns:1fr; gap:22px; padding:22px 20px;}
   .footprint-col + .footprint-col{border-left:none; padding-left:0; border-top:1px solid var(--hairline-color); padding-top:22px;}
@@ -1833,8 +1831,7 @@ main:focus{outline:none;}
 
   /* Footprint bar: tighter padding, smaller language pills */
   .leadership-footprint-bar{padding:20px 18px; margin-top:20px;}
-  .footprint-cities{font-size:.8125rem; line-height:1.5;}
-  .lang-pill{font-size:.75rem; padding:3px 8px;}
+  .footprint-items{font-size:.875rem; line-height:1.5;}
 }
 
 /* ==========================================================================
