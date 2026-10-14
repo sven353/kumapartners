@@ -469,8 +469,8 @@ document.addEventListener('DOMContentLoaded', function () {
       high: 'HIGH LEADERSHIP FRICTION'
     };
     var CTA_COPY = {
-      founder: 'Initiate a 14-Day Friction Scan to Fix This',
-      investor: 'Request a Confidential Portfolio Debrief'
+      founder: 'Initiate a 14-Day Scan',
+      investor: 'Book a Partner Debrief'
     };
     var SYNTHESIS_COPY = {
       founder: {
@@ -662,7 +662,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
     var ctaBtn = scorecard.querySelector('[data-scorecard-cta]');
     if (ctaBtn) {
-      ctaBtn.addEventListener('click', function () {
+      ctaBtn.addEventListener('click', function (e) {
+        // Founder mode shares the single "Initiate a 14-Day Scan" flow: the button carries
+        // data-open-scan-modal, so the scan modal opens right after this handler. Prefill it here.
+        // Investor mode is a Path B action (partner debrief via the contact form), so the modal
+        // listener is blocked for that case.
+        if (respondent.mode !== 'investor') {
+          var scanEmail = document.getElementById('scan-email');
+          var scanCompany = document.getElementById('scan-company');
+          if (scanEmail) scanEmail.value = respondent.email;
+          if (scanCompany) scanCompany.value = respondent.company;
+          return;
+        }
+        e.stopImmediatePropagation();
         var emailField = document.getElementById('email');
         var companyField = document.getElementById('company');
         var roleField = document.getElementById('role');
