@@ -1,0 +1,4 @@
+# Executive offsites live on their own Netlify site and are served here under /offsite/.
+# The first rule adds the trailing slash so the offsite pages resolve their relative CSS, images and links inside /offsite/.
+/offsite    /offsite/    301!
+/offsite/*  https://offsite.kuma.partners/:splat    200!
