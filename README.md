@@ -108,3 +108,7 @@ Submission is handled by `wireAjaxForm()` in `site.js`, which posts via `fetch()
 ## 7. Deployment
 
 Netlify deploys straight from the `main` branch of this repository. There is no CI step and no build command: whatever is on `main` is what ships. The usual flow is to commit locally, then push to `main` once changes have been checked in a browser (both viewport ranges and the DOM tag balance, since there is no linter running on save). After a push, Netlify's edge deploy is typically live within a minute.
+
+## 8. Private client pages
+
+`constellr-review.html` (served at `/constellr-review`) is an unlisted debrief form for constellr coachees. It carries `noindex, nofollow`, and it is deliberately absent from the navigation, footers, `sitemap.xml`, `llms.txt` and `robots.txt` (a Disallow line would advertise the URL). It submits to the Netlify form `constellr-executive-debrief` through `review-portal.js`, which also prefills name and role from the link, for example `/constellr-review?name=Max&role=Co-Founder%20%26%20CEO`. Set the notification email for that form in the Netlify dashboard under Forms.
