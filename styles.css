@@ -1870,9 +1870,10 @@ main:focus{outline:none;}
 
 .review-card-container{max-width:780px; margin:0 auto; background:#fff; border:1px solid var(--hairline-color); border-radius:var(--radius-lg); padding:40px; box-shadow:var(--shadow-card-subtle);}
 .review-honeypot{position:absolute; left:-9999px; width:1px; height:1px; overflow:hidden;}
-.review-identity-grid{display:grid; grid-template-columns:1.45fr 1.1fr 1fr; gap:20px; align-items:end; margin-bottom:32px; padding-bottom:28px; border-bottom:1px solid var(--hairline-color);}
+.review-identity-grid{display:grid; grid-template-columns:1.3fr 0.85fr 1.35fr; gap:20px; align-items:end; margin-bottom:32px; padding-bottom:28px; border-bottom:1px solid var(--hairline-color);}
 .identity-field{display:flex; flex-direction:column; min-width:0;}
 .identity-field .form-input{height:46px; line-height:1.2;}
+.identity-field .form-select{font-size:.9375rem; padding-left:12px;}
 /* Every label row is the same height, so the three inputs share one baseline even when only one has a hint */
 .label-row{display:flex; justify-content:space-between; align-items:baseline; gap:8px; min-height:22px; margin-bottom:6px;}
 .label-row .input-label{margin:0; white-space:nowrap;}

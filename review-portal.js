@@ -33,13 +33,15 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   if (roleParam && roleInput) roleInput.value = roleParam;
 
-  // ?coach=Sven or ?coach=Vincent pre-selects the matching coach (case-insensitive, matches any part of the name)
-  var coachParam = (params.get('coach') || '').trim().toLowerCase();
+  // ?coach=Sven, Vincent, Marcio (or Márcio) or Adrian pre-selects that coach: accents and case are ignored,
+  // and any part of the name matches
+  function fold(t) { return (t || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim(); }
+  var coachParam = fold(params.get('coach'));
   var coachSelect = document.getElementById('field-coach');
   if (coachParam && coachSelect) {
     for (var i = 0; i < coachSelect.options.length; i++) {
       var opt = coachSelect.options[i];
-      if (opt.value && opt.value.toLowerCase().indexOf(coachParam) !== -1) { coachSelect.value = opt.value; break; }
+      if (opt.value && fold(opt.value).indexOf(coachParam) !== -1) { coachSelect.value = opt.value; break; }
     }
   }
 
