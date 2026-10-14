@@ -46,14 +46,16 @@ There is no `assets/brand/` or `assets/clients/` folder. The client pedigree str
 3. Proof bar. The text client marquee.
 4. `#problem`. A 65 percent leadership-friction stat lockup next to a three-card diagnostic grid.
 5. `#approach`, labeled "The operator difference" on the page. A comparison table contrasting Kuma against traditional consultancies and generic coaching collectives.
-6. `#engagements`. A tabbed section. The default tab holds the three paid tiers (the 14-Day Friction Scan, the 60-90 Day Alignment Sprint, and Strategic Scaling Advisory); the other two tabs cover Strategic and Executive Offsites and the AI Leadership Transition offer.
-7. `#case-studies`, labeled "Proof of impact." Three tabbed case studies, including the 48-hour decision-velocity benchmark.
-8. `#scorecard`, the free self-assessment. A 90-second interactive diagnostic that ends in a lead-capture modal.
-9. `#investors`. Addressed to VC and PE operating partners: pre-emptive diagnostics, co-founder realignment, and portfolio triage.
-10. `#faq`. Ten questions total. The first four render open by default; a "View all 10 questions" toggle reveals the rest. All ten stay present in the static markup either way, so crawlers and AI agents see the full set regardless of JavaScript.
-11. `#fit`, "We do not work with everyone. By design." Ideal client profile against out-of-scope mandates.
-12. A client-logo strip (`.global-strip`), then `#contact`: the streamlined three-field executive intake form.
-13. Footer.
+6. `#partners`, "Executive leadership". The single team module: two managing partner cards (Sven Mulfinger and Vincent Azé) and the specialised senior advisor network as a 3x3 grid of nine real advisors, linking to `partners.html#advisors`. The nav "Team" link points here.
+7. `#system`, the Kuma Operating System (KOS) wheel and six operating tools. The nav labels it Methodology.
+8. `#engagements`. A tabbed section. The default tab holds the three paid tiers (the 14-Day Friction Scan, the 60-90 Day Alignment Sprint, and Strategic Scaling Advisory); the other two tabs cover Strategic and Executive Offsites and the AI Leadership Transition offer.
+9. `#case-studies`, labeled "Proof of impact." Three tabbed case studies, including the 48-hour decision-velocity benchmark.
+10. `#scorecard`, the free self-assessment. A 90-second interactive diagnostic that ends in a lead-capture modal.
+11. `#investors`. Addressed to VC and PE operating partners: pre-emptive diagnostics, co-founder realignment, and portfolio triage.
+12. `#faq`. Ten questions total. The first four render open by default; a "View all 10 questions" toggle reveals the rest. All ten stay present in the static markup either way, so crawlers and AI agents see the full set regardless of JavaScript.
+13. `#fit`, "We do not work with everyone. By design." Ideal client profile against out-of-scope mandates.
+14. A client-logo strip (`.global-strip`), then `#contact`: the streamlined three-field executive intake form.
+15. Footer.
 
 ### partners.html
 
@@ -79,7 +81,7 @@ All colors are CSS custom properties defined once on `:root` in `styles.css`.
 | `--teal` | `#588088` | Accent color: eyebrows, links, icons, hover states |
 | `--ink` | `#1A1A1A` | Body text |
 
-Sections alternate between the cream tier and a plain white tier (`.proof`, `#approach`, `#case-studies`, `.team-teaser`, `#fit`) so that no two adjacent sections share a background, with the two navy strips and the one slate strip breaking the rhythm deliberately at the highest-stakes points on the page. The slate tone for `#investors` was chosen specifically to stay warm and distinct from `--navy`, so it should not be merged into the navy token even though both read as dark.
+Sections alternate between the cream tier and a plain white tier (`.proof`, `#approach`, `#case-studies`, `#investors`, `#fit`) so that no two adjacent sections share a background, with the two navy strips and the one slate strip breaking the rhythm deliberately at the highest-stakes points on the page. The slate tone for `#investors` was chosen specifically to stay warm and distinct from `--navy`, so it should not be merged into the navy token even though both read as dark.
 
 ## 5. Forms and lead routing
 
