@@ -4,7 +4,7 @@ The production codebase for the Kuma Partners marketing and advisory site: "When
 
 Built as a static site with no build step: semantic HTML, one shared stylesheet, one shared script. Optimized for fast load times and for being read cleanly by both search crawlers and AI answer engines (GEO).
 
-Maintainer note: the executive offsite offering (formerly the separate site offsite.kuma.partners) now lives in this repo under `offsite/` and is served at www.kuma.partners/offsite/. The old subdomain is only a 301 redirect, run by the old Netlify project `offsitekumapartners` from the repo `sven353/offsite.kuma.partners`, which holds nothing but that redirect rule. The `assets/offsites/` folder holds photography for the main site's own Executive Offsites section.
+Maintainer note: this repo occasionally gets confused with `offsite.kuma.partners`, a separate joint-venture landing page project that lives in its own repository. The `assets/offsites/` folder below holds real photography for Kuma's own Executive Offsite service line and belongs here. Nothing in this repo should reference the offsite.kuma.partners sub-brand, its configurator, or its retreat logistics. If a pull request touches any of that, it does not belong in this repository.
 
 ## 1. Stack
 
@@ -29,8 +29,7 @@ sitemap.xml               # Production URL list
 llms.txt                  # Plain-language site summary for AI agents (GEO)
 assets/
   logo-icon.png            # Favicon
-  logo-lockup.png           # Header wordmark (dark on light)
-  kuma-partners-logo-white.png  # Footer wordmark, white on transparent, 4x for retina (shown at 32px high)
+  logo-lockup.png           # Header and footer wordmark
   og-image.jpg               # Social share image
   team/                       # Headshots for partners and the specialist bench
   offsites/                    # Photography for the Executive Offsites service
@@ -47,16 +46,14 @@ There is no `assets/brand/` or `assets/clients/` folder. The client pedigree str
 3. Proof bar. The text client marquee.
 4. `#problem`. A 65 percent leadership-friction stat lockup next to a three-card diagnostic grid.
 5. `#approach`, labeled "The operator difference" on the page. A comparison table contrasting Kuma against traditional consultancies and generic coaching collectives.
-6. `#partners`, "Executive leadership". The single team module: two managing partner cards (Sven Mulfinger and Vincent Azé) and the specialised senior advisor network as a 3x3 grid of nine real advisors, linking to `partners.html#advisors`, then the international footprint and native-language bar (`.leadership-footprint-bar`). The nav "Team" link points here.
-7. `#system`, the Kuma Operating System (KOS) wheel and six operating tools. The nav labels it Methodology.
-8. `#engagements`. A tabbed section. The default tab holds the three paid tiers (the 14-Day Friction Scan, the 60-90 Day Alignment Sprint, and Strategic Scaling Advisory); the other two tabs cover Strategic and Executive Offsites and the AI Leadership Transition offer.
-9. `#case-studies`, labeled "Proof of impact." Three tabbed case studies, including the 48-hour decision-velocity benchmark.
-10. `#scorecard`, the free self-assessment. A 90-second interactive diagnostic that ends in a lead-capture modal.
-11. `#investors`. Addressed to VC and PE operating partners: pre-emptive diagnostics, co-founder realignment, and portfolio triage.
-12. `#faq`. Ten questions total. The first four render open by default; a "View all 10 questions" toggle reveals the rest. All ten stay present in the static markup either way, so crawlers and AI agents see the full set regardless of JavaScript.
-13. `#fit`, "We do not work with everyone. By design." Ideal client profile against out-of-scope mandates.
-14. `#contact`: the executive intake form, straight above the dark footer.
-15. Footer.
+6. `#engagements`. A tabbed section. The default tab holds the three paid tiers (the 14-Day Friction Scan, the 60-90 Day Alignment Sprint, and Strategic Scaling Advisory); the other two tabs cover Strategic and Executive Offsites and the AI Leadership Transition offer.
+7. `#case-studies`, labeled "Proof of impact." Three tabbed case studies, including the 48-hour decision-velocity benchmark.
+8. `#scorecard`, the free self-assessment. A 90-second interactive diagnostic that ends in a lead-capture modal.
+9. `#investors`. Addressed to VC and PE operating partners: pre-emptive diagnostics, co-founder realignment, and portfolio triage.
+10. `#faq`. Ten questions total. The first four render open by default; a "View all 10 questions" toggle reveals the rest. All ten stay present in the static markup either way, so crawlers and AI agents see the full set regardless of JavaScript.
+11. `#fit`, "We do not work with everyone. By design." Ideal client profile against out-of-scope mandates.
+12. A client-logo strip (`.global-strip`), then `#contact`: the streamlined three-field executive intake form.
+13. Footer.
 
 ### partners.html
 
@@ -76,22 +73,13 @@ All colors are CSS custom properties defined once on `:root` in `styles.css`.
 
 | Token | Value | Role |
 |---|---|---|
-| `--cream` | `#F4F6F8` | Chalk: the off-white tier for alternating sections |
-| `--navy` | `#0B1523` | Midnight: the `.proof` logo bar (five over five: Microsoft, Santander, BMW Group, Bloomberg, IESE / Bertelsmann, Netflix, constellr, Rootstock, Cellnex), and text and headings |
-| `--bg-dark-ambient` | radial `#17324B` to `#0B1523` | Overhead ambient light on the dark anchors `#scorecard` and `#contact` |
-| `--footer-dark` | `#060E17` | Footer base on every page |
-| `--teal` | `#1D6F8A` | Accent: eyebrows, links, icons, hover states |
+| `--cream` | `#F4F1EB` | Warm stone base for narrative and diagnostic sections |
+| `--navy` | `#284050` | High-conversion action strips only: `#scorecard` and `#contact` |
+| (unnamed, set per section) | `#332F2A` | Executive slate, `#investors` only |
+| `--teal` | `#588088` | Accent color: eyebrows, links, icons, hover states |
 | `--ink` | `#1A1A1A` | Body text |
-| `--shadow-card-subtle` / `--shadow-card-hover` | soft navy shadows | Lift for white cards sitting on a chalk section |
-| `--hairline-color` / `--hairline-subtle` | `rgba(11,21,35,.08)` / `.05` | Every 1px border and divider (semi-transparent ink, so it reads the same on white and chalk) |
 
-Border weights: every line is 1px, with two exceptions, the 1.5px teal outline on the Kuma column of the comparison table and the 2px teal outline on the featured tier card. Eyebrow dashes are 14px by 1.5px.
-
-Headings are in British sentence case. Product, tool and people names keep their capitals (the 14-Day Leadership Friction Scan, Friction Matrix, Kuma Operating System). The only two booking calls to action are "Initiate a 14-Day Scan" and "Book a Partner Debrief".
-
-Every page carries the same header navigation as the homepage, including the mobile menu toggle. On subpages the links point to `index.html#section`, and Team points to `partners.html`. If you change the homepage menu, copy it to the other five pages.
-
-Homepage light sections are soft vertical ramps (`--ramp-chalk` #F4F6F8 to #EEF2F6, `--ramp-white` white to #F8F9FA, `--ramp-inverse` #F8F9FA to white) that alternate between chalk and white so no two neighbours share a tone: hero white, `.proof` navy, `#problem` chalk, `#approach` white, `#partners` chalk, `#system` white, `#engagements` chalk, `#case-studies` white, `#scorecard` dark, `#investors` chalk, `#faq` white, `#fit` chalk, `#contact` dark, footer dark. Cards placed on a chalk section are white with a hairline border and `--shadow-card-subtle`. If you add or move a section, keep the alternation; the order is also written as a comment above `#problem` in `styles.css`.
+Sections alternate between the cream tier and a plain white tier (`.proof`, `#approach`, `#case-studies`, `.team-teaser`, `#fit`) so that no two adjacent sections share a background, with the two navy strips and the one slate strip breaking the rhythm deliberately at the highest-stakes points on the page. The slate tone for `#investors` was chosen specifically to stay warm and distinct from `--navy`, so it should not be merged into the navy token even though both read as dark.
 
 ## 5. Forms and lead routing
 
@@ -109,22 +97,3 @@ Submission is handled by `wireAjaxForm()` in `site.js`, which posts via `fetch()
 ## 7. Deployment
 
 Netlify deploys straight from the `main` branch of this repository. There is no CI step and no build command: whatever is on `main` is what ships. The usual flow is to commit locally, then push to `main` once changes have been checked in a browser (both viewport ranges and the DOM tag balance, since there is no linter running on save). After a push, Netlify's edge deploy is typically live within a minute.
-
-## 8. Private client pages
-
-`constellr-review.html` (served at `/constellr-review`) is an unlisted debrief form for constellr coachees. It carries `noindex, nofollow`, and it is deliberately absent from the navigation, footers, `sitemap.xml`, `llms.txt` and `robots.txt` (a Disallow line would advertise the URL). It submits to the Netlify form `constellr-debrief-v5` through `review-portal.js`, which also prefills name, role and lead coach from the link (the coach match ignores accents and case, so `?coach=Marcio` finds Márcio Marcos), for example `/constellr-review?name=Max&role=Co-Founder%20%26%20CEO&coach=Sven`. To add a coach, add an `<option>` to the Lead Coach select. Set the notification email for that form in the Netlify dashboard under Forms. Netlify labels each field in its emails with the text of the field's `<label>` element when there is one, and falls back to the `name` only when there is none. So the scale buttons and the question 5 tick options deliberately have no `<label>`. The question 5 boxes also have no `name`: the script writes the ticked options into one hidden field, `5. Potential next steps`, as a comma-separated list (the radio covers its cell invisibly and is `aria-labelledby` the number), and every remaining label's text is identical to its field's name (for example `1. Strategic clarity and decision speed`). Giving the scale numbers `<label>` elements again would collapse questions 1 to 5 into a single field called `1` in the email. Netlify only stores fields that existed in the form when it was deployed, so redeploy after renaming any field.
-
-## 9. Executive offsites (/offsite/)
-
-The offsite site lives in the `offsite/` folder and is served directly at www.kuma.partners/offsite/. It used to be a separate Netlify site (offsite.kuma.partners) proxied in through `_redirects`; that proxy is gone, and the old subdomain now only redirects here.
-
-- All links inside `offsite/` are relative, so the folder works as it is.
-- Its two Netlify forms are `offsite-blueprint` (configurator) and `discovery-call` (partners page). Form names must stay unique across the whole site.
-- Its pages are listed in the main `sitemap.xml`.
-- `offsite/configurator.html` (served at `/offsite/configurator`) is a stripped-down page with only the configurator, for outbound links. It loads its CSS, images and `app.js` from root-absolute `/offsite/...` paths so it renders with or without a trailing slash, and it carries its own hidden copy of the `offsite-blueprint` form.
-- The header links to `/offsite/` as Offsites and the footer as Executive Offsites. The header switches to the burger menu below 1024px (CSS and the two `innerWidth > 1023` checks in `site.js`) because eight items plus the CTA no longer fit on one line.
-- Never add a rule redirecting `/offsite` to `/offsite/` in `_redirects`: Netlify treats both as the same path, so the rule loops. `offsite/index.html` adds the missing slash with a small script instead.
-
-## 10. Kuma Sanctuary pages
-
-`next-offsites.html`, `es/index.html`, `es/aviso-legal.html`, `imprint.html` and `success.html`, styled by `css/style.css`, are the Kuma Sanctuary campaign pages (CEO Sanctuary, Austria). They are not linked from the main navigation and are shared by direct link. Their application form is `sanctuary-application`, which redirects to `success.html`.
