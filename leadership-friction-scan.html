@@ -30,6 +30,97 @@
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="leadership-friction-scan.css">
 <link rel="stylesheet" href="suite.css">
+
+<!-- Structured data: entities, tool and definitions for search and answer engines -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://www.kuma.partners/#organization",
+      "name": "Kuma Partners",
+      "url": "https://www.kuma.partners",
+      "logo": "https://www.kuma.partners/assets/logo-lockup.png",
+      "description": "Executive advisory and leadership alignment practice for scale-stage and venture-backed leadership teams.",
+      "foundingLocation": {
+        "@type": "Place",
+        "name": "Barcelona, Spain"
+      },
+      "areaServed": "Worldwide",
+      "founder": {
+        "@id": "https://www.kuma.partners/#sven-mulfinger"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://www.kuma.partners/#sven-mulfinger",
+      "name": "Dr. Sven Mulfinger",
+      "jobTitle": "Lead Partner",
+      "worksFor": {
+        "@id": "https://www.kuma.partners/#organization"
+      },
+      "url": "https://www.kuma.partners/partners.html",
+      "sameAs": [
+        "https://www.linkedin.com/in/svenmulfinger",
+        "https://www.mulfinger.com"
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://www.kuma.partners/leadership-friction-scan#app",
+      "name": "Kuma Leadership Friction Scan",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "All",
+      "url": "https://www.kuma.partners/leadership-friction-scan",
+      "description": "A 12-statement diagnostic that scores decision velocity, strategic cohesion, executive bandwidth and candor in a leadership team.",
+      "author": {
+        "@id": "https://www.kuma.partners/#sven-mulfinger"
+      },
+      "publisher": {
+        "@id": "https://www.kuma.partners/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.kuma.partners/leadership-friction-scan#faq",
+      "url": "https://www.kuma.partners/leadership-friction-scan",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the Silent Veto in executive teams?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Silent Veto happens when a decision agreed inside the executive meeting is quietly undermined outside the room through passive compliance, delayed execution or corridor pushback. It is the clearest symptom of artificial harmony in a leadership team."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does founder centrality create leadership friction?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Founder centrality drag happens when reversible operational decisions default inward to the CEO or co-founders. The leadership team becomes a queue, execution speed is capped at the founders' calendar, and decision latency spreads across every function."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the 12 to 60 Leadership Friction Index?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Kuma Leadership Friction Index scores twelve statements from 1 to 5 across four vectors: Decision Velocity & Autonomy, Strategic Cohesion vs. Defensive Silos, Cognitive Bandwidth & Energy Drain, and Principled Candor vs. The Silent Veto. Totals run from 12 to 60: High-Flow Velocity (12 to 25), Operational Drag (26 to 42) and Critical Systemic Gridlock (43 to 60)."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body class="suite">
 <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -445,6 +536,40 @@
     <div class="lfs-sticky no-print" data-lfs-sticky>
       <span class="lfs-sticky-badge" data-sticky-score></span>
       <a class="lfs-sticky-btn" href="https://calendly.com/sven-mulfinger/leadership-friction-debrief-30min" target="_blank" rel="noopener" data-lfs-book-sticky>Schedule Debrief →</a>
+    </div>
+  </section>
+
+  <!-- Crawlable methodology and definitions. Plain HTML so search and answer engines read it without running JavaScript. -->
+  <section class="lfs-methodology no-print" id="framework-methodology" aria-labelledby="methodology-title">
+    <div class="lfs-meth-wrap">
+      <p class="lfs-meth-eyebrow">Kuma Operating Framework &bull; Reference</p>
+      <h2 id="methodology-title">The Anatomy of Leadership Friction in Scale-Stage Ventures</h2>
+      <p class="lfs-meth-lede">Developed by Sven Mulfinger and the partners at Kuma Partners, the Leadership Friction Scan measures the gap between executive intent and what the organisation actually does. As a company grows, the cost of coordinating its leaders tends to become a larger limit on speed than the market itself.</p>
+
+      <div class="lfs-meth-grid">
+        <article>
+          <h3>1. The Silent Veto and artificial harmony</h3>
+          <p>Decisions agreed in the executive meeting are quietly eroded outside it. When co-founder friendships blur executive mandates (CEO, CTO, CPO), the team trades peer accountability for polite comfort, and speed suffers.</p>
+        </article>
+        <article>
+          <h3>2. Founder centrality drag</h3>
+          <p>The founders remain the clearing house for reversible operational calls. Execution speed defaults to the founders&rsquo; calendar, and initiatives stall while they wait for sign-off.</p>
+        </article>
+        <article>
+          <h3>3. Defensive silos</h3>
+          <p>Functions retreat into local targets and optimise for their own metrics rather than company outcomes. Activity stays high while unified progress stays low.</p>
+        </article>
+        <article>
+          <h3>4. Executive energy and bandwidth burn</h3>
+          <p>Leaders spend more energy on internal politics, consensus loops and meeting churn than on the market, which breeds cynicism and fatigue.</p>
+        </article>
+      </div>
+
+      <h2 class="lfs-meth-h2">Definitions</h2>
+      <div class="lfs-meth-qa"><h3>What is the Silent Veto in executive teams?</h3><p>The Silent Veto happens when a decision agreed inside the executive meeting is quietly undermined outside the room through passive compliance, delayed execution or corridor pushback. It is the clearest symptom of artificial harmony in a leadership team.</p></div>
+      <div class="lfs-meth-qa"><h3>How does founder centrality create leadership friction?</h3><p>Founder centrality drag happens when reversible operational decisions default inward to the CEO or co-founders. The leadership team becomes a queue, execution speed is capped at the founders&rsquo; calendar, and decision latency spreads across every function.</p></div>
+      <div class="lfs-meth-qa"><h3>What is the 12 to 60 Leadership Friction Index?</h3><p>The Kuma Leadership Friction Index scores twelve statements from 1 to 5 across four vectors: Decision Velocity &amp; Autonomy, Strategic Cohesion vs. Defensive Silos, Cognitive Bandwidth &amp; Energy Drain, and Principled Candor vs. The Silent Veto. Totals run from 12 to 60: High-Flow Velocity (12 to 25), Operational Drag (26 to 42) and Critical Systemic Gridlock (43 to 60).</p></div>
+      <p class="lfs-meth-foot"><span>Sources: Noam Wasserman, Harvard Business School, <em>The Founder&rsquo;s Dilemmas</em> (2012) &bull; McKinsey &amp; Company, <em>Decision making in the age of urgency</em> (2019)</span><span>Diagnostic framework &copy; Kuma Partners</span></p>
     </div>
   </section>
 
