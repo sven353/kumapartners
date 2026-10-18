@@ -1,9 +1,10 @@
 // Kuma Partners: Kuma Operating System router (/KOS)
 // Vanilla JS, no dependencies, same conventions as site.js.
 //
-// Cards 2 to 4 open an email capture drawer. Each submission records which diagnostic the
-// visitor asked for: { selected_diagnostic, email } goes to Netlify Forms (form "kos-interest")
-// and, if configured, to a second webhook. Configure everything in CONFIG below.
+// Cards 2 to 4 open an access request drawer (name, work email, company or fund). Each
+// submission is tagged with the product the visitor asked for, as product_intent, and goes to
+// Netlify Forms (form "kos-interest") and, if configured, to a second webhook. Configure
+// everything in CONFIG below.
 
 (function () {
   'use strict';
@@ -21,28 +22,28 @@
     minFillMs: 1500
   };
 
-  // The three pilot instruments. `accessUrl` is where a visitor can use the tool straight away.
-  // Leave it empty while the tool is not ready: the drawer then confirms a place on the pilot
-  // list instead. Example for card 3, if you want to route people to the calculator that already
-  // lives at velocity.kuma.partners: accessUrl: 'https://velocity.kuma.partners'.
+  // The three pilot instruments. The key is the product_intent value written to the CRM.
+  // `accessUrl` is optional: when set, the confirmation also shows a button to open the tool
+  // straight away. Leave it empty while the tool is not ready. Example for card 3, if you want to
+  // route people to the calculator that already lives at velocity.kuma.partners:
+  // accessUrl: 'https://velocity.kuma.partners'.
   var DIAGNOSTICS = {
     'co-founder-radar': {
-      title: 'Co-Founder Alignment Radar',
-      badge: 'Pilot Cohort Access',
-      lead: 'Enter your work email to run the dual co-founder radar.',
+      product: 'Co-Founder Alignment Radar',
+      modalTitle: 'Join the Pilot Cohort',
+      modalLead: 'The Dual-Input Co-Founder Alignment Radar is currently in private pilot for executive pairs. Enter your work email to request early access.',
       accessUrl: ''
     },
     'coordination-tax-calculator': {
-      title: 'Executive Coordination Tax Calculator',
-      badge: 'Benchmark Tool Access',
-      badgeWithAccess: 'Instant Benchmark Tool',
-      lead: 'Enter your work email to access the Coordination Tax Calculator.',
+      product: 'Executive Coordination Tax Calculator',
+      modalTitle: 'Request Benchmark Telemetry',
+      modalLead: 'Access the interactive model to calculate executive consensus cost and runway drag on your balance sheet.',
       accessUrl: ''
     },
     'vc-portfolio-velocity-benchmark': {
-      title: 'VC Portfolio Velocity Benchmark',
-      badge: 'Investor Portal',
-      lead: 'Enter your work email to review the portfolio velocity framework.',
+      product: 'VC Portfolio Velocity Benchmark',
+      modalTitle: 'Investor & Board Telemetry',
+      modalLead: 'Access the portfolio operating framework designed for Venture Partners and Operating Executives.',
       accessUrl: ''
     }
   };
@@ -71,16 +72,18 @@
     var modal = overlay.querySelector('.scan-modal');
     var formView = overlay.querySelector('[data-kos-form-view]');
     var form = overlay.querySelector('[data-kos-form]');
-    var badgeEl = overlay.querySelector('[data-kos-badge]');
     var titleEl = overlay.querySelector('[data-kos-title]');
     var leadEl = overlay.querySelector('[data-kos-lead]');
+    var nameInput = form.elements.name;
     var emailInput = form.elements.email;
+    var companyInput = form.elements.company;
+    var nameError = overlay.querySelector('[data-kos-name-error]');
     var emailError = overlay.querySelector('[data-kos-email-error]');
+    var companyError = overlay.querySelector('[data-kos-company-error]');
     var submitBtn = form.querySelector('[data-kos-submit]');
     var submitLabel = submitBtn.querySelector('[data-btn-label]');
     var formError = overlay.querySelector('[data-kos-error]');
     var success = overlay.querySelector('[data-kos-success]');
-    var successText = overlay.querySelector('[data-kos-success-text]');
     var successLink = overlay.querySelector('[data-kos-success-link]');
 
     var current = null;       // key of the open diagnostic
@@ -103,10 +106,6 @@
       });
     }
 
-    function badgeFor(d) {
-      return d.accessUrl && d.badgeWithAccess ? d.badgeWithAccess : d.badge;
-    }
-
     function openDrawer(key, opener) {
       var d = DIAGNOSTICS[key];
       if (!d) return;
@@ -114,11 +113,10 @@
       current = key;
       lastFocused = opener || document.activeElement;
 
-      badgeEl.textContent = badgeFor(d);
-      titleEl.textContent = d.title;
-      leadEl.textContent = d.lead;
-      form.elements.selected_diagnostic.value = key;
-      form.elements.selected_title.value = d.title;
+      titleEl.textContent = d.modalTitle;
+      leadEl.textContent = d.modalLead;
+      form.elements.product_intent.value = key;
+      form.elements.product_name.value = d.product;
 
       resetState();
       overlay.hidden = false;
@@ -126,9 +124,9 @@
       setBackgroundInert(true);
       window.requestAnimationFrame(function () { overlay.classList.add('open'); });
       openedAt = Date.now();
-      window.setTimeout(function () { emailInput.focus(); }, 60);
+      window.setTimeout(function () { nameInput.focus(); }, 60);
       document.addEventListener('keydown', onKeydown);
-      emit('kos:interest-open', { selected_diagnostic: key });
+      emit('kos:interest-open', { product_intent: key });
     }
 
     function closeDrawer() {
@@ -146,16 +144,18 @@
       formView.hidden = false;
       success.hidden = true;
       successLink.hidden = true;
-      emailError.classList.remove('show');
-      emailInput.setAttribute('aria-invalid', 'false');
+      [[nameError, nameInput], [emailError, emailInput], [companyError, companyInput]].forEach(function (pair) {
+        pair[0].classList.remove('show');
+        pair[1].setAttribute('aria-invalid', 'false');
+      });
       formError.hidden = true;
       submitBtn.disabled = false;
       submitLabel.textContent = 'Request Access →';
       busy = false;
       // form.reset() clears the hidden fields too, so restore the selection if a card is open.
       if (current) {
-        form.elements.selected_diagnostic.value = current;
-        form.elements.selected_title.value = DIAGNOSTICS[current].title;
+        form.elements.product_intent.value = current;
+        form.elements.product_name.value = DIAGNOSTICS[current].product;
       }
     }
 
@@ -198,7 +198,7 @@
 
     // ---- INTEREST HOOK -------------------------------------------------------
     // The one place an interest event leaves the page.
-    //   payload: { selected_diagnostic, email }  (plus context fields below)
+    //   payload: { product_intent, product_name, name, email, company, source, submitted_at }
     // Step 1 posts the form to Netlify Forms. Step 2 forwards the payload as JSON to
     // CONFIG.crmWebhookUrl when set. Resolves once the Netlify submission has succeeded.
     function handleInterest(payload) {
@@ -231,51 +231,60 @@
     }
     // ---------------------------------------------------------------------------
 
-    function showSuccess(key, email) {
+    function showSuccess(key) {
       var d = DIAGNOSTICS[key];
       formView.hidden = true;
       success.hidden = false;
       if (d.accessUrl) {
-        successText.textContent = 'Your request for the ' + d.title + ' is logged. You can open it now, and we will follow up at ' + email + '.';
         successLink.setAttribute('href', d.accessUrl);
         successLink.hidden = false;
       } else {
-        successText.textContent = 'Your request for the ' + d.title + ' is logged. A Kuma partner will email ' + email + ' when your pilot cohort opens.';
         successLink.hidden = true;
       }
       success.focus();
     }
 
+    function fail(errorEl, input, message) {
+      if (message) errorEl.textContent = message;
+      errorEl.classList.add('show');
+      input.setAttribute('aria-invalid', 'true');
+    }
+
+    function validate() {
+      var ok = true;
+      var first = null;
+      var name = nameInput.value.trim();
+      var email = emailInput.value.trim();
+      var company = companyInput.value.trim();
+      if (name.length < 2) { fail(nameError, nameInput); ok = false; first = first || nameInput; }
+      if (!isValidEmail(email)) {
+        fail(emailError, emailInput, 'Please enter a valid email address.'); ok = false; first = first || emailInput;
+      } else if (isFreeEmail(email)) {
+        fail(emailError, emailInput, 'Please use your business email address, not a personal inbox.'); ok = false; first = first || emailInput;
+      }
+      if (company.length < 2) { fail(companyError, companyInput); ok = false; first = first || companyInput; }
+      if (first) first.focus();
+      return ok;
+    }
+
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (busy || !current) return;
-      var email = emailInput.value.trim();
-      if (!isValidEmail(email)) {
-        emailError.textContent = 'Please enter a valid email address.';
-        emailError.classList.add('show');
-        emailInput.setAttribute('aria-invalid', 'true');
-        emailInput.focus();
-        return;
-      }
-      if (isFreeEmail(email)) {
-        emailError.textContent = 'Please use your business email address, not a personal inbox.';
-        emailError.classList.add('show');
-        emailInput.setAttribute('aria-invalid', 'true');
-        emailInput.focus();
-        return;
-      }
+      if (!validate()) return;
 
       var key = current;
       var payload = {
-        selected_diagnostic: key,
-        email: email,
-        selected_title: DIAGNOSTICS[key].title,
+        product_intent: key,
+        product_name: DIAGNOSTICS[key].product,
+        name: nameInput.value.trim(),
+        email: emailInput.value.trim(),
+        company: companyInput.value.trim(),
         source: '/KOS',
         submitted_at: new Date().toISOString()
       };
 
       // Bots get the normal confirmation and no network call, so they have no error to retry on.
-      if (looksLikeBot()) { showSuccess(key, email); return; }
+      if (looksLikeBot()) { showSuccess(key); return; }
 
       formError.hidden = true;
       busy = true;
@@ -284,8 +293,8 @@
 
       handleInterest(payload).then(function () {
         busy = false;
-        emit('kos:interest', { selected_diagnostic: key });
-        showSuccess(key, email);
+        emit('kos:interest', { product_intent: key });
+        showSuccess(key);
       }).catch(function () {
         busy = false;
         submitBtn.disabled = false;
@@ -294,9 +303,11 @@
       });
     });
 
-    emailInput.addEventListener('input', function () {
-      emailError.classList.remove('show');
-      emailInput.setAttribute('aria-invalid', 'false');
+    [[nameError, nameInput], [emailError, emailInput], [companyError, companyInput]].forEach(function (pair) {
+      pair[1].addEventListener('input', function () {
+        pair[0].classList.remove('show');
+        pair[1].setAttribute('aria-invalid', 'false');
+      });
     });
 
     // ---- wiring ----
@@ -311,7 +322,7 @@
     var cardLink = document.querySelector('[data-kos-card-link]');
     if (cardLink) {
       cardLink.addEventListener('click', function () {
-        emit('kos:interest', { selected_diagnostic: cardLink.getAttribute('data-kos-card-link') });
+        emit('kos:interest', { product_intent: cardLink.getAttribute('data-kos-card-link') });
       });
     }
 

@@ -80,6 +80,7 @@
 .kos-anchor-link:focus-visible{outline:2px solid var(--teal-on-dark); outline-offset:4px;}
 
 /* ---------- Drawer additions ---------- */
+.scan-modal .kos-confirm{font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:1.05rem; line-height:1.5; color:var(--navy); margin:0 0 4px;}
 .scan-modal .kos-success-access{margin-top:24px; display:inline-flex;}
 .scan-modal .kos-success-access[hidden]{display:none;}
 .scan-modal .kos-success-access + .scan-success-close{margin-left:12px;}

@@ -230,7 +230,6 @@
     <button type="button" class="scan-modal-close" data-kos-close aria-label="Close">&times;</button>
 
     <div data-kos-form-view>
-      <span class="scan-modal-badge" data-kos-badge></span>
       <h3 id="kos-modal-title" data-kos-title></h3>
       <p class="scan-modal-subtitle" data-kos-lead></p>
 
@@ -239,16 +238,26 @@
         <p class="hp-field" hidden>
           <label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
         </p>
-        <!-- Set by kos.js when a card is opened. Together with the email this is the logged payload:
-             { selected_diagnostic, email } -->
-        <input type="hidden" name="selected_diagnostic" value="">
-        <input type="hidden" name="selected_title" value="">
+        <!-- Set by kos.js when a card is opened. This is the CRM tag for the product the visitor asked for:
+             product_intent is the id (for example co-founder-radar), product_name is its display name. -->
+        <input type="hidden" name="product_intent" value="">
+        <input type="hidden" name="product_name" value="">
         <input type="hidden" name="source" value="/KOS">
 
+        <div class="field">
+          <label for="kos-name">Full name</label>
+          <input type="text" id="kos-name" name="name" autocomplete="name" required>
+          <span class="scan-field-error" data-kos-name-error>Please enter your name.</span>
+        </div>
         <div class="field">
           <label for="kos-email">Work email</label>
           <input type="email" id="kos-email" name="email" autocomplete="email" required>
           <span class="scan-field-error" data-kos-email-error>Please use your business email address, not a personal inbox.</span>
+        </div>
+        <div class="field">
+          <label for="kos-company">Company / Fund name</label>
+          <input type="text" id="kos-company" name="company" autocomplete="organization" required>
+          <span class="scan-field-error" data-kos-company-error>Please enter your company or fund name.</span>
         </div>
 
         <div class="hp-wrapper" aria-hidden="true">
@@ -259,7 +268,7 @@
         <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;" data-kos-submit>
           <span data-btn-label>Request Access →</span>
         </button>
-        <p class="scan-form-microcopy">We use your email only to follow up on this request. See our <a href="privacy.html">Privacy Policy</a>.</p>
+        <p class="scan-form-microcopy">We use your details only to follow up on this request. See our <a href="privacy.html">Privacy Policy</a>.</p>
         <p class="scan-form-error" data-kos-error hidden>Something went wrong sending your request. Please try again, or email us at <a href="mailto:contact@kuma.partners">contact@kuma.partners</a>.</p>
       </form>
     </div>
@@ -268,8 +277,7 @@
       <div class="scan-success-icon" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.5 12.75l6 6 9-13.5"/></svg>
       </div>
-      <h3>Thank you.</h3>
-      <p data-kos-success-text></p>
+      <p class="kos-confirm" data-kos-success-text>Access requested. We will deliver telemetry credentials within 24 hours.</p>
       <a href="#" class="btn btn-primary kos-success-access" data-kos-success-link hidden target="_blank" rel="noopener">Open the tool →</a>
       <button type="button" class="scan-success-close" data-kos-close>Close window</button>
     </div>
