@@ -50,6 +50,10 @@
   --radius-card: 8px;
   --radius-inset: 6px;
 
+  /* Title bar before every eyebrow (The Round) */
+  --bar-w: 28px;
+  --bar-h: 2px;
+
   /* Card sheen: a faint top-light inset plus a soft contact shadow, used on
      white cards that sit directly on a white or near-white section background
      and would otherwise read as a flat, edgeless rectangle. Not applied to
@@ -2006,3 +2010,11 @@ main:focus{outline:none;}
 .tier-card, .partner-card, .value-card, .scorecard-card, .contact-form-shell, .price-box{border-radius:var(--radius-card);}
 .partner-card, .scorecard-card, .contact-form-shell, .price-box{box-shadow:var(--shadow-card-subtle);}
 .partner-card{border-color:var(--hairline-color);}
+
+/* Title bar: aligned to the text baseline, not to the line box, so it sits on the middle of the capital
+   letters in every browser and font (cap height is about .71em, half of it is .355em). */
+.eyebrow, .badge-pill{align-items:baseline;}
+.eyebrow::before, .eyebrow::after, .badge-pill::before{
+  width:var(--bar-w); height:var(--bar-h); border-radius:var(--bar-h); align-self:baseline;
+  transform:translateY(calc(-.355em + var(--bar-h) / 2));
+}

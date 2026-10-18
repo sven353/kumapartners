@@ -748,11 +748,11 @@ body.suite .lfs-methodology{border-top:1px solid #E2E8F0;background:rgba(248,250
 
   /* Eyebrow labels: The Round title bar, 28x3, vertically centred */
   body.suite .lfs-hero .eyebrow, body.suite .lfs-results .eyebrow{
-    display:flex; width:fit-content; align-items:center; gap:12px; padding:0; border:0; background:none; border-radius:0;
+    display:flex; width:fit-content; align-items:baseline; gap:12px; padding:0; border:0; background:none; border-radius:0;
     font-family:'Lato',Arial,sans-serif; font-size:.78rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; line-height:1.5; color:var(--navy);
   }
   body.suite .lfs-tag, body.suite .lfs-act-eyebrow{
-    display:flex; width:fit-content; align-items:center; gap:12px; padding:0; border:0; background:none; border-radius:0;
+    display:flex; width:fit-content; align-items:baseline; gap:12px; padding:0; border:0; background:none; border-radius:0;
     font-family:'Lato',Arial,sans-serif; font-size:.74rem; font-weight:700; letter-spacing:.12em; text-transform:uppercase; line-height:1.5; color:var(--teal);
   }
   body.suite .lfs-hero .eyebrow{margin:0 auto 12px;}
@@ -760,7 +760,7 @@ body.suite .lfs-methodology{border-top:1px solid #E2E8F0;background:rgba(248,250
   body.suite .lfs-tag{margin-bottom:12px;}
   body.suite .lfs-act-eyebrow{margin-bottom:8px;}
   body.suite .lfs-hero .eyebrow::before, body.suite .lfs-hero .eyebrow::after,
-  body.suite .lfs-results .eyebrow::before{content:""; display:inline-block; width:28px; height:3px; border-radius:2px; background:var(--teal); flex:none;}
+  body.suite .lfs-results .eyebrow::before{content:""; display:inline-block; background:var(--teal); flex:none;}
   body.suite .lfs-results .eyebrow::after{display:none;}
 
   /* Hairline dividers */
@@ -940,3 +940,8 @@ body.suite .lfs-keyhint, body.suite .lfs-rate-key{display:none;}
 body.suite .lfs-rate.lfs-rate-ns{flex-direction:row; white-space:nowrap; align-items:center;}
 body.suite .lfs-rate.lfs-rate-ns span{display:inline; position:static; padding:0; margin:0;}
 body.suite .lfs-rate.lfs-rate-ns .lfs-ns-sub::before{content:"\00b7\00a0";}
+
+/* Scan title bars follow the shared token and baseline alignment from styles.css */
+body.suite .lfs-hero .eyebrow::before, body.suite .lfs-hero .eyebrow::after, body.suite .lfs-results .eyebrow::before{
+  width:var(--bar-w); height:var(--bar-h); border-radius:var(--bar-h); align-self:baseline; transform:translateY(calc(-.355em + var(--bar-h) / 2));
+}

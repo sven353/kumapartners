@@ -159,3 +159,6 @@
   .suite .kos-card, .suite .lfs-card, .suite .cfa-card{padding:28px 24px;}
   .suite .hero h1{letter-spacing:-.02em;}
 }
+
+.suite .hero .eyebrow{align-items:baseline;}
+.suite .hero .eyebrow::after{width:var(--bar-w); height:var(--bar-h); border-radius:var(--bar-h); align-self:baseline; transform:translateY(calc(-.355em + var(--bar-h) / 2));}
