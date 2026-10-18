@@ -1,0 +1,162 @@
+/* Diagnostic suite: shared look for /KOS, /leadership-friction-scan, /coordination-tax and
+   /cofounder-alignment. Loaded after styles.css and each page's own stylesheet, and scoped to
+   body.suite so nothing here reaches the homepage or any other page.
+
+   What it does: larger centred heroes, wider diagnostic cards, soft 20px corners, a light gradient
+   wash instead of flat white, fine translucent borders, soft shadows, pill badges and a short
+   entrance animation. Page files keep structure and behaviour; this file owns the surface. */
+
+.suite{
+  --s-radius:20px;
+  --s-radius-md:14px;
+  --s-radius-sm:12px;
+  --s-line:rgba(226,232,240,.8);
+  --s-line-input:rgba(148,163,184,.5);
+  --s-surface:linear-gradient(to bottom, #fff, rgba(248,250,252,.6), rgba(241,245,249,.3));
+  --s-shadow:0 1px 2px rgba(15,23,42,.06);
+  --s-shadow-hover:0 22px 44px -14px rgba(15,23,42,.2);
+  --s-ring:rgba(29,111,138,.25);
+  --s-slate:#475569;
+}
+
+@keyframes suite-rise{from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:none;}}
+
+/* ---------- Hero: centred, generous, bold ---------- */
+.suite .hero{padding:64px 0; text-align:center;}
+.suite .hero .wrap{max-width:1024px;}
+.suite .hero .eyebrow{justify-content:center;}
+.suite .hero .eyebrow::after{content:""; display:inline-block; width:28px; height:3px; background:var(--teal); border-radius:var(--radius-xs);}
+.suite .hero h1{
+  max-width:56rem; margin:0 auto 22px; font-weight:700; letter-spacing:-.025em; line-height:1.12;
+  font-size:2.25rem;
+}
+.suite .kos-lede, .suite .lfs-lede, .suite .ct-lede, .suite .cfa-lede{
+  max-width:42rem; margin:0 auto 32px; font-size:1.125rem; line-height:1.6; color:var(--s-slate);
+}
+.suite .kos-micro, .suite .lfs-micro, .suite .ct-micro, .suite .cfa-micro{margin-left:auto; margin-right:auto; text-align:center;}
+.suite .hero-ctas, .suite .cfa-hero-ctas{justify-content:center;}
+.suite .cfa-notice, .suite .lfs-noscript, .suite .cfa-noscript{margin-left:auto; margin-right:auto; text-align:center;}
+.suite .cfa-resume{text-align:center;}
+.suite .kos-hero, .suite .ct-hero{padding-bottom:32px;}
+@media (min-width:640px){ .suite .hero h1{font-size:3rem;} }
+@media (min-width:768px){
+  .suite .hero{padding:96px 0;}
+  .suite .hero h1{font-size:3.75rem;}
+  .suite .kos-lede, .suite .lfs-lede, .suite .ct-lede, .suite .cfa-lede{font-size:1.25rem;}
+  .suite .kos-hero, .suite .ct-hero{padding-bottom:40px;}
+}
+
+/* ---------- Diagnostic frame: fixes the small card floating in a large empty field ---------- */
+.suite .lfs-flow, .suite .cfa-flow{
+  display:flex; align-items:center; justify-content:center; padding-top:64px; padding-bottom:64px;
+}
+.suite .lfs-flow .wrap, .suite .cfa-flow .wrap{width:100%;}
+.suite .lfs-shell, .suite .cfa-shell{width:100%; max-width:56rem; padding:32px;}
+@media (min-width:768px){
+  .suite .lfs-flow, .suite .cfa-flow{padding-top:96px; padding-bottom:96px;}
+  .suite .lfs-shell, .suite .cfa-shell{padding:48px;}
+}
+.suite .lfs-statement{font-size:1.5rem;}
+.suite .cfa-statement{font-size:1.45rem;}
+@media (min-width:768px){ .suite .lfs-statement{font-size:1.75rem;} .suite .cfa-statement{font-size:1.65rem;} }
+
+/* ---------- Soft surfaces ---------- */
+.suite .kos-card, .suite .lfs-shell, .suite .lfs-card, .suite .ct-panel, .suite .ct-metric, .suite .ct-capture-card,
+.suite .ct-maths, .suite .cfa-shell, .suite .cfa-card, .suite .cfa-share{
+  background-color:#fff; background-image:var(--s-surface);
+  border:var(--hairline) solid var(--s-line); border-radius:var(--s-radius); box-shadow:var(--s-shadow);
+  transition:box-shadow .3s ease-out, border-color .3s ease-out, transform .3s ease-out;
+}
+.suite .kos-card:hover, .suite .lfs-card:hover, .suite .ct-metric:hover, .suite .cfa-card:hover, .suite .ct-panel:hover, .suite .ct-capture-card:hover{
+  box-shadow:var(--s-shadow-hover); border-color:var(--s-ring);
+}
+.suite .kos-card:hover, .suite .lfs-card:hover, .suite .ct-metric:hover, .suite .cfa-card:hover{transform:translateY(-2px);}
+.suite .lfs-shell:hover, .suite .cfa-shell:hover{box-shadow:var(--s-shadow); border-color:var(--s-line);}
+
+/* Active primary card on /KOS: a faint teal tint and ring */
+.suite .kos-card.kos-card-active{
+  background-image:linear-gradient(to bottom, rgba(29,111,138,.08), rgba(255,255,255,0) 55%), var(--s-surface);
+  border-color:var(--s-ring); box-shadow:0 0 0 4px rgba(29,111,138,.06), var(--s-shadow);
+}
+.suite .kos-card.kos-card-active:hover{box-shadow:0 0 0 4px rgba(29,111,138,.08), var(--s-shadow-hover);}
+
+/* Padding: roomy panels */
+.suite .lfs-card, .suite .cfa-card{padding:32px;}
+.suite .ct-panel{padding:32px;}
+.suite .ct-capture-card{padding:32px;}
+@media (min-width:768px){
+  .suite .ct-panel, .suite .ct-capture-card{padding:48px;}
+  .suite .lfs-card, .suite .cfa-card{padding:36px;}
+}
+
+/* Navy cards and strips keep their own fill but get the same soft corners */
+.suite .ct-metric-primary{
+  background-image:radial-gradient(120% 85% at 50% 0%, #152740 0%, var(--navy) 100%); border-color:rgba(255,255,255,.1);
+  box-shadow:0 18px 40px -16px rgba(11,21,35,.55);
+}
+.suite .ct-metric-primary:hover{border-color:rgba(255,255,255,.2);}
+.suite .ct-path{border-radius:var(--s-radius); border-color:rgba(255,255,255,.14);}
+.suite .lfs-bridge, .suite .cfa-bridge{border-radius:24px;}
+.suite .cfa-sim-banner, .suite .lfs-signal{border-radius:var(--s-radius-md);}
+.suite .cfa-privacy{border-radius:var(--s-radius-md); border-color:var(--s-line);}
+
+/* ---------- Controls ---------- */
+.suite main .btn{border-radius:var(--s-radius-sm); transition:background .2s ease, box-shadow .3s ease-out, border-color .2s ease, color .2s ease;}
+.suite main .btn-primary{box-shadow:var(--s-shadow);}
+.suite main .btn-primary:hover{box-shadow:0 10px 22px -10px rgba(11,21,35,.5);}
+.suite main .btn-secondary{border-color:rgba(11,21,35,.28);}
+.suite main .btn-secondary:hover{border-color:var(--navy);}
+.suite main .ct-btn-ondark{border-color:rgba(255,255,255,.5); color:#fff;}
+.suite main .ct-btn-ondark:hover{background:#fff; color:var(--navy); border-color:#fff;}
+
+.suite .lfs-form input[type="text"], .suite .lfs-form input[type="email"],
+.suite .cfa-form input[type="text"], .suite .cfa-form input[type="email"],
+.suite .ct-form input[type="email"], .suite .ct-num input, .suite .cfa-linkbox input{
+  border-color:var(--s-line-input); border-radius:var(--s-radius-sm); background:#fff;
+}
+.suite .select-shell{border-color:var(--s-line-input); border-radius:var(--s-radius-sm);}
+.suite .lfs-form .is-invalid input, .suite .lfs-form .is-invalid .select-shell,
+.suite .cfa-form .is-invalid input, .suite .ct-form .is-invalid input, .suite .ct-form .is-invalid .select-shell{border-color:#a3402f;}
+
+.suite .lfs-rate, .suite .cfa-rate, .suite .ct-presets button{
+  border-color:rgba(148,163,184,.4); border-radius:var(--s-radius-md); background-color:#fff;
+  background-image:linear-gradient(to bottom, #fff, rgba(248,250,252,.7));
+  transition:border-color .3s ease-out, background-color .3s ease-out, box-shadow .3s ease-out;
+}
+.suite .lfs-rate:hover, .suite .cfa-rate:hover, .suite .ct-presets button:hover{box-shadow:0 8px 18px -10px rgba(15,23,42,.25);}
+.suite .lfs-rate.selected, .suite .cfa-rate[aria-pressed="true"], .suite .ct-presets button[aria-checked="true"]{
+  border-color:var(--teal); background-color:rgba(29,111,138,.1); background-image:none;
+}
+.suite .ct-currency{border-color:var(--s-line-input);}
+.suite .lfs-progress-bar, .suite .cfa-progress-bar{background:rgba(148,163,184,.25);}
+
+/* ---------- Pills and badges instead of bullet lists ---------- */
+.suite .kos-pills li{
+  background:rgba(29,111,138,.07); border:var(--hairline) solid rgba(29,111,138,.18); border-radius:var(--radius-pill);
+}
+.suite .kos-status{background:rgba(255,255,255,.75); border:var(--hairline) solid var(--s-line); border-radius:var(--radius-pill);}
+.suite .kos-status-active{background:rgba(29,111,138,.08); border-color:var(--s-ring);}
+
+/* Fine, translucent dividers wherever a table-like list still needs them */
+.suite .cfa-heat-row, .suite .cfa-index-note, .suite .ct-control{border-color:rgba(203,213,225,.45);}
+.suite .lfs-dim, .suite .lfs-steps li{border-color:rgba(203,213,225,.45);}
+
+/* ---------- Motion: short, with a 50ms stagger ---------- */
+.suite .kos-card{animation:suite-rise .3s ease-out backwards; animation-delay:calc(var(--i, 0) * 50ms);}
+.suite .lfs-shell, .suite .cfa-shell{animation:suite-rise .3s ease-out backwards;}
+.suite .ct-panel{animation:suite-rise .3s ease-out backwards;}
+.suite .ct-readout article{animation:suite-rise .3s ease-out backwards;}
+.suite .ct-readout article:nth-of-type(2){animation-delay:50ms;}
+.suite .ct-readout article:nth-of-type(3){animation-delay:100ms;}
+.suite .cfa-res-grid .cfa-card:nth-child(2){animation:suite-rise .3s ease-out 50ms backwards;}
+.suite .cfa-res-grid .cfa-card:nth-child(1){animation:suite-rise .3s ease-out backwards;}
+@media (prefers-reduced-motion:reduce){
+  .suite main *, .suite main *::before, .suite main *::after{animation:none !important; transition:none !important;}
+}
+
+/* ---------- Small screens ---------- */
+@media (max-width:640px){
+  .suite .lfs-shell, .suite .cfa-shell, .suite .ct-panel, .suite .ct-capture-card{padding:28px 22px;}
+  .suite .kos-card, .suite .lfs-card, .suite .cfa-card{padding:28px 24px;}
+  .suite .hero h1{letter-spacing:-.02em;}
+}

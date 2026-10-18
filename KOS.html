@@ -29,8 +29,9 @@
 <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&amp;family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&amp;display=swap"></noscript>
 <link rel="stylesheet" href="styles.css">
 <link rel="stylesheet" href="kos.css">
+<link rel="stylesheet" href="suite.css">
 </head>
-<body>
+<body class="suite">
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
 <header class="site">
@@ -62,104 +63,69 @@
   <!-- 1. HEADER AND HERO -->
   <section class="hero kos-hero">
     <div class="wrap">
-      <div class="eyebrow">KUMA OPERATING SYSTEM • DIAGNOSTIC TELEMETRY</div>
+      <div class="eyebrow">KUMA OPERATING SYSTEM &bull; DIAGNOSTIC TELEMETRY</div>
       <h1>Identify the primary constraint on your executive velocity.</h1>
       <p class="kos-lede">Growth exposes structural limits in leadership architecture. Select your team's most critical friction zone below to run a targeted 3-minute diagnostic and unblock execution speed.</p>
-      <p class="kos-micro">Confidential • 3-minute completion • Actionable operational protocols</p>
+      <p class="kos-micro">Confidential &bull; 3-minute completion &bull; Actionable operational protocols</p>
     </div>
   </section>
 
-  <!-- 2. THE CONTEXTUAL DIAGNOSTIC MATRIX -->
+  <!-- 2. THE DIAGNOSTIC MATRIX: three instruments, each linking straight to its own page -->
   <section class="kos-matrix" id="matrix">
     <div class="wrap">
       <h2 class="kos-sr">Diagnostic instruments</h2>
       <div class="kos-grid">
-
-        <!-- Card 1: active -->
-        <article class="kos-card kos-card-active" data-kos-card="leadership-friction-scan">
+        <article class="kos-card kos-card-active" style="--i:0">
           <div class="kos-card-top">
-            <span class="kos-tag">Decision bottlenecks &amp; autonomy</span>
-            <span class="kos-status kos-status-active">Active • Ready to run</span>
+            <span class="kos-tag">DECISION BOTTLENECKS &amp; AUTONOMY</span>
+            <span class="kos-status kos-status-active">Active &bull; Ready to run</span>
           </div>
           <h3 class="kos-card-title">Leadership Friction Scan</h3>
-          <p class="kos-hook">Decisions default inward to the CEO desk, meetings multiply, and executive priorities get diluted before reaching frontline execution.</p>
-          <div class="kos-telemetry">
-            <span class="kos-telemetry-label">Telemetry delivered</span>
-            <ul>
-              <li>12-question diagnostic across 4 operational dimensions</li>
-              <li>Dominant Friction Vector &amp; Benchmark Score</li>
-              <li>Immediate tactical micro-intervention</li>
-            </ul>
-          </div>
+          <p class="kos-hook">Decisions stall at the founder desk, meetings multiply, and strategic intent gets diluted during execution.</p>
+          <ul class="kos-pills" aria-label="What you get">
+              <li>12 Questions</li>
+              <li>Friction Archetype</li>
+              <li>Actionable Protocol</li>
+          </ul>
           <div class="kos-card-cta">
-            <a href="/leadership-friction-scan" class="btn btn-primary" data-kos-card-link="leadership-friction-scan">Initiate Friction Scan (3 min) →</a>
+            <a href="/leadership-friction-scan" class="btn btn-primary" data-kos-card-link="leadership-friction-scan">Initiate Friction Scan (3 min) &rarr;</a>
           </div>
         </article>
 
-        <!-- Card 2: co-founder alignment -->
-        <article class="kos-card" data-kos-card="co-founder-radar">
+        <article class="kos-card " style="--i:1">
           <div class="kos-card-top">
-            <span class="kos-tag">Strategic &amp; behavioural divergence</span>
-            <span class="kos-status">Pilot access</span>
+            <span class="kos-tag">STRATEGIC &amp; BEHAVIORAL COHESION</span>
+            <span class="kos-status ">Pilot cohort</span>
           </div>
           <h3 class="kos-card-title">Co-Founder Alignment Radar</h3>
-          <p class="kos-hook">Unspoken friction between founders regarding long-term vision, operational pacing, or decision rights quietly slowing top-level momentum.</p>
-          <div class="kos-telemetry">
-            <span class="kos-telemetry-label">Telemetry delivered</span>
-            <ul>
-              <li>Dual-input mirror comparing co-founder assumptions</li>
-              <li>Divergence heat-map across 5 strategic vectors</li>
-            </ul>
-          </div>
+          <p class="kos-hook">Map hidden divergences in pacing, risk appetite, and decision rights between executive pairs before friction accumulates.</p>
+          <ul class="kos-pills" aria-label="What you get">
+              <li>Dual-Input Mirror</li>
+              <li>Comparative Heat Map</li>
+              <li>Blind Spot Radar</li>
+          </ul>
           <div class="kos-card-cta">
-            <button type="button" class="btn btn-secondary" data-kos-open="co-founder-radar" aria-haspopup="dialog">Explore Alignment Diagnostic →</button>
+            <a href="/cofounder-alignment" class="btn btn-secondary" data-kos-card-link="co-founder-radar">Explore Alignment Diagnostic &rarr;</a>
           </div>
         </article>
 
-        <!-- Card 3: capital and burn -->
-        <article class="kos-card" data-kos-card="coordination-tax-calculator">
+        <article class="kos-card " style="--i:2">
           <div class="kos-card-top">
-            <span class="kos-tag">Runway &amp; efficiency</span>
-            <span class="kos-status">Pilot access</span>
+            <span class="kos-tag">RUNWAY &amp; CAPITAL EFFICIENCY</span>
+            <span class="kos-status ">Financial model</span>
           </div>
-          <h3 class="kos-card-title">Executive Coordination Tax Calculator</h3>
-          <p class="kos-hook">Calculate the exact monetary and velocity cost of meeting overhead, consensus lag, and executive context-switching on your balance sheet.</p>
-          <div class="kos-telemetry">
-            <span class="kos-telemetry-label">Telemetry delivered</span>
-            <ul>
-              <li>Annual financial cost of executive consensus drag</li>
-              <li>Runway efficiency ratio vs. market benchmarks</li>
-            </ul>
-          </div>
+          <h3 class="kos-card-title">Coordination Tax Calculator</h3>
+          <p class="kos-hook">Quantify the balance-sheet cost of meeting overhead, consensus lag, and executive context-switching in real time.</p>
+          <ul class="kos-pills" aria-label="What you get">
+              <li>Real-Time Sliders</li>
+              <li>Annual Drag Cost</li>
+              <li>Runway Dilution</li>
+          </ul>
           <div class="kos-card-cta">
-            <button type="button" class="btn btn-secondary" data-kos-open="coordination-tax-calculator" aria-haspopup="dialog">Calculate Drag Cost →</button>
+            <a href="/coordination-tax" class="btn btn-secondary" data-kos-card-link="coordination-tax-calculator">Calculate Drag Cost &rarr;</a>
           </div>
         </article>
-
-        <!-- Card 4: investors and boards -->
-        <article class="kos-card" data-kos-card="vc-portfolio-velocity-benchmark">
-          <div class="kos-card-top">
-            <span class="kos-tag">Portfolio governance</span>
-            <span class="kos-status">Pilot access</span>
-          </div>
-          <h3 class="kos-card-title">VC Portfolio Velocity Benchmark</h3>
-          <p class="kos-hook">Designed for Venture Partners and Operating Executives to diagnose execution drag and leadership bottlenecks across portfolio companies.</p>
-          <div class="kos-telemetry">
-            <span class="kos-telemetry-label">Telemetry delivered</span>
-            <ul>
-              <li>Cross-company operational friction index</li>
-              <li>Board-level alignment indicators</li>
-            </ul>
-          </div>
-          <div class="kos-card-cta">
-            <button type="button" class="btn btn-secondary" data-kos-open="vc-portfolio-velocity-benchmark" aria-haspopup="dialog">Access Partner Telemetry →</button>
-          </div>
-        </article>
-
       </div>
-      <noscript>
-        <p class="kos-noscript">Pilot access requests need JavaScript. To request access without it, write to <a href="mailto:contact@kuma.partners">contact@kuma.partners</a>.</p>
-      </noscript>
     </div>
   </section>
 
@@ -222,67 +188,6 @@
     </div>
   </div>
 </footer>
-
-<!-- EMAIL CAPTURE DRAWER (cards 2 to 4). Reuses the .scan-modal drawer styles from styles.css.
-     Ids and data attributes are kos- prefixed so site.js never touches it. -->
-<div class="scan-modal-overlay" id="kos-modal-overlay" hidden>
-  <div class="scan-modal" role="dialog" aria-modal="true" aria-labelledby="kos-modal-title">
-    <button type="button" class="scan-modal-close" data-kos-close aria-label="Close">&times;</button>
-
-    <div data-kos-form-view>
-      <h3 id="kos-modal-title" data-kos-title></h3>
-      <p class="scan-modal-subtitle" data-kos-lead></p>
-
-      <form name="kos-interest" method="POST" action="/KOS" data-netlify="true" netlify-honeypot="bot-field" data-kos-form novalidate>
-        <input type="hidden" name="form-name" value="kos-interest">
-        <p class="hp-field" hidden>
-          <label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
-        </p>
-        <!-- Set by kos.js when a card is opened. This is the CRM tag for the product the visitor asked for:
-             product_intent is the id (for example co-founder-radar), product_name is its display name. -->
-        <input type="hidden" name="product_intent" value="">
-        <input type="hidden" name="product_name" value="">
-        <input type="hidden" name="source" value="/KOS">
-
-        <div class="field">
-          <label for="kos-name">Full name</label>
-          <input type="text" id="kos-name" name="name" autocomplete="name" required>
-          <span class="scan-field-error" data-kos-name-error>Please enter your name.</span>
-        </div>
-        <div class="field">
-          <label for="kos-email">Work email</label>
-          <input type="email" id="kos-email" name="email" autocomplete="email" required>
-          <span class="scan-field-error" data-kos-email-error>Please use your business email address, not a personal inbox.</span>
-        </div>
-        <div class="field">
-          <label for="kos-company">Company / Fund name</label>
-          <input type="text" id="kos-company" name="company" autocomplete="organization" required>
-          <span class="scan-field-error" data-kos-company-error>Please enter your company or fund name.</span>
-        </div>
-
-        <div class="hp-wrapper" aria-hidden="true">
-          <label for="hp-tax-id-kos">Tax ID (do not fill)</label>
-          <input type="text" name="company_tax_id" id="hp-tax-id-kos" tabindex="-1" autocomplete="off" value="">
-        </div>
-
-        <button type="submit" class="btn btn-primary" style="width:100%; justify-content:center;" data-kos-submit>
-          <span data-btn-label>Request Access →</span>
-        </button>
-        <p class="scan-form-microcopy">We use your details only to follow up on this request. See our <a href="privacy.html">Privacy Policy</a>.</p>
-        <p class="scan-form-error" data-kos-error hidden>Something went wrong sending your request. Please try again, or email us at <a href="mailto:contact@kuma.partners">contact@kuma.partners</a>.</p>
-      </form>
-    </div>
-
-    <div class="scan-success" data-kos-success hidden tabindex="-1">
-      <div class="scan-success-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.5 12.75l6 6 9-13.5"/></svg>
-      </div>
-      <p class="kos-confirm" data-kos-success-text>Access requested. We will deliver telemetry credentials within 24 hours.</p>
-      <a href="#" class="btn btn-primary kos-success-access" data-kos-success-link hidden target="_blank" rel="noopener">Open the tool →</a>
-      <button type="button" class="scan-success-close" data-kos-close>Close window</button>
-    </div>
-  </div>
-</div>
 
 <div class="cookie-banner" id="cookie-banner">
   <div class="wrap">
