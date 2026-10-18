@@ -96,19 +96,19 @@
             <div class="lfs-bar" role="img" aria-label="Decision Velocity and Autonomy: 11 out of 15, high friction"><div class="lfs-bar-fill high" style="width:73.3%"></div></div>
           </li>
           <li class="lfs-dim">
-            <div class="lfs-dim-name"><span class="lfs-dim-num">D2</span>Strategic Signal vs. Noise</div>
+            <div class="lfs-dim-name"><span class="lfs-dim-num">D2</span>Strategic Cohesion vs. Defensive Silos</div>
             <div class="lfs-dim-value moderate"><span class="lfs-dim-score">10 / 15</span></div>
-            <div class="lfs-bar" role="img" aria-label="Strategic Signal vs. Noise: 10 out of 15, moderate friction"><div class="lfs-bar-fill moderate" style="width:66.7%"></div></div>
+            <div class="lfs-bar" role="img" aria-label="Strategic Cohesion vs. Defensive Silos: 10 out of 15, moderate friction"><div class="lfs-bar-fill moderate" style="width:66.7%"></div></div>
           </li>
           <li class="lfs-dim">
-            <div class="lfs-dim-name"><span class="lfs-dim-num">D3</span>Principled Tension &amp; Candor</div>
+            <div class="lfs-dim-name"><span class="lfs-dim-num">D3</span>Cognitive Bandwidth &amp; Energy Drain</div>
             <div class="lfs-dim-value moderate"><span class="lfs-dim-score">9 / 15</span></div>
-            <div class="lfs-bar" role="img" aria-label="Principled Tension and Candor: 9 out of 15, moderate friction"><div class="lfs-bar-fill moderate" style="width:60%"></div></div>
+            <div class="lfs-bar" role="img" aria-label="Cognitive Bandwidth and Energy Drain: 9 out of 15, moderate friction"><div class="lfs-bar-fill moderate" style="width:60%"></div></div>
           </li>
           <li class="lfs-dim">
-            <div class="lfs-dim-name"><span class="lfs-dim-num">D4</span>Operational Cadence &amp; Cognitive Bandwidth</div>
+            <div class="lfs-dim-name"><span class="lfs-dim-num">D4</span>Principled Candor vs. The Silent Veto</div>
             <div class="lfs-dim-value moderate"><span class="lfs-dim-score">8 / 15</span></div>
-            <div class="lfs-bar" role="img" aria-label="Operational Cadence and Cognitive Bandwidth: 8 out of 15, moderate friction"><div class="lfs-bar-fill moderate" style="width:53.3%"></div></div>
+            <div class="lfs-bar" role="img" aria-label="Principled Candor vs. The Silent Veto: 8 out of 15, moderate friction"><div class="lfs-bar-fill moderate" style="width:53.3%"></div></div>
           </li>
         </ul>
         <p class="lfs-matrix-note">Each dimension scores from 3 to 15. A higher score means more friction.</p>
@@ -186,9 +186,9 @@
           <input type="hidden" name="friction_band" value="">
           <input type="hidden" name="dominant_vector" value="">
           <input type="hidden" name="d1_decision_velocity" value="">
-          <input type="hidden" name="d2_strategic_signal" value="">
-          <input type="hidden" name="d3_principled_tension" value="">
-          <input type="hidden" name="d4_operational_cadence" value="">
+          <input type="hidden" name="d2_strategic_cohesion" value="">
+          <input type="hidden" name="d3_energy_drain" value="">
+          <input type="hidden" name="d4_silent_veto" value="">
           <input type="hidden" name="not_sure_count" value="">
           <input type="hidden" name="scale_version" value="">
           <input type="hidden" name="answers" value="">
@@ -318,6 +318,16 @@
         </article>
 
         <!-- 1b. Structural risk and runway callout -->
+        <!-- Silent veto analysis: always shown, with an alert when Dimension 4 is elevated -->
+        <aside class="lfs-veto avoid-break-inside" aria-labelledby="lfs-veto-label">
+          <div class="lfs-veto-head">
+            <h3 class="lfs-veto-label" id="lfs-veto-label">The invisible runway killer: artificial harmony &amp; the silent veto</h3>
+            <p class="lfs-veto-alert" data-res-veto-alert hidden role="status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5L2.8 19.5h18.4L12 3.5zM12 10v4.5M12 17.2v.1"/></svg>Elevated risk: silent veto &amp; mandate ambiguity detected</p>
+          </div>
+          <p>Friction does not always show up as open confrontation. In high-stakes leadership teams the most expensive drag is silent: strategic initiatives nodded through in Monday meetings that quietly stall in corridor execution.</p>
+          <p>When co-founder friendships or early loyalties blur executive mandates (CEO, CTO, CPO), the team avoids holding peers accountable to protect personal harmony. The cost of avoiding principled tension is paid out of company velocity and, in the end, out of runway.</p>
+        </aside>
+
         <aside class="lfs-risk avoid-break-inside" aria-labelledby="lfs-risk-label">
           <div class="lfs-risk-label" id="lfs-risk-label">Why this matters commercially</div>
           <div class="lfs-risk-item">
@@ -340,8 +350,8 @@
 
         <!-- Print only, page 2: memo banner -->
         <div class="lfs-po lfs-memo print-page-2 avoid-break-inside" data-res-memo aria-hidden="true">
-          <div class="lfs-memo-tag">Internal memo: for the co-founder &amp; executive committee</div>
-          <p>This diagnostic reflects operational telemetry on our leadership team&rsquo;s decision speed, strategic alignment and bandwidth. Please review the highlighted bottleneck and the runway implications below before our next executive sync.</p>
+          <div class="lfs-memo-tag">Internal memo: for co-founders &amp; the executive committee</div>
+          <p>Operational review on decision velocity, executive mandate boundaries and cash runway drag. Please review this telemetry prior to our next executive strategy session.</p>
         </div>
 
         <!-- 2. Dominant Friction Vector -->
@@ -381,9 +391,9 @@
         <section class="lfs-po lfs-scope avoid-break-inside" aria-hidden="true">
           <div class="lfs-card-label">The next step: the Kuma 14-Day Leadership Friction Scan</div>
           <ol class="lfs-scope-list">
-            <li><strong>Confidential 1-on-1 executive interviews.</strong> Structured diagnostic conversations with the CEO, the founders and each C-suite executive.</li>
-            <li><strong>Cross-functional friction heat map.</strong> An unvarnished view of hidden misalignment between Product, Go-To-Market and the founders.</li>
-            <li><strong>Debrief and 90-day realignment compact.</strong> A facilitated session that sets Type 1 and Type 2 decision boundaries and aligns the next quarter&rsquo;s bets.</li>
+            <li><strong>Confidential 1-on-1 executive interviews.</strong> Diagnostic conversations with each executive to isolate unstated friction and silent vetoes, mapped into a cross-functional friction heat map.</li>
+            <li><strong>Mandate clarity.</strong> Clear authority boundaries between the CEO, CTO, CPO and go-to-market leads.</li>
+            <li><strong>Debrief and 90-day alignment compact.</strong> Type 1 and Type 2 decision rights and a zero-passive-veto operating agreement, agreed in a facilitated session.</li>
           </ol>
         </section>
 
@@ -394,13 +404,13 @@
         <div class="lfs-bridge-copy">
           <h2>Identifying friction is step one. Dismantling it requires external leverage.</h2>
           <blockquote class="lfs-quote">
-            <p>This self-assessment reflects the perspective of one leader. The Kuma 14-Day Leadership Friction Scan cross-calibrates these metrics against confidential, 1-on-1 diagnostic interviews across your entire executive team to isolate where speed is being lost.</p>
+            <p>You cannot untangle a silent veto from inside the room. When co-founders are also close friends, direct confrontation feels like a personal attack, leading to polite paralysis. Dismantling this requires an external, neutral operating framework to separate personal loyalty from executive execution.</p>
           </blockquote>
-          <p class="lfs-bridge-note">Book a confidential 30-minute debrief with a Kuma Partner to review your breakdown across all 4 dimensions and isolate the two highest-leverage interventions for your executive team.</p>
+          <p class="lfs-bridge-note">The Kuma 14-Day Leadership Friction Scan cross-calibrates this self-assessment against confidential 1-on-1 interviews across your executive team. Book a 30-minute debrief to review your four-dimension breakdown and isolate the two highest-leverage interventions.</p>
         </div>
         <div class="lfs-bridge-actions">
           <a href="index.html#contact" class="btn btn-cream" data-lfs-book>Schedule 30-Minute Debrief →</a>
-          <p class="lfs-cta-sub">Confidential • Direct with a Kuma Partner • Strategic action plan</p>
+          <p class="lfs-cta-sub">Confidential • Direct with Sven Mulfinger, Lead Partner • Unvarnished executive telemetry</p>
           <a href="friction-scan.html" class="btn-link">See how the 14-Day Scan works</a>
         </div>
       </div>

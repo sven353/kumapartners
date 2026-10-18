@@ -39,38 +39,41 @@
     dataPurgeLive: false
   };
 
-  // Stored with every submission so the CRM can tell the 4-point v1 scale from this one.
-  var SCALE_VERSION = '5pt-not-sure-v2';
+  // Stored with every submission so the CRM can tell question sets apart. v3 replaced the D3 and D4 statements
+  // (Energy Drain, Silent Veto) and reworded the rest.
+  var SCALE_VERSION = '5pt-not-sure-v3-silent-veto';
 
   // ---------------------------------------------------------------------------
   // DATA: dimensions, statements, scale
   // ---------------------------------------------------------------------------
   var DIMENSIONS = {
     d1: { number: 1, name: 'Decision Velocity & Autonomy', field: 'd1_decision_velocity' },
-    d2: { number: 2, name: 'Strategic Signal vs. Noise', field: 'd2_strategic_signal' },
-    d3: { number: 3, name: 'Principled Tension & Candor', field: 'd3_principled_tension' },
-    d4: { number: 4, name: 'Operational Cadence & Cognitive Bandwidth', field: 'd4_operational_cadence' }
+    d2: { number: 2, name: 'Strategic Cohesion vs. Defensive Silos', field: 'd2_strategic_cohesion' },
+    d3: { number: 3, name: 'Cognitive Bandwidth & Energy Drain', field: 'd3_energy_drain' },
+    d4: { number: 4, name: 'Principled Candor vs. The Silent Veto', field: 'd4_silent_veto' }
   };
 
+
   // Display and storage order. Ties for the dominant vector resolve in TIE_ORDER:
-  // D1 first, then D3 (as specified), then D2 and D4 so that every tie has a defined winner.
+  // D1 first, then D4 (candor and the silent veto), then D2 and D3 so that every tie has a defined winner.
   var DIMENSION_ORDER = ['d1', 'd2', 'd3', 'd4'];
-  var TIE_ORDER = ['d1', 'd3', 'd2', 'd4'];
+  var TIE_ORDER = ['d1', 'd4', 'd2', 'd3'];
 
   var QUESTIONS = [
-    { dim: 'd1', text: 'Operational decisions stall while teams wait for direct co-founder or CEO input, even when the scope is fully within their domain.' },
-    { dim: 'd1', text: 'Reversible experiments are treated with the same bureaucratic deliberation and risk aversion as irreversible structural bets.' },
-    { dim: 'd1', text: 'Important decisions emerge without a single clear owner, leading to ambiguity over who is accountable when execution lags.' },
-    { dim: 'd2', text: 'Priorities agreed upon at the executive table get diluted, renegotiated, or re-debated before they reach frontline execution.' },
-    { dim: 'd2', text: 'The executive team spends more meeting time reporting backward-looking status updates than addressing cross-functional blockers.' },
-    { dim: 'd2', text: 'New strategic ideas or customer requests frequently derail agreed quarterly objectives before those initiatives land.' },
-    { dim: 'd3', text: 'Tough, necessary disagreements are avoided or softened in group meetings, only to be re-hashed in 1-on-1 side conversations later.' },
-    { dim: 'd3', text: 'Feedback across functional peers is rare; cross-departmental friction is escalated upward to the CEO to arbitrate.' },
-    { dim: 'd3', text: 'The team accepts persistent underperformance or cultural drift to maintain surface harmony and avoid uncomfortable tension.' },
-    { dim: 'd4', text: 'Executive calendars are over 60% booked with reactive internal meetings, leaving minimal unbroken time for deep strategic focus.' },
-    { dim: 'd4', text: 'Adding new team members or leaders has increased coordination friction and communication overhead rather than linear output.' },
-    { dim: 'd4', text: 'The leadership team leaves weekly meetings without absolute clarity on the single most critical priority for the next 7 days.' }
+    { dim: 'd1', text: 'Operational decisions stall while teams wait for direct co-founder or CEO sign-off, even when the call sits squarely within a leader\u2019s domain.' },
+    { dim: 'd1', text: 'Reversible tactical experiments are treated with the same bureaucratic deliberation, consensus loops and risk aversion as irreversible structural bets.' },
+    { dim: 'd1', text: 'High-stakes initiatives emerge without a single clear decision owner, leading to diffused accountability and execution paralysis when timelines slip.' },
+    { dim: 'd2', text: 'Functional leads interpret company strategy differently, prompting departments to retreat into defensive silos and optimise for departmental metrics rather than unified company outcomes.' },
+    { dim: 'd2', text: 'Strategic priorities formally approved at the executive table get diluted, renegotiated or quietly bypassed before reaching frontline execution.' },
+    { dim: 'd2', text: 'New incoming ideas or customer demands frequently derail agreed quarterly targets, leaving key strategic initiatives unfinished.' },
+    { dim: 'd3', text: 'Key leaders spend more cognitive energy navigating internal communication, politics and consensus loops than competing in the market.' },
+    { dim: 'd3', text: 'Frequent initiative churn and delayed calls have created executive resignation or cynicism, quietly eroding discretionary effort.' },
+    { dim: 'd3', text: 'Leaders finish their weeks cognitively exhausted while feeling that the executive team made minimal tangible progress on core strategic bets.' },
+    { dim: 'd4', text: 'Decisions agreed in executive meetings are frequently undermined outside the room through passive compliance, delayed execution or corridor pushback.' },
+    { dim: 'd4', text: 'Personal relationships, co-founder history or conflict avoidance prevent the team from holding C-suite peers (CEO, CTO, CPO and others) rigorously accountable to their functional mandates.' },
+    { dim: 'd4', text: 'Critical, uncomfortable truths about underperformance, product reality or cultural drift are softened or silenced to preserve polite group dynamics.' }
   ];
+
   var TOTAL = QUESTIONS.length; // 12
 
   // ---------------------------------------------------------------------------
@@ -104,10 +107,11 @@
 
   var VECTORS = {
     d1: { name: 'The Founder Bottleneck', text: 'Decisions default inward. Execution speed is capped by founder calendar bandwidth.' },
-    d2: { name: 'Kinetic Drift', text: 'High internal motion with a low unified vector. Priorities shift before execution solidifies.' },
-    d3: { name: 'Artificial Harmony Trap', text: 'Polite consensus is masking operational misalignment. Unspoken tension erodes accountability.' },
-    d4: { name: 'The Coordination Tax', text: 'Scaling headcount has triggered exponential meeting overhead and context-switching.' }
+    d2: { name: 'Kinetic Drift', text: 'High internal motion with a low unified vector. Functions optimise for their own metrics and approved priorities dilute before they reach execution.' },
+    d3: { name: 'The Energy Drain', text: 'Leaders spend their energy navigating the organisation instead of the market. Churn and delay harden into cynicism.' },
+    d4: { name: 'The Silent Veto', text: 'Decisions are agreed in the room and undermined outside it. Polite harmony and personal loyalty stand in for accountability.' }
   };
+
 
   // Print brief only: what typically follows if the dominant pattern is left alone.
   // Kuma Partners view, deliberately without invented statistics.
@@ -118,21 +122,22 @@
       'The founder is the limit on growth. Milestones slip before the board update and stronger leaders begin to disengage.'
     ],
     d2: [
-      'Agreed priorities get reopened in side conversations. New requests enter the quarter without a named trade.',
+      'Agreed priorities get reopened or quietly bypassed. Functional heads protect departmental priorities and new requests enter the quarter without a named trade.',
       'Functions optimise for their own goals while the shared company bets slip. Status reporting grows to fill the gap.',
       'The quarter closes with plenty of motion and few shipped outcomes. The board update has to explain the drift.'
     ],
     d3: [
-      'Disagreements are softened in the room and settled afterwards in side conversations. Decisions get made twice.',
-      'Peers stop giving each other direct feedback and the CEO becomes the arbiter. Underperformance goes unaddressed.',
-      'Settled decisions keep being reopened and trust thins. The strongest people disengage first.'
+      'Leaders spend more energy on internal navigation than on the market. Initiative churn and delayed calls start to wear down discretionary effort.',
+      'Cynicism sets in. People stop volunteering ideas and do the minimum the process requires.',
+      'Leaders end each week exhausted with little to show on the core bets. The strongest people disengage or leave.'
     ],
     d4: [
-      'Calendars stay full of reactive meetings. Deep work and strategic decisions move to evenings and weekends.',
-      'New hires add coordination load faster than output. Context switching becomes the normal way of working.',
-      'Meeting load, not strategy, sets the pace. Next quarter\u2019s priorities go to whoever has time left.'
+      'The silent veto continues. Decisions are undermined outside the room and reversible calls wait for founder consensus.',
+      'Mandate blur deepens and peer accountability weakens to preserve interpersonal harmony. Key engineering and go-to-market milestones begin to lag.',
+      'The strategic disconnect starts to burn runway. High performers tire and disengage, and quarterly commitments slip before the board.'
     ]
   };
+
 
   var INTERVENTIONS = {
     d1: {
@@ -160,18 +165,6 @@
       signal: 'Frontline teams can name the same outcomes the executive team signed, and no priority gets reopened without a named trade.'
     },
     d3: {
-      title: 'The Structured Executive Tension Round',
-      lead: 'Bring the corridor conversations into the room, with a time limit and a decision at the end.',
-      time: 'About 30 minutes, at the start of your next leadership meeting.',
-      steps: [
-        'Each executive names one issue they have discussed privately but not yet in the room. Two minutes each, with no replies during the round.',
-        'The group picks the issue with the largest effect on delivery. One person states the disagreement as two positions and the cost of each.',
-        'Debate for 20 minutes, then close with a decision, one owner and a date, whether or not everyone agrees.',
-        'Agree that any issue raised afterwards in a side conversation returns to the next round instead of being settled privately.'
-      ],
-      signal: 'Fewer decisions get reopened after meetings, and cross-functional disputes stop travelling upward to the CEO.'
-    },
-    d4: {
       title: 'The Meeting Cadence Audit & Asynchronous Default',
       lead: 'Count what coordination costs, then stop paying for the part that only informs.',
       time: 'About two hours for the audit, then one week to reset the calendar.',
@@ -182,6 +175,18 @@
         'End every weekly leadership meeting by writing down the single most critical priority for the next seven days.'
       ],
       signal: 'Booked hours fall under the cap, and every executive can state the weekly priority without checking notes.'
+    },
+    d4: {
+      title: 'The Zero-Passive-Veto Tension Round',
+      lead: 'Bring the corridor conversations into the room, with a time limit and a decision at the end.',
+      time: 'About 30 minutes, at the start of your next leadership meeting.',
+      steps: [
+        'Each executive names one agreed decision they have questioned privately, or one peer mandate they have avoided challenging. Two minutes each, with no replies during the round.',
+        'The group picks the issue with the largest effect on delivery. One person states the disagreement as two positions and the cost of each.',
+        'Debate for 20 minutes, then close with a decision, one owner and a date, whether or not everyone agrees.',
+        'Agree a zero-passive-veto rule: objections are raised before the close, and anything raised afterwards in a side conversation returns to the next round instead of being settled privately.'
+      ],
+      signal: 'Fewer decisions get reopened after meetings, and peers challenge each other on their mandates directly instead of through the CEO.'
     }
   };
 
@@ -637,6 +642,9 @@
         q('[data-res-band]').textContent = result.band.name;
         q('[data-res-band-text]').textContent = result.band.text;
       }
+
+      // Silent veto alert when Dimension 4 is elevated (10 or more out of 15, as displayed)
+      q('[data-res-veto-alert]').hidden = insufficient || result.dims.d4 === null || result.dims.d4 < 10;
 
       // Founder centrality benchmark only when Dimension 1 is the dominant dimension
       q('[data-res-founder-risk]').hidden = result.dominant !== 'd1';
