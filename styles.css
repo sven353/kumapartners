@@ -16,6 +16,15 @@
   --teal-on-dark:#4FB3CF;   /* teal for text on navy, 7.6:1 */
   --max: 1120px;
 
+  /* Canvas design system: three section roles. Pages opt in with .section-primary,
+     .section-secondary or .section-dark (see "Section canvas roles" below). */
+  --canvas-primary:#F8F9FA;    /* Gallery Chalk: reading, calm, open */
+  --canvas-secondary:#E9EEF2;  /* Architectural Mist: context separator, grounds white cards */
+  --canvas-dark:#0B1523;       /* Midnight Navy: authority and conversion anchors */
+  --teal-accent:#1D6F8A;
+  --teal-glow:#4FB3CF;
+  --hairline-secondary:rgba(148,163,184,.35);
+
   /* Border token constitution: every border on this site is 1px. No exceptions.
      Use --hairline (never a literal 2px/3px) and --hairline-color (or an rgba/opacity
      tint of --navy for a subtler line) for any new container, card, pill, badge,
@@ -289,7 +298,7 @@ header.site.scrolled .nav{padding:10px 0;}
 }
 .problem-callout-label{
   display:block; font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.75rem;
-  letter-spacing:.1em; text-transform:uppercase; color:rgba(11,21,35,.55); margin-bottom:3px;
+  letter-spacing:.1em; text-transform:uppercase; color:rgba(11,21,35,.72); margin-bottom:3px;
 }
 .section-head{max-width:760px;}
 .section-head h2{margin-bottom:14px;}
@@ -433,7 +442,7 @@ header.site.scrolled .nav{padding:10px 0;}
   display:flex; flex-direction:column; align-items:center; text-align:center; gap:6px;
   flex:0 0 auto; max-width:92px;
   font-family:'Lato',Arial,sans-serif; font-size:.75rem; font-weight:600; line-height:1.35;
-  color:rgba(11,21,35,.55);
+  color:rgba(11,21,35,.72);
 }
 .tier-mini-dot{width:8px; height:8px; border-radius:50%; background:var(--teal); flex-shrink:0;}
 .tier-mini-dot-final{background:var(--navy);}
@@ -770,7 +779,7 @@ header.site.scrolled .nav{padding:10px 0;}
 .faq-intro h2{margin-bottom:14px;}
 .faq-intro-sub{font-size:.92rem; color:rgba(26,26,26,.65); line-height:1.6; margin-bottom:0;}
 .faq-bridge{margin-top:28px; padding-top:24px; border-top:1px solid rgba(11,21,35,.1);}
-.faq-bridge p{font-size:.78rem; color:rgba(26,26,26,.55); margin-bottom:8px;}
+.faq-bridge p{font-size:.78rem; color:rgba(26,26,26,.72); margin-bottom:8px;}
 .faq-bridge-link{
   display:inline-flex; align-items:center; gap:6px; font-family:'Lato',Arial,sans-serif;
   font-weight:700; font-size:.85rem; color:var(--navy); text-decoration:none; transition:color .2s ease;
@@ -1037,7 +1046,7 @@ header.site.scrolled .nav{padding:10px 0;}
 .scan-modal input:focus, .scan-modal select:focus{outline:none; border-color:var(--navy);}
 .scan-field-error{color:#a3402f; font-size:.8rem; margin-top:6px; display:none;}
 .scan-field-error.show{display:block;}
-.scan-form-microcopy{font-size:.78rem; color:rgba(11,21,35,.55); text-align:center; margin:14px 0 0;}
+.scan-form-microcopy{font-size:.78rem; color:rgba(11,21,35,.72); text-align:center; margin:14px 0 0;}
 .scan-form-error{font-size:.85rem; color:#b3261e; text-align:center; margin:14px 0 0;}
 .scan-form-error a{color:inherit; text-decoration:underline;}
 .scan-success{text-align:center; padding:40px 4px 8px;}
@@ -1069,7 +1078,7 @@ body.scan-modal-locked{overflow:hidden;}
 .legal-content ul{padding-left:20px;}
 .legal-content li{margin-bottom:8px;}
 .legal-content .updated{
-  font-family:'Lato',Arial,sans-serif; font-size:.85rem; color:rgba(26,26,26,.55); margin-bottom:36px; display:block;
+  font-family:'Lato',Arial,sans-serif; font-size:.85rem; color:rgba(26,26,26,.72); margin-bottom:36px; display:block;
 }
 
 @media (max-width: 860px){
@@ -1184,7 +1193,7 @@ body.scan-modal-locked{overflow:hidden;}
 .btn-teal{background:var(--teal); color:#fff; border-color:var(--teal);}
 .btn-teal:hover{background:#15556B; border-color:#15556B;}
 .btn-teal:disabled{opacity:.65; cursor:not-allowed;}
-.contact-form-microcopy{font-size:.78rem; color:rgba(11,21,35,.55); text-align:center; margin:14px 0 0;}
+.contact-form-microcopy{font-size:.78rem; color:rgba(11,21,35,.72); text-align:center; margin:14px 0 0;}
 .contact-form-error{font-size:.85rem; color:#b3261e; text-align:center; margin:14px 0 0;}
 .contact-form-error a{color:inherit; text-decoration:underline;}
 .contact-success{text-align:center; padding:24px 8px;}
@@ -1270,7 +1279,7 @@ body.scan-modal-locked{overflow:hidden;}
 .debrief-form input:focus, .debrief-form select:focus, .debrief-form textarea:focus{outline:none; border-color:var(--navy);}
 .debrief-form textarea{min-height:76px; resize:vertical;}
 .debrief-form .btn{width:100%; justify-content:center;}
-.debrief-form-microcopy{font-size:.78rem; color:rgba(11,21,35,.55); text-align:center; margin:14px 0 0;}
+.debrief-form-microcopy{font-size:.78rem; color:rgba(11,21,35,.72); text-align:center; margin:14px 0 0;}
 .debrief-form-error{font-size:.85rem; color:#b3261e; text-align:center; margin:14px 0 0;}
 .debrief-form-error a{color:inherit; text-decoration:underline;}
 .debrief-success{
@@ -1300,6 +1309,31 @@ body.debrief-modal-locked{overflow:hidden;}
   .debrief-modal-body{padding:24px 20px 32px;}
   .debrief-form .field-row{grid-template-columns:1fr;}
 }
+
+/* ---- Section canvas roles --------------------------------------------------------------
+   background-color is !important so no later section rule can collapse a role to white.
+   Gradients on .hero, #scorecard and .contact-section are background-image and still show. */
+.section-primary{background-color:var(--canvas-primary) !important; color:var(--navy);}
+.section-secondary{background-color:var(--canvas-secondary) !important; color:var(--navy);}
+.section-dark{background-color:var(--canvas-dark) !important; color:#fff;}
+
+/* White cards ground themselves on Architectural Mist: border plus a soft lift. */
+.section-secondary .card,
+.section-secondary .problem-col,
+.section-secondary .team-pillar,
+.section-secondary .operator-card,
+.section-secondary .tier-card,
+.section-secondary .fit-card{
+  background:#fff; border:1px solid rgba(226,232,240,.9); box-shadow:0 1px 3px rgba(15,23,42,.05);
+}
+.section-secondary .problem-col,
+.section-secondary .team-pillar{border-radius:var(--radius-md); padding:28px 26px;}
+.section-secondary .problem-grid{gap:24px;}
+.section-secondary .team-pillars{gap:24px; border-top:0; padding-top:8px;}
+.section-secondary .tier-card.tier-featured{border-color:var(--navy); box-shadow:0 18px 40px -24px rgba(11,21,35,.35);}
+/* Muted copy needs more weight on Mist than on white to keep 4.5:1. */
+.section-secondary .eyebrow,.section-secondary .problem-index,.section-secondary .team-pillar-index{color:#17596F;}
+.section-secondary p{color:rgba(11,21,35,.82);}
 
 /* Footer */
 footer.site{background:var(--cream); padding:60px 0 40px; border-top:1px solid rgba(11,21,35,.12);}
@@ -1787,3 +1821,15 @@ main:focus{outline:none;}
 @media (prefers-reduced-motion: reduce){
   .intake-track-option span{transition:none;}
 }
+
+/* Dark footer (opt in with class="site site-footer"). Other pages keep the light footer. */
+footer.site.site-footer{background:var(--canvas-dark); border-top:1px solid rgba(255,255,255,.08); color:rgba(255,255,255,.82);}
+footer.site.site-footer .footer-blurb{font-size:.92rem; color:rgba(255,255,255,.72); max-width:280px;}
+footer.site.site-footer .footer-grid h4{color:rgba(255,255,255,.7);}
+footer.site.site-footer .footer-grid a,
+footer.site.site-footer .footer-grid button.footer-link-btn,
+footer.site.site-footer .footer-email{color:#fff;}
+footer.site.site-footer .footer-grid a:hover,
+footer.site.site-footer .footer-grid button.footer-link-btn:hover,
+footer.site.site-footer .footer-email:hover{color:var(--teal-glow);}
+footer.site.site-footer .footer-bottom{border-top:1px solid rgba(255,255,255,.14); color:rgba(255,255,255,.7);}
