@@ -22,7 +22,7 @@
      divider, or accent edge. A colored accent edge (e.g. a top marker on a card)
      still uses this 1px width, it's the color that carries the emphasis, not the weight. */
   --hairline: 1px;
-  --hairline-color: rgba(11,21,35,.08);
+  --hairline-color:rgba(11,21,35,.07);
   --hairline-subtle: rgba(11,21,35,.05);
 
   /* Radius system: names the five corner-radius values already in use across the
@@ -36,6 +36,7 @@
   --radius-md: 6px;
   --radius-lg: 8px;
   --radius-pill: 999px;
+  --radius-xl: 20px;   /* cards, panels, forms: continuous Apple-style corner */
 
   /* Card sheen: a faint top-light inset plus a soft contact shadow, used on
      white cards that sit directly on a white or near-white section background
@@ -45,7 +46,7 @@
   --card-sheen: inset 0 1px 0 rgba(255,255,255,.9), 0 1px 3px rgba(11,21,35,.04);
 
   /* Elevation for white cards sitting on a chalk (--cream) section */
-  --shadow-card-subtle: 0 4px 20px -4px rgba(11,21,35,.05);
+  --shadow-card-subtle:0 4px 20px -2px rgba(15,23,42,.03), 0 2px 6px -1px rgba(15,23,42,.02);
   --shadow-card-hover: 0 12px 28px -8px rgba(11,21,35,.08);
 
   /* Ambient overhead light for the dark anchor sections (#scorecard, #contact) */
@@ -128,8 +129,15 @@ header.site.scrolled .nav{padding:10px 0;}
 .nav-links > li > a.nav-link.active, .nav-dropdown-trigger.nav-link.active{color:var(--navy); font-weight:700;}
 .nav-links > li > a.nav-link.active::after, .nav-dropdown-trigger.nav-link.active::after{
   content:''; position:absolute; left:0; right:0; bottom:-8px; height:2px;
-  background:var(--teal); border-radius:1px;
+  background:var(--teal); border-radius:2px;
 }
+.nav-links > li > a.nav-link::after, .nav-dropdown-trigger.nav-link::after{
+  content:''; position:absolute; left:0; right:0; bottom:-8px; height:2px; border-radius:2px;
+  background:var(--teal); transform:scaleX(0); transform-origin:left center; opacity:.9;
+  transition:transform .28s cubic-bezier(.16,1,.3,1);
+}
+.nav-links > li > a.nav-link:hover::after, .nav-dropdown-trigger.nav-link:hover::after,
+.nav-links > li > a.nav-link.active::after, .nav-dropdown-trigger.nav-link.active::after{transform:scaleX(1);}
 .nav-cta{display:flex; align-items:center; gap:20px;}
 .nav-cta button.btn{font-family:'Lato',Arial,sans-serif; white-space:nowrap; font-size:.875rem; font-weight:600;}
 .nav-mobile-only{display:none;}
@@ -183,8 +191,8 @@ header.site.scrolled .nav{padding:10px 0;}
 }
 .btn-primary{background:var(--navy); color:#fff;}
 .btn-primary:hover{background:#16283D;}
-.btn-secondary{background:transparent; color:var(--navy); border-color:var(--navy);}
-.btn-secondary:hover{background:var(--navy); color:#fff;}
+.btn-secondary{background:transparent; color:var(--navy); border-color:rgba(11,21,35,.18);}
+.btn-secondary:hover{background:var(--navy); color:#fff; border-color:var(--navy);}
 .btn-link{
   color:var(--navy); text-decoration:none; display:inline-block;
   border-bottom:1px solid rgba(11,21,35,.3); padding-bottom:2px;
@@ -205,16 +213,16 @@ header.site.scrolled .nav{padding:10px 0;}
      40px by design, so 64px here reads as one continuous transition into the logo bar instead
      of two stacked gaps. */
   padding:110px 0 64px;
-  background:linear-gradient(180deg, rgba(29,111,138,.08), transparent 60%), #fff;
+  background:radial-gradient(120% 80% at 50% 0%, #FFFFFF 0%, #F4F7F9 60%, #EAEFF3 100%);
 }
 .hero .wrap{max-width:1040px;}
 .hero h1{font-size:3.1rem; max-width:1000px; text-wrap:balance;}
 .hero .subhead{display:block; font-size:1.3rem; max-width:680px; margin-bottom:34px;}
 .hero-ctas{display:flex; align-items:center; gap:28px; flex-wrap:wrap;}
 .badge-pill{
-  display:inline-flex; align-items:center; gap:8px; background:#fff; border:1px solid var(--teal);
-  color:var(--teal); font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:.78rem;
-  letter-spacing:.04em; text-transform:uppercase; padding:8px 16px; border-radius:var(--radius-pill); margin-bottom:22px;
+  display:inline-flex; align-items:center; gap:8px; background:rgba(29,111,138,.05); border:1px solid rgba(29,111,138,.25);
+  color:var(--teal); font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:.75rem;
+  letter-spacing:.04em; text-transform:uppercase; padding:4px 14px; border-radius:var(--radius-pill); margin-bottom:22px;
 }
 
 /* Proof bar — one of the site's 3 designated navy blocks (with #scorecard and #contact),
@@ -358,6 +366,7 @@ header.site.scrolled .nav{padding:10px 0;}
 .comparison-table .col-kuma{
   width:28%; background:#fff; color:var(--navy); font-weight:600; line-height:1.65;
   border-left:1.5px solid var(--teal); border-right:1.5px solid var(--teal);
+  box-shadow:0 10px 30px -10px rgba(29,111,138,.15);
 }
 .comparison-table thead .col-kuma{
   text-align:center; padding-top:16px; padding-bottom:16px;
@@ -440,7 +449,7 @@ header.site.scrolled .nav{padding:10px 0;}
 }
 .tier-mini-timeline{
   display:flex; align-items:flex-start; justify-content:space-between;
-  padding-top:20px; margin-bottom:24px; border-top:1px solid rgba(11,21,35,.1);
+  padding-top:20px; margin-bottom:24px; border-top:1px solid var(--hairline-color);
 }
 .tier-mini-step{
   display:flex; flex-direction:column; align-items:center; text-align:center; gap:6px;
@@ -491,7 +500,7 @@ header.site.scrolled .nav{padding:10px 0;}
 .governance-compact .compact-text{font-size:.95rem; line-height:1.6; color:rgba(26,26,26,.72); margin:0 0 10px;}
 .governance-compact .compact-text:last-child{margin-bottom:0;}
 .ai-tier-grid{margin-top:36px;}
-.tier-deliverable{margin:0 0 28px; padding-top:16px; border-top:1px solid rgba(11,21,35,.1);}
+.tier-deliverable{margin:0 0 28px; padding-top:16px; border-top:1px solid var(--hairline-color);}
 .tier-deliverable-label{
   display:block; font-family:'Lato',Arial,sans-serif; font-weight:700; letter-spacing:.08em;
   text-transform:uppercase; font-size:.75rem; color:var(--teal); margin-bottom:6px;
@@ -784,7 +793,7 @@ header.site.scrolled .nav{padding:10px 0;}
 .faq-intro .eyebrow{margin-bottom:14px;}
 .faq-intro h2{margin-bottom:14px;}
 .faq-intro-sub{font-size:.92rem; color:rgba(26,26,26,.65); line-height:1.6; margin-bottom:0;}
-.faq-bridge{margin-top:28px; padding-top:24px; border-top:1px solid rgba(11,21,35,.1);}
+.faq-bridge{margin-top:28px; padding-top:24px; border-top:1px solid var(--hairline-color);}
 .faq-bridge p{font-size:.78rem; color:rgba(26,26,26,.55); margin-bottom:8px;}
 .faq-bridge-link{
   display:inline-flex; align-items:center; gap:6px; font-family:'Lato',Arial,sans-serif;
@@ -796,8 +805,8 @@ header.site.scrolled .nav{padding:10px 0;}
 
 /* FAQ accordion */
 .faq{max-width:none; margin-top:0;}
-.faq-item{border-top:1px solid rgba(11,21,35,.12);}
-.faq-item:last-child{border-bottom:1px solid rgba(11,21,35,.12);}
+.faq-item{border-top:1px solid var(--hairline-color);}
+.faq-item:last-child{border-bottom:1px solid var(--hairline-color);}
 .faq-question{
   width:100%; text-align:left; background:none; border:none; cursor:pointer; padding:22px 4px;
   display:flex; justify-content:space-between; align-items:center; gap:20px;
@@ -824,7 +833,7 @@ header.site.scrolled .nav{padding:10px 0;}
 .faq-extended-inner{overflow:hidden;}
 .faq-toggle{
   display:flex; align-items:center; justify-content:center; gap:6px; width:100%;
-  background:none; border:none; border-top:1px solid rgba(11,21,35,.12); cursor:pointer;
+  background:none; border:none; border-top:1px solid var(--hairline-color); cursor:pointer;
   font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.85rem; color:var(--navy);
   padding:22px 4px 4px; transition:color .2s ease;
 }
@@ -947,7 +956,7 @@ header.site.scrolled .nav{padding:10px 0;}
   max-width:640px; margin:44px auto 0; padding:40px;
   box-shadow:none;
 }
-.sc-nav-row{margin-top:24px; padding-top:20px; border-top:1px solid rgba(11,21,35,.1);}
+.sc-nav-row{margin-top:24px; padding-top:20px; border-top:1px solid var(--hairline-color);}
 .sc-back-btn{
   display:inline-flex; align-items:center; gap:6px; background:none; border:none; cursor:pointer; padding:6px 4px;
   font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.8rem; color:var(--teal);
@@ -1353,18 +1362,18 @@ footer.site .footer-logo img:not(.footer-logo-img){filter:brightness(0) invert(1
 }
 .timeline{margin-top:44px; display:grid; gap:0;}
 .timeline-item{
-  display:grid; grid-template-columns:140px 1fr; gap:28px; padding:26px 0; border-top:1px solid rgba(11,21,35,.12);
+  display:grid; grid-template-columns:140px 1fr; gap:28px; padding:26px 0; border-top:1px solid var(--hairline-color);
 }
-.timeline-item:last-child{border-bottom:1px solid rgba(11,21,35,.12);}
+.timeline-item:last-child{border-bottom:1px solid var(--hairline-color);}
 .timeline-item .days{
   font-family:'Montserrat',Arial,sans-serif; font-weight:600; color:var(--navy); font-size:1rem;
 }
 .two-col{display:grid; grid-template-columns:1fr 1fr; gap:56px;}
 .deliverable-list{list-style:none; margin:0; padding:0;}
 .deliverable-list li{
-  padding:14px 0 14px 30px; border-top:1px solid rgba(11,21,35,.12); position:relative;
+  padding:14px 0 14px 30px; border-top:1px solid var(--hairline-color); position:relative;
 }
-.deliverable-list li:last-child{border-bottom:1px solid rgba(11,21,35,.12);}
+.deliverable-list li:last-child{border-bottom:1px solid var(--hairline-color);}
 .deliverable-list li::before{
   content:"›"; position:absolute; left:0; top:14px; color:var(--teal); font-weight:700; font-size:1.1rem;
 }
@@ -1415,7 +1424,7 @@ footer.site .footer-logo img:not(.footer-logo-img){filter:brightness(0) invert(1
   .problem-grid{gap:36px;}
   .partner-grid.partner-grid-2col{grid-template-columns:1fr; max-width:420px;}
   .phase{border-left:1px solid rgba(11,21,35,.12) !important; border-bottom:none;}
-  .phase:last-child{border-bottom:1px solid rgba(11,21,35,.12);}
+  .phase:last-child{border-bottom:1px solid var(--hairline-color);}
   .contact-grid, .two-col{grid-template-columns:1fr;}
   .faq-layout{grid-template-columns:1fr; gap:0;}
   .faq-intro{position:static; margin-bottom:32px;}
@@ -1576,15 +1585,18 @@ footer.site .footer-logo img:not(.footer-logo-img){filter:brightness(0) invert(1
    components get the reveal instead, once, on their outer shell.
    ========================================================================== */
 .reveal-on-scroll{
-  opacity:0; transform:translateY(24px);
-  transition:opacity 650ms cubic-bezier(.2,.8,.2,1), transform 650ms cubic-bezier(.2,.8,.2,1);
+  opacity:0; transform:translateY(16px);
+  transition:opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);
+  will-change:opacity, transform;
 }
 .reveal-on-scroll.is-visible{opacity:1; transform:translateY(0);}
 
 .reveal-stagger > *:nth-child(1){transition-delay:0ms;}
-.reveal-stagger > *:nth-child(2){transition-delay:90ms;}
-.reveal-stagger > *:nth-child(3){transition-delay:180ms;}
-.reveal-stagger > *:nth-child(4){transition-delay:270ms;}
+.reveal-stagger > *:nth-child(2){transition-delay:100ms;}
+.reveal-stagger > *:nth-child(3){transition-delay:200ms;}
+.reveal-stagger > *:nth-child(4){transition-delay:300ms;}
+.reveal-stagger > *:nth-child(5){transition-delay:400ms;}
+.reveal-stagger > *:nth-child(6){transition-delay:500ms;}
 
 /* .advisor-grid runs to 10 cards in a 2-column layout, past the 4-step stagger
    above. An odd/even alternation scales to any row count instead of leaving
@@ -1597,7 +1609,7 @@ footer.site .footer-logo img:not(.footer-logo-img){filter:brightness(0) invert(1
    the later rule silently replacing it, since "transition" isn't additive
    across separate rules on the same element. */
 .value-card.reveal-on-scroll{
-  transition:border-color .2s ease, opacity 650ms cubic-bezier(.2,.8,.2,1), transform 650ms cubic-bezier(.2,.8,.2,1);
+  transition:border-color .2s ease, opacity .7s cubic-bezier(.16,1,.3,1), transform .7s cubic-bezier(.16,1,.3,1);
 }
 
 @media (prefers-reduced-motion: reduce){
@@ -1696,10 +1708,10 @@ main:focus{outline:none;}
 .kos-tool-body{flex:1; min-width:0;}
 .kos-tool-name{font-size:1.05rem; font-weight:700; color:var(--navy); margin:0 0 6px;}
 .kos-tool-desc{font-size:.9rem; line-height:1.55; color:rgba(26,26,26,.75); margin:0 0 12px;}
-.kos-tool-metric{display:inline-block; font-family:'Lato',Arial,sans-serif; font-size:.75rem; font-weight:700; color:var(--teal); background:var(--cream); border:1px solid var(--hairline-color); padding:4px 8px; border-radius:var(--radius-sm);}
-@media (min-width:1024px){
-  .kos-layout{grid-template-columns:1.05fr 1fr; gap:64px;}
-  .kos-wheel-column{position:sticky; top:104px;}
+.kos-tool-metric{display:block; font-family:'Lato',Arial,sans-serif; font-size:.82rem; font-weight:600; color:var(--teal); margin-top:8px; line-height:1.45;}
+@media (min-width:960px){
+  .kos-layout{grid-template-columns:minmax(0,1fr) minmax(0,1.25fr); gap:48px; align-items:start;}
+  .kos-wheel-column{position:sticky; top:120px;}
 }
 @media (max-width:640px){
   .kos-tool{flex-direction:column; gap:12px;}
@@ -1977,3 +1989,15 @@ main:focus{outline:none;}
 @media (prefers-reduced-motion: reduce){
   .scale-num, .btn-submit-debrief{transition:none;}
 }
+
+/* Landing refinement: continuous 20px corners on cards and forms, layered micro-shadow from --shadow-card-subtle. */
+.problem-col,
+.tier-card,
+.value-card,
+.fit-card,
+.operator-card,
+.kos-tool,
+.contact-form-shell,
+.operator-bench-strip,
+.leadership-footprint-bar{border-radius:var(--radius-xl);}
+.contact-form-shell, .kos-tool{box-shadow:var(--shadow-card-subtle);}
