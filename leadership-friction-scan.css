@@ -747,13 +747,13 @@ body.suite .lfs-methodology{border-top:1px solid #E2E8F0;background:rgba(248,250
   }
 
   /* Eyebrow pills */
-  body.suite .lfs-hero .eyebrow, body.suite .lfs-hero .lfs-framework, body.suite .lfs-results .eyebrow,
+  body.suite .lfs-hero .eyebrow, body.suite .lfs-results .eyebrow,
   body.suite .lfs-tag, body.suite .lfs-act-eyebrow{
     display:flex; width:fit-content; align-items:center; padding:4px 14px; border-radius:9999px;
     font-family:'Lato',Arial,sans-serif; font-size:.74rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; line-height:1.5;
     border:var(--hairline) solid rgba(29,111,138,.22); background:rgba(29,111,138,.05); color:var(--teal);
   }
-  body.suite .lfs-hero .eyebrow, body.suite .lfs-hero .lfs-framework{margin:0 auto 12px;}
+  body.suite .lfs-hero .eyebrow{margin:0 auto 12px;}
   body.suite .lfs-results .eyebrow{margin:0 0 14px;}
   body.suite .lfs-tag{margin-bottom:12px;}
   body.suite .lfs-act-eyebrow{margin-bottom:8px;}
@@ -921,3 +921,19 @@ body.suite .lfs-meth-details[open] > .lfs-meth-summary::after{content:"\2212";}
 body.suite .lfs-meth-details[open] > .lfs-meth-summary{margin-bottom:28px;}
 body.suite .lfs-meth-summary:focus-visible{outline:2px solid var(--teal); outline-offset:3px;}
 @media (max-width:767px){ body.suite .lfs-topinvite{padding:14px 16px;} }
+
+/* Single pill in the hero, framework line is plain small text. Not Sure is a visible button. */
+body.suite .lfs-hero .lfs-framework{display:block; width:auto; margin:0 auto 14px; padding:0; border:0; background:none; border-radius:0; font-size:.8rem; font-weight:400; letter-spacing:.01em; text-transform:none; color:var(--slate);}
+body.suite .lfs-ns-row{margin-top:14px;}
+body.suite .lfs-rate.lfs-rate-ns{display:inline-flex; align-items:baseline; gap:8px; padding:10px 18px; min-height:40px; border:1px solid rgba(11,21,35,.14); border-radius:9999px; background:#fff; color:var(--ink); font-size:.86rem; font-weight:700; text-decoration:none;}
+body.suite .lfs-rate.lfs-rate-ns .lfs-ns-sub{font-weight:400; font-size:.76rem; color:#64748b;}
+body.suite .lfs-rate.lfs-rate-ns:hover{border-color:rgba(29,111,138,.45); background:rgba(29,111,138,.04); color:var(--ink); text-decoration:none;}
+body.suite .lfs-rate.lfs-rate-ns.selected{border-color:var(--teal); background:rgba(29,111,138,.08); color:var(--navy);}
+body.suite .lfs-keyhint, body.suite .lfs-rate-key{display:none;}
+@media (max-width:639px){
+  body.suite .lfs-hero .lfs-framework{display:none;}
+  body.suite .lfs-rate.lfs-rate-ns{display:flex; width:100%; justify-content:center; min-height:44px;}
+}
+body.suite .lfs-rate.lfs-rate-ns{flex-direction:row; white-space:nowrap; align-items:center;}
+body.suite .lfs-rate.lfs-rate-ns span{display:inline; position:static; padding:0; margin:0;}
+body.suite .lfs-rate.lfs-rate-ns .lfs-ns-sub::before{content:"\00b7\00a0";}
