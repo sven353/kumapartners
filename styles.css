@@ -96,7 +96,7 @@ section{padding:96px 0;}
   font-weight:700; letter-spacing:.12em; text-transform:uppercase;
   font-size:.78rem; color:var(--navy); margin-bottom:18px;
 }
-.eyebrow::before{content:""; display:inline-block; width:14px; height:1.5px; background:var(--teal); opacity:.85; flex:none;}
+.eyebrow::before{content:""; display:inline-block; width:14px; height:1px; background:var(--teal); opacity:.85; flex:none;}
 
 /* Header */
 body{padding-top:79px;}
@@ -195,7 +195,7 @@ header.site.scrolled .nav{padding:10px 0;}
 .btn-secondary:hover{background:var(--navy); color:#fff; border-color:var(--navy);}
 .btn-link{
   color:var(--navy); text-decoration:none; display:inline-block;
-  border-bottom:1px solid rgba(11,21,35,.3); padding-bottom:2px;
+  border-bottom:1px solid rgba(11,21,35,.2); padding-bottom:2px;
   font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.95rem;
   transition:border-color .2s ease;
 }
@@ -220,10 +220,11 @@ header.site.scrolled .nav{padding:10px 0;}
 .hero .subhead{display:block; font-size:1.3rem; max-width:680px; margin-bottom:34px;}
 .hero-ctas{display:flex; align-items:center; gap:28px; flex-wrap:wrap;}
 .badge-pill{
-  display:inline-flex; align-items:center; gap:8px; background:rgba(29,111,138,.05); border:1px solid rgba(29,111,138,.25);
-  color:var(--teal); font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:.75rem;
-  letter-spacing:.04em; text-transform:uppercase; padding:4px 14px; border-radius:var(--radius-pill); margin-bottom:22px;
+  display:inline-flex; align-items:center; gap:8px; background:none; border:0; padding:0;
+  color:var(--navy); font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:.75rem;
+  letter-spacing:.12em; text-transform:uppercase; margin-bottom:22px;
 }
+.badge-pill::before{content:""; display:inline-block; width:14px; height:1px; background:var(--teal); opacity:.85; flex:none;}
 
 /* Proof bar — one of the site's 3 designated navy blocks (with #scorecard and #contact),
    so the pedigree strip reads as a credibility beat rather than a plain content section. */
@@ -339,47 +340,33 @@ header.site.scrolled .nav{padding:10px 0;}
    and #engagements sections so the cadence alternates instead of running two cream
    sections together. */
 #approach{background:var(--ramp-inverse); border-bottom:1px solid var(--hairline-color);}
-.comparison-table tbody tr:nth-child(even) .col-competitor{background:var(--cream);}
 
-/* Comparison table */
-.comparison-matrix-wrapper{overflow-x:auto; padding:28px 0 4px 4px;}
-.comparison-table{
-  width:100%; border-collapse:separate; border-spacing:0; margin-top:0; background:#fff;
-  border-radius:var(--radius-md); overflow:hidden;
-}
+/* Comparison table: flat surface, horizontal hairlines only, Kuma column carried by a soft tint */
+.comparison-matrix-wrapper{overflow-x:auto; padding:8px 0 4px;}
+.comparison-table{width:100%; border-collapse:separate; border-spacing:0; margin-top:0; background:transparent;}
 .comparison-table th, .comparison-table td{
-  text-align:left; padding:18px 22px; border:1px solid var(--hairline-subtle); vertical-align:middle; font-size:.95rem;
-  border-left:none; border-top:none;
+  text-align:left; padding:22px 24px; border:0; border-bottom:1px solid var(--hairline-subtle); vertical-align:middle; font-size:.95rem; background:transparent;
 }
-.comparison-table th:first-child, .comparison-table td:first-child{border-left:1px solid var(--hairline-color);}
-.comparison-table thead th{border-top:1px solid var(--hairline-color);}
-.comparison-table tbody tr:last-child > *{border-bottom-color:var(--hairline-color);}
-.comparison-table .col-dimension{
-  font-family:'Montserrat',Arial,sans-serif; font-weight:600; color:var(--navy); background:rgba(29,111,138,.06);
-  white-space:nowrap; width:18%;
-}
-.comparison-table thead .col-dimension{background:rgba(29,111,138,.08); white-space:normal;}
+.comparison-table tbody tr:last-child > *{border-bottom:0;}
+.comparison-table thead th{border-bottom:1px solid var(--hairline-color); padding-top:20px; padding-bottom:20px; font-family:'Montserrat',Arial,sans-serif; font-weight:600; color:var(--slate);}
+.comparison-table .col-dimension{font-family:'Montserrat',Arial,sans-serif; font-weight:600; color:var(--navy); white-space:nowrap; width:18%;}
+.comparison-table thead .col-dimension{white-space:normal;}
 .comparison-table .col-competitor{width:27%; color:var(--slate);}
-.comparison-table thead .col-competitor{
-  font-family:'Montserrat',Arial,sans-serif; font-weight:600; color:var(--navy); background:rgba(29,111,138,.08);
-}
 .comparison-table .col-kuma{
-  width:28%; background:#fff; color:var(--navy); font-weight:600; line-height:1.65;
-  border-left:1.5px solid var(--teal); border-right:1.5px solid var(--teal);
-  box-shadow:0 10px 30px -10px rgba(29,111,138,.15);
+  width:28%; background:rgba(29,111,138,.045); color:var(--navy); font-weight:600; line-height:1.65;
+  border-left:1px solid rgba(29,111,138,.3); border-right:1px solid rgba(29,111,138,.3); border-bottom-color:rgba(29,111,138,.12);
 }
 .comparison-table thead .col-kuma{
-  text-align:center; padding-top:16px; padding-bottom:16px;
-  border-top:1.5px solid var(--teal); border-top-left-radius:var(--radius-md); border-top-right-radius:var(--radius-md);
+  text-align:center; padding-top:18px; padding-bottom:18px; color:var(--navy);
+  border-top:1px solid rgba(29,111,138,.3); border-top-left-radius:var(--radius-md); border-top-right-radius:var(--radius-md);
 }
 .comparison-table tbody tr:last-child .col-kuma{
-  border-bottom:1.5px solid var(--teal); border-bottom-left-radius:var(--radius-md); border-bottom-right-radius:var(--radius-md);
+  border-bottom:1px solid rgba(29,111,138,.3); border-bottom-left-radius:var(--radius-md); border-bottom-right-radius:var(--radius-md);
 }
 .kuma-badge-header{
-  display:block; background:var(--teal); color:#fff; white-space:nowrap;
-  font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.75rem;
-  letter-spacing:.06em; text-transform:uppercase; padding:6px 14px; border-radius:var(--radius-pill);
-  margin:0 auto 10px; width:fit-content;
+  display:block; color:var(--teal); white-space:nowrap;
+  font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.7rem;
+  letter-spacing:.1em; text-transform:uppercase; margin:0 auto 6px;
 }
 .kuma-title-header{
   display:block; font-family:'Montserrat',Arial,sans-serif; font-weight:700; font-size:1.15rem; color:var(--navy);
@@ -881,7 +868,7 @@ header.site.scrolled .nav{padding:10px 0;}
    unbranded, uncoordinated dark rather than a deliberate one. White also keeps navy down
    to exactly 3 sections site-wide (proof, scorecard, contact), per the strict cadence rule. */
 #investors{background:var(--ramp-chalk); padding:90px 0; border-top:1px solid var(--hairline-color);}
-#investors .badge-pill{background:var(--cream); border-color:var(--hairline-color); color:var(--navy);}
+#investors .badge-pill{background:none; border:0; color:var(--navy);}
 #investors h2{color:var(--ink);}
 #investors .wrap > p{color:rgba(26,26,26,.7);}
 #investors .btn-primary{background:var(--navy); color:#fff; border:1px solid var(--navy);}
@@ -1659,8 +1646,8 @@ main:focus{outline:none;}
 /* Operators strip */
 .section-operators-strip{background:var(--ramp-chalk); padding:88px 0; border-top:1px solid var(--hairline-color); border-bottom:1px solid var(--hairline-color);}
 .operators-head{text-align:center; max-width:680px; margin:0 auto 48px;}
-.operators-head .eyebrow{display:block; text-align:center; font-size:.75rem; letter-spacing:.08em; margin-bottom:12px;}
-.operators-head .eyebrow::before{display:none;}
+.operators-head .eyebrow{justify-content:center; text-align:center; font-size:.75rem; letter-spacing:.08em; margin-bottom:12px;}
+.operators-head .eyebrow::after{content:""; display:inline-block; width:14px; height:1px; background:var(--teal); opacity:.85; flex:none;}
 .operators-head h2{font-size:2.125rem; letter-spacing:-.02em; margin-bottom:12px;}
 .operators-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:32px; max-width:760px; margin:0 auto;}
 .operator-card{background:#fff; border:1px solid var(--hairline-color); border-radius:var(--radius-md); overflow:hidden; display:flex; flex-direction:column; box-shadow:var(--shadow-card-subtle); transition:transform .25s ease, box-shadow .25s ease;}
@@ -1817,12 +1804,13 @@ main:focus{outline:none;}
 }
 
 /* Intake track selector (contact form) */
-.intake-track{display:flex; gap:4px; margin:0 0 22px; padding:4px; background:var(--kuma-chalk); border:1px solid var(--kuma-hairline); border-radius:6px; min-width:0;}
+.intake-track{display:flex; gap:4px; margin:0 0 22px; padding:4px; background:rgba(11,21,35,.06); border:0; border-radius:12px; min-width:0;}
 .intake-track-legend{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;}
 .contact-form .intake-track-option{flex:1; position:relative; display:block; margin:0; cursor:pointer; text-transform:none; letter-spacing:0; font-size:.8125rem;}
 .contact-form .intake-track-option input{position:absolute; opacity:0; width:1px; height:1px; padding:0; border:0; margin:0;}
-.intake-track-option span{display:block; text-align:center; padding:10px 8px; min-height:24px; border-radius:4px; font-weight:700; color:var(--slate); transition:background .2s ease, color .2s ease;}
-.intake-track-option input:checked + span{background:#fff; color:var(--kuma-midnight); box-shadow:0 2px 4px rgba(11,21,35,.1);}
+.intake-track-option span{display:block; text-align:center; padding:10px 8px; min-height:24px; border-radius:9px; font-weight:700; color:var(--slate); transition:background .2s ease, color .2s ease, box-shadow .2s ease;}
+.intake-track-option:hover input:not(:checked) + span{background:rgba(255,255,255,.65); color:var(--navy);}
+.intake-track-option input:checked + span{background:#fff; color:var(--kuma-midnight); box-shadow:0 1px 2px rgba(11,21,35,.12), 0 0 0 1px rgba(11,21,35,.06);}
 .intake-track-option input:focus-visible + span{outline:2px solid var(--teal); outline-offset:2px;}
 @media (prefers-reduced-motion: reduce){
   .intake-track-option span{transition:none;}
