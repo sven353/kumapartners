@@ -24,6 +24,11 @@
     // Netlify Forms always receives the submission first. A failure here never blocks the visitor.
     crmWebhookUrl: '',
 
+    // Step-level analytics. Events are always sent to window.plausible, window.gtag, window.dataLayer and a
+    // 'lfs:track' DOM event when any of them exists. Set plausibleDomain (for example 'kuma.partners') to load
+    // Plausible, which is cookieless, so it needs no consent banner. Leave empty to record nothing.
+    analytics: { plausibleDomain: '' },
+
     // Anti-bot: minimum time between the intake form appearing and a valid submit.
     minFillMs: 2500,
 
@@ -308,6 +313,44 @@
       busy: false
     };
 
+    // ---- A/B variant (assigned in the page head before first paint) ----
+    // A = current intake. B = focused: result preview before the form, company optional, one-line trust text,
+    // no funding stage, logo-only header. The variant is stored with every submission.
+    var variant = document.documentElement.getAttribute('data-lfs-variant') === 'B' ? 'B' : 'A';
+
+    // ---- tracking ----
+    function referrerHost() {
+      try {
+        if (!document.referrer) return '';
+        var h = new URL(document.referrer).hostname.replace(/^www\./, '');
+        return h === window.location.hostname.replace(/^www\./, '') ? '' : h;
+      } catch (e) { return ''; }
+    }
+    function sourceTag() {
+      try {
+        var p = new URLSearchParams(window.location.search);
+        return p.get('utm_source') || referrerHost() || 'direct';
+      } catch (e) { return 'direct'; }
+    }
+    if (CONFIG.analytics && CONFIG.analytics.plausibleDomain) {
+      window.plausible = window.plausible || function () { (window.plausible.q = window.plausible.q || []).push(arguments); };
+      var ps = document.createElement('script');
+      ps.defer = true;
+      ps.setAttribute('data-domain', CONFIG.analytics.plausibleDomain);
+      ps.src = 'https://plausible.io/js/script.js';
+      document.head.appendChild(ps);
+    }
+    var tracked = {};
+    function track(name, props, once) {
+      if (once) { if (tracked[name]) return; tracked[name] = true; }
+      var data = { variant: variant, source: sourceTag() };
+      if (props) Object.keys(props).forEach(function (k) { data[k] = props[k]; });
+      try { if (typeof window.plausible === 'function') window.plausible(name, { props: data }); } catch (e) { /* never block the visitor */ }
+      try { if (typeof window.gtag === 'function') window.gtag('event', name, data); } catch (e) { /* same */ }
+      try { if (window.dataLayer && window.dataLayer.push) window.dataLayer.push({ event: 'lfs_' + name, lfs: data }); } catch (e) { /* same */ }
+      try { document.dispatchEvent(new CustomEvent('lfs:track', { detail: { name: name, props: data } })); } catch (e) { /* same */ }
+    }
+
     // A team link (?company=&ref=) pre-fills the company field and tags the submission. The values are
     // untrusted text: they only ever go into an input value or a hidden field, never into markup.
     function cleanParam(v) { return String(v || '').replace(/[\u0000-\u001f\u007f<>]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 80); }
@@ -388,6 +431,8 @@
       if (state.view !== 'quiz' || state.advancing) return;
       state.answers[state.step] = value;
       markSelected();
+      track('scan_start', null, true);
+      if (state.step === 5) track('scan_q6', null, true);
       state.advancing = true;
       window.setTimeout(function () {
         state.advancing = false;
@@ -423,9 +468,36 @@
       setView('gate');
       state.gateShownAt = Date.now();
       formError.hidden = true;
+      renderGate();
+      track('scan_complete', null, true);
+      track('gate_view', null, true);
       var title = document.getElementById('lfs-gate-title');
       try { title.focus({ preventScroll: true }); } catch (e) { title.focus(); }
       keepCardVisible();
+    }
+
+    // Variant B: show the headline result before asking for details, and say plainly what the details unlock.
+    var gateTitle = document.getElementById('lfs-gate-title');
+    var gateSub = root.querySelector('.lfs-gate-sub');
+    var gateCopy = { title: gateTitle.textContent, sub: gateSub.textContent, button: submitLabel.textContent };
+    function renderGate() {
+      var result = state.result;
+      var prev = root.querySelector('[data-lfs-preview]');
+      if (variant !== 'B') return;
+      gateTitle.textContent = 'Your result is ready';
+      gateSub.textContent = 'Enter your name and work email to open the full breakdown and download the 2-page executive brief. A copy goes to your inbox.';
+      if (!prev) return;
+      prev.hidden = !!(result && result.insufficient);
+      if (result && !result.insufficient) {
+        prev.querySelector('[data-prev-score]').textContent = String(result.total);
+        prev.querySelector('[data-prev-band]').textContent = result.band.name;
+        prev.querySelector('[data-prev-vector]').textContent = VECTORS[result.dominant].name;
+      }
+    }
+    function submitText() { return variant === 'B' ? 'Open my full results \u2192' : gateCopy.button; }
+    if (variant === 'B') {
+      if (form.elements.company) form.elements.company.required = false;
+      submitLabel.textContent = submitText();
     }
 
     function fieldWrap(name) {
@@ -438,7 +510,7 @@
       var checks = {
         name: function (v) { return v.trim().length > 1; },
         email: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()); },
-        company: function (v) { return v.trim().length > 1; }
+        company: function (v) { return variant === 'B' ? (v.trim() === '' || v.trim().length > 1) : v.trim().length > 1; }
       };
       var firstInvalid = null;
       Object.keys(checks).forEach(function (name) {
@@ -465,8 +537,11 @@
       try {
         var p = new URLSearchParams(window.location.search);
         var keys = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_content', 'utm_term'];
-        return keys.filter(function (k) { return p.get(k); })
+        var found = keys.filter(function (k) { return p.get(k); })
           .map(function (k) { return k + '=' + p.get(k); }).join('&');
+        if (found) return found;
+        var rh = referrerHost();
+        return rh ? 'utm_source=' + rh + '&utm_medium=referral' : '';
       } catch (e) { return ''; }
     }
 
@@ -484,6 +559,7 @@
       // Team link loop: every submission joins a company cluster; invited_by is set only for invited colleagues.
       form.elements.company_cluster.value = invite.company || form.elements.company.value.trim().slice(0, 80);
       form.elements.invited_by.value = invite.ref;
+      if (form.elements.variant) form.elements.variant.value = variant;
     }
 
     // ---- CRM HOOK -----------------------------------------------------------
@@ -594,13 +670,15 @@
       handleLeadSubmission(state.lead, breakdownFrom(result)).then(function () {
         state.busy = false;
         submitBtn.disabled = false;
-        submitLabel.textContent = 'Generate Telemetry & View Results →';
+        submitLabel.textContent = submitText();
+        track('gate_submit', { band: result.insufficient ? 'insufficient' : result.band.id });
         showResults(result);
       }).catch(function () {
         state.busy = false;
         submitBtn.disabled = false;
-        submitLabel.textContent = 'Generate Telemetry & View Results →';
+        submitLabel.textContent = submitText();
         formError.hidden = false;
+        track('gate_error');
       });
     }
 
@@ -609,6 +687,7 @@
 
     function showResults(result) {
       state.result = result;
+      track('results_view', { shared: state.lead ? 'no' : 'yes' });
       renderResults(result);
       wireBooking();
       updateSharing(result);
@@ -887,10 +966,13 @@
     }
 
     // Company-tagged link for co-founders and C-suite peers. The landing page pre-fills the company.
-    function teamLink() {
+    function teamLink(medium) {
       var l = state.lead || { company: '', name: '' };
-      return CONFIG.shareUrl + '?company=' + encodeURIComponent(l.company) + '&ref=' + encodeURIComponent(l.name.split(/\s+/)[0]) +
-        '&utm_source=team_invite&utm_medium=direct_referral';
+      var qs = [];
+      if (l.company) qs.push('company=' + encodeURIComponent(l.company));
+      qs.push('ref=' + encodeURIComponent(l.name.split(/\s+/)[0]));
+      qs.push('utm_source=team_invite', 'utm_medium=' + (medium || 'direct_referral'));
+      return CONFIG.shareUrl + '?' + qs.join('&');
     }
 
     function scanLink(source) {
@@ -923,9 +1005,13 @@
             'Once you finish, let\u2019s compare our breakdowns and review where our scores diverge.\n\n' +
             'Thanks,\n' + fn;
           var mailBtn = q2('[data-share-mail-team]');
-          if (mailBtn) mailBtn.setAttribute('href', mailto('Confidential: Take the 3-minute Leadership Friction Scan for ' + co, inviteBody));
+          if (mailBtn) mailBtn.setAttribute('href', mailto('Confidential: Take the 3-minute Leadership Friction Scan' + (co ? ' for ' + co : ''), inviteBody));
+          var topMail = q2('[data-top-mail-team]');
+          if (topMail) topMail.setAttribute('href', mailto('Confidential: Take the 3-minute Leadership Friction Scan' + (co ? ' for ' + co : ''), inviteBody.replace(teamUrl, teamLink('results_top'))));
         }
       }
+      var topInvite = q2('[data-lfs-topinvite]');
+      if (topInvite) topInvite.hidden = !state.lead;
 
       // Pre-fill the dispatch email from the intake form so subscribing is one click.
       var dEmail = dispatchForm && dispatchForm.elements.email;
@@ -962,19 +1048,42 @@
         });
       }
 
+      var statusTop = document.querySelector('[data-share-status-top]');
+      on('[data-top-copy-team]', function () {
+        track('share_click', { channel: 'team_copy_top' });
+        copyText(teamLink('results_top')).then(
+          function () { flash(statusTop, '\u2713 Team link copied', 'top'); },
+          function () { flash(statusTop, 'Copy failed. Use the email invite instead.', 'top'); }
+        );
+      });
+      on('[data-top-mail-team]', function () { track('share_click', { channel: 'team_mail_top' }); });
+      on('[data-gate-copy-scan]', function () {
+        track('share_click', { channel: 'gate_peer_copy' });
+        var st = document.querySelector('[data-gate-peer-status]');
+        copyText(scanLink('gate_invite')).then(
+          function () { flash(st, '\u2713 Link copied', 'gate'); },
+          function () { flash(st, 'Copy ' + CONFIG.shareUrl + ' by hand.', 'gate'); }
+        );
+      });
+      on('[data-share-linkedin]', function () { track('share_click', { channel: 'linkedin' }); });
+      on('[data-share-whatsapp]', function () { track('share_click', { channel: 'whatsapp_or_native' }); });
+      on('[data-share-mail-team]', function () { track('share_click', { channel: 'team_mail' }); });
       on('[data-share-copy-results]', function () {
+        track('share_click', { channel: 'results_copy' });
         copyText(resultsLink()).then(
           function () { flash(statusT, '\u2713 Results link copied', 't'); },
           function () { flash(statusT, 'Copy failed. Select the address bar and copy it.', 't'); }
         );
       });
       on('[data-share-copy-team]', function () {
+        track('share_click', { channel: 'team_copy' });
         copyText(teamLink()).then(
           function () { flash(statusT, '\u2713 Team Link Copied', 't'); },
           function () { flash(statusT, 'Copy failed. Copy the address from the invite email instead.', 't'); }
         );
       });
       on('[data-share-copy-scan]', function () {
+        track('share_click', { channel: 'scan_copy' });
         copyText(scanLink('direct_copy')).then(
           function () { flash(statusB, '✓ Link copied', 'b'); },
           function () { flash(statusB, 'Copy failed. Copy ' + CONFIG.shareUrl + ' by hand.', 'b'); }
@@ -1005,6 +1114,7 @@
         dispatchStatus.hidden = false;
         dispatchStatus.classList.remove('is-error');
         dispatchStatus.textContent = '✓ You are on the list. The next quarterly briefing will go to ' + value + '.';
+        track('dispatch_subscribe');
       };
       // A bot filled the honeypot: look successful, send nothing.
       if (dispatchForm.elements['bot-field'] && dispatchForm.elements['bot-field'].value) { done(); return; }
@@ -1108,15 +1218,23 @@
     });
 
     var printBtn = document.querySelector('[data-lfs-print]');
-    if (printBtn) printBtn.addEventListener('click', function () { window.print(); });
+    if (printBtn) printBtn.addEventListener('click', function () { track('pdf_download'); window.print(); });
 
     var retakeBtn = document.querySelector('[data-lfs-retake]');
+    if (retakeBtn) retakeBtn.addEventListener('click', function () { track('retake'); });
     if (retakeBtn) retakeBtn.addEventListener('click', retake);
+
+    // The booking link is the commercial next step, so it is measured in both places it appears.
+    var bookMain = document.querySelector('[data-lfs-book]');
+    if (bookMain) bookMain.addEventListener('click', function () { track('debrief_click', { place: 'results' }); });
+    var bookSticky = document.querySelector('[data-lfs-book-sticky]');
+    if (bookSticky) bookSticky.addEventListener('click', function () { track('debrief_click', { place: 'sticky_bar' }); });
 
     applyInvite();
     wireSharing();
     startScan();
     var shared = sharedAnswers();
+    track('scan_view', { entry: shared ? 'shared_result' : (invite.ref ? 'team_invite' : 'standard') }, true);
     if (shared) openSharedView(shared);
   });
 })();

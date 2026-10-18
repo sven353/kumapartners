@@ -848,3 +848,76 @@ body.suite .lfs-methodology{border-top:1px solid #E2E8F0;background:rgba(248,250
 @media (prefers-reduced-motion: reduce){
   .lfs-hero-card, .lfs-results, .lfs-card, .lfs-bridge, .lfs-invite, .lfs-dispatch, .lfs-swap{animation:none !important;}
 }
+
+
+/* ---------- Focused intake (variant B), invite strip, collapsed methodology ----------
+   Variant B is chosen in the page head and mirrored onto the body as data-lfs-variant. Variant A is the
+   page as it was, so every rule here is either B only or additive. Landing header markup is not edited;
+   B only hides parts of it with CSS on this page. */
+body.suite .lfs-preview{display:none;}
+body.suite .lfs-b-only, body.suite .lfs-trust-line{display:none;}
+body.suite[data-lfs-variant="B"] .lfs-b-only{display:inline;}
+body.suite[data-lfs-variant="B"] .lfs-preview{
+  display:grid; grid-template-columns:auto minmax(0,1fr); gap:6px 28px; align-items:center;
+  margin:0 0 24px; padding:18px 22px; border-radius:16px;
+  background:rgba(29,111,138,.04); border:var(--hairline) solid rgba(29,111,138,.15);
+}
+body.suite[data-lfs-variant="B"] .lfs-preview[hidden]{display:none;}
+body.suite .lfs-preview-main{display:flex; flex-direction:column; gap:2px;}
+body.suite .lfs-preview-label{font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--teal);}
+body.suite .lfs-preview-score{display:flex; align-items:baseline; gap:6px; line-height:1;}
+body.suite .lfs-preview-num{font-family:'Montserrat',Arial,sans-serif; font-weight:800; font-size:3rem; color:var(--navy); font-variant-numeric:tabular-nums;}
+body.suite .lfs-preview-max{font-family:'Montserrat',Arial,sans-serif; font-weight:500; font-size:1.05rem; color:rgba(11,21,35,.5);}
+body.suite .lfs-preview-side{display:flex; flex-direction:column; gap:4px;}
+body.suite .lfs-preview-band{font-family:'Montserrat',Arial,sans-serif; font-weight:700; font-size:1.1rem; color:var(--navy); line-height:1.25;}
+body.suite .lfs-preview-vector{font-family:'Lato',Arial,sans-serif; font-size:.86rem; color:rgba(11,21,35,.72);}
+body.suite .lfs-preview-vector-name{font-weight:700; color:var(--navy);}
+body.suite .lfs-preview-note{grid-column:1 / -1; margin:6px 0 0; font-size:.86rem; line-height:1.5; color:rgba(11,21,35,.65);}
+@media (max-width:560px){
+  body.suite[data-lfs-variant="B"] .lfs-preview{grid-template-columns:1fr; gap:8px; padding:16px 18px;}
+  body.suite .lfs-preview-num{font-size:2.6rem;}
+}
+
+body.suite[data-lfs-variant="B"] .lfs-guarantee,
+body.suite[data-lfs-variant="B"] .lfs-form-microcopy,
+body.suite[data-lfs-variant="B"] .lfs-stage-field{display:none;}
+body.suite[data-lfs-variant="B"] .lfs-trust-line{display:block; margin:14px 0 0; text-align:center; font-family:'Lato',Arial,sans-serif; font-size:.8rem; line-height:1.5; color:rgba(11,21,35,.62);}
+body.suite[data-lfs-variant="B"] .lfs-trust-line a{color:inherit; text-decoration:underline;}
+
+/* Variant B header: logo only. The markup is the landing header, unchanged. */
+body.suite[data-lfs-variant="B"] header.site .nav-links,
+body.suite[data-lfs-variant="B"] header.site .nav-cta,
+body.suite[data-lfs-variant="B"] header.site .nav-toggle{display:none;}
+
+/* Peer link on the intake step (both variants) */
+body.suite .lfs-gate-peer{margin:14px 0 0; text-align:center; font-family:'Lato',Arial,sans-serif; font-size:.8rem; color:rgba(11,21,35,.62);}
+body.suite .lfs-linkbtn{background:none; border:0; padding:0; font:inherit; font-weight:700; color:var(--teal); text-decoration:underline; cursor:pointer;}
+body.suite .lfs-linkbtn:hover{color:var(--navy);}
+body.suite .lfs-linkbtn:focus-visible{outline:2px solid var(--teal); outline-offset:2px; border-radius:4px;}
+body.suite .lfs-gate-peer-status{margin-left:6px; font-weight:700; color:#1f6a4a;}
+
+/* Slim team invite at the top of the results */
+body.suite .lfs-topinvite{
+  display:flex; align-items:center; flex-wrap:wrap; gap:12px 20px; margin:0 0 24px; padding:14px 20px;
+  background:#fff; border:var(--hairline) solid rgba(11,21,35,.06); border-radius:18px; box-shadow:0 4px 16px -4px rgba(15,23,42,.04);
+}
+body.suite .lfs-topinvite[hidden]{display:none;}
+body.suite .lfs-topinvite-text{flex:1 1 320px; margin:0; font-size:.92rem; line-height:1.5; color:rgba(15,23,42,.85);}
+body.suite .lfs-topinvite-lead{font-weight:700; color:var(--navy);}
+body.suite .lfs-topinvite .lfs-share-actions{margin-top:0;}
+body.suite .lfs-topinvite .lfs-share-status{flex-basis:100%; margin:0; min-height:0; font-size:.82rem; font-weight:700; color:#1f6a4a; opacity:1;}
+body.suite .lfs-topinvite .lfs-share-status:empty{display:none;}
+
+/* Methodology: headline and lede stay visible, the detail opens on request and stays in the page source */
+body.suite .lfs-meth-details{margin-top:4px;}
+body.suite .lfs-meth-summary{
+  display:inline-flex; align-items:center; gap:10px; padding:10px 18px; cursor:pointer; list-style:none;
+  font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.9rem; color:var(--teal);
+  border:var(--hairline) solid rgba(29,111,138,.22); border-radius:9999px; background:rgba(29,111,138,.05);
+}
+body.suite .lfs-meth-summary::-webkit-details-marker{display:none;}
+body.suite .lfs-meth-summary::after{content:"+"; font-weight:700;}
+body.suite .lfs-meth-details[open] > .lfs-meth-summary::after{content:"\2212";}
+body.suite .lfs-meth-details[open] > .lfs-meth-summary{margin-bottom:28px;}
+body.suite .lfs-meth-summary:focus-visible{outline:2px solid var(--teal); outline-offset:3px;}
+@media (max-width:767px){ body.suite .lfs-topinvite{padding:14px 16px;} }

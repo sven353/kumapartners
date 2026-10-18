@@ -121,8 +121,19 @@
   ]
 }
 </script>
+<script>
+/* A/B assignment for the intake step. Runs before first paint so the header never flickers.
+   ?gate=a or ?gate=b forces a variant for testing and is not remembered. Otherwise 50/50, remembered per browser. */
+(function(){var d=document.documentElement,v=null,forced=false;
+try{var g=new URLSearchParams(location.search).get('gate');if(g==='a'||g==='b'){v=g.toUpperCase();forced=true;}}catch(e){}
+try{if(!v){v=localStorage.getItem('lfs_variant');}}catch(e){}
+if(v!=='A'&&v!=='B'){v=Math.random()<0.5?'B':'A';}
+if(!forced){try{localStorage.setItem('lfs_variant',v);}catch(e){}}
+d.setAttribute('data-lfs-variant',v);})();
+</script>
 </head>
 <body class="suite">
+<script>document.body.setAttribute("data-lfs-variant",document.documentElement.getAttribute("data-lfs-variant")||"A");</script>
 <a href="#main-content" class="skip-link">Skip to main content</a>
 
 <header class="site">
@@ -201,6 +212,19 @@
           <h2 class="lfs-gate-title" id="lfs-gate-title" tabindex="-1">Your Leadership Telemetry Is Compiled</h2>
           <p class="lfs-gate-sub">Enter your details to open your on-screen dashboard and export your 2-page executive PDF memo. The full report also goes to your inbox. Your individual answers stay confidential.</p>
 
+          <!-- Variant B only: the headline result is shown before the details are asked for -->
+          <div class="lfs-preview" data-lfs-preview>
+            <div class="lfs-preview-main">
+              <span class="lfs-preview-label">Your Leadership Friction Index</span>
+              <span class="lfs-preview-score"><span class="lfs-preview-num" data-prev-score>0</span><span class="lfs-preview-max">/ 60</span></span>
+            </div>
+            <div class="lfs-preview-side">
+              <span class="lfs-preview-band" data-prev-band></span>
+              <span class="lfs-preview-vector" data-prev-vector-line>Dominant friction pattern: <span class="lfs-preview-vector-name" data-prev-vector></span></span>
+            </div>
+            <p class="lfs-preview-note">Your four-dimension breakdown, the cost of delay and your first action are one step away.</p>
+          </div>
+
         <form class="lfs-form" name="leadership-friction-scan" method="POST" action="/leadership-friction-scan" data-netlify="true" netlify-honeypot="bot-field" data-lfs-form novalidate>
           <input type="hidden" name="form-name" value="leadership-friction-scan">
           <p class="hp-field" hidden>
@@ -221,6 +245,7 @@
           <input type="hidden" name="utm" value="">
           <input type="hidden" name="company_cluster" value="">
           <input type="hidden" name="invited_by" value="">
+          <input type="hidden" name="variant" value="">
 
           <div class="field">
             <label for="lfs-name">Full Name</label>
@@ -233,11 +258,11 @@
             <span class="lfs-field-error" data-lfs-error="email">Please enter a valid email address.</span>
           </div>
           <div class="field">
-            <label for="lfs-company">Company Name</label>
+            <label for="lfs-company">Company Name <span class="lfs-optional lfs-b-only">(optional)</span></label>
             <input type="text" id="lfs-company" name="company" autocomplete="organization" required>
             <span class="lfs-field-error" data-lfs-error="company">Please enter your company name.</span>
           </div>
-          <div class="field">
+          <div class="field lfs-stage-field">
             <label for="lfs-stage">Funding Stage <span class="lfs-optional">(optional)</span></label>
             <div class="select-shell">
               <select id="lfs-stage" name="stage">
@@ -268,7 +293,9 @@
           <button type="submit" class="btn btn-primary lfs-submit" data-lfs-submit>
             <span data-btn-label>Generate Telemetry &amp; View Results →</span>
           </button>
+          <p class="lfs-trust-line">Your individual responses are confidential. We use your details to deliver your report and follow up on your results. <a href="privacy.html">Privacy Policy</a>.</p>
           <p class="lfs-form-microcopy">See our <a href="privacy.html">Privacy Policy</a>.</p>
+          <p class="lfs-gate-peer no-print">Taking this with a co-founder? <button type="button" class="lfs-linkbtn" data-gate-copy-scan>Copy the scan link for them</button> <span class="lfs-gate-peer-status" data-gate-peer-status role="status" aria-live="polite"></span></p>
           <p class="lfs-form-error" data-lfs-form-error hidden>Something went wrong sending your details. Please try again, or email us at <a href="mailto:contact@kuma.partners">contact@kuma.partners</a>.</p>
         </form>
 
@@ -315,6 +342,16 @@
         <p class="lfs-shared-banner no-print" data-res-shared hidden>You are viewing a result a colleague shared with you. <a href="#" data-lfs-shared-start>Take the scan yourself</a> to compare how each of you sees the same team.</p>
         <p class="lfs-stamp lfs-stamp-top"><span class="lfs-p-interim">Telemetry generated under Kuma Partners Privacy Standards. Responses are used only to produce this breakdown and to follow up on the scan.</span><span class="lfs-p-full">Telemetry generated under Kuma Partners Privacy Standards. Raw individual responses scheduled for automated purge within 30 days.</span></p>
       </div>
+
+      <!-- Slim team invite at the top of the results. Hidden in a shared view and in the PDF. -->
+      <section class="lfs-topinvite no-print" aria-label="Compare with your team" data-lfs-topinvite hidden>
+        <p class="lfs-topinvite-text"><span class="lfs-topinvite-lead">This is your view only.</span> Invite a co-founder or peer to take the scan and see where you disagree.</p>
+        <div class="lfs-share-actions">
+          <button type="button" class="lfs-share-btn" data-top-copy-team>Copy team link</button>
+          <a class="lfs-share-btn" href="#" data-top-mail-team>Email an invite</a>
+        </div>
+        <p class="lfs-share-status" data-share-status-top role="status" aria-live="polite"></p>
+      </section>
 
       <div class="lfs-grid">
 
@@ -546,6 +583,8 @@
       <h2 id="methodology-title">The Anatomy of Leadership Friction in Scale-Stage Ventures</h2>
       <p class="lfs-meth-lede">Developed by Sven Mulfinger and the partners at Kuma Partners, the Leadership Friction Scan measures the gap between executive intent and what the organisation actually does. As a company grows, the cost of coordinating its leaders tends to become a larger limit on speed than the market itself.</p>
 
+      <details class="lfs-meth-details">
+      <summary class="lfs-meth-summary">Read the four vectors, definitions and sources</summary>
       <div class="lfs-meth-grid">
         <article>
           <h3>1. The Silent Veto and artificial harmony</h3>
@@ -570,6 +609,7 @@
       <div class="lfs-meth-qa"><h3>How does founder centrality create leadership friction?</h3><p>Founder centrality drag happens when reversible operational decisions default inward to the CEO or co-founders. The leadership team becomes a queue, execution speed is capped at the founders&rsquo; calendar, and decision latency spreads across every function.</p></div>
       <div class="lfs-meth-qa"><h3>What is the 12 to 60 Leadership Friction Index?</h3><p>The Kuma Leadership Friction Index scores twelve statements from 1 to 5 across four vectors: Decision Velocity &amp; Autonomy, Strategic Cohesion vs. Defensive Silos, Cognitive Bandwidth &amp; Energy Drain, and Principled Candor vs. The Silent Veto. Totals run from 12 to 60: High-Flow Velocity (12 to 25), Operational Drag (26 to 42) and Critical Systemic Gridlock (43 to 60).</p></div>
       <p class="lfs-meth-foot"><span>Sources: Noam Wasserman, Harvard Business School, <em>The Founder&rsquo;s Dilemmas</em> (2012) &bull; McKinsey &amp; Company, <em>Decision making in the age of urgency</em> (2019)</span><span>Diagnostic framework &copy; Kuma Partners</span></p>
+      </details>
     </div>
   </section>
 

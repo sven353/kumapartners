@@ -104,7 +104,8 @@ export function buildReport(fields, opts = {}) {
   const name = clip(fields.name, 120);
   const company = clip(fields.company, 120);
   if (!/^[^\s@<>"',;]+@[^\s@<>"',;]+\.[^\s@<>"',;]{2,}$/.test(email)) return { error: 'invalid email' };
-  if (name.length < 2 || company.length < 2) return { error: 'missing name or company' };
+  // Company is optional in the focused intake variant. Name and a valid email are always required.
+  if (name.length < 2) return { error: 'missing name' };
 
   const answers = parseAnswers(fields.answers);
   if (!answers) return { error: 'invalid answers' };
@@ -136,7 +137,7 @@ export function buildReport(fields, opts = {}) {
   return {
     insufficient,
     scaleVersion: SCALE_VERSION,
-    name, firstName: name.split(/\s+/)[0], email, company, stage: clip(fields.stage, 60) || 'Not given',
+    name, firstName: name.split(/\s+/)[0], email, company, companyName: company || 'your leadership team', variant: clip(fields.variant, 4), stage: clip(fields.stage, 60) || 'Not given',
     submittedAt,
     dateLong: formatDate(submittedAt, timeZone),
     timestamp: formatTimestamp(submittedAt, timeZone),
@@ -233,7 +234,7 @@ export function renderRespondentEmail(report, opts = {}) {
   const calcUrl = opts.calculatorUrl || 'https://www.kuma.partners/coordination-tax.html';
   const siteUrl = opts.siteUrl || 'https://www.kuma.partners';
   const purgeLive = !!opts.purgeLive;
-  const subject = oneLine('Your Leadership Friction Telemetry: ' + report.company + ' (' + report.band + ')');
+  const subject = oneLine('Your Leadership Friction Telemetry' + (report.company ? ': ' + report.company : '') + ' (' + report.band + ')');
 
   const governance = purgeLive
     ? 'Executive Data Governance: your raw response telemetry is strictly confidential, encrypted, and scheduled for automated purge from our active diagnostic servers within 30 days.'
@@ -270,7 +271,7 @@ export function renderRespondentEmail(report, opts = {}) {
   if (report.insufficient) {
     body =
       p('Hi ' + esc(report.firstName) + ',') +
-      p('Thank you for completing the Leadership Friction Scan for <strong>' + esc(report.company) + '</strong> on ' + esc(report.dateLong) + '.') +
+      p('Thank you for completing the Leadership Friction Scan for <strong>' + esc(report.companyName) + '</strong> on ' + esc(report.dateLong) + '.') +
       p('Every statement was marked Not Sure, so there is nothing to score yet. That usually means the leadership table does not have shared sight of how decisions and priorities move day to day, which is useful information in itself.') +
       p('The 14-Day Leadership Friction Scan does not depend on one person’s view. It cross-calibrates these questions against confidential, 1-on-1 interviews across your executive team.') +
       cta('Book a 30-Minute Telemetry Debrief &rarr;') + hr + about + hr + footer;
@@ -293,7 +294,7 @@ export function renderRespondentEmail(report, opts = {}) {
 
     body =
       p('Hi ' + esc(report.firstName) + ',') +
-      p('Your leadership friction telemetry for <strong>' + esc(report.company) + '</strong> has been compiled from your assessment on ' + esc(report.dateLong) + '.') +
+      p('Your leadership friction telemetry for <strong>' + esc(report.companyName) + '</strong> has been compiled from your assessment on ' + esc(report.dateLong) + '.') +
       hr +
       h3('Executive telemetry snapshot') +
       '<table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:' + COLOURS.wash + ';border:1px solid ' + COLOURS.line + ';border-radius:10px;"><tr><td style="padding:16px 18px;">' +
@@ -325,17 +326,17 @@ export function renderRespondentEmail(report, opts = {}) {
   }
 
   const preheader = report.insufficient
-    ? 'Your Leadership Friction Scan for ' + report.company
+    ? 'Your Leadership Friction Scan for ' + report.companyName
     : 'Friction index ' + report.score + ' / 60. ' + report.band + '. Primary constraint: ' + report.dominant.name + '.';
 
   // Plain-text alternative
   const t = [];
   t.push('Hi ' + report.firstName + ',', '');
   if (report.insufficient) {
-    t.push('Thank you for completing the Leadership Friction Scan for ' + report.company + ' on ' + report.dateLong + '.',
+    t.push('Thank you for completing the Leadership Friction Scan for ' + report.companyName + ' on ' + report.dateLong + '.',
       'Every statement was marked Not Sure, so there is nothing to score yet. The 14-Day Leadership Friction Scan does not depend on one person’s view: it cross-calibrates these questions against confidential, 1-on-1 interviews across your executive team.');
   } else {
-    t.push('Your leadership friction telemetry for ' + report.company + ' has been compiled from your assessment on ' + report.dateLong + '.', '',
+    t.push('Your leadership friction telemetry for ' + report.companyName + ' has been compiled from your assessment on ' + report.dateLong + '.', '',
       'EXECUTIVE TELEMETRY SNAPSHOT',
       'Overall Friction Index: ' + report.score + ' / 60',
       'Operating classification: ' + report.band + ' (' + report.bandFriction + ')',
@@ -364,7 +365,7 @@ export function renderRespondentEmail(report, opts = {}) {
 export function renderTriageEmail(report) {
   const domName = report.dominant ? report.dominant.name : 'None (all Not Sure)';
   const scoreText = report.insufficient ? 'n/a' : String(report.score);
-  const subject = oneLine('[New Scan] ' + report.firstName + ' (' + report.company + ' - ' + report.stage + ') • ' + scoreText + '/60 • ' + domName);
+  const subject = oneLine('[New Scan] ' + report.firstName + ' (' + (report.company || 'company not given') + ' - ' + report.stage + ') • ' + scoreText + '/60 • ' + domName);
 
   const kv = (k, v) =>
     '<tr><td style="padding:5px 14px 5px 0;font-size:13px;color:' + COLOURS.muted + ';white-space:nowrap;" valign="top">' + k + '</td><td style="padding:5px 0;font-size:14px;color:' + COLOURS.ink + ';">' + v + '</td></tr>';
@@ -379,11 +380,12 @@ export function renderTriageEmail(report) {
     '<table role="presentation" cellpadding="0" cellspacing="0">' +
     kv('Name', esc(report.name)) +
     kv('Email', '<a href="mailto:' + esc(report.email) + '" style="color:' + COLOURS.teal + ';">' + esc(report.email) + '</a>') +
-    kv('Company', esc(report.company)) +
+    kv('Company', esc(report.company || 'Not given')) +
     kv('Stage', esc(report.stage)) +
     kv('Timestamp', esc(report.timestamp)) +
     kv('Source', esc(report.source)) +
     (report.invitedBy ? kv('Invited by', esc(report.invitedBy)) : '') +
+    (report.variant ? kv('Intake variant', esc(report.variant)) : '') +
     (report.cluster ? kv('Company cluster', esc(report.cluster)) : '') +
     '</table>' +
     sect('2. Telemetry summary') +
@@ -400,9 +402,9 @@ export function renderTriageEmail(report) {
   const t = [
     'NEW LEADERSHIP FRICTION SCAN', report.timestamp, '',
     '1. CONTACT AND LEAD DETAILS',
-    'Name: ' + report.name, 'Email: ' + report.email, 'Company: ' + report.company, 'Stage: ' + report.stage,
+    'Name: ' + report.name, 'Email: ' + report.email, 'Company: ' + (report.company || 'Not given'), 'Stage: ' + report.stage,
     'Timestamp: ' + report.timestamp, 'Source: ' + report.source,
-    ...(report.invitedBy ? ['Invited by: ' + report.invitedBy] : []), ...(report.cluster ? ['Company cluster: ' + report.cluster] : []), '',
+    ...(report.invitedBy ? ['Invited by: ' + report.invitedBy] : []), ...(report.variant ? ['Intake variant: ' + report.variant] : []), ...(report.cluster ? ['Company cluster: ' + report.cluster] : []), '',
     '2. TELEMETRY SUMMARY',
     'Total score: ' + scoreText + ' / 60 (Band: ' + report.band + ')',
     'Dominant constraint: ' + domName,
@@ -412,5 +414,5 @@ export function renderTriageEmail(report) {
   if (report.mismatch) t.push('Check: posted index ' + report.mismatch.posted + ' differs from recomputed ' + report.mismatch.recomputed + '.');
   t.push('', '3. ITEMISED AUDIT', auditText(report));
 
-  return { subject, html: layout(inner, { preheader: scoreText + '/60 ' + report.band + ' for ' + report.company }), text: t.join('\n') };
+  return { subject, html: layout(inner, { preheader: scoreText + '/60 ' + report.band + ' for ' + report.companyName }), text: t.join('\n') };
 }

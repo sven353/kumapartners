@@ -45,7 +45,7 @@ const foot = '<p style="margin:18px 0 0;font-size:12px;line-height:1.5;color:#7a
 export function renderNurture(n, report, opts = {}) {
   const book = bookingLinkFor(opts.bookingUrl, report);
   const first = report.firstName;
-  const company = report.company;
+  const company = report.company || 'your company';
   const band = report.band;
   const dom = report.dominant ? report.dominant.name : '';
 
