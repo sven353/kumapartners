@@ -882,20 +882,21 @@
     // The results link carries the answers (not the name or company) and the scale version,
     // so a link made from an older question set is never rendered against newer statements.
     function resultsLink() {
-      return CONFIG.shareUrl + '?v=' + encodeURIComponent(SCALE_VERSION) + '&r=' + answersCsv().split(',').join('-');
+      return CONFIG.shareUrl + '?v=' + encodeURIComponent(SCALE_VERSION) + '&r=' + answersCsv().split(',').join('-') +
+        '&utm_source=peer_share&utm_medium=results_link';
     }
 
     // Company-tagged link for co-founders and C-suite peers. The landing page pre-fills the company.
     function teamLink() {
       var l = state.lead || { company: '', name: '' };
-      return CONFIG.shareUrl + '?company=' + encodeURIComponent(l.company) + '&ref=' + encodeURIComponent(l.name.split(/\s+/)[0]);
+      return CONFIG.shareUrl + '?company=' + encodeURIComponent(l.company) + '&ref=' + encodeURIComponent(l.name.split(/\s+/)[0]) +
+        '&utm_source=team_invite&utm_medium=direct_referral';
     }
 
     function scanLink(source) {
       return source ? CONFIG.shareUrl + '?utm_source=' + source + '&utm_medium=share' : CONFIG.shareUrl;
     }
 
-    var POST_TEXT = 'Harvard Business School research by Noam Wasserman found that 65% of high-potential start-ups fail as a result of conflict among the founders. The Kuma 3-Minute Leadership Friction Scan is a sharp diagnostic mirror for any scale-stage executive team.';
     var WA_TEXT = 'Found this 3-minute leadership friction scan by Kuma Partners. Really sharp diagnostic on decision bottlenecks and silent vetoes: ';
 
     function mailto(subject, body) {
@@ -921,20 +922,45 @@
             'Take 3 minutes to run it from your perspective here:\n' + teamUrl + '\n\n' +
             'Once you finish, let\u2019s compare our breakdowns and review where our scores diverge.\n\n' +
             'Thanks,\n' + fn;
-          q2('[data-share-mail-team]').setAttribute('href', mailto('Confidential: Take the 3-minute Leadership Friction Scan for ' + co, inviteBody));
+          var mailBtn = q2('[data-share-mail-team]');
+          if (mailBtn) mailBtn.setAttribute('href', mailto('Confidential: Take the 3-minute Leadership Friction Scan for ' + co, inviteBody));
         }
       }
-
-      q2('[data-share-linkedin]').setAttribute('href', 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(scanLink('linkedin')));
-      q2('[data-share-whatsapp]').setAttribute('href', 'https://wa.me/?text=' + encodeURIComponent(WA_TEXT + scanLink('whatsapp')));
 
       // Pre-fill the dispatch email from the intake form so subscribing is one click.
       var dEmail = dispatchForm && dispatchForm.elements.email;
       if (dEmail && !dEmail.value && state.lead) dEmail.value = state.lead.email;
     }
 
+    var LINKEDIN_SHARE = 'https://www.linkedin.com/sharing/share-offsite/?url=';
+    var WHATSAPP_SHARE = 'https://api.whatsapp.com/send?text=';
+
     function wireSharing() {
       var on = function (sel, fn) { var el = document.querySelector(sel); if (el) el.addEventListener('click', fn); };
+
+      // Live links from the first paint, not only after a result renders.
+      var lnBtn = document.querySelector('[data-share-linkedin]');
+      if (lnBtn) lnBtn.setAttribute('href', LINKEDIN_SHARE + encodeURIComponent(scanLink('linkedin')));
+      var waBtn = document.querySelector('[data-share-whatsapp]');
+      var waUrl = WHATSAPP_SHARE + encodeURIComponent(WA_TEXT + scanLink('whatsapp'));
+      if (waBtn) waBtn.setAttribute('href', waUrl);
+
+      // Where the browser has a native share sheet, use it: it reaches WhatsApp, Signal, Slack and Mail.
+      if (waBtn && typeof navigator.share === 'function') {
+        var waLabel = waBtn.querySelector('[data-share-wa-label]');
+        if (waLabel) waLabel.textContent = 'Share with a Peer';
+        waBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          navigator.share({
+            title: 'Leadership Friction Scan | Kuma Partners',
+            text: WA_TEXT.trim(),
+            url: scanLink('app_share')
+          }).catch(function (err) {
+            if (err && err.name === 'AbortError') return; // the person closed the sheet
+            window.open(waUrl, '_blank', 'noopener');
+          });
+        });
+      }
 
       on('[data-share-copy-results]', function () {
         copyText(resultsLink()).then(
@@ -949,16 +975,9 @@
         );
       });
       on('[data-share-copy-scan]', function () {
-        copyText(CONFIG.shareUrl).then(
+        copyText(scanLink('direct_copy')).then(
           function () { flash(statusB, '✓ Link copied', 'b'); },
           function () { flash(statusB, 'Copy failed. Copy ' + CONFIG.shareUrl + ' by hand.', 'b'); }
-        );
-      });
-      // LinkedIn ignores any text passed in its share link, so the suggested post goes to the clipboard.
-      on('[data-share-linkedin]', function () {
-        copyText(POST_TEXT).then(
-          function () { flash(statusB, '✓ Suggested post copied. Paste it into your LinkedIn post.', 'b'); },
-          function () { /* the share window still opens */ }
         );
       });
       var aShared = document.querySelector('[data-lfs-shared-start]');
