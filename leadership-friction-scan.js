@@ -36,7 +36,14 @@
     // (for example a scheduled job that deletes Netlify Forms submissions and CRM records after
     // 30 days). That switches the landing page, lead capture and results page to the full
     // "End-to-End Encrypted / 30-Day Automatic Data Purge / Zero Third-Party Sharing" wording.
-    dataPurgeLive: false
+    dataPurgeLive: false,
+
+    // Public address of the scan. Every share link is built from this, so a share made from a staging
+    // or preview URL still points visitors at the live page.
+    shareUrl: 'https://www.kuma.partners/leadership-friction-scan',
+
+    // Tag stored with every Executive Dispatch opt-in (Netlify Forms field "tag" and the CRM webhook body).
+    dispatchTag: 'friction_scan_dispatch'
   };
 
   // Stored with every submission so the CRM can tell question sets apart. v3 replaced the D3 and D4 statements
@@ -583,6 +590,7 @@
       state.result = result;
       renderResults(result);
       wireBooking();
+      updateSharing(result);
       setView('results');
       bringIntoView(views.results, document.getElementById('lfs-results-title'));
       // Animate the gauge marker and the dimension bars from empty to their values.
@@ -783,10 +791,227 @@
       state.lead = null;
       state.result = null;
       form.reset();
+      if (dispatchForm) {
+        dispatchForm.reset();
+        dispatchForm.hidden = false;
+        var dBtn = dispatchForm.querySelector('[data-dispatch-submit]');
+        dBtn.disabled = false;
+        dBtn.textContent = 'Subscribe to Briefing \u2192';
+        dispatchForm.querySelector('[data-dispatch-error]').hidden = true;
+        var dNote = document.querySelector('.lfs-dispatch-note');
+        if (dNote) dNote.hidden = false;
+        if (dispatchStatus) dispatchStatus.hidden = true;
+      }
+      var sharedBanner = document.querySelector('[data-res-shared]');
+      if (sharedBanner) sharedBanner.hidden = true;
+      var retakeLabel = document.querySelector('[data-lfs-retake]');
+      if (retakeLabel) retakeLabel.textContent = 'Retake the scan';
       Array.prototype.forEach.call(form.querySelectorAll('.is-invalid'), function (el) { el.classList.remove('is-invalid'); });
       formError.hidden = true;
       setView('intro');
       bringIntoView(views.intro);
+    }
+
+
+    // ---- Executive Dispatch opt-in and sharing suite ------------------------------------
+    var dispatchForm = document.querySelector('[data-lfs-dispatch]');
+    var dispatchStatus = document.querySelector('[data-dispatch-status]');
+    var statusA = document.querySelector('[data-share-status-a]');
+    var statusB = document.querySelector('[data-share-status-b]');
+    var statusTimers = {};
+
+    function flash(el, text, key) {
+      if (!el) return;
+      el.textContent = text;
+      el.classList.add('is-on');
+      window.clearTimeout(statusTimers[key]);
+      statusTimers[key] = window.setTimeout(function () { el.classList.remove('is-on'); el.textContent = ''; }, 3200);
+    }
+
+    function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        return navigator.clipboard.writeText(text);
+      }
+      return new Promise(function (resolve, reject) {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.cssText = 'position:fixed; top:0; left:0; opacity:0;';
+        document.body.appendChild(ta);
+        ta.select();
+        var ok = false;
+        try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+        document.body.removeChild(ta);
+        if (ok) resolve(); else reject(new Error('copy failed'));
+      });
+    }
+
+    // The results link carries the answers (not the name or company) and the scale version,
+    // so a link made from an older question set is never rendered against newer statements.
+    function resultsLink() {
+      return CONFIG.shareUrl + '?v=' + encodeURIComponent(SCALE_VERSION) + '&r=' + answersCsv().split(',').join('-');
+    }
+
+    function scanLink(source) {
+      return source ? CONFIG.shareUrl + '?utm_source=' + source + '&utm_medium=share' : CONFIG.shareUrl;
+    }
+
+    var POST_TEXT = 'Harvard Business School research by Noam Wasserman found that 65% of high-potential start-ups fail as a result of conflict among the founders. The Kuma 3-Minute Leadership Friction Scan is a sharp diagnostic mirror for any scale-stage executive team.';
+    var X_TEXT = 'Harvard Business School research found that 65% of high-potential start-ups fail as a result of conflict among the founders. The Kuma 3-Minute Leadership Friction Scan is a sharp diagnostic mirror for any scale-stage executive team:';
+    var WA_TEXT = 'Found this 3-minute leadership friction scan by Kuma Partners. Really sharp diagnostic on decision bottlenecks and silent vetoes: ';
+    var MAIL_SCAN_SUBJECT = 'A 3-minute leadership friction scan worth taking';
+    var MAIL_SCAN_BODY = 'I came across this and thought of you. It is a 12-statement diagnostic from Kuma Partners that shows where a leadership team loses speed: decision velocity, strategic cohesion, energy drain and the silent veto.\n\nIt takes about three minutes and the result is free:\n';
+
+    function mailto(subject, body) {
+      return 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body).replace(/%0A/g, '%0D%0A');
+    }
+
+    // Set every link and the visibility of the results track for the current result.
+    function updateSharing(result) {
+      var q2 = function (sel) { return document.querySelector(sel); };
+      var track = q2('[data-share-results]');
+      if (track) track.hidden = result.insufficient;
+
+      if (!result.insufficient) {
+        var company = state.lead ? state.lead.company : '';
+        var first = state.lead ? state.lead.name.split(/\s+/)[0] : '';
+        var subject = 'Operational Telemetry: Leadership Friction Scan Results for ' + (company || 'our leadership team');
+        var body = 'Hi [Name],\n\n' +
+          'I just ran our leadership team through the Kuma Leadership Friction Scan.\n' +
+          'Our overall score came in at ' + result.total + '/60 (' + result.band.name + '), with our primary operational constraint flagged in ' + DIMENSIONS[result.dominant].name + '.\n\n' +
+          'Take a quick look at the breakdown here:\n' + resultsLink() + '\n\n' +
+          'If you have three minutes, take the scan yourself from that page so we can compare how each of us sees it.\n\n' +
+          'Let’s discuss this before our next executive sync.\n\n' +
+          'Thanks' + (first ? ',\n' + first : '');
+        q2('[data-share-mail-results]').setAttribute('href', mailto(subject, body));
+      }
+
+      q2('[data-share-linkedin]').setAttribute('href', 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(scanLink('linkedin')));
+      q2('[data-share-x]').setAttribute('href', 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(X_TEXT) + '&url=' + encodeURIComponent(scanLink('x')));
+      q2('[data-share-whatsapp]').setAttribute('href', 'https://wa.me/?text=' + encodeURIComponent(WA_TEXT + scanLink('whatsapp')));
+      q2('[data-share-mail-scan]').setAttribute('href', mailto(MAIL_SCAN_SUBJECT, MAIL_SCAN_BODY + scanLink('email')));
+      q2('[data-share-native]').hidden = typeof navigator.share !== 'function';
+
+      // Pre-fill the dispatch email from the intake form so subscribing is one click.
+      var dEmail = dispatchForm && dispatchForm.elements.email;
+      if (dEmail && !dEmail.value && state.lead) dEmail.value = state.lead.email;
+    }
+
+    function wireSharing() {
+      var on = function (sel, fn) { var el = document.querySelector(sel); if (el) el.addEventListener('click', fn); };
+
+      on('[data-share-copy-results]', function () {
+        copyText(resultsLink()).then(
+          function () { flash(statusA, '✓ Link copied', 'a'); },
+          function () { flash(statusA, 'Copy failed. Select the address bar and copy it.', 'a'); }
+        );
+      });
+      on('[data-share-copy-scan]', function () {
+        copyText(CONFIG.shareUrl).then(
+          function () { flash(statusB, '✓ Link copied', 'b'); },
+          function () { flash(statusB, 'Copy failed. Copy ' + CONFIG.shareUrl + ' by hand.', 'b'); }
+        );
+      });
+      // LinkedIn ignores any text passed in its share link, so the suggested post goes to the clipboard.
+      on('[data-share-linkedin]', function () {
+        copyText(POST_TEXT).then(
+          function () { flash(statusB, '✓ Suggested post copied. Paste it into your LinkedIn post.', 'b'); },
+          function () { /* the share window still opens */ }
+        );
+      });
+      on('[data-share-native]', function () {
+        navigator.share({ title: 'Kuma Leadership Friction Scan', text: WA_TEXT.replace(/:\s*$/, '.'), url: scanLink('share') }).catch(function () { /* cancelled */ });
+      });
+
+      var aShared = document.querySelector('[data-lfs-shared-start]');
+      if (aShared) aShared.addEventListener('click', function (e) { e.preventDefault(); retake(); startScan(); });
+
+      if (dispatchForm) dispatchForm.addEventListener('submit', onDispatchSubmit);
+    }
+
+    function onDispatchSubmit(e) {
+      e.preventDefault();
+      var email = dispatchForm.elements.email;
+      var err = dispatchForm.querySelector('[data-dispatch-error]');
+      var value = email.value.trim();
+      var valid = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(value);
+      err.hidden = valid;
+      email.setAttribute('aria-invalid', valid ? 'false' : 'true');
+      if (!valid) { email.focus(); return; }
+
+      var btn = dispatchForm.querySelector('[data-dispatch-submit]');
+      var original = btn.textContent;
+      var done = function () {
+        dispatchForm.hidden = true;
+        var note = document.querySelector('.lfs-dispatch-note');
+        if (note) note.hidden = true;
+        dispatchStatus.hidden = false;
+        dispatchStatus.classList.remove('is-error');
+        dispatchStatus.textContent = '✓ You are on the list. The next quarterly briefing will go to ' + value + '.';
+      };
+      // A bot filled the honeypot: look successful, send nothing.
+      if (dispatchForm.elements['bot-field'] && dispatchForm.elements['bot-field'].value) { done(); return; }
+
+      var body = { type: 'dispatch_optin', tag: CONFIG.dispatchTag, email: value, source: 'leadership-friction-scan-results',
+        meta: { page: window.location.pathname, submittedAt: new Date().toISOString(), utm: utmString() } };
+
+      if (isLocalPreview()) {
+        if (window.console && console.info) console.info('[Friction Scan] local preview, dispatch opt-in not sent', body);
+        done();
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Subscribing…';
+      email.value = value;
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(dispatchForm)).toString()
+      }).then(function (response) {
+        if (!response.ok) throw new Error('status ' + response.status);
+        if (CONFIG.crmWebhookUrl) {
+          try {
+            fetch(CONFIG.crmWebhookUrl, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body), keepalive: true })
+              .catch(function () { /* best effort */ });
+          } catch (x) { /* same */ }
+        }
+        done();
+      }).catch(function () {
+        btn.disabled = false;
+        btn.textContent = original;
+        dispatchStatus.hidden = false;
+        dispatchStatus.classList.add('is-error');
+        dispatchStatus.textContent = 'That did not go through. Please try again, or write to contact@kuma.partners.';
+      });
+    }
+
+    // A shared results link opens the read-only result straight away. Anything malformed, or made with
+    // a different question set, is ignored and the normal landing page shows.
+    function sharedAnswers() {
+      var p;
+      try { p = new URLSearchParams(window.location.search); } catch (e) { return null; }
+      if (p.get('v') !== SCALE_VERSION || !p.get('r')) return null;
+      var parts = p.get('r').split('-');
+      if (parts.length !== TOTAL) return null;
+      var out = [];
+      for (var i = 0; i < parts.length; i++) {
+        if (parts[i] === 'NS') out.push('NS');
+        else if (/^[1-5]$/.test(parts[i])) out.push(Number(parts[i]));
+        else return null;
+      }
+      return out;
+    }
+
+    function openSharedView(answers) {
+      state.answers = answers.slice();
+      state.lead = null;
+      var result = computeResult(answers);
+      showResults(result);
+      var banner = document.querySelector('[data-res-shared]');
+      if (banner) banner.hidden = false;
+      var retakeEl = document.querySelector('[data-lfs-retake]');
+      if (retakeEl) retakeEl.textContent = 'Take the scan yourself';
     }
 
     // ---- wiring ----
@@ -834,5 +1059,9 @@
 
     var retakeBtn = document.querySelector('[data-lfs-retake]');
     if (retakeBtn) retakeBtn.addEventListener('click', retake);
+
+    wireSharing();
+    var shared = sharedAnswers();
+    if (shared) openSharedView(shared);
   });
 })();
