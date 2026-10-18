@@ -12,10 +12,10 @@
   // CONFIG
   // ---------------------------------------------------------------------------
   var CONFIG = {
-    // Booking link for the 30-minute Leadership Friction Debrief (Cal.com, HubSpot Meetings,
-    // Chili Piper). Name and email are appended as ?name=&email= when it is set.
-    // While this is empty, the button falls back to the intake form on the homepage.
-    bookingUrl: '',
+    // Calendly link for the 30-minute Leadership Friction Debrief. The respondent's name and email are
+    // appended as ?name=&email=, plus a1 (company) and a2 (score and dominant dimension), which Calendly
+    // fills into the first two custom questions of the event type. Empty means: use the homepage form.
+    bookingUrl: 'https://calendly.com/sven-mulfinger/leadership-friction-debrief-30min',
 
     // Optional second destination for the lead and full breakdown, as JSON.
     // Examples: a HubSpot Forms API URL
@@ -308,6 +308,19 @@
       busy: false
     };
 
+    // A team link (?company=&ref=) pre-fills the company field and tags the submission. The values are
+    // untrusted text: they only ever go into an input value or a hidden field, never into markup.
+    function cleanParam(v) { return String(v || '').replace(/[\u0000-\u001f\u007f<>]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, 80); }
+    var invite = { company: '', ref: '' };
+    try {
+      var ip = new URLSearchParams(window.location.search);
+      invite.company = cleanParam(ip.get('company'));
+      invite.ref = cleanParam(ip.get('ref'));
+    } catch (e) { /* no query string support: no invite */ }
+    function applyInvite() {
+      if (invite.company && form.elements.company && !form.elements.company.value) form.elements.company.value = invite.company;
+    }
+
     // ---- view switching ----
     function setView(name) {
       state.view = name;
@@ -465,6 +478,9 @@
       form.elements.scale_version.value = SCALE_VERSION;
       form.elements.answers.value = answersCsv();
       form.elements.utm.value = utmString();
+      // Team link loop: every submission joins a company cluster; invited_by is set only for invited colleagues.
+      form.elements.company_cluster.value = invite.company || form.elements.company.value.trim().slice(0, 80);
+      form.elements.invited_by.value = invite.ref;
     }
 
     // ---- CRM HOOK -----------------------------------------------------------
@@ -502,7 +518,9 @@
           page: window.location.pathname,
           submittedAt: new Date().toISOString(),
           referrer: document.referrer || '',
-          utm: utmString()
+          utm: utmString(),
+          companyCluster: invite.company || (lead && lead.company) || '',
+          invitedBy: invite.ref
         }
       };
     }
@@ -775,8 +793,11 @@
       if (CONFIG.bookingUrl) {
         var url = CONFIG.bookingUrl;
         if (state.lead) {
-          url += (url.indexOf('?') === -1 ? '?' : '&') +
-            'name=' + encodeURIComponent(state.lead.name) + '&email=' + encodeURIComponent(state.lead.email);
+          var parts = ['name=' + encodeURIComponent(state.lead.name), 'email=' + encodeURIComponent(state.lead.email), 'a1=' + encodeURIComponent(state.lead.company)];
+          if (state.result && !state.result.insufficient) {
+            parts.push('a2=' + encodeURIComponent(state.result.total + '/60 (' + DIMENSIONS[state.result.dominant].name + ')'));
+          }
+          url += (url.indexOf('?') === -1 ? '?' : '&') + parts.join('&');
         }
         book.setAttribute('href', url);
         book.setAttribute('target', '_blank');
@@ -791,6 +812,7 @@
       state.lead = null;
       state.result = null;
       form.reset();
+      applyInvite();
       if (dispatchForm) {
         dispatchForm.reset();
         dispatchForm.hidden = false;
@@ -818,6 +840,7 @@
     var dispatchStatus = document.querySelector('[data-dispatch-status]');
     var statusA = document.querySelector('[data-share-status-a]');
     var statusB = document.querySelector('[data-share-status-b]');
+    var statusT = document.querySelector('[data-share-status-t]');
     var statusTimers = {};
 
     function flash(el, text, key) {
@@ -850,6 +873,12 @@
     // so a link made from an older question set is never rendered against newer statements.
     function resultsLink() {
       return CONFIG.shareUrl + '?v=' + encodeURIComponent(SCALE_VERSION) + '&r=' + answersCsv().split(',').join('-');
+    }
+
+    // Company-tagged link for co-founders and C-suite peers. The landing page pre-fills the company.
+    function teamLink() {
+      var l = state.lead || { company: '', name: '' };
+      return CONFIG.shareUrl + '?company=' + encodeURIComponent(l.company) + '&ref=' + encodeURIComponent(l.name.split(/\s+/)[0]);
     }
 
     function scanLink(source) {
@@ -886,6 +915,22 @@
         q2('[data-share-mail-results]').setAttribute('href', mailto(subject, body));
       }
 
+      // Team invite: needs the respondent's company and first name, so it is hidden in a shared view.
+      var inviteCard = q2('[data-lfs-invite]');
+      if (inviteCard) {
+        inviteCard.hidden = !state.lead;
+        if (state.lead) {
+          var co = state.lead.company, fn = state.lead.name.split(/\s+/)[0];
+          var teamUrl = teamLink();
+          var inviteBody = 'Hi [Name],\n\n' +
+            'I just ran through the Kuma Leadership Friction Scan to look at our internal decision speed, mandate boundaries and operational drag.\n\n' +
+            'Take 3 minutes to run it from your perspective here:\n' + teamUrl + '\n\n' +
+            'Once you finish, let\u2019s compare our breakdowns and review where our scores diverge.\n\n' +
+            'Thanks,\n' + fn;
+          q2('[data-share-mail-team]').setAttribute('href', mailto('Confidential: Take the 3-minute Leadership Friction Scan for ' + co, inviteBody));
+        }
+      }
+
       q2('[data-share-linkedin]').setAttribute('href', 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(scanLink('linkedin')));
       q2('[data-share-x]').setAttribute('href', 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(X_TEXT) + '&url=' + encodeURIComponent(scanLink('x')));
       q2('[data-share-whatsapp]').setAttribute('href', 'https://wa.me/?text=' + encodeURIComponent(WA_TEXT + scanLink('whatsapp')));
@@ -904,6 +949,12 @@
         copyText(resultsLink()).then(
           function () { flash(statusA, '✓ Link copied', 'a'); },
           function () { flash(statusA, 'Copy failed. Select the address bar and copy it.', 'a'); }
+        );
+      });
+      on('[data-share-copy-team]', function () {
+        copyText(teamLink()).then(
+          function () { flash(statusT, '\u2713 Team Link Copied', 't'); },
+          function () { flash(statusT, 'Copy failed. Copy the address from the invite email instead.', 't'); }
         );
       });
       on('[data-share-copy-scan]', function () {
@@ -1060,6 +1111,7 @@
     var retakeBtn = document.querySelector('[data-lfs-retake]');
     if (retakeBtn) retakeBtn.addEventListener('click', retake);
 
+    applyInvite();
     wireSharing();
     var shared = sharedAnswers();
     if (shared) openSharedView(shared);

@@ -83,6 +83,18 @@ function sourceFrom(utm) {
 
 // ---------------------------------------------------------------------------
 // report model
+export const DEFAULT_BOOKING_URL = 'https://calendly.com/sven-mulfinger/leadership-friction-debrief-30min';
+
+// Calendly link with the respondent's details pre-filled. a1 = company and a2 = score summary only fill
+// in if the Calendly event type has custom questions in those positions.
+export function bookingLinkFor(base, report) {
+  const url = base || DEFAULT_BOOKING_URL;
+  if (!report || report.error) return url;
+  const parts = ['name=' + encodeURIComponent(report.name), 'email=' + encodeURIComponent(report.email), 'a1=' + encodeURIComponent(report.company)];
+  if (!report.insufficient && report.dominant) parts.push('a2=' + encodeURIComponent(report.score + '/60 (' + report.dominant.name + ')'));
+  return url + (url.indexOf('?') === -1 ? '?' : '&') + parts.join('&');
+}
+
 // ---------------------------------------------------------------------------
 // fields: the form fields as Netlify stored them. Scores are recomputed from `answers`, never
 // trusted from the posted score fields. Returns { error } when the payload is unusable.
@@ -129,6 +141,8 @@ export function buildReport(fields, opts = {}) {
     dateLong: formatDate(submittedAt, timeZone),
     timestamp: formatTimestamp(submittedAt, timeZone),
     source: sourceFrom(fields.utm),
+    invitedBy: clip(fields.invited_by, 80),
+    cluster: clip(fields.company_cluster, 80),
     score: insufficient ? null : result.total,
     band: insufficient ? 'Insufficient data' : result.band.name,
     bandFriction: insufficient ? '' : result.band.friction,
@@ -215,7 +229,7 @@ const NOT_SURE_NOTE = "Note: High number of 'Not Sure' responses detected. This 
 // EMAIL 1: executive report for the respondent
 // ---------------------------------------------------------------------------
 export function renderRespondentEmail(report, opts = {}) {
-  const bookingUrl = opts.bookingUrl || 'https://www.kuma.partners/index.html#contact';
+  const bookingUrl = bookingLinkFor(opts.bookingUrl, report);
   const calcUrl = opts.calculatorUrl || 'https://www.kuma.partners/coordination-tax.html';
   const siteUrl = opts.siteUrl || 'https://www.kuma.partners';
   const purgeLive = !!opts.purgeLive;
@@ -369,6 +383,8 @@ export function renderTriageEmail(report) {
     kv('Stage', esc(report.stage)) +
     kv('Timestamp', esc(report.timestamp)) +
     kv('Source', esc(report.source)) +
+    (report.invitedBy ? kv('Invited by', esc(report.invitedBy)) : '') +
+    (report.cluster ? kv('Company cluster', esc(report.cluster)) : '') +
     '</table>' +
     sect('2. Telemetry summary') +
     '<table role="presentation" cellpadding="0" cellspacing="0">' +
@@ -385,7 +401,8 @@ export function renderTriageEmail(report) {
     'NEW LEADERSHIP FRICTION SCAN', report.timestamp, '',
     '1. CONTACT AND LEAD DETAILS',
     'Name: ' + report.name, 'Email: ' + report.email, 'Company: ' + report.company, 'Stage: ' + report.stage,
-    'Timestamp: ' + report.timestamp, 'Source: ' + report.source, '',
+    'Timestamp: ' + report.timestamp, 'Source: ' + report.source,
+    ...(report.invitedBy ? ['Invited by: ' + report.invitedBy] : []), ...(report.cluster ? ['Company cluster: ' + report.cluster] : []), '',
     '2. TELEMETRY SUMMARY',
     'Total score: ' + scoreText + ' / 60 (Band: ' + report.band + ')',
     'Dominant constraint: ' + domName,

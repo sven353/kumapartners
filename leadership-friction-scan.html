@@ -193,6 +193,8 @@
           <input type="hidden" name="scale_version" value="">
           <input type="hidden" name="answers" value="">
           <input type="hidden" name="utm" value="">
+          <input type="hidden" name="company_cluster" value="">
+          <input type="hidden" name="invited_by" value="">
 
           <div class="field">
             <label for="lfs-name">Full name</label>
@@ -410,11 +412,23 @@
           <p class="lfs-bridge-note">The Kuma 14-Day Leadership Friction Scan cross-calibrates this self-assessment against confidential 1-on-1 interviews across your executive team. Book a 30-minute debrief to review your four-dimension breakdown and isolate the two highest-leverage interventions.</p>
         </div>
         <div class="lfs-bridge-actions">
-          <a href="index.html#contact" class="btn btn-cream" data-lfs-book>Schedule 30-Minute Debrief →</a>
+          <a href="https://calendly.com/sven-mulfinger/leadership-friction-debrief-30min" class="btn btn-cream" data-lfs-book>Schedule 30-Minute Debrief →</a>
           <p class="lfs-cta-sub">Confidential • Direct with Sven Mulfinger, Lead Partner • Unvarnished executive telemetry</p>
           <a href="friction-scan.html" class="btn-link">See how the 14-Day Scan works</a>
         </div>
       </div>
+
+      <!-- Team invite: sends a company-tagged link to a co-founder or C-suite peer. Hidden from the PDF. -->
+      <section class="lfs-invite no-print" aria-labelledby="lfs-invite-title" data-lfs-invite>
+        <span class="lfs-dispatch-eyebrow">Cross-Executive Calibration</span>
+        <h2 id="lfs-invite-title">Invite Your Co-Founder or C-Suite Peer to Take the Scan</h2>
+        <p class="lfs-dispatch-copy">Co-founders and functional leads often experience friction in different places, so one self-assessment shows one perspective. Send a private team link to your CTO, CPO or GTM lead to cross-reference where your views of internal drag, mandates and silent vetoes align.</p>
+        <div class="lfs-share-actions">
+          <button type="button" class="lfs-share-btn" data-share-copy-team><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1M14 10a4 4 0 00-5.7 0l-3 3a4 4 0 005.7 5.7l1-1"/></svg>Copy Team Link</button>
+          <a class="lfs-share-btn" href="#" data-share-mail-team><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg>Email an invite</a>
+        </div>
+        <p class="lfs-share-status" data-share-status-t role="status" aria-live="polite"></p>
+      </section>
 
       <!-- Executive Dispatch opt-in. Hidden from the PDF. -->
       <section class="lfs-dispatch dispatch-optin no-print" aria-labelledby="lfs-dispatch-title" data-lfs-dispatch-card>

@@ -13,7 +13,7 @@
 //   SCAN_FROM           optional. Default: Sven Mulfinger • Kuma Partners <sven@kuma.partners>
 //   SCAN_REPLY_TO       optional. Default: sven@kuma.partners
 //   SCAN_ALERT_TO       optional. Default: sven@kuma.partners
-//   BOOKING_URL         optional. Calendar link for the debrief button. Default: the homepage contact form.
+//   BOOKING_URL         optional. Calendly link for the debrief button. Default: the leadership-friction-debrief-30min event.
 //   DATA_PURGE_LIVE     optional. Set to "true" only once responses really are purged after 30 days. It switches
 //                       the governance line in the respondent email to the 30-day wording.
 //
