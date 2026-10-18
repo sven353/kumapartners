@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Coordination Tax Calculator | Kuma Partners</title>
+<meta name="description" content="Model what meeting load, consensus loops and context switching cost your executive team each year, in money, hours and full-time capacity. Live calculation, no sign-up needed.">
+<link rel="canonical" href="https://www.kuma.partners/coordination-tax">
+
+<!-- Open Graph / Social sharing -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kuma Partners">
+<meta property="og:url" content="https://www.kuma.partners/coordination-tax">
+<meta property="og:title" content="Coordination Tax Calculator | Kuma Partners">
+<meta property="og:description" content="Model what coordination drag costs your executive team each year, in money, hours and full-time capacity.">
+<meta property="og:image" content="https://www.kuma.partners/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Kuma Partners">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Coordination Tax Calculator | Kuma Partners">
+<meta name="twitter:description" content="Model what coordination drag costs your executive team each year, in money, hours and full-time capacity.">
+<meta name="twitter:image" content="https://www.kuma.partners/assets/og-image.jpg">
+
+<link rel="icon" type="image/png" href="assets/logo-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&amp;family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&amp;display=swap" onload="this.onload=null;this.rel='stylesheet'">
+<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,400;0,700;1,400&amp;family=Montserrat:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&amp;display=swap"></noscript>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="coordination-tax.css">
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<header class="site">
+  <nav class="wrap nav">
+    <a href="/" class="logo">
+      <img width="768" height="173" src="assets/logo-lockup.png" alt="Kuma Partners">
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#problem">Problem</a></li>
+      <li><a href="index.html#approach">Approach</a></li>
+      <li><a href="index.html#engagements">Engagements</a></li>
+      <li><a href="partners.html">Team</a></li>
+      <li class="nav-mobile-only">
+        <a href="friction-scan.html" class="btn btn-primary btn-sm">The 14-Day Scan</a>
+      </li>
+    </ul>
+    <div class="nav-cta">
+      <a href="friction-scan.html" class="btn btn-primary btn-sm">The 14-Day Scan</a>
+    </div>
+    <button type="button" class="nav-toggle" aria-label="Toggle navigation menu" aria-expanded="false">
+      <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16"></path></svg>
+      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" hidden><path d="M6 6l12 12M18 6L6 18"></path></svg>
+    </button>
+  </nav>
+</header>
+
+<main id="main-content" tabindex="-1">
+
+  <section class="hero ct-hero">
+    <div class="wrap">
+      <span class="eyebrow">Financial telemetry &bull; Runway &amp; velocity model</span>
+      <h1>What is coordination drag costing your balance sheet?</h1>
+      <p class="ct-lede">Meeting bloat, consensus loops and context switching are not only culture issues. They are a recurring cost in payroll and in executive hours. Model your leadership team's coordination tax below in real time.</p>
+      <p class="ct-micro">Interactive model &bull; Real-time calculation &bull; Every formula shown</p>
+    </div>
+  </section>
+
+  <section class="ct-calc" aria-labelledby="ct-calc-title">
+    <div class="wrap">
+      <h2 class="ct-sr" id="ct-calc-title">Coordination tax calculator</h2>
+      <noscript><p class="ct-noscript">The calculator needs JavaScript. The figures below show the default scenario of six leaders, 14 meeting hours a week, &euro;150,000 average cost and 35% friction.</p></noscript>
+
+      <div class="ct-grid">
+
+        <!-- Inputs -->
+        <div class="ct-panel ct-inputs" role="group" aria-labelledby="ct-inputs-title">
+          <div class="ct-panel-head">
+            <span class="ct-card-label" id="ct-inputs-title">Inputs</span>
+            <div class="ct-currency" role="radiogroup" aria-label="Currency">
+              <button type="button" role="radio" aria-checked="true" data-ct-currency="EUR" data-symbol="&euro;">&euro; EUR</button>
+              <button type="button" role="radio" aria-checked="false" data-ct-currency="USD" data-symbol="$" tabindex="-1">$ USD</button>
+            </div>
+          </div>
+
+          <div class="ct-control" data-ct-control="team">
+            <div class="ct-control-top">
+              <label for="ct-team">Executive &amp; senior leadership headcount</label>
+              <div class="ct-num"><input type="number" id="ct-team" inputmode="numeric" min="3" max="25" step="1" value="6" aria-label="Executive and senior leadership headcount, exact value"></div>
+            </div>
+            <input type="range" class="ct-range" id="ct-team-range" min="3" max="25" step="1" value="6" aria-label="Executive and senior leadership headcount">
+            <p class="ct-help">C-suite, VPs and cross-functional department leads.</p>
+          </div>
+
+          <div class="ct-control" data-ct-control="meet">
+            <div class="ct-control-top">
+              <label for="ct-meet">Average hours per leader in internal meetings, per week</label>
+              <div class="ct-num"><input type="number" id="ct-meet" inputmode="numeric" min="4" max="35" step="1" value="14" aria-label="Meeting hours per leader per week, exact value"><span class="ct-unit">hrs</span></div>
+            </div>
+            <input type="range" class="ct-range" id="ct-meet-range" min="4" max="35" step="1" value="14" aria-label="Meeting hours per leader per week">
+            <p class="ct-help">Status syncs, updates, alignment sessions and one-to-one escalations.</p>
+          </div>
+
+          <div class="ct-control" data-ct-control="comp">
+            <div class="ct-control-top">
+              <label for="ct-comp">Average annual fully-loaded executive cost</label>
+              <div class="ct-num"><span class="ct-unit" data-ct-cur>&euro;</span><input type="number" id="ct-comp" inputmode="numeric" min="80000" max="350000" step="5000" value="150000" aria-label="Average annual fully-loaded executive cost, exact value"></div>
+            </div>
+            <input type="range" class="ct-range" id="ct-comp-range" min="80000" max="350000" step="5000" value="150000" aria-label="Average annual fully-loaded executive cost">
+            <p class="ct-help">Base salary, bonus, taxes and benefits. The currency switch changes the symbol only, so enter the amount in the currency you pay in.</p>
+          </div>
+
+          <div class="ct-control ct-control-presets">
+            <span class="ct-label" id="ct-friction-label">Low-value friction factor</span>
+            <div class="ct-presets" role="radiogroup" aria-labelledby="ct-friction-label">
+              <button type="button" role="radio" aria-checked="false" data-ct-friction="20" tabindex="-1"><span class="ct-preset-num">20%</span><span class="ct-preset-cap">Optimised / lean</span></button>
+              <button type="button" role="radio" aria-checked="true" data-ct-friction="35"><span class="ct-preset-num">35%</span><span class="ct-preset-cap">Typical scale-up</span></button>
+              <button type="button" role="radio" aria-checked="false" data-ct-friction="50" tabindex="-1"><span class="ct-preset-num">50%</span><span class="ct-preset-cap">High drag / consensus trap</span></button>
+            </div>
+            <p class="ct-help">Share of meeting time spent re-debating settled calls, passive status reporting or consensus-seeking.</p>
+          </div>
+        </div>
+
+        <!-- Readout -->
+        <div class="ct-readout" aria-labelledby="ct-readout-title">
+          <h3 class="ct-sr" id="ct-readout-title">Results</h3>
+
+          <article class="ct-metric ct-metric-primary">
+            <span class="ct-card-label">Annual capital burned on coordination drag</span>
+            <p class="ct-big"><span data-ct-cur>&euro;</span><span data-ct-out="cost">110,250</span><span class="ct-big-unit"> / year</span></p>
+            <p class="ct-sub">Capital paid for meeting hours spent on non-decisive friction.</p>
+            <dl class="ct-breakdown">
+              <div><dt>Executive payroll</dt><dd><span data-ct-cur>&euro;</span><span data-ct-out="payroll">900,000</span></dd></div>
+              <div><dt>Paid for internal meetings</dt><dd><span data-ct-cur>&euro;</span><span data-ct-out="meetingPayroll">315,000</span></dd></div>
+              <div><dt>Of which non-decisive</dt><dd><span data-ct-cur>&euro;</span><span data-ct-out="cost2">110,250</span></dd></div>
+            </dl>
+          </article>
+
+          <article class="ct-metric">
+            <span class="ct-card-label">Sunk executive time</span>
+            <p class="ct-big ct-big-sm"><span data-ct-out="hours">1,352</span><span class="ct-big-unit"> hours / year</span></p>
+            <p class="ct-sub">Equivalent to <strong data-ct-out="fte">0.7</strong> full-time leaders of executive capacity consumed by operational drag.</p>
+          </article>
+
+          <article class="ct-metric">
+            <span class="ct-card-label">Speed penalty</span>
+            <p class="ct-big ct-big-sm"><span data-ct-out="weekly">4.9</span><span class="ct-big-unit"> hrs / week per leader</span></p>
+            <p class="ct-sub"><strong data-ct-out="capacity">12%</strong> of each leader's 40-hour week goes on meetings that do not move a decision.</p>
+          </article>
+
+          <p class="ct-sr" role="status" aria-live="polite" data-ct-live></p>
+        </div>
+      </div>
+
+      <details class="ct-maths">
+        <summary>How this is calculated</summary>
+        <div class="ct-maths-body">
+          <p>The model assumes 46 working weeks a year and a 40-hour working week, which gives 1,840 working hours per leader.</p>
+          <ul>
+            <li>Executive payroll = headcount &times; average annual cost</li>
+            <li>Paid for internal meetings = payroll &times; (meeting hours &divide; 40)</li>
+            <li>Coordination drag cost = paid for internal meetings &times; friction factor</li>
+            <li>Sunk executive hours = headcount &times; meeting hours &times; 46 &times; friction factor</li>
+            <li>Full-time leaders equivalent = sunk executive hours &divide; 1,840</li>
+            <li>Speed penalty = meeting hours &times; friction factor, shown per leader per week and as a share of 40 hours</li>
+          </ul>
+          <p>The friction factor is your own estimate of how much meeting time adds no decision. It is the input that moves the result most, so test all three presets.</p>
+        </div>
+      </details>
+    </div>
+  </section>
+
+  <section class="ct-capture" aria-labelledby="ct-capture-title">
+    <div class="wrap">
+      <div class="ct-capture-card">
+        <div data-ct-form-view>
+          <h2 id="ct-capture-title">Export this financial model to your executive dashboard.</h2>
+          <p class="ct-capture-sub">Add your email and company stage and we will send the full breakdown of this model, using the inputs you have set above.</p>
+
+          <form class="ct-form" name="coordination-tax" method="POST" action="/coordination-tax" data-netlify="true" netlify-honeypot="bot-field" data-ct-form novalidate>
+            <input type="hidden" name="form-name" value="coordination-tax">
+            <p class="hp-field" hidden>
+              <label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+            </p>
+
+            <!-- Filled by coordination-tax.js just before submit so the CRM receives the inputs and the results -->
+            <input type="hidden" name="product_intent" value="coordination-tax-calculator">
+            <input type="hidden" name="currency" value="EUR">
+            <input type="hidden" name="team_size" value="">
+            <input type="hidden" name="meeting_hours_per_week" value="">
+            <input type="hidden" name="avg_annual_cost" value="">
+            <input type="hidden" name="friction_pct" value="">
+            <input type="hidden" name="annual_drag_cost" value="">
+            <input type="hidden" name="annual_drag_hours" value="">
+            <input type="hidden" name="fte_equivalent" value="">
+            <input type="hidden" name="capacity_lost_pct" value="">
+            <input type="hidden" name="utm" value="">
+            <input type="hidden" name="source" value="/coordination-tax">
+
+            <div class="ct-form-row">
+              <div class="field">
+                <label for="ct-email">Work email</label>
+                <input type="email" id="ct-email" name="email" autocomplete="email" required>
+                <span class="ct-field-error" data-ct-error="email">Please enter a valid email address.</span>
+              </div>
+              <div class="field">
+                <label for="ct-stage">Company stage</label>
+                <div class="select-shell">
+                  <select id="ct-stage" name="stage" required>
+                    <option value="" selected disabled>Select your stage</option>
+                    <option>Seed</option>
+                    <option>Series A</option>
+                    <option>Series B</option>
+                    <option>Series C+</option>
+                    <option>Bootstrapped / Profitable</option>
+                  </select>
+                  <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+                </div>
+                <span class="ct-field-error" data-ct-error="stage">Please select a stage.</span>
+              </div>
+            </div>
+
+            <div class="hp-wrapper" aria-hidden="true">
+              <label for="hp-tax-id-ct">Tax ID (do not fill)</label>
+              <input type="text" name="company_tax_id" id="hp-tax-id-ct" tabindex="-1" autocomplete="off" value="">
+            </div>
+
+            <button type="submit" class="btn btn-primary ct-submit" data-ct-submit><span data-btn-label>Receive Telemetry Breakdown (PDF) &rarr;</span></button>
+            <p class="ct-form-microcopy">Confidential. We use your details only to send this breakdown. See our <a href="privacy.html">Privacy Policy</a>.</p>
+            <p class="ct-form-error" data-ct-form-error hidden>Something went wrong sending your details. Please try again, or email us at <a href="mailto:contact@kuma.partners">contact@kuma.partners</a>.</p>
+          </form>
+        </div>
+
+        <div class="ct-success" data-ct-success hidden tabindex="-1">
+          <div class="ct-success-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.5 12.75l6 6 9-13.5"/></svg>
+          </div>
+          <p class="ct-confirm" data-ct-success-text>Breakdown requested. We will send it to your inbox within 24 hours.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ct-bridge" aria-labelledby="ct-bridge-title">
+    <div class="wrap">
+      <h2 id="ct-bridge-title">Measuring the tax is step one. Eliminating it creates immediate runway.</h2>
+      <div class="ct-bridge-grid">
+        <article class="ct-path">
+          <span class="ct-card-label ct-card-label-dark">Option A &bull; Root-cause diagnostic</span>
+          <p>Uncover where this drag is originating across Decision Velocity, Strategic Signal and Autonomy.</p>
+          <a href="/leadership-friction-scan" class="btn btn-cream" data-ct-path="friction-scan">Run the Leadership Friction Scan (3 min) &rarr;</a>
+        </article>
+        <article class="ct-path">
+          <span class="ct-card-label ct-card-label-dark">Option B &bull; Executive advisory</span>
+          <p>Need an objective audit of your leadership cadence and decision architecture?</p>
+          <a href="index.html#contact" class="btn btn-secondary ct-btn-ondark" data-ct-book data-ct-path="debrief">Book a 30-Minute Telemetry Debrief with Kuma Partners &rarr;</a>
+        </article>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <a href="/" class="logo footer-logo" style="margin-bottom:14px;">
+          <img width="768" height="173" src="assets/logo-lockup.png" alt="Kuma Partners">
+        </a>
+        <p style="font-size:.92rem; color:rgba(26,26,26,.6); max-width:280px;">Executive Advisory &amp; Leadership Alignment for Scale-Stage Leadership Teams.</p>
+        <a href="mailto:contact@kuma.partners" class="footer-email">contact@kuma.partners</a>
+      </div>
+      <div>
+        <h4>Engagements</h4>
+        <ul>
+          <li><a href="friction-scan.html">The 14-Day Scan</a></li>
+          <li><a href="alignment-sprint.html">Executive Alignment Sprint</a></li>
+          <li><a href="index.html#engagements">Strategic Advisory</a></li>
+          <li><a href="partners.html">The Partners</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Compliance</h4>
+        <ul>
+          <li><a href="privacy.html">Privacy Policy (GDPR)</a></li>
+          <li><a href="legal.html">Legal Notice / Imprint</a></li>
+          <li><button type="button" class="footer-link-btn" data-cookie-preferences>Cookie Preferences</button></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-hubs">
+      <span class="footer-hubs-label">International Presence</span>
+      <div class="footer-hubs-cities">
+        <span>New York</span>
+        <span>Los Angeles</span>
+        <span>London</span>
+        <span>Paris</span>
+        <span>Munich</span>
+        <span>Barcelona</span>
+        <span>Lisbon</span>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <span>© 2026 Kuma Partners. All rights reserved.</span>
+      <span>kuma.partners · Operating across the world</span>
+    </div>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookie-banner">
+  <div class="wrap">
+    <p>We use essential cookies to ensure our site functions properly and to analyze aggregate traffic in accordance with our <a href="privacy.html">Privacy Policy</a>.</p>
+    <div class="cookie-actions">
+      <button class="btn-essential" id="cookie-essential">Essential Only</button>
+      <button class="btn-accept" id="cookie-accept">Accept All</button>
+    </div>
+  </div>
+</div>
+
+<script src="site.js"></script>
+<script src="coordination-tax.js"></script>
+</body>
+</html>
