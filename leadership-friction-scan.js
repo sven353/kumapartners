@@ -784,6 +784,9 @@
     // ---- wiring ----
     var startBtn = document.querySelector('[data-lfs-start]');
     if (startBtn) startBtn.addEventListener('click', startScan);
+    // The preview card is a second way in. The CTA stays the keyboard and screen reader route.
+    var previewCard = document.querySelector('[data-lfs-preview]');
+    if (previewCard) previewCard.addEventListener('click', startScan);
 
     rateButtons.forEach(function (btn) {
       btn.addEventListener('click', function () {
