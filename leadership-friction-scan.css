@@ -167,19 +167,37 @@ body.suite .lfs-hero .lfs-lede{max-width:700px; font-size:1rem; line-height:1.55
 .lfs-title-row{display:flex; align-items:center; justify-content:space-between; gap:12px 24px; flex-wrap:wrap; margin-bottom:10px;}
 .lfs-title-row h2{margin:0;}
 .lfs-results .section-head h2{outline:none;}
-.lfs-prepared{color:rgba(26,26,26,.7); margin:0;}
+.lfs-prepared{color:rgba(26,26,26,.72); margin:0; white-space:pre-line; line-height:1.6;}
 .lfs-stamp{font-family:'Lato',Arial,sans-serif; font-size:.76rem; line-height:1.5; color:rgba(11,21,35,.55); margin:12px 0 0; max-width:720px;}
 .lfs-stamp-bottom{margin:28px 0 14px;}
 .lfs-export{
-  display:inline-flex; align-items:center; gap:8px; flex:none; padding:10px 18px; cursor:pointer; white-space:nowrap;
-  font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.85rem; color:var(--navy);
-  background:#fff; border:var(--hairline) solid rgba(11,21,35,.28); border-radius:var(--radius-pill); transition:border-color .15s ease, box-shadow .15s ease;
+  display:inline-flex; align-items:center; gap:10px; flex:none; padding:13px 22px; cursor:pointer;
+  font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.92rem; color:#fff;
+  background:var(--navy); border:var(--hairline) solid var(--navy); border-radius:var(--radius-pill);
+  box-shadow:0 10px 20px -12px rgba(11,21,35,.7); transition:background-color .15s ease, box-shadow .15s ease, transform .1s ease;
 }
-.lfs-export:hover{border-color:var(--navy); box-shadow:0 8px 18px -10px rgba(15,23,42,.3);}
-.lfs-export:focus-visible{outline:2px solid var(--teal); outline-offset:2px;}
-.lfs-export svg{width:16px; height:16px;}
+.lfs-export:hover{background:#152740; box-shadow:0 14px 24px -12px rgba(11,21,35,.8);}
+.lfs-export:active{transform:translateY(1px);}
+.lfs-export:focus-visible{outline:2px solid var(--teal); outline-offset:3px;}
+.lfs-export svg{width:18px; height:18px;}
 
 .lfs-grid{display:grid; grid-template-columns:5fr 7fr; gap:24px;}
+
+/* Screen layout: three narrative acts. Print keeps the original page order and grid untouched. */
+.lfs-act{display:none;}
+@media screen{
+  .lfs-grid{grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px;}
+  .lfs-act{display:block; grid-column:1 / -1; margin:16px 0 -4px; padding-top:18px; border-top:var(--hairline) solid rgba(11,21,35,.14);}
+  .lfs-act-1{margin-top:0; padding-top:0; border-top:0;}
+  .lfs-act-eyebrow{display:block; font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.74rem; letter-spacing:.1em; text-transform:uppercase; color:var(--teal);}
+  .lfs-act p{margin:4px 0 0; font-family:'Montserrat',Arial,sans-serif; font-weight:700; font-size:1.25rem; color:var(--navy);}
+  .lfs-act-1{order:1;} .lfs-index{order:2;} .lfs-matrix{order:3;} .lfs-veto{order:4;}
+  .lfs-act-2{order:5;} .lfs-vector{order:6;} .lfs-risk{order:7;}
+  .lfs-act-3{order:8;} .lfs-intervention{order:9;}
+  .lfs-risk{grid-template-columns:repeat(3,minmax(0,1fr)); gap:4px 32px;}
+  .lfs-risk-item{padding:10px 0 4px;}
+}
+@media screen and (max-width:960px){ .lfs-grid{grid-template-columns:1fr;} .lfs-risk{grid-template-columns:1fr;} }
 .lfs-card{
   background:#fff; border:var(--hairline) solid var(--hairline-color); border-radius:var(--radius-xs);
   padding:32px 30px; box-shadow:var(--card-sheen); transition:border-color .2s ease;
@@ -245,7 +263,8 @@ body.suite .lfs-hero .lfs-lede{max-width:700px; font-size:1rem; line-height:1.55
 .lfs-dim-value.high .lfs-dim-level{color:#9a3b1f; background:rgba(193,80,46,.12);}
 .lfs-dim-value.none .lfs-dim-level{color:#475569; background:rgba(100,116,139,.12);}
 .lfs-bar{grid-column:1 / -1; height:8px; border-radius:9999px; background:#f1f5f9; overflow:hidden;}
-.lfs-bar-fill{height:100%; width:0; border-radius:9999px; transition:width .7s cubic-bezier(.2,.8,.2,1);}
+.lfs-bar-fill{height:100%; width:0; border-radius:9999px; animation:lfs-fill .8s cubic-bezier(.2,.8,.2,1) both;}
+@keyframes lfs-fill{from{width:0;}}
 .lfs-bar-fill.low{background:linear-gradient(90deg,#14b8a6,#34d399);}
 .lfs-bar-fill.moderate{background:linear-gradient(90deg,#fbbf24,#f59e0b);}
 .lfs-bar-fill.high{background:linear-gradient(90deg,#f43f5e,#e11d48);}
@@ -295,16 +314,22 @@ body.suite .lfs-hero .lfs-lede{max-width:700px; font-size:1rem; line-height:1.55
 .lfs-bridge{
   margin-top:24px; padding:44px 44px; border-radius:var(--radius-xs);
   background:radial-gradient(120% 85% at 50% 0%, #152740 0%, var(--navy) 100%);
-  display:grid; grid-template-columns:1fr auto; gap:36px; align-items:center;
+  display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); gap:28px 44px; align-items:start;
 }
-.lfs-bridge h2{color:#fff; font-size:1.7rem; margin:0 0 20px; max-width:620px;}
+.lfs-bridge h2{grid-column:1 / -1; color:#fff; font-size:1.7rem; margin:0; max-width:760px;}
 .lfs-bridge p{color:rgba(255,255,255,.8); margin:0; max-width:620px;}
 .lfs-quote{
-  margin:0 0 22px; max-width:640px; padding:24px; border-radius:16px;
-  background:rgba(255,255,255,.1); border:var(--hairline) solid rgba(255,255,255,.15);
+  margin:0 0 22px; max-width:640px; padding:20px 22px; border-radius:0 12px 12px 0;
+  background:rgba(255,255,255,.07); border:0; border-left:4px solid #14b8a6;
 }
 .lfs-quote p{font-family:'Montserrat',Arial,sans-serif; font-style:italic; font-weight:500; font-size:1.02rem; line-height:1.65; color:#fff; max-width:none;}
 .lfs-bridge-note{font-size:.95rem;}
+.lfs-partner{padding:0 0 4px; margin-bottom:2px;}
+.lfs-partner strong{display:block; color:#fff; font-family:'Montserrat',Arial,sans-serif; font-size:1.05rem;}
+.lfs-partner strong span{font-weight:500; color:rgba(255,255,255,.78); font-size:.92rem;}
+.lfs-partner p{margin:6px 0 0; font-size:.92rem; line-height:1.5; max-width:420px;}
+.lfs-partner a{color:#fff; border-bottom:var(--hairline) solid rgba(255,255,255,.4);}
+.lfs-partner a:hover{border-bottom-color:#fff;}
 .lfs-bridge-actions{display:flex; flex-direction:column; align-items:flex-start; gap:18px;}
 .lfs-bridge .btn-cream{white-space:nowrap;}
 .lfs-bridge .btn-link{color:#fff; border-bottom-color:rgba(255,255,255,.4);}
@@ -335,6 +360,7 @@ body.suite .lfs-hero .lfs-lede{max-width:700px; font-size:1rem; line-height:1.55
 .lfs-risk-label{grid-column:1 / -1;}
 .lfs-risk-item{padding:6px 0 4px;}
 .lfs-risk-item[hidden]{display:none;}
+@media print{ .lfs-risk-item[data-res-founder-risk]:not(.is-dominant){display:none !important;} }
 .lfs-risk-item h3{font-family:'Montserrat',Arial,sans-serif; font-weight:700; font-size:.95rem; color:var(--navy); margin:0 0 6px;}
 .lfs-risk-item p{margin:0; font-size:.93rem; line-height:1.55; color:rgba(15,23,42,.88);}
 .lfs-risk-item .lfs-cite{
@@ -404,9 +430,8 @@ body.suite .lfs-hero .lfs-lede{max-width:700px; font-size:1rem; line-height:1.55
 
 /* ---------- Executive Dispatch opt-in and sharing suite (screen only) ---------- */
 .lfs-dispatch{
-  max-width:56rem; margin:48px auto 0; padding:24px; border-radius:16px;
-  border:var(--hairline) solid rgba(226,232,240,.9); background:rgba(248,250,252,.7);
-  background-image:linear-gradient(to bottom, rgba(255,255,255,.7), rgba(248,250,252,.7));
+  max-width:56rem; margin:24px auto 0; padding:24px; border-radius:16px;
+  border:var(--hairline) solid rgba(226,232,240,.9); background:#fff; box-shadow:0 1px 2px rgba(15,23,42,.06);
 }
 @media (min-width:768px){ .lfs-dispatch{padding:32px;} }
 .lfs-dispatch-eyebrow, .lfs-share-eyebrow{display:block; font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.7rem; letter-spacing:.1em; text-transform:uppercase; color:var(--teal); margin-bottom:10px;}
@@ -429,8 +454,8 @@ body.suite .lfs-hero .lfs-lede{max-width:700px; font-size:1rem; line-height:1.55
 .lfs-dispatch-status.is-error{color:#9a3b1f; background:rgba(193,80,46,.1); border-color:rgba(193,80,46,.3); margin-top:14px;}
 
 .lfs-invite{
-  max-width:56rem; margin:32px auto 0; padding:24px; border-radius:16px;
-  border:var(--hairline) solid rgba(226,232,240,.9); background:rgba(248,250,252,.6);
+  max-width:56rem; margin:40px auto 0; padding:24px; border-radius:16px;
+  border:var(--hairline) solid rgba(226,232,240,.9); background:rgba(248,250,252,.7);
 }
 @media (min-width:768px){ .lfs-invite{padding:32px;} }
 .lfs-invite[hidden]{display:none;}
@@ -438,6 +463,12 @@ body.suite .lfs-hero .lfs-lede{max-width:700px; font-size:1rem; line-height:1.55
 .lfs-invite .lfs-dispatch-copy{margin-bottom:18px;}
 .lfs-invite .lfs-share-status{margin:10px 0 0; min-height:1.4em; font-size:.82rem; font-weight:700; color:#1f6a4a; opacity:0; transition:opacity .2s ease;}
 .lfs-invite .lfs-share-status.is-on{opacity:1;}
+.lfs-sharebar{max-width:56rem; margin:24px auto 0; display:flex; align-items:center; justify-content:space-between; gap:12px 20px; flex-wrap:wrap; padding:0 4px;}
+.lfs-sharebar-label{font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.82rem; color:rgba(11,21,35,.7);}
+.lfs-sharebar .lfs-share-actions{margin-top:0;}
+.lfs-sharebar .lfs-share-status{flex-basis:100%; min-height:1.3em; margin:0; font-size:.82rem; font-weight:700; color:#1f6a4a; opacity:0; transition:opacity .2s ease;}
+.lfs-sharebar .lfs-share-status.is-on{opacity:1;}
+.lfs-invite .lfs-share-fine{margin:4px 0 0; font-size:.76rem; color:rgba(11,21,35,.5);}
 .lfs-share{max-width:56rem; margin:20px auto 0; padding:0 !important; display:grid; grid-template-columns:1fr 1fr; gap:20px;}
 .lfs-share > *{min-width:0;}
 .lfs-share-card{
@@ -482,7 +513,7 @@ body.suite .lfs-hero .lfs-lede{max-width:700px; font-size:1rem; line-height:1.55
   * {-webkit-print-color-adjust:exact !important; print-color-adjust:exact !important;}
   header, nav, footer, .cookie-banner, #cookie-consent, [role="dialog"], button, .no-print,
   .skip-link, .lfs-hero, .lfs-flow, .lfs-glow, .lfs-bridge, .lfs-results .section-head,
-  .sharing-suite, .dispatch-optin, .lfs-shared-banner, .lfs-share, .lfs-dispatch, .lfs-invite{display:none !important;}
+  .sharing-suite, .dispatch-optin, .lfs-shared-banner, .lfs-share, .lfs-sharebar, .lfs-dispatch, .lfs-invite, .lfs-act, .lfs-retake{display:none !important;}
   html, body{background:#fff !important; color:#0f172a !important; font-size:10pt; line-height:1.4;}
   body.suite main, .lfs-results{background:#fff !important; padding:0 !important; min-height:0 !important;}
   .lfs-results[hidden]{display:none !important;}

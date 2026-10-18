@@ -620,9 +620,6 @@
       window.requestAnimationFrame(function () {
         window.requestAnimationFrame(function () {
           if (!result.insufficient) marker.style.left = markerPosition(result.total) + '%';
-          Array.prototype.forEach.call(views.results.querySelectorAll('[data-w]'), function (el) {
-            el.style.width = el.getAttribute('data-w') + '%';
-          });
         });
       });
     }
@@ -634,21 +631,26 @@
 
     function fmt(n) { return n === null ? 'NS' : (n % 1 === 0 ? String(n) : n.toFixed(1)); }
 
+    // "Acme Leadership Team", or "Executive Leadership Team" when the company is blank or a placeholder.
+    function teamName(company) {
+      var c = String(company || '').replace(/\s+/g, ' ').trim();
+      var generic = c.length < 2 || /^(company|company name|your company|test|testing|n\/?a|none|tbd|xx+|asdf+|-+|\.+)$/i.test(c);
+      return generic ? 'Executive Leadership Team' : c + ' Leadership Team';
+    }
+
     function renderResults(result) {
       var first = state.lead ? state.lead.name.split(/\s+/)[0] : '';
-      var scored = TOTAL - result.notSure;
-      var basis = result.notSure === 0
-        ? 'Based on your answers to all 12 statements.'
-        : 'Based on ' + scored + ' of 12 statements. ' + result.notSure + ' marked Not Sure and left out of the score.';
-      q('[data-res-prepared]').textContent = state.lead
-        ? 'Prepared for ' + first + ' at ' + state.lead.company + '. ' + basis
-        : basis;
+      var today = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+      var ns = result.notSure === 0 ? '' : ' \u2022 ' + result.notSure + ' of 12 marked Not Sure and left out of the score';
+      var team = state.lead ? teamName(state.lead.company) : '';
+      q('[data-res-prepared]').textContent =
+        (state.lead ? 'Prepared for ' + first + ' \u2022 ' + team + '\n' : '') +
+        'Assessed on ' + today + ' \u2022 Normalised 12-statement operational telemetry' + ns;
 
       var insufficient = result.insufficient;
-      var today = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
       q('[data-res-print-meta]').textContent = state.lead
-        ? 'Prepared for: ' + state.lead.name + ' at ' + state.lead.company + ' \u2022 Benchmark: ' + today + ' \u2022 ' + basis
-        : 'Benchmark: ' + today + ' \u2022 ' + basis;
+        ? 'Prepared for: ' + state.lead.name + ' \u2022 ' + team + ' \u2022 Assessed ' + today + ns
+        : 'Assessed ' + today + ns;
       var marker = q('[data-res-marker]');
       marker.hidden = insufficient;
       q('[data-res-vector-card]').hidden = insufficient;
@@ -676,7 +678,8 @@
       q('[data-res-veto-alert]').hidden = insufficient || result.dims.d4 === null || result.dims.d4 < 10;
 
       // Founder centrality benchmark only when Dimension 1 is the dominant dimension
-      q('[data-res-founder-risk]').hidden = result.dominant !== 'd1';
+      // Shown on screen for everyone; the PDF carries it only when Dimension 1 dominates (see print CSS).
+      q('[data-res-founder-risk]').classList.toggle('is-dominant', result.dominant === 'd1');
 
       // Not Sure footnote
       q('[data-res-ns-note]').hidden = result.notSure < 4;
@@ -721,8 +724,9 @@
         bar.setAttribute('aria-label', DIMENSIONS[key].name + ': ' + (score === null ? 'not enough answers' : fmt(score) + ' out of 15, ' + level.label.toLowerCase() + ' friction'));
         var fill = document.createElement('div');
         fill.className = 'lfs-bar-fill ' + level.id;
-        fill.style.width = '0%';
-        fill.setAttribute('data-w', score === null ? '0' : String(Math.round((score / 15) * 1000) / 10));
+        var pct = score === null ? 0 : Math.round((score / 15) * 1000) / 10;
+        fill.style.width = pct + '%';
+        fill.setAttribute('data-w', String(pct));
         bar.appendChild(fill);
 
         li.appendChild(name);
@@ -841,7 +845,6 @@
     // ---- Executive Dispatch opt-in and sharing suite ------------------------------------
     var dispatchForm = document.querySelector('[data-lfs-dispatch]');
     var dispatchStatus = document.querySelector('[data-dispatch-status]');
-    var statusA = document.querySelector('[data-share-status-a]');
     var statusB = document.querySelector('[data-share-status-b]');
     var statusT = document.querySelector('[data-share-status-t]');
     var statusTimers = {};
@@ -889,10 +892,7 @@
     }
 
     var POST_TEXT = 'Harvard Business School research by Noam Wasserman found that 65% of high-potential start-ups fail as a result of conflict among the founders. The Kuma 3-Minute Leadership Friction Scan is a sharp diagnostic mirror for any scale-stage executive team.';
-    var X_TEXT = 'Harvard Business School research found that 65% of high-potential start-ups fail as a result of conflict among the founders. The Kuma 3-Minute Leadership Friction Scan is a sharp diagnostic mirror for any scale-stage executive team:';
     var WA_TEXT = 'Found this 3-minute leadership friction scan by Kuma Partners. Really sharp diagnostic on decision bottlenecks and silent vetoes: ';
-    var MAIL_SCAN_SUBJECT = 'A 3-minute leadership friction scan worth taking';
-    var MAIL_SCAN_BODY = 'I came across this and thought of you. It is a 12-statement diagnostic from Kuma Partners that shows where a leadership team loses speed: decision velocity, strategic cohesion, energy drain and the silent veto.\n\nIt takes about three minutes and the result is free:\n';
 
     function mailto(subject, body) {
       return 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body).replace(/%0A/g, '%0D%0A');
@@ -901,22 +901,8 @@
     // Set every link and the visibility of the results track for the current result.
     function updateSharing(result) {
       var q2 = function (sel) { return document.querySelector(sel); };
-      var track = q2('[data-share-results]');
-      if (track) track.hidden = result.insufficient;
-
-      if (!result.insufficient) {
-        var company = state.lead ? state.lead.company : '';
-        var first = state.lead ? state.lead.name.split(/\s+/)[0] : '';
-        var subject = 'Operational Telemetry: Leadership Friction Scan Results for ' + (company || 'our leadership team');
-        var body = 'Hi [Name],\n\n' +
-          'I just ran our leadership team through the Kuma Leadership Friction Scan.\n' +
-          'Our overall score came in at ' + result.total + '/60 (' + result.band.name + '), with our primary operational constraint flagged in ' + DIMENSIONS[result.dominant].name + '.\n\n' +
-          'Take a quick look at the breakdown here:\n' + resultsLink() + '\n\n' +
-          'If you have three minutes, take the scan yourself from that page so we can compare how each of us sees it.\n\n' +
-          'Let’s discuss this before our next executive sync.\n\n' +
-          'Thanks' + (first ? ',\n' + first : '');
-        q2('[data-share-mail-results]').setAttribute('href', mailto(subject, body));
-      }
+      var copyResults = q2('[data-share-copy-results]');
+      if (copyResults) copyResults.hidden = result.insufficient;
 
       // Team invite: needs the respondent's company and first name, so it is hidden in a shared view.
       var inviteCard = q2('[data-lfs-invite]');
@@ -927,6 +913,7 @@
           var teamUrl = teamLink();
           var inviteBody = 'Hi [Name],\n\n' +
             'I just ran through the Kuma Leadership Friction Scan to look at our internal decision speed, mandate boundaries and operational drag.\n\n' +
+            (result.insufficient ? '' : 'My result was ' + result.total + '/60 (' + result.band.name + '), with the heaviest drag in ' + DIMENSIONS[result.dominant].name + '.\n\n') +
             'Take 3 minutes to run it from your perspective here:\n' + teamUrl + '\n\n' +
             'Once you finish, let\u2019s compare our breakdowns and review where our scores diverge.\n\n' +
             'Thanks,\n' + fn;
@@ -935,10 +922,7 @@
       }
 
       q2('[data-share-linkedin]').setAttribute('href', 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(scanLink('linkedin')));
-      q2('[data-share-x]').setAttribute('href', 'https://twitter.com/intent/tweet?text=' + encodeURIComponent(X_TEXT) + '&url=' + encodeURIComponent(scanLink('x')));
       q2('[data-share-whatsapp]').setAttribute('href', 'https://wa.me/?text=' + encodeURIComponent(WA_TEXT + scanLink('whatsapp')));
-      q2('[data-share-mail-scan]').setAttribute('href', mailto(MAIL_SCAN_SUBJECT, MAIL_SCAN_BODY + scanLink('email')));
-      q2('[data-share-native]').hidden = typeof navigator.share !== 'function';
 
       // Pre-fill the dispatch email from the intake form so subscribing is one click.
       var dEmail = dispatchForm && dispatchForm.elements.email;
@@ -950,8 +934,8 @@
 
       on('[data-share-copy-results]', function () {
         copyText(resultsLink()).then(
-          function () { flash(statusA, '✓ Link copied', 'a'); },
-          function () { flash(statusA, 'Copy failed. Select the address bar and copy it.', 'a'); }
+          function () { flash(statusT, '\u2713 Results link copied', 't'); },
+          function () { flash(statusT, 'Copy failed. Select the address bar and copy it.', 't'); }
         );
       });
       on('[data-share-copy-team]', function () {
@@ -973,10 +957,6 @@
           function () { /* the share window still opens */ }
         );
       });
-      on('[data-share-native]', function () {
-        navigator.share({ title: 'Kuma Leadership Friction Scan', text: WA_TEXT.replace(/:\s*$/, '.'), url: scanLink('share') }).catch(function () { /* cancelled */ });
-      });
-
       var aShared = document.querySelector('[data-lfs-shared-start]');
       if (aShared) aShared.addEventListener('click', function (e) { e.preventDefault(); retake(); });
 
