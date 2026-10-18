@@ -278,8 +278,7 @@
     document.body.setAttribute('data-lfs-privacy', CONFIG.dataPurgeLive ? 'full' : 'interim');
 
     var views = {
-      intro: document.getElementById('lfs-intro'),
-      flow: root,
+      hero: document.getElementById('lfs-intro'),   // headline plus the live diagnostic card (#lfs-flow)
       results: document.getElementById('lfs-results')
     };
     var panels = {
@@ -288,6 +287,7 @@
     };
 
     var statementEl = root.querySelector('[data-lfs-statement]');
+    var prevBtn = panels.quiz.querySelector('[data-lfs-back]');
     var countEl = root.querySelector('[data-lfs-count]');
     var dimEl = root.querySelector('[data-lfs-dim]');
     var fillEl = root.querySelector('[data-lfs-fill]');
@@ -298,7 +298,7 @@
     var formError = form.querySelector('[data-lfs-form-error]');
 
     var state = {
-      view: 'intro',   // intro | quiz | gate | results
+      view: 'quiz',    // quiz | gate | results
       step: 0,         // index of the current question, 0 to 11
       answers: new Array(TOTAL),
       lead: null,
@@ -324,8 +324,7 @@
     // ---- view switching ----
     function setView(name) {
       state.view = name;
-      views.intro.hidden = name !== 'intro';
-      views.flow.hidden = !(name === 'quiz' || name === 'gate');
+      views.hero.hidden = name === 'results';
       views.results.hidden = name !== 'results';
       panels.quiz.hidden = name !== 'quiz';
       panels.gate.hidden = name !== 'gate';
@@ -345,8 +344,9 @@
     function renderQuestion() {
       var q = QUESTIONS[state.step];
       statementEl.textContent = q.text;
-      countEl.textContent = pad2(state.step + 1) + ' / ' + TOTAL;
-      dimEl.textContent = DIMENSIONS[q.dim].name;
+      countEl.textContent = 'Statement ' + (state.step + 1) + ' of ' + TOTAL;
+      dimEl.textContent = 'Dimension ' + DIMENSIONS[q.dim].number + ': ' + DIMENSIONS[q.dim].name;
+      if (prevBtn) prevBtn.hidden = state.step === 0;
       fillEl.style.width = (((state.step + 1) / TOTAL) * 100) + '%';
       markSelected();
       swapIn();
@@ -369,12 +369,19 @@
       swapEls.forEach(function (el) { if (el) el.classList.add('lfs-swap'); });
     }
 
+    // Resets to statement 1. Used on load and by Retake; it never scrolls on its own.
     function startScan() {
       state.step = 0;
       state.advancing = false;
       setView('quiz');
       renderQuestion();
-      bringIntoView(views.flow, statementEl);
+    }
+
+    // Keep the card in view without jumping: scroll only when part of it is off screen.
+    function keepCardVisible() {
+      var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      var r = root.getBoundingClientRect();
+      if (r.top < 0 || r.bottom > window.innerHeight) root.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: r.height > window.innerHeight ? 'start' : 'nearest' });
     }
 
     function answer(value) {
@@ -400,18 +407,14 @@
         state.step = TOTAL - 1;
         setView('quiz');
         renderQuestion();
-        bringIntoView(views.flow, statementEl);
+        try { statementEl.focus({ preventScroll: true }); } catch (e) { statementEl.focus(); }
+        keepCardVisible();
         return;
       }
-      if (state.view !== 'quiz') return;
-      if (state.step > 0) {
-        state.step -= 1;
-        renderQuestion();
-        try { statementEl.focus({ preventScroll: true }); } catch (e) { statementEl.focus(); }
-      } else {
-        setView('intro');
-        bringIntoView(views.intro);
-      }
+      if (state.view !== 'quiz' || state.step === 0) return;
+      state.step -= 1;
+      renderQuestion();
+      try { statementEl.focus({ preventScroll: true }); } catch (e) { statementEl.focus(); }
     }
 
     // ---- lead intake ----
@@ -421,7 +424,8 @@
       state.gateShownAt = Date.now();
       formError.hidden = true;
       var title = document.getElementById('lfs-gate-title');
-      bringIntoView(views.flow, title);
+      try { title.focus({ preventScroll: true }); } catch (e) { title.focus(); }
+      keepCardVisible();
     }
 
     function fieldWrap(name) {
@@ -434,8 +438,7 @@
       var checks = {
         name: function (v) { return v.trim().length > 1; },
         email: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(v.trim()); },
-        company: function (v) { return v.trim().length > 1; },
-        stage: function (v) { return v !== ''; }
+        company: function (v) { return v.trim().length > 1; }
       };
       var firstInvalid = null;
       Object.keys(checks).forEach(function (name) {
@@ -591,12 +594,12 @@
       handleLeadSubmission(state.lead, breakdownFrom(result)).then(function () {
         state.busy = false;
         submitBtn.disabled = false;
-        submitLabel.textContent = 'View Diagnostic Breakdown →';
+        submitLabel.textContent = 'Generate Telemetry & View Results →';
         showResults(result);
       }).catch(function () {
         state.busy = false;
         submitBtn.disabled = false;
-        submitLabel.textContent = 'View Diagnostic Breakdown →';
+        submitLabel.textContent = 'Generate Telemetry & View Results →';
         formError.hidden = false;
       });
     }
@@ -830,8 +833,8 @@
       if (retakeLabel) retakeLabel.textContent = 'Retake the scan';
       Array.prototype.forEach.call(form.querySelectorAll('.is-invalid'), function (el) { el.classList.remove('is-invalid'); });
       formError.hidden = true;
-      setView('intro');
-      bringIntoView(views.intro);
+      startScan();
+      bringIntoView(views.hero);
     }
 
 
@@ -975,7 +978,7 @@
       });
 
       var aShared = document.querySelector('[data-lfs-shared-start]');
-      if (aShared) aShared.addEventListener('click', function (e) { e.preventDefault(); retake(); startScan(); });
+      if (aShared) aShared.addEventListener('click', function (e) { e.preventDefault(); retake(); });
 
       if (dispatchForm) dispatchForm.addEventListener('submit', onDispatchSubmit);
     }
@@ -1066,12 +1069,6 @@
     }
 
     // ---- wiring ----
-    var startBtn = document.querySelector('[data-lfs-start]');
-    if (startBtn) startBtn.addEventListener('click', startScan);
-    // The preview card is a second way in. The CTA stays the keyboard and screen reader route.
-    var previewCard = document.querySelector('[data-lfs-preview]');
-    if (previewCard) previewCard.addEventListener('click', startScan);
-
     rateButtons.forEach(function (btn) {
       btn.addEventListener('click', function () {
         var v = btn.getAttribute('data-value');
@@ -1096,6 +1093,8 @@
 
     document.addEventListener('keydown', function (e) {
       if (state.view !== 'quiz' || e.metaKey || e.ctrlKey || e.altKey) return;
+      // Statement 1 is live on page load, so shortcuts only work once focus is inside the card.
+      if (!root.contains(document.activeElement)) return;
       if (e.key >= '1' && e.key <= '5') {
         e.preventDefault();
         answer(Number(e.key));
@@ -1113,6 +1112,7 @@
 
     applyInvite();
     wireSharing();
+    startScan();
     var shared = sharedAnswers();
     if (shared) openSharedView(shared);
   });
