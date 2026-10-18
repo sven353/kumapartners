@@ -222,7 +222,10 @@
 
   // Test hook for Node. In the browser `module` is undefined, so this is a no-op.
   if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { computeResult: computeResult, levelFor: levelFor, QUESTIONS: QUESTIONS, BANDS: BANDS, TIE_ORDER: TIE_ORDER, SCALE_VERSION: SCALE_VERSION };
+    module.exports = {
+      computeResult: computeResult, levelFor: levelFor, QUESTIONS: QUESTIONS, BANDS: BANDS, TIE_ORDER: TIE_ORDER,
+      SCALE_VERSION: SCALE_VERSION, DIMENSIONS: DIMENSIONS, DIMENSION_ORDER: DIMENSION_ORDER, VECTORS: VECTORS, INTERVENTIONS: INTERVENTIONS
+    };
   }
 
   if (typeof document === 'undefined') return;
