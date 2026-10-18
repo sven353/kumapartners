@@ -23,9 +23,9 @@ Why this is enough: the landing page loads only `styles.css` and `site.js`. A pa
 1. Copy `templates/subpage-skeleton.html` to `<page>.html` and `templates/subpage-skeleton.css` to `<page>.css`. Replace PAGE with the page name. The skeleton already carries the landing header, footer, fonts and tokens.
 2. Load order is `styles.css`, then `<page>.css`. Nothing else is copied from `styles.css`.
 3. Every selector in `<page>.css` starts with `body.<page>` or a class that starts with the page name. No bare elements (`section`, `h1`, `a`, `body`, `*`), no `:root`, no redefining a token, no `!important` to beat a landing rule. The exception is `@media print`.
-4. Use the tokens, never fresh hex values: `--navy`, `--teal`, `--teal-on-dark`, `--cream`, `--ink`, `--slate`, `--hairline-color`, `--hairline-subtle`, `--radius-xs` to `--radius-lg`, `--radius-xl`, `--card-sheen`, `--shadow-card-subtle`, `--shadow-card-hover`, `--ramp-chalk`, `--ramp-white`, `--ramp-inverse`, `--bg-dark-ambient`, `--footer-dark`.
+4. Use the tokens, never fresh hex values: `--navy`, `--teal`, `--teal-on-dark`, `--cream`, `--ink`, `--slate`, `--hairline-color`, `--hairline-subtle`, `--radius-xs` to `--radius-lg`, `--radius-xl`, `--radius-card`, `--radius-inset`, `--card-sheen`, `--shadow-card-subtle`, `--shadow-card-hover`, `--ramp-chalk`, `--ramp-white`, `--ramp-inverse`, `--bg-dark-ambient`, `--footer-dark`.
 5. Reuse the landing classes as they are (`.wrap`, `.eyebrow`, `.btn`, `.btn-primary`, `.btn-secondary`, `.section-head`, `.hero`). To vary one, add a page class on top. Never edit the shared rule.
-6. Cadence: light sections alternate white and chalk, each a soft vertical ramp. Dark anchors (`--bg-dark-ambient`) only for the main conversion block. Sections pad 96px (64px on phones). Every border is 1px. Cards are white with a 1px `--hairline-color` border, radius `--radius-xl` (20px) and `--shadow-card-subtle`. Buttons keep `--radius-xs` and pills `--radius-pill`. The only borders above 1px are the Kuma column in comparison tables (1.5px) and the featured tier card (2px teal).
+6. Cadence: light sections alternate white and chalk, each a soft vertical ramp. Dark anchors (`--bg-dark-ambient`) only for the main conversion block. Sections pad 96px (64px on phones). Every border is 1px. Cards are white with a 1px `--hairline-color` border, radius `--radius-card` (8px, same as The Round) and `--shadow-card-subtle` (one soft ambient shadow, no layered or coloured shadows). Buttons keep `--radius-xs`. Avoid pills: use the dash label or a small mono tag. A filled pill is only for something special (for example Recommended entry point). Every border is 1px. The one thing above 1px is the title bar before every eyebrow: 28px wide, 3px tall, 2px radius, vertically centred (`.eyebrow::before`), exactly as The Round.
 7. Header and footer markup stay identical to the landing page. Adding a page to the nav or footer is a landing page change and is delivered on its own.
 8. Page behaviour goes in its own script file. `site.js` is not edited.
 9. Copy: British spelling, no serial comma, no em dashes (comments included), sentence case for headings, labels and buttons. No bold-label formatting in running prose.
@@ -39,8 +39,12 @@ Why this is enough: the landing page loads only `styles.css` and `site.js`. A pa
 
 ## Diagnostic suite pages
 
-`/KOS`, `/leadership-friction-scan`, `/coordination-tax` and `/cofounder-alignment` also load `suite.css`, scoped to `body.suite`. Its 20px corners now match `--radius-xl`. Its border and shadow values are still its own hard-coded ones. New pages follow the landing rules above, not `suite.css`, unless the task says it is a suite page.
+`/KOS`, `/leadership-friction-scan`, `/coordination-tax` and `/cofounder-alignment` also load `suite.css`, scoped to `body.suite`. Its corners, hairlines and shadows now use the same tokens as the landing page (8px, `--hairline-color`, `--shadow-card-subtle`). New pages follow the landing rules above, not `suite.css`, unless the task says it is a suite page.
 
 ## Other sites in this repo
 
 `offsite/` and `es/` have their own stylesheets. Do not change them in a landing or subpage task.
+
+## Fonts
+
+Montserrat and Lato are self-hosted from `assets/fonts` (woff2, SIL OFL), declared at the top of `styles.css`. Do not add Google Fonts links to a page that loads `styles.css`.

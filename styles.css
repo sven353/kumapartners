@@ -1,3 +1,13 @@
+/* Self-hosted fonts (SIL Open Font Licence, see assets/fonts/OFL-*.txt). Same files as The Round. */
+@font-face{font-family:'Montserrat'; font-style:normal; font-weight:600; font-display:swap; src:url('assets/fonts/montserrat-latin-600-normal.woff2') format('woff2');}
+@font-face{font-family:'Montserrat'; font-style:normal; font-weight:700; font-display:swap; src:url('assets/fonts/montserrat-latin-700-normal.woff2') format('woff2');}
+@font-face{font-family:'Montserrat'; font-style:normal; font-weight:800; font-display:swap; src:url('assets/fonts/montserrat-latin-800-normal.woff2') format('woff2');}
+@font-face{font-family:'Montserrat'; font-style:italic; font-weight:400; font-display:swap; src:url('assets/fonts/montserrat-latin-400-italic.woff2') format('woff2');}
+@font-face{font-family:'Lato'; font-style:normal; font-weight:300; font-display:swap; src:url('assets/fonts/lato-latin-300-normal.woff2') format('woff2');}
+@font-face{font-family:'Lato'; font-style:normal; font-weight:400; font-display:swap; src:url('assets/fonts/lato-latin-400-normal.woff2') format('woff2');}
+@font-face{font-family:'Lato'; font-style:normal; font-weight:700; font-display:swap; src:url('assets/fonts/lato-latin-700-normal.woff2') format('woff2');}
+@font-face{font-family:'Lato'; font-style:italic; font-weight:400; font-display:swap; src:url('assets/fonts/lato-latin-400-italic.woff2') format('woff2');}
+
 
 :root{
   /* Architectural palette (2026 refresh): the previous warm stone/cream and muted
@@ -22,8 +32,8 @@
      divider, or accent edge. A colored accent edge (e.g. a top marker on a card)
      still uses this 1px width, it's the color that carries the emphasis, not the weight. */
   --hairline: 1px;
-  --hairline-color:rgba(11,21,35,.07);
-  --hairline-subtle: rgba(11,21,35,.05);
+  --hairline-color:rgba(11,21,35,.08);
+  --hairline-subtle: rgba(11,21,35,.06);
 
   /* Radius system: names the five corner-radius values already in use across the
      site (cards, buttons, pills, panels) rather than introducing new ones. Every
@@ -33,21 +43,23 @@
      circle", not a corner-radius scale, so it stays a literal value. */
   --radius-xs: 2px;
   --radius-sm: 4px;
-  --radius-md: 6px;
+  --radius-md: 8px;   /* cards, as The Round (--radius-card) */
   --radius-lg: 8px;
   --radius-pill: 999px;
-  --radius-xl: 20px;   /* cards, panels, forms: continuous Apple-style corner */
+  --radius-xl: 8px;    /* cards, panels, forms: same 8px as The Round */
+  --radius-card: 8px;
+  --radius-inset: 6px;
 
   /* Card sheen: a faint top-light inset plus a soft contact shadow, used on
      white cards that sit directly on a white or near-white section background
      and would otherwise read as a flat, edgeless rectangle. Not applied to
      cards that already carry a deliberate tint against their section (see
      .value-card). */
-  --card-sheen: inset 0 1px 0 rgba(255,255,255,.9), 0 1px 3px rgba(11,21,35,.04);
+  --card-sheen: 0 4px 16px rgba(15,23,42,.04);
 
   /* Elevation for white cards sitting on a chalk (--cream) section */
-  --shadow-card-subtle:0 4px 20px -2px rgba(15,23,42,.03), 0 2px 6px -1px rgba(15,23,42,.02);
-  --shadow-card-hover: 0 12px 28px -8px rgba(11,21,35,.08);
+  --shadow-card-subtle:0 4px 16px rgba(15,23,42,.04);   /* The Round: --shadow-ambient */
+  --shadow-card-hover:0 8px 24px rgba(15,23,42,.07);   /* The Round: --shadow-ambient-hover */
 
   /* Ambient overhead light for the dark anchor sections (#scorecard, #contact) */
   --bg-dark-ambient: radial-gradient(ellipse 100% 60% at 50% 0%, #17324B 0%, #0B1523 85%);
@@ -91,12 +103,12 @@ a{color:var(--navy);}
 .wrap{max-width:var(--max); margin:0 auto; padding:0 32px;}
 section{padding:96px 0;}
 .eyebrow{
-  display:flex; align-items:center; gap:8px;
+  display:flex; align-items:center; gap:12px;
   font-family:'Lato',Arial,sans-serif;
   font-weight:700; letter-spacing:.12em; text-transform:uppercase;
   font-size:.78rem; color:var(--navy); margin-bottom:18px;
 }
-.eyebrow::before{content:""; display:inline-block; width:14px; height:1px; background:var(--teal); opacity:.85; flex:none;}
+.eyebrow::before{content:""; display:inline-block; width:28px; height:3px; background:var(--teal); border-radius:2px; flex:none;}
 
 /* Header */
 body{padding-top:79px;}
@@ -220,11 +232,11 @@ header.site.scrolled .nav{padding:10px 0;}
 .hero .subhead{display:block; font-size:1.3rem; max-width:680px; margin-bottom:34px;}
 .hero-ctas{display:flex; align-items:center; gap:28px; flex-wrap:wrap;}
 .badge-pill{
-  display:inline-flex; align-items:center; gap:8px; background:none; border:0; padding:0;
+  display:inline-flex; align-items:center; gap:12px; background:none; border:0; padding:0;
   color:var(--navy); font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:.75rem;
   letter-spacing:.12em; text-transform:uppercase; margin-bottom:22px;
 }
-.badge-pill::before{content:""; display:inline-block; width:14px; height:1px; background:var(--teal); opacity:.85; flex:none;}
+.badge-pill::before{content:""; display:inline-block; width:28px; height:3px; background:var(--teal); border-radius:2px; flex:none;}
 
 /* Proof bar — one of the site's 3 designated navy blocks (with #scorecard and #contact),
    so the pedigree strip reads as a credibility beat rather than a plain content section. */
@@ -606,7 +618,7 @@ header.site.scrolled .nav{padding:10px 0;}
   border-radius:var(--radius-md); padding:26px 24px; text-align:left; transition:box-shadow .2s ease;
   box-shadow:var(--shadow-card-subtle);
 }
-.partner-card-lg:hover{box-shadow:0 18px 40px -24px rgba(11,21,35,.35);}
+.partner-card-lg:hover{box-shadow:var(--shadow-card-hover);}
 .partner-photo{
   width:56px; height:56px; border-radius:50%; background:var(--cream); border:1px solid rgba(11,21,35,.15);
   display:flex; align-items:center; justify-content:center; overflow:hidden; margin-bottom:14px;
@@ -1647,11 +1659,11 @@ main:focus{outline:none;}
 .section-operators-strip{background:var(--ramp-chalk); padding:88px 0; border-top:1px solid var(--hairline-color); border-bottom:1px solid var(--hairline-color);}
 .operators-head{text-align:center; max-width:680px; margin:0 auto 48px;}
 .operators-head .eyebrow{justify-content:center; text-align:center; font-size:.75rem; letter-spacing:.08em; margin-bottom:12px;}
-.operators-head .eyebrow::after{content:""; display:inline-block; width:14px; height:1px; background:var(--teal); opacity:.85; flex:none;}
+.operators-head .eyebrow::after{content:""; display:inline-block; width:28px; height:3px; background:var(--teal); border-radius:2px; flex:none;}
 .operators-head h2{font-size:2.125rem; letter-spacing:-.02em; margin-bottom:12px;}
 .operators-grid{display:grid; grid-template-columns:repeat(auto-fit,minmax(280px,1fr)); gap:32px; max-width:760px; margin:0 auto;}
 .operator-card{background:#fff; border:1px solid var(--hairline-color); border-radius:var(--radius-md); overflow:hidden; display:flex; flex-direction:column; box-shadow:var(--shadow-card-subtle); transition:transform .25s ease, box-shadow .25s ease;}
-.operator-card:hover{transform:translateY(-3px); box-shadow:0 10px 28px rgba(11,21,35,.08);}
+.operator-card:hover{transform:translateY(-2px); box-shadow:var(--shadow-card-hover);}
 .operator-image-wrapper{aspect-ratio:1/1; overflow:hidden; background:#E2E8F0;}
 .operator-img{display:block; width:100%; height:100%; object-fit:cover; object-position:center top; filter:grayscale(1); transition:filter .3s ease;}
 .operator-card:hover .operator-img{filter:grayscale(0);}
@@ -1680,15 +1692,15 @@ main:focus{outline:none;}
 /* KOS section: wheel and six operating tools */
 .kos-layout{display:grid; grid-template-columns:1fr; gap:40px; align-items:start; max-width:1240px; margin:48px auto 40px;}
 .kos-wheel-column{display:flex; flex-direction:column; align-items:center;}
-.kos-wheel-frame{width:100%; max-width:580px; background:#F5F6F8; border:1px solid var(--hairline-color); border-radius:12px; overflow:hidden; box-shadow:0 4px 20px -4px rgba(11,21,35,.05);}
+.kos-wheel-frame{width:100%; max-width:580px; background:#F5F6F8; border:1px solid var(--hairline-color); border-radius:var(--radius-card); overflow:hidden; box-shadow:var(--shadow-card-subtle);}
 .kos-wheel-img{display:block; width:100%; height:auto; aspect-ratio:1 / 1;}
 .kos-wheel-caption{margin:18px 0 0; max-width:480px; text-align:center; font-size:.84rem; line-height:1.5; color:rgba(26,26,26,.75);}
 .kos-tools-head{margin-bottom:24px; padding-bottom:16px; border-bottom:1px solid var(--hairline-color);}
 .kos-tools-title{font-size:1.5rem; font-weight:700; color:var(--navy); margin:0 0 4px;}
 .kos-tools-sub{font-size:.875rem; color:rgba(26,26,26,.75);}
 .kos-tools-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px;}
-.kos-tool{background:#fff; border:1px solid var(--hairline-color); border-radius:8px; padding:20px; display:flex; gap:20px; transition:border-color .2s ease, box-shadow .2s ease;}
-.kos-tool:hover{border-color:rgba(29,111,138,.35); box-shadow:0 4px 12px rgba(11,21,35,.04);}
+.kos-tool{background:#fff; border:1px solid var(--hairline-color); border-radius:8px; padding:20px; display:flex; gap:20px; transition:border-color .2s ease, box-shadow .2s ease; box-shadow:var(--shadow-card-subtle);}
+.kos-tool:hover{border-color:rgba(29,111,138,.35); box-shadow:var(--shadow-card-hover);}
 .kos-tool-meta{display:flex; flex-direction:column; align-items:flex-start; flex:0 0 118px;}
 .kos-tool-num{font-size:1.125rem; font-weight:700; color:var(--navy); line-height:1;}
 .kos-tool-tag{display:inline-block; margin-top:8px; font-family:'Lato',Arial,sans-serif; font-size:.75rem; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:var(--teal); background:rgba(29,111,138,.08); padding:3px 8px; border-radius:var(--radius-sm);}
@@ -1804,11 +1816,11 @@ main:focus{outline:none;}
 }
 
 /* Intake track selector (contact form) */
-.intake-track{display:flex; gap:4px; margin:0 0 22px; padding:4px; background:rgba(11,21,35,.06); border:0; border-radius:12px; min-width:0;}
+.intake-track{display:flex; gap:4px; margin:0 0 22px; padding:4px; background:rgba(11,21,35,.06); border:0; border-radius:var(--radius-card); min-width:0;}
 .intake-track-legend{position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap;}
 .contact-form .intake-track-option{flex:1; position:relative; display:block; margin:0; cursor:pointer; text-transform:none; letter-spacing:0; font-size:.8125rem;}
 .contact-form .intake-track-option input{position:absolute; opacity:0; width:1px; height:1px; padding:0; border:0; margin:0;}
-.intake-track-option span{display:block; text-align:center; padding:10px 8px; min-height:24px; border-radius:9px; font-weight:700; color:var(--slate); transition:background .2s ease, color .2s ease, box-shadow .2s ease;}
+.intake-track-option span{display:block; text-align:center; padding:10px 8px; min-height:24px; border-radius:var(--radius-inset); font-weight:700; color:var(--slate); transition:background .2s ease, color .2s ease, box-shadow .2s ease;}
 .intake-track-option:hover input:not(:checked) + span{background:rgba(255,255,255,.65); color:var(--navy);}
 .intake-track-option input:checked + span{background:#fff; color:var(--kuma-midnight); box-shadow:0 1px 2px rgba(11,21,35,.12), 0 0 0 1px rgba(11,21,35,.06);}
 .intake-track-option input:focus-visible + span{outline:2px solid var(--teal); outline-offset:2px;}
@@ -1989,3 +2001,8 @@ main:focus{outline:none;}
 .operator-bench-strip,
 .leadership-footprint-bar{border-radius:var(--radius-xl);}
 .contact-form-shell, .kos-tool{box-shadow:var(--shadow-card-subtle);}
+
+/* The Round alignment: 8px cards, one soft ambient shadow, 1px hairlines */
+.tier-card, .partner-card, .value-card, .scorecard-card, .contact-form-shell, .price-box{border-radius:var(--radius-card);}
+.partner-card, .scorecard-card, .contact-form-shell, .price-box{box-shadow:var(--shadow-card-subtle);}
+.partner-card{border-color:var(--hairline-color);}

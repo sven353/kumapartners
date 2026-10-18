@@ -139,7 +139,7 @@
 .cfa-q{font-family:'Montserrat',Arial,sans-serif; font-weight:700; color:var(--teal);}
 .cfa-cell{text-align:center; font-family:'Montserrat',Arial,sans-serif; font-weight:700; font-variant-numeric:tabular-nums; color:var(--navy);}
 .cfa-gap{
-  display:inline-flex; align-items:center; justify-content:center; padding:5px 10px; border-radius:var(--radius-pill);
+  display:inline-flex; align-items:center; justify-content:center; padding:5px 10px; border-radius:var(--radius-xs);
   font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.72rem; letter-spacing:.06em; text-transform:uppercase; color:#fff; white-space:nowrap;
 }
 .cfa-gap-low{background:#2E7D5B;} .cfa-gap-mid{background:#8a6508;} .cfa-gap-high{background:#C1502E;}
