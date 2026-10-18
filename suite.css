@@ -118,13 +118,13 @@
 .suite .lfs-form .is-invalid input, .suite .lfs-form .is-invalid .select-shell,
 .suite .cfa-form .is-invalid input, .suite .ct-form .is-invalid input, .suite .ct-form .is-invalid .select-shell{border-color:#a3402f;}
 
-.suite .lfs-rate, .suite .cfa-rate, .suite .ct-presets button{
+.suite .cfa-rate, .suite .ct-presets button{
   border-color:rgba(148,163,184,.4); border-radius:var(--s-radius-md); background-color:#fff;
   background-image:linear-gradient(to bottom, #fff, rgba(248,250,252,.7));
   transition:border-color .3s ease-out, background-color .3s ease-out, box-shadow .3s ease-out;
 }
-.suite .lfs-rate:hover, .suite .cfa-rate:hover, .suite .ct-presets button:hover{box-shadow:0 8px 18px -10px rgba(15,23,42,.25);}
-.suite .lfs-rate.selected, .suite .cfa-rate[aria-pressed="true"], .suite .ct-presets button[aria-checked="true"]{
+.suite .cfa-rate:hover, .suite .ct-presets button:hover{box-shadow:0 8px 18px -10px rgba(15,23,42,.25);}
+.suite .cfa-rate[aria-pressed="true"], .suite .ct-presets button[aria-checked="true"]{
   border-color:var(--teal); background-color:rgba(29,111,138,.1); background-image:none;
 }
 .suite .ct-currency{border-color:var(--s-line-input);}

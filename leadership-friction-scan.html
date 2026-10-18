@@ -62,14 +62,34 @@
 
   <!-- STATE 1: HERO AND FRAMING -->
   <section class="hero lfs-hero" id="lfs-intro" data-lfs-view="intro">
-    <div class="wrap">
+    <div class="lfs-glow" aria-hidden="true"></div>
+    <div class="wrap lfs-hero-wrap">
       <div class="eyebrow">EXECUTIVE TELEMETRY • 3 MINUTES</div>
+      <p class="lfs-framework">Step 1 of the Kuma 14-Day Leadership Friction Framework</p>
       <h1>Where is your leadership team quietly losing speed?</h1>
       <p class="lfs-lede">Growth creates drag. When companies scale, decisions stall, meetings multiply, and founders become bottlenecks. Complete this 12-question diagnostic to identify your team’s dominant friction vector and restore execution velocity.</p>
       <div class="hero-ctas">
         <button type="button" class="btn btn-primary" data-lfs-start>Initiate the Friction Scan →</button>
       </div>
+
+      <!-- Data governance touchpoint 1: wording switches on CONFIG.dataPurgeLive in the script -->
+      <ul class="lfs-trust" aria-label="Data handling">
+        <li class="lfs-p-interim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>Encrypted in transit</span></li>
+        <li class="lfs-p-interim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5.5c0 4.2-2.8 7.6-7 9.5-4.2-1.9-7-5.3-7-9.5V6l7-3z"/><path d="M9 12l2.2 2.2L15.2 10"/></svg><span>Used only for this scan</span></li>
+        <li class="lfs-p-interim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><span>Never sold or commercialised</span></li>
+        <li class="lfs-p-full"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>End-to-End Encrypted</span></li>
+        <li class="lfs-p-full"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><span>30-Day Automatic Data Purge</span></li>
+        <li class="lfs-p-full"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5.5c0 4.2-2.8 7.6-7 9.5-4.2-1.9-7-5.3-7-9.5V6l7-3z"/><path d="M9 12l2.2 2.2L15.2 10"/></svg><span>Zero Third-Party Sharing</span></li>
+      </ul>
+
       <p class="lfs-micro">Confidential • Instant benchmark score &amp; dominant friction archetype • No theoretical slide decks</p>
+
+      <div class="lfs-sample" aria-label="Example of the telemetry this scan produces">
+        <span class="lfs-sample-label">Sample Telemetry</span>
+        <span class="lfs-sample-title">Founder Bottleneck Index • Decision Velocity 14/15</span>
+        <span class="lfs-sample-bar" aria-hidden="true"><span style="width:93.3%"></span></span>
+      </div>
+
       <noscript>
         <p class="lfs-noscript">This diagnostic needs JavaScript. To run the scan with a Kuma partner instead, write to <a href="mailto:contact@kuma.partners">contact@kuma.partners</a>.</p>
       </noscript>
@@ -94,10 +114,12 @@
         <p class="lfs-prompt" id="lfs-prompt">How often is this true in your leadership team?</p>
 
         <div class="lfs-scale" role="group" aria-labelledby="lfs-prompt" data-lfs-scale>
-          <button type="button" class="lfs-rate" data-value="1" aria-pressed="false"><span class="lfs-rate-num">1</span><span class="lfs-rate-label">Rarely</span></button>
-          <button type="button" class="lfs-rate" data-value="2" aria-pressed="false"><span class="lfs-rate-num">2</span><span class="lfs-rate-label">Sometimes</span></button>
-          <button type="button" class="lfs-rate" data-value="3" aria-pressed="false"><span class="lfs-rate-num">3</span><span class="lfs-rate-label">Frequently</span></button>
-          <button type="button" class="lfs-rate" data-value="4" aria-pressed="false"><span class="lfs-rate-num">4</span><span class="lfs-rate-label">Almost Always</span></button>
+          <button type="button" class="lfs-rate" data-value="1" aria-pressed="false"><span class="lfs-rate-num">1</span><span class="lfs-rate-label">Never / Rare</span><span class="lfs-rate-hint">Not an operational issue</span></button>
+          <button type="button" class="lfs-rate" data-value="2" aria-pressed="false"><span class="lfs-rate-num">2</span><span class="lfs-rate-label">Occasional</span><span class="lfs-rate-hint">Surfaces during crunch sprints</span></button>
+          <button type="button" class="lfs-rate" data-value="3" aria-pressed="false"><span class="lfs-rate-num">3</span><span class="lfs-rate-label">Periodic</span><span class="lfs-rate-hint">Noticeable drag, but managed around</span></button>
+          <button type="button" class="lfs-rate" data-value="4" aria-pressed="false"><span class="lfs-rate-num">4</span><span class="lfs-rate-label">Frequent</span><span class="lfs-rate-hint">A recurring bottleneck to execution</span></button>
+          <button type="button" class="lfs-rate" data-value="5" aria-pressed="false"><span class="lfs-rate-num">5</span><span class="lfs-rate-label">Chronic / Constant</span><span class="lfs-rate-hint">Our default operating reality</span></button>
+          <button type="button" class="lfs-rate lfs-rate-ns" data-value="NS" aria-pressed="false"><span class="lfs-rate-num" aria-hidden="true">?</span><span class="lfs-rate-label">Not Sure / Insufficient Data</span><span class="lfs-rate-hint">Neutral / Unknown. Left out of your score</span></button>
         </div>
 
         <div class="lfs-nav-row">
@@ -105,7 +127,7 @@
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 19l-7-7 7-7"></path></svg>
             Back
           </button>
-          <span class="lfs-keyhint">Keys 1 to 4 also answer</span>
+          <span class="lfs-keyhint">Keys 1 to 5 score it. Key 6 or N for Not Sure</span>
         </div>
       </div>
 
@@ -113,7 +135,7 @@
       <div class="lfs-shell" data-lfs-panel="gate" hidden>
         <span class="lfs-tag">Scan complete</span>
         <h2 class="lfs-gate-title" id="lfs-gate-title" tabindex="-1">Your breakdown is ready.</h2>
-        <p class="lfs-gate-sub">Add your details to open your friction index, your dominant friction vector and the first intervention to run against it. Your answers stay confidential.</p>
+        <p class="lfs-gate-sub">Add your details to open your friction index, your dominant friction vector and the first intervention to run against it. Your individual answers stay confidential.</p>
 
         <form class="lfs-form" name="leadership-friction-scan" method="POST" action="/leadership-friction-scan" data-netlify="true" netlify-honeypot="bot-field" data-lfs-form novalidate>
           <input type="hidden" name="form-name" value="leadership-friction-scan">
@@ -129,6 +151,8 @@
           <input type="hidden" name="d2_strategic_signal" value="">
           <input type="hidden" name="d3_principled_tension" value="">
           <input type="hidden" name="d4_operational_cadence" value="">
+          <input type="hidden" name="not_sure_count" value="">
+          <input type="hidden" name="scale_version" value="">
           <input type="hidden" name="answers" value="">
           <input type="hidden" name="utm" value="">
 
@@ -168,10 +192,19 @@
             <input type="text" name="company_tax_id" id="hp-tax-id-lfs" tabindex="-1" autocomplete="off" value="">
           </div>
 
+          <div class="lfs-guarantee" role="note">
+            <span class="lfs-guarantee-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5.5c0 4.2-2.8 7.6-7 9.5-4.2-1.9-7-5.3-7-9.5V6l7-3z"/><path d="M9 12l2.2 2.2L15.2 10"/></svg></span>
+            <div>
+              <p class="lfs-guarantee-title"><span class="lfs-p-interim">Kuma Executive Data Commitment</span><span class="lfs-p-full">Kuma Executive Data Guarantee</span></p>
+              <p class="lfs-guarantee-text lfs-p-interim">Your details travel over an encrypted connection and are used only to deliver this scan and follow up with you. Individual scores are strictly confidential and will never be shared or commercialised.</p>
+              <p class="lfs-guarantee-text lfs-p-full">All diagnostic data is encrypted and permanently purged from our active diagnostic servers after 30 days. Individual scores are strictly confidential and will never be shared or commercialised.</p>
+            </div>
+          </div>
+
           <button type="submit" class="btn btn-primary lfs-submit" data-lfs-submit>
             <span data-btn-label>View Diagnostic Breakdown →</span>
           </button>
-          <p class="lfs-form-microcopy">We use your details only to follow up on this scan. See our <a href="privacy.html">Privacy Policy</a>.</p>
+          <p class="lfs-form-microcopy">See our <a href="privacy.html">Privacy Policy</a>.</p>
           <p class="lfs-form-error" data-lfs-form-error hidden>Something went wrong sending your details. Please try again, or email us at <a href="mailto:contact@kuma.partners">contact@kuma.partners</a>.</p>
         </form>
 
@@ -193,6 +226,11 @@
         <div class="eyebrow">Your diagnostic breakdown</div>
         <h2 id="lfs-results-title" tabindex="-1">Leadership Friction Scan results</h2>
         <p class="lfs-prepared" data-res-prepared></p>
+        <p class="lfs-stamp lfs-stamp-top"><span class="lfs-p-interim">Telemetry generated under Kuma Partners Privacy Standards. Responses are used only to produce this breakdown and to follow up on the scan.</span><span class="lfs-p-full">Telemetry generated under Kuma Partners Privacy Standards. Raw individual responses scheduled for automated purge within 30 days.</span></p>
+        <button type="button" class="lfs-export" data-lfs-print>
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg>
+          Export PDF
+        </button>
       </div>
 
       <div class="lfs-grid">
@@ -201,7 +239,7 @@
         <article class="lfs-card lfs-index" aria-labelledby="lfs-index-label">
           <div class="lfs-card-label" id="lfs-index-label">Overall Friction Index</div>
           <div class="lfs-score" aria-label="Score">
-            <span class="lfs-score-num" data-res-score>0</span><span class="lfs-score-max">/ 48</span>
+            <span class="lfs-score-num" data-res-score>0</span><span class="lfs-score-max">/ 60</span>
           </div>
           <span class="sc-score-badge" data-res-badge></span>
           <h3 class="lfs-band-name" data-res-band></h3>
@@ -215,9 +253,9 @@
             </div>
             <div class="lfs-gauge-scale">
               <span style="left:0">12</span>
-              <span style="left:24.3%">20</span>
-              <span style="left:56.8%">32</span>
-              <span style="left:100%">48</span>
+              <span style="left:28.57%">26</span>
+              <span style="left:63.27%">43</span>
+              <span style="left:100%">60</span>
             </div>
           </div>
         </article>
@@ -226,11 +264,12 @@
         <article class="lfs-card lfs-matrix" aria-labelledby="lfs-matrix-label">
           <div class="lfs-card-label" id="lfs-matrix-label">Friction by dimension</div>
           <ul class="lfs-dims" data-res-dims></ul>
-          <p class="lfs-matrix-note">Each dimension scores from 3 to 12. A higher score means more friction.</p>
+          <p class="lfs-matrix-note">Each dimension scores from 3 to 15. A higher score means more friction. Not Sure answers are left out and the rest are scaled to the same range.</p>
+          <p class="lfs-ns-note" data-res-ns-note hidden>Note: High number of 'Not Sure' responses detected. This typically indicates a lack of cross-functional operational visibility between departments.</p>
         </article>
 
         <!-- 2. Dominant Friction Vector -->
-        <article class="lfs-card lfs-vector" aria-labelledby="lfs-vector-label">
+        <article class="lfs-card lfs-vector" aria-labelledby="lfs-vector-label" data-res-vector-card>
           <div class="lfs-card-label" id="lfs-vector-label">Dominant friction vector</div>
           <h3 class="lfs-vector-name" data-res-vector></h3>
           <p class="lfs-vector-text" data-res-vector-text></p>
@@ -239,7 +278,7 @@
         </article>
 
         <!-- 3. Immediate Micro-Intervention -->
-        <article class="lfs-card lfs-intervention" aria-labelledby="lfs-intervention-label">
+        <article class="lfs-card lfs-intervention" aria-labelledby="lfs-intervention-label" data-res-intervention-card>
           <div class="lfs-card-label" id="lfs-intervention-label">Immediate micro-intervention</div>
           <h3 class="lfs-intervention-title" data-res-intervention></h3>
           <p class="lfs-intervention-lead" data-res-intervention-lead></p>
@@ -257,15 +296,18 @@
       <div class="lfs-bridge">
         <div class="lfs-bridge-copy">
           <h2>Identifying friction is step one. Dismantling it requires external leverage.</h2>
-          <p>Book a confidential 30-minute Leadership Friction Debrief with a Kuma Partner to review your breakdown across all 4 dimensions and isolate the two highest-leverage interventions for your executive team.</p>
+          <blockquote class="lfs-quote">
+            <p>This self-assessment reflects the perspective of one leader. The Kuma 14-Day Leadership Friction Scan cross-calibrates these metrics against confidential, 1-on-1 diagnostic interviews across your entire executive team.</p>
+          </blockquote>
+          <p class="lfs-bridge-note">Book a confidential 30-minute debrief with a Kuma Partner to review your breakdown across all 4 dimensions and isolate the two highest-leverage interventions for your executive team.</p>
         </div>
         <div class="lfs-bridge-actions">
-          <a href="index.html#contact" class="btn btn-cream" data-lfs-book>Book the Leadership Friction Debrief →</a>
+          <a href="index.html#contact" class="btn btn-cream" data-lfs-book>Book the 30-Minute Friction Debrief →</a>
           <a href="friction-scan.html" class="btn-link">See how the 14-Day Scan works</a>
         </div>
       </div>
 
-      <p class="lfs-disclaimer">This is a self-assessment and reflects the view of one person on the team. The 14-Day Leadership Friction Scan tests it against confidential interviews with each executive.</p>
+      <p class="lfs-stamp lfs-stamp-bottom"><span class="lfs-p-interim">Telemetry generated under Kuma Partners Privacy Standards. Responses are used only to produce this breakdown and to follow up on the scan.</span><span class="lfs-p-full">Telemetry generated under Kuma Partners Privacy Standards. Raw individual responses scheduled for automated purge within 30 days.</span></p>
       <button type="button" class="lfs-retake" data-lfs-retake>Retake the scan</button>
     </div>
   </section>

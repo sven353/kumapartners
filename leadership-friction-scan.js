@@ -1,7 +1,7 @@
 // Kuma Partners: Leadership Friction Scan (/leadership-friction-scan)
 // Vanilla JS, no dependencies, same conventions as site.js.
 //
-// Flow: intro -> 12 questions (one at a time) -> lead intake -> results dashboard.
+// Flow: intro -> 12 questions (one at a time, 1 to 5 plus Not Sure) -> lead intake -> results dashboard.
 // Scoring and copy live in the data blocks at the top. The only place that talks to a
 // network is handleLeadSubmission(), the CRM hook. Configure it in CONFIG below.
 
@@ -28,8 +28,19 @@
     minFillMs: 2500,
 
     // After an answer, wait this long so the selection is visible before moving on.
-    advanceDelayMs: 180
+    advanceDelayMs: 150,
+
+    // Data governance wording. The page ships with wording that matches what the site does today:
+    // HTTPS in transit, details used only to follow up on the scan, nothing sold.
+    // Set this to true ONLY once the 30-day purge and the encryption claims are operationally true
+    // (for example a scheduled job that deletes Netlify Forms submissions and CRM records after
+    // 30 days). That switches the landing page, lead capture and results page to the full
+    // "End-to-End Encrypted / 30-Day Automatic Data Purge / Zero Third-Party Sharing" wording.
+    dataPurgeLive: false
   };
+
+  // Stored with every submission so the CRM can tell the 4-point v1 scale from this one.
+  var SCALE_VERSION = '5pt-not-sure-v2';
 
   // ---------------------------------------------------------------------------
   // DATA: dimensions, statements, scale
@@ -65,27 +76,30 @@
   // ---------------------------------------------------------------------------
   // DATA: bands, vectors, interventions
   // ---------------------------------------------------------------------------
-  // Overall bands on the 12 to 48 index.
+  // Overall bands on the 12 to 60 index.
   var BANDS = [
     {
-      id: 'high-flow', min: 12, max: 20, name: 'High-Flow Velocity', friction: 'Low Friction', badge: 'sc-badge-optimal',
+      id: 'high-flow', min: 12, max: 25, name: 'High-Flow Velocity', friction: 'Low Friction', badge: 'sc-badge-optimal',
       text: 'Decisions move, priorities hold and the team can disagree in the room. Scale tends to erode this first, so recheck it each quarter.'
     },
     {
-      id: 'operational-drag', min: 21, max: 32, name: 'Operational Drag', friction: 'Moderate Friction', badge: 'sc-badge-moderate',
+      id: 'operational-drag', min: 26, max: 42, name: 'Operational Drag', friction: 'Moderate Friction', badge: 'sc-badge-moderate',
       text: 'Friction is measurable and starting to cost speed. It is usually concentrated in one dimension, which makes it fixable without restructuring.'
     },
     {
-      id: 'systemic-gridlock', min: 33, max: 48, name: 'Critical Systemic Gridlock', friction: 'High Friction', badge: 'sc-badge-high',
+      id: 'systemic-gridlock', min: 43, max: 60, name: 'Critical Systemic Gridlock', friction: 'High Friction', badge: 'sc-badge-high',
       text: 'Friction is now the main constraint on execution. Several dimensions are compounding, and the team is unlikely to untangle it from the inside.'
     }
   ];
 
-  // Per-dimension level on the 3 to 12 scale, proportional to the overall bands.
+  // Per-dimension level on the 3 to 15 scale: green 3 to 6, amber 7 to 10, red 11 to 15.
+  // Fractional scores (from Not Sure answers) are rounded to the nearest whole number first.
   function levelFor(dimScore) {
-    if (dimScore <= 5) return { id: 'low', label: 'Low friction' };
-    if (dimScore <= 8) return { id: 'moderate', label: 'Moderate friction' };
-    return { id: 'high', label: 'High friction' };
+    if (dimScore === null || dimScore === undefined) return { id: 'none', label: 'Not enough data' };
+    var r = Math.round(dimScore + 1e-9);
+    if (r <= 6) return { id: 'low', label: 'Low' };
+    if (r <= 10) return { id: 'moderate', label: 'Moderate' };
+    return { id: 'high', label: 'High' };
   }
 
   var VECTORS = {
@@ -149,32 +163,66 @@
   // ---------------------------------------------------------------------------
   // SCORING (pure, no DOM)
   // ---------------------------------------------------------------------------
-  // answers: array of 12 integers, 1 to 4, in question order.
+  // answers: array of 12 entries in question order. An integer 1 to 5 is scored. Anything else
+  // (the 'NS' Not Sure value, null, undefined) is treated as Not Sure and left out of both the
+  // numerator and the denominator.
+  //
+  // Dimension score = (sum of answered values / number answered) x 3, so it always sits on 3 to 15
+  // and equals the plain sum when all three statements are answered.
+  // Overall index = sum of the four dimension scores (12 to 60).
+  // If one or more dimensions have no numeric answer at all, the index is the sum of the scored
+  // dimensions scaled by 4 / (scored dimensions), so it stays on the same 12 to 60 range.
+  // If nothing is scored the result is flagged insufficient and carries no index or band.
+  // The dominant dimension is chosen on unrounded scores, ties resolving in TIE_ORDER.
+  function isScored(v) { return typeof v === 'number' && v >= 1 && v <= 5 && v % 1 === 0; }
+  function round1(n) { return Math.round(n * 10) / 10; }
+
   function computeResult(answers) {
-    var dims = { d1: 0, d2: 0, d3: 0, d4: 0 };
-    var total = 0;
+    var sums = { d1: 0, d2: 0, d3: 0, d4: 0 };
+    var counts = { d1: 0, d2: 0, d3: 0, d4: 0 };
+    var notSure = 0;
     for (var i = 0; i < TOTAL; i++) {
       var v = answers[i];
-      dims[QUESTIONS[i].dim] += v;
-      total += v;
+      if (isScored(v)) { sums[QUESTIONS[i].dim] += v; counts[QUESTIONS[i].dim] += 1; } else { notSure += 1; }
     }
 
-    var dominant = TIE_ORDER[0];
-    for (var j = 1; j < TIE_ORDER.length; j++) {
-      if (dims[TIE_ORDER[j]] > dims[dominant]) dominant = TIE_ORDER[j];
+    var raw = {}, dims = {}, sum = 0, scoredDims = 0;
+    DIMENSION_ORDER.forEach(function (k) {
+      if (counts[k] > 0) {
+        raw[k] = (sums[k] * 3) / counts[k];
+        dims[k] = round1(raw[k]);
+        sum += raw[k];
+        scoredDims += 1;
+      } else {
+        raw[k] = null;
+        dims[k] = null;
+      }
+    });
+
+    if (scoredDims === 0) {
+      return { insufficient: true, total: null, exact: null, dims: dims, raw: raw, counts: counts, notSure: notSure, dominant: null, band: null };
     }
+
+    var exact = scoredDims < 4 ? (sum * 4) / scoredDims : sum;
+    var total = Math.round(exact + 1e-9);
+
+    var dominant = null;
+    TIE_ORDER.forEach(function (k) {
+      if (raw[k] === null) return;
+      if (dominant === null || raw[k] > raw[dominant] + 1e-9) dominant = k;
+    });
 
     var band = BANDS[0];
     for (var b = 0; b < BANDS.length; b++) {
       if (total >= BANDS[b].min && total <= BANDS[b].max) band = BANDS[b];
     }
 
-    return { total: total, dims: dims, dominant: dominant, band: band };
+    return { insufficient: false, total: total, exact: exact, dims: dims, raw: raw, counts: counts, notSure: notSure, dominant: dominant, band: band };
   }
 
   // Test hook for Node. In the browser `module` is undefined, so this is a no-op.
   if (typeof module !== 'undefined' && module.exports) {
-    module.exports = { computeResult: computeResult, QUESTIONS: QUESTIONS, BANDS: BANDS, TIE_ORDER: TIE_ORDER };
+    module.exports = { computeResult: computeResult, levelFor: levelFor, QUESTIONS: QUESTIONS, BANDS: BANDS, TIE_ORDER: TIE_ORDER, SCALE_VERSION: SCALE_VERSION };
   }
 
   if (typeof document === 'undefined') return;
@@ -185,6 +233,9 @@
   document.addEventListener('DOMContentLoaded', function () {
     var root = document.getElementById('lfs-flow');
     if (!root) return;
+
+    // Governance wording: the stricter 30-day purge copy only shows once CONFIG.dataPurgeLive is true.
+    document.body.setAttribute('data-lfs-privacy', CONFIG.dataPurgeLive ? 'full' : 'interim');
 
     var views = {
       intro: document.getElementById('lfs-intro'),
@@ -244,12 +295,25 @@
       countEl.textContent = pad2(state.step + 1) + ' / ' + TOTAL;
       dimEl.textContent = DIMENSIONS[q.dim].name;
       fillEl.style.width = (((state.step + 1) / TOTAL) * 100) + '%';
+      markSelected();
+      swapIn();
+    }
+
+    function markSelected() {
       var current = state.answers[state.step];
       rateButtons.forEach(function (btn) {
-        var on = Number(btn.getAttribute('data-value')) === current;
+        var on = current !== undefined && btn.getAttribute('data-value') === String(current);
         btn.classList.toggle('selected', on);
         btn.setAttribute('aria-pressed', on ? 'true' : 'false');
       });
+    }
+
+    // Restart the short fade on the statement and scale so a new question never pops in.
+    var swapEls = [statementEl, root.querySelector('[data-lfs-scale]')];
+    function swapIn() {
+      swapEls.forEach(function (el) { if (el) el.classList.remove('lfs-swap'); });
+      void root.offsetWidth;
+      swapEls.forEach(function (el) { if (el) el.classList.add('lfs-swap'); });
     }
 
     function startScan() {
@@ -263,7 +327,7 @@
     function answer(value) {
       if (state.view !== 'quiz' || state.advancing) return;
       state.answers[state.step] = value;
-      renderQuestion();
+      markSelected();
       state.advancing = true;
       window.setTimeout(function () {
         state.advancing = false;
@@ -351,13 +415,15 @@
     }
 
     function fillHiddenFields(result) {
-      form.elements.friction_index.value = String(result.total);
-      form.elements.friction_band.value = result.band.name;
-      form.elements.dominant_vector.value = VECTORS[result.dominant].name;
+      form.elements.friction_index.value = result.insufficient ? 'NS' : String(result.total);
+      form.elements.friction_band.value = result.insufficient ? 'Insufficient data' : result.band.name;
+      form.elements.dominant_vector.value = result.insufficient ? 'Insufficient data' : VECTORS[result.dominant].name;
       DIMENSION_ORDER.forEach(function (key) {
-        form.elements[DIMENSIONS[key].field].value = String(result.dims[key]);
+        form.elements[DIMENSIONS[key].field].value = result.dims[key] === null ? 'NS' : String(result.dims[key]);
       });
-      form.elements.answers.value = state.answers.join(',');
+      form.elements.not_sure_count.value = String(result.notSure);
+      form.elements.scale_version.value = SCALE_VERSION;
+      form.elements.answers.value = answersCsv();
       form.elements.utm.value = utmString();
     }
 
@@ -419,16 +485,26 @@
     }
     // -------------------------------------------------------------------------
 
+    // 1 to 5, or NS for Not Sure, in question order.
+    function answersCsv() {
+      var out = [];
+      for (var i = 0; i < TOTAL; i++) out.push(state.answers[i] === undefined ? 'NS' : state.answers[i]);
+      return out.join(',');
+    }
+
     function breakdownFrom(result) {
       return {
+        scaleVersion: SCALE_VERSION,
         total: result.total,
-        band: result.band.name,
-        friction: result.band.friction,
-        dominant: { key: result.dominant, name: VECTORS[result.dominant].name, dimension: DIMENSIONS[result.dominant].name },
+        band: result.insufficient ? 'Insufficient data' : result.band.name,
+        friction: result.insufficient ? '' : result.band.friction,
+        dominant: result.insufficient ? null : { key: result.dominant, name: VECTORS[result.dominant].name, dimension: DIMENSIONS[result.dominant].name },
         dimensions: {
           d1: result.dims.d1, d2: result.dims.d2, d3: result.dims.d3, d4: result.dims.d4
         },
-        answers: state.answers.slice()
+        answeredPerDimension: { d1: result.counts.d1, d2: result.counts.d2, d3: result.counts.d3, d4: result.counts.d4 },
+        notSureCount: result.notSure,
+        answers: answersCsv().split(',').map(function (v) { return v === 'NS' ? 'NS' : Number(v); })
       };
     }
 
@@ -473,44 +549,72 @@
     function showResults(result) {
       state.result = result;
       renderResults(result);
+      wireBooking();
       setView('results');
       bringIntoView(views.results, document.getElementById('lfs-results-title'));
-      // Animate the gauge marker from the left edge to its position.
+      // Animate the gauge marker and the dimension bars from empty to their values.
       var marker = q('[data-res-marker]');
       marker.style.left = '0%';
       window.requestAnimationFrame(function () {
-        window.requestAnimationFrame(function () { marker.style.left = markerPosition(result.total) + '%'; });
+        window.requestAnimationFrame(function () {
+          if (!result.insufficient) marker.style.left = markerPosition(result.total) + '%';
+          Array.prototype.forEach.call(views.results.querySelectorAll('[data-w]'), function (el) {
+            el.style.width = el.getAttribute('data-w') + '%';
+          });
+        });
       });
     }
 
     function markerPosition(total) {
-      // 37 possible index values (12 to 48). Centre the marker in the cell of its value.
-      return ((total - 12 + 0.5) / 37) * 100;
+      // 49 possible index values (12 to 60). Centre the marker in the cell of its value.
+      return ((total - 12 + 0.5) / 49) * 100;
     }
+
+    function fmt(n) { return n === null ? 'NS' : (n % 1 === 0 ? String(n) : n.toFixed(1)); }
 
     function renderResults(result) {
       var first = state.lead ? state.lead.name.split(/\s+/)[0] : '';
-      var prepared = q('[data-res-prepared]');
-      prepared.textContent = state.lead
-        ? 'Prepared for ' + first + ' at ' + state.lead.company + '. Based on your answers to all 12 statements.'
-        : 'Based on your answers to all 12 statements.';
+      var scored = TOTAL - result.notSure;
+      var basis = result.notSure === 0
+        ? 'Based on your answers to all 12 statements.'
+        : 'Based on ' + scored + ' of 12 statements. ' + result.notSure + ' marked Not Sure and left out of the score.';
+      q('[data-res-prepared]').textContent = state.lead
+        ? 'Prepared for ' + first + ' at ' + state.lead.company + '. ' + basis
+        : basis;
+
+      var insufficient = result.insufficient;
+      var marker = q('[data-res-marker]');
+      marker.hidden = insufficient;
+      q('[data-res-vector-card]').hidden = insufficient;
+      q('[data-res-intervention-card]').hidden = insufficient;
 
       // 1. Overall index
-      q('[data-res-score]').textContent = String(result.total);
       var badge = q('[data-res-badge]');
-      badge.className = 'sc-score-badge ' + result.band.badge;
-      badge.textContent = result.band.friction;
-      q('[data-res-band]').textContent = result.band.name;
-      q('[data-res-band-text]').textContent = result.band.text;
+      if (insufficient) {
+        q('[data-res-score]').textContent = '–';
+        badge.className = 'sc-score-badge';
+        badge.textContent = 'Insufficient data';
+        q('[data-res-band]').textContent = 'No index available';
+        q('[data-res-band-text]').textContent = 'Every statement was marked Not Sure, so there is nothing to score. Retake the scan with a colleague who sees the day-to-day, or ask us to run the 14-Day Scan, which does not depend on one person’s view.';
+      } else {
+        q('[data-res-score]').textContent = String(result.total);
+        badge.className = 'sc-score-badge ' + result.band.badge;
+        badge.textContent = result.band.friction;
+        q('[data-res-band]').textContent = result.band.name;
+        q('[data-res-band-text]').textContent = result.band.text;
+      }
 
-      // Dimension matrix
+      // Not Sure footnote
+      q('[data-res-ns-note]').hidden = result.notSure < 4;
+
+      // Dimension matrix: gradient bars on a 3 to 15 scale
       var list = q('[data-res-dims]');
       list.textContent = '';
       DIMENSION_ORDER.forEach(function (key) {
         var score = result.dims[key];
         var level = levelFor(score);
         var li = document.createElement('li');
-        li.className = 'lfs-dim';
+        li.className = 'lfs-dim' + (key === result.dominant ? ' is-dominant' : '');
 
         var name = document.createElement('div');
         name.className = 'lfs-dim-name';
@@ -528,22 +632,40 @@
 
         var value = document.createElement('div');
         value.className = 'lfs-dim-value ' + level.id;
-        value.textContent = score + ' / 12 · ' + level.label;
+        var big = document.createElement('span');
+        big.className = 'lfs-dim-score';
+        big.textContent = score === null ? 'NS' : fmt(score) + ' / 15';
+        var lvl = document.createElement('span');
+        lvl.className = 'lfs-dim-level';
+        lvl.textContent = level.label;
+        value.appendChild(big);
+        value.appendChild(lvl);
 
-        var ticks = document.createElement('div');
-        ticks.className = 'lfs-dim-ticks';
-        ticks.setAttribute('aria-hidden', 'true');
-        for (var t = 1; t <= 12; t++) {
-          var tick = document.createElement('span');
-          tick.className = 'lfs-tick' + (t <= score ? ' on ' + level.id : '');
-          ticks.appendChild(tick);
-        }
+        var bar = document.createElement('div');
+        bar.className = 'lfs-bar';
+        bar.setAttribute('role', 'img');
+        bar.setAttribute('aria-label', DIMENSIONS[key].name + ': ' + (score === null ? 'not enough answers' : fmt(score) + ' out of 15, ' + level.label.toLowerCase() + ' friction'));
+        var fill = document.createElement('div');
+        fill.className = 'lfs-bar-fill ' + level.id;
+        fill.style.width = '0%';
+        fill.setAttribute('data-w', score === null ? '0' : String(Math.round((score / 15) * 1000) / 10));
+        bar.appendChild(fill);
 
         li.appendChild(name);
         li.appendChild(value);
-        li.appendChild(ticks);
+        li.appendChild(bar);
+        if (result.counts[key] < 3) {
+          var meta = document.createElement('div');
+          meta.className = 'lfs-dim-meta';
+          meta.textContent = result.counts[key] === 0
+            ? 'All three statements marked Not Sure. This dimension is not scored.'
+            : 'Scaled from ' + result.counts[key] + ' of 3 answers.';
+          li.appendChild(meta);
+        }
         list.appendChild(li);
       });
+
+      if (insufficient) return;
 
       // 2. Dominant vector
       var vec = VECTORS[result.dominant];
@@ -551,7 +673,7 @@
       q('[data-res-vector-text]').textContent = vec.text;
       q('[data-res-vector-source]').textContent =
         'Driven by Dimension ' + DIMENSIONS[result.dominant].number + ', ' + DIMENSIONS[result.dominant].name +
-        ' (' + result.dims[result.dominant] + ' / 12).';
+        ' (' + fmt(result.dims[result.dominant]) + ' / 15).';
       var note = q('[data-res-vector-note]');
       if (result.band.id === 'high-flow') {
         note.hidden = false;
@@ -568,15 +690,18 @@
       q('[data-res-intervention-time]').textContent = iv.time;
       var steps = q('[data-res-steps]');
       steps.textContent = '';
-      iv.steps.forEach(function (s) {
+      iv.steps.forEach(function (st) {
         var li = document.createElement('li');
-        li.textContent = s;
+        li.textContent = st;
         steps.appendChild(li);
       });
       q('[data-res-signal]').textContent = iv.signal;
+    }
 
-      // 4. Booking link
+    // Booking link, set once per results view.
+    function wireBooking() {
       var book = q('[data-lfs-book]');
+      if (!book) return;
       if (CONFIG.bookingUrl) {
         var url = CONFIG.bookingUrl;
         if (state.lead) {
@@ -607,7 +732,10 @@
     if (startBtn) startBtn.addEventListener('click', startScan);
 
     rateButtons.forEach(function (btn) {
-      btn.addEventListener('click', function () { answer(Number(btn.getAttribute('data-value'))); });
+      btn.addEventListener('click', function () {
+        var v = btn.getAttribute('data-value');
+        answer(v === 'NS' ? 'NS' : Number(v));
+      });
     });
 
     Array.prototype.forEach.call(root.querySelectorAll('[data-lfs-back]'), function (btn) {
@@ -627,11 +755,17 @@
 
     document.addEventListener('keydown', function (e) {
       if (state.view !== 'quiz' || e.metaKey || e.ctrlKey || e.altKey) return;
-      if (e.key >= '1' && e.key <= '4') {
+      if (e.key >= '1' && e.key <= '5') {
         e.preventDefault();
         answer(Number(e.key));
+      } else if (e.key === '6' || e.key === 'n' || e.key === 'N') {
+        e.preventDefault();
+        answer('NS');
       }
     });
+
+    var printBtn = document.querySelector('[data-lfs-print]');
+    if (printBtn) printBtn.addEventListener('click', function () { window.print(); });
 
     var retakeBtn = document.querySelector('[data-lfs-retake]');
     if (retakeBtn) retakeBtn.addEventListener('click', retake);
