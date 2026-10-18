@@ -67,18 +67,18 @@
   var TIE_ORDER = ['d1', 'd4', 'd2', 'd3'];
 
   var QUESTIONS = [
-    { dim: 'd1', text: 'Operational decisions stall while teams wait for direct co-founder or CEO sign-off, even when the call sits squarely within a leader\u2019s domain.' },
-    { dim: 'd1', text: 'Reversible tactical experiments are treated with the same bureaucratic deliberation, consensus loops and risk aversion as irreversible structural bets.' },
-    { dim: 'd1', text: 'High-stakes initiatives emerge without a single clear decision owner, leading to diffused accountability and execution paralysis when timelines slip.' },
-    { dim: 'd2', text: 'Functional leads interpret company strategy differently, prompting departments to retreat into defensive silos and optimise for departmental metrics rather than unified company outcomes.' },
-    { dim: 'd2', text: 'Strategic priorities formally approved at the executive table get diluted, renegotiated or quietly bypassed before reaching frontline execution.' },
-    { dim: 'd2', text: 'New incoming ideas or customer demands frequently derail agreed quarterly targets, leaving key strategic initiatives unfinished.' },
-    { dim: 'd3', text: 'Key leaders spend more cognitive energy navigating internal communication, politics and consensus loops than competing in the market.' },
-    { dim: 'd3', text: 'Frequent initiative churn and delayed calls have created executive resignation or cynicism, quietly eroding discretionary effort.' },
-    { dim: 'd3', text: 'Leaders finish their weeks cognitively exhausted while feeling that the executive team made minimal tangible progress on core strategic bets.' },
-    { dim: 'd4', text: 'Decisions agreed in executive meetings are frequently undermined outside the room through passive compliance, delayed execution or corridor pushback.' },
-    { dim: 'd4', text: 'Personal relationships, co-founder history or conflict avoidance prevent the team from holding C-suite peers (CEO, CTO, CPO and others) rigorously accountable to their functional mandates.' },
-    { dim: 'd4', text: 'Critical, uncomfortable truths about underperformance, product reality or cultural drift are softened or silenced to preserve polite group dynamics.' }
+    { dim: 'd1', text: 'Day-to-day decisions pause while waiting for founder or CEO approval, even when someone else owns the area.' },
+    { dim: 'd1', text: 'Reversible decisions take weeks of debate instead of quick trials.' },
+    { dim: 'd1', text: 'Important projects stall because no single person has clear authority to make the final call.' },
+    { dim: 'd2', text: 'Departments focus on their own targets rather than working towards shared company goals.' },
+    { dim: 'd2', text: 'Decisions agreed in executive meetings get quietly dropped or changed before teams carry them out.' },
+    { dim: 'd2', text: 'New ideas and sudden requests frequently pull the team away from planned quarterly priorities.' },
+    { dim: 'd3', text: 'Leaders spend more energy managing internal communication and politics than driving external business results.' },
+    { dim: 'd3', text: 'Repeated delays and shifting plans leave team leaders frustrated or disengaged.' },
+    { dim: 'd3', text: 'Leaders finish the week exhausted without feeling they made real progress on major priorities.' },
+    { dim: 'd4', text: 'People agree to decisions in the room, then push back or delay action in the corridors.' },
+    { dim: 'd4', text: 'Co-founder friendships or history make it difficult to hold each other accountable to executive roles (CEO, CTO, CPO).' },
+    { dim: 'd4', text: 'Uncomfortable truths about performance, product or team issues are avoided to keep meetings polite.' }
   ];
 
   var TOTAL = QUESTIONS.length; // 12
@@ -651,6 +651,8 @@
       q('[data-res-print-meta]').textContent = state.lead
         ? 'Prepared for: ' + state.lead.name + ' \u2022 ' + team + ' \u2022 Assessed ' + today + ns
         : 'Assessed ' + today + ns;
+      var sticky = q('[data-sticky-score]');
+      if (sticky) sticky.textContent = insufficient ? 'Result not scored' : result.total + '/60 \u2022 ' + result.band.name;
       var marker = q('[data-res-marker]');
       marker.hidden = insufficient;
       q('[data-res-vector-card]').hidden = insufficient;
@@ -807,6 +809,8 @@
           url += (url.indexOf('?') === -1 ? '?' : '&') + parts.join('&');
         }
         book.setAttribute('href', url);
+        var stickyBook = document.querySelector('[data-lfs-book-sticky]');
+        if (stickyBook) stickyBook.setAttribute('href', url);
         book.setAttribute('target', '_blank');
         book.setAttribute('rel', 'noopener');
       }

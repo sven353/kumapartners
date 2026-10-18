@@ -14,7 +14,7 @@ export const FORM_NAME = 'leadership-friction-scan';
 
 const { computeResult, levelFor, QUESTIONS, DIMENSIONS, DIMENSION_ORDER, VECTORS, INTERVENTIONS, SCALE_VERSION } = scan;
 
-const SCALE_SHORT = { 1: 'Never / Rare', 2: 'Occasional', 3: 'Periodic', 4: 'Frequent', 5: 'Chronic' };
+const SCALE_SHORT = { 1: 'Never', 2: 'Rarely', 3: 'Sometimes', 4: 'Often', 5: 'Constantly' };
 
 const COLOURS = {
   navy: '#0B1523', teal: '#1D6F8A', tealLight: '#4FB3CF', ink: '#1e293b', muted: '#64748b', line: '#e2e8f0',

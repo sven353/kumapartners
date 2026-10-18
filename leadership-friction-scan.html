@@ -91,13 +91,13 @@
           <p class="lfs-prompt" id="lfs-prompt">How often is this true in your leadership team?</p>
 
           <div class="lfs-scale" role="group" aria-labelledby="lfs-prompt" data-lfs-scale>
-          <button type="button" class="lfs-rate" data-value="1" aria-pressed="false" aria-label="1 - Never" title="Not an operational issue"><span class="lfs-rate-num" aria-hidden="true">1</span><span class="lfs-rate-label" aria-hidden="true">Never</span></button>
-          <button type="button" class="lfs-rate" data-value="2" aria-pressed="false" aria-label="2 - Rare" title="Surfaces during crunch sprints"><span class="lfs-rate-num" aria-hidden="true">2</span><span class="lfs-rate-label" aria-hidden="true">Rare</span></button>
-          <button type="button" class="lfs-rate" data-value="3" aria-pressed="false" aria-label="3 - Periodic" title="Noticeable drag, but managed around"><span class="lfs-rate-num" aria-hidden="true">3</span><span class="lfs-rate-label" aria-hidden="true">Periodic</span></button>
-          <button type="button" class="lfs-rate" data-value="4" aria-pressed="false" aria-label="4 - Frequent" title="A recurring bottleneck to execution"><span class="lfs-rate-num" aria-hidden="true">4</span><span class="lfs-rate-label" aria-hidden="true">Frequent</span></button>
-          <button type="button" class="lfs-rate" data-value="5" aria-pressed="false" aria-label="5 - Constant" title="Our default operating reality"><span class="lfs-rate-num" aria-hidden="true">5</span><span class="lfs-rate-label" aria-hidden="true">Constant</span></button>
-          <button type="button" class="lfs-rate lfs-rate-ns" data-value="NS" aria-pressed="false" aria-label="Not Sure" title="Neutral or unknown. Left out of your score"><span class="lfs-rate-num" aria-hidden="true">?</span><span class="lfs-rate-label" aria-hidden="true">Not Sure</span></button>
+            <button type="button" class="lfs-rate" data-value="1" aria-pressed="false" aria-label="1 - Never" aria-keyshortcuts="1"><span class="lfs-rate-key" aria-hidden="true">1</span><span class="lfs-rate-num" aria-hidden="true">1</span><span class="lfs-rate-label" aria-hidden="true">Never</span></button>
+            <button type="button" class="lfs-rate" data-value="2" aria-pressed="false" aria-label="2 - Rarely" aria-keyshortcuts="2"><span class="lfs-rate-key" aria-hidden="true">2</span><span class="lfs-rate-num" aria-hidden="true">2</span><span class="lfs-rate-label" aria-hidden="true">Rarely</span></button>
+            <button type="button" class="lfs-rate" data-value="3" aria-pressed="false" aria-label="3 - Sometimes" aria-keyshortcuts="3"><span class="lfs-rate-key" aria-hidden="true">3</span><span class="lfs-rate-num" aria-hidden="true">3</span><span class="lfs-rate-label" aria-hidden="true">Sometimes</span></button>
+            <button type="button" class="lfs-rate" data-value="4" aria-pressed="false" aria-label="4 - Often" aria-keyshortcuts="4"><span class="lfs-rate-key" aria-hidden="true">4</span><span class="lfs-rate-num" aria-hidden="true">4</span><span class="lfs-rate-label" aria-hidden="true">Often</span></button>
+            <button type="button" class="lfs-rate" data-value="5" aria-pressed="false" aria-label="5 - Constantly" aria-keyshortcuts="5"><span class="lfs-rate-key" aria-hidden="true">5</span><span class="lfs-rate-num" aria-hidden="true">5</span><span class="lfs-rate-label" aria-hidden="true">Constantly</span></button>
           </div>
+          <div class="lfs-ns-row"><button type="button" class="lfs-rate lfs-rate-ns" data-value="NS" aria-pressed="false" aria-keyshortcuts="6 N">? Not sure / Insufficient data (excluded from score)</button></div>
 
           <div class="lfs-nav-row">
             <button type="button" class="lfs-prev" data-lfs-back hidden>&larr; Previous statement</button>
@@ -439,6 +439,12 @@
 
       <p class="lfs-stamp lfs-stamp-bottom"><span class="lfs-p-interim">Telemetry generated under Kuma Partners Privacy Standards. Responses are used only to produce this breakdown and to follow up on the scan.</span><span class="lfs-p-full">Telemetry generated under Kuma Partners Privacy Standards. Raw individual responses scheduled for automated purge within 30 days.</span></p>
       <button type="button" class="lfs-retake no-print" data-lfs-retake>Retake the scan</button>
+    </div>
+
+    <!-- Mobile only: persistent debrief bar. Hidden on desktop and in the PDF. -->
+    <div class="lfs-sticky no-print" data-lfs-sticky>
+      <span class="lfs-sticky-badge" data-sticky-score></span>
+      <a class="lfs-sticky-btn" href="https://calendly.com/sven-mulfinger/leadership-friction-debrief-30min" target="_blank" rel="noopener" data-lfs-book-sticky>Schedule Debrief →</a>
     </div>
   </section>
 
