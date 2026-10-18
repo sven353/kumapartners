@@ -258,22 +258,27 @@
     <div class="wrap">
       <div class="lfs-print-head" aria-hidden="true">
         <img src="assets/logo-lockup.png" alt="" width="768" height="173">
-        <span>Leadership Friction Scan</span>
+        <div class="lfs-print-title">
+          <strong>Kuma Partners &bull; Executive Telemetry Brief</strong>
+          <span>Leadership Friction Scan Results | Confidential</span>
+        </div>
       </div>
+      <p class="lfs-print-meta" data-res-print-meta aria-hidden="true"></p>
       <div class="section-head">
         <div class="eyebrow">Your diagnostic breakdown</div>
-        <h2 id="lfs-results-title" tabindex="-1">Leadership Friction Scan results</h2>
+        <div class="lfs-title-row">
+          <h2 id="lfs-results-title" tabindex="-1">Leadership Friction Scan results</h2>
+          <button type="button" class="lfs-export no-print" data-lfs-print>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg>
+            Export Executive Brief (PDF)
+          </button>
+        </div>
         <p class="lfs-prepared" data-res-prepared></p>
         <p class="lfs-stamp lfs-stamp-top"><span class="lfs-p-interim">Telemetry generated under Kuma Partners Privacy Standards. Responses are used only to produce this breakdown and to follow up on the scan.</span><span class="lfs-p-full">Telemetry generated under Kuma Partners Privacy Standards. Raw individual responses scheduled for automated purge within 30 days.</span></p>
-        <button type="button" class="lfs-export no-print" data-lfs-print>
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg>
-          Export PDF
-        </button>
       </div>
 
       <div class="lfs-grid">
 
-        <div class="lfs-col avoid-break-inside">
         <!-- 1. Overall Friction Index -->
         <article class="lfs-card lfs-index" aria-labelledby="lfs-index-label">
           <div class="lfs-card-label" id="lfs-index-label">Overall Friction Index</div>
@@ -299,6 +304,15 @@
           </div>
         </article>
 
+
+        <!-- Dimension matrix -->
+        <article class="lfs-card lfs-matrix avoid-break-inside" aria-labelledby="lfs-matrix-label">
+          <div class="lfs-card-label" id="lfs-matrix-label">Friction by dimension</div>
+          <ul class="lfs-dims" data-res-dims></ul>
+          <p class="lfs-matrix-note">Each dimension scores from 3 to 15. A higher score means more friction. Not Sure answers are left out and the rest are scaled to the same range.</p>
+          <p class="lfs-ns-note" data-res-ns-note hidden>Note: High number of 'Not Sure' responses detected. This typically indicates a lack of cross-functional operational visibility between departments.</p>
+        </article>
+
         <!-- 1b. Structural risk and runway callout -->
         <aside class="lfs-risk avoid-break-inside" aria-labelledby="lfs-risk-label">
           <div class="lfs-risk-label" id="lfs-risk-label">Why this matters commercially</div>
@@ -319,18 +333,15 @@
             <p class="lfs-cite">Kuma Partners observation. Related reading: Chris Zook and James Allen, The Founder’s Mentality (Bain &amp; Company)</p>
           </div>
         </aside>
+
+        <!-- Print only, page 2: memo banner -->
+        <div class="lfs-po lfs-memo print-page-2 avoid-break-inside" data-res-memo aria-hidden="true">
+          <div class="lfs-memo-tag">Internal memo: for the co-founder &amp; executive committee</div>
+          <p>This diagnostic reflects operational telemetry on our leadership team&rsquo;s decision speed, strategic alignment and bandwidth. Please review the highlighted bottleneck and the runway implications below before our next executive sync.</p>
         </div>
 
-        <!-- Dimension matrix -->
-        <article class="lfs-card lfs-matrix avoid-break-inside" aria-labelledby="lfs-matrix-label">
-          <div class="lfs-card-label" id="lfs-matrix-label">Friction by dimension</div>
-          <ul class="lfs-dims" data-res-dims></ul>
-          <p class="lfs-matrix-note">Each dimension scores from 3 to 15. A higher score means more friction. Not Sure answers are left out and the rest are scaled to the same range.</p>
-          <p class="lfs-ns-note" data-res-ns-note hidden>Note: High number of 'Not Sure' responses detected. This typically indicates a lack of cross-functional operational visibility between departments.</p>
-        </article>
-
         <!-- 2. Dominant Friction Vector -->
-        <article class="lfs-card lfs-vector page-break-before avoid-break-inside" aria-labelledby="lfs-vector-label" data-res-vector-card>
+        <article class="lfs-card lfs-vector avoid-break-inside" aria-labelledby="lfs-vector-label" data-res-vector-card>
           <div class="lfs-card-label" id="lfs-vector-label">Dominant friction vector</div>
           <h3 class="lfs-vector-name" data-res-vector></h3>
           <p class="lfs-vector-text" data-res-vector-text></p>
@@ -351,6 +362,27 @@
           </div>
         </article>
 
+        <!-- Print only, page 2: cost of delay, variance gap, 14-Day Scan scope -->
+        <section class="lfs-po lfs-delay avoid-break-inside" data-res-delay-card aria-hidden="true">
+          <div class="lfs-card-label">The compounding 90-day cost of delay</div>
+          <ol class="lfs-delay-grid" data-res-delay></ol>
+          <p class="lfs-delay-note">Kuma Partners view of what typically follows when this pattern is left alone.</p>
+        </section>
+
+        <section class="lfs-po lfs-gap avoid-break-inside" aria-hidden="true">
+          <div class="lfs-card-label">The executive perception gap</div>
+          <p>Most leadership teams believe they are aligned on priorities. In our work with scale-stage teams, founders, COOs and functional VPs tend to feel friction in different places, even when they agree in the room. A self-assessment from one leader exposes the symptom. Calibrating across the whole leadership team shows where the structural divide sits.</p>
+        </section>
+
+        <section class="lfs-po lfs-scope avoid-break-inside" aria-hidden="true">
+          <div class="lfs-card-label">The next step: the Kuma 14-Day Leadership Friction Scan</div>
+          <ol class="lfs-scope-list">
+            <li><strong>Confidential 1-on-1 executive interviews.</strong> Structured diagnostic conversations with the CEO, the founders and each C-suite executive.</li>
+            <li><strong>Cross-functional friction heat map.</strong> An unvarnished view of hidden misalignment between Product, Go-To-Market and the founders.</li>
+            <li><strong>Debrief and 90-day realignment compact.</strong> A facilitated session that sets Type 1 and Type 2 decision boundaries and aligns the next quarter&rsquo;s bets.</li>
+          </ol>
+        </section>
+
       </div>
 
       <!-- 4. Conversion bridge -->
@@ -363,13 +395,31 @@
           <p class="lfs-bridge-note">Book a confidential 30-minute debrief with a Kuma Partner to review your breakdown across all 4 dimensions and isolate the two highest-leverage interventions for your executive team.</p>
         </div>
         <div class="lfs-bridge-actions">
-          <a href="index.html#contact" class="btn btn-cream" data-lfs-book>Book the 30-Minute Leadership Friction Debrief →</a>
+          <a href="index.html#contact" class="btn btn-cream" data-lfs-book>Schedule 30-Minute Debrief →</a>
           <p class="lfs-cta-sub">Confidential • Direct with a Kuma Partner • Strategic action plan</p>
           <a href="friction-scan.html" class="btn-link">See how the 14-Day Scan works</a>
         </div>
       </div>
 
-      <p class="lfs-print-contact" aria-hidden="true">Book the 30-Minute Leadership Friction Debrief: contact@kuma.partners • www.kuma.partners</p>
+      <section class="lfs-po lfs-cred avoid-break-inside" aria-hidden="true">
+        <div class="lfs-cred-book">
+          <h3>Schedule a confidential 30-minute telemetry debrief</h3>
+          <p>Direct booking: <span data-res-book-url>www.kuma.partners/#contact</span></p>
+        </div>
+        <div class="lfs-cred-profile">
+          <div class="lfs-cred-firm">
+            <strong>Kuma Partners</strong>
+            <span>Executive advisory &amp; leadership alignment for scale-stage leadership teams</span>
+            <span>Operating internationally: New York &bull; London &bull; Munich &bull; Barcelona &bull; Lisbon</span>
+          </div>
+          <div class="lfs-cred-person">
+            <span class="lfs-cred-k">Direct partner contact</span>
+            <strong>Sven Mulfinger, Lead Partner</strong>
+            <span>sven@kuma.partners &nbsp;|&nbsp; www.kuma.partners</span>
+            <span>linkedin.com/in/svenmulfinger</span>
+          </div>
+        </div>
+      </section>
 
       <p class="lfs-stamp lfs-stamp-bottom"><span class="lfs-p-interim">Telemetry generated under Kuma Partners Privacy Standards. Responses are used only to produce this breakdown and to follow up on the scan.</span><span class="lfs-p-full">Telemetry generated under Kuma Partners Privacy Standards. Raw individual responses scheduled for automated purge within 30 days.</span></p>
       <button type="button" class="lfs-retake" data-lfs-retake>Retake the scan</button>

@@ -109,6 +109,31 @@
     d4: { name: 'The Coordination Tax', text: 'Scaling headcount has triggered exponential meeting overhead and context-switching.' }
   };
 
+  // Print brief only: what typically follows if the dominant pattern is left alone.
+  // Kuma Partners view, deliberately without invented statistics.
+  var DELAY = {
+    d1: [
+      'Approval requests keep routing to the founder. The calendar fills with sign-offs and initiatives that need a yes wait for it.',
+      'Leaders stop deciding and start asking. The founder becomes the pace-setter for every function.',
+      'The founder is the limit on growth. Milestones slip before the board update and stronger leaders begin to disengage.'
+    ],
+    d2: [
+      'Agreed priorities get reopened in side conversations. New requests enter the quarter without a named trade.',
+      'Functions optimise for their own goals while the shared company bets slip. Status reporting grows to fill the gap.',
+      'The quarter closes with plenty of motion and few shipped outcomes. The board update has to explain the drift.'
+    ],
+    d3: [
+      'Disagreements are softened in the room and settled afterwards in side conversations. Decisions get made twice.',
+      'Peers stop giving each other direct feedback and the CEO becomes the arbiter. Underperformance goes unaddressed.',
+      'Settled decisions keep being reopened and trust thins. The strongest people disengage first.'
+    ],
+    d4: [
+      'Calendars stay full of reactive meetings. Deep work and strategic decisions move to evenings and weekends.',
+      'New hires add coordination load faster than output. Context switching becomes the normal way of working.',
+      'Meeting load, not strategy, sets the pace. Next quarter\u2019s priorities go to whoever has time left.'
+    ]
+  };
+
   var INTERVENTIONS = {
     d1: {
       title: 'The Type 1 vs. Type 2 Decision Boundary Protocol',
@@ -586,10 +611,16 @@
         : basis;
 
       var insufficient = result.insufficient;
+      var today = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+      q('[data-res-print-meta]').textContent = state.lead
+        ? 'Prepared for: ' + state.lead.name + ' at ' + state.lead.company + ' \u2022 Benchmark: ' + today + ' \u2022 ' + basis
+        : 'Benchmark: ' + today + ' \u2022 ' + basis;
       var marker = q('[data-res-marker]');
       marker.hidden = insufficient;
       q('[data-res-vector-card]').hidden = insufficient;
       q('[data-res-intervention-card]').hidden = insufficient;
+      q('[data-res-delay-card]').hidden = insufficient;
+      q('[data-res-memo]').hidden = insufficient;
 
       // 1. Overall index
       var badge = q('[data-res-badge]');
@@ -702,10 +733,27 @@
         steps.appendChild(li);
       });
       q('[data-res-signal]').textContent = iv.signal;
+
+      // Print brief: 30, 60 and 90 day progression for the dominant dimension
+      var delayList = q('[data-res-delay]');
+      delayList.textContent = '';
+      [30, 60, 90].forEach(function (days, i) {
+        var li = document.createElement('li');
+        var head = document.createElement('span');
+        head.className = 'lfs-delay-days';
+        head.textContent = 'In ' + days + ' days';
+        var body = document.createElement('p');
+        body.textContent = DELAY[result.dominant][i];
+        li.appendChild(head);
+        li.appendChild(body);
+        delayList.appendChild(li);
+      });
     }
 
     // Booking link, set once per results view.
     function wireBooking() {
+      var shown = q('[data-res-book-url]');
+      if (shown) shown.textContent = CONFIG.bookingUrl ? CONFIG.bookingUrl.replace(/^https?:\/\//, '') : 'www.kuma.partners/#contact';
       var book = q('[data-lfs-book]');
       if (!book) return;
       if (CONFIG.bookingUrl) {

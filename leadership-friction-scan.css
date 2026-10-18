@@ -200,15 +200,18 @@ body.suite .lfs-shell, body.suite .lfs-shell:hover{
 
 /* ---------- State 3B: results ---------- */
 .lfs-results{background:var(--cream); padding:80px 0 72px;}
-.lfs-results .section-head{max-width:760px; margin-bottom:40px; outline:none;}
+.lfs-results .section-head{max-width:none; margin-bottom:40px; outline:none;}
+.lfs-results .section-head > p{max-width:760px;}
+.lfs-title-row{display:flex; align-items:center; justify-content:space-between; gap:12px 24px; flex-wrap:wrap; margin-bottom:10px;}
+.lfs-title-row h2{margin:0;}
 .lfs-results .section-head h2{outline:none;}
 .lfs-prepared{color:rgba(26,26,26,.7); margin:0;}
 .lfs-stamp{font-family:'Lato',Arial,sans-serif; font-size:.76rem; line-height:1.5; color:rgba(11,21,35,.55); margin:12px 0 0; max-width:720px;}
 .lfs-stamp-bottom{margin:28px 0 14px;}
 .lfs-export{
-  display:inline-flex; align-items:center; gap:8px; margin-top:16px; padding:9px 16px; cursor:pointer;
+  display:inline-flex; align-items:center; gap:8px; flex:none; padding:10px 18px; cursor:pointer; white-space:nowrap;
   font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.85rem; color:var(--navy);
-  background:#fff; border:var(--hairline) solid rgba(11,21,35,.28); border-radius:12px; transition:border-color .15s ease, box-shadow .15s ease;
+  background:#fff; border:var(--hairline) solid rgba(11,21,35,.28); border-radius:var(--radius-pill); transition:border-color .15s ease, box-shadow .15s ease;
 }
 .lfs-export:hover{border-color:var(--navy); box-shadow:0 8px 18px -10px rgba(15,23,42,.3);}
 .lfs-export:focus-visible{outline:2px solid var(--teal); outline-offset:2px;}
@@ -335,11 +338,10 @@ body.suite .lfs-shell, body.suite .lfs-shell:hover{
 .lfs-bridge h2{color:#fff; font-size:1.7rem; margin:0 0 20px; max-width:620px;}
 .lfs-bridge p{color:rgba(255,255,255,.8); margin:0; max-width:620px;}
 .lfs-quote{
-  margin:0 0 18px; max-width:640px; padding:20px 24px; border-radius:16px;
-  background:linear-gradient(to bottom, rgba(255,255,255,.1), rgba(255,255,255,.04));
-  border:var(--hairline) solid rgba(255,255,255,.16); border-left:3px solid var(--teal-on-dark);
+  margin:0 0 22px; max-width:640px; padding:24px; border-radius:16px;
+  background:rgba(255,255,255,.1); border:var(--hairline) solid rgba(255,255,255,.15);
 }
-.lfs-quote p{font-family:'Montserrat',Arial,sans-serif; font-style:italic; font-weight:500; font-size:1.02rem; line-height:1.6; color:#fff; max-width:none;}
+.lfs-quote p{font-family:'Montserrat',Arial,sans-serif; font-style:italic; font-weight:500; font-size:1.02rem; line-height:1.65; color:#fff; max-width:none;}
 .lfs-bridge-note{font-size:.95rem;}
 .lfs-bridge-actions{display:flex; flex-direction:column; align-items:flex-start; gap:18px;}
 .lfs-bridge .btn-cream{white-space:nowrap;}
@@ -356,12 +358,8 @@ body.suite .lfs-shell, body.suite .lfs-shell:hover{
 /* Visually hidden text for screen readers */
 .lfs-sr{position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;}
 
-/* The dimension card keeps its natural height beside the taller left column */
-@media screen and (min-width:961px){ .lfs-matrix{align-self:start;} }
-
-/* Left column stacks the index card and the risk callout */
-.lfs-col{display:flex; flex-direction:column; gap:24px; min-width:0;}
-.lfs-col > .lfs-index{flex:none;}
+/* Index and dimension cards sit side by side at equal height; the risk callout spans both columns below */
+.lfs-grid > *{min-width:0;}
 
 /* Structural risk and runway callout */
 .lfs-risk{
@@ -371,8 +369,9 @@ body.suite .lfs-shell, body.suite .lfs-shell:hover{
   box-shadow:0 1px 2px rgba(15,23,42,.05), 0 16px 32px -20px rgba(29,111,138,.35);
 }
 .lfs-risk-label{font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--teal); margin-bottom:6px;}
-.lfs-risk-item{padding:18px 0; border-top:var(--hairline) solid rgba(29,111,138,.18);}
-.lfs-risk-item:first-of-type{border-top:none;}
+.lfs-risk{grid-column:1 / -1; display:grid; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); gap:4px 36px;}
+.lfs-risk-label{grid-column:1 / -1;}
+.lfs-risk-item{padding:6px 0 4px;}
 .lfs-risk-item[hidden]{display:none;}
 .lfs-risk-item h3{font-family:'Montserrat',Arial,sans-serif; font-weight:700; font-size:.95rem; color:var(--navy); margin:0 0 6px;}
 .lfs-risk-item p{margin:0; font-size:.93rem; line-height:1.55; color:rgba(15,23,42,.88);}
@@ -385,11 +384,12 @@ body.suite .lfs-shell, body.suite .lfs-shell:hover{
 .lfs-cta-sub{margin:-6px 0 0; font-family:'Lato',Arial,sans-serif; font-size:.76rem; letter-spacing:.02em; color:rgba(255,255,255,.7); max-width:260px;}
 
 /* Print-only furniture, hidden on screen */
-.lfs-print-head, .lfs-print-contact{display:none;}
+.lfs-print-head, .lfs-print-meta, .lfs-po{display:none;}
 
 /* ---------- Responsive ---------- */
 @media (max-width:960px){
   .lfs-grid{grid-template-columns:1fr;}
+  .lfs-risk{grid-template-columns:1fr;}
   .lfs-steps{grid-template-columns:1fr;}
   .lfs-steps li:nth-last-child(2){border-bottom:none;}
   .lfs-bridge{grid-template-columns:1fr; padding:36px 28px;}
@@ -411,6 +411,7 @@ body.suite .lfs-shell, body.suite .lfs-shell:hover{
   .lfs-rate-ns{padding:12px 14px;}
   .lfs-keyhint{display:none;}
   .lfs-results{padding:56px 0 56px;}
+  .lfs-export{width:100%; justify-content:center;}
   .lfs-card{padding:26px 22px;}
   .lfs-score-num{font-size:3.2rem;}
   .lfs-dim{padding:16px 10px; margin:0 -10px;}
@@ -429,31 +430,34 @@ body.suite .lfs-shell, body.suite .lfs-shell:hover{
 }
 
 /* ---------- Export PDF (browser print): a two-page executive brief ----------
-   Page 1: branding, index, risk callout, dimension bars.
-   Page 2: dominant vector, micro-intervention, bridge to the 14-Day Scan, contact. */
-@page{size:A4; margin:11mm 13mm 15mm;}
+   Page 1: branding, index, dimension bars, commercial risk.
+   Page 2: memo banner, dominant vector and protocol, 90-day cost of delay, perception gap,
+           14-Day Scan scope, partner credentials. */
+@page{size:A4; margin:10mm 13mm 14mm;}
 @media print{
+  * {-webkit-print-color-adjust:exact !important; print-color-adjust:exact !important;}
   header, nav, footer, .cookie-banner, #cookie-consent, [role="dialog"], button, .no-print,
-  .skip-link, .lfs-hero, .lfs-flow, .lfs-glow, .lfs-bridge-actions, .lfs-results .section-head .eyebrow{display:none !important;}
+  .skip-link, .lfs-hero, .lfs-flow, .lfs-glow, .lfs-bridge, .lfs-results .section-head{display:none !important;}
   html, body{background:#fff !important; color:#0f172a !important; font-size:10pt; line-height:1.4;}
   body.suite main, .lfs-results{background:#fff !important; padding:0 !important; min-height:0 !important;}
   .lfs-results[hidden]{display:none !important;}
   .lfs-results .wrap{max-width:none; padding:0;}
-  .lfs-results *{-webkit-print-color-adjust:exact; print-color-adjust:exact; animation:none !important; transition:none !important; box-shadow:none !important; transform:none !important;}
-  .page-break-before{page-break-before:always !important; break-before:page !important;}
+  .lfs-results *{animation:none !important; transition:none !important; box-shadow:none !important; transform:none !important;}
+  .page-break-before, .print-page-2{page-break-before:always !important; break-before:page !important;}
   .avoid-break-inside{page-break-inside:avoid !important; break-inside:avoid !important;}
+  .lfs-po{display:block !important;}
+  .lfs-po[hidden], [data-res-memo][hidden], [data-res-delay-card][hidden]{display:none !important;}
 
-  .lfs-print-head{display:flex !important; align-items:center; justify-content:space-between; padding-bottom:8px; margin-bottom:8px; border-bottom:1px solid #cbd5e1;}
+  .lfs-print-head{display:flex !important; align-items:center; justify-content:space-between; padding-bottom:7px; border-bottom:2px solid #0B1523; margin-bottom:6px;}
   .lfs-print-head img{height:26px; width:auto;}
-  .lfs-print-head span{font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:8.5pt; letter-spacing:.1em; text-transform:uppercase; color:#475569;}
-  .lfs-results .section-head{margin:0 0 8px; max-width:none;}
-  .lfs-results .section-head h2{font-size:17pt; margin:0 0 2px;}
-  .lfs-prepared{font-size:9pt; margin:0;}
-  .lfs-stamp-top{display:block !important; font-size:7.5pt; margin:4px 0 0; padding:0; border:0;}
+  .lfs-print-title{text-align:right; display:flex; flex-direction:column; gap:1px;}
+  .lfs-print-title strong{font-family:'Lato',Arial,sans-serif; font-weight:800; font-size:9pt; letter-spacing:.1em; text-transform:uppercase; color:#0B1523;}
+  .lfs-print-title span{font-family:'Lato',Arial,sans-serif; font-size:8.5pt; color:#475569;}
+  .lfs-print-meta{display:block !important; margin:0 0 9px; padding:5px 10px; background:#f1f5f9 !important; border-radius:6px; font-family:'Lato',Arial,sans-serif; font-size:8pt; color:#334155;}
 
   .lfs-grid{display:block !important;}
-  .lfs-col{display:block !important;}
-  .lfs-card, .lfs-risk{border:1px solid #cbd5e1 !important; border-radius:10px !important; background:#fff !important; margin:0 0 8px !important;}
+  .lfs-grid > *{margin-bottom:9px;}
+  .lfs-card, .lfs-risk{border:1px solid #cbd5e1 !important; border-radius:10px !important; background:#fff !important;}
   .lfs-card{padding:10px 14px !important;}
   .lfs-card-label{margin-bottom:6px; font-size:7.5pt;}
 
@@ -464,8 +468,9 @@ body.suite .lfs-shell, body.suite .lfs-shell:hover{
   .lfs-band-text{font-size:9pt; margin:0 0 8px;}
   .lfs-gauge-scale{margin-top:6px;}
 
-  .lfs-risk{padding:10px 14px 2px !important;}
-  .lfs-risk-item{padding:7px 0;}
+  .lfs-risk{display:block !important; padding:10px 14px 2px !important;}
+  .lfs-risk-item{padding:7px 0; border-top:1px solid rgba(29,111,138,.18);}
+  .lfs-risk-label + .lfs-risk-item{border-top:none;}
   .lfs-risk-item h3{font-size:9.5pt; margin-bottom:2px;}
   .lfs-risk-item p{font-size:8.8pt; line-height:1.4;}
   .lfs-risk-item .lfs-cite{font-size:6.8pt; margin-top:3px;}
@@ -475,23 +480,50 @@ body.suite .lfs-shell, body.suite .lfs-shell:hover{
   .lfs-dim-score{font-size:9.5pt;}
   .lfs-dim-meta{font-size:7.5pt;}
   .lfs-matrix-note, .lfs-ns-note{font-size:7.5pt;}
+  .lfs-bar{height:8px !important; background:#e2e8f0 !important;}
+  .lfs-bar-fill{min-width:0;}
 
-  .lfs-vector-name{font-size:15pt; margin-bottom:6px;}
-  .lfs-vector-text{font-size:10pt; margin-bottom:8px;}
-  .lfs-vector-source{font-size:8.5pt; padding-top:8px;}
-  .lfs-intervention-title{font-size:13pt;}
-  .lfs-intervention-lead, .lfs-steps li{font-size:9.5pt;}
-  .lfs-intervention-time{margin-bottom:10px;}
-  .lfs-steps li{padding:8px 0 8px 34px;}
-  .lfs-steps li::before{top:8px;}
-  .lfs-signal{padding:10px 12px;}
+  .lfs-memo{padding:9px 14px; background:#0B1523 !important; border-radius:10px; color:#fff !important;}
+  .lfs-memo-tag{font-family:'Lato',Arial,sans-serif; font-weight:800; font-size:8pt; letter-spacing:.08em; text-transform:uppercase; color:#4FB3CF !important; margin-bottom:3px;}
+  .lfs-memo p{margin:0; font-size:8.8pt; line-height:1.45; font-style:italic; color:#fff !important;}
 
-  .lfs-bridge{display:block !important; background:#fff !important; border:1px solid #94a3b8 !important; border-radius:12px !important; padding:14px 16px !important; margin-top:10px;}
-  .lfs-bridge h2{color:#0B1523 !important; font-size:13pt; margin:0 0 8px;}
-  .lfs-quote{background:#f1f5f9 !important; border:0 !important; border-left:3px solid #1D6F8A !important; border-radius:8px !important; margin:0 0 8px; padding:10px 14px;}
-  .lfs-quote p{color:#0B1523 !important; font-size:10pt; line-height:1.5;}
-  .lfs-bridge p, .lfs-bridge-note{color:#334155 !important; font-size:9pt;}
-  .lfs-print-contact{display:block !important; margin:8px 0 0; font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:9pt; color:#0B1523;}
+  .lfs-vector-name{font-size:13pt; margin-bottom:3px;}
+  .lfs-vector-text{font-size:9.2pt; margin-bottom:4px; max-width:none;}
+  .lfs-vector-source{font-size:8pt; padding-top:5px; max-width:none;}
+  .lfs-vector-note{font-size:8pt; margin-top:3px;}
+  .lfs-intervention-title{font-size:11pt; margin-bottom:3px;}
+  .lfs-intervention-lead{display:none;}
+  .lfs-intervention-time{font-size:7.5pt; margin-bottom:5px;}
+  .lfs-steps{margin-bottom:6px;}
+  .lfs-steps li{font-size:8.4pt; line-height:1.35; padding:6px 0 6px 28px;}
+  .lfs-steps li::before{top:6px; width:19px; height:19px; font-size:7.5pt;}
+  .lfs-steps li{min-height:30px;}
+  .lfs-signal{padding:6px 10px;}
+  .lfs-signal p{font-size:8.4pt;}
+
+  .lfs-delay, .lfs-gap, .lfs-scope{border:1px solid #cbd5e1; border-radius:10px; padding:9px 14px; background:#fff !important;}
+  .lfs-delay-grid{list-style:none; margin:0; padding:0; display:grid; grid-template-columns:repeat(3,1fr); gap:8px;}
+  .lfs-delay-grid li{padding:6px 8px; border-radius:7px; background:#f8fafc !important; border-top:3px solid #f59e0b;}
+  .lfs-delay-grid li:nth-child(1){border-top-color:#14b8a6;}
+  .lfs-delay-grid li:nth-child(3){border-top-color:#e11d48;}
+  .lfs-delay-days{display:block; font-family:'Lato',Arial,sans-serif; font-weight:800; font-size:8pt; letter-spacing:.06em; text-transform:uppercase; color:#0B1523; margin-bottom:2px;}
+  .lfs-delay-grid p{margin:0; font-size:8pt; line-height:1.35; color:#334155;}
+  .lfs-delay-note{margin:5px 0 0; font-size:7pt; color:#64748b;}
+  .lfs-gap{border-left:3px solid #1D6F8A; background:#f1f5f9 !important;}
+  .lfs-gap p{margin:0; font-size:8.6pt; line-height:1.42; color:#0B1523;}
+  .lfs-scope-list{margin:0; padding-left:16px; font-size:8.4pt; line-height:1.38; color:#334155;}
+  .lfs-scope-list li{margin:0 0 2px; padding-left:2px;}
+  .lfs-scope-list strong{color:#0B1523;}
+
+  .lfs-cred{border:1.5px solid #0B1523; border-radius:10px; padding:9px 14px; background:#fff !important; margin-bottom:0 !important;}
+  .lfs-cred-book h3{font-size:10.5pt; margin:0 0 2px; color:#0B1523;}
+  .lfs-cred-book p{margin:0 0 7px; font-size:8.8pt; color:#334155;}
+  .lfs-cred-book span{font-weight:700; color:#1D6F8A;}
+  .lfs-cred-profile{display:grid; grid-template-columns:1.2fr 1fr; gap:14px; padding-top:7px; border-top:1px solid #cbd5e1; font-size:8pt; line-height:1.4; color:#334155;}
+  .lfs-cred-profile span, .lfs-cred-profile strong{display:block;}
+  .lfs-cred-profile strong{color:#0B1523; font-size:8.6pt;}
+  .lfs-cred-firm strong{text-transform:uppercase; letter-spacing:.08em;}
+  .lfs-cred-k{font-family:'Lato',Arial,sans-serif; font-weight:800; font-size:7pt; letter-spacing:.08em; text-transform:uppercase; color:#1D6F8A;}
 
   .lfs-stamp-bottom{position:fixed; left:0; right:0; bottom:0; margin:0; padding:4px 0 0; border-top:1px solid #cbd5e1; background:#fff; font-size:7pt;}
 }
