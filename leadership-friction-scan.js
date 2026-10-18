@@ -604,6 +604,9 @@
         q('[data-res-band-text]').textContent = result.band.text;
       }
 
+      // Founder centrality benchmark only when Dimension 1 is the dominant dimension
+      q('[data-res-founder-risk]').hidden = result.dominant !== 'd1';
+
       // Not Sure footnote
       q('[data-res-ns-note]').hidden = result.notSure < 4;
 
@@ -626,7 +629,7 @@
         if (key === result.dominant) {
           var tag = document.createElement('span');
           tag.className = 'lfs-dim-tag';
-          tag.textContent = 'Dominant';
+          tag.textContent = 'Dominant Bottleneck';
           name.appendChild(tag);
         }
 
@@ -636,8 +639,8 @@
         big.className = 'lfs-dim-score';
         big.textContent = score === null ? 'NS' : fmt(score) + ' / 15';
         var lvl = document.createElement('span');
-        lvl.className = 'lfs-dim-level';
-        lvl.textContent = level.label;
+        lvl.className = 'lfs-sr';
+        lvl.textContent = score === null ? ', not scored' : ', ' + level.label.toLowerCase() + ' friction';
         value.appendChild(big);
         value.appendChild(lvl);
 

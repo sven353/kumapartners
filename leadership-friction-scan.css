@@ -234,7 +234,7 @@ body.suite .lfs-shell, body.suite .lfs-shell:hover{
   background:var(--navy); color:#fff;
   box-shadow:0 0 0 3px rgba(29,111,138,.16), 0 0 16px rgba(79,179,207,.55);
 }
-.lfs-dim.is-dominant{background:linear-gradient(to right, rgba(29,111,138,.07), rgba(29,111,138,0)); border-top-color:transparent; box-shadow:inset 0 0 0 1px rgba(29,111,138,.16);}
+.lfs-dim.is-dominant{background:linear-gradient(to right, rgba(29,111,138,.1), rgba(29,111,138,.02)); border-top-color:transparent; box-shadow:inset 0 0 0 1px rgba(29,111,138,.28), 0 6px 18px -10px rgba(29,111,138,.45);}
 .lfs-dim.is-dominant + .lfs-dim{border-top-color:transparent;}
 .lfs-dim-value{display:flex; align-items:center; gap:10px; justify-content:flex-end; font-family:'Lato',Arial,sans-serif; white-space:nowrap; font-variant-numeric:tabular-nums;}
 .lfs-dim-score{font-family:'Montserrat',Arial,sans-serif; font-weight:700; font-size:.95rem; color:var(--navy);}
@@ -245,11 +245,11 @@ body.suite .lfs-shell, body.suite .lfs-shell:hover{
 .lfs-dim-value.moderate .lfs-dim-level{color:#8A6100; background:rgba(184,134,11,.14);}
 .lfs-dim-value.high .lfs-dim-level{color:#9a3b1f; background:rgba(193,80,46,.12);}
 .lfs-dim-value.none .lfs-dim-level{color:#475569; background:rgba(100,116,139,.12);}
-.lfs-bar{grid-column:1 / -1; height:10px; border-radius:var(--radius-pill); background:rgba(148,163,184,.22); overflow:hidden;}
-.lfs-bar-fill{height:100%; width:0; border-radius:var(--radius-pill); transition:width .7s cubic-bezier(.2,.8,.2,1);}
-.lfs-bar-fill.low{background:linear-gradient(90deg,#6FC49C,#2E7D5B);}
-.lfs-bar-fill.moderate{background:linear-gradient(90deg,#F0C060,#B8860B);}
-.lfs-bar-fill.high{background:linear-gradient(90deg,#475569,#C1502E);}
+.lfs-bar{grid-column:1 / -1; height:8px; border-radius:9999px; background:#f1f5f9; overflow:hidden;}
+.lfs-bar-fill{height:100%; width:0; border-radius:9999px; transition:width .7s cubic-bezier(.2,.8,.2,1);}
+.lfs-bar-fill.low{background:linear-gradient(90deg,#14b8a6,#34d399);}
+.lfs-bar-fill.moderate{background:linear-gradient(90deg,#fbbf24,#f59e0b);}
+.lfs-bar-fill.high{background:linear-gradient(90deg,#f43f5e,#e11d48);}
 .lfs-dim-meta{grid-column:1 / -1; font-family:'Lato',Arial,sans-serif; font-size:.76rem; color:rgba(11,21,35,.55); margin-top:-2px;}
 .lfs-matrix-note{font-size:.8rem; color:rgba(11,21,35,.55); margin:0;}
 .lfs-ns-note{font-size:.8rem; line-height:1.5; color:#475569; margin:12px 0 0; padding:10px 14px; border-radius:12px; background:rgba(100,116,139,.08); border:var(--hairline) dashed rgba(100,116,139,.4);}
@@ -319,6 +319,40 @@ body.suite .lfs-shell, body.suite .lfs-shell:hover{
 }
 .lfs-retake:hover{color:var(--navy); border-bottom-color:var(--navy);}
 
+/* Visually hidden text for screen readers */
+.lfs-sr{position:absolute; width:1px; height:1px; margin:-1px; padding:0; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;}
+
+/* The dimension card keeps its natural height beside the taller left column */
+@media screen and (min-width:961px){ .lfs-matrix{align-self:start;} }
+
+/* Left column stacks the index card and the risk callout */
+.lfs-col{display:flex; flex-direction:column; gap:24px; min-width:0;}
+.lfs-col > .lfs-index{flex:none;}
+
+/* Structural risk and runway callout */
+.lfs-risk{
+  padding:28px 28px 8px; border-radius:20px;
+  background:linear-gradient(to bottom, rgba(29,111,138,.08), rgba(29,111,138,.02));
+  border:var(--hairline) solid rgba(29,111,138,.3);
+  box-shadow:0 1px 2px rgba(15,23,42,.05), 0 16px 32px -20px rgba(29,111,138,.35);
+}
+.lfs-risk-label{font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.72rem; letter-spacing:.1em; text-transform:uppercase; color:var(--teal); margin-bottom:6px;}
+.lfs-risk-item{padding:18px 0; border-top:var(--hairline) solid rgba(29,111,138,.18);}
+.lfs-risk-item:first-of-type{border-top:none;}
+.lfs-risk-item[hidden]{display:none;}
+.lfs-risk-item h3{font-family:'Montserrat',Arial,sans-serif; font-weight:700; font-size:.95rem; color:var(--navy); margin:0 0 6px;}
+.lfs-risk-item p{margin:0; font-size:.93rem; line-height:1.55; color:rgba(15,23,42,.88);}
+.lfs-risk-item .lfs-cite{
+  margin-top:8px; font-family:'Lato',Arial,sans-serif; font-size:.7rem; line-height:1.45; letter-spacing:.04em; text-transform:uppercase; color:rgba(11,21,35,.5);
+}
+.lfs-risk-link{display:inline-block; margin-top:10px; font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.84rem; color:var(--teal); border-bottom:var(--hairline) solid rgba(29,111,138,.4);}
+.lfs-risk-link:hover{color:var(--navy); border-bottom-color:var(--navy);}
+
+.lfs-cta-sub{margin:-6px 0 0; font-family:'Lato',Arial,sans-serif; font-size:.76rem; letter-spacing:.02em; color:rgba(255,255,255,.7); max-width:260px;}
+
+/* Print-only furniture, hidden on screen */
+.lfs-print-head, .lfs-print-contact{display:none;}
+
 /* ---------- Responsive ---------- */
 @media (max-width:960px){
   .lfs-grid{grid-template-columns:1fr;}
@@ -360,19 +394,70 @@ body.suite .lfs-shell, body.suite .lfs-shell:hover{
   .lfs-progress-fill, .lfs-gauge-marker, .lfs-bar-fill, .lfs-rate{transition:none;}
 }
 
-/* ---------- Export PDF (browser print) ---------- */
+/* ---------- Export PDF (browser print): a two-page executive brief ----------
+   Page 1: branding, index, risk callout, dimension bars.
+   Page 2: dominant vector, micro-intervention, bridge to the 14-Day Scan, contact. */
+@page{size:A4; margin:11mm 13mm 15mm;}
 @media print{
-  header.site, footer.site, .skip-link, .lfs-hero, .lfs-flow, .lfs-export, .lfs-retake, .lfs-bridge-actions, .lfs-glow{display:none !important;}
-  body.suite, .lfs-results{background:#fff !important;}
-  .lfs-results{display:block !important; padding:0 !important;}
+  header, nav, footer, .cookie-banner, #cookie-consent, [role="dialog"], button, .no-print,
+  .skip-link, .lfs-hero, .lfs-flow, .lfs-glow, .lfs-bridge-actions, .lfs-results .section-head .eyebrow{display:none !important;}
+  html, body{background:#fff !important; color:#0f172a !important; font-size:10pt; line-height:1.4;}
+  body.suite main, .lfs-results{background:#fff !important; padding:0 !important; min-height:0 !important;}
   .lfs-results[hidden]{display:none !important;}
-  .lfs-card, .lfs-bridge, .lfs-quote, .lfs-dim{break-inside:avoid; box-shadow:none !important; animation:none !important; transform:none !important;}
-  .lfs-bridge{background:#fff !important; border:1px solid #cbd5e1; padding:24px !important;}
-  .lfs-bridge h2, .lfs-quote p{color:#0B1523 !important;}
-  .lfs-bridge p{color:#334155 !important;}
-  .lfs-bar-fill, .lfs-gauge-seg, .lfs-dim-tag, .lfs-dim-level, .sc-score-badge{-webkit-print-color-adjust:exact; print-color-adjust:exact;}
-  /* Privacy stamp at the head of the first page and repeated as a footer on every page */
-  .lfs-stamp-top{display:block !important; border-bottom:1px solid #cbd5e1; padding-bottom:10px;}
-  .lfs-stamp-bottom{position:fixed; left:0; right:0; bottom:0; margin:0; padding:8px 0 0; border-top:1px solid #cbd5e1; background:#fff;}
-  .lfs-results .wrap{padding-bottom:40px;}
+  .lfs-results .wrap{max-width:none; padding:0;}
+  .lfs-results *{-webkit-print-color-adjust:exact; print-color-adjust:exact; animation:none !important; transition:none !important; box-shadow:none !important; transform:none !important;}
+  .page-break-before{page-break-before:always !important; break-before:page !important;}
+  .avoid-break-inside{page-break-inside:avoid !important; break-inside:avoid !important;}
+
+  .lfs-print-head{display:flex !important; align-items:center; justify-content:space-between; padding-bottom:8px; margin-bottom:8px; border-bottom:1px solid #cbd5e1;}
+  .lfs-print-head img{height:26px; width:auto;}
+  .lfs-print-head span{font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:8.5pt; letter-spacing:.1em; text-transform:uppercase; color:#475569;}
+  .lfs-results .section-head{margin:0 0 8px; max-width:none;}
+  .lfs-results .section-head h2{font-size:17pt; margin:0 0 2px;}
+  .lfs-prepared{font-size:9pt; margin:0;}
+  .lfs-stamp-top{display:block !important; font-size:7.5pt; margin:4px 0 0; padding:0; border:0;}
+
+  .lfs-grid{display:block !important;}
+  .lfs-col{display:block !important;}
+  .lfs-card, .lfs-risk{border:1px solid #cbd5e1 !important; border-radius:10px !important; background:#fff !important; margin:0 0 8px !important;}
+  .lfs-card{padding:10px 14px !important;}
+  .lfs-card-label{margin-bottom:6px; font-size:7.5pt;}
+
+  .lfs-index{display:block !important;}
+  .lfs-score{margin-bottom:6px;}
+  .lfs-score-num{font-size:30pt;}
+  .lfs-band-name{font-size:12pt; margin:4px 0 2px;}
+  .lfs-band-text{font-size:9pt; margin:0 0 8px;}
+  .lfs-gauge-scale{margin-top:6px;}
+
+  .lfs-risk{padding:10px 14px 2px !important;}
+  .lfs-risk-item{padding:7px 0;}
+  .lfs-risk-item h3{font-size:9.5pt; margin-bottom:2px;}
+  .lfs-risk-item p{font-size:8.8pt; line-height:1.4;}
+  .lfs-risk-item .lfs-cite{font-size:6.8pt; margin-top:3px;}
+
+  .lfs-dim{padding:8px 8px; margin:0 -8px; gap:6px 12px;}
+  .lfs-dim-name{font-size:9.5pt;}
+  .lfs-dim-score{font-size:9.5pt;}
+  .lfs-dim-meta{font-size:7.5pt;}
+  .lfs-matrix-note, .lfs-ns-note{font-size:7.5pt;}
+
+  .lfs-vector-name{font-size:15pt; margin-bottom:6px;}
+  .lfs-vector-text{font-size:10pt; margin-bottom:8px;}
+  .lfs-vector-source{font-size:8.5pt; padding-top:8px;}
+  .lfs-intervention-title{font-size:13pt;}
+  .lfs-intervention-lead, .lfs-steps li{font-size:9.5pt;}
+  .lfs-intervention-time{margin-bottom:10px;}
+  .lfs-steps li{padding:8px 0 8px 34px;}
+  .lfs-steps li::before{top:8px;}
+  .lfs-signal{padding:10px 12px;}
+
+  .lfs-bridge{display:block !important; background:#fff !important; border:1px solid #94a3b8 !important; border-radius:12px !important; padding:14px 16px !important; margin-top:10px;}
+  .lfs-bridge h2{color:#0B1523 !important; font-size:13pt; margin:0 0 8px;}
+  .lfs-quote{background:#f1f5f9 !important; border:0 !important; border-left:3px solid #1D6F8A !important; border-radius:8px !important; margin:0 0 8px; padding:10px 14px;}
+  .lfs-quote p{color:#0B1523 !important; font-size:10pt; line-height:1.5;}
+  .lfs-bridge p, .lfs-bridge-note{color:#334155 !important; font-size:9pt;}
+  .lfs-print-contact{display:block !important; margin:8px 0 0; font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:9pt; color:#0B1523;}
+
+  .lfs-stamp-bottom{position:fixed; left:0; right:0; bottom:0; margin:0; padding:4px 0 0; border-top:1px solid #cbd5e1; background:#fff; font-size:7pt;}
 }

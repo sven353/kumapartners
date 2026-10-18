@@ -222,12 +222,16 @@
   <!-- STATE 3B: RESULTS DASHBOARD -->
   <section class="lfs-results" id="lfs-results" data-lfs-view="results" aria-labelledby="lfs-results-title" hidden>
     <div class="wrap">
+      <div class="lfs-print-head" aria-hidden="true">
+        <img src="assets/logo-lockup.png" alt="" width="768" height="173">
+        <span>Leadership Friction Scan</span>
+      </div>
       <div class="section-head">
         <div class="eyebrow">Your diagnostic breakdown</div>
         <h2 id="lfs-results-title" tabindex="-1">Leadership Friction Scan results</h2>
         <p class="lfs-prepared" data-res-prepared></p>
         <p class="lfs-stamp lfs-stamp-top"><span class="lfs-p-interim">Telemetry generated under Kuma Partners Privacy Standards. Responses are used only to produce this breakdown and to follow up on the scan.</span><span class="lfs-p-full">Telemetry generated under Kuma Partners Privacy Standards. Raw individual responses scheduled for automated purge within 30 days.</span></p>
-        <button type="button" class="lfs-export" data-lfs-print>
+        <button type="button" class="lfs-export no-print" data-lfs-print>
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg>
           Export PDF
         </button>
@@ -235,6 +239,7 @@
 
       <div class="lfs-grid">
 
+        <div class="lfs-col avoid-break-inside">
         <!-- 1. Overall Friction Index -->
         <article class="lfs-card lfs-index" aria-labelledby="lfs-index-label">
           <div class="lfs-card-label" id="lfs-index-label">Overall Friction Index</div>
@@ -260,8 +265,30 @@
           </div>
         </article>
 
+        <!-- 1b. Structural risk and runway callout -->
+        <aside class="lfs-risk avoid-break-inside" aria-labelledby="lfs-risk-label">
+          <div class="lfs-risk-label" id="lfs-risk-label">Why this matters commercially</div>
+          <div class="lfs-risk-item">
+            <h3>Structural failure risk</h3>
+            <p>Harvard Business School research found that 65% of high-potential start-ups fail as a result of conflict among the founders.</p>
+            <p class="lfs-cite">Harvard Business School, Noam Wasserman, The Founder’s Dilemmas (2012)</p>
+          </div>
+          <div class="lfs-risk-item">
+            <h3>Runway and velocity dilution</h3>
+            <p>In a McKinsey survey of 1,228 respondents, 61% said most of their organisation’s decision-making time is used ineffectively. That time is paid for out of runway.</p>
+            <p class="lfs-cite">McKinsey &amp; Company, Decision making in the age of urgency (2019)</p>
+            <a class="lfs-risk-link no-print" href="coordination-tax.html">Price it for your own team with the Coordination Tax Calculator →</a>
+          </div>
+          <div class="lfs-risk-item" data-res-founder-risk hidden>
+            <h3>Founder centrality</h3>
+            <p>As companies scale, founder over-centralisation turns from the engine of the company into its most expensive bottleneck.</p>
+            <p class="lfs-cite">Kuma Partners observation. Related reading: Chris Zook and James Allen, The Founder’s Mentality (Bain &amp; Company)</p>
+          </div>
+        </aside>
+        </div>
+
         <!-- Dimension matrix -->
-        <article class="lfs-card lfs-matrix" aria-labelledby="lfs-matrix-label">
+        <article class="lfs-card lfs-matrix avoid-break-inside" aria-labelledby="lfs-matrix-label">
           <div class="lfs-card-label" id="lfs-matrix-label">Friction by dimension</div>
           <ul class="lfs-dims" data-res-dims></ul>
           <p class="lfs-matrix-note">Each dimension scores from 3 to 15. A higher score means more friction. Not Sure answers are left out and the rest are scaled to the same range.</p>
@@ -269,7 +296,7 @@
         </article>
 
         <!-- 2. Dominant Friction Vector -->
-        <article class="lfs-card lfs-vector" aria-labelledby="lfs-vector-label" data-res-vector-card>
+        <article class="lfs-card lfs-vector page-break-before avoid-break-inside" aria-labelledby="lfs-vector-label" data-res-vector-card>
           <div class="lfs-card-label" id="lfs-vector-label">Dominant friction vector</div>
           <h3 class="lfs-vector-name" data-res-vector></h3>
           <p class="lfs-vector-text" data-res-vector-text></p>
@@ -278,7 +305,7 @@
         </article>
 
         <!-- 3. Immediate Micro-Intervention -->
-        <article class="lfs-card lfs-intervention" aria-labelledby="lfs-intervention-label" data-res-intervention-card>
+        <article class="lfs-card lfs-intervention avoid-break-inside" aria-labelledby="lfs-intervention-label" data-res-intervention-card>
           <div class="lfs-card-label" id="lfs-intervention-label">Immediate micro-intervention</div>
           <h3 class="lfs-intervention-title" data-res-intervention></h3>
           <p class="lfs-intervention-lead" data-res-intervention-lead></p>
@@ -293,19 +320,22 @@
       </div>
 
       <!-- 4. Conversion bridge -->
-      <div class="lfs-bridge">
+      <div class="lfs-bridge avoid-break-inside">
         <div class="lfs-bridge-copy">
           <h2>Identifying friction is step one. Dismantling it requires external leverage.</h2>
           <blockquote class="lfs-quote">
-            <p>This self-assessment reflects the perspective of one leader. The Kuma 14-Day Leadership Friction Scan cross-calibrates these metrics against confidential, 1-on-1 diagnostic interviews across your entire executive team.</p>
+            <p>This self-assessment reflects the perspective of one leader. The Kuma 14-Day Leadership Friction Scan cross-calibrates these metrics against confidential, 1-on-1 diagnostic interviews across your entire executive team to isolate where speed is being lost.</p>
           </blockquote>
           <p class="lfs-bridge-note">Book a confidential 30-minute debrief with a Kuma Partner to review your breakdown across all 4 dimensions and isolate the two highest-leverage interventions for your executive team.</p>
         </div>
         <div class="lfs-bridge-actions">
-          <a href="index.html#contact" class="btn btn-cream" data-lfs-book>Book the 30-Minute Friction Debrief →</a>
+          <a href="index.html#contact" class="btn btn-cream" data-lfs-book>Book the 30-Minute Leadership Friction Debrief →</a>
+          <p class="lfs-cta-sub">Confidential • Direct with a Kuma Partner • Strategic action plan</p>
           <a href="friction-scan.html" class="btn-link">See how the 14-Day Scan works</a>
         </div>
       </div>
+
+      <p class="lfs-print-contact" aria-hidden="true">Book the 30-Minute Leadership Friction Debrief: contact@kuma.partners • www.kuma.partners</p>
 
       <p class="lfs-stamp lfs-stamp-bottom"><span class="lfs-p-interim">Telemetry generated under Kuma Partners Privacy Standards. Responses are used only to produce this breakdown and to follow up on the scan.</span><span class="lfs-p-full">Telemetry generated under Kuma Partners Privacy Standards. Raw individual responses scheduled for automated purge within 30 days.</span></p>
       <button type="button" class="lfs-retake" data-lfs-retake>Retake the scan</button>
