@@ -703,3 +703,148 @@ body.suite .lfs-methodology{border-top:1px solid #E2E8F0;background:rgba(248,250
 
   .lfs-stamp-bottom{position:fixed; left:0; right:0; bottom:0; margin:0; padding:4px 0 0; border-top:1px solid #cbd5e1; background:#fff; font-size:7pt;}
 }
+
+
+/* ---------- Apple-style surface layer (screen only) ----------
+   Mesh canvases, 24px squircle cards, hairline borders, layered micro-shadows and a short entrance.
+   Selectors start with body.suite so they out-rank suite.css without touching it. Print is untouched:
+   everything here sits inside @media screen. Entrance animations use fill-mode backwards so hover
+   transforms still work afterwards and no stacking context is left behind on the results view. */
+@media screen{
+  /* Canvases */
+  body.suite .lfs-hero{background:radial-gradient(120% 85% at 50% 0%, #FFFFFF 0%, #F5F7FA 55%, #EBF0F4 100%);}
+  body.suite .lfs-results{background:radial-gradient(110% 75% at 50% 0%, #FAFBFD 0%, #F0F4F7 60%, #E6EDF2 100%);}
+  body.suite .lfs-methodology{background:linear-gradient(180deg, #EBF0F4 0%, #F8FAFC 100%); border-top:var(--hairline) solid rgba(11,21,35,.07);}
+
+  /* Squircle cards */
+  body.suite .lfs-hero-card, body.suite .lfs-card{
+    border-radius:24px; border:var(--hairline) solid rgba(11,21,35,.06); background:#fff;
+    box-shadow:0 4px 6px -1px rgba(15,23,42,.03), 0 20px 35px -8px rgba(15,23,42,.06), 0 0 0 1px rgba(11,21,35,.03);
+  }
+  body.suite .lfs-card:hover{border-color:rgba(29,111,138,.2);}
+  body.suite .lfs-meth-grid article, body.suite .lfs-meth-qa{
+    border:var(--hairline) solid rgba(11,21,35,.06); border-radius:18px; box-shadow:0 2px 10px -2px rgba(15,23,42,.03);
+  }
+
+  /* Inputs */
+  body.suite .lfs-form input[type="text"], body.suite .lfs-form input[type="email"],
+  body.suite .lfs-form .select-shell, body.suite .lfs-dispatch-row input[type="email"]{
+    border:var(--hairline) solid rgba(11,21,35,.12); border-radius:14px;
+  }
+  body.suite .lfs-form .select-shell select{border-radius:14px;}
+  body.suite .lfs-form input[type="text"]:focus, body.suite .lfs-form input[type="email"]:focus,
+  body.suite .lfs-dispatch-row input[type="email"]:focus{border-color:var(--teal); box-shadow:0 0 0 3px rgba(29,111,138,.15);}
+  body.suite .lfs-form .select-shell:focus-within{border-color:var(--teal); box-shadow:0 0 0 3px rgba(29,111,138,.15);}
+  body.suite .lfs-form .is-invalid input, body.suite .lfs-form .is-invalid .select-shell,
+  body.suite .lfs-dispatch-row input[aria-invalid="true"]{border-color:#a3402f;}
+
+  /* Rating buttons (the quiet Not Sure link keeps its own style) */
+  body.suite .lfs-rate:not(.lfs-rate-ns){border:var(--hairline) solid rgba(11,21,35,.08); border-radius:16px;}
+  body.suite .lfs-rate:not(.lfs-rate-ns):hover{border-color:rgba(29,111,138,.45);}
+  body.suite .lfs-rate.selected:not(.lfs-rate-ns){
+    border-color:var(--teal); background-color:rgba(29,111,138,.05);
+    box-shadow:0 0 0 2px rgba(29,111,138,.2), 0 8px 16px -6px rgba(29,111,138,.25); transform:translateY(-1px);
+  }
+
+  /* Eyebrow pills */
+  body.suite .lfs-hero .eyebrow, body.suite .lfs-hero .lfs-framework, body.suite .lfs-results .eyebrow,
+  body.suite .lfs-tag, body.suite .lfs-act-eyebrow{
+    display:flex; width:fit-content; align-items:center; padding:4px 14px; border-radius:9999px;
+    font-family:'Lato',Arial,sans-serif; font-size:.74rem; font-weight:700; letter-spacing:.08em; text-transform:uppercase; line-height:1.5;
+    border:var(--hairline) solid rgba(29,111,138,.22); background:rgba(29,111,138,.05); color:var(--teal);
+  }
+  body.suite .lfs-hero .eyebrow, body.suite .lfs-hero .lfs-framework{margin:0 auto 12px;}
+  body.suite .lfs-results .eyebrow{margin:0 0 14px;}
+  body.suite .lfs-tag{margin-bottom:12px;}
+  body.suite .lfs-act-eyebrow{margin-bottom:8px;}
+  body.suite .lfs-hero .eyebrow::before, body.suite .lfs-hero .eyebrow::after,
+  body.suite .lfs-results .eyebrow::before, body.suite .lfs-results .eyebrow::after{display:none;}
+
+  /* Hairline dividers */
+  body.suite .lfs-act{border-top:var(--hairline) solid rgba(11,21,35,.07);}
+  body.suite .lfs-act-1{border-top:0;}
+  body.suite .lfs-promise, body.suite .lfs-vector-source, body.suite .lfs-steps li,
+  body.suite .lfs-methodology .lfs-meth-foot{border-top-color:rgba(11,21,35,.07);}
+  body.suite .lfs-steps li:nth-last-child(-n+2){border-bottom-color:rgba(11,21,35,.07);}
+  body.suite .lfs-dim{border-top-color:rgba(11,21,35,.07);}
+  body.suite .lfs-dim:first-child, body.suite .lfs-dim.is-dominant + .lfs-dim{border-top-color:transparent;}
+
+  /* Progress bars */
+  body.suite .lfs-progress-bar{height:6px; border-radius:9999px; background:rgba(148,163,184,.18);}
+  body.suite .lfs-bar{height:6px; border-radius:9999px; background:rgba(148,163,184,.18);}
+  body.suite .lfs-bar-fill{border-radius:9999px; animation-timing-function:cubic-bezier(.16,1,.3,1);}
+
+  /* Act 1: verdict */
+  body.suite .lfs-score-num{font-size:4.2rem; font-weight:800; color:var(--navy);}
+  body.suite .lfs-index .sc-score-badge{align-self:flex-start; padding:4px 12px; font-size:.78rem; border-radius:9999px;}
+  body.suite .lfs-gauge-track{
+    height:6px; gap:0; background:linear-gradient(90deg, #2E7D5B 0%, #2E7D5B 16%, #B8860B 46%, #B8860B 54%, #C1502E 84%, #C1502E 100%);
+  }
+  body.suite .lfs-gauge-seg{background:transparent;}
+  body.suite .lfs-seg-low, body.suite .lfs-seg-mid{box-shadow:1px 0 0 rgba(255,255,255,.85);}
+  body.suite .lfs-gauge-marker{top:-7px;}
+
+  body.suite .lfs-dim{padding:14px 12px; margin:0 -12px; border-radius:14px; transition:background .2s ease;}
+  body.suite .lfs-dim:hover{background:rgba(11,21,35,.02);}
+  body.suite .lfs-dim.is-dominant{background:rgba(29,111,138,.04); border:var(--hairline) solid rgba(29,111,138,.15); box-shadow:none;}
+
+  body.suite .lfs-veto{
+    border-radius:20px; background:linear-gradient(135deg, rgba(244,63,94,.04) 0%, rgba(255,255,255,.95) 100%);
+    border:var(--hairline) solid rgba(244,63,94,.2); border-left:4px solid #E11D48; box-shadow:0 4px 20px -4px rgba(225,29,72,.08);
+  }
+
+  /* Act 2: commercial risk as three floating tiles */
+  body.suite .lfs-risk{padding:0; border:0; border-radius:0; background:none; box-shadow:none; gap:16px;}
+  body.suite .lfs-risk-label{margin-bottom:0;}
+  body.suite .lfs-risk-item{
+    padding:22px; background:#fff; border:var(--hairline) solid rgba(11,21,35,.06); border-radius:18px; box-shadow:0 2px 10px -2px rgba(15,23,42,.03);
+  }
+  body.suite .lfs-stat{color:var(--navy); font-weight:800; font-family:'Montserrat',Arial,sans-serif;}
+
+  /* Act 3: intervention */
+  body.suite .lfs-steps li::before{width:28px; height:28px; border-color:rgba(29,111,138,.3); background:rgba(29,111,138,.06);}
+  body.suite .lfs-signal{background:rgba(29,111,138,.04); border:var(--hairline) solid rgba(29,111,138,.15); border-radius:14px;}
+
+  /* Conversion bridge */
+  body.suite .lfs-bridge{
+    border-radius:26px; padding:44px; border:var(--hairline) solid rgba(255,255,255,.08);
+    background:radial-gradient(120% 90% at 50% 0%, #152740 0%, #0B1523 100%); box-shadow:0 25px 50px -12px rgba(11,21,35,.35);
+  }
+  body.suite .lfs-quote{
+    padding:20px 24px; border:0; border-left:3px solid #14B8A6; border-radius:0 16px 16px 0; background:rgba(255,255,255,.04);
+    -webkit-backdrop-filter:blur(10px); backdrop-filter:blur(10px);
+  }
+
+  /* Multiplier modules */
+  body.suite .lfs-invite, body.suite .lfs-dispatch, body.suite .lfs-share-card{
+    border-radius:22px; border:var(--hairline) solid rgba(11,21,35,.06); background:#fff; box-shadow:0 4px 16px -4px rgba(15,23,42,.04);
+  }
+  body.suite .lfs-sharebar{
+    padding:14px 22px; border-radius:22px; border:var(--hairline) solid rgba(11,21,35,.06); background:#fff; box-shadow:0 4px 16px -4px rgba(15,23,42,.04);
+  }
+  body.suite .lfs-share-btn{padding:9px 16px; font-weight:600; border:var(--hairline) solid rgba(11,21,35,.12); border-radius:9999px; background:#fff;}
+  body.suite .lfs-share-btn:hover{border-color:var(--teal); background:rgba(29,111,138,.06);}
+
+  /* Entrance */
+  .lfs-hero-card, .lfs-results, .lfs-card, .lfs-bridge, .lfs-invite, .lfs-dispatch{animation:lfs-apple-fade .65s cubic-bezier(.16,1,.3,1) backwards;}
+  .lfs-swap{animation:lfs-apple-swap .22s cubic-bezier(.16,1,.3,1) backwards;}
+}
+@keyframes lfs-apple-fade{from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:none;}}
+@keyframes lfs-apple-swap{from{opacity:0; transform:translateY(6px);} to{opacity:1; transform:none;}}
+
+/* Responsive corrections for the layer above (same specificity, so they must live after it) */
+@media screen and (max-width:960px){ body.suite .lfs-bridge{padding:36px 28px;} }
+@media screen and (max-width:639px){
+  body.suite .lfs-hero .eyebrow{font-size:.68rem;}
+  body.suite .lfs-hero .lfs-framework{display:none;}
+  body.suite .lfs-rate.selected:not(.lfs-rate-ns){transform:none;}
+}
+@media screen and (max-width:560px){
+  body.suite .lfs-score-num{font-size:3.4rem;}
+  body.suite .lfs-dim{padding:14px 10px; margin:0 -10px;}
+  body.suite .lfs-hero-card{border-radius:22px;}
+  body.suite .lfs-sharebar{padding:14px 16px;}
+}
+@media (prefers-reduced-motion: reduce){
+  .lfs-hero-card, .lfs-results, .lfs-card, .lfs-bridge, .lfs-invite, .lfs-dispatch, .lfs-swap{animation:none !important;}
+}
