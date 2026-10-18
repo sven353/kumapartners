@@ -1,0 +1,19 @@
+/* Page stylesheet skeleton. Copy to <page>.css and replace PAGE with the page name.
+   Loads after styles.css. Every selector starts with body.PAGE or a PAGE- class, so nothing here
+   can touch the landing page or any other page. Colours, radius, borders and shadows come from the
+   tokens in styles.css (var(--navy), var(--teal), var(--cream), var(--hairline-color),
+   var(--radius-md), var(--shadow-card-subtle), var(--ramp-chalk), var(--bg-dark-ambient)). */
+
+.PAGE-section{background:var(--ramp-chalk);}
+
+.PAGE-card{
+  background:#fff;
+  border:var(--hairline) solid var(--hairline-color);
+  border-radius:var(--radius-md);
+  box-shadow:var(--shadow-card-subtle);
+  padding:28px;
+}
+
+@media (max-width:640px){
+  .PAGE-card{padding:20px;}
+}
