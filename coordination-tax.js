@@ -1,4 +1,4 @@
-/* Coordination Tax Calculator (/coordination-tax)
+/* The Leadership Friction Cost Index (/coordination-tax)
    Vanilla JS, no dependencies. Everything recalculates on input, with no network calls until the
    visitor asks for the breakdown. Edit CONFIG below to connect booking and a CRM webhook. */
 (function () {
@@ -73,6 +73,10 @@
 
     var state = { team: 6, meet: 14, comp: 150000, frictionPct: 35, delay: 0, currency: 'EUR', symbol: '€' };
     var DELAY_MAX = 1000000000;
+    // Typical starting points for the cost chips. They only fill the field, which the visitor can edit.
+    var COMP_PRESETS = { EUR: [120000, 160000, 220000], USD: [135000, 180000, 250000] };
+    var DELAY_EXAMPLES = [30000, 75000, 150000];
+    var symptomsTicked = 0;
 
     var numInputs = { team: byId('ct-team'), meet: byId('ct-meet'), comp: byId('ct-comp') };
     var ranges = { team: byId('ct-team-range'), meet: byId('ct-meet-range'), comp: byId('ct-comp-range') };
@@ -86,6 +90,20 @@
     var liveTimer = null;
 
     function byId(id) { return document.getElementById(id); }
+
+    function shortAmount(v) { return state.symbol + Math.round(v / 1000) + 'k'; }
+    function updateChips() {
+      Array.prototype.forEach.call(document.querySelectorAll('[data-ct-comp-chip]'), function (btn) {
+        var v = COMP_PRESETS[state.currency][parseInt(btn.getAttribute('data-ct-comp-chip'), 10)];
+        btn.textContent = btn.getAttribute('data-name') + ' \u00b7 ' + shortAmount(v);
+        btn.setAttribute('aria-pressed', state.comp === v ? 'true' : 'false');
+      });
+      Array.prototype.forEach.call(document.querySelectorAll('[data-ct-delay-chip]'), function (btn) {
+        var v = parseInt(btn.getAttribute('data-ct-delay-chip'), 10);
+        btn.textContent = shortAmount(v) + ' a month';
+        btn.setAttribute('aria-pressed', state.delay === v ? 'true' : 'false');
+      });
+    }
 
     // Working weeks each leader loses a year: drag hours per leader over a 40-hour week.
     function weeksPerLeader(r) { return r.dragHours / state.team / HOURS_PER_WEEK; }
@@ -112,6 +130,11 @@
         outs.delayMonth.textContent = nf.format(Math.round(state.delay));
         outs.delayQuarter.textContent = nf.format(Math.round(state.delay * 3));
       }
+      var pts = Math.min(10, state.frictionPct);
+      outs.whatIfPoints.textContent = String(pts);
+      outs.whatIfCost.textContent = nf.format(Math.round(r.meetingPayroll * pts / 100));
+      outs.whatIfHours.textContent = nf.format(Math.round(r.annualMeetingHours * pts / 100));
+      updateChips();
       Array.prototype.forEach.call(document.querySelectorAll('[data-ct-book-label]'), function (el) {
         el.textContent = 'Talk through your ' + state.symbol + nf.format(Math.round(r.cost)) + ' with a Kuma partner';
       });
@@ -126,7 +149,7 @@
       // Screen readers get one calm summary after the visitor pauses, not a stream while dragging.
       window.clearTimeout(liveTimer);
       liveTimer = window.setTimeout(function () {
-        live.textContent = 'Coordination drag costs ' + state.symbol + nf.format(Math.round(r.cost)) + ' a year, ' +
+        live.textContent = 'Leadership friction costs ' + state.symbol + nf.format(Math.round(r.cost)) + ' a year, ' +
           nf.format(Math.round(r.dragHours)) + ' hours, or ' + nf1.format(r.fte) + ' full-time leaders.';
       }, 500);
     }
@@ -188,6 +211,37 @@
       render();
     });
 
+    // ---------------- cost chips ----------------
+    Array.prototype.forEach.call(document.querySelectorAll('[data-ct-comp-chip]'), function (btn) {
+      btn.addEventListener('click', function () {
+        var v = COMP_PRESETS[state.currency][parseInt(btn.getAttribute('data-ct-comp-chip'), 10)];
+        setValue('comp', clamp(v, LIMITS.comp));
+      });
+    });
+
+    // ---------------- friction helper: a prompt, not a measurement ----------------
+    var symptomBoxes = Array.prototype.slice.call(document.querySelectorAll('[data-ct-symptom]'));
+    var suggestText = document.querySelector('[data-ct-suggest]');
+    var suggestApply = document.querySelector('[data-ct-suggest-apply]');
+    var suggestedPct = 0;
+    function updateSuggestion() {
+      symptomsTicked = symptomBoxes.filter(function (b) { return b.checked; }).length;
+      suggestedPct = symptomsTicked === 0 ? 0 : symptomsTicked === 1 ? 20 : symptomsTicked === 2 ? 35 : 50;
+      if (suggestedPct === 0) {
+        suggestText.textContent = 'Tick what applies to see which preset it points to.';
+        suggestApply.hidden = true;
+      } else {
+        suggestText.textContent = 'You ticked ' + symptomsTicked + ' of 4, which points to the ' + suggestedPct +
+          '% preset. This is a prompt, not a measurement: set the percentage you believe.';
+        suggestApply.hidden = false;
+      }
+    }
+    symptomBoxes.forEach(function (b) { b.addEventListener('change', updateSuggestion); });
+    suggestApply.addEventListener('click', function () {
+      var target = document.querySelector('[data-ct-friction="' + suggestedPct + '"]');
+      if (target) target.click();
+    });
+
     // ---------------- optional cost of delay ----------------
     function setDelay(value) {
       var v = parseFloat(value);
@@ -195,6 +249,13 @@
       render();
     }
     delayInput.addEventListener('input', function () { setDelay(delayInput.value); });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-ct-delay-chip]'), function (btn) {
+      btn.addEventListener('click', function () {
+        var v = parseInt(btn.getAttribute('data-ct-delay-chip'), 10);
+        delayInput.value = String(v);
+        setDelay(v);
+      });
+    });
 
     // ---------------- lead capture ----------------
     var form = document.querySelector('[data-ct-form]');
@@ -230,7 +291,8 @@
         fte_equivalent: Math.round(r.fte * 10) / 10,
         capacity_lost_pct: Math.round(r.capacityPct * 10) / 10,
         weeks_per_leader: Math.round(weeksPerLeader(r) * 10) / 10,
-        monthly_delay_cost: state.delay > 0 ? state.delay : ''
+        monthly_delay_cost: state.delay > 0 ? state.delay : '',
+        friction_symptoms: symptomsTicked
       };
     }
 
@@ -414,10 +476,13 @@
       var today = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
       rep('meta').textContent = (name ? 'Prepared for ' + name + ' • ' : '') + today;
       rep('lede').textContent = 'With ' + state.team + ' leaders spending ' + state.meet + ' hours a week in internal meetings and ' +
-        state.frictionPct + '% of that time adding no decision, coordination drag costs about ' + money(r.cost) + ' a year.';
+        state.frictionPct + '% of that time adding no decision, leadership friction costs about ' + money(r.cost) + ' a year.';
       rep('cost').textContent = money(r.cost);
       rep('hours').textContent = nf.format(Math.round(r.dragHours)) + ' hrs';
       rep('fteText').textContent = 'Equivalent to ' + nf1.format(r.fte) + ' full-time leaders of capacity.';
+      rep('whatIf').textContent = 'Every ' + Math.min(10, state.frictionPct) + ' points of friction you remove is worth ' +
+        money(r.meetingPayroll * Math.min(10, state.frictionPct) / 100) + ' and ' +
+        nf.format(Math.round(r.annualMeetingHours * Math.min(10, state.frictionPct) / 100)) + ' hours a year for your team.';
       rep('perDay').textContent = 'About ' + money(r.cost / WEEKS_PER_YEAR) + ' a week, or ' + money(r.cost / WORKING_DAYS) + ' for every working day.';
       rep('weekly').textContent = nf1.format(weeksPerLeader(r)) + ' wks';
       rep('capacityText').textContent = 'Working weeks lost per leader, every year. In an ordinary week that is ' + nf1.format(r.weeklyLost) +
@@ -463,7 +528,7 @@
     if (downloadBtn) {
       downloadBtn.addEventListener('click', function () {
         fillReport(form.elements.name.value.trim());
-        document.title = 'Coordination tax breakdown | Kuma Partners';
+        document.title = 'Leadership friction cost breakdown | Kuma Partners';
         window.print();
         window.setTimeout(restoreTitle, 1500);
       });
@@ -512,15 +577,15 @@
       var calcMail = document.querySelector('[data-ct-mail="calc"]');
       if (calcMail) {
         calcMail.setAttribute('href', mailto(
-          'What does coordination drag cost your leadership team?',
-          'I tried this calculator from Kuma Partners. It models what meeting load and consensus loops cost an executive team each year, in money, hours and full-time capacity.\n\nTry it with your own figures:\n' + calcLink('peer_mail') + '\n'
+          'What does leadership friction cost your team?',
+          'I tried the Leadership Friction Cost Index from Kuma Partners. It models what meeting load and consensus loops cost an executive team each year, in money, hours and full-time capacity.\n\nTry it with your own figures:\n' + calcLink('peer_mail') + '\n'
         ));
       }
       var resMail = document.querySelector('[data-ct-mail="results"]');
       if (resMail) {
         resMail.setAttribute('href', mailto(
-          'Our coordination tax: ' + money(r.cost) + ' a year',
-          'I ran our leadership team through the Coordination Tax Calculator from Kuma Partners.\n\n' +
+          'Our leadership friction cost: ' + money(r.cost) + ' a year',
+          'I ran our leadership team through the Leadership Friction Cost Index from Kuma Partners.\n\n' +
           state.team + ' leaders, ' + state.meet + ' meeting hours a week each, ' + state.frictionPct + '% of that time adding no decision. ' +
           'It comes to about ' + money(r.cost) + ' a year, or ' + nf1.format(r.fte) + ' full-time leaders.\n\n' +
           'The inputs are filled in, so change them to fit your own team:\n' + resultsLink('peer_mail') + '\n'

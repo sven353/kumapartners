@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Coordination Tax Calculator | Kuma Partners</title>
+<title>The Leadership Friction Cost Index | Kuma Partners</title>
 <meta name="description" content="Model what meeting load, consensus loops and context switching cost your executive team each year, in money, hours and full-time capacity. Live calculation, no sign-up needed.">
 <link rel="canonical" href="https://www.kuma.partners/coordination-tax">
 
@@ -11,15 +11,15 @@
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Kuma Partners">
 <meta property="og:url" content="https://www.kuma.partners/coordination-tax">
-<meta property="og:title" content="Coordination Tax Calculator | Kuma Partners">
-<meta property="og:description" content="Model what coordination drag costs your executive team each year, in money, hours and full-time capacity.">
+<meta property="og:title" content="The Leadership Friction Cost Index | Kuma Partners">
+<meta property="og:description" content="Model what leadership friction costs your executive team each year, in money, hours and full-time capacity.">
 <meta property="og:image" content="https://www.kuma.partners/assets/og-image.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="Kuma Partners">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Coordination Tax Calculator | Kuma Partners">
-<meta name="twitter:description" content="Model what coordination drag costs your executive team each year, in money, hours and full-time capacity.">
+<meta name="twitter:title" content="The Leadership Friction Cost Index | Kuma Partners">
+<meta name="twitter:description" content="Model what leadership friction costs your executive team each year, in money, hours and full-time capacity.">
 <meta name="twitter:image" content="https://www.kuma.partners/assets/og-image.jpg">
 
 <link rel="icon" type="image/png" href="assets/logo-icon.png">
@@ -61,9 +61,9 @@
 
   <section class="hero ct-hero">
     <div class="wrap">
-      <span class="eyebrow">Financial telemetry &bull; Runway &amp; velocity model</span>
-      <h1>What is coordination drag costing your balance sheet?</h1>
-      <p class="ct-lede">Meeting bloat, consensus loops and context switching are not only culture issues. They are a recurring cost in payroll and in executive hours. Model your leadership team's coordination tax below in real time.</p>
+      <span class="eyebrow">The Leadership Friction Cost Index &bull; Runway &amp; velocity model</span>
+      <h1>What is leadership friction costing your balance sheet?</h1>
+      <p class="ct-lede">Meeting bloat, consensus loops and context switching are not only culture issues. They are a recurring cost in payroll and in executive hours. Model your leadership team's friction cost below in real time.</p>
       <p class="ct-micro">Interactive model &bull; Real-time calculation &bull; Every formula shown</p>
     </div>
   </section>
@@ -109,7 +109,12 @@
               <div class="ct-num"><span class="ct-unit" data-ct-cur>&euro;</span><input type="number" id="ct-comp" inputmode="numeric" min="80000" max="350000" step="5000" value="150000" aria-label="Average annual fully-loaded executive cost, exact value"></div>
             </div>
             <input type="range" class="ct-range" id="ct-comp-range" min="80000" max="350000" step="5000" value="150000" aria-label="Average annual fully-loaded executive cost">
-            <p class="ct-help">Base salary, bonus, taxes and benefits. The currency switch changes the symbol only, so enter the amount in the currency you pay in.</p>
+            <div class="ct-chips" role="group" aria-label="Typical starting points">
+              <button type="button" data-ct-comp-chip="0" data-name="Seed">Seed</button>
+              <button type="button" data-ct-comp-chip="1" data-name="Series A">Series A</button>
+              <button type="button" data-ct-comp-chip="2" data-name="Series B+">Series B+</button>
+            </div>
+            <p class="ct-help">Base salary, bonus, taxes and benefits. The chips are typical starting points, not benchmarks: edit the figure to fit your team. The currency switch changes the symbol only.</p>
           </div>
 
           <div class="ct-control ct-control-presets">
@@ -120,12 +125,29 @@
               <button type="button" role="radio" aria-checked="false" data-ct-friction="50" tabindex="-1"><span class="ct-preset-num">50%</span><span class="ct-preset-cap">High drag / consensus trap</span></button>
             </div>
             <p class="ct-help">Share of meeting time spent re-debating settled calls, passive status reporting or consensus-seeking.</p>
+
+            <details class="ct-helper">
+              <summary>Not sure which fits? Tick what applies</summary>
+              <div class="ct-helper-body">
+                <label class="ct-tick"><input type="checkbox" data-ct-symptom><span>Decisions are reopened or resisted outside the room.</span></label>
+                <label class="ct-tick"><input type="checkbox" data-ct-symptom><span>Meetings are used for status updates more than for decisions.</span></label>
+                <label class="ct-tick"><input type="checkbox" data-ct-symptom><span>Reversible calls wait for founder or CEO sign-off.</span></label>
+                <label class="ct-tick"><input type="checkbox" data-ct-symptom><span>Agendas overrun or have no single decision owner.</span></label>
+                <p class="ct-help" data-ct-suggest aria-live="polite">Tick what applies to see which preset it points to.</p>
+                <button type="button" class="btn btn-secondary ct-btn-sm" data-ct-suggest-apply hidden>Use this preset</button>
+              </div>
+            </details>
           </div>
 
           <div class="ct-control ct-control-optional" data-ct-control="delay">
             <div class="ct-control-top">
               <label for="ct-delay">Optional: what does one month of delay cost you?</label>
               <div class="ct-num"><span class="ct-unit" data-ct-cur>&euro;</span><input type="number" id="ct-delay" inputmode="numeric" min="0" max="1000000000" step="10000" placeholder="0" aria-label="Cost of one month of delay, optional"></div>
+            </div>
+            <div class="ct-chips" role="group" aria-label="Examples of monthly delay cost">
+              <button type="button" data-ct-delay-chip="30000">30k a month</button>
+              <button type="button" data-ct-delay-chip="75000">75k a month</button>
+              <button type="button" data-ct-delay-chip="150000">150k a month</button>
             </div>
             <p class="ct-help">Monthly burn, revenue at stake or what it costs when a launch slips a month. Your own figure, used only on this page and in your PDF.</p>
           </div>
@@ -136,10 +158,11 @@
           <h3 class="ct-sr" id="ct-readout-title">Results</h3>
 
           <article class="ct-metric ct-metric-primary">
-            <span class="ct-card-label">Annual capital burned on coordination drag</span>
+            <span class="ct-card-label">Annual capital burned on leadership friction</span>
             <p class="ct-big"><span data-ct-cur>&euro;</span><span data-ct-out="cost">110,250</span><span class="ct-big-unit"> / year</span></p>
             <p class="ct-sub">Capital paid for meeting hours spent on non-decisive friction.</p>
             <p class="ct-sub ct-perday">That is about <strong><span data-ct-cur>&euro;</span><span data-ct-out="perWeek">2,397</span></strong> a week, or <strong><span data-ct-cur>&euro;</span><span data-ct-out="perDay">479</span></strong> for every working day.</p>
+            <p class="ct-sub ct-whatif">Every <span data-ct-out="whatIfPoints">10</span> points of friction you remove is worth <strong><span data-ct-cur>&euro;</span><span data-ct-out="whatIfCost">31,500</span></strong> and <strong><span data-ct-out="whatIfHours">386</span> hours</strong> a year.</p>
             <dl class="ct-breakdown">
               <div><dt>Executive payroll</dt><dd><span data-ct-cur>&euro;</span><span data-ct-out="payroll">900,000</span></dd></div>
               <div><dt>Paid for internal meetings</dt><dd><span data-ct-cur>&euro;</span><span data-ct-out="meetingPayroll">315,000</span></dd></div>
@@ -176,11 +199,11 @@
           <ul>
             <li>Executive payroll = headcount &times; average annual cost</li>
             <li>Paid for internal meetings = payroll &times; (meeting hours &divide; 40)</li>
-            <li>Coordination drag cost = paid for internal meetings &times; friction factor</li>
+            <li>Leadership friction cost = paid for internal meetings &times; friction factor</li>
             <li>Sunk executive hours = headcount &times; meeting hours &times; 46 &times; friction factor</li>
             <li>Full-time leaders equivalent = sunk executive hours &divide; 1,840</li>
             <li>Time lost per leader = meeting hours &times; friction factor, shown per week, as a share of 40 hours and as working weeks a year (&times; 46)</li>
-            <li>Cost per week = coordination drag cost &divide; 46, and per working day = coordination drag cost &divide; 230</li>
+            <li>Cost per week = leadership friction cost &divide; 46, and per working day = leadership friction cost &divide; 230</li>
           </ul>
           <p>The friction factor is your own estimate of how much meeting time adds no decision. It is the input that moves the result most, so test all three presets.</p>
         </div>
@@ -213,6 +236,7 @@
             <input type="hidden" name="fte_equivalent" value="">
             <input type="hidden" name="capacity_lost_pct" value="">
             <input type="hidden" name="weeks_per_leader" value="">
+            <input type="hidden" name="friction_symptoms" value="">
             <input type="hidden" name="monthly_delay_cost" value="">
             <input type="hidden" name="contact_me" value="No">
             <input type="hidden" name="utm" value="">
@@ -325,12 +349,12 @@
     <div class="ct-report-head">
       <img width="768" height="173" src="assets/logo-lockup.png" alt="Kuma Partners">
       <div class="ct-report-title">
-        <strong>Coordination tax breakdown</strong>
+        <strong>Leadership friction cost breakdown</strong>
         <span data-rep="meta"></span>
       </div>
     </div>
 
-    <h2>What coordination drag costs your leadership team</h2>
+    <h2>What leadership friction costs your team</h2>
     <p class="ct-report-lede" data-rep="lede"></p>
 
     <div class="ct-report-grid">
@@ -375,10 +399,11 @@
       </thead>
       <tbody data-rep="scenarios"></tbody>
     </table>
+    <p data-rep="whatIf"></p>
 
     <h3>How to read these numbers</h3>
     <p>The annual cost is a payroll figure. It counts what you pay your leaders for time spent in meetings that re-debate settled calls, repeat status that could be written down or chase consensus. It does not count the cost of decisions that arrive late, which this model does not measure.</p>
-    <p>Sunk executive time converts the same drag into capacity. A result of one full-time leader means that one senior salary is being spent, in effect, on coordination alone.</p>
+    <p>Sunk executive time converts the same drag into capacity. A result of one full-time leader means that one senior salary is being spent, in effect, on internal friction alone.</p>
     <p>The time lost per leader shows what each person gives up over a working year, in weeks, and what share of an ordinary 40-hour week that is.</p>
 
     <h3>Where the drag usually comes from</h3>
@@ -402,7 +427,7 @@
     <ul>
       <li>Executive payroll = headcount &times; average annual cost</li>
       <li>Paid for internal meetings = payroll &times; (meeting hours &divide; 40)</li>
-      <li>Coordination drag cost = paid for internal meetings &times; friction factor</li>
+      <li>Leadership friction cost = paid for internal meetings &times; friction factor</li>
       <li>Sunk executive hours = headcount &times; meeting hours &times; 46 &times; friction factor</li>
       <li>Full-time leaders equivalent = sunk executive hours &divide; 1,840</li>
       <li>Time lost per leader = meeting hours &times; friction factor &times; 46 weeks, shown in working weeks and as a share of a 40-hour week</li>
