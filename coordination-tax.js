@@ -22,6 +22,7 @@
   var WEEKS_PER_YEAR = 46;
   var HOURS_PER_WEEK = 40;
   var HOURS_PER_YEAR = WEEKS_PER_YEAR * HOURS_PER_WEEK; // 1,840
+  var WORKING_DAYS = WEEKS_PER_YEAR * 5; // 230
 
   var LIMITS = {
     team: { min: 3, max: 25, step: 1 },
@@ -70,7 +71,8 @@
     var nf = new Intl.NumberFormat('en-GB', { maximumFractionDigits: 0 });
     var nf1 = new Intl.NumberFormat('en-GB', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
 
-    var state = { team: 6, meet: 14, comp: 150000, frictionPct: 35, currency: 'EUR', symbol: '€' };
+    var state = { team: 6, meet: 14, comp: 150000, frictionPct: 35, delay: 0, currency: 'EUR', symbol: '€' };
+    var DELAY_MAX = 1000000000;
 
     var numInputs = { team: byId('ct-team'), meet: byId('ct-meet'), comp: byId('ct-comp') };
     var ranges = { team: byId('ct-team-range'), meet: byId('ct-meet-range'), comp: byId('ct-comp-range') };
@@ -78,10 +80,15 @@
     Array.prototype.forEach.call(document.querySelectorAll('[data-ct-out]'), function (el) {
       outs[el.getAttribute('data-ct-out')] = el;
     });
+    var delayInput = document.getElementById('ct-delay');
+    var delayCard = document.querySelector('[data-ct-delay-card]');
     var live = document.querySelector('[data-ct-live]');
     var liveTimer = null;
 
     function byId(id) { return document.getElementById(id); }
+
+    // Working weeks each leader loses a year: drag hours per leader over a 40-hour week.
+    function weeksPerLeader(r) { return r.dragHours / state.team / HOURS_PER_WEEK; }
 
     // ---------------- render ----------------
     function render() {
@@ -94,6 +101,20 @@
       outs.fte.textContent = nf1.format(r.fte);
       outs.weekly.textContent = nf1.format(r.weeklyLost);
       outs.capacity.textContent = Math.round(r.capacityPct) + '%';
+      outs.cost3.textContent = nf.format(Math.round(r.cost));
+      outs.perWeek.textContent = nf.format(Math.round(r.cost / WEEKS_PER_YEAR));
+      outs.perDay.textContent = nf.format(Math.round(r.cost / WORKING_DAYS));
+      outs.weeks.textContent = nf1.format(weeksPerLeader(r));
+
+      var hasDelay = state.delay > 0;
+      delayCard.hidden = !hasDelay;
+      if (hasDelay) {
+        outs.delayMonth.textContent = nf.format(Math.round(state.delay));
+        outs.delayQuarter.textContent = nf.format(Math.round(state.delay * 3));
+      }
+      Array.prototype.forEach.call(document.querySelectorAll('[data-ct-book-label]'), function (el) {
+        el.textContent = 'Talk through your ' + state.symbol + nf.format(Math.round(r.cost)) + ' with a Kuma partner';
+      });
 
       Object.keys(ranges).forEach(function (key) {
         var l = LIMITS[key];
@@ -167,6 +188,14 @@
       render();
     });
 
+    // ---------------- optional cost of delay ----------------
+    function setDelay(value) {
+      var v = parseFloat(value);
+      state.delay = (isNaN(v) || v < 0) ? 0 : Math.min(DELAY_MAX, Math.round(v));
+      render();
+    }
+    delayInput.addEventListener('input', function () { setDelay(delayInput.value); });
+
     // ---------------- lead capture ----------------
     var form = document.querySelector('[data-ct-form]');
     var formView = document.querySelector('[data-ct-form-view]');
@@ -199,7 +228,9 @@
         annual_drag_cost: Math.round(r.cost),
         annual_drag_hours: Math.round(r.dragHours),
         fte_equivalent: Math.round(r.fte * 10) / 10,
-        capacity_lost_pct: Math.round(r.capacityPct * 10) / 10
+        capacity_lost_pct: Math.round(r.capacityPct * 10) / 10,
+        weeks_per_leader: Math.round(weeksPerLeader(r) * 10) / 10,
+        monthly_delay_cost: state.delay > 0 ? state.delay : ''
       };
     }
 
@@ -354,6 +385,12 @@
         setValue(map[q], clamp(v, LIMITS[map[q]]));
         touched = true;
       });
+      var d = parseFloat(p.get('d'));
+      if (!isNaN(d) && d > 0) {
+        delayInput.value = String(Math.min(DELAY_MAX, Math.round(d)));
+        setDelay(delayInput.value);
+        touched = true;
+      }
       var f = p.get('f');
       if (f === '20' || f === '35' || f === '50') {
         var fb = document.querySelector('[data-ct-friction="' + f + '"]');
@@ -381,8 +418,19 @@
       rep('cost').textContent = money(r.cost);
       rep('hours').textContent = nf.format(Math.round(r.dragHours)) + ' hrs';
       rep('fteText').textContent = 'Equivalent to ' + nf1.format(r.fte) + ' full-time leaders of capacity.';
-      rep('weekly').textContent = nf1.format(r.weeklyLost) + ' hrs';
-      rep('capacityText').textContent = 'A week, per leader. That is ' + Math.round(r.capacityPct) + '% of a 40-hour week.';
+      rep('perDay').textContent = 'About ' + money(r.cost / WEEKS_PER_YEAR) + ' a week, or ' + money(r.cost / WORKING_DAYS) + ' for every working day.';
+      rep('weekly').textContent = nf1.format(weeksPerLeader(r)) + ' wks';
+      rep('capacityText').textContent = 'Working weeks lost per leader, every year. In an ordinary week that is ' + nf1.format(r.weeklyLost) +
+        ' hours, or ' + Math.round(r.capacityPct) + '% of a 40-hour week.';
+      var delayBlock = rep('delayBlock');
+      if (state.delay > 0) {
+        delayBlock.hidden = false;
+        rep('delayText').textContent = 'At ' + money(state.delay) + ' a month, every quarter a decision waits costs you ' + money(state.delay * 3) +
+          '. This is your own figure and sits on top of the payroll cost above.';
+      } else {
+        delayBlock.hidden = true;
+      }
+      rep('ctaText').textContent = 'Talk through your ' + money(r.cost) + ' with a Kuma partner. Book 30 minutes and bring your answers to the questions above.';
       rep('in-team').textContent = String(state.team);
       rep('in-meet').textContent = state.meet + ' hours';
       rep('in-comp').textContent = money(state.comp);
@@ -436,7 +484,8 @@
     }
     function resultsLink(source) {
       return CONFIG.shareUrl + '?t=' + state.team + '&m=' + state.meet + '&c=' + state.comp + '&f=' + state.frictionPct +
-        '&cur=' + state.currency + '&utm_source=' + source + '&utm_medium=share';
+        '&cur=' + state.currency + (state.delay > 0 ? '&d=' + state.delay : '') +
+        '&utm_source=' + source + '&utm_medium=share';
     }
     function mailto(subject, body) {
       return 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body).replace(/%0A/g, '%0D%0A');

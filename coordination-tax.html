@@ -121,6 +121,14 @@
             </div>
             <p class="ct-help">Share of meeting time spent re-debating settled calls, passive status reporting or consensus-seeking.</p>
           </div>
+
+          <div class="ct-control ct-control-optional" data-ct-control="delay">
+            <div class="ct-control-top">
+              <label for="ct-delay">Optional: what does one month of delay cost you?</label>
+              <div class="ct-num"><span class="ct-unit" data-ct-cur>&euro;</span><input type="number" id="ct-delay" inputmode="numeric" min="0" max="1000000000" step="10000" placeholder="0" aria-label="Cost of one month of delay, optional"></div>
+            </div>
+            <p class="ct-help">Monthly burn, revenue at stake or what it costs when a launch slips a month. Your own figure, used only on this page and in your PDF.</p>
+          </div>
         </div>
 
         <!-- Readout -->
@@ -131,6 +139,7 @@
             <span class="ct-card-label">Annual capital burned on coordination drag</span>
             <p class="ct-big"><span data-ct-cur>&euro;</span><span data-ct-out="cost">110,250</span><span class="ct-big-unit"> / year</span></p>
             <p class="ct-sub">Capital paid for meeting hours spent on non-decisive friction.</p>
+            <p class="ct-sub ct-perday">That is about <strong><span data-ct-cur>&euro;</span><span data-ct-out="perWeek">2,397</span></strong> a week, or <strong><span data-ct-cur>&euro;</span><span data-ct-out="perDay">479</span></strong> for every working day.</p>
             <dl class="ct-breakdown">
               <div><dt>Executive payroll</dt><dd><span data-ct-cur>&euro;</span><span data-ct-out="payroll">900,000</span></dd></div>
               <div><dt>Paid for internal meetings</dt><dd><span data-ct-cur>&euro;</span><span data-ct-out="meetingPayroll">315,000</span></dd></div>
@@ -145,9 +154,15 @@
           </article>
 
           <article class="ct-metric">
-            <span class="ct-card-label">Speed penalty</span>
-            <p class="ct-big ct-big-sm"><span data-ct-out="weekly">4.9</span><span class="ct-big-unit"> hrs / week per leader</span></p>
-            <p class="ct-sub"><strong data-ct-out="capacity">12%</strong> of each leader's 40-hour week goes on meetings that do not move a decision.</p>
+            <span class="ct-card-label">Time lost per leader</span>
+            <p class="ct-big ct-big-sm"><span data-ct-out="weeks">5.6</span><span class="ct-big-unit"> working weeks / year per leader</span></p>
+            <p class="ct-sub">Every leader loses this much of the year to meetings that do not move a decision. In an ordinary week that is <strong data-ct-out="weekly">4.9</strong> hours, or <strong data-ct-out="capacity">12%</strong> of a 40-hour week.</p>
+          </article>
+
+          <article class="ct-metric" data-ct-delay-card hidden>
+            <span class="ct-card-label">Cost of waiting</span>
+            <p class="ct-big ct-big-sm"><span data-ct-cur>&euro;</span><span data-ct-out="delayQuarter">0</span><span class="ct-big-unit"> per quarter of delay</span></p>
+            <p class="ct-sub">At <strong><span data-ct-cur>&euro;</span><span data-ct-out="delayMonth">0</span></strong> a month. This sits on top of the payroll cost above: it is what a decision that arrives late costs you.</p>
           </article>
 
           <p class="ct-sr" role="status" aria-live="polite" data-ct-live></p>
@@ -164,7 +179,8 @@
             <li>Coordination drag cost = paid for internal meetings &times; friction factor</li>
             <li>Sunk executive hours = headcount &times; meeting hours &times; 46 &times; friction factor</li>
             <li>Full-time leaders equivalent = sunk executive hours &divide; 1,840</li>
-            <li>Speed penalty = meeting hours &times; friction factor, shown per leader per week and as a share of 40 hours</li>
+            <li>Time lost per leader = meeting hours &times; friction factor, shown per week, as a share of 40 hours and as working weeks a year (&times; 46)</li>
+            <li>Cost per week = coordination drag cost &divide; 46, and per working day = coordination drag cost &divide; 230</li>
           </ul>
           <p>The friction factor is your own estimate of how much meeting time adds no decision. It is the input that moves the result most, so test all three presets.</p>
         </div>
@@ -176,8 +192,8 @@
     <div class="wrap">
       <div class="ct-capture-card">
         <div data-ct-form-view>
-          <h2 id="ct-capture-title">Export this financial model to your executive dashboard.</h2>
-          <p class="ct-capture-sub">Add your details and download the full breakdown of this model as a PDF, using the inputs you have set above.</p>
+          <h2 id="ct-capture-title">Get the full breakdown behind your <span data-ct-cur>&euro;</span><span data-ct-out="cost3">110,250</span> a year.</h2>
+          <p class="ct-capture-sub">Add your details and download the PDF: your inputs, three scenarios side by side and the questions to take into your next leadership meeting.</p>
 
           <form class="ct-form" name="coordination-tax" method="POST" action="/coordination-tax" data-netlify="true" netlify-honeypot="bot-field" data-ct-form novalidate>
             <input type="hidden" name="form-name" value="coordination-tax">
@@ -196,6 +212,8 @@
             <input type="hidden" name="annual_drag_hours" value="">
             <input type="hidden" name="fte_equivalent" value="">
             <input type="hidden" name="capacity_lost_pct" value="">
+            <input type="hidden" name="weeks_per_leader" value="">
+            <input type="hidden" name="monthly_delay_cost" value="">
             <input type="hidden" name="contact_me" value="No">
             <input type="hidden" name="utm" value="">
             <input type="hidden" name="source" value="/coordination-tax">
@@ -258,7 +276,7 @@
 
           <div class="ct-actions">
             <button type="button" class="btn btn-primary" data-ct-download>Download the PDF breakdown &darr;</button>
-            <a href="index.html#contact" class="btn btn-secondary" data-ct-book data-ct-path="debrief-success">Book a 30-minute debrief &rarr;</a>
+            <a href="index.html#contact" class="btn btn-secondary" data-ct-book data-ct-path="debrief-success"><span data-ct-book-label>Talk through your numbers with a Kuma partner</span> &rarr;</a>
           </div>
 
           <div class="ct-share">
@@ -296,7 +314,7 @@
         <article class="ct-path">
           <span class="ct-card-label ct-card-label-dark">Option B &bull; Executive advisory</span>
           <p>Need an objective audit of your leadership cadence and decision architecture?</p>
-          <a href="index.html#contact" class="btn btn-secondary ct-btn-ondark" data-ct-book data-ct-path="debrief">Book a 30-Minute Telemetry Debrief with Kuma Partners &rarr;</a>
+          <a href="index.html#contact" class="btn btn-secondary ct-btn-ondark" data-ct-book data-ct-path="debrief"><span data-ct-book-label>Talk through your numbers with a Kuma partner</span> &rarr;</a>
         </article>
       </div>
     </div>
@@ -320,6 +338,7 @@
         <span class="ct-report-label">Annual capital burned</span>
         <p class="ct-report-big" data-rep="cost"></p>
         <p>Paid for meeting hours that do not move a decision.</p>
+        <p data-rep="perDay"></p>
       </div>
       <div class="ct-report-card">
         <span class="ct-report-label">Sunk executive time</span>
@@ -327,10 +346,15 @@
         <p data-rep="fteText"></p>
       </div>
       <div class="ct-report-card">
-        <span class="ct-report-label">Speed penalty</span>
+        <span class="ct-report-label">Time lost per leader</span>
         <p class="ct-report-big" data-rep="weekly"></p>
         <p data-rep="capacityText"></p>
       </div>
+    </div>
+
+    <div class="ct-report-delay" data-rep="delayBlock" hidden>
+      <span class="ct-report-label">Cost of waiting</span>
+      <p data-rep="delayText"></p>
     </div>
 
     <h3>Your inputs</h3>
@@ -355,7 +379,7 @@
     <h3>How to read these numbers</h3>
     <p>The annual cost is a payroll figure. It counts what you pay your leaders for time spent in meetings that re-debate settled calls, repeat status that could be written down or chase consensus. It does not count the cost of decisions that arrive late, which this model does not measure.</p>
     <p>Sunk executive time converts the same drag into capacity. A result of one full-time leader means that one senior salary is being spent, in effect, on coordination alone.</p>
-    <p>The speed penalty shows what each leader loses in an ordinary week, and what share of a 40-hour week that is.</p>
+    <p>The time lost per leader shows what each person gives up over a working year, in weeks, and what share of an ordinary 40-hour week that is.</p>
 
     <h3>Where the drag usually comes from</h3>
     <ul>
@@ -363,6 +387,15 @@
       <li>Status updates delivered live that could have been read beforehand.</li>
       <li>Consensus loops, where every function has a vote and nobody holds the decision.</li>
     </ul>
+
+    <h3>Questions to take into your next leadership meeting</h3>
+    <p>Answer these separately, then compare. The gaps between your answers are where the drag sits.</p>
+    <ol class="ct-report-questions">
+      <li>Which decision from your last leadership meeting was reopened this week, and who reopened it?</li>
+      <li>Who could say no to your most important current initiative without having said so out loud?</li>
+      <li>For your three biggest open decisions, can everyone name the single person who owns the call?</li>
+      <li>Which standing meeting would nobody miss if it stopped next month?</li>
+    </ol>
 
     <h3>How this is calculated</h3>
     <p>The model assumes 46 working weeks a year and a 40-hour working week, which gives 1,840 working hours per leader.</p>
@@ -372,12 +405,12 @@
       <li>Coordination drag cost = paid for internal meetings &times; friction factor</li>
       <li>Sunk executive hours = headcount &times; meeting hours &times; 46 &times; friction factor</li>
       <li>Full-time leaders equivalent = sunk executive hours &divide; 1,840</li>
-      <li>Speed penalty = meeting hours &times; friction factor, per leader per week and as a share of 40 hours</li>
+      <li>Time lost per leader = meeting hours &times; friction factor &times; 46 weeks, shown in working weeks and as a share of a 40-hour week</li>
     </ul>
 
     <div class="ct-report-cta">
       <strong>Next step</strong>
-      <p>Book a 30-minute debrief with Kuma Partners to go through these numbers and see where the drag starts in your team.</p>
+      <p data-rep="ctaText"></p>
       <p class="ct-report-link" data-rep="book"></p>
     </div>
 
