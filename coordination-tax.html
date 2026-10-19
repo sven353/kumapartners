@@ -177,7 +177,7 @@
       <div class="ct-capture-card">
         <div data-ct-form-view>
           <h2 id="ct-capture-title">Export this financial model to your executive dashboard.</h2>
-          <p class="ct-capture-sub">Add your email and company stage and we will send the full breakdown of this model, using the inputs you have set above.</p>
+          <p class="ct-capture-sub">Add your details and download the full breakdown of this model as a PDF, using the inputs you have set above.</p>
 
           <form class="ct-form" name="coordination-tax" method="POST" action="/coordination-tax" data-netlify="true" netlify-honeypot="bot-field" data-ct-form novalidate>
             <input type="hidden" name="form-name" value="coordination-tax">
@@ -196,15 +196,30 @@
             <input type="hidden" name="annual_drag_hours" value="">
             <input type="hidden" name="fte_equivalent" value="">
             <input type="hidden" name="capacity_lost_pct" value="">
+            <input type="hidden" name="contact_me" value="No">
             <input type="hidden" name="utm" value="">
             <input type="hidden" name="source" value="/coordination-tax">
 
             <div class="ct-form-row">
               <div class="field">
+                <label for="ct-name">Name</label>
+                <input type="text" id="ct-name" name="name" autocomplete="name" required>
+                <span class="ct-field-error" data-ct-error="name">Please enter your name.</span>
+              </div>
+              <div class="field">
                 <label for="ct-email">Work email</label>
                 <input type="email" id="ct-email" name="email" autocomplete="email" required>
                 <span class="ct-field-error" data-ct-error="email">Please enter a valid email address.</span>
               </div>
+            </div>
+
+            <label class="ct-check" for="ct-contact">
+              <input type="checkbox" id="ct-contact" data-ct-contact>
+              <span>Contact me for more</span>
+            </label>
+            <p class="ct-check-note">Tick the box if you would like a Kuma partner to get in touch about your numbers.</p>
+
+            <div class="ct-form-row">
               <div class="field">
                 <label for="ct-stage">Company stage</label>
                 <div class="select-shell">
@@ -215,6 +230,7 @@
                     <option>Series B</option>
                     <option>Series C+</option>
                     <option>Bootstrapped / Profitable</option>
+                    <option>Post M&amp;A</option>
                   </select>
                   <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
                 </div>
@@ -227,8 +243,8 @@
               <input type="text" name="company_tax_id" id="hp-tax-id-ct" tabindex="-1" autocomplete="off" value="">
             </div>
 
-            <button type="submit" class="btn btn-primary ct-submit" data-ct-submit><span data-btn-label>Receive Telemetry Breakdown (PDF) &rarr;</span></button>
-            <p class="ct-form-microcopy">Confidential. We use your details only to send this breakdown. See our <a href="privacy.html">Privacy Policy</a>.</p>
+            <button type="submit" class="btn btn-primary ct-submit" data-ct-submit><span data-btn-label>Download my breakdown (PDF) &rarr;</span></button>
+            <p class="ct-form-microcopy">Confidential. We use your details to unlock this breakdown and, only if you tick the box, to contact you. See our <a href="privacy.html">Privacy Policy</a>.</p>
             <p class="ct-form-error" data-ct-form-error hidden>Something went wrong sending your details. Please try again, or email us at <a href="mailto:contact@kuma.partners">contact@kuma.partners</a>.</p>
           </form>
         </div>
@@ -237,7 +253,32 @@
           <div class="ct-success-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4.5 12.75l6 6 9-13.5"/></svg>
           </div>
-          <p class="ct-confirm" data-ct-success-text>Breakdown requested. We will send it to your inbox within 24 hours.</p>
+          <p class="ct-confirm" data-ct-success-text>Your breakdown is ready.</p>
+          <p class="ct-success-sub" data-ct-success-sub></p>
+
+          <div class="ct-actions">
+            <button type="button" class="btn btn-primary" data-ct-download>Download the PDF breakdown &darr;</button>
+            <a href="index.html#contact" class="btn btn-secondary" data-ct-book data-ct-path="debrief-success">Book a 30-minute debrief &rarr;</a>
+          </div>
+
+          <div class="ct-share">
+            <div class="ct-share-group">
+              <span class="ct-share-title">Share the calculator with a peer</span>
+              <div class="ct-share-row">
+                <button type="button" class="btn btn-secondary ct-btn-sm" data-ct-copy="calc">Copy link</button>
+                <a class="btn btn-secondary ct-btn-sm" data-ct-mail="calc" href="#">Email</a>
+                <a class="btn btn-secondary ct-btn-sm" data-ct-linkedin href="#" target="_blank" rel="noopener">LinkedIn</a>
+              </div>
+            </div>
+            <div class="ct-share-group">
+              <span class="ct-share-title">Share your results with a peer</span>
+              <div class="ct-share-row">
+                <button type="button" class="btn btn-secondary ct-btn-sm" data-ct-copy="results">Copy link</button>
+                <a class="btn btn-secondary ct-btn-sm" data-ct-mail="results" href="#">Email</a>
+              </div>
+            </div>
+            <p class="ct-share-status" role="status" aria-live="polite" data-ct-share-status></p>
+          </div>
         </div>
       </div>
     </div>
@@ -259,6 +300,88 @@
         </article>
       </div>
     </div>
+  </section>
+
+  <!-- Print only: the PDF breakdown. Hidden on screen, filled by coordination-tax.js once the visitor has unlocked it. -->
+  <section class="ct-report" data-ct-report aria-hidden="true">
+    <div class="ct-report-head">
+      <img width="768" height="173" src="assets/logo-lockup.png" alt="Kuma Partners">
+      <div class="ct-report-title">
+        <strong>Coordination tax breakdown</strong>
+        <span data-rep="meta"></span>
+      </div>
+    </div>
+
+    <h2>What coordination drag costs your leadership team</h2>
+    <p class="ct-report-lede" data-rep="lede"></p>
+
+    <div class="ct-report-grid">
+      <div class="ct-report-card">
+        <span class="ct-report-label">Annual capital burned</span>
+        <p class="ct-report-big" data-rep="cost"></p>
+        <p>Paid for meeting hours that do not move a decision.</p>
+      </div>
+      <div class="ct-report-card">
+        <span class="ct-report-label">Sunk executive time</span>
+        <p class="ct-report-big" data-rep="hours"></p>
+        <p data-rep="fteText"></p>
+      </div>
+      <div class="ct-report-card">
+        <span class="ct-report-label">Speed penalty</span>
+        <p class="ct-report-big" data-rep="weekly"></p>
+        <p data-rep="capacityText"></p>
+      </div>
+    </div>
+
+    <h3>Your inputs</h3>
+    <table class="ct-report-table">
+      <tbody>
+        <tr><th>Executive and senior leadership headcount</th><td data-rep="in-team"></td></tr>
+        <tr><th>Internal meeting hours per leader, per week</th><td data-rep="in-meet"></td></tr>
+        <tr><th>Average annual fully-loaded executive cost</th><td data-rep="in-comp"></td></tr>
+        <tr><th>Low-value friction factor</th><td data-rep="in-friction"></td></tr>
+      </tbody>
+    </table>
+
+    <h3>How sensitive the result is to the friction factor</h3>
+    <p>The friction factor is your own estimate of how much meeting time adds no decision, and it moves the result more than any other input. The same team looks like this at each preset.</p>
+    <table class="ct-report-table ct-report-scenarios">
+      <thead>
+        <tr><th>Scenario</th><th>Annual cost</th><th>Hours a year</th><th>Full-time leaders</th></tr>
+      </thead>
+      <tbody data-rep="scenarios"></tbody>
+    </table>
+
+    <h3>How to read these numbers</h3>
+    <p>The annual cost is a payroll figure. It counts what you pay your leaders for time spent in meetings that re-debate settled calls, repeat status that could be written down or chase consensus. It does not count the cost of decisions that arrive late, which this model does not measure.</p>
+    <p>Sunk executive time converts the same drag into capacity. A result of one full-time leader means that one senior salary is being spent, in effect, on coordination alone.</p>
+    <p>The speed penalty shows what each leader loses in an ordinary week, and what share of a 40-hour week that is.</p>
+
+    <h3>Where the drag usually comes from</h3>
+    <ul>
+      <li>Decisions that are made in one meeting and reopened in the next, because nobody owns the call.</li>
+      <li>Status updates delivered live that could have been read beforehand.</li>
+      <li>Consensus loops, where every function has a vote and nobody holds the decision.</li>
+    </ul>
+
+    <h3>How this is calculated</h3>
+    <p>The model assumes 46 working weeks a year and a 40-hour working week, which gives 1,840 working hours per leader.</p>
+    <ul>
+      <li>Executive payroll = headcount &times; average annual cost</li>
+      <li>Paid for internal meetings = payroll &times; (meeting hours &divide; 40)</li>
+      <li>Coordination drag cost = paid for internal meetings &times; friction factor</li>
+      <li>Sunk executive hours = headcount &times; meeting hours &times; 46 &times; friction factor</li>
+      <li>Full-time leaders equivalent = sunk executive hours &divide; 1,840</li>
+      <li>Speed penalty = meeting hours &times; friction factor, per leader per week and as a share of 40 hours</li>
+    </ul>
+
+    <div class="ct-report-cta">
+      <strong>Next step</strong>
+      <p>Book a 30-minute debrief with Kuma Partners to go through these numbers and see where the drag starts in your team.</p>
+      <p class="ct-report-link" data-rep="book"></p>
+    </div>
+
+    <p class="ct-report-foot">Kuma Partners &middot; kuma.partners &middot; contact@kuma.partners</p>
   </section>
 
 </main>

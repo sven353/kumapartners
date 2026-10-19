@@ -6,9 +6,11 @@
 
   // ------------------------------ CONFIG ------------------------------
   var CONFIG = {
-    // Calendar link for the "Book a 30-Minute Telemetry Debrief" button. While empty it falls back to the
+    // Calendar link for the debrief buttons and the PDF. While empty it falls back to the
     // homepage contact section, so the button always goes somewhere real.
-    bookingUrl: '',
+    bookingUrl: 'https://calendly.com/sven-mulfinger/leadership-friction-debrief-30min',
+    // Public address of the calculator. Every share link is built from this.
+    shareUrl: 'https://www.kuma.partners/coordination-tax',
     // Optional second destination for the lead (HubSpot, Zapier, Make). Receives JSON after the Netlify
     // form accepts the submission. Leave empty to rely on Netlify Forms alone.
     crmWebhookUrl: '',
@@ -170,6 +172,8 @@
     var formView = document.querySelector('[data-ct-form-view]');
     var success = document.querySelector('[data-ct-success]');
     var successText = document.querySelector('[data-ct-success-text]');
+    var successSub = document.querySelector('[data-ct-success-sub]');
+    var contactBox = form.querySelector('[data-ct-contact]');
     var submitBtn = form.querySelector('[data-ct-submit]');
     var submitLabel = submitBtn.querySelector('[data-btn-label]');
     var formError = form.querySelector('[data-ct-form-error]');
@@ -204,6 +208,7 @@
       var snap = snapshot();
       Object.keys(snap).forEach(function (k) { form.elements[k].value = String(snap[k]); });
       form.elements.utm.value = utmString();
+      form.elements.contact_me.value = contactBox.checked ? 'Yes' : 'No';
       return snap;
     }
 
@@ -253,8 +258,19 @@
       field.classList.toggle('is-invalid', on);
     }
 
-    function showSuccess(email) {
-      successText.textContent = 'Breakdown requested. We will send it to ' + email + ' within 24 hours.';
+    function firstName(full) {
+      var t = String(full || '').trim().split(/\s+/)[0];
+      return t || '';
+    }
+
+    function showSuccess(name, wantsContact) {
+      fillReport(name);
+      refreshShareLinks();
+      var first = firstName(name);
+      successText.textContent = first ? 'Thank you, ' + first + '. Your breakdown is ready.' : 'Your breakdown is ready.';
+      successSub.textContent = wantsContact
+        ? 'A Kuma partner will be in touch about your numbers. You can also pick a time yourself below.'
+        : 'Download the PDF, share it with a peer or book a time to go through the numbers.';
       formView.hidden = true;
       success.hidden = false;
       success.focus();
@@ -262,24 +278,31 @@
 
     form.elements.email.addEventListener('input', function () { setInvalid('email', false); });
     form.elements.stage.addEventListener('change', function () { setInvalid('stage', false); });
+    form.elements.name.addEventListener('input', function () { setInvalid('name', false); });
 
     form.addEventListener('submit', function (e) {
       e.preventDefault();
       if (busy) return;
+      var name = form.elements.name.value.trim();
       var email = form.elements.email.value.trim();
       var stage = form.elements.stage.value;
+      var okName = name !== '';
       var okEmail = isValidEmail(email);
       var okStage = stage !== '';
+      setInvalid('name', !okName);
       setInvalid('email', !okEmail);
       setInvalid('stage', !okStage);
+      if (!okName) { form.elements.name.focus(); return; }
       if (!okEmail) { form.elements.email.focus(); return; }
       if (!okStage) { form.elements.stage.focus(); return; }
 
       var snap = fillHiddenFields();
       var body = {
         product_intent: 'coordination-tax-calculator',
+        name: name,
         email: email,
         stage: stage,
+        contact_me: contactBox.checked ? 'Yes' : 'No',
         model: snap,
         source: '/coordination-tax',
         utm: utmString(),
@@ -288,7 +311,7 @@
       };
 
       // Bots get the normal confirmation and no network call, so they have no error to retry on.
-      if (looksLikeBot()) { showSuccess(email); return; }
+      if (looksLikeBot()) { showSuccess(name, contactBox.checked); return; }
 
       formError.hidden = true;
       busy = true;
@@ -297,24 +320,183 @@
 
       submitLead(body).then(function () {
         busy = false;
-        showSuccess(email);
+        showSuccess(name, contactBox.checked);
       }).catch(function () {
         busy = false;
         submitBtn.disabled = false;
-        submitLabel.textContent = 'Receive Telemetry Breakdown (PDF) →';
+        submitLabel.textContent = 'Download my breakdown (PDF) →';
         formError.hidden = false;
       });
     });
 
     // ---------------- booking link ----------------
-    var book = document.querySelector('[data-ct-book]');
-    if (book && CONFIG.bookingUrl) {
+    var bookUrl = CONFIG.bookingUrl || 'https://www.kuma.partners/#contact';
+    Array.prototype.forEach.call(document.querySelectorAll('[data-ct-book]'), function (book) {
+      if (!CONFIG.bookingUrl) return;
       book.setAttribute('href', CONFIG.bookingUrl);
       if (/^https?:/i.test(CONFIG.bookingUrl)) {
         book.setAttribute('target', '_blank');
         book.setAttribute('rel', 'noopener');
       }
+    });
+
+    // ---------------- shared links open with the sender's inputs ----------------
+    (function applySharedInputs() {
+      var p;
+      try { p = new URLSearchParams(window.location.search); } catch (e) { return; }
+      var map = { t: 'team', m: 'meet', c: 'comp' };
+      var touched = false;
+      Object.keys(map).forEach(function (q) {
+        var raw = p.get(q);
+        if (raw === null || raw === '') return;
+        var v = parseFloat(raw);
+        if (isNaN(v)) return;
+        setValue(map[q], clamp(v, LIMITS[map[q]]));
+        touched = true;
+      });
+      var f = p.get('f');
+      if (f === '20' || f === '35' || f === '50') {
+        var fb = document.querySelector('[data-ct-friction="' + f + '"]');
+        if (fb) { fb.click(); touched = true; }
+      }
+      var cur = p.get('cur');
+      if (cur === 'EUR' || cur === 'USD') {
+        var cb = document.querySelector('[data-ct-currency="' + cur + '"]');
+        if (cb) { cb.click(); touched = true; }
+      }
+      return touched;
+    })();
+
+    // ---------------- PDF breakdown (browser print, same approach as the Leadership Friction Scan) ----------------
+    var report = document.querySelector('[data-ct-report]');
+    function rep(key) { return report.querySelector('[data-rep="' + key + '"]'); }
+    function money(n) { return state.symbol + nf.format(Math.round(n)); }
+
+    function fillReport(name) {
+      var r = compute(state);
+      var today = new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' });
+      rep('meta').textContent = (name ? 'Prepared for ' + name + ' • ' : '') + today;
+      rep('lede').textContent = 'With ' + state.team + ' leaders spending ' + state.meet + ' hours a week in internal meetings and ' +
+        state.frictionPct + '% of that time adding no decision, coordination drag costs about ' + money(r.cost) + ' a year.';
+      rep('cost').textContent = money(r.cost);
+      rep('hours').textContent = nf.format(Math.round(r.dragHours)) + ' hrs';
+      rep('fteText').textContent = 'Equivalent to ' + nf1.format(r.fte) + ' full-time leaders of capacity.';
+      rep('weekly').textContent = nf1.format(r.weeklyLost) + ' hrs';
+      rep('capacityText').textContent = 'A week, per leader. That is ' + Math.round(r.capacityPct) + '% of a 40-hour week.';
+      rep('in-team').textContent = String(state.team);
+      rep('in-meet').textContent = state.meet + ' hours';
+      rep('in-comp').textContent = money(state.comp);
+      rep('in-friction').textContent = state.frictionPct + '%';
+
+      var rows = [[20, 'Optimised / lean'], [35, 'Typical scale-up'], [50, 'High drag / consensus trap']];
+      var body = rep('scenarios');
+      body.textContent = '';
+      rows.forEach(function (row) {
+        var sc = compute({ team: state.team, meet: state.meet, comp: state.comp, frictionPct: row[0] });
+        var tr = document.createElement('tr');
+        if (row[0] === state.frictionPct) tr.className = 'is-current';
+        [row[0] + '% ' + row[1], money(sc.cost), nf.format(Math.round(sc.dragHours)), nf1.format(sc.fte)].forEach(function (cell) {
+          var td = document.createElement('td');
+          td.textContent = cell;
+          tr.appendChild(td);
+        });
+        body.appendChild(tr);
+      });
+
+      rep('book').textContent = bookUrl;
+      report.setAttribute('data-ready', 'true');
     }
+
+    var originalTitle = document.title;
+    function restoreTitle() { document.title = originalTitle; }
+    window.addEventListener('afterprint', restoreTitle);
+
+    var downloadBtn = document.querySelector('[data-ct-download]');
+    if (downloadBtn) {
+      downloadBtn.addEventListener('click', function () {
+        fillReport(form.elements.name.value.trim());
+        document.title = 'Coordination tax breakdown | Kuma Partners';
+        window.print();
+        window.setTimeout(restoreTitle, 1500);
+      });
+    }
+
+    // ---------------- sharing ----------------
+    var shareStatus = document.querySelector('[data-ct-share-status]');
+    var statusTimer = null;
+    function flash(text) {
+      if (!shareStatus) return;
+      shareStatus.textContent = text;
+      window.clearTimeout(statusTimer);
+      statusTimer = window.setTimeout(function () { shareStatus.textContent = ''; }, 3500);
+    }
+
+    function calcLink(source) {
+      return CONFIG.shareUrl + '?utm_source=' + source + '&utm_medium=share';
+    }
+    function resultsLink(source) {
+      return CONFIG.shareUrl + '?t=' + state.team + '&m=' + state.meet + '&c=' + state.comp + '&f=' + state.frictionPct +
+        '&cur=' + state.currency + '&utm_source=' + source + '&utm_medium=share';
+    }
+    function mailto(subject, body) {
+      return 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body).replace(/%0A/g, '%0D%0A');
+    }
+    function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+      return new Promise(function (resolve, reject) {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        var ok = false;
+        try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+        document.body.removeChild(ta);
+        ok ? resolve() : reject(new Error('copy failed'));
+      });
+    }
+
+    function refreshShareLinks() {
+      var r = compute(state);
+      var calcMail = document.querySelector('[data-ct-mail="calc"]');
+      if (calcMail) {
+        calcMail.setAttribute('href', mailto(
+          'What does coordination drag cost your leadership team?',
+          'I tried this calculator from Kuma Partners. It models what meeting load and consensus loops cost an executive team each year, in money, hours and full-time capacity.\n\nTry it with your own figures:\n' + calcLink('peer_mail') + '\n'
+        ));
+      }
+      var resMail = document.querySelector('[data-ct-mail="results"]');
+      if (resMail) {
+        resMail.setAttribute('href', mailto(
+          'Our coordination tax: ' + money(r.cost) + ' a year',
+          'I ran our leadership team through the Coordination Tax Calculator from Kuma Partners.\n\n' +
+          state.team + ' leaders, ' + state.meet + ' meeting hours a week each, ' + state.frictionPct + '% of that time adding no decision. ' +
+          'It comes to about ' + money(r.cost) + ' a year, or ' + nf1.format(r.fte) + ' full-time leaders.\n\n' +
+          'The inputs are filled in, so change them to fit your own team:\n' + resultsLink('peer_mail') + '\n'
+        ));
+      }
+      var ln = document.querySelector('[data-ct-linkedin]');
+      if (ln) ln.setAttribute('href', 'https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(calcLink('linkedin')));
+    }
+
+    Array.prototype.forEach.call(document.querySelectorAll('[data-ct-copy]'), function (btn) {
+      btn.addEventListener('click', function () {
+        var which = btn.getAttribute('data-ct-copy');
+        var link = which === 'results' ? resultsLink('peer_copy') : calcLink('peer_copy');
+        copyText(link).then(
+          function () { flash('Link copied.'); },
+          function () { flash('Copy failed. Copy this link by hand: ' + link); }
+        );
+      });
+    });
+    Array.prototype.forEach.call(document.querySelectorAll('[data-ct-mail], [data-ct-linkedin]'), function (a) {
+      a.addEventListener('mouseenter', refreshShareLinks);
+      a.addEventListener('focus', refreshShareLinks);
+      a.addEventListener('touchstart', refreshShareLinks, { passive: true });
+    });
+    refreshShareLinks();
 
     render();
   });
