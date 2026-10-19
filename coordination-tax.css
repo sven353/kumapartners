@@ -52,6 +52,14 @@
 .ct-control-optional{border-top:var(--hairline) solid var(--hairline-color); padding-top:22px; margin-top:6px;}
 .ct-perday{margin-top:10px;}
 .ct-whatif{margin-top:8px;}
+/* Qualitative note: dashed hairline marks it as outside the model */
+.ct-note{border:var(--hairline) dashed rgba(11,21,35,.28); border-radius:var(--radius-card); padding:24px 28px;}
+.ct-note-title{font-family:'Montserrat',Arial,sans-serif; font-weight:600; font-size:1.05rem; line-height:1.4; color:var(--navy); margin:10px 0 10px;}
+.ct-note p{margin:0 0 8px; font-size:.92rem; color:rgba(26,26,26,.75);}
+.ct-note .ct-note-title{font-size:1.05rem; color:var(--navy); margin:10px 0 10px;}
+.ct-note-link{display:inline-block; margin-top:8px; font-family:'Lato',Arial,sans-serif; font-weight:700; font-size:.9rem; color:var(--teal); text-decoration:none; border-bottom:var(--hairline) solid currentColor;}
+.ct-note-link:hover{color:var(--navy);}
+.ct-note-link:focus-visible{outline:2px solid var(--teal); outline-offset:3px;}
 .ct-metric-primary .ct-whatif strong{color:#fff;}
 .ct-chips{display:flex; flex-wrap:wrap; gap:8px; margin:14px 0 0;}
 .ct-chips button{
