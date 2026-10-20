@@ -143,7 +143,7 @@
 .execution-diagnostic-form-sub{font-size:.92rem; color:rgba(26,26,26,.7); margin:0 0 20px;}
 .execution-diagnostic-field-error{display:none; font-size:.8rem; color:#b3261e; margin-top:6px;}
 .execution-diagnostic-field-error.is-visible{display:block;}
-.execution-diagnostic-check{
+body.execution-diagnostic .contact-form .execution-diagnostic-check{
   display:flex; align-items:flex-start; gap:10px; margin:2px 0 20px; cursor:pointer;
   font-size:.92rem; color:var(--navy); text-transform:none; letter-spacing:0; font-weight:400;
 }
