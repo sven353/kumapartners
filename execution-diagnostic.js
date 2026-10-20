@@ -5,7 +5,7 @@
    Comparison without a backend: the invite link carries the inviter's first name, company and scores
    in the URL hash (#i=). The colleague answers the six core questions and sees both views side by side;
    their return link (#x=) carries both sets, so the inviter sees the same comparison.
-   Progress is kept in localStorage; every storage call is wrapped, so the page works without it. */
+   Nothing is stored in the browser: a refresh always starts the diagnostic from scratch. */
 (function () {
   'use strict';
 
@@ -240,13 +240,11 @@
     try { if (window.dataLayer && window.dataLayer.push) window.dataLayer.push({ event: 'ed_' + name, ed: data }); } catch (e) { /* never block */ }
   }
 
-  /* ---------- storage ---------- */
-  function load() {
-    try { var s = window.localStorage.getItem(STORE_KEY); return s ? JSON.parse(s) : null; } catch (e) { return null; }
-  }
-  function save() {
-    try { window.localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) { /* storage unavailable */ }
-  }
+  /* ---------- no storage ---------- */
+  // Answers live in memory only, so a refresh starts from scratch. Earlier versions of this page kept
+  // answers in localStorage; that copy is removed on load so a returning visitor also starts fresh.
+  try { window.localStorage.removeItem(STORE_KEY); } catch (e) { /* storage unavailable */ }
+  function save() { /* nothing is kept between visits */ }
 
   /* ---------- comparison links ---------- */
   // Values from a link are untrusted: they are cleaned here and only ever written with textContent or into input values.
@@ -317,32 +315,22 @@
   var invitedEl = $('[data-ed-invited]', app);
 
   function fresh() { return { step: 0, answers: {}, invite: null, compare: null, lead: null }; }
-  var state = load() || fresh();
-  if (typeof state.step !== 'number' || !state.answers) state = fresh();
+  var state = fresh();
 
   // A link in the address bar wins over whatever this browser had stored.
   var linked = readHash();
   if (linked && linked.kind === 'invite') {
-    var sameInvite = state.invite && JSON.stringify(state.invite) === JSON.stringify(linked.view);
-    if (!sameInvite) {
-      var keepLead = state.lead;
-      state = fresh();
-      state.lead = keepLead;
-      state.invite = linked.view;
-      state.answers = { stage: linked.view.ctx.stage, headcount: linked.view.ctx.headcount, ai_level: linked.view.ctx.ai_level };
-      state.step = FIRST_CORE_STEP;
-    }
-    save(); dropHash(); track('invite_open');
+    state.invite = linked.view;
+    state.answers = { stage: linked.view.ctx.stage, headcount: linked.view.ctx.headcount, ai_level: linked.view.ctx.ai_level };
+    state.step = FIRST_CORE_STEP;
+    track('invite_open');
   } else if (linked && linked.kind === 'compare') {
     state.compare = { a: linked.a, b: linked.b };
     state.invite = null;
-    var own = state.step >= STEPS.length && cleanScores(state.answers);
-    if (!own) {
-      state.answers = { stage: linked.a.ctx.stage, headcount: linked.a.ctx.headcount, ai_level: linked.a.ctx.ai_level };
-      CORE.forEach(function (k) { state.answers[k] = linked.a.a[k]; });
-      state.step = STEPS.length;
-    }
-    save(); dropHash(); track('comparison_open');
+    state.answers = { stage: linked.a.ctx.stage, headcount: linked.a.ctx.headcount, ai_level: linked.a.ctx.ai_level };
+    CORE.forEach(function (k) { state.answers[k] = linked.a.a[k]; });
+    state.step = STEPS.length;
+    track('comparison_open');
   } else if (linked && linked.kind === 'broken') {
     dropHash();
   }
@@ -366,7 +354,6 @@
 
   function renderStep() {
     var s = STEPS[state.step];
-    if (resumeEl) resumeEl.hidden = true;
     var start = firstStep();
     var count = STEPS.length - start;
     resultEl.hidden = true;
@@ -603,7 +590,6 @@
     progress.hidden = true;
     navEl.hidden = true;
     invitedEl.hidden = true;
-    if (resumeEl) resumeEl.hidden = true;
     resultEl.hidden = false;
 
     $('[data-ed-out="efi"]', resultEl).textContent = r.efi;
@@ -663,6 +649,21 @@
     }
   }
 
+  /* ---------- the brief section headline follows the weakest link ---------- */
+  var HEADLINES = {
+    q1: 'Decisions are where your company leaks. Here is what it costs.',
+    q2: 'Ownership is where your company leaks. Here is what it costs.',
+    q3: 'Priorities are where your company leaks. Here is what it costs.',
+    q4: 'Handovers are where your company leaks. Here is what it costs.',
+    q5: 'Turning AI into results is where your company leaks. Here is what it costs.'
+  };
+  var briefTitle = $('#execution-diagnostic-debrief-title');
+  var briefTitleDefault = briefTitle ? briefTitle.textContent : '';
+  function syncHeadline() {
+    if (!briefTitle) return;
+    briefTitle.textContent = complete() ? HEADLINES[calculateAuditResults(state.answers).weakest] : briefTitleDefault;
+  }
+
   /* ---------- form and unlock ---------- */
   var form = $('[data-ed-form]');
   var formView = $('[data-ed-form-view]');
@@ -679,6 +680,7 @@
 
   // Keeps the form card in step with the diagnostic: before, after and once the brief is unlocked.
   function syncForm() {
+    syncHeadline();
     if (!form) return;
     var a = state.answers;
     var stage = $('#ed-stage', form);
@@ -692,9 +694,9 @@
     if (formSub) {
       if (complete()) {
         var r = calculateAuditResults(a);
-        formSub.textContent = 'Built from your answers: ' + r.efi + '% (' + r.tier.name.toLowerCase() + ') and the link that breaks first. The download opens as soon as you send the form.';
+        formSub.textContent = 'Your result: ' + r.efi + '%, ' + r.tier.name.toLowerCase() + '. Add your details and the PDF opens straight away.';
       } else {
-        formSub.textContent = 'Take the diagnostic above first. The brief is built from your answers.';
+        formSub.textContent = 'Take the diagnostic above first. The PDF is written from your answers.';
       }
     }
     if (state.lead) {
@@ -702,7 +704,7 @@
       success.hidden = false;
       $('[data-ed-success-title]', success).textContent = complete() ? 'Your brief is ready.' : 'Almost there.';
       if (!complete()) $('[data-ed-success-text]', success).textContent = 'Finish the diagnostic above and your brief will be ready here.';
-      else if (!$('[data-ed-success-text]', success).textContent) $('[data-ed-success-text]', success).textContent = 'Download it now, or come back to this page later: it stays unlocked in this browser.';
+      else if (!$('[data-ed-success-text]', success).textContent) $('[data-ed-success-text]', success).textContent = 'Download it now. If you refresh the page, the diagnostic starts again from scratch.';
       printBtn.hidden = !complete();
       $('.execution-diagnostic-print-hint', success).hidden = !complete();
     }
@@ -790,8 +792,8 @@
         save();
         track('form_submit', { contact: wantsCall ? 'yes' : 'no', invited: state.invite ? 'yes' : 'no' });
         $('[data-ed-success-text]', success).textContent = wantsCall
-          ? 'A Kuma partner will be in touch within one business day to find a time for your debrief.'
-          : 'If you would like to talk it through, book a debrief with the button in this section.';
+          ? 'A Kuma partner will be in touch within one business day to review your result with you.'
+          : 'If you want an outside view, book a call with Sven from this section.';
         syncForm();
         if (complete()) renderResult(false);
         success.focus();
@@ -914,31 +916,17 @@
     scrollToApp();
   });
 
-  /* ---------- returning visitor ---------- */
-  // A refresh or a later visit opens on a short choice instead of jumping straight to the old result.
-  // A link that just opened a comparison goes straight to it.
-  var resumeEl = $('[data-ed-resume]', app);
-  function showResume() {
-    var r = calculateAuditResults(state.answers);
-    stepsEl.innerHTML = '';
-    progress.hidden = true; navEl.hidden = true; resultEl.hidden = true; invitedEl.hidden = true;
-    $('[data-ed-resume-text]', resumeEl).textContent = 'You have already taken the diagnostic in this browser. Your execution friction index was ' + r.efi + '% (' + r.tier.name.toLowerCase() + ').' +
-      (state.lead ? ' Your PDF brief is still unlocked.' : '');
-    resumeEl.hidden = false;
-    syncForm();
-  }
-  $('[data-ed-resume-show]', resumeEl).addEventListener('click', function () { resumeEl.hidden = true; renderResult(true); });
-  $('[data-ed-resume-new]', resumeEl).addEventListener('click', function () {
-    resumeEl.hidden = true;
-    var keepLead = state.lead;
-    state = fresh(); state.lead = keepLead; save();
-    renderStep(); syncForm(); scrollToApp();
+  var toInvite = $('[data-ed-to-invite]');
+  if (toInvite) toInvite.addEventListener('click', function (e) {
+    var box = $('[data-ed-invite]');
+    if (!box || box.hidden || resultEl.hidden) return;
+    e.preventDefault();
+    box.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (inviteName) inviteName.focus({ preventScroll: true });
   });
 
   wireSharing();
-  if (complete() && linked && linked.kind === 'compare') renderResult(false);
-  else if (complete()) showResume();
-  else { renderStep(); syncForm(); }
+  if (complete()) renderResult(false); else { renderStep(); syncForm(); }
 
   // Exposed for testing and for anyone who wants to check the maths in the console.
   window.calculateAuditResults = calculateAuditResults;

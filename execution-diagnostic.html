@@ -122,7 +122,7 @@
       <div class="section-head">
         <div class="eyebrow">Self-audit</div>
         <h2 id="execution-diagnostic-tool-title">Where does your execution leak?</h2>
-        <p>Three questions on context, five on how your leadership team works and one on how you see it. Answer for how things are, not how they should be. Your result appears on screen straight away. Nothing is sent unless you ask for the PDF brief.</p>
+        <p>Three questions on context, five on how your leadership team works and one on how you see it. Answer for how things are, not how they should be. Your result appears on screen straight away. Nothing is sent unless you ask for the PDF.</p>
       </div>
 
       <div class="execution-diagnostic-card" data-ed-app>
@@ -146,16 +146,6 @@
         <div class="execution-diagnostic-invited" data-ed-invited hidden>
           <span class="execution-diagnostic-label">A comparison invite</span>
           <p data-ed-invited-text></p>
-        </div>
-
-        <!-- After a refresh: the questions come first, with a way back to the last result -->
-        <div class="execution-diagnostic-resume" data-ed-resume hidden>
-          <span class="execution-diagnostic-label">Welcome back</span>
-          <p data-ed-resume-text></p>
-          <div class="execution-diagnostic-share-actions">
-            <button type="button" class="btn btn-primary btn-sm" data-ed-resume-show>Show my last result</button>
-            <button type="button" class="btn btn-secondary btn-sm" data-ed-resume-new>Take it again</button>
-          </div>
         </div>
 
         <!-- Results, filled by execution-diagnostic.js -->
@@ -273,26 +263,27 @@
     <div class="wrap">
       <div class="execution-diagnostic-debrief-grid">
         <div class="execution-diagnostic-debrief-copy">
-          <div class="eyebrow">Your executive brief</div>
-          <h2 id="execution-diagnostic-debrief-title">Take the full brief into your next leadership meeting</h2>
-          <p>Two pages, ready to forward to your leadership team. Built from your answers, the moment you ask for it.</p>
+          <div class="eyebrow">The executive brief</div>
+          <h2 id="execution-diagnostic-debrief-title">Make the leak impossible to ignore in your next leadership meeting</h2>
+          <p>Your score is one person&rsquo;s view. The leak usually sits where your leadership team sees things differently and nobody says so in the room. The brief gives you two pages to put on the table and a fix to start this month.</p>
           <ul class="execution-diagnostic-call-list">
-            <li>Your score and all five links, with the weakest one explained.</li>
-            <li>A step-by-step fix for that link, with the time it takes and how you will know it worked.</li>
-            <li>What typically happens over 90 days if it is left alone.</li>
-            <li>Questions to take into your next leadership meeting.</li>
+            <li>Where the AI gain leaks, link by link, with the weakest one explained.</li>
+            <li>A 30-day fix, with the time it costs and the signal that it worked.</li>
+            <li>What leaving it alone costs at 30, 60 and 90 days.</li>
+            <li>The questions that open the hard conversation.</li>
           </ul>
+          <p class="execution-diagnostic-invite-line">Then ask your co-founder or COO to answer the same six questions. Where your scores differ is where the runway goes. <a href="#execution-diagnostic-tool" data-ed-to-invite>Invite them from your result &rarr;</a></p>
           <div class="execution-diagnostic-partner">
-            <p class="execution-diagnostic-partner-name">Rather talk it through first?</p>
-            <p>Book 30 minutes with Sven Mulfinger, Lead Partner at Kuma Partners. We go through your scores, name the bottleneck that costs you most and you leave with concrete next steps, whether or not you work with us.</p>
-            <a class="btn btn-cream" href="https://calendly.com/sven-mulfinger/leadership-friction-debrief-30min?utm_source=execution-diagnostic&amp;utm_medium=debrief" target="_blank" rel="noopener" data-ed-book>Book a 30-minute debrief &rarr;</a>
+            <p class="execution-diagnostic-partner-name">Want an outside view?</p>
+            <p>Your team is part of the pattern, which is why it is hard to see from inside. In 30 minutes with Sven Mulfinger, Lead Partner, you find the one bottleneck that costs most and what to do about it, whether or not you work with us.</p>
+            <a class="btn btn-cream" href="https://calendly.com/sven-mulfinger/leadership-friction-debrief-30min?utm_source=execution-diagnostic&amp;utm_medium=debrief" target="_blank" rel="noopener" data-ed-book>Book a call with Sven &rarr;</a>
           </div>
         </div>
 
         <div class="execution-diagnostic-form-card">
           <div data-ed-form-view>
-            <h3>Get your brief as a PDF</h3>
-            <p class="execution-diagnostic-form-sub" data-ed-form-sub>Take the diagnostic above first. The brief is built from your answers.</p>
+            <h3>Download the brief</h3>
+            <p class="execution-diagnostic-form-sub" data-ed-form-sub>Take the diagnostic above first. The PDF is written from your answers.</p>
 
             <form class="contact-form execution-diagnostic-form" name="execution-diagnostic" method="POST" action="/execution-diagnostic" data-netlify="true" netlify-honeypot="bot-field" data-ed-form novalidate>
               <input type="hidden" name="form-name" value="execution-diagnostic">
@@ -360,7 +351,7 @@
 
               <label class="execution-diagnostic-check" for="ed-contact">
                 <input type="checkbox" id="ed-contact" data-ed-contact>
-                <span>Contact me to book a 30-minute debrief</span>
+                <span>I&rsquo;d like a partner to review my result with me</span>
               </label>
 
               <div class="hp-wrapper" aria-hidden="true">
@@ -368,7 +359,7 @@
                 <input type="text" name="company_tax_id" id="hp-tax-id-ed" tabindex="-1" autocomplete="off" value="">
               </div>
 
-              <button type="submit" class="btn btn-teal" data-ed-submit><span data-btn-label>Get my PDF brief &rarr;</span></button>
+              <button type="submit" class="btn btn-teal" data-ed-submit><span data-btn-label>Download the PDF &rarr;</span></button>
               <p class="contact-form-microcopy">Confidential. We use your details and answers only to prepare for a conversation with you, and to contact you if you tick the box. We do not share them. See our <a href="privacy.html">privacy policy</a>.</p>
               <p class="contact-form-error" data-ed-form-error hidden>Something went wrong sending your details. Please try again, or email us at <a href="mailto:contact@kuma.partners">contact@kuma.partners</a>.</p>
             </form>

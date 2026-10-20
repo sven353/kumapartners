@@ -184,12 +184,11 @@ body.execution-diagnostic .execution-diagnostic-method-grid ul.execution-diagnos
 }
 
 /* ---------- comparison invite banner ---------- */
-.execution-diagnostic-invited, .execution-diagnostic-resume{
+.execution-diagnostic-invited{
   margin:0 0 24px; padding:16px 18px; border:1px solid var(--hairline-color); border-left:2px solid var(--teal);
   border-radius:var(--radius-inset); background:var(--cream);
 }
-.execution-diagnostic-invited p, .execution-diagnostic-resume p{margin:0; font-size:.95rem; line-height:1.55;}
-.execution-diagnostic-resume p{margin-bottom:14px;}
+.execution-diagnostic-invited p{margin:0; font-size:.95rem; line-height:1.55;}
 
 /* ---------- side by side ---------- */
 .execution-diagnostic-compare{margin-top:30px;}
@@ -230,7 +229,9 @@ body.execution-diagnostic .execution-diagnostic-method-grid ul.execution-diagnos
 .execution-diagnostic-result-foot{margin-top:8px;}
 
 /* ---------- partner card on the dark section ---------- */
-.execution-diagnostic-partner{margin-top:32px; padding-top:24px; border-top:1px solid rgba(255,255,255,.14);}
+.execution-diagnostic-invite-line{margin-top:22px; color:rgba(248,249,250,.82); font-size:.98rem;}
+.execution-diagnostic-invite-line a{color:var(--teal-on-dark); font-weight:700; white-space:nowrap;}
+.execution-diagnostic-partner{margin-top:28px; padding-top:24px; border-top:1px solid rgba(255,255,255,.14);}
 .execution-diagnostic-partner p{color:rgba(248,249,250,.82); font-size:.95rem;}
 .execution-diagnostic-partner .execution-diagnostic-partner-name{color:#fff; font-weight:700; font-size:1.02rem; margin-bottom:6px;}
 .execution-diagnostic-partner .btn{margin-top:6px;}
