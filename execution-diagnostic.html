@@ -122,7 +122,7 @@
       <div class="section-head">
         <div class="eyebrow">Self-audit</div>
         <h2 id="execution-diagnostic-tool-title">Where does your execution leak?</h2>
-        <p>Three questions on context, five on how your leadership team works and one on how you see it. Answer for how things are, not how they should be. Nothing is sent until you choose to share your result.</p>
+        <p>Three questions on context, five on how your leadership team works and one on how you see it. Answer for how things are, not how they should be. Your result appears on screen straight away. Nothing is sent unless you ask for the PDF brief.</p>
       </div>
 
       <div class="execution-diagnostic-card" data-ed-app>
@@ -140,6 +140,12 @@
 
         <div class="execution-diagnostic-nav" data-ed-nav hidden>
           <button type="button" class="execution-diagnostic-back" data-ed-back>&larr; Back</button>
+        </div>
+
+        <!-- Shown when a colleague arrives through a comparison invite -->
+        <div class="execution-diagnostic-invited" data-ed-invited hidden>
+          <span class="execution-diagnostic-label">A comparison invite</span>
+          <p data-ed-invited-text></p>
         </div>
 
         <!-- Results, filled by execution-diagnostic.js -->
@@ -168,6 +174,18 @@
             <p class="execution-diagnostic-chain-note" data-ed-out="weakest"></p>
           </div>
 
+          <!-- Side by side, for a colleague who came through an invite and for a returned comparison link -->
+          <div class="execution-diagnostic-compare" data-ed-compare hidden>
+            <span class="execution-diagnostic-label" data-ed-compare-title>Both views, link by link</span>
+            <div class="execution-diagnostic-compare-scroll">
+              <table class="execution-diagnostic-compare-table">
+                <thead><tr><th scope="col">Link</th><th scope="col" data-ed-compare-a>You</th><th scope="col" data-ed-compare-b>Colleague</th><th scope="col">Gap</th></tr></thead>
+                <tbody data-ed-compare-rows></tbody>
+              </table>
+            </div>
+            <p class="execution-diagnostic-compare-note" data-ed-compare-note></p>
+          </div>
+
           <div class="execution-diagnostic-callout" data-ed-gap hidden>
             <span class="execution-diagnostic-label">A perception gap to check</span>
             <p>You are confident your VP and director layer sees these bottlenecks the way you do, yet your answers point to slow decisions, diffuse ownership or misaligned priorities. Friction of that kind is usually felt most below the leadership team, where it is least likely to be said out loud. It is worth asking them directly.</p>
@@ -178,31 +196,93 @@
             <ol data-ed-actions></ol>
           </div>
 
-          <button type="button" class="execution-diagnostic-restart" data-ed-restart>Start again</button>
+          <!-- The colleague sends the comparison back to whoever invited them -->
+          <div class="execution-diagnostic-share-block" data-ed-return hidden>
+            <span class="execution-diagnostic-label" data-ed-return-title>Send both views back</span>
+            <p data-ed-return-text></p>
+            <div class="execution-diagnostic-share-row">
+              <div class="execution-diagnostic-share-field">
+                <label for="ed-return-name">Your first name</label>
+                <input type="text" id="ed-return-name" autocomplete="given-name" maxlength="40" data-ed-return-name>
+              </div>
+            </div>
+            <div class="execution-diagnostic-share-actions">
+              <button type="button" class="btn btn-primary btn-sm" data-ed-return-copy>Copy the comparison link</button>
+              <a class="btn btn-secondary btn-sm" href="#" data-ed-return-mail>Email it</a>
+            </div>
+            <p class="execution-diagnostic-share-status" data-ed-status="return" role="status" aria-live="polite"></p>
+          </div>
+
+          <!-- The inviter asks a colleague to answer the same questions -->
+          <div class="execution-diagnostic-share-block" data-ed-invite hidden>
+            <span class="execution-diagnostic-label">Compare with your team</span>
+            <p>This is your view only. Ask a co-founder, your COO or a VP to answer the same six questions. When they finish, they see both results side by side, link by link, and can send the comparison back to you.</p>
+            <div class="execution-diagnostic-share-row">
+              <div class="execution-diagnostic-share-field">
+                <label for="ed-invite-name">Your first name</label>
+                <input type="text" id="ed-invite-name" autocomplete="given-name" maxlength="40" data-ed-invite-name>
+              </div>
+              <div class="execution-diagnostic-share-field">
+                <label for="ed-invite-company">Company (optional)</label>
+                <input type="text" id="ed-invite-company" autocomplete="organization" maxlength="80" data-ed-invite-company>
+              </div>
+            </div>
+            <div class="execution-diagnostic-share-actions">
+              <button type="button" class="btn btn-primary btn-sm" data-ed-invite-copy>Copy the invite link</button>
+              <a class="btn btn-secondary btn-sm" href="#" data-ed-invite-mail>Email an invite</a>
+            </div>
+            <p class="execution-diagnostic-share-status" data-ed-status="invite" role="status" aria-live="polite"></p>
+            <p class="execution-diagnostic-share-fine">The link carries your first name, the company name and your scores. Nothing is stored on our side unless someone fills in the form.</p>
+          </div>
+
+          <p class="execution-diagnostic-teaser" data-ed-teaser>
+            <span data-ed-teaser-text>The PDF brief adds a step-by-step fix for the link that breaks first, what 90 days of delay looks like and questions for your next leadership meeting.</span>
+            <a href="#execution-diagnostic-debrief" data-ed-teaser-link>Get the brief &rarr;</a>
+          </p>
+
+          <div class="execution-diagnostic-peer">
+            <span class="execution-diagnostic-peer-label">Know a CEO who should see this?</span>
+            <div class="execution-diagnostic-share-actions">
+              <a class="btn btn-secondary btn-sm" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fwww.kuma.partners%2Fexecution-diagnostic%3Futm_source%3Dlinkedin%26utm_medium%3Dshare" target="_blank" rel="noopener" data-ed-share="linkedin">LinkedIn</a>
+              <a class="btn btn-secondary btn-sm" href="https://api.whatsapp.com/send?text=A%203-minute%20diagnostic%20on%20why%20AI%20makes%20people%20faster%20and%20companies%20not%3A%20https%3A%2F%2Fwww.kuma.partners%2Fexecution-diagnostic%3Futm_source%3Dwhatsapp%26utm_medium%3Dshare" target="_blank" rel="noopener" data-ed-share="whatsapp"><span data-ed-share-wa-label>WhatsApp</span></a>
+              <button type="button" class="btn btn-secondary btn-sm" data-ed-share="copy">Copy link</button>
+            </div>
+            <p class="execution-diagnostic-share-status" data-ed-status="peer" role="status" aria-live="polite"></p>
+          </div>
+
+          <div class="execution-diagnostic-result-foot">
+            <button type="button" class="execution-diagnostic-restart" data-ed-restart>Start again</button>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- Conversion: the one dark anchor on the page -->
+  <!-- Conversion: the one dark anchor on the page. The form unlocks the PDF brief. -->
   <section id="execution-diagnostic-debrief" class="execution-diagnostic-debrief" aria-labelledby="execution-diagnostic-debrief-title">
     <div class="wrap">
       <div class="execution-diagnostic-debrief-grid">
         <div class="execution-diagnostic-debrief-copy">
-          <div class="eyebrow">30-minute debrief</div>
-          <h2 id="execution-diagnostic-debrief-title">Talk through your result with a Kuma partner</h2>
-          <p>Internal reviews rarely fix this, because the people in the room are also part of the pattern. A partner who has run a company looks at it from the outside, with you.</p>
+          <div class="eyebrow">Your executive brief</div>
+          <h2 id="execution-diagnostic-debrief-title">Take the full brief into your next leadership meeting</h2>
+          <p>Two pages, ready to forward to your leadership team. Built from your answers, the moment you ask for it.</p>
           <ul class="execution-diagnostic-call-list">
-            <li>We go through your scores and the link that broke first.</li>
-            <li>We name the one decision bottleneck that is costing you most right now.</li>
-            <li>You leave with two or three concrete next steps, whether or not you work with us.</li>
+            <li>Your score and all five links, with the weakest one explained.</li>
+            <li>A step-by-step fix for that link, with the time it takes and how you will know it worked.</li>
+            <li>What typically happens over 90 days if it is left alone.</li>
+            <li>Questions to take into your next leadership meeting.</li>
           </ul>
+          <div class="execution-diagnostic-partner">
+            <p class="execution-diagnostic-partner-name">Rather talk it through first?</p>
+            <p>Book 30 minutes with Sven Mulfinger, Lead Partner at Kuma Partners. We go through your scores, name the bottleneck that costs you most and you leave with concrete next steps, whether or not you work with us.</p>
+            <a class="btn btn-cream" href="https://calendly.com/sven-mulfinger/leadership-friction-debrief-30min?utm_source=execution-diagnostic&amp;utm_medium=debrief" target="_blank" rel="noopener" data-ed-book>Book a 30-minute debrief &rarr;</a>
+          </div>
         </div>
 
         <div class="execution-diagnostic-form-card">
           <div data-ed-form-view>
-            <h3>Share your result and request a debrief</h3>
-            <p class="execution-diagnostic-form-sub" data-ed-form-sub>Your answers and score are sent with your details, so the partner can prepare.</p>
+            <h3>Get your brief as a PDF</h3>
+            <p class="execution-diagnostic-form-sub" data-ed-form-sub>Take the diagnostic above first. The brief is built from your answers.</p>
 
             <form class="contact-form execution-diagnostic-form" name="execution-diagnostic" method="POST" action="/execution-diagnostic" data-netlify="true" netlify-honeypot="bot-field" data-ed-form novalidate>
               <input type="hidden" name="form-name" value="execution-diagnostic">
@@ -211,7 +291,7 @@
               </p>
 
               <!-- Filled by execution-diagnostic.js just before submit -->
-              <input type="hidden" name="product_intent" value="execution-diagnostic">
+              <input type="hidden" name="product_intent" value="execution-diagnostic-pdf">
               <input type="hidden" name="headcount" value="">
               <input type="hidden" name="ai_level" value="">
               <input type="hidden" name="q1_decision_velocity" value="">
@@ -225,6 +305,10 @@
               <input type="hidden" name="tier" value="">
               <input type="hidden" name="weakest_link" value="">
               <input type="hidden" name="perception_gap_flag" value="">
+              <input type="hidden" name="invited_by" value="">
+              <input type="hidden" name="company_cluster" value="">
+              <input type="hidden" name="inviter_scores" value="">
+              <input type="hidden" name="largest_gap" value="">
               <input type="hidden" name="contact_me" value="No">
               <input type="hidden" name="utm" value="">
               <input type="hidden" name="source" value="/execution-diagnostic">
@@ -274,16 +358,17 @@
                 <input type="text" name="company_tax_id" id="hp-tax-id-ed" tabindex="-1" autocomplete="off" value="">
               </div>
 
-              <button type="submit" class="btn btn-teal" data-ed-submit><span data-btn-label>Send my result &rarr;</span></button>
+              <button type="submit" class="btn btn-teal" data-ed-submit><span data-btn-label>Get my PDF brief &rarr;</span></button>
               <p class="contact-form-microcopy">Confidential. We use your details and answers only to prepare for a conversation with you, and to contact you if you tick the box. We do not share them. See our <a href="privacy.html">privacy policy</a>.</p>
               <p class="contact-form-error" data-ed-form-error hidden>Something went wrong sending your details. Please try again, or email us at <a href="mailto:contact@kuma.partners">contact@kuma.partners</a>.</p>
             </form>
           </div>
 
           <div class="contact-success" data-ed-success hidden tabindex="-1">
-            <h3 data-ed-success-title>Thank you.</h3>
+            <h3 data-ed-success-title>Your brief is ready.</h3>
             <p data-ed-success-text></p>
-            <p><button type="button" class="btn btn-secondary btn-sm" data-ed-print>Save your result as a PDF</button></p>
+            <p><button type="button" class="btn btn-teal" data-ed-print>Download the PDF brief</button></p>
+            <p class="execution-diagnostic-print-hint">Your browser opens its print window. Choose Save as PDF.</p>
           </div>
         </div>
       </div>
@@ -320,6 +405,99 @@
       </div>
     </div>
   </section>
+
+  <!-- The PDF brief. Never shown on screen; execution-diagnostic.js fills it and the print styles show only this. -->
+  <div class="execution-diagnostic-report" data-ed-report aria-hidden="true">
+    <div class="execution-diagnostic-report-page">
+      <div class="execution-diagnostic-report-head">
+        <img src="assets/logo-lockup.png" alt="" width="768" height="173">
+        <div>
+          <p class="execution-diagnostic-report-kicker">Execution brief &middot; Confidential</p>
+          <p class="execution-diagnostic-report-meta" data-rep="meta"></p>
+        </div>
+      </div>
+
+      <div class="execution-diagnostic-report-score">
+        <div>
+          <span class="execution-diagnostic-report-label">Execution friction index</span>
+          <p class="execution-diagnostic-report-efi"><span data-rep="efi"></span>%</p>
+          <p class="execution-diagnostic-report-tier" data-rep="tier"></p>
+        </div>
+        <p data-rep="tierText"></p>
+      </div>
+
+      <span class="execution-diagnostic-report-label">Your conversion chain</span>
+      <table class="execution-diagnostic-report-table">
+        <thead><tr><th>Link</th><th>What it measures</th><th>Score</th></tr></thead>
+        <tbody data-rep="chain"></tbody>
+      </table>
+
+      <div class="execution-diagnostic-report-block">
+        <span class="execution-diagnostic-report-label">The link that breaks first</span>
+        <h2 data-rep="weakName"></h2>
+        <p data-rep="look"></p>
+        <h4>Why AI makes it worse</h4>
+        <p data-rep="whyAi"></p>
+      </div>
+
+      <div class="execution-diagnostic-report-block execution-diagnostic-report-fix">
+        <span class="execution-diagnostic-report-label">The fix for the next 30 days</span>
+        <h3 data-rep="fixTitle"></h3>
+        <ol data-rep="fixSteps"></ol>
+        <h4>Time it takes</h4>
+        <p data-rep="fixTime"></p>
+        <h4>Signal it worked</h4>
+        <p data-rep="fixSignal"></p>
+      </div>
+
+      <div class="execution-diagnostic-report-block">
+        <span class="execution-diagnostic-report-label">The second place to look</span>
+        <p data-rep="second"></p>
+      </div>
+
+      <div class="execution-diagnostic-report-block" data-rep="gapBlock">
+        <span class="execution-diagnostic-report-label">A perception gap to check</span>
+        <p>You are confident your VP and director layer sees these bottlenecks the way you do, yet your answers point to slow decisions, diffuse ownership or misaligned priorities. Friction of that kind is usually felt most below the leadership team, where it is least likely to be said out loud.</p>
+      </div>
+    </div>
+
+    <div class="execution-diagnostic-report-page execution-diagnostic-report-page-2">
+      <div class="execution-diagnostic-report-memo">
+        <span class="execution-diagnostic-report-label">For the leadership team</span>
+        <p data-rep="memo"></p>
+      </div>
+
+      <div class="execution-diagnostic-report-block">
+        <span class="execution-diagnostic-report-label">The cost of leaving it alone</span>
+        <ol class="execution-diagnostic-report-delay" data-rep="delay"></ol>
+        <p class="execution-diagnostic-report-note">Kuma Partners view of what typically follows when this pattern is left alone.</p>
+      </div>
+
+
+
+      <div class="execution-diagnostic-report-block" data-rep="compareBlock">
+        <span class="execution-diagnostic-report-label">Two views compared</span>
+        <table class="execution-diagnostic-report-table">
+          <thead data-rep="compareHead"></thead>
+          <tbody data-rep="compareRows"></tbody>
+        </table>
+        <p data-rep="compareNote"></p>
+      </div>
+
+      <div class="execution-diagnostic-report-block">
+        <span class="execution-diagnostic-report-label">Questions for your next leadership meeting</span>
+        <ol data-rep="questions"></ol>
+      </div>
+
+      <div class="execution-diagnostic-report-next">
+        <span class="execution-diagnostic-report-label">If you want an outside view</span>
+        <p>In the Kuma 14-Day Leadership Friction Scan, a partner who has run a company interviews each member of your leadership team one to one, maps where decisions actually stall and debriefs the team on what to fix first.</p>
+        <p>Sven Mulfinger, Lead Partner &middot; sven@kuma.partners &middot; www.kuma.partners<br>Book a 30-minute debrief: calendly.com/sven-mulfinger/leadership-friction-debrief-30min</p>
+      </div>
+
+      <p class="execution-diagnostic-report-src">A structured self-assessment, not a benchmark. Sources for the figures on kuma.partners/execution-diagnostic: Noy and Zhang, <em>Science</em>, 2023; McKinsey, The state of AI, 2026; McKinsey, Decision making in the age of urgency, 2019.</p>
+    </div>
+  </div>
 
 </main>
 

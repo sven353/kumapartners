@@ -1,8 +1,11 @@
 /* The execution diagnostic (/execution-diagnostic).
    Nine steps: three context questions, five scored questions and one perception check.
-   Results show on the page with no sign-up. The form below them sends the answers to the
-   Netlify form "execution-diagnostic". Progress is kept in localStorage so a refresh does
-   not lose it; every storage call is wrapped, so the page still works without it. */
+   The result shows on the page with no sign-up. The form in the dark section unlocks the PDF brief,
+   which is a print-only block filled from the answers (the browser saves it as a PDF).
+   Comparison without a backend: the invite link carries the inviter's first name, company and scores
+   in the URL hash (#i=). The colleague answers the six core questions and sees both views side by side;
+   their return link (#x=) carries both sets, so the inviter sees the same comparison.
+   Progress is kept in localStorage; every storage call is wrapped, so the page works without it. */
 (function () {
   'use strict';
 
@@ -102,6 +105,109 @@
     { min: 19, max: 25, name: 'High-throughput operating system', text: 'Your answers describe a leadership team that turns effort into results. The risk is keeping that discipline as headcount grows.' }
   ];
 
+
+  // The fuller analysis for each link. Only the PDF brief carries it.
+  var LINKS = {
+    q1: {
+      look: 'Cross-functional calls come back to the same meeting week after week. People wait for the CEO or for a consensus that never arrives, and work that is ready sits still.',
+      whyAi: 'AI shortens the time it takes to produce options, analyses and drafts. It does nothing for the time it takes to choose between them, so the queue in front of each decision grows faster.',
+      fixTitle: 'Give every open decision one owner and a date',
+      steps: [
+        'List the open decisions that block more than one team. Most leadership teams find between five and fifteen.',
+        'Name one owner for each, with a date. The owner consults and then decides; the group no longer has to agree.',
+        'Spend the first ten minutes of each leadership meeting on the list. Anything past its date is decided that day, by the owner.'
+      ],
+      time: 'About 45 minutes to set up, then ten minutes a week.',
+      signal: 'Fewer topics come back to the leadership meeting a second time, and the open list is shorter within a month.',
+      delay: [
+        'Teams plan around the open decisions and start parallel work that may be thrown away.',
+        'Your strongest people stop escalating and work around the leadership team, which hides the problem.',
+        'Next quarter is planned on top of decisions that were never taken.'
+      ],
+      questions: ['Which decision has been open the longest, and who owns it?', 'Which decisions reach the CEO that someone else could take?']
+    },
+    q2: {
+      look: 'Targets have names next to them, but the person named cannot change the inputs from other functions. When something misses, the review turns into a discussion about who else was involved.',
+      whyAi: 'Automated steps add new places where a result can go wrong without anyone owning it. "The system did it" becomes an answer, and nobody fixes the process.',
+      fixTitle: 'Match every owner with the authority to act',
+      steps: [
+        'Take your five most important initiatives and write one owner next to each. One person, not a team.',
+        'Ask each owner what they cannot change without someone else’s sign-off, and write it down.',
+        'Either move that authority to the owner or change the owner. Do this before you discuss the target again.'
+      ],
+      time: 'One leadership meeting of about 90 minutes.',
+      signal: 'Reviews are about what to change rather than who was involved, and owners raise problems before the deadline.',
+      delay: [
+        'Misses are explained rather than fixed, and the same issue comes back at the next review.',
+        'Leaders protect their own targets, so cross-functional work gets the least attention.',
+        'Good people leave initiatives they cannot win, and the ones who stay learn to promise less.'
+      ],
+      questions: ['For our top initiative, what can the owner not change without asking someone?', 'When did a missed target last change how we work?']
+    },
+    q3: {
+      look: 'Everyone uses the same words for the strategy, but each function’s plan pulls in a different direction. Trade-offs are made team by team, usually in favour of the loudest roadmap.',
+      whyAi: 'Each team can now produce more plans and more output on its own. Without shared priorities, AI speeds all of them up at once, including the ones that work against each other.',
+      fixTitle: 'Write the priorities down separately, then compare',
+      steps: [
+        'Ask each member of the leadership team to write the top three priorities for the quarter, on their own and without discussing them.',
+        'Put the lists side by side at the start of the next leadership meeting. Nobody defends their list yet.',
+        'Agree three priorities and write down what is dropped to make room for them.'
+      ],
+      time: 'Ten minutes of preparation for each leader and an hour in the meeting.',
+      signal: 'When resources get tight, people point to the agreed list instead of escalating, and dropped items stay dropped.',
+      delay: [
+        'Teams keep shipping work that looks productive and does not add up to a company result.',
+        'Resource fights move out of the leadership meeting and into corridors and one-to-ones.',
+        'The quarter ends with each team close to its own goals and the company short of its own.'
+      ],
+      questions: ['What did we stop doing this quarter to make room for our priorities?', 'Which two functions would write the most different top three?']
+    },
+    q4: {
+      look: 'Work slows each time it passes from one team to another. Status meetings and steering groups fill the calendar, and managers spend their week moving information around.',
+      whyAi: 'Teams produce their part faster, so more work arrives at each handover. If the handovers stay manual and meeting-based, the queue between teams becomes the real speed of the company.',
+      fixTitle: 'Stop one meeting and fix one handover',
+      steps: [
+        'Pick the standing status meeting people would miss least and stop it for four weeks.',
+        'Replace status updates in the remaining meetings with a short written pre-read, sent the day before.',
+        'Map the handover that stalls most often, for example sales to delivery, and agree what ready means on both sides.'
+      ],
+      time: 'An afternoon to choose and map, then a four-week trial.',
+      signal: 'Nobody asks for the cancelled meeting back, and the handover you mapped stops showing up as a blocker.',
+      delay: [
+        'Calendars fill further as each team adds its own coordination meeting.',
+        'Managers become full-time routers of information and stop improving their own areas.',
+        'New hires are added to absorb the coordination load, which creates more handovers.'
+      ],
+      questions: ['Which meeting would we stop if we had to cancel one tomorrow?', 'Which handover between teams causes the most rework?']
+    },
+    q5: {
+      look: 'AI is used widely, but mostly to do the same tasks faster. More decks, analyses and code appear, and the numbers you report to the board do not move.',
+      whyAi: 'Speed at task level only becomes a company result when a whole process is redesigned around it. Otherwise the extra output lands in the same queues and approvals as before.',
+      fixTitle: 'Redesign one process end to end',
+      steps: [
+        'Choose one process that matters to revenue or margin, such as lead to cash or idea to release.',
+        'Measure how long it takes today from start to finish, waiting time included.',
+        'Redesign it with the team that runs it, using AI where it removes steps rather than speeding them up. Measure again after six weeks.'
+      ],
+      time: 'Two working sessions to map and redesign, then six weeks to measure.',
+      signal: 'The cycle time of that one process drops, and you can show the number in your next board pack.',
+      delay: [
+        'AI spend grows as seats and tools are added, with nothing to show in the numbers.',
+        'Teams grow sceptical of AI or use it quietly for their own tasks only.',
+        'The board asks what the AI budget has delivered, and the answer is anecdotes.'
+      ],
+      questions: ['Which process would show the clearest result if we redesigned it around AI?', 'What do we measure today to know whether AI is paying off?']
+    }
+  };
+
+  var CONFIG = {
+    // Every share and invite link points at the live page, even from a preview deploy.
+    shareUrl: 'https://www.kuma.partners/execution-diagnostic'
+  };
+
+  var CORE = ['q1', 'q2', 'q3', 'q4', 'q5', 'q6'];
+  var FIRST_CORE_STEP = 3;
+
   /* ---------- scoring ---------- */
   function calculateAuditResults(a) {
     var dims = ['q1', 'q2', 'q3', 'q4', 'q5'];
@@ -124,31 +230,122 @@
     };
   }
 
+  function linkOf(id) { return CHAIN.filter(function (c) { return c.id === id; })[0]; }
+
+  /* ---------- tracking: does nothing until Plausible, gtag or a dataLayer is on the page ---------- */
+  function track(name, props) {
+    var data = props || {};
+    try { if (typeof window.plausible === 'function') window.plausible('ed_' + name, { props: data }); } catch (e) { /* never block */ }
+    try { if (typeof window.gtag === 'function') window.gtag('event', 'ed_' + name, data); } catch (e) { /* never block */ }
+    try { if (window.dataLayer && window.dataLayer.push) window.dataLayer.push({ event: 'ed_' + name, ed: data }); } catch (e) { /* never block */ }
+  }
+
   /* ---------- storage ---------- */
   function load() {
     try { var s = window.localStorage.getItem(STORE_KEY); return s ? JSON.parse(s) : null; } catch (e) { return null; }
   }
-  function save(state) {
+  function save() {
     try { window.localStorage.setItem(STORE_KEY, JSON.stringify(state)); } catch (e) { /* storage unavailable */ }
   }
-  function clear() {
-    try { window.localStorage.removeItem(STORE_KEY); } catch (e) { /* storage unavailable */ }
+
+  /* ---------- comparison links ---------- */
+  // Values from a link are untrusted: they are cleaned here and only ever written with textContent or into input values.
+  function cleanText(v, max) { return String(v || '').replace(/[\u0000-\u001f\u007f<>]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, max || 40); }
+  function cleanScores(a) {
+    if (!a || typeof a !== 'object') return null;
+    var out = {};
+    for (var i = 0; i < CORE.length; i++) {
+      var n = Number(a[CORE[i]]);
+      if (!(n >= 1 && n <= 5) || Math.round(n) !== n) return null;
+      out[CORE[i]] = n;
+    }
+    return out;
+  }
+  function cleanView(o) {
+    if (!o || typeof o !== 'object') return null;
+    var a = cleanScores(o.a);
+    if (!a) return null;
+    var ctx = o.ctx && typeof o.ctx === 'object' ? o.ctx : {};
+    return {
+      n: cleanText(o.n, 40) || 'Your colleague',
+      c: cleanText(o.c, 80),
+      a: a,
+      ctx: { stage: cleanText(ctx.stage, 60), headcount: cleanText(ctx.headcount, 20), ai_level: cleanText(ctx.ai_level, 60) }
+    };
+  }
+  function encode(obj) {
+    var b = window.btoa(unescape(encodeURIComponent(JSON.stringify(obj))));
+    return b.replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+  }
+  function decode(str) {
+    try {
+      var b = String(str).replace(/-/g, '+').replace(/_/g, '/');
+      while (b.length % 4) b += '=';
+      return JSON.parse(decodeURIComponent(escape(window.atob(b))));
+    } catch (e) { return null; }
+  }
+  function scoresOf(a) { var o = {}; CORE.forEach(function (k) { o[k] = Number(a[k]); }); return o; }
+  function readHash() {
+    var h = (window.location.hash || '').replace(/^#/, '');
+    if (h.indexOf('i=') === 0) {
+      var v = cleanView(decode(h.slice(2)));
+      return v ? { kind: 'invite', view: v } : { kind: 'broken' };
+    }
+    if (h.indexOf('x=') === 0) {
+      var p = decode(h.slice(2));
+      var a = p && cleanView(p.a), b = p && cleanView(p.b);
+      return a && b ? { kind: 'compare', a: a, b: b } : { kind: 'broken' };
+    }
+    return null;
+  }
+  function dropHash() {
+    try { window.history.replaceState(null, '', window.location.pathname + window.location.search); } catch (e) { /* old browser */ }
   }
 
   /* ---------- DOM ---------- */
   var app = document.querySelector('[data-ed-app]');
   if (!app) return;
-  var stepsEl = app.querySelector('[data-ed-steps]');
-  var progress = app.querySelector('[data-ed-progress]');
-  var progLabel = app.querySelector('[data-ed-progress-label]');
-  var progSection = app.querySelector('[data-ed-progress-section]');
-  var progFill = app.querySelector('[data-ed-progress-fill]');
-  var navEl = app.querySelector('[data-ed-nav]');
-  var backBtn = app.querySelector('[data-ed-back]');
-  var resultEl = app.querySelector('[data-ed-result]');
+  var $ = function (sel, root) { return (root || document).querySelector(sel); };
+  var stepsEl = $('[data-ed-steps]', app);
+  var progress = $('[data-ed-progress]', app);
+  var progLabel = $('[data-ed-progress-label]', app);
+  var progSection = $('[data-ed-progress-section]', app);
+  var progFill = $('[data-ed-progress-fill]', app);
+  var navEl = $('[data-ed-nav]', app);
+  var backBtn = $('[data-ed-back]', app);
+  var resultEl = $('[data-ed-result]', app);
+  var invitedEl = $('[data-ed-invited]', app);
 
-  var state = load() || { step: 0, answers: {} };
-  if (typeof state.step !== 'number' || !state.answers) state = { step: 0, answers: {} };
+  function fresh() { return { step: 0, answers: {}, invite: null, compare: null, lead: null }; }
+  var state = load() || fresh();
+  if (typeof state.step !== 'number' || !state.answers) state = fresh();
+
+  // A link in the address bar wins over whatever this browser had stored.
+  var linked = readHash();
+  if (linked && linked.kind === 'invite') {
+    var sameInvite = state.invite && JSON.stringify(state.invite) === JSON.stringify(linked.view);
+    if (!sameInvite) {
+      var keepLead = state.lead;
+      state = fresh();
+      state.lead = keepLead;
+      state.invite = linked.view;
+      state.answers = { stage: linked.view.ctx.stage, headcount: linked.view.ctx.headcount, ai_level: linked.view.ctx.ai_level };
+      state.step = FIRST_CORE_STEP;
+    }
+    save(); dropHash(); track('invite_open');
+  } else if (linked && linked.kind === 'compare') {
+    state.compare = { a: linked.a, b: linked.b };
+    state.invite = null;
+    var own = state.step >= STEPS.length && cleanScores(state.answers);
+    if (!own) {
+      state.answers = { stage: linked.a.ctx.stage, headcount: linked.a.ctx.headcount, ai_level: linked.a.ctx.ai_level };
+      CORE.forEach(function (k) { state.answers[k] = linked.a.a[k]; });
+      state.step = STEPS.length;
+    }
+    save(); dropHash(); track('comparison_open');
+  } else if (linked && linked.kind === 'broken') {
+    dropHash();
+  }
 
   function el(tag, cls, text) {
     var n = document.createElement(tag);
@@ -157,19 +354,31 @@
     return n;
   }
 
+  function firstStep() { return state.invite ? FIRST_CORE_STEP : 0; }
+
+  function renderInvited() {
+    if (!state.invite || state.step >= STEPS.length) { invitedEl.hidden = true; return; }
+    var inv = state.invite;
+    $('[data-ed-invited-text]', invitedEl).textContent = inv.n + ' asked you to compare how you each see ' +
+      (inv.c || 'the company') + '. Six questions, about two minutes. Answer for how things are, not how they should be. At the end you see both views side by side.';
+    invitedEl.hidden = false;
+  }
+
   function renderStep() {
     var s = STEPS[state.step];
+    var start = firstStep();
+    var count = STEPS.length - start;
     resultEl.hidden = true;
     progress.hidden = false;
-    navEl.hidden = state.step === 0;
-    progLabel.textContent = 'Step ' + (state.step + 1) + ' of ' + STEPS.length;
+    navEl.hidden = state.step === start;
+    progLabel.textContent = 'Step ' + (state.step - start + 1) + ' of ' + count;
     progSection.textContent = s.section;
-    progFill.style.width = Math.round(((state.step) / STEPS.length) * 100) + '%';
+    progFill.style.width = Math.round(((state.step - start) / count) * 100) + '%';
+    renderInvited();
 
     stepsEl.innerHTML = '';
     var wrap = el('fieldset', 'execution-diagnostic-step');
-    var legend = el('legend', 'execution-diagnostic-q', s.title);
-    wrap.appendChild(legend);
+    wrap.appendChild(el('legend', 'execution-diagnostic-q', s.title));
     var list = el('div', 'execution-diagnostic-options');
     s.options.forEach(function (o) {
       var b = el('button', 'execution-diagnostic-option');
@@ -185,17 +394,20 @@
   }
 
   function choose(id, v) {
+    if (state.step === firstStep()) track('start', { invited: state.invite ? 'yes' : 'no' });
     state.answers[id] = v;
     if (state.step < STEPS.length - 1) {
       state.step += 1;
-      save(state);
+      save();
       renderStep();
       scrollToApp();
       var first = stepsEl.querySelector('.execution-diagnostic-option');
       if (first) first.focus({ preventScroll: true });
     } else {
       state.step = STEPS.length;
-      save(state);
+      if (state.invite) state.compare = null;
+      save();
+      track('complete', { invited: state.invite ? 'yes' : 'no' });
       renderResult(true);
     }
   }
@@ -207,20 +419,197 @@
     }
   }
 
+  /* ---------- comparison ---------- */
+  // Returns the two views to compare for the current state, or null.
+  function comparison() {
+    if (state.step < STEPS.length) return null;
+    if (state.invite) {
+      return { left: { label: 'You', a: scoresOf(state.answers) }, right: { label: state.invite.n, a: state.invite.a, invited: true } };
+    }
+    if (state.compare) {
+      return { left: { label: state.compare.a.n, a: state.compare.a.a }, right: { label: state.compare.b.n, a: state.compare.b.a } };
+    }
+    return null;
+  }
+
+  function compareRows(cmp) {
+    return CHAIN.map(function (c) {
+      var x = cmp.left.a[c.id], y = cmp.right.a[c.id];
+      return { link: c, x: x, y: y, gap: Math.abs(x - y) };
+    });
+  }
+
+  function scoresSentence(label, n) { return (label === 'You' ? 'you score it ' : label + ' scores it ') + n; }
+
+  function compareNote(cmp) {
+    var rows = compareRows(cmp);
+    var widest = rows.slice().sort(function (p, q) { return q.gap - p.gap; })[0];
+    var efiL = calculateAuditResults(cmp.left.a).efi, efiR = calculateAuditResults(cmp.right.a).efi;
+    var parts = ['Execution friction index: ' + cmp.left.label + ' ' + efiL + '%, ' + cmp.right.label + ' ' + efiR + '%.'];
+    if (widest.gap >= 2) {
+      parts.push('The widest gap is on ' + widest.link.name.toLowerCase() + ': ' + scoresSentence(cmp.left.label, widest.x) +
+        ', ' + scoresSentence(cmp.right.label, widest.y) + '. A gap of two points or more usually means you are describing different companies. Start the conversation there.');
+    } else {
+      parts.push('The two views differ by one point at most on every link. Worth checking against the people below the leadership team, where friction is felt first.');
+    }
+    var inviter = cmp.right.invited ? cmp.right : (state.compare ? cmp.left : null);
+    if (inviter && inviter.a.q6 >= 4 && widest.gap >= 2) {
+      parts.push(inviter.label + '\u2019s confidence that the team sees these bottlenecks the same way: ' + inviter.a.q6 + ' out of 5.');
+    }
+    return { text: parts.join(' '), widest: widest, rows: rows };
+  }
+
+  function renderCompare() {
+    var box = $('[data-ed-compare]', resultEl);
+    var cmp = comparison();
+    if (!cmp) { box.hidden = true; return; }
+    $('[data-ed-compare-title]', box).textContent = cmp.left.label === 'You' ? 'Your view and ' + cmp.right.label + '’s view' : cmp.left.label + ' and ' + cmp.right.label + ', side by side';
+    $('[data-ed-compare-a]', box).textContent = cmp.left.label;
+    $('[data-ed-compare-b]', box).textContent = cmp.right.label;
+    var note = compareNote(cmp);
+    var body = $('[data-ed-compare-rows]', box);
+    body.innerHTML = '';
+    note.rows.forEach(function (r) {
+      var tr = el('tr', r.gap >= 2 ? 'is-wide' : null);
+      var th = el('th', null, r.link.name); th.scope = 'row';
+      tr.appendChild(th);
+      tr.appendChild(el('td', null, r.x + ' / 5'));
+      tr.appendChild(el('td', null, r.y + ' / 5'));
+      tr.appendChild(el('td', null, r.gap === 0 ? 'None' : String(r.gap)));
+      body.appendChild(tr);
+    });
+    $('[data-ed-compare-note]', box).textContent = note.text;
+    box.hidden = false;
+  }
+
+  /* ---------- copy, mail and status ---------- */
+  var timers = {};
+  function flash(key, text) {
+    var s = document.querySelector('[data-ed-status="' + key + '"]');
+    if (!s) return;
+    s.textContent = text;
+    window.clearTimeout(timers[key]);
+    timers[key] = window.setTimeout(function () { s.textContent = ''; }, 4000);
+  }
+  function copyText(text) {
+    if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+    return new Promise(function (resolve, reject) {
+      var ta = document.createElement('textarea');
+      ta.value = text; ta.setAttribute('readonly', '');
+      ta.style.cssText = 'position:fixed; top:0; left:0; opacity:0;';
+      document.body.appendChild(ta); ta.select();
+      var ok = false;
+      try { ok = document.execCommand('copy'); } catch (e) { ok = false; }
+      document.body.removeChild(ta);
+      if (ok) resolve(); else reject(new Error('copy failed'));
+    });
+  }
+  function mailto(subject, body) {
+    return 'mailto:?subject=' + encodeURIComponent(subject) + '&body=' + encodeURIComponent(body).replace(/%0A/g, '%0D%0A');
+  }
+
+  var inviteName = $('[data-ed-invite-name]');
+  var inviteCompany = $('[data-ed-invite-company]');
+  var returnName = $('[data-ed-return-name]');
+
+  function inviteLink() {
+    var payload = {
+      n: cleanText(inviteName.value, 40), c: cleanText(inviteCompany.value, 80),
+      a: scoresOf(state.answers),
+      ctx: { stage: state.answers.stage || '', headcount: state.answers.headcount || '', ai_level: state.answers.ai_level || '' }
+    };
+    return CONFIG.shareUrl + '?utm_source=team_invite&utm_medium=comparison#i=' + encode(payload);
+  }
+  function returnLink() {
+    var payload = { a: state.invite, b: { n: cleanText(returnName.value, 40) || 'Your colleague', c: state.invite.c, a: scoresOf(state.answers), ctx: state.invite.ctx } };
+    return CONFIG.shareUrl + '?utm_source=team_invite&utm_medium=comparison_return#x=' + encode(payload);
+  }
+  function needName(input, key) {
+    if (cleanText(input.value)) return false;
+    flash(key, 'Add your first name first, so your colleague knows who is asking.');
+    input.focus();
+    return true;
+  }
+
+  function wireSharing() {
+    var on = function (sel, fn) { var n = $(sel); if (n) n.addEventListener('click', fn); };
+
+    on('[data-ed-invite-copy]', function () {
+      if (needName(inviteName, 'invite')) return;
+      track('invite_copy');
+      copyText(inviteLink()).then(
+        function () { flash('invite', '✓ Invite link copied. Paste it into Slack, WhatsApp or an email.'); },
+        function () { flash('invite', 'Copying did not work here. Use Email an invite instead.'); }
+      );
+    });
+    on('[data-ed-invite-mail]', function (e) {
+      if (needName(inviteName, 'invite')) { e.preventDefault(); return; }
+      track('invite_mail');
+      var me = cleanText(inviteName.value);
+      var body = 'Hi,\n\nI took a short diagnostic on how we turn effort into results: decisions, priorities, handovers, ownership and what AI is actually doing for us.\n\n' +
+        'Could you answer the same six questions from where you sit? It takes about two minutes, and at the end you see both of our views side by side:\n' +
+        inviteLink() + '\n\nThanks,\n' + me;
+      e.currentTarget.setAttribute('href', mailto('Two minutes: how do you see our execution?', body));
+    });
+
+    on('[data-ed-return-copy]', function () {
+      if (needName(returnName, 'return')) return;
+      track('return_copy');
+      copyText(returnLink()).then(
+        function () { flash('return', '✓ Comparison link copied. Send it to ' + state.invite.n + '.'); },
+        function () { flash('return', 'Copying did not work here. Use Email it instead.'); }
+      );
+    });
+    on('[data-ed-return-mail]', function (e) {
+      if (needName(returnName, 'return')) { e.preventDefault(); return; }
+      track('return_mail');
+      var me = cleanText(returnName.value);
+      var body = 'Hi ' + state.invite.n + ',\n\nI answered the same questions. Here are both of our views side by side, link by link:\n' +
+        returnLink() + '\n\n' + me;
+      e.currentTarget.setAttribute('href', mailto('How our views on execution compare', body));
+    });
+
+    var peerUrl = function (src) { return CONFIG.shareUrl + '?utm_source=' + src + '&utm_medium=share'; };
+    var wa = $('[data-ed-share="whatsapp"]');
+    if (wa && typeof navigator.share === 'function') {
+      var waLabel = $('[data-ed-share-wa-label]', wa);
+      if (waLabel) waLabel.textContent = 'Share';
+      wa.addEventListener('click', function (e) {
+        e.preventDefault();
+        track('share', { channel: 'native' });
+        navigator.share({ title: 'The execution diagnostic | Kuma Partners', text: 'A 3-minute diagnostic on why AI makes people faster and companies not.', url: peerUrl('app_share') })
+          .catch(function (err) { if (!err || err.name !== 'AbortError') window.open(wa.getAttribute('href'), '_blank', 'noopener'); });
+      });
+    } else {
+      on('[data-ed-share="whatsapp"]', function () { track('share', { channel: 'whatsapp' }); });
+    }
+    on('[data-ed-share="linkedin"]', function () { track('share', { channel: 'linkedin' }); });
+    on('[data-ed-share="copy"]', function () {
+      track('share', { channel: 'copy' });
+      copyText(peerUrl('direct_copy')).then(
+        function () { flash('peer', '✓ Link copied'); },
+        function () { flash('peer', 'Copy ' + CONFIG.shareUrl + ' by hand.'); }
+      );
+    });
+    on('[data-ed-book]', function () { track('book_click'); });
+  }
+
+  /* ---------- result ---------- */
   function renderResult(focus) {
     var a = state.answers;
     var r = calculateAuditResults(a);
     stepsEl.innerHTML = '';
     progress.hidden = true;
     navEl.hidden = true;
+    invitedEl.hidden = true;
     resultEl.hidden = false;
 
-    resultEl.querySelector('[data-ed-out="efi"]').textContent = r.efi;
-    resultEl.querySelector('[data-ed-out="tier"]').textContent = r.tier.name + ' · ' + r.total + ' of 25 points';
-    resultEl.querySelector('[data-ed-out="analysis"]').textContent = r.tier.text;
-    resultEl.querySelector('[data-ed-marker]').style.left = Math.min(Math.max(r.efi, 2), 98) + '%';
+    $('[data-ed-out="efi"]', resultEl).textContent = r.efi;
+    $('[data-ed-out="tier"]', resultEl).textContent = r.tier.name + ' · ' + r.total + ' of 25 points';
+    $('[data-ed-out="analysis"]', resultEl).textContent = r.tier.text;
+    $('[data-ed-marker]', resultEl).style.left = Math.min(Math.max(r.efi, 2), 98) + '%';
 
-    var chain = resultEl.querySelector('[data-ed-chain]');
+    var chain = $('[data-ed-chain]', resultEl);
     chain.innerHTML = '';
     CHAIN.forEach(function (c) {
       var li = el('li', 'execution-diagnostic-link' + (c.id === r.weakest ? ' is-weakest' : ''));
@@ -229,53 +618,97 @@
       li.appendChild(el('span', 'execution-diagnostic-link-what', c.what));
       chain.appendChild(li);
     });
-    var weakest = CHAIN.filter(function (c) { return c.id === r.weakest; })[0];
+    var weakest = linkOf(r.weakest);
     var weakText = 'The link that breaks first: ' + weakest.name.toLowerCase() + ' (' + weakest.what.toLowerCase() + ').';
     if (r.weakest === 'q5' && a.ai_level === 'Ad-hoc personal use') {
       weakText += ' With AI still at the level of personal use, that is expected; look at the next lowest link as well.';
     }
-    resultEl.querySelector('[data-ed-out="weakest"]').textContent = weakText;
+    $('[data-ed-out="weakest"]', resultEl).textContent = weakText;
+    $('[data-ed-gap]', resultEl).hidden = !r.perceptionGap;
 
-    resultEl.querySelector('[data-ed-gap]').hidden = !r.perceptionGap;
-
-    var acts = resultEl.querySelector('[data-ed-actions]');
+    var acts = $('[data-ed-actions]', resultEl);
     acts.innerHTML = '';
     r.actions.forEach(function (k) { acts.appendChild(el('li', null, ACTIONS[k])); });
 
-    prefillForm(r);
+    renderCompare();
+
+    // Invite for everyone who answered for themselves; send-back for a colleague who came through an invite.
+    $('[data-ed-invite]', resultEl).hidden = !!state.invite;
+    var ret = $('[data-ed-return]', resultEl);
+    ret.hidden = !state.invite;
+    if (state.invite) {
+      $('[data-ed-return-title]', ret).textContent = 'Send both views back to ' + state.invite.n;
+      $('[data-ed-return-text]', ret).textContent = 'The comparison link shows ' + state.invite.n + ' the table above. It carries both sets of scores and your first name, nothing else.';
+    }
+    if (state.lead && inviteName && !inviteName.value) inviteName.value = state.lead.name.split(/\s+/)[0];
+    if (state.lead && returnName && !returnName.value) returnName.value = state.lead.name.split(/\s+/)[0];
+    if (inviteCompany && !inviteCompany.value) inviteCompany.value = (state.lead && state.lead.company) || (state.compare && state.compare.a.c) || '';
+
+    var teaser = $('[data-ed-teaser-text]', resultEl);
+    var teaserLink = $('[data-ed-teaser-link]', resultEl);
+    if (state.lead) {
+      teaser.textContent = 'Your PDF brief is ready, with a step-by-step fix for ' + weakest.name.toLowerCase() + '.';
+      teaserLink.textContent = 'Download it →';
+    } else {
+      teaser.textContent = 'The PDF brief adds a step-by-step fix for ' + weakest.name.toLowerCase() + ', what 90 days of delay looks like and questions for your next leadership meeting.';
+      teaserLink.textContent = 'Get the brief →';
+    }
+
+    syncForm();
     if (focus) {
       resultEl.focus({ preventScroll: true });
       scrollToApp();
     }
   }
 
-  /* ---------- form ---------- */
-  var form = document.querySelector('[data-ed-form]');
-  var formView = document.querySelector('[data-ed-form-view]');
-  var formSub = document.querySelector('[data-ed-form-sub]');
-  var success = document.querySelector('[data-ed-success]');
+  /* ---------- form and unlock ---------- */
+  var form = $('[data-ed-form]');
+  var formView = $('[data-ed-form-view]');
+  var formSub = $('[data-ed-form-sub]');
+  var success = $('[data-ed-success]');
+  var printBtn = $('[data-ed-print]');
+
+  function complete() { return state.step >= STEPS.length; }
 
   function setHidden(name, value) {
     var f = form && form.querySelector('[name="' + name + '"]');
     if (f) f.value = value == null ? '' : String(value);
   }
 
-  function prefillForm(r) {
+  // Keeps the form card in step with the diagnostic: before, after and once the brief is unlocked.
+  function syncForm() {
     if (!form) return;
     var a = state.answers;
-    var stage = form.querySelector('#ed-stage');
+    var stage = $('#ed-stage', form);
     if (stage && !stage.value && a.stage) {
       for (var i = 0; i < stage.options.length; i++) {
         if (stage.options[i].text === a.stage) { stage.selectedIndex = i; break; }
       }
     }
-    if (formSub) formSub.textContent = 'Your answers and your score of ' + r.efi + '% (' + r.tier.name.toLowerCase() + ') are sent with your details, so the partner can prepare.';
+    var company = $('#ed-company', form);
+    if (company && !company.value) company.value = (state.invite && state.invite.c) || (state.compare && state.compare.a.c) || '';
+    if (formSub) {
+      if (complete()) {
+        var r = calculateAuditResults(a);
+        formSub.textContent = 'Built from your answers: ' + r.efi + '% (' + r.tier.name.toLowerCase() + ') and the link that breaks first. The download opens as soon as you send the form.';
+      } else {
+        formSub.textContent = 'Take the diagnostic above first. The brief is built from your answers.';
+      }
+    }
+    if (state.lead) {
+      formView.hidden = true;
+      success.hidden = false;
+      $('[data-ed-success-title]', success).textContent = complete() ? 'Your brief is ready.' : 'Almost there.';
+      if (!complete()) $('[data-ed-success-text]', success).textContent = 'Finish the diagnostic above and your brief will be ready here.';
+      else if (!$('[data-ed-success-text]', success).textContent) $('[data-ed-success-text]', success).textContent = 'Download it now, or come back to this page later: it stays unlocked in this browser.';
+      printBtn.hidden = !complete();
+      $('.execution-diagnostic-print-hint', success).hidden = !complete();
+    }
   }
 
   function fillHidden() {
     var a = state.answers;
-    var complete = state.step >= STEPS.length;
-    var r = complete ? calculateAuditResults(a) : null;
+    var r = complete() ? calculateAuditResults(a) : null;
     setHidden('headcount', a.headcount);
     setHidden('ai_level', a.ai_level);
     setHidden('q1_decision_velocity', a.q1);
@@ -287,9 +720,21 @@
     setHidden('total_score', r ? r.total : 'Diagnostic not completed');
     setHidden('efi_percentage', r ? r.efi : '');
     setHidden('tier', r ? r.tier.name : '');
-    setHidden('weakest_link', r ? CHAIN.filter(function (c) { return c.id === r.weakest; })[0].what : '');
+    setHidden('weakest_link', r ? linkOf(r.weakest).what : '');
     setHidden('perception_gap_flag', r ? (r.perceptionGap ? 'Yes' : 'No') : '');
-    var contact = form.querySelector('[data-ed-contact]');
+    // Team loop: invited colleagues and returned comparisons are tagged so one company's answers group together in Netlify.
+    var other = state.invite || (state.compare && state.compare.b) || null;
+    setHidden('invited_by', state.invite ? state.invite.n : (state.compare ? 'Comparison returned by ' + state.compare.b.n : ''));
+    setHidden('company_cluster', (state.invite && state.invite.c) || (state.compare && state.compare.a.c) || ($('#ed-company', form).value || '').trim().slice(0, 80));
+    setHidden('inviter_scores', other ? CORE.map(function (k) { return k + ':' + other.a[k]; }).join(' ') : '');
+    var cmp = comparison();
+    if (cmp) {
+      var w = compareNote(cmp).widest;
+      setHidden('largest_gap', w.link.name + ' (' + w.x + ' vs ' + w.y + ')');
+    } else {
+      setHidden('largest_gap', '');
+    }
+    var contact = $('[data-ed-contact]', form);
     setHidden('contact_me', contact && contact.checked ? 'Yes' : 'No');
     var utm = [];
     try {
@@ -305,31 +750,27 @@
   }
 
   function validate() {
-    var ok = true;
-    var name = form.querySelector('#ed-name');
-    var email = form.querySelector('#ed-email');
-    var stage = form.querySelector('#ed-stage');
+    var name = $('#ed-name', form), email = $('#ed-email', form), stage = $('#ed-stage', form);
     var nameOk = name.value.trim().length > 1;
     var emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(email.value.trim());
     var stageOk = !!stage.value;
     showError('name', !nameOk); showError('email', !emailOk); showError('stage', !stageOk);
-    ok = nameOk && emailOk && stageOk;
-    if (!ok) {
-      var first = !nameOk ? name : (!emailOk ? email : stage);
-      first.focus();
+    if (!(nameOk && emailOk && stageOk)) {
+      (!nameOk ? name : (!emailOk ? email : stage)).focus();
+      return false;
     }
-    return ok;
+    return true;
   }
 
   if (form) {
     form.addEventListener('submit', function (ev) {
       ev.preventDefault();
-      var err = form.querySelector('[data-ed-form-error]');
+      var err = $('[data-ed-form-error]', form);
       if (err) err.hidden = true;
       if (!validate()) return;
       fillHidden();
-      var btn = form.querySelector('[data-ed-submit]');
-      var label = btn.querySelector('[data-btn-label]');
+      var btn = $('[data-ed-submit]', form);
+      var label = $('[data-btn-label]', btn);
       var original = label.textContent;
       btn.disabled = true; label.textContent = 'Sending…';
       fetch('/', {
@@ -338,13 +779,19 @@
         body: new URLSearchParams(new FormData(form)).toString()
       }).then(function (res) {
         if (!res.ok) throw new Error('Status ' + res.status);
-        var wantsCall = form.querySelector('[data-ed-contact]').checked;
-        success.querySelector('[data-ed-success-title]').textContent = 'Thank you.';
-        success.querySelector('[data-ed-success-text]').textContent = wantsCall
+        var wantsCall = $('[data-ed-contact]', form).checked;
+        state.lead = {
+          name: cleanText($('#ed-name', form).value, 80),
+          company: cleanText($('#ed-company', form).value, 80),
+          date: new Date().toLocaleDateString('en-GB', { day: 'numeric', month: 'long', year: 'numeric' })
+        };
+        save();
+        track('form_submit', { contact: wantsCall ? 'yes' : 'no', invited: state.invite ? 'yes' : 'no' });
+        $('[data-ed-success-text]', success).textContent = wantsCall
           ? 'A Kuma partner will be in touch within one business day to find a time for your debrief.'
-          : 'Your result is with us. If you would like a debrief later, reply to any of our emails or write to contact@kuma.partners.';
-        formView.hidden = true;
-        success.hidden = false;
+          : 'If you would like to talk it through, book a debrief with the button in this section.';
+        syncForm();
+        if (complete()) renderResult(false);
         success.focus();
       }).catch(function () {
         if (err) err.hidden = false;
@@ -359,20 +806,114 @@
     });
   }
 
+  /* ---------- the PDF brief ---------- */
+  var report = $('[data-ed-report]');
+  function rep(key) { return report.querySelector('[data-rep="' + key + '"]'); }
+  function fillList(node, items) {
+    node.innerHTML = '';
+    items.forEach(function (t) { node.appendChild(el('li', null, t)); });
+  }
+
+  function fillReport() {
+    var a = state.answers;
+    var r = calculateAuditResults(a);
+    var weak = linkOf(r.weakest), second = linkOf(r.actions[1]);
+    var info = LINKS[r.weakest];
+    var lead = state.lead || { name: '', company: '', date: '' };
+
+    rep('meta').textContent = 'Prepared for ' + lead.name + (lead.company ? ', ' + lead.company : '') + ' · ' + lead.date;
+    rep('efi').textContent = r.efi;
+    rep('tier').textContent = r.tier.name + ' · ' + r.total + ' of 25 points';
+    rep('tierText').textContent = r.tier.text;
+
+    var chain = rep('chain');
+    chain.innerHTML = '';
+    CHAIN.forEach(function (c) {
+      var tr = el('tr', c.id === r.weakest ? 'is-weakest' : null);
+      tr.appendChild(el('td', null, c.name));
+      tr.appendChild(el('td', null, c.what));
+      tr.appendChild(el('td', null, a[c.id] + ' / 5'));
+      chain.appendChild(tr);
+    });
+
+    rep('weakName').textContent = weak.name + ': ' + weak.what.toLowerCase();
+    rep('look').textContent = info.look;
+    rep('whyAi').textContent = info.whyAi;
+    rep('fixTitle').textContent = info.fixTitle;
+    fillList(rep('fixSteps'), info.steps);
+    rep('fixTime').textContent = info.time;
+    rep('fixSignal').textContent = info.signal;
+
+    rep('memo').textContent = 'This brief reflects one person’s view of how we turn effort into results. Please read it before our next leadership meeting and note where you see it differently. Where our views differ most is usually the most useful place to start.';
+
+    var delay = rep('delay');
+    delay.innerHTML = '';
+    ['Day 30', 'Day 60', 'Day 90'].forEach(function (when, i) {
+      var li = el('li');
+      li.appendChild(el('span', 'execution-diagnostic-report-when', when));
+      li.appendChild(el('p', null, info.delay[i]));
+      delay.appendChild(li);
+    });
+
+    rep('second').textContent = second.name + ' (' + second.what.toLowerCase() + ') comes next. ' + ACTIONS[second.id];
+    rep('gapBlock').hidden = !r.perceptionGap;
+
+    var cmp = comparison();
+    var cBlock = rep('compareBlock');
+    cBlock.hidden = !cmp;
+    if (cmp) {
+      var note = compareNote(cmp);
+      var head = rep('compareHead');
+      head.innerHTML = '';
+      var htr = el('tr');
+      ['Link', cmp.left.label, cmp.right.label, 'Gap'].forEach(function (t) { htr.appendChild(el('th', null, t)); });
+      head.appendChild(htr);
+      var rows = rep('compareRows');
+      rows.innerHTML = '';
+      note.rows.forEach(function (row) {
+        var tr = el('tr', row.gap >= 2 ? 'is-weakest' : null);
+        [row.link.name, row.x + ' / 5', row.y + ' / 5', row.gap === 0 ? 'None' : String(row.gap)].forEach(function (t) { tr.appendChild(el('td', null, t)); });
+        rows.appendChild(tr);
+      });
+      rep('compareNote').textContent = note.text;
+    }
+
+    fillList(rep('questions'), info.questions.concat([
+      LINKS[second.id].questions[0],
+      'If each of us answered these questions on our own, where would our scores differ most?'
+    ]));
+  }
+
+  var originalTitle = document.title;
+  window.addEventListener('afterprint', function () { document.title = originalTitle; });
+  if (printBtn) printBtn.addEventListener('click', function () {
+    if (!state.lead || !complete()) return;
+    fillReport();
+    track('pdf_download');
+    document.title = 'Kuma execution brief' + (state.lead.company ? ', ' + state.lead.company : '');
+    window.print();
+  });
+  var teaserLinkEl = $('[data-ed-teaser-link]');
+  if (teaserLinkEl) teaserLinkEl.addEventListener('click', function (e) {
+    if (state.lead && complete()) { e.preventDefault(); printBtn.click(); }
+  });
+
   /* ---------- controls ---------- */
   backBtn.addEventListener('click', function () {
-    if (state.step > 0) { state.step -= 1; save(state); renderStep(); }
+    if (state.step > firstStep()) { state.step -= 1; save(); renderStep(); }
   });
-  resultEl.querySelector('[data-ed-restart]').addEventListener('click', function () {
-    state = { step: 0, answers: {} };
-    clear();
+  $('[data-ed-restart]', resultEl).addEventListener('click', function () {
+    var keepLead = state.lead;
+    state = fresh();
+    state.lead = keepLead;
+    save();
     renderStep();
+    syncForm();
     scrollToApp();
   });
-  var printBtn = document.querySelector('[data-ed-print]');
-  if (printBtn) printBtn.addEventListener('click', function () { window.print(); });
 
-  if (state.step >= STEPS.length) renderResult(false); else renderStep();
+  wireSharing();
+  if (complete()) renderResult(false); else { renderStep(); syncForm(); }
 
   // Exposed for testing and for anyone who wants to check the maths in the console.
   window.calculateAuditResults = calculateAuditResults;
