@@ -100,7 +100,7 @@
   };
 
   var TIERS = [
-    { min: 5, max: 12, name: 'Critical execution drag', text: 'The company has outgrown its informal operating model. Adding more AI tools or capital to it is likely to add noise faster than it adds output.' },
+    { min: 5, max: 12, name: 'Critical execution drag', text: 'The company has outgrown its informal operating model. Adding more AI tools or capital to it is likely to add noise faster than it adds output, and every month of it is paid for out of runway.' },
     { min: 13, max: 18, name: 'The scaling squeeze', text: 'Teams move fast on their own, but work slows where it passes between functions. Strategic calls wait for the weekly meeting instead of being made by the person who owns them.' },
     { min: 19, max: 25, name: 'High-throughput operating system', text: 'Your answers describe a leadership team that turns effort into results. The risk is keeping that discipline as headcount grows.' }
   ];
@@ -366,6 +366,7 @@
 
   function renderStep() {
     var s = STEPS[state.step];
+    if (resumeEl) resumeEl.hidden = true;
     var start = firstStep();
     var count = STEPS.length - start;
     resultEl.hidden = true;
@@ -602,6 +603,7 @@
     progress.hidden = true;
     navEl.hidden = true;
     invitedEl.hidden = true;
+    if (resumeEl) resumeEl.hidden = true;
     resultEl.hidden = false;
 
     $('[data-ed-out="efi"]', resultEl).textContent = r.efi;
@@ -912,8 +914,31 @@
     scrollToApp();
   });
 
+  /* ---------- returning visitor ---------- */
+  // A refresh or a later visit opens on a short choice instead of jumping straight to the old result.
+  // A link that just opened a comparison goes straight to it.
+  var resumeEl = $('[data-ed-resume]', app);
+  function showResume() {
+    var r = calculateAuditResults(state.answers);
+    stepsEl.innerHTML = '';
+    progress.hidden = true; navEl.hidden = true; resultEl.hidden = true; invitedEl.hidden = true;
+    $('[data-ed-resume-text]', resumeEl).textContent = 'You have already taken the diagnostic in this browser. Your execution friction index was ' + r.efi + '% (' + r.tier.name.toLowerCase() + ').' +
+      (state.lead ? ' Your PDF brief is still unlocked.' : '');
+    resumeEl.hidden = false;
+    syncForm();
+  }
+  $('[data-ed-resume-show]', resumeEl).addEventListener('click', function () { resumeEl.hidden = true; renderResult(true); });
+  $('[data-ed-resume-new]', resumeEl).addEventListener('click', function () {
+    resumeEl.hidden = true;
+    var keepLead = state.lead;
+    state = fresh(); state.lead = keepLead; save();
+    renderStep(); syncForm(); scrollToApp();
+  });
+
   wireSharing();
-  if (complete()) renderResult(false); else { renderStep(); syncForm(); }
+  if (complete() && linked && linked.kind === 'compare') renderResult(false);
+  else if (complete()) showResume();
+  else { renderStep(); syncForm(); }
 
   // Exposed for testing and for anyone who wants to check the maths in the console.
   window.calculateAuditResults = calculateAuditResults;

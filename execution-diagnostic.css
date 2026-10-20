@@ -184,11 +184,12 @@ body.execution-diagnostic .execution-diagnostic-method-grid ul.execution-diagnos
 }
 
 /* ---------- comparison invite banner ---------- */
-.execution-diagnostic-invited{
+.execution-diagnostic-invited, .execution-diagnostic-resume{
   margin:0 0 24px; padding:16px 18px; border:1px solid var(--hairline-color); border-left:2px solid var(--teal);
   border-radius:var(--radius-inset); background:var(--cream);
 }
-.execution-diagnostic-invited p{margin:0; font-size:.95rem; line-height:1.55;}
+.execution-diagnostic-invited p, .execution-diagnostic-resume p{margin:0; font-size:.95rem; line-height:1.55;}
+.execution-diagnostic-resume p{margin-bottom:14px;}
 
 /* ---------- side by side ---------- */
 .execution-diagnostic-compare{margin-top:30px;}
