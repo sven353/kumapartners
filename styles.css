@@ -125,12 +125,12 @@ header.site{
 }
 header.site.scrolled{box-shadow:0 8px 24px -20px rgba(11,21,35,.4);}
 header.site.scrolled .nav{padding:10px 0;}
-.nav{display:flex; align-items:center; justify-content:space-between; padding:16px 0; transition:padding .25s ease;}
-.logo{display:flex; align-items:center; text-decoration:none;}
-.logo img{height:30px; width:auto; display:block;}
+.nav{display:flex; align-items:center; justify-content:space-between; gap:48px; padding:16px 0; transition:padding .25s ease;}
+.logo, .logo-jv{display:flex; align-items:center; flex-shrink:0; text-decoration:none;}
+.logo img{height:28px; width:auto; display:block;}
 .logo.footer-logo img{height:32px;}
 .logo.footer-logo img.footer-logo-img{height:28px; width:auto; display:block; image-rendering:-webkit-optimize-contrast;}
-.nav-links{display:flex; align-items:center; gap:clamp(12px, 2.1vw, 32px); list-style:none; margin:0; padding:0;}
+.nav-links{display:flex; align-items:center; gap:clamp(14px, 1.8vw, 28px); list-style:none; margin:0; padding:0;}
 .nav-links a{
   text-decoration:none; color:var(--navy); font-size:.875rem; font-weight:400; white-space:nowrap;
   font-family:'Lato',Arial,sans-serif;
@@ -1395,7 +1395,7 @@ footer.site .footer-logo img:not(.footer-logo-img){filter:brightness(0) invert(1
 .outcomes-list li{list-style:none; padding-left:26px; position:relative; font-size:.95rem;}
 .outcomes-list li::before{content:"✓"; position:absolute; left:0; color:var(--teal); font-weight:700;}
 
-/* Burger menu below 1024px: eight nav items plus the CTA no longer fit on one line */
+/* Burger menu below 1024px: six nav items plus the CTA no longer fit on one line */
 @media (max-width: 1023px){
   .nav-cta{display:none;}
   .nav-toggle{display:flex;}
