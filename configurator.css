@@ -19,7 +19,7 @@
    runs taller than the Kuma lockup to keep its lettering legible. */
 .logo-jv{display:inline-flex; align-items:center; text-decoration:none;}
 .logo-lockup-track{display:inline-flex; align-items:center; gap:16px;}
-.logo-kuma{height:36px; width:auto; display:block; object-fit:contain;}
+.logo-kuma{height:30px; width:auto; display:block; object-fit:contain;}
 .logo-divider{
   display:inline-block; width:1px; height:32px; flex-shrink:0;
   /* Slightly darker than --hairline-color so it reads against the frosted
@@ -33,7 +33,7 @@
 header.site .nav{padding:12px 32px;}
 header.site.scrolled .nav{padding:8px 32px;}
 @media (max-width:860px){
-  .logo-kuma{height:28px;}
+  .logo-kuma{height:24px;}
   .logo-divider{height:26px;}
   .logo-nonameyet{height:36px;}
   .logo-lockup-track{gap:12px;}

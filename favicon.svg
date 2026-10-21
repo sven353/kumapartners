@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="79 343 484 496">
+  <defs>
+    <mask id="h" maskUnits="userSpaceOnUse" x="79" y="343" width="484" height="496"><rect x="79" y="343" width="484" height="496" fill="#fff"/><circle cx="320" cy="659" r="178" fill="#000"/><circle cx="320" cy="783" r="55" fill="#000"/></mask>
+  </defs>
+  <g mask="url(#h)">
+    <circle cx="320" cy="585.5" r="240.5" fill="#061a32"/>
+    <circle cx="320.5" cy="707.5" r="126.5" fill="#167086"/>
+  </g>
+</svg>

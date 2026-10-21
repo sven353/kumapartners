@@ -91,8 +91,8 @@ header.site.scrolled{box-shadow:0 8px 24px -20px rgba(11,21,35,.4);}
 header.site.scrolled .nav{padding:10px 0;}
 .nav{display:flex; align-items:center; justify-content:space-between; padding:16px 0; transition:padding .25s ease;}
 .logo{display:flex; align-items:center; text-decoration:none;}
-.logo img{height:37px; width:auto; display:block;}
-.logo.footer-logo img{height:40px;}
+.logo img{height:30px; width:auto; display:block;}
+.logo.footer-logo img{height:32px;}
 .nav-links{display:flex; align-items:center; gap:32px; list-style:none; margin:0; padding:0;}
 .nav-links a{
   text-decoration:none; color:var(--navy); font-size:.92rem; font-weight:400;
