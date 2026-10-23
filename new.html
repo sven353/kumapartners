@@ -333,12 +333,15 @@
   <!-- 8. Contact -->
   <section class="section contact" id="contact">
     <div class="wrap contact-grid">
-      <figure class="contact-img"><img src="/assets/contact-session.jpg" alt="A leadership team in a working session around a table" loading="lazy" width="1448" height="1086"></figure>
-      <div class="contact-copy">
-        <p class="eyebrow">Let's talk</p>
+      <div class="contact-intro">
+        <p class="eyebrow eyebrow-light">Let's talk</p>
         <h2>What does your team need to work through?</h2>
-        <p>Tell us a little about your team and what you want to achieve. We'll set up a conversation to explore the right format. No questionnaire, no sales funnel.</p>
-
+        <p class="contact-lede">Tell us a little about your team and what you want to achieve. We'll set up a conversation to explore the right format. No questionnaire, no sales funnel.</p>
+        <figure class="contact-img"><img src="/assets/contact-session.jpg" alt="A leadership team in a working session around a table" loading="lazy" width="1448" height="1086"></figure>
+      </div>
+      <div class="contact-card">
+        <h3>Start the conversation</h3>
+        <p class="contact-card-sub">A partner replies personally within two working days.</p>
         <form class="contact-form" name="offsite-conversation" method="POST" data-netlify="true" netlify-honeypot="company_tax_id" novalidate>
           <input type="hidden" name="form-name" value="offsite-conversation">
           <p class="hp" aria-hidden="true"><label>Leave this empty <input name="company_tax_id" tabindex="-1" autocomplete="off"></label></p>
@@ -347,11 +350,11 @@
             <label>Company<input name="company" autocomplete="organization" required></label>
           </div>
           <label>Work email<input type="email" name="email" autocomplete="email" required></label>
-          <label>What would you like to achieve? <span class="opt">(optional)</span><textarea name="message" rows="4"></textarea></label>
-          <button type="submit" class="btn btn-primary">Start the conversation</button>
+          <label><span>What would you like to achieve? <span class="opt">Optional</span></span><textarea name="message" rows="5" placeholder="For example: a two-day strategy offsite for our leadership team in spring"></textarea></label>
+          <button type="submit" class="btn btn-primary btn-block">Discuss your next offsite</button>
           <p class="form-status" role="status" aria-live="polite"></p>
         </form>
-        <p class="contact-alt">Prefer email? Write to <a href="mailto:contact@kuma.partners">contact@kuma.partners</a>.</p>
+        <p class="contact-alt">Prefer email? <a href="mailto:contact@kuma.partners">contact@kuma.partners</a></p>
       </div>
     </div>
   </section>
