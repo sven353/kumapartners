@@ -580,17 +580,17 @@
         </div>
         <div class="gallery" aria-roledescription="carousel" aria-label="Offsites outside Barcelona">
           <div class="gallery-track" tabindex="0">
-            <figure class="gallery-slide" role="group" aria-roledescription="slide" aria-label="1 of 7"><img src="/offsite/assets/formats/offsite-bavaria-session.jpeg" alt="A leadership session in a historic room" loading="lazy"></figure>
-            <figure class="gallery-slide" role="group" aria-roledescription="slide" aria-label="2 of 7"><img src="/offsite/assets/formats/slowing-down-session.jpeg" alt="Leaders writing at an outdoor table in the mountains" loading="lazy"></figure>
-            <figure class="gallery-slide" role="group" aria-roledescription="slide" aria-label="3 of 7"><img src="/assets/offsites/sailboat-retrospective.jpg" alt="A team standing at a wall of notes during a retrospective" loading="lazy"></figure>
-            <figure class="gallery-slide" role="group" aria-roledescription="slide" aria-label="4 of 7"><img src="/offsite/assets/formats/offsite-meditation.jpeg" alt="A reflective session in a quiet room" loading="lazy"></figure>
-            <figure class="gallery-slide" role="group" aria-roledescription="slide" aria-label="5 of 7"><img src="/assets/offsites/strategy-review-session.jpg" alt="A strategy review with a leadership team around a table" loading="lazy"></figure>
-            <figure class="gallery-slide" role="group" aria-roledescription="slide" aria-label="6 of 7"><img src="/offsite/assets/proof-2.jpg" alt="A team working in a hotel meeting room" loading="lazy"></figure>
-            <figure class="gallery-slide" role="group" aria-roledescription="slide" aria-label="7 of 7"><img src="/assets/offsites/board%20offsite%20kuma%20partners.png" alt="A board offsite in a meeting room with a view" loading="lazy"></figure>
+            <figure class="gallery-slide" role="group" aria-roledescription="slide" aria-label="1 of 8"><img src="/offsite/assets/formats/offsite-bavaria-session.jpeg" alt="A leadership session in a historic room" loading="lazy"></figure>
+            <figure class="gallery-slide" role="group" aria-roledescription="slide" aria-label="2 of 8"><img src="/assets/offsites/terrace-session.jpg" alt="A leadership team working on a shaded terrace" loading="lazy"></figure>
+            <figure class="gallery-slide" role="group" aria-roledescription="slide" aria-label="3 of 8"><img src="/offsite/assets/formats/slowing-down-session.jpeg" alt="Leaders writing at an outdoor table in the mountains" loading="lazy"></figure>
+            <figure class="gallery-slide" role="group" aria-roledescription="slide" aria-label="4 of 8"><img src="/assets/offsites/palace-session.jpg" alt="A facilitated session in a room with a painted ceiling" loading="lazy"></figure>
+            <figure class="gallery-slide" role="group" aria-roledescription="slide" aria-label="5 of 8"><img src="/offsite/assets/formats/offsite-meditation.jpeg" alt="A reflective session in a quiet room" loading="lazy"></figure>
+            <figure class="gallery-slide" role="group" aria-roledescription="slide" aria-label="6 of 8"><img src="/assets/offsites/alpine-chalet-session.jpg" alt="A team at a wall of notes in a mountain chalet" loading="lazy"></figure>
+            <figure class="gallery-slide" role="group" aria-roledescription="slide" aria-label="7 of 8"><img src="/assets/offsites/strategy-review-session.jpg" alt="A strategy review with a leadership team around a table" loading="lazy"></figure>
+            <figure class="gallery-slide" role="group" aria-roledescription="slide" aria-label="8 of 8"><img src="/offsite/assets/proof-2.jpg" alt="A team working in a hotel meeting room" loading="lazy"></figure>
           </div>
           <button type="button" class="gallery-arrow gallery-prev" aria-label="Previous photo">&#8592;</button>
           <button type="button" class="gallery-arrow gallery-next" aria-label="Next photo">&#8594;</button>
-          <p class="gallery-count" aria-live="polite"><span class="gallery-current">1</span> / 7</p>
         </div>
       </div>
     </div>
@@ -792,28 +792,26 @@
   });
 })();
 (function () {
-  // Photo gallery: one full photo at a time, arrows, swipe and arrow keys.
+  // Photo gallery: three photos in view on desktop, arrows move one photo at a time.
   var g = document.querySelector(".gallery");
   if (!g) return;
   var track = g.querySelector(".gallery-track");
   var slides = track.querySelectorAll(".gallery-slide");
-  var cur = g.querySelector(".gallery-current");
-  var prev = g.querySelector(".gallery-prev"), next = g.querySelector(".gallery-next");
-  function index() { return Math.round(track.scrollLeft / track.clientWidth); }
-  function go(i) {
-    i = (i + slides.length) % slides.length;
-    track.scrollTo({ left: i * track.clientWidth, behavior: "smooth" });
+  function step() {
+    var s = slides[0], gap = parseFloat(getComputedStyle(track).columnGap) || 0;
+    return s.getBoundingClientRect().width + gap;
   }
-  prev.addEventListener("click", function () { go(index() - 1); });
-  next.addEventListener("click", function () { go(index() + 1); });
+  function move(dir) {
+    var max = track.scrollWidth - track.clientWidth - 2;
+    if (dir > 0 && track.scrollLeft >= max) { track.scrollTo({ left: 0, behavior: "smooth" }); return; }
+    if (dir < 0 && track.scrollLeft <= 2) { track.scrollTo({ left: track.scrollWidth, behavior: "smooth" }); return; }
+    track.scrollBy({ left: dir * step(), behavior: "smooth" });
+  }
+  g.querySelector(".gallery-prev").addEventListener("click", function () { move(-1); });
+  g.querySelector(".gallery-next").addEventListener("click", function () { move(1); });
   track.addEventListener("keydown", function (e) {
-    if (e.key === "ArrowRight") { e.preventDefault(); go(index() + 1); }
-    if (e.key === "ArrowLeft") { e.preventDefault(); go(index() - 1); }
-  });
-  var t;
-  track.addEventListener("scroll", function () {
-    clearTimeout(t);
-    t = setTimeout(function () { cur.textContent = index() + 1; }, 60);
+    if (e.key === "ArrowRight") { e.preventDefault(); move(1); }
+    if (e.key === "ArrowLeft") { e.preventDefault(); move(-1); }
   });
 })();
 (function () {
