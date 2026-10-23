@@ -383,3 +383,7 @@ p { margin: 0 0 1em; }
   .contact-shade { background: linear-gradient(180deg, rgba(11,21,35,.7) 0%, rgba(11,21,35,.88) 35%, rgba(11,21,35,.96) 60%); }
   .contact-bg { height: 60%; object-position: center 40%; }
 }
+
+/* Place photos in the gallery carry a small caption */
+.gallery-slide { position: relative; }
+.gallery-place figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 28px 14px 10px; font: 600 .82rem/1.2 var(--head); color: #fff; background: linear-gradient(transparent, rgba(11,21,35,.75)); }
