@@ -366,3 +366,9 @@ p { margin: 0 0 1em; }
 @media (max-width: 520px) {
   .steps { grid-template-columns: repeat(2, 1fr); }
 }
+
+/* Hero text: stronger contrast over the photo */
+.hero .eyebrow { color: #fff; font-weight: 700; font-size: .85rem; letter-spacing: .14em; }
+.hero .eyebrow::before { background: var(--teal-light); height: 3px; }
+.hero-lede { color: #fff; }
+.hero-tags { color: rgba(255,255,255,.88); font-weight: 700; }
