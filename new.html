@@ -89,14 +89,32 @@
     <div class="wrap">
       <div class="section-head">
         <p class="eyebrow">Selected work</p>
-        <h2>Three offsites, three very different rooms.</h2>
+        <h2 class="h2-break">Three offsites,<br>three very different rooms.</h2>
         <p class="section-lede">Client details are anonymised. The group sizes run from a handful of leaders to a whole company.</p>
       </div>
 
-      <article class="case">
+      <div class="case-tabs" role="tablist" aria-label="Case studies">
+        <button type="button" class="case-tab" role="tab" id="case-tab-1" aria-controls="case-1" aria-selected="true">
+          <span class="ct-n">Case 01</span>
+          <span class="ct-label">Founding and executive team</span>
+          <span class="ct-meta">6 executives · 2 offsites</span>
+        </button>
+        <button type="button" class="case-tab" role="tab" id="case-tab-2" aria-controls="case-2" aria-selected="false" tabindex="-1">
+          <span class="ct-n">Case 02</span>
+          <span class="ct-label">The leadership layer</span>
+          <span class="ct-meta">C-suite and VPs · 4 offsites</span>
+        </button>
+        <button type="button" class="case-tab" role="tab" id="case-tab-3" aria-controls="case-3" aria-selected="false" tabindex="-1">
+          <span class="ct-n">Case 03</span>
+          <span class="ct-label">The whole company</span>
+          <span class="ct-meta">Top 30, then everyone · 4 days</span>
+        </button>
+      </div>
+
+      <div class="case-panels">
+      <article class="case" id="case-1" role="tabpanel" aria-labelledby="case-tab-1">
         <figure class="case-img"><img src="/offsite/assets/proof-1.jpg" alt="A small leadership team working in a courtyard" loading="lazy"></figure>
         <div class="case-body">
-          <p class="case-label">01 · Founding and executive team</p>
           <h3>Six leaders, two offsites, one direction.</h3>
           <p>A fully remote fintech infrastructure scale-up of around a hundred people had outgrown the way its leadership team worked. <span class="tbc">[The brief was a strategy offsite. The interviews showed the real problem was that nobody was sure who decided what.]</span> <span class="tbc">[On day one we set the strategy agenda aside and spent the morning on decision rights.]</span></p>
           <p>Eight months later, a second offsite agreed the three-to-five-year vision, the next year's priorities and the commitments each leader made in front of the others. <span class="tbc">[Within a month, they presented the plan to the whole company.]</span></p>
@@ -108,10 +126,9 @@
         </div>
       </article>
 
-      <article class="case case-flip">
+      <article class="case" id="case-2" role="tabpanel" aria-labelledby="case-tab-2">
         <figure class="case-img"><img src="/assets/case-leadership.jpg" alt="A leadership team gathered around a wall of notes" loading="lazy"></figure>
         <div class="case-body">
-          <p class="case-label">02 · The leadership layer</p>
           <h3>Four offsites, eight months, one leadership team.</h3>
           <p>A European deep-tech company was taking its product into a new, highly regulated market while scaling its commercial team. <span class="tbc">[The technical and commercial sides were planning to different timelines, and the gap only showed when deals slipped.]</span></p>
           <p>We ran four offsites with the C-suite and key VPs, each building on the last. <span class="tbc">[At the second offsite, we dropped the planned session and put the sales pipeline and the product roadmap on the same wall.]</span> <span class="tbc">[They left with one shared roadmap and a monthly leadership rhythm that still runs today.]</span></p>
@@ -123,10 +140,9 @@
         </div>
       </article>
 
-      <article class="case">
+      <article class="case" id="case-3" role="tabpanel" aria-labelledby="case-tab-3">
         <figure class="case-img"><img src="/offsite/assets/formats/company-offsite-crowd.jpeg" alt="A whole company gathered in a plenary session" loading="lazy"></figure>
         <div class="case-body">
-          <p class="case-label">03 · The whole company</p>
           <h3>The leadership team first, then everyone.</h3>
           <p>A distributed scale-up of around a hundred people from many countries had a new strategy. <span class="tbc">[Most people had only seen it on slides.]</span> The top thirty met first and turned the strategy into 90-day plans for each area. The next day, they presented those plans to everyone, and each team worked out how it contributes.</p>
           <p><span class="tbc">[We let teams challenge the leaders' plans openly before anyone committed.]</span> On the last day, the company agreed together what good work looks like. <span class="tbc">[At the end of the quarter, every team reviewed its plan against what it had promised.]</span></p>
@@ -137,6 +153,7 @@
           </ul>
         </div>
       </article>
+      </div>
     </div>
   </section>
 
@@ -407,6 +424,29 @@
 <a href="#contact" class="sticky-cta">Discuss your next offsite</a>
 
 <script>
+(function () {
+  // Case studies: one panel at a time, switched with the tabs (arrow keys work too).
+  var tabs = Array.prototype.slice.call(document.querySelectorAll(".case-tab"));
+  if (!tabs.length) return;
+  document.querySelector(".case-panels").classList.add("tabs-ready");
+  function show(tab, focus) {
+    tabs.forEach(function (t) {
+      var on = t === tab;
+      t.setAttribute("aria-selected", on ? "true" : "false");
+      t.tabIndex = on ? 0 : -1;
+      document.getElementById(t.getAttribute("aria-controls")).hidden = !on;
+    });
+    if (focus) tab.focus();
+  }
+  tabs.forEach(function (t, i) {
+    t.addEventListener("click", function () { show(t); });
+    t.addEventListener("keydown", function (e) {
+      var d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+      if (d) { e.preventDefault(); show(tabs[(i + d + tabs.length) % tabs.length], true); }
+    });
+  });
+  show(tabs[0]);
+})();
 (function () {
   // Mobile sticky button: show it only between the hero and the contact section.
   var cta = document.querySelector(".sticky-cta");
