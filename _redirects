@@ -9,7 +9,11 @@
 # rewrite to a file, never a redirect, so it cannot loop.
 /offsite/configurator   /offsite/configurator.html   200
 
-# Draft offsite redesign. The files sit at the top level of the repo (new.html, new.css)
-# and are shown at /offsite/new. Forced 200 rewrites, never redirects, so they cannot loop.
-/offsite/new        /new.html   200!
-/offsite/new.html   /new.html   200!
+# Offsite page. The page file sits at the top level of the repo (new.html, new.css) and is
+# shown at /offsite/ through forced 200 rewrites (internal, the address stays /offsite/).
+# The old draft address /offsite/new sends people to /offsite/ for good.
+# To bring back the previous page (offsite/index.html), delete the two /offsite/ rewrite lines.
+/offsite/new          /offsite/   301!
+/offsite/new.html     /offsite/   301!
+/offsite/             /new.html   200!
+/offsite/index.html   /new.html   200!
