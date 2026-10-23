@@ -1,5 +1,7 @@
 User-agent: *
 Allow: /
+# The offsite page is served at /offsite/; /new.html is the same file under its storage name.
+Disallow: /new.html
 
 # Explicit AI Search & Assistant Crawlers
 User-agent: GPTBot
@@ -15,6 +17,21 @@ User-agent: Applebot-Extended
 Allow: /
 
 User-agent: Google-Extended
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-SearchBot
+Allow: /
+
+User-agent: Claude-User
+Allow: /
+
+User-agent: Perplexity-User
 Allow: /
 
 # Sitemap & LLM Declaration

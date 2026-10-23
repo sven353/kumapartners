@@ -201,6 +201,7 @@ p { margin: 0 0 1em; }
 
 /* Footer and sticky CTA */
 .foot { background: #060E17; color: rgba(255,255,255,.6); padding: 36px 0; font-size: .9rem; }
+.foot-about p { max-width: 760px; margin: 0 0 20px; padding-bottom: 20px; border-bottom: 1px solid rgba(255,255,255,.1); color: rgba(255,255,255,.7); line-height: 1.6; }
 .foot-inner { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; }
 .foot p { margin: 0; }
 .foot a { color: rgba(255,255,255,.85); }
