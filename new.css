@@ -372,3 +372,14 @@ p { margin: 0 0 1em; }
 .hero .eyebrow::before { background: var(--teal-light); height: 3px; }
 .hero-lede { color: #fff; }
 .hero-tags { color: rgba(255,255,255,.88); font-weight: 700; }
+
+/* Contact strip: the session photo fills the whole band behind the content */
+.contact { position: relative; overflow: hidden; background: var(--navy); background-image: none; }
+.contact-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 45%; }
+.contact-shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(11,21,35,.92) 0%, rgba(11,21,35,.82) 45%, rgba(11,21,35,.55) 100%); }
+.contact .contact-grid { position: relative; align-items: center; }
+.contact-intro > p { max-width: 460px; }
+@media (max-width: 820px) {
+  .contact-shade { background: linear-gradient(180deg, rgba(11,21,35,.7) 0%, rgba(11,21,35,.88) 35%, rgba(11,21,35,.96) 60%); }
+  .contact-bg { height: 60%; object-position: center 40%; }
+}
