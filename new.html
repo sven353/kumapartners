@@ -5,12 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Executive Offsites in Barcelona | Kuma Partners</title>
 <meta name="description" content="Kuma Partners designs and facilitates executive offsites in Barcelona and beyond, for founding teams, leadership teams and whole companies.">
-<!-- Draft redesign for review: not linked from anywhere and kept out of search results. -->
+<!-- Draft redesign for review: not linked from anywhere and kept out of search results.
+     Lives at the repo top level and is served at /offsite/new through a rewrite in _redirects,
+     so every path below is absolute. -->
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Lato:ital,wght@0,300;0,400;0,700;1,400&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="new.css">
+<link rel="stylesheet" href="/new.css">
 </head>
 <body>
 
@@ -20,10 +22,10 @@
 
 <header class="top">
   <div class="wrap top-inner">
-    <a href="new.html" class="logo" aria-label="Kuma Partners × Nonameyet">
-      <img src="assets/logo-lockup.png" alt="Kuma Partners" class="logo-kuma">
+    <a href="/offsite/new" class="logo" aria-label="Kuma Partners × Nonameyet">
+      <img src="/offsite/assets/logo-lockup.png" alt="Kuma Partners" class="logo-kuma">
       <span class="logo-divider" aria-hidden="true"></span>
-      <img src="assets/logo-nonameyet.png" alt="Nonameyet" class="logo-nny" width="577" height="360">
+      <img src="/offsite/assets/logo-nonameyet.png" alt="Nonameyet" class="logo-nny" width="577" height="360">
     </a>
     <nav class="top-nav" aria-label="Page sections">
       <a href="#cases">Cases</a>
@@ -40,7 +42,7 @@
 
   <!-- 1. Hero -->
   <section class="hero">
-    <img class="hero-img" src="assets/format-urban.jpg" alt="A leadership team in a working session overlooking the sea" fetchpriority="high">
+    <img class="hero-img" src="/offsite/assets/format-urban.jpg" alt="A leadership team in a working session overlooking the sea" fetchpriority="high">
     <div class="hero-shade" aria-hidden="true"></div>
     <div class="wrap hero-copy">
       <p class="eyebrow eyebrow-light">Executive offsites · Barcelona and beyond</p>
@@ -92,7 +94,7 @@
       </div>
 
       <article class="case">
-        <figure class="case-img"><img src="assets/proof-1.jpg" alt="A small leadership team working in a courtyard" loading="lazy"></figure>
+        <figure class="case-img"><img src="/offsite/assets/proof-1.jpg" alt="A small leadership team working in a courtyard" loading="lazy"></figure>
         <div class="case-body">
           <p class="case-label">01 · Founding and executive team</p>
           <h3>Six leaders, two offsites, one direction.</h3>
@@ -107,7 +109,7 @@
       </article>
 
       <article class="case case-flip">
-        <figure class="case-img"><img src="assets/proof-4.jpg" alt="A leadership team working in front of a wall of notes" loading="lazy"></figure>
+        <figure class="case-img"><img src="/offsite/assets/proof-4.jpg" alt="A leadership team working in front of a wall of notes" loading="lazy"></figure>
         <div class="case-body">
           <p class="case-label">02 · The leadership layer</p>
           <h3>Four offsites, eight months, one leadership team.</h3>
@@ -122,7 +124,7 @@
       </article>
 
       <article class="case">
-        <figure class="case-img"><img src="assets/formats/company-offsite-crowd.jpeg" alt="A whole company gathered in a plenary session" loading="lazy"></figure>
+        <figure class="case-img"><img src="/offsite/assets/formats/company-offsite-crowd.jpeg" alt="A whole company gathered in a plenary session" loading="lazy"></figure>
         <div class="case-body">
           <p class="case-label">03 · The whole company</p>
           <h3>The leadership team first, then everyone.</h3>
@@ -149,7 +151,7 @@
 
       <div class="programmes">
         <article class="programme">
-          <figure class="programme-img"><img src="assets/environments/masia-barcelona.jpeg" alt="A private masia estate in the hills near Barcelona" loading="lazy"></figure>
+          <figure class="programme-img"><img src="/offsite/assets/environments/masia-barcelona.jpeg" alt="A private masia estate in the hills near Barcelona" loading="lazy"></figure>
           <div class="programme-body">
             <p class="programme-tag">Sample programme 01</p>
             <h3>The Horizon &amp; Founder Reset</h3>
@@ -163,7 +165,7 @@
                 <p>We speak with each founder alone about what the company needs next and what they haven't said to the others. The agenda is built from those conversations.</p>
                 <h4>Day 1</h4>
                 <p>Where the company is honestly heading, then roles, decision rights and the disagreements that keep coming back. Dinner at the masia, with no programme.</p>
-                <figure class="detail-img"><img src="assets/gallery/02-trail-strategy.jpeg" alt="A team walking a forest trail between sessions" loading="lazy"></figure>
+                <figure class="detail-img"><img src="/offsite/assets/gallery/02-trail-strategy.jpeg" alt="A team walking a forest trail between sessions" loading="lazy"></figure>
                 <h4>Day 2</h4>
                 <p>What came up turns into decisions: who owns what and how the founders will disagree in future. It ends with the commitments each founder makes to the others.</p>
                 <p class="programme-out">They leave with a shared view of the next two to three years, clear ownership at the top and a short written agreement on how they work together.</p>
@@ -173,7 +175,7 @@
         </article>
 
         <article class="programme">
-          <figure class="programme-img"><img src="assets/format-winery.jpg" alt="A winery estate in the Penedès" loading="lazy"></figure>
+          <figure class="programme-img"><img src="/offsite/assets/format-winery.jpg" alt="A winery estate in the Penedès" loading="lazy"></figure>
           <div class="programme-body">
             <p class="programme-tag">Sample programme 02</p>
             <h3>The Strategy-to-Execution Offsite</h3>
@@ -187,7 +189,7 @@
                 <p>We interview the executives, review the current plan and agree with the CEO which decisions the offsite must produce.</p>
                 <h4>Day 1</h4>
                 <p>The strategy meets reality: the assumptions behind it, the trade-offs nobody has made and where functions are pulling in different directions.</p>
-                <figure class="detail-img"><img src="assets/gallery/03-urban-atelier.jpeg" alt="A private loft space in Poblenou" loading="lazy"></figure>
+                <figure class="detail-img"><img src="/offsite/assets/gallery/03-urban-atelier.jpeg" alt="A private loft space in Poblenou" loading="lazy"></figure>
                 <h4>Day 2</h4>
                 <p>Choices and priorities, including what gets cut. Dinner in the vineyard.</p>
                 <h4>Day 3</h4>
@@ -199,7 +201,7 @@
         </article>
 
         <article class="programme">
-          <figure class="programme-img"><img src="assets/gallery/04-masia-courtyard.jpeg" alt="An estate near Barcelona with space for a whole company" loading="lazy"></figure>
+          <figure class="programme-img"><img src="/offsite/assets/gallery/04-masia-courtyard.jpeg" alt="An estate near Barcelona with space for a whole company" loading="lazy"></figure>
           <div class="programme-body">
             <p class="programme-tag">Sample programme 03</p>
             <h3>The Company Momentum Offsite</h3>
@@ -215,7 +217,7 @@
                 <p>The leadership team only. They align on the strategy and the year's priorities, build the story they will tell the company and test it on each other until it holds up. On the second evening the rest of the company arrives.</p>
                 <h4>Day 3</h4>
                 <p>The leadership team presents the strategy to everyone and takes open questions. The afternoon is for the whole company to spend time together through an activity chosen with you, such as sailing, a cooking workshop or a walk in the hills.</p>
-                <figure class="detail-img"><img src="assets/gallery/01-maker-workshop.jpeg" alt="A team after a cooking workshop" loading="lazy"></figure>
+                <figure class="detail-img"><img src="/offsite/assets/gallery/01-maker-workshop.jpeg" alt="A team after a cooking workshop" loading="lazy"></figure>
                 <h4>Day 4</h4>
                 <p>Each team works out how it contributes and what it needs from the others. After lunch, teams present their plans to each other and the company agrees what good work looks like here.</p>
                 <p class="programme-out">They leave with a strategy the leadership team owns, a plan every team built itself and a shared standard for the year ahead.</p>
@@ -236,12 +238,12 @@
         <p class="section-lede">Masias in the hills, vineyards in the Penedès, lofts in Poblenou and the coast an hour from all of them. Our partners live here, so the setting works for the conversation and never the other way round.</p>
       </div>
       <div class="mosaic">
-        <figure class="m-a"><img src="assets/gallery/06-catamaran-sunset.jpeg" alt="Barcelona's waterfront" loading="lazy"><figcaption>The coast</figcaption></figure>
-        <figure class="m-b"><img src="assets/environments/barcelona-winery.jpeg" alt="A winery estate lit at dusk" loading="lazy"><figcaption>Vineyard estates</figcaption></figure>
-        <figure class="m-c"><img src="assets/environments/barcelona-loft.jpeg" alt="A loft interior in the city" loading="lazy"><figcaption>City lofts</figcaption></figure>
-        <figure class="m-d"><img src="assets/format-masia.jpg" alt="A masia retreat in a green valley" loading="lazy"><figcaption>Masias in the hills</figcaption></figure>
-        <figure class="m-e"><img src="assets/gallery/07-montserrat-foothills.jpeg" alt="The Montserrat mountains" loading="lazy"><figcaption>Montserrat</figcaption></figure>
-        <figure class="m-f"><img src="assets/gallery/05-terrace-dining.jpeg" alt="A terrace set for dinner" loading="lazy"><figcaption>Dinners outside</figcaption></figure>
+        <figure class="m-a"><img src="/offsite/assets/gallery/06-catamaran-sunset.jpeg" alt="Barcelona's waterfront" loading="lazy"><figcaption>The coast</figcaption></figure>
+        <figure class="m-b"><img src="/offsite/assets/environments/barcelona-winery.jpeg" alt="A winery estate lit at dusk" loading="lazy"><figcaption>Vineyard estates</figcaption></figure>
+        <figure class="m-c"><img src="/offsite/assets/environments/barcelona-loft.jpeg" alt="A loft interior in the city" loading="lazy"><figcaption>City lofts</figcaption></figure>
+        <figure class="m-d"><img src="/offsite/assets/format-masia.jpg" alt="A masia retreat in a green valley" loading="lazy"><figcaption>Masias in the hills</figcaption></figure>
+        <figure class="m-e"><img src="/offsite/assets/gallery/07-montserrat-foothills.jpeg" alt="The Montserrat mountains" loading="lazy"><figcaption>Montserrat</figcaption></figure>
+        <figure class="m-f"><img src="/offsite/assets/gallery/05-terrace-dining.jpeg" alt="A terrace set for dinner" loading="lazy"><figcaption>Dinners outside</figcaption></figure>
       </div>
       <p class="mosaic-note">Looking for a venue first? Browse <a href="https://executiveoffsite.es" class="link-light" rel="noopener">executiveoffsite.es</a>, our directory of executive offsite venues around Barcelona.</p>
 
@@ -251,10 +253,10 @@
           <p>We have also facilitated offsites in Madrid, Marrakesh, the Caribbean and across Germany. If the right place for your team is somewhere else, we bring the same preparation and the same people.</p>
         </div>
         <div class="beyond-strip">
-          <img src="assets/formats/offsite-bavaria-session.jpeg" alt="A leadership session in a historic room" loading="lazy">
-          <img src="assets/formats/slowing-down-session.jpeg" alt="Leaders writing at an outdoor table in the mountains" loading="lazy">
-          <img src="assets/formats/offsite-meditation.jpeg" alt="A reflective session in a quiet room" loading="lazy">
-          <img src="assets/proof-2.jpg" alt="A team working in a hotel meeting room" loading="lazy">
+          <img src="/offsite/assets/formats/offsite-bavaria-session.jpeg" alt="A leadership session in a historic room" loading="lazy">
+          <img src="/offsite/assets/formats/slowing-down-session.jpeg" alt="Leaders writing at an outdoor table in the mountains" loading="lazy">
+          <img src="/offsite/assets/formats/offsite-meditation.jpeg" alt="A reflective session in a quiet room" loading="lazy">
+          <img src="/offsite/assets/proof-2.jpg" alt="A team working in a hotel meeting room" loading="lazy">
         </div>
       </div>
     </div>
@@ -267,7 +269,7 @@
         <p class="eyebrow">Why Kuma</p>
         <h2>We have sat on your side of the table.</h2>
       </div>
-      <figure class="why-img"><img src="assets/why-session.jpg" alt="A facilitated strategy session with a large leadership group" loading="lazy" width="1600" height="900"></figure>
+      <figure class="why-img"><img src="/assets/why-session.jpg" alt="A facilitated strategy session with a large leadership group" loading="lazy" width="1600" height="900"></figure>
       <div class="why-copy">
         <div class="why-point">
           <h3>We understand the business, not only the conversation</h3>
@@ -288,27 +290,27 @@
       <h3 class="team-head">Who facilitates</h3>
       <div class="team">
         <div class="person">
-          <img src="assets/team/bw-sven.jpg" alt="Dr. Sven Mulfinger" loading="lazy">
+          <img src="/assets/team/bw-sven.jpg" alt="Dr. Sven Mulfinger" loading="lazy">
           <p class="person-name">Dr. Sven Mulfinger</p>
           <p class="person-role">Managing Partner · leadership teams, co-founder alignment and M&amp;A</p>
         </div>
         <div class="person">
-          <img src="assets/team/bw-farid.jpg" alt="Farid Chaouki" loading="lazy">
+          <img src="/assets/team/bw-farid.jpg" alt="Farid Chaouki" loading="lazy">
           <p class="person-name">Farid Chaouki</p>
           <p class="person-role">Founder, Nonameyet · product innovation and strategy sprints</p>
         </div>
         <div class="person">
-          <img src="assets/team/bw-luisa.jpg" alt="Luisa Ábalo" loading="lazy">
+          <img src="/assets/team/bw-luisa.jpg" alt="Luisa Ábalo" loading="lazy">
           <p class="person-name">Luisa Ábalo</p>
           <p class="person-role">Executive Leadership Chair · governance and scaling</p>
         </div>
         <div class="person">
-          <img src="assets/team/bw-colleen.jpg" alt="Colleen Connors" loading="lazy">
+          <img src="/assets/team/bw-colleen.jpg" alt="Colleen Connors" loading="lazy">
           <p class="person-name">Colleen Connors</p>
           <p class="person-role">Senior Advisor · former CEO and COO</p>
         </div>
       </div>
-      <p class="team-more"><a href="partners.html">Meet the full partner network →</a></p>
+      <p class="team-more"><a href="/offsite/partners.html">Meet the full partner network →</a></p>
     </div>
   </section>
 
@@ -331,7 +333,7 @@
   <!-- 8. Contact -->
   <section class="section contact" id="contact">
     <div class="wrap contact-grid">
-      <figure class="contact-img"><img src="assets/contact-session.jpg" alt="A leadership team in a working session around a table" loading="lazy" width="1448" height="1086"></figure>
+      <figure class="contact-img"><img src="/assets/contact-session.jpg" alt="A leadership team in a working session around a table" loading="lazy" width="1448" height="1086"></figure>
       <div class="contact-copy">
         <p class="eyebrow">Let's talk</p>
         <h2>What does your team need to work through?</h2>
@@ -395,7 +397,7 @@
 <footer class="foot">
   <div class="wrap foot-inner">
     <p>Kuma Partners · Executive offsites · Barcelona</p>
-    <p><a href="mailto:contact@kuma.partners">contact@kuma.partners</a> · <a href="./">Current offsite page</a> · <a href="/">kuma.partners</a></p>
+    <p><a href="mailto:contact@kuma.partners">contact@kuma.partners</a> · <a href="/offsite/">Current offsite page</a> · <a href="/">kuma.partners</a></p>
   </div>
 </footer>
 

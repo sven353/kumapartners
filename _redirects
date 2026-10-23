@@ -8,3 +8,8 @@
 # trailing-slash form (Netlify matches rules with or without the slash). It is a
 # rewrite to a file, never a redirect, so it cannot loop.
 /offsite/configurator   /offsite/configurator.html   200
+
+# Draft offsite redesign. The files sit at the top level of the repo (new.html, new.css)
+# and are shown at /offsite/new. Forced 200 rewrites, never redirects, so they cannot loop.
+/offsite/new        /new.html   200!
+/offsite/new.html   /new.html   200!
