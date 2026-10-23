@@ -570,11 +570,19 @@
           <h3>And wherever your team needs to be.</h3>
           <p>We have also facilitated offsites in Madrid, Marrakesh, the Caribbean and across Germany. If the right place for your team is somewhere else, we bring the same preparation and the same people.</p>
         </div>
-        <div class="beyond-strip">
-          <img src="/offsite/assets/formats/offsite-bavaria-session.jpeg" alt="A leadership session in a historic room" loading="lazy">
-          <img src="/offsite/assets/formats/slowing-down-session.jpeg" alt="Leaders writing at an outdoor table in the mountains" loading="lazy">
-          <img src="/offsite/assets/formats/offsite-meditation.jpeg" alt="A reflective session in a quiet room" loading="lazy">
-          <img src="/offsite/assets/proof-2.jpg" alt="A team working in a hotel meeting room" loading="lazy">
+        <div class="gallery" aria-roledescription="carousel" aria-label="Offsites outside Barcelona">
+          <div class="gallery-track" tabindex="0">
+            <figure class="gallery-slide" role="group" aria-roledescription="slide" aria-label="1 of 7"><img src="/offsite/assets/formats/offsite-bavaria-session.jpeg" alt="A leadership session in a historic room" loading="lazy"></figure>
+            <figure class="gallery-slide" role="group" aria-roledescription="slide" aria-label="2 of 7"><img src="/offsite/assets/formats/slowing-down-session.jpeg" alt="Leaders writing at an outdoor table in the mountains" loading="lazy"></figure>
+            <figure class="gallery-slide" role="group" aria-roledescription="slide" aria-label="3 of 7"><img src="/assets/offsites/sailboat-retrospective.jpg" alt="A team standing at a wall of notes during a retrospective" loading="lazy"></figure>
+            <figure class="gallery-slide" role="group" aria-roledescription="slide" aria-label="4 of 7"><img src="/offsite/assets/formats/offsite-meditation.jpeg" alt="A reflective session in a quiet room" loading="lazy"></figure>
+            <figure class="gallery-slide" role="group" aria-roledescription="slide" aria-label="5 of 7"><img src="/assets/offsites/strategy-review-session.jpg" alt="A strategy review with a leadership team around a table" loading="lazy"></figure>
+            <figure class="gallery-slide" role="group" aria-roledescription="slide" aria-label="6 of 7"><img src="/offsite/assets/proof-2.jpg" alt="A team working in a hotel meeting room" loading="lazy"></figure>
+            <figure class="gallery-slide" role="group" aria-roledescription="slide" aria-label="7 of 7"><img src="/assets/offsites/board%20offsite%20kuma%20partners.png" alt="A board offsite in a meeting room with a view" loading="lazy"></figure>
+          </div>
+          <button type="button" class="gallery-arrow gallery-prev" aria-label="Previous photo">&#8592;</button>
+          <button type="button" class="gallery-arrow gallery-next" aria-label="Next photo">&#8594;</button>
+          <p class="gallery-count" aria-live="polite"><span class="gallery-current">1</span> / 7</p>
         </div>
       </div>
     </div>
@@ -755,6 +763,31 @@
 <a href="#contact" class="sticky-cta">Discuss your next offsite</a>
 
 <script>
+(function () {
+  // Photo gallery: one full photo at a time, arrows, swipe and arrow keys.
+  var g = document.querySelector(".gallery");
+  if (!g) return;
+  var track = g.querySelector(".gallery-track");
+  var slides = track.querySelectorAll(".gallery-slide");
+  var cur = g.querySelector(".gallery-current");
+  var prev = g.querySelector(".gallery-prev"), next = g.querySelector(".gallery-next");
+  function index() { return Math.round(track.scrollLeft / track.clientWidth); }
+  function go(i) {
+    i = (i + slides.length) % slides.length;
+    track.scrollTo({ left: i * track.clientWidth, behavior: "smooth" });
+  }
+  prev.addEventListener("click", function () { go(index() - 1); });
+  next.addEventListener("click", function () { go(index() + 1); });
+  track.addEventListener("keydown", function (e) {
+    if (e.key === "ArrowRight") { e.preventDefault(); go(index() + 1); }
+    if (e.key === "ArrowLeft") { e.preventDefault(); go(index() - 1); }
+  });
+  var t;
+  track.addEventListener("scroll", function () {
+    clearTimeout(t);
+    t = setTimeout(function () { cur.textContent = index() + 1; }, 60);
+  });
+})();
 (function () {
   // FAQ: six questions on show, the rest one click away. All stay in the page for search engines.
   var more = document.getElementById("faq-more");
