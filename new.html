@@ -666,8 +666,10 @@
         <figure class="contact-img"><img src="/assets/contact-session.jpg" alt="A leadership team in a working session around a table" loading="lazy" width="1448" height="1086"></figure>
       </div>
       <div class="contact-card reveal-on-scroll">
-        <h3>Start the conversation</h3>
-        <p class="contact-card-sub">A partner replies personally within two working days.</p>
+        <div class="contact-start">
+          <h3>Start the conversation</h3>
+          <p class="contact-card-sub">A partner replies personally within two working days.</p>
+        </div>
         <form class="contact-form" name="offsite-conversation" method="POST" data-netlify="true" netlify-honeypot="company_tax_id" novalidate>
           <input type="hidden" name="form-name" value="offsite-conversation">
           <p class="hp" aria-hidden="true"><label>Leave this empty <input name="company_tax_id" tabindex="-1" autocomplete="off"></label></p>
@@ -681,6 +683,15 @@
           <p class="form-status" role="status" aria-live="polite"></p>
         </form>
         <p class="contact-alt">Prefer email? <a href="mailto:contact@kuma.partners">contact@kuma.partners</a></p>
+        <div class="contact-thanks" hidden>
+          <span class="thanks-mark" aria-hidden="true">&#10003;</span>
+          <h3 tabindex="-1">Thank you.</h3>
+          <p>Your message is with us. A partner will reply personally within two working days.</p>
+          <div class="thanks-actions">
+            <a class="btn btn-primary btn-block" href="https://www.linkedin.com/in/svenmulfinger" target="_blank" rel="noopener">Connect with Sven on LinkedIn</a>
+            <a class="btn btn-ghost btn-block thanks-share" href="mailto:?subject=Executive%20offsites%20with%20Kuma%20Partners&amp;body=I%20came%20across%20this%20and%20thought%20it%20might%20be%20useful%20for%20our%20next%20offsite%3A%20https%3A%2F%2Fwww.kuma.partners%2Foffsite%2F">Send this page to a colleague</a>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -861,6 +872,15 @@
   }
 })();
 (function () {
+  // "Send this page to a colleague": the phone's share sheet where available, otherwise an email draft.
+  var share = document.querySelector(".thanks-share");
+  if (!share || !navigator.share) return;
+  share.addEventListener("click", function (e) {
+    e.preventDefault();
+    navigator.share({ title: "Executive offsites with Kuma Partners", url: "https://www.kuma.partners/offsite/" }).catch(function () {});
+  });
+})();
+(function () {
   var form = document.querySelector(".contact-form");
   if (!form) return;
   var status = form.querySelector(".form-status");
@@ -896,8 +916,15 @@
       if (!res.ok) throw new Error(res.status);
       try { times.push(Date.now()); localStorage.setItem(KEY, JSON.stringify(times)); } catch (e) {}
       form.reset();
-      form.classList.add("is-sent");
-      status.textContent = "Thank you. A partner will reply personally within two working days.";
+      status.textContent = "";
+      // Swap the form for the thank-you panel inside the same card.
+      var card = form.closest(".contact-card");
+      card.querySelector(".contact-start").hidden = true;
+      form.hidden = true;
+      card.querySelector(".contact-alt").hidden = true;
+      var thanks = card.querySelector(".contact-thanks");
+      thanks.hidden = false;
+      thanks.querySelector("h3").focus();
     }).catch(function () {
       status.textContent = "Something went wrong. Please write to contact@kuma.partners instead.";
     }).finally(function () { btn.disabled = false; });

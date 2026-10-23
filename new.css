@@ -195,6 +195,14 @@ p { margin: 0 0 1em; }
 .form-status { margin: 0; min-height: 1.4em; color: var(--teal); font-weight: 700; text-align: center; }
 .form-status:empty { display: none; }
 .hp { position: absolute; left: -9999px; }
+.contact-form[hidden], .contact-start[hidden], .contact-alt[hidden], .contact-thanks[hidden] { display: none; }
+.contact-thanks { text-align: center; padding: 12px 0 4px; animation: case-in .4s ease; }
+.thanks-mark { display: inline-flex; align-items: center; justify-content: center; width: 56px; height: 56px; border-radius: 50%; background: rgba(29,111,138,.1); color: var(--teal); font-size: 1.6rem; margin-bottom: 18px; }
+.contact-thanks h3 { font-size: 1.7rem; margin-bottom: 10px; outline: none; }
+.contact-thanks > p { color: var(--slate); max-width: 340px; margin: 0 auto 28px; }
+.thanks-actions { display: grid; gap: 12px; }
+.btn-ghost { background: #fff; color: var(--teal); border-color: #CBD5DF; }
+.btn-ghost:hover { border-color: var(--teal); }
 .contact-alt { font-size: .92rem; color: var(--slate); margin: 22px 0 0; padding-top: 18px; border-top: 1px solid var(--line); text-align: center; }
 
 /* FAQ */
