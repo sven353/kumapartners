@@ -28,6 +28,62 @@
 <link rel="preload" href="assets/fonts/montserrat-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/lato-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfilePage",
+      "@id": "https://www.kuma.partners/partners.html#webpage",
+      "url": "https://www.kuma.partners/partners.html",
+      "name": "Partners & Team | Kuma Partners",
+      "isPartOf": { "@id": "https://www.kuma.partners/#website" },
+      "about": [
+        { "@id": "https://mulfinger.com/#sven-mulfinger" },
+        { "@id": "https://vincentaze.com/#vincent-aze" }
+      ]
+    },
+    {
+      "@type": ["Organization", "ProfessionalService"],
+      "@id": "https://www.kuma.partners/#organization",
+      "name": "Kuma Partners",
+      "url": "https://www.kuma.partners/",
+      "founder": [
+        { "@id": "https://vincentaze.com/#vincent-aze" },
+        { "@id": "https://mulfinger.com/#sven-mulfinger" }
+      ],
+      "sameAs": [
+        "https://www.linkedin.com/company/92525300/",
+        "https://www.kuma.partners/offsite/",
+        "https://theround.kuma.partners"
+      ]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://vincentaze.com/#vincent-aze",
+      "name": "Vincent Azé",
+      "jobTitle": "Founding Partner",
+      "description": "Executive coach and strategic advisor at Kuma Partners, based in Lisbon.",
+      "url": "https://vincentaze.com",
+      "email": "vincent@kuma.partners",
+      "knowsLanguage": ["en", "fr"],
+      "worksFor": { "@id": "https://www.kuma.partners/#organization" },
+      "colleague": { "@id": "https://mulfinger.com/#sven-mulfinger" },
+      "sameAs": ["https://www.linkedin.com/in/vincentaze/"]
+    },
+    {
+      "@type": "Person",
+      "@id": "https://mulfinger.com/#sven-mulfinger",
+      "name": "Dr. Sven Mulfinger",
+      "jobTitle": "Managing Partner",
+      "url": "https://mulfinger.com",
+      "worksFor": { "@id": "https://www.kuma.partners/#organization" },
+      "colleague": { "@id": "https://vincentaze.com/#vincent-aze" },
+      "sameAs": ["https://www.linkedin.com/in/svenmulfinger"]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -129,10 +185,10 @@
 
         <div class="partner-card-lg reveal-on-scroll">
           <div class="partner-photo">
-            <img width="300" height="400" src="assets/team/vincent-aze.jpg" alt="Vincent Azé, Managing Partner at Kuma Partners">
+            <img width="300" height="400" src="assets/team/vincent-aze.jpg" alt="Vincent Azé, Founding Partner at Kuma Partners">
           </div>
           <h3>Vincent Azé</h3>
-          <span class="role">Managing Partner · Commercial Velocity &amp; GTM Architecture</span>
+          <span class="role">Founding Partner · Executive Coach &amp; Strategic Advisor</span>
           <div class="track-record">
             <span>Former CRO, Glownet</span>
             <span>Sales Director, FIS</span>
@@ -149,6 +205,7 @@
           </div>
           <div class="social-row">
             <a href="https://www.linkedin.com/in/vincentaze/" target="_blank" rel="noopener noreferrer">LinkedIn ↗</a>
+            <a href="https://vincentaze.com" target="_blank" rel="noopener">vincentaze.com ↗</a>
             <a href="mailto:vincent@kuma.partners">Email ↗</a>
           </div>
         </div>

@@ -94,6 +94,8 @@ Submission is handled by `wireAjaxForm()` in `site.js`, which posts via `fetch()
 
 `robots.txt` explicitly allows `GPTBot`, `ClaudeBot`, `PerplexityBot`, `Applebot-Extended`, and `Google-Extended`, and points to both `sitemap.xml` and `llms.txt`. `llms.txt` gives AI agents a plain-language summary of the firm, its offerings, and its positioning. `index.html` also carries JSON-LD for `ProfessionalService`, `FAQPage`, `Service`, `Offer`, `OfferCatalog`, and `Person`, all rendered directly into the static markup so nothing depends on client-side JavaScript to be readable.
 
+Entity links (25 Oct 2026): `partners.html` and `offsite/partners.html` carry JSON-LD that links Vincent Azé (`https://vincentaze.com/#vincent-aze`, Founding Partner) and Dr. Sven Mulfinger (`https://mulfinger.com/#sven-mulfinger`) to the organisation id `https://www.kuma.partners/#organization`. Use that same www id on every Kuma site, The Round included. `llms.txt` has an Ecosystem and a Disambiguation section. The team cards link to vincentaze.com. The landing page JSON-LD still needs the same ids (landing page task, locked).
+
 ## 7. Deployment
 
 Netlify deploys straight from the `main` branch of this repository. There is no CI step and no build command: whatever is on `main` is what ships. The usual flow is to commit locally, then push to `main` once changes have been checked in a browser (both viewport ranges and the DOM tag balance, since there is no linter running on save). After a push, Netlify's edge deploy is typically live within a minute.
