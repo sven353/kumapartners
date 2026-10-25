@@ -166,6 +166,7 @@ p { margin: 0 0 1em; }
 .why-img img { width: 100%; height: auto; border-radius: var(--r); } /* full photo, never cropped */
 .why-copy { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-top: 36px; }
 .why-point { padding: 20px 0; border-top: 1px solid var(--line); }
+.why-icon { display: inline-flex; align-items: center; justify-content: center; width: 44px; height: 44px; margin-bottom: 14px; border-radius: 10px; background: rgba(29,111,138,.08); color: var(--teal); }
 .why-point h3 { margin-bottom: 8px; }
 .why-point p { margin: 0; color: var(--slate); }
 .team-head { margin: clamp(64px, 8vw, 96px) 0 28px; font-size: 1.3rem; }
