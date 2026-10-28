@@ -104,6 +104,7 @@ Since 28 Oct 2026 The Round by Kuma Partners lives at `https://www.kuma.partners
 - Form `the-round-apply` (candidate review) is a Netlify Form on this site. `submission-created` skips it (it only handles the scan form). Turn on the email notification for it under Forms.
 - Member sign in links go to `https://ledger.kuma.partners/`, a separate Netlify project (Identity, Blobs and the ledger function) whose code stays in the private repo `sven353/theround`. Invite and reset emails that land here with a token in the address are forwarded there by `the-round/site.js`.
 - `/theround` redirects to `/the-round/`. The page is in `sitemap.xml` but not linked from the landing page yet.
+- 28 Oct: `llms.txt` (Ecosystem) and the JSON-LD `sameAs` in `partners.html` point to `https://www.kuma.partners/the-round/` instead of the old subdomain. Page title (and meta title, og:title, twitter:title) now reads "The Round | Confidential CEO Peer Board in Barcelona | Kuma Partners". New sparring photo (`the-round/assets/photos/cadence-sparring-office.*`).
 
 ## 7. Deployment
 
