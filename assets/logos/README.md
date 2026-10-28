@@ -11,3 +11,5 @@ To add another logo: save a single-path SVG here, bake in fill="#5F7380", then i
 (use client-logo--wide for very wide wordmarks, 16px high).
 
 Sizing: every logo is sized so its ink area is roughly equal, within 22px height and 88px width, then written as width/height attributes in partners.html. Very thin wordmarks (Porsche, Bertelsmann) hit the width cap and end up shorter.
+
+Added 28 Oct 2026 for Isabelle Engeler's card: IKEA, Longines, TWINT, Unil (HEC Lausanne) and Victorinox, supplied as raster images and converted the same way (single slate tone, 2x display size, ink area matched to the existing marks). Light-on-dark sources (IKEA, TWINT) were read as bright ink on a dark ground. SBB CFF, Swiss Re and University of Oxford have no vetted logo file yet and are set as typographic names or credential tags.
