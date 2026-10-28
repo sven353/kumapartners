@@ -96,6 +96,15 @@ Submission is handled by `wireAjaxForm()` in `site.js`, which posts via `fetch()
 
 Entity links (25 Oct 2026): `partners.html` and `offsite/partners.html` carry JSON-LD that links Vincent Azé (`https://vincentaze.com/#vincent-aze`, Founding Partner) and Dr. Sven Mulfinger (`https://mulfinger.com/#sven-mulfinger`) to the organisation id `https://www.kuma.partners/#organization`. Use that same www id on every Kuma site, The Round included. `llms.txt` has an Ecosystem and a Disambiguation section. The team cards link to vincentaze.com. The landing page JSON-LD still needs the same ids (landing page task, locked).
 
+## The Round (`the-round/`)
+
+Since 28 Oct 2026 The Round by Kuma Partners lives at `https://www.kuma.partners/the-round/`, moved from theround.kuma.partners for SEO and GEO (one domain, one organisation id). The old subdomain answers with a 301 to the same path here.
+
+- Folder `the-round/`: `index.html`, its own `styles.css` and `site.js`, `favicon.ico` and `assets/` (fonts, photos, icons, share image). Every path is absolute (`/the-round/...`), so the page never loads a landing file and the design lock is unaffected.
+- Form `the-round-apply` (candidate review) is a Netlify Form on this site. `submission-created` skips it (it only handles the scan form). Turn on the email notification for it under Forms.
+- Member sign in links go to `https://ledger.kuma.partners/`, a separate Netlify project (Identity, Blobs and the ledger function) whose code stays in the private repo `sven353/theround`. Invite and reset emails that land here with a token in the address are forwarded there by `the-round/site.js`.
+- `/theround` redirects to `/the-round/`. The page is in `sitemap.xml` but not linked from the landing page yet.
+
 ## 7. Deployment
 
 Netlify deploys straight from the `main` branch of this repository. There is no CI step and no build command: whatever is on `main` is what ships. The usual flow is to commit locally, then push to `main` once changes have been checked in a browser (both viewport ranges and the DOM tag balance, since there is no linter running on save). After a push, Netlify's edge deploy is typically live within a minute.
