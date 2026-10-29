@@ -75,7 +75,7 @@
       "@type": "Person",
       "@id": "https://mulfinger.com/#sven-mulfinger",
       "name": "Dr. Sven Mulfinger",
-      "jobTitle": "Managing Partner",
+      "jobTitle": "Founding Partner",
       "url": "https://mulfinger.com",
       "worksFor": { "@id": "https://www.kuma.partners/#organization" },
       "colleague": { "@id": "https://vincentaze.com/#vincent-aze" },
@@ -84,6 +84,14 @@
   ]
 }
 </script>
+<style>
+/* Partner cards: pedigree logos on a fixed 3-column grid so rows never orphan a logo */
+.partner-card-lg .client-badges{display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:14px 12px; align-items:center; justify-items:start;}
+.partner-card-lg .client-badges .pedigree-caption{grid-column:1 / -1;}
+.partner-card-lg .client-badges .client-logo{max-width:88px; max-height:22px; width:auto; height:auto;}
+.partner-grid-2col > .partner-card-lg{min-width:0;}
+.partner-card-lg .social-row{flex-wrap:wrap; gap:6px 16px;}
+</style>
 </head>
 <body>
 <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -145,27 +153,28 @@
     </div>
   </section>
 
-  <!-- MANAGING PARTNERS -->
+  <!-- FOUNDING PARTNERS -->
   <section style="background:#fff;">
     <div class="wrap">
       <div class="section-head reveal-on-scroll">
-        <div class="eyebrow">Managing partners</div>
+        <div class="eyebrow">Founding partners</div>
         <h2>The partners who run every engagement</h2>
       </div>
       <div class="partner-grid partner-grid-2col reveal-stagger">
 
         <div class="partner-card-lg reveal-on-scroll">
           <div class="partner-photo">
-            <img width="300" height="400" src="assets/team/sven-mulfinger.jpg" alt="Dr. Sven Mulfinger, Managing Partner at Kuma Partners">
+            <img width="300" height="400" src="assets/team/sven-mulfinger.jpg" alt="Dr. Sven Mulfinger, Founding Partner at Kuma Partners">
           </div>
           <h3>Dr. Sven Mulfinger</h3>
-          <span class="role">Managing Partner · Systemic Architecture &amp; Executive Mediation</span>
+          <span class="role">Founding Partner · Offsites, Executive Coaching &amp; Intercultural Leadership</span>
           <div class="track-record">
             <span>Serial Entrepreneur</span>
             <span>PhD Engineer</span>
-            <span>Vistage Chair</span>
+            <span>Former CEO</span>
+            <span>Former Vistage Chair</span>
           </div>
-          <p>Executive strategist and systems designer pairing neuroscience-grounded diagnostics with high-stakes mediation. He guides founders, CEOs and boards through complex co-founder gridlock, structural misalignment and behavioural compacts, translating latent leadership tension into conscious, disciplined governance.</p>
+          <p>Serial entrepreneur and former corporate CEO with twenty years of building start-ups. Prepares and facilitates C-suite offsites and coaches founders and CEOs of scale-ups, especially when the executive team is split, cultures collide or growth has outrun the way the team decides. Researches cognitive preferences in leadership and is the author of The Non-Linear Operating System.</p>
           <div class="client-badges">
             <span class="pedigree-caption">Executive Pedigree &amp; Operating Background</span>
             <img class="client-logo" src="assets/logos/bertelsmann.png" alt="Bertelsmann" width="88" height="10" loading="lazy">
@@ -190,8 +199,8 @@
           <h3>Vincent Azé</h3>
           <span class="role">Founding Partner · Executive Coach &amp; Strategic Advisor</span>
           <div class="track-record">
-            <span>Former CRO, Glownet</span>
-            <span>Sales Director, FIS</span>
+            <span>Former CRO</span>
+            <span>Sales Director</span>
           </div>
           <p>Commercial operator and former scale-up executive specialising in dismantling revenue drag, pipeline bottlenecks and operational friction. He advises boards, CFOs and CROs on protecting runway, accelerating capital efficiency and compressing decision cycles across high-growth go-to-market teams.</p>
           <div class="client-badges">
