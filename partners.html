@@ -90,7 +90,16 @@
 .partner-card-lg .client-badges .pedigree-caption{grid-column:1 / -1;}
 .partner-card-lg .client-badges .client-logo{max-width:88px; max-height:22px; width:auto; height:auto;}
 .partner-grid-2col > .partner-card-lg{min-width:0;}
-.partner-card-lg .social-row{flex-wrap:wrap; gap:6px 16px;}
+.partner-card-lg .social-row{flex-wrap:wrap; gap:6px 16px; margin-top:auto; padding-top:22px;}
+.partner-card-founder{display:flex; flex-direction:column; padding:32px 32px 28px;}
+.partner-card-founder .partner-photo{width:88px; height:88px; margin-bottom:20px;}
+.partner-card-founder h3{font-size:1.45rem; margin-bottom:4px;}
+.partner-card-founder .role{display:block; margin-bottom:10px;}
+.partner-card-founder .partner-meta{margin:0 0 18px; font-family:'Lato',Arial,sans-serif; font-size:.76rem; font-weight:700; letter-spacing:.06em; text-transform:uppercase; line-height:1.6; color:var(--slate);}
+.partner-card-founder .client-badges{margin-top:20px;}
+.partner-meta span{white-space:nowrap;}
+@media (max-width:480px){.partner-card-founder{padding:26px 22px 24px;} .partner-card-lg .client-badges{grid-template-columns:repeat(2,minmax(0,1fr));}}
+.partner-intro{margin-top:14px; max-width:680px; font-size:1.05rem; line-height:1.65;}
 </style>
 </head>
 <body>
@@ -159,24 +168,20 @@
       <div class="section-head reveal-on-scroll">
         <div class="eyebrow">Founding partners</div>
         <h2>The partners who run every engagement</h2>
+        <p class="partner-intro">Sven focuses on how leadership teams decide and Vincent on how they turn decisions into revenue. Between them they cover the human and the commercial side of the same friction.</p>
       </div>
       <div class="partner-grid partner-grid-2col reveal-stagger">
 
-        <div class="partner-card-lg reveal-on-scroll">
+        <div class="partner-card-lg partner-card-founder reveal-on-scroll">
           <div class="partner-photo">
             <img width="300" height="400" src="assets/team/sven-mulfinger.jpg" alt="Dr. Sven Mulfinger, Founding Partner at Kuma Partners">
           </div>
           <h3>Dr. Sven Mulfinger</h3>
           <span class="role">Founding Partner · Offsites, Executive Coaching &amp; Intercultural Leadership</span>
-          <div class="track-record">
-            <span>Serial Entrepreneur</span>
-            <span>PhD Engineer</span>
-            <span>Former CEO</span>
-            <span>Former Vistage Chair</span>
-          </div>
-          <p>Serial entrepreneur and former corporate CEO with twenty years of building start-ups. Prepares and facilitates C-suite offsites and coaches founders and CEOs of scale-ups, especially when the executive team is split, cultures collide or growth has outrun the way the team decides. Researches cognitive preferences in leadership and is the author of The Non-Linear Operating System.</p>
+          <p class="partner-meta"><span>Serial entrepreneur ·</span> <span>Former CEO ·</span> <span>PhD engineer ·</span> <span>Former Vistage Chair</span></p>
+          <p>Serial entrepreneur and former corporate CEO with twenty years of building start-ups. Prepares and facilitates C-suite offsites and coaches founders and CEOs of scale-ups, especially when the executive team is split, cultures collide or growth has outrun the way the team decides. Author of The Non-Linear Operating System.</p>
           <div class="client-badges">
-            <span class="pedigree-caption">Executive Pedigree &amp; Operating Background</span>
+            <span class="pedigree-caption">Selected experience</span>
             <img class="client-logo" src="assets/logos/bertelsmann.png" alt="Bertelsmann" width="88" height="10" loading="lazy">
             <img class="client-logo" src="assets/logos/vistage.png" alt="Vistage" width="57" height="11" loading="lazy">
             <img class="client-logo" src="assets/logos/proctergamble.png" alt="P&amp;G" width="43" height="19" loading="lazy">
@@ -192,19 +197,16 @@
           </div>
         </div>
 
-        <div class="partner-card-lg reveal-on-scroll">
+        <div class="partner-card-lg partner-card-founder reveal-on-scroll">
           <div class="partner-photo">
             <img width="300" height="400" src="assets/team/vincent-aze.jpg" alt="Vincent Azé, Founding Partner at Kuma Partners">
           </div>
           <h3>Vincent Azé</h3>
           <span class="role">Founding Partner · Executive Coach &amp; Strategic Advisor</span>
-          <div class="track-record">
-            <span>Former CRO</span>
-            <span>Sales Director</span>
-          </div>
+          <p class="partner-meta"><span>Former CRO ·</span> <span>Sales Director</span></p>
           <p>Commercial operator and former scale-up executive specialising in dismantling revenue drag, pipeline bottlenecks and operational friction. He advises boards, CFOs and CROs on protecting runway, accelerating capital efficiency and compressing decision cycles across high-growth go-to-market teams.</p>
           <div class="client-badges">
-            <span class="pedigree-caption">Executive Pedigree &amp; Operating Background</span>
+            <span class="pedigree-caption">Selected experience</span>
             <img class="client-logo" src="assets/logos/fis.svg" alt="FIS" width="53" height="22" loading="lazy">
             <img class="client-logo" src="assets/logos/landmark.png" alt="Landmark" width="65" height="22" loading="lazy">
             <img class="client-logo" src="assets/logos/glownet.svg" alt="Glownet" width="71" height="15" loading="lazy">
@@ -239,7 +241,7 @@
           <span class="domain">PhD in AI &amp; Large-Scale Systems Transformation</span>
           <p class="advisor-bio">20+ years guiding agile architecture and organisational scaling across complex tech ecosystems. Aligns operational goals with healthy human execution.</p>
           <div class="client-badges">
-            <span class="pedigree-caption">Executive Pedigree &amp; Operating Background</span>
+            <span class="pedigree-caption">Selected experience</span>
             <span class="client-name">Criteo</span>
             <img class="client-logo" src="assets/logos/esade.png" alt="ESADE" width="58" height="18" loading="lazy">
             <img class="client-logo" src="assets/logos/scrum-alliance.svg" alt="Scrum Alliance" width="61" height="22" loading="lazy">
@@ -253,7 +255,7 @@
           <span class="domain">Executive Board Advisory &amp; Business Psychology (CPCC)</span>
           <p class="advisor-bio">ICF-accredited leadership consultant advising boards and C-suite teams through interpersonal friction, executive restructuring and complex talent transitions.</p>
           <div class="client-badges">
-            <span class="pedigree-caption">Executive Pedigree &amp; Operating Background</span>
+            <span class="pedigree-caption">Selected experience</span>
             <span class="client-name">Korn Ferry</span>
             <img class="client-logo" src="assets/logos/icf.png" alt="International Coaching Federation (ICF)" width="69" height="18" loading="lazy">
             <img class="client-logo" src="assets/logos/cpcc.png" alt="CTI Certified Professional Co-Active Coach (CPCC)" width="64" height="22" loading="lazy">
@@ -266,7 +268,7 @@
           <span class="domain">Executive Narrative &amp; High-Stakes Communication</span>
           <p class="advisor-bio">Advises leadership teams on strategic narrative, board-level communication and executive alignment during high-stakes growth phases. Host of <em>Into the Story</em> (2M+ downloads).</p>
           <div class="client-badges">
-            <span class="pedigree-caption">Executive Pedigree &amp; Operating Background</span>
+            <span class="pedigree-caption">Selected experience</span>
             <img class="client-logo" src="assets/logos/pepsico.svg" alt="PepsiCo" width="22" height="22" loading="lazy">
             <span class="client-name">Novartis</span>
             <img class="client-logo" src="assets/logos/unilever.svg" alt="Unilever" width="21" height="22" loading="lazy">
@@ -280,7 +282,7 @@
           <span class="domain">Global Sales Leadership &amp; Scaling Adaptability (ExO)</span>
           <p class="advisor-bio">25+ years leading international sales and enterprise revenue teams. Specialises in building team resilience and commercial focus during hyper-growth transitions.</p>
           <div class="client-badges">
-            <span class="pedigree-caption">Executive Pedigree &amp; Operating Background</span>
+            <span class="pedigree-caption">Selected experience</span>
             <img class="client-logo" src="assets/logos/yahoo.svg" alt="Yahoo!" width="25" height="22" loading="lazy">
             <img class="client-logo" src="assets/logos/astrazeneca.png" alt="AstraZeneca" width="84" height="21" loading="lazy">
             <span class="client-name">JLL</span>
@@ -294,7 +296,7 @@
           <span class="domain">Executive Offsites &amp; Systemic Leadership Alignment</span>
           <p class="advisor-bio">20+ years designing and moderating high-impact leadership offsites and alignment frameworks for global tech scale-ups, unlocking executive trust and focus.</p>
           <div class="client-badges">
-            <span class="pedigree-caption">Executive Pedigree &amp; Operating Background</span>
+            <span class="pedigree-caption">Selected experience</span>
             <img class="client-logo" src="assets/logos/microsoft.png" alt="Microsoft" width="72" height="15" loading="lazy">
             <img class="client-logo" src="assets/logos/linkedin.svg" alt="LinkedIn" width="21" height="21" loading="lazy">
             <img class="client-logo" src="assets/logos/booking-com.svg" alt="Booking.com" width="19" height="19" loading="lazy">
@@ -308,7 +310,7 @@
           <span class="domain">Executive Sparring &amp; High-Trust Culture Architecture</span>
           <p class="advisor-bio">Seasoned sounding board and culture architect helping leaders navigate strategic inflection points, eliminate political drag and build high-accountability teams.</p>
           <div class="client-badges">
-            <span class="pedigree-caption">Executive Pedigree &amp; Operating Background</span>
+            <span class="pedigree-caption">Selected experience</span>
             <img class="client-logo" src="assets/logos/harvard.png" alt="Harvard University" width="75" height="19" loading="lazy">
             <img class="client-logo" src="assets/logos/ibm.svg" alt="IBM" width="49" height="18" loading="lazy">
             <img class="client-logo" src="assets/logos/dell.svg" alt="Dell" width="22" height="22" loading="lazy">
@@ -322,7 +324,7 @@
           <span class="domain">Digital Product Architecture &amp; HealthTech Scaling</span>
           <p class="advisor-bio">Serial founder and innovation leader who pairs technology and design with empathy. Co-founder of Talkspace (US IPO) and Carl, he draws on 25 years across health-tech, fin-tech, fashion, music and AI to help scale-ups and global companies make ambitious ideas real, and human.</p>
           <div class="client-badges">
-            <span class="pedigree-caption">Executive Pedigree &amp; Operating Background</span>
+            <span class="pedigree-caption">Selected experience</span>
             <img class="client-logo" src="assets/logos/talkspace.png" alt="Talkspace" width="64" height="17" loading="lazy">
             <span class="client-name">Within</span>
             <span class="client-name">Carl</span>
@@ -336,7 +338,7 @@
           <span class="domain">Operational Excellence &amp; High-Performance Teams</span>
           <p class="advisor-bio">Former CEO and COO who has advised multiple VC-backed start-ups and companies with over $100 million in revenue. Brings 15+ years coaching global leaders to scaling teams, operations and strategic alignment. Board member and founder of Coaching Leaders Global.</p>
           <div class="client-badges">
-            <span class="pedigree-caption">Executive Pedigree &amp; Operating Background</span>
+            <span class="pedigree-caption">Selected experience</span>
             <span class="client-name">Coaching Leaders Global</span>
             <span class="credential-tag">Former CEO / COO</span>
           </div>
@@ -348,7 +350,7 @@
           <span class="domain">Leadership &amp; Culture Transformation Mentor</span>
           <p class="advisor-bio">25+ years advising founders, executive teams and boards through complex organisational restructuring and critical growth inflection points. Focuses on leadership accountability and high-stakes strategic execution.</p>
           <div class="client-badges">
-            <span class="pedigree-caption">Executive Pedigree &amp; Operating Background</span>
+            <span class="pedigree-caption">Selected experience</span>
             <img class="client-logo" src="assets/logos/tiktok.svg" alt="TikTok" width="19" height="22" loading="lazy">
             <img class="client-logo" src="assets/logos/bsh.png" alt="BSH (Bosch Siemens)" width="67" height="21" loading="lazy">
             <img class="client-logo" src="assets/logos/bbva.png" alt="BBVA" width="54" height="17" loading="lazy">
@@ -362,7 +364,7 @@
           <span class="domain">Structural Re-engineering &amp; Executive Velocity</span>
           <p class="advisor-bio">Former CEO and executive intervention partner specialising in dismantling structural drag and corporate bottlenecks under pressure. Combines applied neuro-leadership and agentic governance to restore decision speed in scaling teams.</p>
           <div class="client-badges">
-            <span class="pedigree-caption">Executive Pedigree &amp; Operating Background</span>
+            <span class="pedigree-caption">Selected experience</span>
             <img class="client-logo" src="assets/logos/coca-cola.png" alt="Coca-Cola" width="56" height="18" loading="lazy">
             <img class="client-logo" src="assets/logos/caixabank.png" alt="CaixaBank" width="79" height="18" loading="lazy">
             <img class="client-logo" src="assets/logos/shiseido.png" alt="Shiseido" width="84" height="14" loading="lazy">
@@ -377,7 +379,7 @@
           <span class="domain">Climate-Tech Innovation &amp; Responsible AI Governance</span>
           <p class="advisor-bio">Deep-tech entrepreneur and venture builder specialising in industrial decarbonisation and scalable AI ecosystems. Co-founder and CEO at 4BlueTech, partnering with port authorities and industrial consortia to deploy modular climate solutions, capital-efficient infrastructure and responsible governance frameworks.</p>
           <div class="client-badges">
-            <span class="pedigree-caption">Executive Pedigree &amp; Operating Background</span>
+            <span class="pedigree-caption">Selected experience</span>
             <span class="client-name">4BlueTech</span>
             <img class="client-logo" src="assets/logos/eit-health.png" alt="EIT Health" width="50" height="22" loading="lazy">
             <img class="client-logo" src="assets/logos/porsche.png" alt="Porsche" width="88" height="7" loading="lazy">
@@ -393,7 +395,7 @@
           <span class="domain">Culture due diligence, post-merger integration and governance</span>
           <p class="advisor-bio">Harvard Business Review author and professor of management. Works with strategy consulting firms across Europe and advises boards, CEOs and investors on the people side of deals: aligning the executive team after closing, setting up governance between owner and company and building the new owner's culture into the company's own routines and HR policies.</p>
           <div class="client-badges">
-            <span class="pedigree-caption">Executive Pedigree &amp; Operating Background</span>
+            <span class="pedigree-caption">Selected experience</span>
             <img class="client-logo" src="assets/logos/swiss-re.png" alt="Swiss Re" width="68" height="16" loading="lazy">
             <img class="client-logo" src="assets/logos/university-of-oxford.png" alt="University of Oxford" width="74" height="22" loading="lazy">
             <span class="client-name">Harvard Business Review</span>
@@ -406,7 +408,7 @@
           <span class="domain">AI-driven market strategy and pricing architecture</span>
           <p class="advisor-bio">Associate Professor at HEC Lausanne and former IESE faculty. Advises scale-stage leadership on AI-native market intelligence, digital-twin go-to-market strategies and behavioural pricing frameworks.</p>
           <div class="client-badges">
-            <span class="pedigree-caption">Executive Pedigree &amp; Operating Background</span>
+            <span class="pedigree-caption">Selected experience</span>
             <img class="client-logo" src="assets/logos/unil-hec-lausanne.png" alt="HEC Lausanne" width="47" height="22" loading="lazy">
             <img class="client-logo" src="assets/logos/iese.svg" alt="IESE Business School" width="44" height="15" loading="lazy">
             <span class="client-name">NYU Stern</span>
@@ -423,7 +425,7 @@
           <span class="domain">Venture building in AI, blockchain and web3</span>
           <p class="advisor-bio">Two decades of launching and scaling companies across AI, SaaS, blockchain, e-commerce and sustainability. Grew BuyVIP to more than 10 million members and $140M in turnover before its sale to Amazon, and built PORTUM into a B2B sourcing pioneer with over $1B in trading volume. Coaches people and organisations to grow beyond their limits.</p>
           <div class="client-badges">
-            <span class="pedigree-caption">Executive Pedigree &amp; Operating Background</span>
+            <span class="pedigree-caption">Selected experience</span>
             <img class="client-logo" src="assets/logos/buyvip.png" alt="BuyVIP" width="82" height="16" loading="lazy">
             <img class="client-logo" src="assets/logos/portum.png" alt="Portum" width="65" height="13" loading="lazy">
             <img class="client-logo" src="assets/logos/htec.png" alt="HTEC Group" width="59" height="15" loading="lazy">
