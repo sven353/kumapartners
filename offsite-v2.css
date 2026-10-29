@@ -409,3 +409,9 @@ body.menu-open{overflow:hidden}
 .flinks{display:flex;flex-wrap:wrap;gap:6px 20px}
 .flinks .sep{display:none}
 .head-split .h2 .lav{display:block}
+/* tighter opening and no grid decoration */
+.hero{min-height:clamp(600px,80svh,820px)}
+.hero-inner{padding-top:140px}
+.calls .head-split{padding-top:88px}
+.hero-copy .h1 .chip{word-spacing:0}
+.sec::before,.hero-grid,.overlay::before,.rule{display:none}
