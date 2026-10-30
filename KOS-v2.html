@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kuma Operating System | Diagnostic Telemetry | Kuma Partners</title>
+<meta name="description" content="Identify the primary constraint on your executive velocity. Pick your team's most critical friction zone and run a targeted 3-minute diagnostic.">
+<link rel="canonical" href="https://www.kuma.partners/KOS">
+<!-- STAGING: noindex while served under its -v2 name. At go-live remove this line. -->
+<meta name="robots" content="noindex, nofollow">
+
+<!-- Open Graph / Social sharing -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kuma Partners">
+<meta property="og:url" content="https://www.kuma.partners/KOS">
+<meta property="og:title" content="Kuma Operating System | Diagnostic Telemetry">
+<meta property="og:description" content="Identify the primary constraint on your executive velocity. Select your friction zone and run a targeted 3-minute diagnostic.">
+<meta property="og:image" content="https://www.kuma.partners/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Kuma Partners">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Kuma Operating System | Diagnostic Telemetry">
+<meta name="twitter:description" content="Identify the primary constraint on your executive velocity. Select your friction zone and run a targeted 3-minute diagnostic.">
+<meta name="twitter:image" content="https://www.kuma.partners/assets/og-image.jpg">
+
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" type="image/png" href="assets/logo-icon.png">
+<noscript></noscript>
+<link rel="preload" href="assets/fonts/montserrat-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/lato-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="kos.css">
+<link rel="stylesheet" href="suite.css">
+<link rel="stylesheet" href="/kuma-shell.css">
+</head>
+<body class="suite kx-page">
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="logo-kuma" viewBox="0 0 8388 822"><path d="M1979.41 580.76C2002.47 513.012 2191.23 35.8865 2213.63 8.74884C2239.05 -4.19243 2351.74 1.00026 2385.36 1.17252L2385.11 808.042L2250.1 807.975L2250.28 374.307C2249.9 325.193 2250.25 276.075 2251.34 226.972L2017.84 807.571L1938.94 807.599C1862.73 617.238 1777.66 420.099 1706.91 228.395C1701.47 412.59 1706.2 621.791 1706.18 807.866H1571.95L1572.3 1.46081C1608.67 1.04596 1715.03 -3.98499 1743.21 7.50079C1767.02 35.0709 1948.31 504.479 1979.41 580.76Z" fill="currentColor"/><path d="M6365.25 27.716L6492.52 27.5121L6492.34 800.947C6487.77 813.164 6394.39 814.855 6376.67 792.784C6333.85 739.454 6296.16 682.433 6257.07 626.277L6018.63 283.339C6025.31 448.154 6020.85 641.296 6020.74 808.263L5892.42 808.088L5892.39 27.7652C5940.38 26.8476 5991.04 15.5798 6021.38 58.4537C6138.52 224.022 6249.51 394.716 6367.64 559.542C6364.72 382.284 6363.91 204.995 6365.25 27.716Z" fill="currentColor"/><path d="M3645.54 27.1744C3741.8 27.0056 3846.46 20.5725 3921.38 92.9713C4013.42 181.901 4011.84 357.661 3922.86 448.366C3864.18 508.164 3791.58 523.25 3711.18 524.836L3623.5 524.702L3623.81 808.116L3489.02 808.113L3489.27 27.6177L3645.54 27.1744ZM3813.24 174.014C3772.11 135.872 3677.36 145.27 3623.85 145.741C3623.81 230.42 3621.88 322.303 3623.85 406.345C3691.1 406.996 3763.53 416.58 3817.53 371.913C3864.64 317.138 3868.61 225.364 3813.24 174.014Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/><path d="M784.503 1.43618L922.469 1.28149L922.568 336.693C922.459 379.845 923.443 429.999 922.237 471.509C917.34 591.029 968.462 693.859 1099.65 693.163C1241.47 692.407 1280.88 581.477 1274.87 458.923C1273.22 425.281 1274.45 384.077 1274.42 350.232L1274.51 1.54519L1413.23 1.38345L1413.64 396.453C1413.83 502.852 1420.8 611.437 1354.13 702.114C1211.1 896.634 847.455 848.079 796.305 597.185C778.787 511.258 784.289 422.55 784.296 335.012L784.503 1.43618Z" fill="currentColor"/><path d="M7265.27 27.6703C7361.28 27.3434 7546.66 15.506 7630.97 50.7965C7810.8 126.043 7799.41 394.47 7613.88 470.616C7639.23 502.999 7674.39 563.065 7696.99 599.618C7740.24 668.792 7782.85 738.322 7824.89 808.211C7782.53 808.358 7705.25 813.65 7669.92 800.388C7652.31 784.009 7637.51 758.945 7624.81 738.379C7588.81 680.134 7554.47 620.768 7518.36 562.587C7505.67 542.133 7491.68 522.188 7473.71 505.988C7473.71 505.981 7472.16 493.18 7472.02 492.002L7471.99 395.957C7516.5 394.326 7553.2 388.824 7586.64 356.318C7631.18 313.655 7637.75 223.185 7592.22 178.873C7547.05 134.917 7460.67 145.193 7401.36 145.829L7401.46 808.06L7265.23 808.091L7265.27 27.6703Z" fill="currentColor"/><path d="M4717.97 27.7055C4809.31 27.4172 4994.41 15.9384 5075.94 49.4571C5260.72 125.438 5250.38 388.402 5064.12 471.435C5086.41 498.52 5122.48 560.53 5142.28 592.79L5273.94 808.112C5232.49 808.253 5152.02 813.548 5117.74 800.055C5074.78 756.523 4999.01 608.709 4958.41 547.336C4948.21 531.916 4924.94 512.158 4922.65 495.518L4922.72 395.802C4966.91 395.064 5004.15 388.458 5036.7 356.275C5080.96 313.05 5088.59 224.883 5042.64 180.048C4996.31 134.85 4912.63 145.158 4852.69 145.801L4852.27 808.105L4718.32 808.141L4717.97 27.7055Z" fill="currentColor"/><path d="M6656.1 27.716L7123.27 27.607L7123.2 149.468L6791.24 149.225C6791.95 217.465 6791.31 286.939 6791.31 355.277L7056.85 355.386V475.869C6968.29 476.287 6879.77 476.146 6791.21 475.447L6791.49 535.948L6791.42 687.035L7124.6 686.905L7124.81 808.077L6656.03 808.074L6656.1 27.716Z" fill="currentColor"/><path d="M2784.06 1.47135L2922.17 1.27798L3223.67 807.93C3190.76 807.585 3157.89 809.607 3124.79 808.489C3085.28 807.153 3075.92 797.818 3061.98 761.863C3039.08 702.765 3018.84 642.499 2997.78 582.725L2872.18 222.988C2864.29 201.862 2858.94 181.605 2852.93 159.899C2835.85 219.177 2645.49 777.354 2625.55 795.632C2600.93 818.185 2516.27 808.249 2483.52 807.821C2508.55 729.853 2552.6 621.081 2581.79 542.554L2784.06 1.47135Z" fill="currentColor"/><path d="M8128.54 21.2542C8133.08 20.8498 8137.62 20.5229 8142.15 20.2698C8237.11 15.0947 8302.71 40.5061 8372.29 102.794C8362.44 124.261 8344.72 167.507 8329.22 182.79C8298.07 213.454 8259.75 172.689 8227.79 157.895C8206.94 148.129 8184.2 143.098 8161.17 143.164C8127.95 142.96 8095.32 149.391 8070.99 173.804C8052.78 191.769 8042.62 216.308 8042.76 241.875C8043.11 347.138 8263.23 346.052 8332.74 426.322C8415.07 521.411 8400.91 658.474 8316.92 746.549C8261.4 804.773 8185.78 818.652 8110.61 818.473C8018.5 815.84 7944.57 774.907 7880.37 711.561C7904.63 677.202 7927.55 589.826 7978.6 632.328C8066.46 705.479 8252.4 744.158 8252.72 573.387C8252.82 520.054 8180.93 490.684 8134.38 477.936C8025.36 448.074 7926.15 406.226 7910.5 279.939C7902.8 219.399 7919.47 158.285 7956.73 109.987C8001.21 53.3138 8058.9 29.5301 8128.54 21.2542Z" fill="currentColor"/><path d="M4222.33 27.7195L4354.94 27.5859C4388.72 111.235 4421.81 206.524 4453.52 291.703L4645.86 808.267C4617.14 807.828 4528.96 812.982 4513.07 801.102C4484.49 779.783 4436.78 622.097 4425.5 590.062L4305.79 247.682C4299.46 230.217 4292.78 206.064 4287.19 187.842C4272.14 249.838 4091.54 769.538 4067.99 798.265C4041.09 814.096 3965.5 808.485 3930.84 808.102L4222.33 27.7195Z" fill="currentColor"/><path d="M5255.69 27.6984L5797.04 27.4348L5796.55 151.187L5593.38 151.293C5589.97 296.98 5592.88 454.898 5592.88 601.52L5592.81 808.193L5458.62 808.126C5464.31 598.581 5459.29 363.163 5459.53 151.345L5255.76 151.275L5255.69 27.6984Z" fill="currentColor"/><path d="M493.351 2.4452C540.078 -0.634545 604.201 1.31315 652.204 1.42916C627.098 38.6955 585.269 90.5942 557.516 127.52L367.714 379.785C401.591 417.754 448.213 480.991 480.652 522.223L697.971 797.917L701.255 802.793L699.402 806.762C676.185 811.016 553.733 810.834 534.375 801.816C498.086 784.912 351.464 581.389 317.253 537.242C293.279 506.301 267.645 465.097 233.793 444.871L233.724 333.342C293.189 282.087 450.03 28.5281 493.351 2.4452Z" fill="currentColor"/><path d="M0.364576 1.54871L137.367 1.21823L137.103 807.617C94.009 808.995 43.6909 807.747 0 807.786L0.364576 1.54871Z" fill="currentColor"/></symbol>
+  <symbol id="logo-nny" viewBox="0 0 3658 1588"><path d="M575.191 1103.01H0V1094.82C81.8778 1062.08 81.8778 961.804 81.8778 685.541V609.825C81.8778 362.211 81.8778 319.237 0 272.17V263.985C165.802 216.918 335.699 128.923 493.313 0V313.098C577.238 100.273 722.571 28.6495 847.435 28.6495C1025.52 28.6495 1119.68 141.201 1117.63 442.021V685.541C1117.63 961.804 1117.63 1062.08 1199.51 1094.82V1103.01H624.318V1094.82C706.196 1062.08 706.196 961.804 706.196 685.541V630.289C706.196 397 695.961 298.773 579.285 298.773C560.863 298.773 519.924 302.866 493.313 319.237V685.541C493.313 961.804 493.313 1062.08 575.191 1094.82V1103.01Z" fill="currentColor"/><path d="M1832.54 1103.01H1257.35V1094.82C1339.23 1062.08 1339.23 961.804 1339.23 685.541V609.825C1339.23 362.211 1339.23 319.237 1257.35 272.17V263.985C1423.15 216.918 1593.05 128.923 1750.66 0V313.098C1834.59 100.273 1979.92 28.6495 2104.79 28.6495C2282.87 28.6495 2377.03 141.201 2374.98 442.021V685.541C2374.98 961.804 2374.98 1062.08 2456.86 1094.82V1103.01H1881.67V1094.82C1963.55 1062.08 1963.55 961.804 1963.55 685.541V630.289C1963.55 397 1953.31 298.773 1836.64 298.773C1818.21 298.773 1777.27 302.866 1750.66 319.237V685.541C1750.66 961.804 1750.66 1062.08 1832.54 1094.82V1103.01Z" fill="currentColor"/><path d="M2382.75 77.7629H3082.81V85.9485C2994.79 96.1805 2945.66 151.433 2984.56 239.428L3203.58 740.794L3275.22 570.943C3441.02 182.129 3262.94 96.1805 3115.56 85.9485V77.7629H3658V85.9485C3596.59 106.412 3479.92 135.062 3355.05 427.696L3035.73 1166.44C2857.65 1581.86 2677.51 1588 2569.03 1588C2438.02 1588 2274.27 1504.1 2274.27 1340.39C2274.27 1233.97 2360.24 1156.21 2476.91 1156.21C2624.29 1156.21 2655 1262.62 2669.33 1383.36C2677.51 1446.8 2669.33 1506.14 2736.88 1506.14C2833.08 1506.14 3007.07 1369.04 2861.74 1031.38L2515.81 229.196C2474.87 135.062 2444.16 100.273 2382.75 85.9485V77.7629Z" fill="currentColor"/></symbol>
+</svg>
+
+<nav class="kx-nav" aria-label="Main">
+  <button class="kx-menu-btn" type="button" aria-expanded="false" aria-controls="kx-menu"><span class="kx-bars" aria-hidden="true"></span>Menu</button>
+  <a class="kx-logo" href="/" aria-label="Kuma Partners, home"><svg viewBox="0 0 8388 822" aria-hidden="true" focusable="false"><use href="#logo-kuma"/></svg></a>
+  <button class="kx-btn kx-btn-white" type="button" data-open="scan">Start a Scan<span class="kx-ic"><svg aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></span></button>
+</nav>
+<div class="kx-overlay" id="kx-menu">
+  <div class="kx-ov-box">
+  <ul>
+    <li><a href="/#approach">Approach</a></li>
+    <li><a href="/#partners">Team</a></li>
+    <li><a href="/#engagements">Engagements</a></li>
+    <li><a href="/offsite/">Offsites</a></li>
+    <li><a href="/round/">The Round</a></li>
+    <li><a href="/#case-studies">Case studies</a></li>
+    <li><a href="/#investors">Investors</a></li>
+    <li><a href="/#faq">FAQ</a></li>
+  </ul>
+  <p class="kx-ov-more"><a href="/#contact">Contact</a><a href="/partners.html">Partners</a><a href="/offsite/insights/">Insights</a><a href="/friction-scan.html">The 14-Day Scan</a></p>
+  </div>
+</div>
+
+
+
+<main id="main-content" tabindex="-1">
+
+  <!-- 1. HEADER AND HERO -->
+  <section class="hero kos-hero">
+    <div class="wrap">
+      <div class="eyebrow">KUMA OPERATING SYSTEM &bull; DIAGNOSTIC TELEMETRY</div>
+      <h1>Identify the primary constraint on your executive velocity.</h1>
+      <p class="kos-lede">Growth exposes structural limits in leadership architecture. Select your team's most critical friction zone below to run a targeted 3-minute diagnostic and unblock execution speed.</p>
+      <p class="kos-micro">Confidential &bull; 3-minute completion &bull; Actionable operational protocols</p>
+    </div>
+  </section>
+
+  <!-- 2. THE DIAGNOSTIC MATRIX: three instruments, each linking straight to its own page -->
+  <section class="kos-matrix" id="matrix">
+    <div class="wrap">
+      <h2 class="kos-sr">Diagnostic instruments</h2>
+      <div class="kos-grid">
+        <article class="kos-card kos-card-active" style="--i:0">
+          <div class="kos-card-top">
+            <span class="kos-tag">DECISION BOTTLENECKS &amp; AUTONOMY</span>
+            <span class="kos-status kos-status-active">Active &bull; Ready to run</span>
+          </div>
+          <h3 class="kos-card-title">Leadership Friction Scan</h3>
+          <p class="kos-hook">Decisions stall at the founder desk, meetings multiply, and strategic intent gets diluted during execution.</p>
+          <ul class="kos-pills" aria-label="What you get">
+              <li>12 Questions</li>
+              <li>Friction Archetype</li>
+              <li>Actionable Protocol</li>
+          </ul>
+          <div class="kos-card-cta">
+            <a href="/leadership-friction-scan" class="btn btn-primary" data-kos-card-link="leadership-friction-scan">Initiate Friction Scan (3 min) &rarr;</a>
+          </div>
+        </article>
+
+        <article class="kos-card " style="--i:1">
+          <div class="kos-card-top">
+            <span class="kos-tag">STRATEGIC &amp; BEHAVIORAL COHESION</span>
+            <span class="kos-status ">Pilot cohort</span>
+          </div>
+          <h3 class="kos-card-title">Co-Founder Alignment Radar</h3>
+          <p class="kos-hook">Map hidden divergences in pacing, risk appetite, and decision rights between executive pairs before friction accumulates.</p>
+          <ul class="kos-pills" aria-label="What you get">
+              <li>Dual-Input Mirror</li>
+              <li>Comparative Heat Map</li>
+              <li>Blind Spot Radar</li>
+          </ul>
+          <div class="kos-card-cta">
+            <a href="/cofounder-alignment" class="btn btn-secondary" data-kos-card-link="co-founder-radar">Explore Alignment Diagnostic &rarr;</a>
+          </div>
+        </article>
+
+        <article class="kos-card " style="--i:2">
+          <div class="kos-card-top">
+            <span class="kos-tag">RUNWAY &amp; CAPITAL EFFICIENCY</span>
+            <span class="kos-status ">Financial model</span>
+          </div>
+          <h3 class="kos-card-title">The Leadership Friction Cost Index</h3>
+          <p class="kos-hook">Quantify the balance-sheet cost of meeting overhead, consensus lag, and executive context-switching in real time.</p>
+          <ul class="kos-pills" aria-label="What you get">
+              <li>Real-Time Sliders</li>
+              <li>Annual Friction Cost</li>
+              <li>Runway Dilution</li>
+          </ul>
+          <div class="kos-card-cta">
+            <a href="/coordination-tax" class="btn btn-secondary" data-kos-card-link="coordination-tax-calculator">Calculate Friction Cost &rarr;</a>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3. BOTTOM CONVERSION AND TRUST ANCHOR -->
+  <section class="kos-anchor">
+    <div class="wrap">
+      <h2>Tension in high-growth companies is normal. Unaddressed drag is fatal.</h2>
+      <p>We design operating systems, decision architecture, and executive cadence for bold leaders navigating complexity.</p>
+      <a href="index.html#contact" class="btn-link kos-anchor-link" data-kos-book>Prefer to speak directly? Schedule a 30-minute confidential friction debrief with a Kuma Partner →</a>
+    </div>
+  </section>
+
+</main>
+
+<footer class="kx-foot">
+  <div class="kx-wrap">
+    <div class="kx-fgrid">
+      <p class="kx-fabout">Kuma Partners is an executive advisory firm based in Barcelona. Former CEOs and operators work inside scale-stage leadership teams to restore decision speed.</p>
+      <div class="kx-fmeta">
+        <p class="kx-tag">Kuma Partners · Executive advisory · Barcelona</p>
+        <p class="kx-flinks"><a href="mailto:contact@kuma.partners">contact@kuma.partners</a><a href="/friction-scan.html">The 14-Day Scan</a><a href="/alignment-sprint.html">Executive Alignment Sprint</a><a href="/offsite/">Executive offsites</a><a href="/round/">The Round</a><a href="/partners.html">The partners</a></p>
+        <p class="kx-flinks"><a href="/privacy.html">Privacy policy (GDPR)</a><a href="/legal.html">Legal notice</a><button class="kx-linkbtn" type="button" data-cookie-preferences>Cookie preferences</button></p>
+      </div>
+    </div>
+    <div class="kx-wordmark"><svg viewBox="0 0 8388 822" role="img" aria-label="Kuma Partners" focusable="false"><use href="#logo-kuma"/></svg></div>
+    <div class="kx-fsig"><i class="kx-frule" aria-hidden="true"></i><svg viewBox="0 0 3658 1588" role="img" aria-label="Nonameyet" focusable="false"><use href="#logo-nny"/></svg></div>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookie-banner">
+  <div class="wrap">
+    <p>We use essential cookies to ensure our site functions properly and to analyze aggregate traffic in accordance with our <a href="privacy.html">Privacy Policy</a>.</p>
+    <div class="cookie-actions">
+      <button class="btn-essential" id="cookie-essential">Essential Only</button>
+      <button class="btn-accept" id="cookie-accept">Accept All</button>
+    </div>
+  </div>
+</div>
+
+<script src="/kuma-shell.js" defer></script>
+<script src="site.js"></script>
+<script src="kos.js"></script>
+</body>
+</html>

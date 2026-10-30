@@ -1,0 +1,74 @@
+/* Kuma shell for pages that keep their own body styles (the diagnostic suite).
+   Every class starts with kx- and every token with --kx-, so nothing here can touch or be touched by styles.css. */
+@font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url(/assets/offsite-v2/fonts/inter-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"Inter Tight";font-style:normal;font-weight:100 900;font-display:swap;src:url(/assets/offsite-v2/fonts/inter-tight-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+:root{
+  --kx-ink:#0F0E13;--kx-paper:#F1F0F6;--kx-lav:#B0A6DF;--kx-lav-deep:color-mix(in srgb,#B0A6DF 60%,#0F0E13);
+  --kx-display:"Inter Tight",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  --kx-body:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
+  --kx-muted:color-mix(in srgb,#F1F0F6 70%,#0F0E13);--kx-line:color-mix(in srgb,#F1F0F6 10%,transparent);
+  --kx-card-2:color-mix(in srgb,#0F0E13 80%,#B0A6DF);
+}
+@supports (color:oklch(from red l c h)){:root{--kx-lav-deep:oklch(from #B0A6DF calc(l - .27) calc(c * 1.9) h)}}
+body.kx-page main{padding-top:88px}
+body.kx-menu-open{overflow:hidden}
+.kx-vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;margin:-1px;padding:0;border:0}
+.kx-nav,.kx-nav *,.kx-overlay,.kx-overlay *,.kx-foot,.kx-foot *{box-sizing:border-box}
+.kx-nav{position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:300;display:flex;align-items:center;gap:22px;height:64px;padding:6px 6px 6px 10px;border-radius:100px;background:var(--kx-ink);border:1px solid color-mix(in srgb,var(--kx-paper) 14%,transparent);-webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);color:var(--kx-paper);font-family:var(--kx-body);font-size:16px;line-height:1.2}
+.kx-menu-btn{display:inline-flex;align-items:center;gap:12px;height:48px;padding:0 14px 0 12px;border-radius:100px;background:none;border:0;cursor:pointer;color:var(--kx-paper);font-family:var(--kx-display);font-weight:600;font-size:16px;letter-spacing:-0.012em}
+.kx-menu-btn:hover{background:color-mix(in srgb,var(--kx-paper) 8%,transparent)}
+.kx-bars{display:block;width:20px;height:2px;background:currentColor;border-radius:2px;position:relative}
+.kx-bars::before,.kx-bars::after{content:"";position:absolute;left:0;width:20px;height:2px;background:currentColor;border-radius:2px;transition:transform .3s ease}
+.kx-bars::before{top:-6px}.kx-bars::after{top:6px}
+.kx-menu-btn[aria-expanded="true"] .kx-bars{background:transparent}
+.kx-menu-btn[aria-expanded="true"] .kx-bars::before{transform:translateY(6px) rotate(45deg)}
+.kx-menu-btn[aria-expanded="true"] .kx-bars::after{transform:translateY(-6px) rotate(-45deg)}
+.kx-logo{display:flex;align-items:center;color:var(--kx-paper);text-decoration:none}
+.kx-logo svg{height:15px;width:auto;display:block}
+.kx-btn{display:inline-flex;align-items:center;gap:14px;height:52px;padding:4px 4px 4px 22px;border-radius:100px;font-family:var(--kx-display);font-weight:600;font-size:16px;letter-spacing:-0.012em;text-decoration:none;white-space:nowrap;border:0;cursor:pointer;transition:transform .25s ease}
+.kx-btn:hover{transform:translateY(-2px)}
+.kx-ic{display:grid;place-items:center;width:44px;height:44px;border-radius:100px;flex:none;transition:transform .3s ease}
+.kx-btn:hover .kx-ic{transform:rotate(45deg)}
+.kx-btn svg{width:18px;height:18px}
+.kx-btn-white{background:var(--kx-paper);color:var(--kx-ink)}
+.kx-btn-white .kx-ic{background:var(--kx-lav-deep);color:var(--kx-paper)}
+.kx-overlay{position:fixed;inset:0;z-index:290;background:var(--kx-ink);display:grid;place-items:center;opacity:0;visibility:hidden;transition:opacity .3s ease,visibility 0s linear .3s;color:var(--kx-paper);font-family:var(--kx-body)}
+.kx-overlay.open{opacity:1;visibility:visible;transition:opacity .3s ease}
+.kx-ov-box{display:grid;gap:36px;justify-items:center}
+.kx-overlay ul{display:grid;gap:2px;text-align:center;margin:0;padding:0;list-style:none}
+.kx-overlay li{margin:0;padding:0;list-style:none}
+.kx-overlay a{display:inline-block;padding:8px 24px;border-radius:100px;font-family:var(--kx-display);font-weight:700;font-size:44px;line-height:1;letter-spacing:-0.026em;text-decoration:none;color:var(--kx-paper)}
+.kx-overlay a:hover{color:var(--kx-lav)}
+.kx-ov-more{display:flex;flex-wrap:wrap;justify-content:center;gap:6px 22px;margin:0}
+.kx-overlay .kx-ov-more a{font-size:18px;font-weight:500;letter-spacing:-0.01em;padding:6px 4px;border-radius:0;color:var(--kx-muted)}
+.kx-overlay .kx-ov-more a:hover{color:var(--kx-lav)}
+/* footer */
+.kx-foot{background:var(--kx-ink);color:var(--kx-paper);padding:96px 0 0;font-family:var(--kx-body);font-size:18px;line-height:1.5;letter-spacing:-0.01em}
+.kx-wrap{width:min(1296px,calc(100% - 144px));margin-inline:auto}
+.kx-fgrid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:48px;align-items:end;padding-bottom:56px}
+.kx-fabout{margin:0;font-family:var(--kx-display);font-weight:600;font-size:26px;line-height:1.2;letter-spacing:-0.019em;color:var(--kx-paper);max-width:30em}
+.kx-fmeta{display:grid;gap:14px;font-size:16px;color:var(--kx-muted)}
+.kx-fmeta p{margin:0}
+.kx-tag{color:var(--kx-paper);font-weight:500}
+.kx-flinks{display:flex;flex-wrap:wrap;gap:6px 20px}
+.kx-flinks a,.kx-linkbtn{color:var(--kx-paper);text-decoration:none;background:none;border:0;padding:0;cursor:pointer;font:inherit}
+.kx-flinks a:hover,.kx-linkbtn:hover{color:var(--kx-lav)}
+.kx-wordmark{border-radius:24px;background:var(--kx-lav);color:var(--kx-ink);padding:clamp(20px,4.4vw,64px) clamp(16px,3.6vw,52px)}
+.kx-wordmark svg{display:block;width:100%;height:auto}
+.kx-fsig{display:flex;align-items:center;gap:16px;padding:22px 0 40px;color:var(--kx-muted)}
+.kx-frule{flex:1;height:1px;background:var(--kx-line)}
+.kx-fsig svg{height:18px;width:auto;display:block;flex:none}
+@media (max-width:1180px){.kx-wrap{width:min(1296px,calc(100% - 56px))}}
+@media (max-width:960px){.kx-fgrid{grid-template-columns:minmax(0,1fr);gap:28px}}
+@media (max-width:720px){
+  body.kx-page main{padding-top:80px}
+  .kx-wrap{width:calc(100% - 32px)}
+  .kx-nav{top:12px;width:calc(100% - 24px);justify-content:space-between;gap:6px;padding:5px 5px 5px 4px;height:58px}
+  .kx-menu-btn{gap:10px;padding:0 10px;font-size:15px}
+  .kx-logo svg{height:11px}
+  .kx-nav .kx-btn{height:46px;padding:0 18px;gap:0;font-size:15px}
+  .kx-nav .kx-btn .kx-ic{display:none}
+  .kx-overlay a{font-size:32px;padding:6px 18px}
+  .kx-foot{padding-top:72px}
+  .kx-fabout{font-size:21px}
+}

@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Leadership Friction Scan | Kuma Partners</title>
+<meta name="description" content="A 12-question diagnostic of where your leadership team loses speed: decision velocity, focus, candour and cadence. Three minutes, instant result.">
+<link rel="canonical" href="https://www.kuma.partners/leadership-friction-scan">
+<!-- STAGING: noindex while served under its -v2 name. At go-live remove this line. -->
+<meta name="robots" content="noindex, nofollow">
+
+<!-- Open Graph / Social sharing -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Kuma Partners">
+<meta property="og:url" content="https://www.kuma.partners/leadership-friction-scan">
+<meta property="og:title" content="Leadership Friction Scan | Kuma Partners">
+<meta property="og:description" content="Twelve questions, three minutes. Find the dominant friction vector slowing your leadership team and the first intervention to run against it.">
+<meta property="og:image" content="https://www.kuma.partners/assets/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Kuma Partners">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Leadership Friction Scan | Kuma Partners">
+<meta name="twitter:description" content="Twelve questions, three minutes. Find the dominant friction vector slowing your leadership team and the first intervention to run against it.">
+<meta name="twitter:image" content="https://www.kuma.partners/assets/og-image.jpg">
+
+<link rel="icon" href="/favicon.ico" sizes="48x48">
+  <link rel="icon" type="image/png" href="assets/logo-icon.png">
+<noscript></noscript>
+<link rel="preload" href="assets/fonts/montserrat-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/lato-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="leadership-friction-scan.css">
+<link rel="stylesheet" href="suite.css">
+<link rel="stylesheet" href="/kuma-shell.css">
+
+<!-- Structured data: entities, tool and definitions for search and answer engines -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ProfessionalService",
+      "@id": "https://www.kuma.partners/#organization",
+      "name": "Kuma Partners",
+      "url": "https://www.kuma.partners",
+      "logo": "https://www.kuma.partners/assets/logo-lockup.png",
+      "description": "Executive advisory and leadership alignment practice for scale-stage and venture-backed leadership teams.",
+      "foundingLocation": {
+        "@type": "Place",
+        "name": "Barcelona, Spain"
+      },
+      "areaServed": "Worldwide",
+      "founder": {
+        "@id": "https://www.kuma.partners/#sven-mulfinger"
+      }
+    },
+    {
+      "@type": "Person",
+      "@id": "https://www.kuma.partners/#sven-mulfinger",
+      "name": "Dr. Sven Mulfinger",
+      "jobTitle": "Lead Partner",
+      "worksFor": {
+        "@id": "https://www.kuma.partners/#organization"
+      },
+      "url": "https://www.kuma.partners/partners.html",
+      "sameAs": [
+        "https://www.linkedin.com/in/svenmulfinger",
+        "https://mulfinger.com",
+        "https://neurodisruptors.com/about/"
+      ]
+    },
+    {
+      "@type": "SoftwareApplication",
+      "@id": "https://www.kuma.partners/leadership-friction-scan#app",
+      "name": "Kuma Leadership Friction Scan",
+      "applicationCategory": "BusinessApplication",
+      "operatingSystem": "All",
+      "url": "https://www.kuma.partners/leadership-friction-scan",
+      "description": "A 12-statement diagnostic that scores decision velocity, strategic cohesion, executive bandwidth and candor in a leadership team.",
+      "author": {
+        "@id": "https://www.kuma.partners/#sven-mulfinger"
+      },
+      "publisher": {
+        "@id": "https://www.kuma.partners/#organization"
+      },
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR",
+        "availability": "https://schema.org/InStock"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.kuma.partners/leadership-friction-scan#faq",
+      "url": "https://www.kuma.partners/leadership-friction-scan",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What is the Silent Veto in executive teams?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Silent Veto happens when a decision agreed inside the executive meeting is quietly undermined outside the room through passive compliance, delayed execution or corridor pushback. It is the clearest symptom of artificial harmony in a leadership team."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How does founder centrality create leadership friction?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Founder centrality drag happens when reversible operational decisions default inward to the CEO or co-founders. The leadership team becomes a queue, execution speed is capped at the founders' calendar, and decision latency spreads across every function."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the 12 to 60 Leadership Friction Index?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The Kuma Leadership Friction Index scores twelve statements from 1 to 5 across four vectors: Decision Velocity & Autonomy, Strategic Cohesion vs. Defensive Silos, Cognitive Bandwidth & Energy Drain, and Principled Candor vs. The Silent Veto. Totals run from 12 to 60: High-Flow Velocity (12 to 25), Operational Drag (26 to 42) and Critical Systemic Gridlock (43 to 60)."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<script>
+/* A/B assignment for the intake step. Runs before first paint so the header never flickers.
+   ?gate=a or ?gate=b forces a variant for testing and is not remembered. Otherwise 50/50, remembered per browser. */
+(function(){var d=document.documentElement,v=null,forced=false;
+try{var g=new URLSearchParams(location.search).get('gate');if(g==='a'||g==='b'){v=g.toUpperCase();forced=true;}}catch(e){}
+try{if(!v){v=localStorage.getItem('lfs_variant');}}catch(e){}
+if(v!=='A'&&v!=='B'){v=Math.random()<0.5?'B':'A';}
+if(!forced){try{localStorage.setItem('lfs_variant',v);}catch(e){}}
+d.setAttribute('data-lfs-variant',v);})();
+</script>
+</head>
+<body class="suite kx-page">
+<script>document.body.setAttribute("data-lfs-variant",document.documentElement.getAttribute("data-lfs-variant")||"A");</script>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M7 17 17 7M9 7h8v8" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="logo-kuma" viewBox="0 0 8388 822"><path d="M1979.41 580.76C2002.47 513.012 2191.23 35.8865 2213.63 8.74884C2239.05 -4.19243 2351.74 1.00026 2385.36 1.17252L2385.11 808.042L2250.1 807.975L2250.28 374.307C2249.9 325.193 2250.25 276.075 2251.34 226.972L2017.84 807.571L1938.94 807.599C1862.73 617.238 1777.66 420.099 1706.91 228.395C1701.47 412.59 1706.2 621.791 1706.18 807.866H1571.95L1572.3 1.46081C1608.67 1.04596 1715.03 -3.98499 1743.21 7.50079C1767.02 35.0709 1948.31 504.479 1979.41 580.76Z" fill="currentColor"/><path d="M6365.25 27.716L6492.52 27.5121L6492.34 800.947C6487.77 813.164 6394.39 814.855 6376.67 792.784C6333.85 739.454 6296.16 682.433 6257.07 626.277L6018.63 283.339C6025.31 448.154 6020.85 641.296 6020.74 808.263L5892.42 808.088L5892.39 27.7652C5940.38 26.8476 5991.04 15.5798 6021.38 58.4537C6138.52 224.022 6249.51 394.716 6367.64 559.542C6364.72 382.284 6363.91 204.995 6365.25 27.716Z" fill="currentColor"/><path d="M3645.54 27.1744C3741.8 27.0056 3846.46 20.5725 3921.38 92.9713C4013.42 181.901 4011.84 357.661 3922.86 448.366C3864.18 508.164 3791.58 523.25 3711.18 524.836L3623.5 524.702L3623.81 808.116L3489.02 808.113L3489.27 27.6177L3645.54 27.1744ZM3813.24 174.014C3772.11 135.872 3677.36 145.27 3623.85 145.741C3623.81 230.42 3621.88 322.303 3623.85 406.345C3691.1 406.996 3763.53 416.58 3817.53 371.913C3864.64 317.138 3868.61 225.364 3813.24 174.014Z" fill-rule="evenodd" clip-rule="evenodd" fill="currentColor"/><path d="M784.503 1.43618L922.469 1.28149L922.568 336.693C922.459 379.845 923.443 429.999 922.237 471.509C917.34 591.029 968.462 693.859 1099.65 693.163C1241.47 692.407 1280.88 581.477 1274.87 458.923C1273.22 425.281 1274.45 384.077 1274.42 350.232L1274.51 1.54519L1413.23 1.38345L1413.64 396.453C1413.83 502.852 1420.8 611.437 1354.13 702.114C1211.1 896.634 847.455 848.079 796.305 597.185C778.787 511.258 784.289 422.55 784.296 335.012L784.503 1.43618Z" fill="currentColor"/><path d="M7265.27 27.6703C7361.28 27.3434 7546.66 15.506 7630.97 50.7965C7810.8 126.043 7799.41 394.47 7613.88 470.616C7639.23 502.999 7674.39 563.065 7696.99 599.618C7740.24 668.792 7782.85 738.322 7824.89 808.211C7782.53 808.358 7705.25 813.65 7669.92 800.388C7652.31 784.009 7637.51 758.945 7624.81 738.379C7588.81 680.134 7554.47 620.768 7518.36 562.587C7505.67 542.133 7491.68 522.188 7473.71 505.988C7473.71 505.981 7472.16 493.18 7472.02 492.002L7471.99 395.957C7516.5 394.326 7553.2 388.824 7586.64 356.318C7631.18 313.655 7637.75 223.185 7592.22 178.873C7547.05 134.917 7460.67 145.193 7401.36 145.829L7401.46 808.06L7265.23 808.091L7265.27 27.6703Z" fill="currentColor"/><path d="M4717.97 27.7055C4809.31 27.4172 4994.41 15.9384 5075.94 49.4571C5260.72 125.438 5250.38 388.402 5064.12 471.435C5086.41 498.52 5122.48 560.53 5142.28 592.79L5273.94 808.112C5232.49 808.253 5152.02 813.548 5117.74 800.055C5074.78 756.523 4999.01 608.709 4958.41 547.336C4948.21 531.916 4924.94 512.158 4922.65 495.518L4922.72 395.802C4966.91 395.064 5004.15 388.458 5036.7 356.275C5080.96 313.05 5088.59 224.883 5042.64 180.048C4996.31 134.85 4912.63 145.158 4852.69 145.801L4852.27 808.105L4718.32 808.141L4717.97 27.7055Z" fill="currentColor"/><path d="M6656.1 27.716L7123.27 27.607L7123.2 149.468L6791.24 149.225C6791.95 217.465 6791.31 286.939 6791.31 355.277L7056.85 355.386V475.869C6968.29 476.287 6879.77 476.146 6791.21 475.447L6791.49 535.948L6791.42 687.035L7124.6 686.905L7124.81 808.077L6656.03 808.074L6656.1 27.716Z" fill="currentColor"/><path d="M2784.06 1.47135L2922.17 1.27798L3223.67 807.93C3190.76 807.585 3157.89 809.607 3124.79 808.489C3085.28 807.153 3075.92 797.818 3061.98 761.863C3039.08 702.765 3018.84 642.499 2997.78 582.725L2872.18 222.988C2864.29 201.862 2858.94 181.605 2852.93 159.899C2835.85 219.177 2645.49 777.354 2625.55 795.632C2600.93 818.185 2516.27 808.249 2483.52 807.821C2508.55 729.853 2552.6 621.081 2581.79 542.554L2784.06 1.47135Z" fill="currentColor"/><path d="M8128.54 21.2542C8133.08 20.8498 8137.62 20.5229 8142.15 20.2698C8237.11 15.0947 8302.71 40.5061 8372.29 102.794C8362.44 124.261 8344.72 167.507 8329.22 182.79C8298.07 213.454 8259.75 172.689 8227.79 157.895C8206.94 148.129 8184.2 143.098 8161.17 143.164C8127.95 142.96 8095.32 149.391 8070.99 173.804C8052.78 191.769 8042.62 216.308 8042.76 241.875C8043.11 347.138 8263.23 346.052 8332.74 426.322C8415.07 521.411 8400.91 658.474 8316.92 746.549C8261.4 804.773 8185.78 818.652 8110.61 818.473C8018.5 815.84 7944.57 774.907 7880.37 711.561C7904.63 677.202 7927.55 589.826 7978.6 632.328C8066.46 705.479 8252.4 744.158 8252.72 573.387C8252.82 520.054 8180.93 490.684 8134.38 477.936C8025.36 448.074 7926.15 406.226 7910.5 279.939C7902.8 219.399 7919.47 158.285 7956.73 109.987C8001.21 53.3138 8058.9 29.5301 8128.54 21.2542Z" fill="currentColor"/><path d="M4222.33 27.7195L4354.94 27.5859C4388.72 111.235 4421.81 206.524 4453.52 291.703L4645.86 808.267C4617.14 807.828 4528.96 812.982 4513.07 801.102C4484.49 779.783 4436.78 622.097 4425.5 590.062L4305.79 247.682C4299.46 230.217 4292.78 206.064 4287.19 187.842C4272.14 249.838 4091.54 769.538 4067.99 798.265C4041.09 814.096 3965.5 808.485 3930.84 808.102L4222.33 27.7195Z" fill="currentColor"/><path d="M5255.69 27.6984L5797.04 27.4348L5796.55 151.187L5593.38 151.293C5589.97 296.98 5592.88 454.898 5592.88 601.52L5592.81 808.193L5458.62 808.126C5464.31 598.581 5459.29 363.163 5459.53 151.345L5255.76 151.275L5255.69 27.6984Z" fill="currentColor"/><path d="M493.351 2.4452C540.078 -0.634545 604.201 1.31315 652.204 1.42916C627.098 38.6955 585.269 90.5942 557.516 127.52L367.714 379.785C401.591 417.754 448.213 480.991 480.652 522.223L697.971 797.917L701.255 802.793L699.402 806.762C676.185 811.016 553.733 810.834 534.375 801.816C498.086 784.912 351.464 581.389 317.253 537.242C293.279 506.301 267.645 465.097 233.793 444.871L233.724 333.342C293.189 282.087 450.03 28.5281 493.351 2.4452Z" fill="currentColor"/><path d="M0.364576 1.54871L137.367 1.21823L137.103 807.617C94.009 808.995 43.6909 807.747 0 807.786L0.364576 1.54871Z" fill="currentColor"/></symbol>
+  <symbol id="logo-nny" viewBox="0 0 3658 1588"><path d="M575.191 1103.01H0V1094.82C81.8778 1062.08 81.8778 961.804 81.8778 685.541V609.825C81.8778 362.211 81.8778 319.237 0 272.17V263.985C165.802 216.918 335.699 128.923 493.313 0V313.098C577.238 100.273 722.571 28.6495 847.435 28.6495C1025.52 28.6495 1119.68 141.201 1117.63 442.021V685.541C1117.63 961.804 1117.63 1062.08 1199.51 1094.82V1103.01H624.318V1094.82C706.196 1062.08 706.196 961.804 706.196 685.541V630.289C706.196 397 695.961 298.773 579.285 298.773C560.863 298.773 519.924 302.866 493.313 319.237V685.541C493.313 961.804 493.313 1062.08 575.191 1094.82V1103.01Z" fill="currentColor"/><path d="M1832.54 1103.01H1257.35V1094.82C1339.23 1062.08 1339.23 961.804 1339.23 685.541V609.825C1339.23 362.211 1339.23 319.237 1257.35 272.17V263.985C1423.15 216.918 1593.05 128.923 1750.66 0V313.098C1834.59 100.273 1979.92 28.6495 2104.79 28.6495C2282.87 28.6495 2377.03 141.201 2374.98 442.021V685.541C2374.98 961.804 2374.98 1062.08 2456.86 1094.82V1103.01H1881.67V1094.82C1963.55 1062.08 1963.55 961.804 1963.55 685.541V630.289C1963.55 397 1953.31 298.773 1836.64 298.773C1818.21 298.773 1777.27 302.866 1750.66 319.237V685.541C1750.66 961.804 1750.66 1062.08 1832.54 1094.82V1103.01Z" fill="currentColor"/><path d="M2382.75 77.7629H3082.81V85.9485C2994.79 96.1805 2945.66 151.433 2984.56 239.428L3203.58 740.794L3275.22 570.943C3441.02 182.129 3262.94 96.1805 3115.56 85.9485V77.7629H3658V85.9485C3596.59 106.412 3479.92 135.062 3355.05 427.696L3035.73 1166.44C2857.65 1581.86 2677.51 1588 2569.03 1588C2438.02 1588 2274.27 1504.1 2274.27 1340.39C2274.27 1233.97 2360.24 1156.21 2476.91 1156.21C2624.29 1156.21 2655 1262.62 2669.33 1383.36C2677.51 1446.8 2669.33 1506.14 2736.88 1506.14C2833.08 1506.14 3007.07 1369.04 2861.74 1031.38L2515.81 229.196C2474.87 135.062 2444.16 100.273 2382.75 85.9485V77.7629Z" fill="currentColor"/></symbol>
+</svg>
+
+<nav class="kx-nav" aria-label="Main">
+  <button class="kx-menu-btn" type="button" aria-expanded="false" aria-controls="kx-menu"><span class="kx-bars" aria-hidden="true"></span>Menu</button>
+  <a class="kx-logo" href="/" aria-label="Kuma Partners, home"><svg viewBox="0 0 8388 822" aria-hidden="true" focusable="false"><use href="#logo-kuma"/></svg></a>
+  <button class="kx-btn kx-btn-white" type="button" data-open="scan">Start a Scan<span class="kx-ic"><svg aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></span></button>
+</nav>
+<div class="kx-overlay" id="kx-menu">
+  <div class="kx-ov-box">
+  <ul>
+    <li><a href="/#approach">Approach</a></li>
+    <li><a href="/#partners">Team</a></li>
+    <li><a href="/#engagements">Engagements</a></li>
+    <li><a href="/offsite/">Offsites</a></li>
+    <li><a href="/round/">The Round</a></li>
+    <li><a href="/#case-studies">Case studies</a></li>
+    <li><a href="/#investors">Investors</a></li>
+    <li><a href="/#faq">FAQ</a></li>
+  </ul>
+  <p class="kx-ov-more"><a href="/#contact">Contact</a><a href="/partners.html">Partners</a><a href="/offsite/insights/">Insights</a><a href="/friction-scan.html">The 14-Day Scan</a></p>
+  </div>
+</div>
+
+
+
+<main id="main-content" tabindex="-1">
+
+  <!-- STATE 1: HERO AND FRAMING -->
+  <section class="hero lfs-hero" id="lfs-intro" data-lfs-view="intro">
+    <div class="lfs-glow" aria-hidden="true"></div>
+    <div class="wrap lfs-hero-wrap">
+      <div class="eyebrow">EXECUTIVE TELEMETRY • 3 MINUTES</div>
+      <p class="lfs-framework">Step 1 of the Kuma 14-Day Leadership Friction Framework</p>
+      <h1>Where is your leadership team quietly losing speed?</h1>
+      <p class="lfs-lede">Growth creates drag. When companies scale, decisions stall, meetings multiply, and founders become bottlenecks. Answer these 12 operational statements to isolate your team’s dominant friction vector and restore execution velocity.</p>
+
+      <noscript>
+        <p class="lfs-noscript">This diagnostic needs JavaScript. To run the scan with a Kuma partner instead, write to <a href="mailto:contact@kuma.partners">contact@kuma.partners</a>.</p>
+      </noscript>
+
+      <!-- The diagnostic itself: statement 1 is live on load. Answering advances in place, no route change. -->
+      <div class="lfs-hero-card" id="lfs-flow" role="region" aria-label="Leadership Friction Scan">
+
+        <!-- Statements 1 to 12, one at a time -->
+        <div data-lfs-panel="quiz">
+          <div class="lfs-progress">
+            <div class="lfs-progress-row">
+              <span class="lfs-progress-count" data-lfs-count aria-live="polite">Statement 1 of 12</span>
+              <span class="lfs-progress-est">Estimated: 3 min</span>
+            </div>
+            <div class="lfs-progress-bar" aria-hidden="true"><div class="lfs-progress-fill" data-lfs-fill style="width:8.3%"></div></div>
+          </div>
+
+          <span class="lfs-progress-dim" data-lfs-dim>Dimension 1: Decision Velocity &amp; Autonomy</span>
+          <h2 class="lfs-statement" id="lfs-statement" tabindex="-1" data-lfs-statement>Operational decisions stall while teams wait for direct co-founder or CEO sign-off, even when the call sits squarely within a leader’s domain.</h2>
+          <p class="lfs-prompt" id="lfs-prompt">How often is this true in your leadership team?</p>
+
+          <div class="lfs-scale" role="group" aria-labelledby="lfs-prompt" data-lfs-scale>
+            <button type="button" class="lfs-rate" data-value="1" aria-pressed="false" aria-label="1 - Never" aria-keyshortcuts="1"><span class="lfs-rate-num" aria-hidden="true">1</span><span class="lfs-rate-label" aria-hidden="true">Never</span></button>
+            <button type="button" class="lfs-rate" data-value="2" aria-pressed="false" aria-label="2 - Rarely" aria-keyshortcuts="2"><span class="lfs-rate-num" aria-hidden="true">2</span><span class="lfs-rate-label" aria-hidden="true">Rarely</span></button>
+            <button type="button" class="lfs-rate" data-value="3" aria-pressed="false" aria-label="3 - Sometimes" aria-keyshortcuts="3"><span class="lfs-rate-num" aria-hidden="true">3</span><span class="lfs-rate-label" aria-hidden="true">Sometimes</span></button>
+            <button type="button" class="lfs-rate" data-value="4" aria-pressed="false" aria-label="4 - Often" aria-keyshortcuts="4"><span class="lfs-rate-num" aria-hidden="true">4</span><span class="lfs-rate-label" aria-hidden="true">Often</span></button>
+            <button type="button" class="lfs-rate" data-value="5" aria-pressed="false" aria-label="5 - Constantly" aria-keyshortcuts="5"><span class="lfs-rate-num" aria-hidden="true">5</span><span class="lfs-rate-label" aria-hidden="true">Constantly</span></button>
+          </div>
+          <div class="lfs-ns-row"><button type="button" class="lfs-rate lfs-rate-ns" data-value="NS" aria-pressed="false" aria-keyshortcuts="6 N"><span class="lfs-ns-main">Not sure? Skip this one</span><span class="lfs-ns-sub">not scored</span></button></div>
+
+          <div class="lfs-nav-row">
+            <button type="button" class="lfs-prev" data-lfs-back hidden>&larr; Previous statement</button>
+          </div>
+        </div>
+
+        <!-- Step 13: lead intake -->
+        <div data-lfs-panel="gate" hidden>
+          <h2 class="lfs-gate-title" id="lfs-gate-title" tabindex="-1">Your Leadership Telemetry Is Compiled</h2>
+          <p class="lfs-gate-sub">Enter your details to open your on-screen dashboard and export your 2-page executive PDF memo. The full report also goes to your inbox. Your individual answers stay confidential.</p>
+
+          <!-- Variant B only: the headline result is shown before the details are asked for -->
+          <div class="lfs-preview" data-lfs-preview>
+            <div class="lfs-preview-main">
+              <span class="lfs-preview-label">Your Leadership Friction Index</span>
+              <span class="lfs-preview-score"><span class="lfs-preview-num" data-prev-score>0</span><span class="lfs-preview-max">/ 60</span></span>
+            </div>
+            <div class="lfs-preview-side">
+              <span class="lfs-preview-band" data-prev-band></span>
+              <span class="lfs-preview-vector" data-prev-vector-line>Dominant friction pattern: <span class="lfs-preview-vector-name" data-prev-vector></span></span>
+            </div>
+            <p class="lfs-preview-note">Your four-dimension breakdown, the cost of delay and your first action are one step away.</p>
+          </div>
+
+        <form class="lfs-form" name="leadership-friction-scan" method="POST" action="/leadership-friction-scan" data-netlify="true" netlify-honeypot="bot-field" data-lfs-form novalidate>
+          <input type="hidden" name="form-name" value="leadership-friction-scan">
+          <p class="hp-field" hidden>
+            <label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+          </p>
+
+          <!-- Result fields, filled by leadership-friction-scan.js just before submit so the CRM receives the full breakdown -->
+          <input type="hidden" name="friction_index" value="">
+          <input type="hidden" name="friction_band" value="">
+          <input type="hidden" name="dominant_vector" value="">
+          <input type="hidden" name="d1_decision_velocity" value="">
+          <input type="hidden" name="d2_strategic_cohesion" value="">
+          <input type="hidden" name="d3_energy_drain" value="">
+          <input type="hidden" name="d4_silent_veto" value="">
+          <input type="hidden" name="not_sure_count" value="">
+          <input type="hidden" name="scale_version" value="">
+          <input type="hidden" name="answers" value="">
+          <input type="hidden" name="utm" value="">
+          <input type="hidden" name="company_cluster" value="">
+          <input type="hidden" name="invited_by" value="">
+          <input type="hidden" name="variant" value="">
+
+          <div class="field">
+            <label for="lfs-name">Full Name</label>
+            <input type="text" id="lfs-name" name="name" autocomplete="name" required>
+            <span class="lfs-field-error" data-lfs-error="name">Please enter your name.</span>
+          </div>
+          <div class="field">
+            <label for="lfs-email">Work Email</label>
+            <input type="email" id="lfs-email" name="email" autocomplete="email" required>
+            <span class="lfs-field-error" data-lfs-error="email">Please enter a valid email address.</span>
+          </div>
+          <div class="field">
+            <label for="lfs-company">Company Name <span class="lfs-optional lfs-b-only">(optional)</span></label>
+            <input type="text" id="lfs-company" name="company" autocomplete="organization" required>
+            <span class="lfs-field-error" data-lfs-error="company">Please enter your company name.</span>
+          </div>
+          <div class="field lfs-stage-field">
+            <label for="lfs-stage">Funding Stage <span class="lfs-optional">(optional)</span></label>
+            <div class="select-shell">
+              <select id="lfs-stage" name="stage">
+                <option value="" selected>Select your stage</option>
+                <option>Seed</option>
+                <option>Series A</option>
+                <option>Series B+</option>
+                <option>Bootstrapped / Scale-up</option>
+              </select>
+              <svg class="select-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19.5 8.25l-7.5 7.5-7.5-7.5"/></svg>
+            </div>
+          </div>
+
+          <div class="hp-wrapper" aria-hidden="true">
+            <label for="hp-tax-id-lfs">Tax ID (do not fill)</label>
+            <input type="text" name="company_tax_id" id="hp-tax-id-lfs" tabindex="-1" autocomplete="off" value="">
+          </div>
+
+          <div class="lfs-guarantee" role="note">
+            <span class="lfs-guarantee-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5.5c0 4.2-2.8 7.6-7 9.5-4.2-1.9-7-5.3-7-9.5V6l7-3z"/><path d="M9 12l2.2 2.2L15.2 10"/></svg></span>
+            <div>
+              <p class="lfs-guarantee-title"><span class="lfs-p-interim">Kuma Executive Data Commitment</span><span class="lfs-p-full">Kuma Executive Data Guarantee</span></p>
+              <p class="lfs-guarantee-text lfs-p-interim">Your details travel over an encrypted connection and are used only to deliver this scan and follow up with you. Individual scores are strictly confidential and will never be shared or commercialised.</p>
+              <p class="lfs-guarantee-text lfs-p-full">All diagnostic data is encrypted and permanently purged from our active diagnostic servers after 30 days. Individual scores are strictly confidential and will never be shared or commercialised.</p>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary lfs-submit" data-lfs-submit>
+            <span data-btn-label>Generate Telemetry &amp; View Results →</span>
+          </button>
+          <p class="lfs-trust-line">Your individual responses are confidential. We use your details to deliver your report and follow up on your results. <a href="privacy.html">Privacy Policy</a>.</p>
+          <p class="lfs-form-microcopy">See our <a href="privacy.html">Privacy Policy</a>.</p>
+          <p class="lfs-gate-peer no-print">Taking this with a co-founder? <button type="button" class="lfs-linkbtn" data-gate-copy-scan>Copy the scan link for them</button> <span class="lfs-gate-peer-status" data-gate-peer-status role="status" aria-live="polite"></span></p>
+          <p class="lfs-form-error" data-lfs-form-error hidden>Something went wrong sending your details. Please try again, or email us at <a href="mailto:contact@kuma.partners">contact@kuma.partners</a>.</p>
+        </form>
+
+          <div class="lfs-nav-row">
+            <button type="button" class="lfs-prev" data-lfs-back>&larr; Back to statement 12</button>
+          </div>
+        </div>
+
+        <!-- Deliverable promise and data handling. Purge wording switches on CONFIG.dataPurgeLive in the script. -->
+        <div class="lfs-promise">
+          <p class="lfs-promise-text">Instant on-screen 4-dimension breakdown, plus a 2-page board-ready PDF memo you can export the moment you finish.</p>
+          <ul class="lfs-trust" aria-label="Data handling">
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span>Encrypted in transit</span></li>
+            <li class="lfs-p-interim"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l7 3v5.5c0 4.2-2.8 7.6-7 9.5-4.2-1.9-7-5.3-7-9.5V6l7-3z"/><path d="M9 12l2.2 2.2L15.2 10"/></svg><span>Used only for this scan</span></li>
+            <li class="lfs-p-full"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg><span>30-day automated purge</span></li>
+            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M6 6l12 12"/></svg><span>Never sold or commercialised</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STATE 3B: RESULTS DASHBOARD -->
+  <section class="lfs-results" id="lfs-results" data-lfs-view="results" aria-labelledby="lfs-results-title" hidden>
+    <div class="wrap">
+      <div class="lfs-print-head" aria-hidden="true">
+        <img src="assets/logo-lockup.png" alt="" width="1036" height="160">
+        <div class="lfs-print-title">
+          <strong>Kuma Partners &bull; Executive Telemetry Brief</strong>
+          <span>Leadership Friction Scan Results | Confidential</span>
+        </div>
+      </div>
+      <p class="lfs-print-meta" data-res-print-meta aria-hidden="true"></p>
+      <div class="section-head">
+        <div class="eyebrow">Your diagnostic breakdown</div>
+        <div class="lfs-title-row">
+          <h2 id="lfs-results-title" tabindex="-1">Leadership Friction Scan results</h2>
+          <button type="button" class="lfs-export no-print" data-lfs-print>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 19h14"/></svg>
+            Download 2-Page Executive Brief (PDF)
+          </button>
+        </div>
+        <p class="lfs-prepared" data-res-prepared></p>
+        <p class="lfs-shared-banner no-print" data-res-shared hidden>You are viewing a result a colleague shared with you. <a href="#" data-lfs-shared-start>Take the scan yourself</a> to compare how each of you sees the same team.</p>
+        <p class="lfs-stamp lfs-stamp-top"><span class="lfs-p-interim">Telemetry generated under Kuma Partners Privacy Standards. Responses are used only to produce this breakdown and to follow up on the scan.</span><span class="lfs-p-full">Telemetry generated under Kuma Partners Privacy Standards. Raw individual responses scheduled for automated purge within 30 days.</span></p>
+      </div>
+
+      <!-- Slim team invite at the top of the results. Hidden in a shared view and in the PDF. -->
+      <section class="lfs-topinvite no-print" aria-label="Compare with your team" data-lfs-topinvite hidden>
+        <p class="lfs-topinvite-text"><span class="lfs-topinvite-lead">This is your view only.</span> Invite a co-founder or peer to take the scan and see where you disagree.</p>
+        <div class="lfs-share-actions">
+          <button type="button" class="lfs-share-btn" data-top-copy-team>Copy team link</button>
+          <a class="lfs-share-btn" href="#" data-top-mail-team>Email an invite</a>
+        </div>
+        <p class="lfs-share-status" data-share-status-top role="status" aria-live="polite"></p>
+      </section>
+
+      <div class="lfs-grid">
+
+        <div class="lfs-act lfs-act-1 no-print"><span class="lfs-act-eyebrow">Act 1 &bull; The diagnostic verdict</span><p>Where you stand</p></div>
+
+        <!-- 1. Overall Friction Index -->
+        <article class="lfs-card lfs-index" aria-labelledby="lfs-index-label">
+          <div class="lfs-card-label" id="lfs-index-label">Overall Friction Index</div>
+          <div class="lfs-score" aria-label="Score">
+            <span class="lfs-score-num" data-res-score>0</span><span class="lfs-score-max">/ 60</span>
+          </div>
+          <span class="sc-score-badge" data-res-badge></span>
+          <h3 class="lfs-band-name" data-res-band></h3>
+          <p class="lfs-band-text" data-res-band-text></p>
+          <div class="lfs-gauge" aria-hidden="true">
+            <div class="lfs-gauge-track">
+              <span class="lfs-gauge-seg lfs-seg-low"></span>
+              <span class="lfs-gauge-seg lfs-seg-mid"></span>
+              <span class="lfs-gauge-seg lfs-seg-high"></span>
+              <span class="lfs-gauge-marker" data-res-marker></span>
+            </div>
+            <div class="lfs-gauge-scale">
+              <span style="left:0">12</span>
+              <span style="left:28.57%">26</span>
+              <span style="left:63.27%">43</span>
+              <span style="left:100%">60</span>
+            </div>
+          </div>
+        </article>
+
+
+        <!-- Dimension matrix -->
+        <article class="lfs-card lfs-matrix avoid-break-inside" aria-labelledby="lfs-matrix-label">
+          <div class="lfs-card-label" id="lfs-matrix-label">Friction by dimension</div>
+          <ul class="lfs-dims" data-res-dims></ul>
+          <p class="lfs-matrix-note">Each dimension scores from 3 to 15. A higher score means more friction. Not Sure answers are left out and the rest are scaled to the same range.</p>
+          <p class="lfs-ns-note" data-res-ns-note hidden>Note: High number of 'Not Sure' responses detected. This typically indicates a lack of cross-functional operational visibility between departments.</p>
+        </article>
+
+        <!-- 1b. Structural risk and runway callout -->
+        <!-- Silent veto analysis: always shown, with an alert when Dimension 4 is elevated -->
+        <aside class="lfs-veto avoid-break-inside" aria-labelledby="lfs-veto-label">
+          <div class="lfs-veto-head">
+            <h3 class="lfs-veto-label" id="lfs-veto-label">The invisible runway killer: artificial harmony &amp; the silent veto</h3>
+            <p class="lfs-veto-alert" data-res-veto-alert hidden role="status"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5L2.8 19.5h18.4L12 3.5zM12 10v4.5M12 17.2v.1"/></svg>Elevated risk: silent veto &amp; mandate ambiguity detected</p>
+          </div>
+          <p>Friction does not always show up as open confrontation. In high-stakes leadership teams the most expensive drag is silent: strategic initiatives nodded through in Monday meetings that quietly stall in corridor execution.</p>
+          <p>When co-founder friendships or early loyalties blur executive mandates (CEO, CTO, CPO), the team avoids holding peers accountable to protect personal harmony. The cost of avoiding principled tension is paid out of company velocity and, in the end, out of runway.</p>
+        </aside>
+
+        <div class="lfs-act lfs-act-2 no-print"><span class="lfs-act-eyebrow">Act 2 &bull; Balance sheet impact &amp; operational constraints</span><p>The cost of inaction</p></div>
+        <div class="lfs-act lfs-act-3 no-print"><span class="lfs-act-eyebrow">Act 3 &bull; Intervention &amp; strategic alignment</span><p>The path forward</p></div>
+
+        <aside class="lfs-risk avoid-break-inside" aria-labelledby="lfs-risk-label">
+          <div class="lfs-risk-label" id="lfs-risk-label">Why this matters commercially</div>
+          <div class="lfs-risk-item">
+            <h3>Structural failure risk</h3>
+            <p>Harvard Business School research found that <strong class="lfs-stat">65%</strong> of high-potential start-ups fail as a result of conflict among the founders.</p>
+            <p class="lfs-cite">Harvard Business School, Noam Wasserman, The Founder’s Dilemmas (2012)</p>
+          </div>
+          <div class="lfs-risk-item">
+            <h3>Runway and velocity dilution</h3>
+            <p>In a McKinsey survey of 1,228 respondents, <strong class="lfs-stat">61%</strong> said most of their organisation’s decision-making time is used ineffectively. That time is paid for out of runway.</p>
+            <p class="lfs-cite">McKinsey &amp; Company, Decision making in the age of urgency (2019)</p>
+            <a class="lfs-risk-link no-print" href="coordination-tax.html">Price it for your own team with the Leadership Friction Cost Index →</a>
+          </div>
+          <div class="lfs-risk-item" data-res-founder-risk>
+            <h3>Founder centrality drag</h3>
+            <p>As companies scale, founder over-centralisation turns from the engine of the company into its most expensive bottleneck.</p>
+            <p class="lfs-cite">Kuma Partners observation. Related reading: Chris Zook and James Allen, The Founder’s Mentality (Bain &amp; Company)</p>
+          </div>
+        </aside>
+
+        <!-- Print only, page 2: memo banner -->
+        <div class="lfs-po lfs-memo print-page-2 avoid-break-inside" data-res-memo aria-hidden="true">
+          <div class="lfs-memo-tag">Internal memo: for co-founders &amp; the executive committee</div>
+          <p>Operational review on decision velocity, executive mandate boundaries and cash runway drag. Please review this telemetry prior to our next executive strategy session.</p>
+        </div>
+
+        <!-- 2. Dominant Friction Vector -->
+        <article class="lfs-card lfs-vector avoid-break-inside" aria-labelledby="lfs-vector-label" data-res-vector-card>
+          <div class="lfs-card-label" id="lfs-vector-label">Dominant friction vector</div>
+          <h3 class="lfs-vector-name" data-res-vector></h3>
+          <p class="lfs-vector-text" data-res-vector-text></p>
+          <p class="lfs-vector-source" data-res-vector-source></p>
+          <p class="lfs-vector-note" data-res-vector-note hidden></p>
+        </article>
+
+        <!-- 3. Immediate Micro-Intervention -->
+        <article class="lfs-card lfs-intervention avoid-break-inside" aria-labelledby="lfs-intervention-label" data-res-intervention-card>
+          <div class="lfs-card-label" id="lfs-intervention-label">Immediate micro-intervention</div>
+          <h3 class="lfs-intervention-title" data-res-intervention></h3>
+          <p class="lfs-intervention-lead" data-res-intervention-lead></p>
+          <p class="lfs-intervention-time" data-res-intervention-time></p>
+          <ol class="lfs-steps" data-res-steps></ol>
+          <div class="lfs-signal">
+            <span class="lfs-signal-label">Signal it worked</span>
+            <p data-res-signal></p>
+          </div>
+        </article>
+
+        <!-- Print only, page 2: cost of delay, variance gap, 14-Day Scan scope -->
+        <section class="lfs-po lfs-delay avoid-break-inside" data-res-delay-card aria-hidden="true">
+          <div class="lfs-card-label">The compounding 90-day cost of delay</div>
+          <ol class="lfs-delay-grid" data-res-delay></ol>
+          <p class="lfs-delay-note">Kuma Partners view of what typically follows when this pattern is left alone.</p>
+        </section>
+
+        <section class="lfs-po lfs-gap avoid-break-inside" aria-hidden="true">
+          <div class="lfs-card-label">The executive perception gap</div>
+          <p>Most leadership teams believe they are aligned on priorities. In our work with scale-stage teams, founders, COOs and functional VPs tend to feel friction in different places, even when they agree in the room. A self-assessment from one leader exposes the symptom. Calibrating across the whole leadership team shows where the structural divide sits.</p>
+        </section>
+
+        <section class="lfs-po lfs-scope avoid-break-inside" aria-hidden="true">
+          <div class="lfs-card-label">The next step: the Kuma 14-Day Leadership Friction Scan</div>
+          <ol class="lfs-scope-list">
+            <li><strong>Confidential 1-on-1 executive interviews.</strong> Diagnostic conversations with each executive to isolate unstated friction and silent vetoes, mapped into a cross-functional friction heat map.</li>
+            <li><strong>Mandate clarity.</strong> Clear authority boundaries between the CEO, CTO, CPO and go-to-market leads.</li>
+            <li><strong>Debrief and 90-day alignment compact.</strong> Type 1 and Type 2 decision rights and a zero-passive-veto operating agreement, agreed in a facilitated session.</li>
+          </ol>
+        </section>
+
+      </div>
+
+      <!-- 4. Conversion bridge -->
+      <div class="lfs-bridge avoid-break-inside">
+        <h2>Identifying friction is step one. Dismantling it requires external leverage.</h2>
+        <div class="lfs-bridge-copy">
+          <blockquote class="lfs-quote">
+            <p>You cannot untangle a silent veto from inside the room. When co-founders are also close friends, direct operational challenge feels like a personal attack. Dismantling this requires an external, neutral operating framework to separate personal loyalty from executive execution.</p>
+          </blockquote>
+          <p class="lfs-bridge-note">The Kuma 14-Day Leadership Friction Scan cross-calibrates this diagnostic against confidential, 1-on-1 interviews across your entire C-suite to isolate the true root causes of execution drag and install a decision architecture that holds.</p>
+        </div>
+        <div class="lfs-bridge-actions">
+          <div class="lfs-partner">
+            <strong>Sven Mulfinger <span>&bull; Lead Partner, Kuma Partners</span></strong>
+            <p>Executive advisor and strategist to scale-stage leadership teams across Europe.</p>
+            <p class="lfs-partner-links"><a href="mailto:sven@kuma.partners">sven@kuma.partners</a> &bull; <a href="https://www.linkedin.com/in/svenmulfinger" target="_blank" rel="noopener">LinkedIn Profile</a></p>
+          </div>
+          <a href="https://calendly.com/sven-mulfinger/leadership-friction-debrief-30min" class="btn btn-cream" data-lfs-book>Schedule 30-Minute Debrief →</a>
+          <p class="lfs-cta-sub">Confidential • Direct with Sven Mulfinger, Lead Partner • Unvarnished executive telemetry</p>
+          <a href="index.html#engagements" class="btn-link">Or learn more about the 14-Day Executive Alignment Sprint →</a>
+        </div>
+      </div>
+
+      <!-- Team invite: sends a company-tagged link to a co-founder or C-suite peer. Hidden from the PDF. -->
+      <section class="lfs-invite no-print" aria-labelledby="lfs-invite-title" data-lfs-invite>
+        <span class="lfs-dispatch-eyebrow">Cross-Executive Calibration</span>
+        <h2 id="lfs-invite-title">Invite Your Co-Founder or C-Suite Peer to Take the Scan</h2>
+        <p class="lfs-dispatch-copy">Co-founders and functional leads often feel friction in different places, so one self-assessment shows one perspective. Generate a private link to compare where your perceptions of internal drag, mandates and silent vetoes align.</p>
+        <div class="lfs-share-actions">
+          <button type="button" class="lfs-share-btn" data-share-copy-team><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1M14 10a4 4 0 00-5.7 0l-3 3a4 4 0 005.7 5.7l1-1"/></svg>Copy Team Link</button>
+          <a class="lfs-share-btn" href="#" data-share-mail-team><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3.5 7l8.5 6 8.5-6"/></svg>Send Email Invite to Peer</a>
+          <button type="button" class="lfs-share-btn" data-share-copy-results><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1M14 10a4 4 0 00-5.7 0l-3 3a4 4 0 005.7 5.7l1-1"/></svg>Copy Results Link</button>
+        </div>
+        <p class="lfs-share-status" data-share-status-t role="status" aria-live="polite"></p>
+        <p class="lfs-share-fine">The results link carries your answers, not your name or company.</p>
+      </section>
+
+      <!-- Executive Dispatch opt-in. Hidden from the PDF. -->
+      <section class="lfs-dispatch dispatch-optin no-print" aria-labelledby="lfs-dispatch-title" data-lfs-dispatch-card>
+        <h2 id="lfs-dispatch-title">Kuma Strategic Telemetry &bull; Quarterly Dispatch</h2>
+        <p class="lfs-dispatch-copy">A private, low-frequency briefing for founders and C-suite executives on decision velocity, executive team alignment and scale-stage operating systems. Zero spam, strictly executive-grade insights.</p>
+        <form class="lfs-dispatch-form" name="leadership-friction-dispatch" method="POST" action="/leadership-friction-scan" data-netlify="true" netlify-honeypot="bot-field" data-lfs-dispatch novalidate>
+          <input type="hidden" name="form-name" value="leadership-friction-dispatch">
+          <input type="hidden" name="tag" value="friction_scan_dispatch">
+          <input type="hidden" name="source" value="leadership-friction-scan-results">
+          <input type="hidden" name="consent" value="Subscribed to the Kuma quarterly dispatch from the Leadership Friction Scan results page">
+          <p class="hp-field" hidden>
+            <label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off"></label>
+          </p>
+          <div class="lfs-dispatch-row">
+            <label class="lfs-sr" for="lfs-dispatch-email">Work email address</label>
+            <input type="email" id="lfs-dispatch-email" name="email" placeholder="Work Email Address" autocomplete="email" inputmode="email" required>
+            <button type="submit" class="btn btn-primary" data-dispatch-submit>Subscribe to Briefing →</button>
+          </div>
+          <p class="lfs-field-error lfs-dispatch-error" data-dispatch-error hidden role="alert">Enter a valid work email address.</p>
+        </form>
+        <p class="lfs-dispatch-note"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 018 0v3"/></svg>Strictly confidential. 1 email per quarter. 1-click unsubscribe at any time.</p>
+        <p class="lfs-dispatch-status" data-dispatch-status hidden role="status" aria-live="polite"></p>
+      </section>
+
+      <!-- Peer and social sharing strip. Hidden from the PDF. -->
+      <section class="lfs-sharebar sharing-suite no-print" aria-label="Share the scan with a peer">
+        <span class="lfs-sharebar-label">Recommend the 3-minute scan to a peer</span>
+        <div class="lfs-share-actions">
+          <a class="lfs-share-btn" href="https://www.linkedin.com/sharing/share-offsite/?url=https%3A%2F%2Fwww.kuma.partners%2Fleadership-friction-scan%3Futm_source%3Dlinkedin%26utm_medium%3Dshare" target="_blank" rel="noopener" data-share-linkedin><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M4.98 3.5a2.5 2.5 0 11-.02 5 2.5 2.5 0 01.02-5zM3 9.75h4v11.5H3zM9.5 9.75h3.8v1.6h.05c.53-.95 1.84-1.95 3.8-1.95 4.06 0 4.8 2.67 4.8 6.14v5.7h-4v-5.05c0-1.2-.02-2.75-1.68-2.75-1.68 0-1.94 1.31-1.94 2.66v5.14h-4z"/></svg>Share on LinkedIn</a>
+          <a class="lfs-share-btn" href="https://api.whatsapp.com/send?text=Found%20this%203-minute%20leadership%20friction%20scan%20by%20Kuma%20Partners.%20Really%20sharp%20diagnostic%20on%20decision%20bottlenecks%20and%20silent%20vetoes%3A%20https%3A%2F%2Fwww.kuma.partners%2Fleadership-friction-scan%3Futm_source%3Dwhatsapp%26utm_medium%3Dshare" target="_blank" rel="noopener" data-share-whatsapp><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 11.5a8 8 0 01-11.7 7.1L4 20l1.4-4.1A8 8 0 1120 11.5z"/></svg><span data-share-wa-label>Share via WhatsApp</span></a>
+          <button type="button" class="lfs-share-btn" data-share-copy-scan><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 14a4 4 0 005.7 0l3-3a4 4 0 00-5.7-5.7l-1 1M14 10a4 4 0 00-5.7 0l-3 3a4 4 0 005.7 5.7l1-1"/></svg>Copy Scan Link</button>
+        </div>
+        <p class="lfs-share-status" data-share-status-b role="status" aria-live="polite"></p>
+      </section>
+
+      <section class="lfs-po lfs-cred avoid-break-inside" aria-hidden="true">
+        <div class="lfs-cred-book">
+          <h3>Schedule a confidential 30-minute telemetry debrief</h3>
+          <p>Direct booking: <span data-res-book-url>www.kuma.partners/#contact</span></p>
+        </div>
+        <div class="lfs-cred-profile">
+          <div class="lfs-cred-firm">
+            <strong>Kuma Partners</strong>
+            <span>Executive advisory &amp; leadership alignment for scale-stage leadership teams</span>
+            <span>Operating internationally: New York &bull; London &bull; Munich &bull; Barcelona &bull; Lisbon</span>
+          </div>
+          <div class="lfs-cred-person">
+            <span class="lfs-cred-k">Direct partner contact</span>
+            <strong>Sven Mulfinger, Lead Partner</strong>
+            <span>sven@kuma.partners &nbsp;|&nbsp; www.kuma.partners</span>
+            <span>linkedin.com/in/svenmulfinger</span>
+          </div>
+        </div>
+      </section>
+
+      <p class="lfs-stamp lfs-stamp-bottom"><span class="lfs-p-interim">Telemetry generated under Kuma Partners Privacy Standards. Responses are used only to produce this breakdown and to follow up on the scan.</span><span class="lfs-p-full">Telemetry generated under Kuma Partners Privacy Standards. Raw individual responses scheduled for automated purge within 30 days.</span></p>
+      <button type="button" class="lfs-retake no-print" data-lfs-retake>Retake the scan</button>
+    </div>
+
+    <!-- Mobile only: persistent debrief bar. Hidden on desktop and in the PDF. -->
+    <div class="lfs-sticky no-print" data-lfs-sticky>
+      <span class="lfs-sticky-badge" data-sticky-score></span>
+      <a class="lfs-sticky-btn" href="https://calendly.com/sven-mulfinger/leadership-friction-debrief-30min" target="_blank" rel="noopener" data-lfs-book-sticky>Schedule Debrief →</a>
+    </div>
+  </section>
+
+  <!-- Crawlable methodology and definitions. Plain HTML so search and answer engines read it without running JavaScript. -->
+  <section class="lfs-methodology no-print" id="framework-methodology" aria-labelledby="methodology-title">
+    <div class="lfs-meth-wrap">
+      <p class="lfs-meth-eyebrow">Kuma Operating Framework &bull; Reference</p>
+      <h2 id="methodology-title">The Anatomy of Leadership Friction in Scale-Stage Ventures</h2>
+      <p class="lfs-meth-lede">Developed by Sven Mulfinger and the partners at Kuma Partners, the Leadership Friction Scan measures the gap between executive intent and what the organisation actually does. As a company grows, the cost of coordinating its leaders tends to become a larger limit on speed than the market itself.</p>
+
+      <details class="lfs-meth-details">
+      <summary class="lfs-meth-summary">Read the four vectors, definitions and sources</summary>
+      <div class="lfs-meth-grid">
+        <article>
+          <h3>1. The Silent Veto and artificial harmony</h3>
+          <p>Decisions agreed in the executive meeting are quietly eroded outside it. When co-founder friendships blur executive mandates (CEO, CTO, CPO), the team trades peer accountability for polite comfort, and speed suffers.</p>
+        </article>
+        <article>
+          <h3>2. Founder centrality drag</h3>
+          <p>The founders remain the clearing house for reversible operational calls. Execution speed defaults to the founders&rsquo; calendar, and initiatives stall while they wait for sign-off.</p>
+        </article>
+        <article>
+          <h3>3. Defensive silos</h3>
+          <p>Functions retreat into local targets and optimise for their own metrics rather than company outcomes. Activity stays high while unified progress stays low.</p>
+        </article>
+        <article>
+          <h3>4. Executive energy and bandwidth burn</h3>
+          <p>Leaders spend more energy on internal politics, consensus loops and meeting churn than on the market, which breeds cynicism and fatigue.</p>
+        </article>
+      </div>
+
+      <h2 class="lfs-meth-h2">Definitions</h2>
+      <div class="lfs-meth-qa"><h3>What is the Silent Veto in executive teams?</h3><p>The Silent Veto happens when a decision agreed inside the executive meeting is quietly undermined outside the room through passive compliance, delayed execution or corridor pushback. It is the clearest symptom of artificial harmony in a leadership team.</p></div>
+      <div class="lfs-meth-qa"><h3>How does founder centrality create leadership friction?</h3><p>Founder centrality drag happens when reversible operational decisions default inward to the CEO or co-founders. The leadership team becomes a queue, execution speed is capped at the founders&rsquo; calendar, and decision latency spreads across every function.</p></div>
+      <div class="lfs-meth-qa"><h3>What is the 12 to 60 Leadership Friction Index?</h3><p>The Kuma Leadership Friction Index scores twelve statements from 1 to 5 across four vectors: Decision Velocity &amp; Autonomy, Strategic Cohesion vs. Defensive Silos, Cognitive Bandwidth &amp; Energy Drain, and Principled Candor vs. The Silent Veto. Totals run from 12 to 60: High-Flow Velocity (12 to 25), Operational Drag (26 to 42) and Critical Systemic Gridlock (43 to 60).</p></div>
+      <p class="lfs-meth-foot"><span>Sources: Noam Wasserman, Harvard Business School, <em>The Founder&rsquo;s Dilemmas</em> (2012) &bull; McKinsey &amp; Company, <em>Decision making in the age of urgency</em> (2019)</span><span>Diagnostic framework &copy; Kuma Partners</span></p>
+      </details>
+    </div>
+  </section>
+
+</main>
+
+<footer class="kx-foot">
+  <div class="kx-wrap">
+    <div class="kx-fgrid">
+      <p class="kx-fabout">Kuma Partners is an executive advisory firm based in Barcelona. Former CEOs and operators work inside scale-stage leadership teams to restore decision speed.</p>
+      <div class="kx-fmeta">
+        <p class="kx-tag">Kuma Partners · Executive advisory · Barcelona</p>
+        <p class="kx-flinks"><a href="mailto:contact@kuma.partners">contact@kuma.partners</a><a href="/friction-scan.html">The 14-Day Scan</a><a href="/alignment-sprint.html">Executive Alignment Sprint</a><a href="/offsite/">Executive offsites</a><a href="/round/">The Round</a><a href="/partners.html">The partners</a></p>
+        <p class="kx-flinks"><a href="/privacy.html">Privacy policy (GDPR)</a><a href="/legal.html">Legal notice</a><button class="kx-linkbtn" type="button" data-cookie-preferences>Cookie preferences</button></p>
+      </div>
+    </div>
+    <div class="kx-wordmark"><svg viewBox="0 0 8388 822" role="img" aria-label="Kuma Partners" focusable="false"><use href="#logo-kuma"/></svg></div>
+    <div class="kx-fsig"><i class="kx-frule" aria-hidden="true"></i><svg viewBox="0 0 3658 1588" role="img" aria-label="Nonameyet" focusable="false"><use href="#logo-nny"/></svg></div>
+  </div>
+</footer>
+
+<div class="cookie-banner" id="cookie-banner">
+  <div class="wrap">
+    <p>We use essential cookies to ensure our site functions properly and to analyze aggregate traffic in accordance with our <a href="privacy.html">Privacy Policy</a>.</p>
+    <div class="cookie-actions">
+      <button class="btn-essential" id="cookie-essential">Essential Only</button>
+      <button class="btn-accept" id="cookie-accept">Accept All</button>
+    </div>
+  </div>
+</div>
+
+<script src="/kuma-shell.js" defer></script>
+<script src="site.js"></script>
+<script src="leadership-friction-scan.js"></script>
+</body>
+</html>
