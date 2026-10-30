@@ -17,7 +17,7 @@
 .ws-who p{font-size:15px;color:var(--muted-l);line-height:1.4}
 .ws-who strong,.ws-hostcard strong{display:block;font-family:var(--font-display);font-weight:600;font-size:17px;color:var(--ink);letter-spacing:-0.01em}
 .ws-ph{width:72px;height:72px;min-width:72px;aspect-ratio:1;border-radius:50%;object-fit:cover;object-position:50% 20%;filter:grayscale(1);flex:none;background:var(--lav)}
-.ws-act{align-self:center}
+.ws-act{align-self:start;padding-top:6px}
 .ws-soon{display:inline-flex;align-items:center;height:52px;padding:0 22px;border-radius:100px;border:1px dashed var(--line-l);color:var(--muted-l);font-size:15px;white-space:nowrap}
 .ws-break{padding:14px 0;text-align:center;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted-l)}
 .ws-row.ws-eve{margin-top:20px;background:var(--ink);border-color:transparent;color:var(--white)}
@@ -39,5 +39,26 @@
 .ws-hostcard p{font-size:15px;color:var(--muted-l);line-height:1.4}
 .ws-about{margin-top:36px;max-width:40em;font-size:17px;color:var(--muted-l);line-height:1.6}
 .ws-about a{color:var(--ink);text-underline-offset:4px}
+.ws-more{margin-top:22px}
+.ws-more summary{display:inline-flex;align-items:center;gap:12px;cursor:pointer;list-style:none;font-size:15px;font-weight:600;color:var(--ink);padding:4px 0}
+.ws-more summary::-webkit-details-marker{display:none}
+.ws-more summary:focus-visible{outline:2px solid var(--lav-deep);outline-offset:4px;border-radius:8px}
+.ws-chev{display:inline-grid;place-items:center;width:32px;height:32px;border-radius:50%;border:1px solid var(--line-l);transition:transform .25s,background .2s}
+.ws-chev svg{width:16px;height:16px}
+.ws-more summary:hover .ws-chev{background:var(--lav)}
+.ws-more[open] .ws-chev{transform:rotate(180deg)}
+.ws-panel{margin-top:18px;padding-top:22px;border-top:1px solid var(--line-l);max-width:44em}
+.ws-panel p,.ws-panel li{font-size:16px;line-height:1.6;color:var(--muted-l)}
+.ws-body .ws-panel>p{margin-top:12px;font-size:16px}
+.ws-panel h4{margin:22px 0 8px;font-family:var(--font-display);font-size:17px;font-weight:600;color:var(--ink);letter-spacing:-0.01em}
+.ws-panel ul,.ws-panel ol{margin:0;padding-left:20px;display:grid;gap:8px}
+.ws-ag strong{color:var(--ink);font-weight:600}
+.ws-panel a:not(.btn){color:var(--ink);text-underline-offset:4px}
+.ws-body .ws-panel .ws-fact{font-size:14px}
+.ws-pb{margin-top:26px}
+.ws-eve .ws-more summary,.ws-eve .ws-panel h4,.ws-eve .ws-ag strong{color:var(--white)}
+.ws-eve .ws-chev,.ws-eve .ws-panel{border-color:var(--line-d)}
+.ws-eve .ws-more summary:hover .ws-chev{background:var(--lav);color:var(--ink)}
+.ws-eve .ws-panel p,.ws-eve .ws-panel li{color:var(--muted-d)}
 @media (max-width:1000px){.ws-row{grid-template-columns:1fr;gap:18px;padding:26px}.ws-act{align-self:start}.ws-cols{grid-template-columns:1fr;gap:48px}.ws-time span{display:inline;margin-right:8px;font-size:30px}}
-@media (max-width:720px){.ws-hero .h1{font-size:44px}.ws-prog,.ws-info,.ws-hosts{padding-block:72px}.ws-body .h3{font-size:25px}.ws-cols .h2{font-size:38px}.ws-venue{padding:26px}.ws-hostcard{border-radius:28px}.ws-act .btn{width:100%;justify-content:space-between}}
+@media (max-width:720px){.ws-pb .btn{width:100%;justify-content:space-between}.ws-hero .h1{font-size:44px}.ws-prog,.ws-info,.ws-hosts{padding-block:72px}.ws-body .h3{font-size:25px}.ws-cols .h2{font-size:38px}.ws-venue{padding:26px}.ws-hostcard{border-radius:28px}.ws-act .btn{width:100%;justify-content:space-between}}
