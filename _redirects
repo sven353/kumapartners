@@ -1,3 +1,45 @@
+# Other domains that point at this project go to the primary domain for good (added 30 Oct 2026).
+# Netlify marks kumapartners.eu as a domain alias, which serves the site without redirecting.
+https://kumapartners.eu/*        https://www.kuma.partners/:splat    301!
+http://kumapartners.eu/*         https://www.kuma.partners/:splat    301!
+https://www.kumapartners.eu/*    https://www.kuma.partners/:splat    301!
+http://www.kumapartners.eu/*     https://www.kuma.partners/:splat    301!
+
+# One address per page (30 Oct 2026). The storage names (-v2.html) and the .html forms send people and
+# search engines to the clean public address for good. The 200 rewrites further down are internal and are
+# not processed again, so they cannot loop. To undo, delete this block.
+/index-v2.html                    /                         301!
+/friction-scan-v2.html            /friction-scan            301!
+/friction-scan.html               /friction-scan            301!
+/alignment-sprint-v2.html         /alignment-sprint         301!
+/alignment-sprint.html            /alignment-sprint         301!
+/partners-v2.html                 /partners                 301!
+/partners.html                    /partners                 301!
+/privacy-v2.html                  /privacy                  301!
+/privacy.html                     /privacy                  301!
+/legal-v2.html                    /legal                    301!
+/legal.html                       /legal                    301!
+/KOS-v2.html                      /KOS                      301!
+/KOS.html                         /KOS                      301!
+/kos.html                         /KOS                      301!
+/leadership-friction-scan-v2.html /leadership-friction-scan 301!
+/leadership-friction-scan.html    /leadership-friction-scan 301!
+/coordination-tax-v2.html         /coordination-tax         301!
+/coordination-tax.html            /coordination-tax         301!
+/cofounder-alignment-v2.html      /cofounder-alignment      301!
+/cofounder-alignment.html         /cofounder-alignment      301!
+/offsite-v2.html                  /offsite/                 301!
+/offsite-partners-v2.html         /offsite/partners.html    301!
+/insights-index-v2.html           /offsite/insights/        301!
+/insight-90-day-execution-compact-v2.html  /offsite/insights/90-day-execution-compact.html  301!
+/insight-barcelona-executive-offsite-guide-v2.html  /offsite/insights/barcelona-executive-offsite-guide.html  301!
+/insight-c-suite-friction-mediation-v2.html  /offsite/insights/c-suite-friction-mediation.html  301!
+/insight-company-momentum-remote-teams-v2.html  /offsite/insights/company-momentum-remote-teams.html  301!
+/insight-corporate-retreat-teams-in-change-v2.html  /offsite/insights/corporate-retreat-teams-in-change.html  301!
+/insight-executive-offsite-vs-leadership-retreat-v2.html  /offsite/insights/executive-offsite-vs-leadership-retreat.html  301!
+/insight-how-to-plan-executive-committee-offsite-v2.html  /offsite/insights/how-to-plan-executive-committee-offsite.html  301!
+/insight-strategic-planning-retreat-ceo-burnout-v2.html  /offsite/insights/strategic-planning-retreat-ceo-burnout.html  301!
+
 # Executive offsites now live in the /offsite/ folder of this repo and are served directly.
 # The old proxy to offsite.kuma.partners has been removed on purpose.
 # Do not add a rule redirecting /offsite to /offsite/: Netlify treats both as the same
@@ -36,7 +78,6 @@
 # index-v2.css, index-v2.js and kuma.css) is shown at /partners and /partners.html; the address stays the same.
 # To go back: delete these two lines, the old partners.html is still in the repo and serves itself again.
 /partners        /partners-v2.html    200!
-/partners.html   /partners-v2.html    200!
 
 # Main site in the new design (go-live 30 Oct 2026). Each public address shows its -v2 file (internal rewrite, the
 # address does not change). The old files (index.html, friction-scan.html, alignment-sprint.html, privacy.html,
@@ -45,23 +86,14 @@
 /                           /index-v2.html                       200!
 /index.html                 /index-v2.html                       200!
 /friction-scan              /friction-scan-v2.html               200!
-/friction-scan.html         /friction-scan-v2.html               200!
 /alignment-sprint           /alignment-sprint-v2.html            200!
-/alignment-sprint.html      /alignment-sprint-v2.html            200!
 /privacy                    /privacy-v2.html                     200!
-/privacy.html               /privacy-v2.html                     200!
 /legal                      /legal-v2.html                       200!
-/legal.html                 /legal-v2.html                       200!
 /KOS                        /KOS-v2.html                         200!
-/KOS.html                   /KOS-v2.html                         200!
 /kos                        /KOS-v2.html                         200!
-/kos.html                   /KOS-v2.html                         200!
 /leadership-friction-scan       /leadership-friction-scan-v2.html    200!
-/leadership-friction-scan.html  /leadership-friction-scan-v2.html    200!
 /coordination-tax           /coordination-tax-v2.html            200!
-/coordination-tax.html      /coordination-tax-v2.html            200!
 /cofounder-alignment        /cofounder-alignment-v2.html         200!
-/cofounder-alignment.html   /cofounder-alignment-v2.html         200!
 
 # The Spanish pages were removed on 30 Oct 2026. Old addresses go to the home page.
 /es         /    301!

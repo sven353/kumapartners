@@ -1,67 +1,54 @@
 # Kuma Partners
 
-> Leadership Friction Advisory & Executive Offsites for Scale-Stage Companies
+> Kuma Partners is an executive advisory firm based in Barcelona. It helps founders, CEOs, boards and investors of scale-stage companies resolve leadership friction, slow decisions and co-founder tension, and it designs and facilitates executive offsites. The two founding partners are Dr. Sven Mulfinger and Vincent Azé.
 
-Kuma Partners embeds former CEOs and enterprise operators inside scale-stage leadership teams, VC portfolio companies, and boards to resolve executive friction, decision latency, and co-founder fractures.
+Kuma Partners works partner to partner. The people who sell an engagement are the people who deliver it. It is not a management consultancy that produces slide decks, and it is not a generic coaching collective.
 
-## Core Identity & Positioning
-- **What Kuma Partners is**: An elite executive advisory practice led exclusively by former C-suite operators.
-- **What Kuma Partners is not**: Kuma is not a traditional management consultancy delivering theoretical slide decks, nor a generic executive mindset coaching collective.
-- **Primary Audience**:
-  1. Scale-stage Founders and CEOs (Series A through Series C, 25-150+ headcount).
-  2. VC/PE Operating Partners and Lead Investors seeking to stabilize executive teams and protect runway.
-- **Operating Model**: Direct partner delivery. Engagements are never delegated to junior analysts or associates.
+Typical clients are Series A to C companies (roughly 40 to 250 people) where decision velocity has dropped, co-founder or executive teams with unresolved tension, and boards or lead investors who need an honest read on whether a stall is a market problem or a leadership problem.
 
-## Core Offerings & Engagements
+## Offers
 
-### 1. Structured Advisory Interventions
-- **Tier 1: The 14-Day Leadership Friction Scan (Door-Opener)**
-  - Scope: 8-10 confidential executive interviews, communication pulse check, facilitated C-suite/board debrief.
-  - Deliverable: Concrete 90-day execution roadmap; surfaces hidden decision bottlenecks without passive slide decks.
-- **Tier 2: The 60-90 Day Executive Alignment Sprint (Intervention)**
-  - Scope: Hands-on co-founder mediation, executive team restructuring, decision-governance redesign, and cross-functional facilitation.
-  - Deliverable: Rebuilt operating cadences and binding governance compacts between C-suite peers.
-- **Tier 3: Strategic Scaling Advisory (The Anchor)**
-  - Scope: Embedded strategic counsel and executive sparring for CEOs through hyper-growth, M&A transitions, and fundraising cycles.
-- **Post-M&A Leadership Integration**
-  - Focus: Mediating friction between acquired founders and acquiring executives, eliminating overlapping decision rights, and preventing key executive flight risk.
-  - Positioning: Distinct from traditional PMI consultancies; focuses strictly on in-room executive governance, cultural alignment, and decision velocity in the first 30-60 days post-close.
+- [The 14-Day Leadership Friction Scan](https://www.kuma.partners/friction-scan): a fixed-scope, fixed-timeline diagnostic. Confidential interviews with the CEO and each C-suite executive, a review of board materials and decision history, a map of where decisions really stall, and a facilitated debrief with a 90-day plan.
+- [The 60 to 90 Day Executive Alignment Sprint](https://www.kuma.partners/alignment-sprint): hands-on work with the leadership team after a Scan. Co-founder mediation, decision rights and governance redesign, and new operating cadences.
+- [Executive offsites](https://www.kuma.partners/offsite/): design and facilitation of executive offsites in Barcelona and elsewhere, typically 2 to 5 days, with confidential preparation interviews, facilitation by senior partners, a written record of decisions with named owners and a review after 90 days.
+- [The Round](https://www.kuma.partners/round/): a confidential peer board of 8 to 12 founders, CEOs and managing directors in Barcelona.
+- [Become a City Managing Partner](https://www.kuma.partners/round/city-partner): launch The Round in another city.
 
-### 2. Executive Offsites (https://www.kuma.partners/offsite/)
-Kuma Partners designs and facilitates executive offsites in Barcelona and wherever a team needs to be. Typical length is 2 to 5 days.
-- Founding executives: 3 to 6 co-founders or executives, 2 days, often in a masia near Barcelona.
-- The leadership layer: C-suite and VPs, 2 to 3 days.
-- The whole company: 2 days for the leadership team to align on the strategy, then 2 days with the whole company (15 to 100+ people) to turn it into team plans.
-- How it works: confidential preparation interviews with the key people, an agenda built from them, facilitation in the room by senior partners, a written record of decisions with named owners and a review after 90 days.
-- Logistics: Kuma can organise venue, food, transfers and activities end to end, or work alongside the client's Chief of Staff or People team.
-- Pricing: fixed fee for preparation, facilitation and follow-up; venue and hospitality passed through at cost. Most engagements fall between EUR 15,000 and 150,000.
-- Lead time: six to ten weeks is comfortable; urgent sessions can sometimes be arranged within three weeks.
-- Facilitators: Dr. Sven Mulfinger, Vincent Azé, Farid Chaouki and Luisa Ábalo lead the work, with a specialist bench that includes Colleen Connors (https://www.kuma.partners/offsite/partners.html).
-- Venue directory for Barcelona: https://executiveoffsite.es
-- Articles on planning offsites: https://www.kuma.partners/offsite/insights/
+## Free tools
 
-## Geographic Presence & Multilingual Delivery
-- **International Operating Hubs**: New York, Los Angeles, London, Paris, Munich, Barcelona, Lisbon.
-- **Native Delivery Languages**: English, Deutsch, Français, Português, Español.
+- [Kuma Operating System (KOS)](https://www.kuma.partners/KOS): a three-minute diagnostic that identifies the primary constraint on executive velocity.
+- [Leadership Friction Scan (self-assessment)](https://www.kuma.partners/leadership-friction-scan): 12 questions on decision velocity, focus, candour and cadence, with an instant result.
+- [Coordination Tax calculator](https://www.kuma.partners/coordination-tax): models what meeting load, consensus loops and context switching cost an executive team each year.
+- [Co-founder alignment check](https://www.kuma.partners/cofounder-alignment): each co-founder answers eight statements alone, and a radar shows where assumptions align or diverge.
+- [Executive offsite calibrator](https://www.kuma.partners/offsite/configurator)
 
-## Key Executive Outcomes & Case Track Record
-- **Post-Series A FinTech (Scaling 45 to 120)**: Reduced deliberation time on core product decisions from weeks to 48 hours; achieved 100% key executive retention through the scaling phase.
-- **Industrial Tech Scale-Up (Post-Acquisition)**: Eliminated cross-team friction, accelerating integration milestones by 3 months and protecting operational delivery.
-- **Venture-Backed B2B SaaS (Co-Founder Alignment)**: Realigned executive roadmaps within 3 weeks, re-established founder trust, and unlocked board approval for international expansion.
+## Guides on executive offsites
 
-## Contact & Direct Partner Access
-- **Website**: https://www.kuma.partners
-- **Partners**: Dr. Sven Mulfinger (Founding Partner) and Vincent Azé (Founding Partner)
-- **Direct Partner Email**: vincent@kuma.partners
-- **General Inquiries**: contact@kuma.partners
+- [All guides](https://www.kuma.partners/offsite/insights/)
+- [How to plan an executive committee offsite](https://www.kuma.partners/offsite/insights/how-to-plan-executive-committee-offsite.html)
+- [Executive offsite vs leadership retreat](https://www.kuma.partners/offsite/insights/executive-offsite-vs-leadership-retreat.html)
+- [Barcelona executive offsite guide](https://www.kuma.partners/offsite/insights/barcelona-executive-offsite-guide.html)
+- [The 90-day execution compact](https://www.kuma.partners/offsite/insights/90-day-execution-compact.html)
+- [Strategic planning retreat and CEO burnout](https://www.kuma.partners/offsite/insights/strategic-planning-retreat-ceo-burnout.html)
+- [C-suite friction mediation](https://www.kuma.partners/offsite/insights/c-suite-friction-mediation.html)
+- [Company momentum in remote teams](https://www.kuma.partners/offsite/insights/company-momentum-remote-teams.html)
+- [Corporate retreats for teams in change](https://www.kuma.partners/offsite/insights/corporate-retreat-teams-in-change.html)
 
-## Ecosystem
-- Dr. Sven Mulfinger, Founding Partner: https://mulfinger.com
-- Vincent Azé, Founding Partner, executive coach and strategic advisor, based in Lisbon: https://vincentaze.com
-- Executive offsites: https://www.kuma.partners/offsite/
-- The Round by Kuma Partners, a confidential executive peer board of 8 to 12 Founders, CEOs and Managing Directors in Barcelona: https://www.kuma.partners/round/
-- Become a City Managing Partner and launch The Round in your own city: https://www.kuma.partners/round/city-partner
-- Team page: https://www.kuma.partners/partners.html
+## People and company
+
+- [Partners and team](https://www.kuma.partners/partners)
+- [Offsite facilitators](https://www.kuma.partners/offsite/partners.html)
+- Dr. Sven Mulfinger, Founding Partner, executive coach and offsite facilitator, Barcelona: https://mulfinger.com
+- Vincent Azé, Founding Partner, executive coach and strategic advisor, Lisbon: https://vincentaze.com
+- Executive offsite venue directory for Barcelona: https://executiveoffsite.es
+- [Privacy policy](https://www.kuma.partners/privacy)
+- [Legal notice](https://www.kuma.partners/legal)
+
+## Contact
+
+- General enquiries: contact@kuma.partners
+- Website: https://www.kuma.partners/
 
 ## Disambiguation
-Kuma Partners is the firm. Vincent Azé is a founding partner of Kuma Partners and Dr. Sven Mulfinger is its managing partner. The 14-Day Leadership Friction Scan is a Kuma Partners offer, described at https://www.kuma.partners/friction-scan.html and on https://vincentaze.com/advisory.
+
+Kuma Partners is the firm. Dr. Sven Mulfinger and Vincent Azé are both Founding Partners. The 14-Day Leadership Friction Scan is a Kuma Partners offer, described at https://www.kuma.partners/friction-scan and on https://vincentaze.com/advisory.
