@@ -67,7 +67,24 @@
 /es         /    301!
 /es/*       /    301!
 
-# The offsite insights are retired (30 Oct 2026). The index and the eight articles go to the offsite page for good.
-# The old files stay in offsite/insights/ and can be deleted later.
-/offsite/insights       /offsite/    301!
-/offsite/insights/*     /offsite/    301!
+# Offsite insights in the new design (go-live 30 Oct 2026). Forced 200 rewrites keep the original addresses, so the
+# articles stay indexed. The files sit at the top level of the repo (insights-index-v2.html and insight-<slug>-v2.html,
+# with insights-v2.css and insights-v2.js). The old files in offsite/insights/ are the rollback: delete these rules to use them again.
+/offsite/insights       /insights-index-v2.html    200!
+/offsite/insights/      /insights-index-v2.html    200!
+/offsite/insights/strategic-planning-retreat-ceo-burnout.html    /insight-strategic-planning-retreat-ceo-burnout-v2.html    200!
+/offsite/insights/strategic-planning-retreat-ceo-burnout    /insight-strategic-planning-retreat-ceo-burnout-v2.html    200!
+/offsite/insights/c-suite-friction-mediation.html    /insight-c-suite-friction-mediation-v2.html    200!
+/offsite/insights/c-suite-friction-mediation    /insight-c-suite-friction-mediation-v2.html    200!
+/offsite/insights/90-day-execution-compact.html    /insight-90-day-execution-compact-v2.html    200!
+/offsite/insights/90-day-execution-compact    /insight-90-day-execution-compact-v2.html    200!
+/offsite/insights/barcelona-executive-offsite-guide.html    /insight-barcelona-executive-offsite-guide-v2.html    200!
+/offsite/insights/barcelona-executive-offsite-guide    /insight-barcelona-executive-offsite-guide-v2.html    200!
+/offsite/insights/executive-offsite-vs-leadership-retreat.html    /insight-executive-offsite-vs-leadership-retreat-v2.html    200!
+/offsite/insights/executive-offsite-vs-leadership-retreat    /insight-executive-offsite-vs-leadership-retreat-v2.html    200!
+/offsite/insights/how-to-plan-executive-committee-offsite.html    /insight-how-to-plan-executive-committee-offsite-v2.html    200!
+/offsite/insights/how-to-plan-executive-committee-offsite    /insight-how-to-plan-executive-committee-offsite-v2.html    200!
+/offsite/insights/company-momentum-remote-teams.html    /insight-company-momentum-remote-teams-v2.html    200!
+/offsite/insights/company-momentum-remote-teams    /insight-company-momentum-remote-teams-v2.html    200!
+/offsite/insights/corporate-retreat-teams-in-change.html    /insight-corporate-retreat-teams-in-change-v2.html    200!
+/offsite/insights/corporate-retreat-teams-in-change    /insight-corporate-retreat-teams-in-change-v2.html    200!

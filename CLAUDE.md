@@ -11,15 +11,13 @@ The files sit at the top level of the repo under their storage names and are sho
 - `index-v2.html` (shown at `/`) with `index-v2.css`, `index-v2.js` and the shared base `kuma.css`
 - `friction-scan-v2.html`, `alignment-sprint-v2.html`, `partners-v2.html` (with `partners-v2.css`), `privacy-v2.html` and `legal-v2.html` (with `legal-v2.css`)
 - the diagnostic suite pages `KOS-v2.html`, `leadership-friction-scan-v2.html`, `coordination-tax-v2.html` and `cofounder-alignment-v2.html`. They keep the old look of their tools (`kos.css`, `suite.css`, the page css and js) inside a new header and footer from `kuma-shell.css` and `kuma-shell.js`. Every class in the shell starts with `kx-` and every token with `--kx-`, because `styles.css` uses the same names.
-- `offsite-v2.html` and `offsite-partners-v2.html` (shown at `/offsite/` and `/offsite/partners.html`), with their own css and js. `round/` is The Round and has its own folder.
+- `offsite-v2.html` and `offsite-partners-v2.html` (shown at `/offsite/` and `/offsite/partners.html`), with their own css and js. The offsite insights are `insights-index-v2.html` (at `/offsite/insights/`) and `insight-<slug>-v2.html` (at `/offsite/insights/<slug>.html`) with `insights-v2.css` and `insights-v2.js`; the old files in `offsite/insights/` are the rollback. `round/` is The Round and has its own folder.
 
 `robots.txt` keeps the storage names (`*-v2.html`) out of the index. Canonical URLs are the public addresses.
 
 The old pages (`index.html`, `friction-scan.html`, `alignment-sprint.html`, `privacy.html`, `legal.html`, `partners.html`, `KOS.html`, `leadership-friction-scan.html`, `coordination-tax.html`, `cofounder-alignment.html`, `styles.css`, `site.js`, `new.html`, `offsite/index.html`, `offsite/partners.html`) are kept only for rollback and are not served. To roll one page back, delete its two lines in `_redirects`.
 
-Retired: the offsite insights (`/offsite/insights/` and its articles 301 to `/offsite/`; the old files in `offsite/insights/` can be deleted).
-
-Still on the old design: `offsite/configurator.html` (use `offsite/styles.css`), `execution-diagnostic.html`, `ai-or-human.html`, `constellr-review.html`, `next-offsites.html`, `success.html`.
+Still on the old design: `offsite/insights/*`, `offsite/configurator.html` (use `offsite/styles.css`), `execution-diagnostic.html`, `ai-or-human.html`, `constellr-review.html`, `next-offsites.html`, `success.html`.
 
 ## The landing page is locked
 

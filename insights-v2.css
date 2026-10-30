@@ -1,0 +1,53 @@
+/* Offsite insights (index and articles), loaded after offsite-v2.css. Every selector starts with .ins */
+.ins-hero{background:var(--ink);color:var(--white);padding:156px 0 64px}
+.ins-hero-in{max-width:860px}
+.ins-back{display:inline-block;margin-bottom:26px;font-family:var(--font-display);font-weight:600;font-size:15px;color:var(--lav);text-decoration:none}
+.ins-back:hover{text-decoration:underline}
+.ins-h1{margin:20px 0 22px;font-family:var(--font-display);font-weight:700;font-size:clamp(34px,5.4vw,66px);line-height:.98;letter-spacing:-0.028em}
+.ins-sub{max-width:36em;font-size:19px;color:var(--muted-d)}
+.ins-by{font-size:16px;color:var(--muted-d)}
+.ins-by a{color:var(--white);text-underline-offset:3px}
+.ins-art{padding:64px 0 104px}
+.ins-prose{max-width:740px}
+.ins-prose p{margin:0 0 20px;font-size:18px;line-height:1.62;color:color-mix(in srgb,var(--ink) 88%,var(--paper))}
+.ins-prose .article-lead{font-family:var(--font-display);font-weight:500;font-size:clamp(21px,2.4vw,25px);line-height:1.38;letter-spacing:-0.012em;color:var(--ink);margin-bottom:28px}
+.ins-prose h2{margin:54px 0 18px;font-family:var(--font-display);font-weight:700;font-size:clamp(26px,3.2vw,36px);line-height:1.04;letter-spacing:-0.024em;color:var(--ink)}
+.ins-prose h3{margin:34px 0 12px;font-family:var(--font-display);font-weight:600;font-size:22px;line-height:1.15;letter-spacing:-0.019em;color:var(--ink)}
+.ins-prose ul,.ins-prose ol{margin:0 0 24px;padding-left:1.35em}
+.ins-prose ul{list-style:disc}
+.ins-prose ol{list-style:decimal}
+.ins-prose li{margin:0 0 12px;padding-left:.3em;font-size:18px;line-height:1.58;color:color-mix(in srgb,var(--ink) 88%,var(--paper))}
+.ins-prose li::marker{color:var(--lav-deep)}
+.ins-prose a:not(.btn){color:var(--lav-deep);text-underline-offset:3px}
+.ins-prose a:not(.btn):hover{color:var(--ink)}
+.ins-prose .article-table-wrap{margin:34px 0;overflow-x:auto;border:1px solid var(--line-l);border-radius:16px;background:#fff}
+.ins-prose .article-table{width:100%;min-width:560px;border-collapse:collapse;font-size:15px;line-height:1.45}
+.ins-prose .article-table th,.ins-prose .article-table td{padding:14px 18px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line-l)}
+.ins-prose .article-table thead th{background:var(--ink);color:var(--white);font-family:var(--font-display);font-weight:600}
+.ins-prose .article-table tbody th{font-family:var(--font-display);font-weight:600;color:var(--ink)}
+.ins-prose .article-table tbody tr:last-child th,.ins-prose .article-table tbody tr:last-child td{border-bottom:0}
+.ins-prose .article-cta{margin-top:58px;padding:38px 36px;border-radius:24px;background:var(--ink);color:var(--white)}
+.ins-prose .article-cta h3{margin:0 0 12px;font-size:28px;line-height:1.05;letter-spacing:-0.024em;color:var(--white)}
+.ins-prose .article-cta p{margin:0 0 24px;font-size:17px;color:var(--muted-d)}
+.ins-prose .article-cta a:not(.btn){color:var(--lav)}
+.ins-prose .article-cta a:not(.btn):hover{color:var(--white)}
+.ins-list{padding:72px 0 112px}
+.ins-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.ins-card{display:flex;flex-direction:column;gap:14px;padding:34px 34px 30px;border-radius:24px;background:#fff;border:1px solid var(--line-l)}
+.ins-tag{align-self:flex-start;padding:3px 12px;border-radius:100px;background:color-mix(in srgb,var(--lav) 28%,#fff);color:var(--ink);font-family:var(--font-display);font-weight:600;font-size:13px;line-height:1.5}
+.ins-card-h{font-family:var(--font-display);font-weight:700;font-size:26px;line-height:1.08;letter-spacing:-0.022em}
+.ins-card-h a{text-decoration:none;color:var(--ink)}
+.ins-card-h a:hover{text-decoration:underline;text-underline-offset:4px}
+.ins-card p{flex:1;font-size:16px;color:var(--muted-l)}
+.ins-more{align-self:flex-start;display:inline-flex;gap:8px;font-family:var(--font-display);font-weight:600;font-size:16px;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line-l);padding-bottom:2px}
+.ins-more:hover{border-color:var(--ink)}
+@media (max-width:960px){.ins-grid{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:720px){
+  .ins-hero{padding:118px 0 44px}
+  .ins-art{padding:44px 0 80px}
+  .ins-list{padding:44px 0 80px}
+  .ins-prose p,.ins-prose li{font-size:17px}
+  .ins-prose .article-cta{padding:28px 22px}
+  .ins-card{padding:26px 22px 24px}
+  .ins-card-h{font-size:23px}
+}

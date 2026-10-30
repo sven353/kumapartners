@@ -6,6 +6,15 @@ Disallow: /new.html
 Disallow: /offsite-v2.html
 Disallow: /offsite-partners-v2.html
 Disallow: /partners-v2.html
+Disallow: /insights-index-v2.html
+Disallow: /insight-strategic-planning-retreat-ceo-burnout-v2.html
+Disallow: /insight-c-suite-friction-mediation-v2.html
+Disallow: /insight-90-day-execution-compact-v2.html
+Disallow: /insight-barcelona-executive-offsite-guide-v2.html
+Disallow: /insight-executive-offsite-vs-leadership-retreat-v2.html
+Disallow: /insight-how-to-plan-executive-committee-offsite-v2.html
+Disallow: /insight-company-momentum-remote-teams-v2.html
+Disallow: /insight-corporate-retreat-teams-in-change-v2.html
 Disallow: /index-v2.html
 Disallow: /friction-scan-v2.html
 Disallow: /alignment-sprint-v2.html
