@@ -17,7 +17,9 @@ The files sit at the top level of the repo under their storage names and are sho
 
 The old pages (`index.html`, `friction-scan.html`, `alignment-sprint.html`, `privacy.html`, `legal.html`, `partners.html`, `KOS.html`, `leadership-friction-scan.html`, `coordination-tax.html`, `cofounder-alignment.html`, `styles.css`, `site.js`, `new.html`, `offsite/index.html`, `offsite/partners.html`) are kept only for rollback and are not served. To roll one page back, delete its two lines in `_redirects`.
 
-Still on the old design: `offsite/insights/*`, `offsite/configurator.html` (use `offsite/styles.css`), `execution-diagnostic.html`, `ai-or-human.html`, `constellr-review.html`, `next-offsites.html`, `success.html`.
+Retired: the offsite insights (`/offsite/insights/` and its articles 301 to `/offsite/`; the old files in `offsite/insights/` can be deleted).
+
+Still on the old design: `offsite/configurator.html` (use `offsite/styles.css`), `execution-diagnostic.html`, `ai-or-human.html`, `constellr-review.html`, `next-offsites.html`, `success.html`.
 
 ## The landing page is locked
 

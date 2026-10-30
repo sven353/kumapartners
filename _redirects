@@ -66,3 +66,8 @@
 # The Spanish pages were removed on 30 Oct 2026. Old addresses go to the home page.
 /es         /    301!
 /es/*       /    301!
+
+# The offsite insights are retired (30 Oct 2026). The index and the eight articles go to the offsite page for good.
+# The old files stay in offsite/insights/ and can be deleted later.
+/offsite/insights       /offsite/    301!
+/offsite/insights/*     /offsite/    301!
