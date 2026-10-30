@@ -52,7 +52,10 @@
       "areaServed": "Worldwide",
       "founder": {
         "@id": "https://www.kuma.partners/#sven-mulfinger"
-      }
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/92525300/"
+      ]
     },
     {
       "@type": "Person",
@@ -133,6 +136,53 @@ try{if(!v){v=localStorage.getItem('lfs_variant');}}catch(e){}
 if(v!=='A'&&v!=='B'){v=Math.random()<0.5?'B':'A';}
 if(!forced){try{localStorage.setItem('lfs_variant',v);}catch(e){}}
 d.setAttribute('data-lfs-variant',v);})();
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "@id": "https://www.kuma.partners/leadership-friction-scan#webpage",
+      "url": "https://www.kuma.partners/leadership-friction-scan",
+      "name": "Leadership Friction Scan | Kuma Partners",
+      "description": "A 12-question diagnostic of where your leadership team loses speed: decision velocity, focus, candour and cadence. Three minutes, instant result.",
+      "isPartOf": {
+        "@type": "WebSite",
+        "@id": "https://www.kuma.partners/#website",
+        "url": "https://www.kuma.partners/",
+        "name": "Kuma Partners"
+      },
+      "publisher": {
+        "@type": "ProfessionalService",
+        "@id": "https://www.kuma.partners/#organization",
+        "name": "Kuma Partners",
+        "url": "https://www.kuma.partners/"
+      },
+      "breadcrumb": {
+        "@id": "https://www.kuma.partners/leadership-friction-scan#breadcrumb"
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://www.kuma.partners/leadership-friction-scan#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Kuma Partners",
+          "item": "https://www.kuma.partners/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Leadership Friction Scan (self-assessment)",
+          "item": "https://www.kuma.partners/leadership-friction-scan"
+        }
+      ]
+    }
+  ]
+}
 </script>
 </head>
 <body class="suite kx-page">

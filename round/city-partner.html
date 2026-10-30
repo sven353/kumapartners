@@ -24,92 +24,95 @@
 <link rel="stylesheet" href="/round/round.css">
 <script type="application/ld+json">
 {
- "@context": "https://schema.org",
- "@graph": [
-  {
-   "@type": "Organization",
-   "@id": "https://www.kuma.partners/#organization",
-   "name": "Kuma Partners",
-   "url": "https://www.kuma.partners/",
-   "email": "contact@kuma.partners",
-   "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Barcelona",
-    "addressCountry": "ES"
-   }
-  },
-  {
-   "@type": "WebPage",
-   "@id": "https://www.kuma.partners/round/city-partner#page",
-   "url": "https://www.kuma.partners/round/city-partner",
-   "name": "Become a City Managing Partner of The Round",
-   "description": "Former CEOs, founders and executive coaches can launch The Round, a confidential CEO peer board, in their own city under a licence from Kuma Partners.",
-   "isPartOf": {
-    "@id": "https://www.kuma.partners/#organization"
-   },
-   "about": {
-    "@type": "Service",
-    "name": "The Round city licence",
-    "provider": {
-     "@id": "https://www.kuma.partners/#organization"
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://www.kuma.partners/#organization",
+      "name": "Kuma Partners",
+      "url": "https://www.kuma.partners/",
+      "email": "contact@kuma.partners",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Barcelona",
+        "addressCountry": "ES"
+      },
+      "sameAs": [
+        "https://www.linkedin.com/company/92525300/"
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "https://www.kuma.partners/round/city-partner#page",
+      "url": "https://www.kuma.partners/round/city-partner",
+      "name": "Become a City Managing Partner of The Round",
+      "description": "Former CEOs, founders and executive coaches can launch The Round, a confidential CEO peer board, in their own city under a licence from Kuma Partners.",
+      "isPartOf": {
+        "@id": "https://www.kuma.partners/#organization"
+      },
+      "about": {
+        "@type": "Service",
+        "name": "The Round city licence",
+        "provider": {
+          "@id": "https://www.kuma.partners/#organization"
+        }
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://www.kuma.partners/round/city-partner#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "How much time does it take?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "A cohort runs on a monthly rhythm: one half-day board, sparring between boards and two retreats a year, plus recruiting and preparation. We agree what that means for your calendar in the first conversation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Do I have to give up my other work?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Not necessarily. The monthly rhythm needs protected time, and the first conversation is where we work out whether it fits alongside what you do today."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can I work with my own members as a coach?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes, with the same transparency the Charter asks of every member. You tell the cohort about any work you do with a member, and you never sell to the room."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Which cities are available?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Open cities are confirmed in the first conversation. Tell us yours in the form below."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What does the licence cover?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The right to run The Round in your city, together with the Charter, the membership agreement, the facilitation protocols, the ledger, the candidate review process, your city page and onboarding with Sven."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How is confidentiality protected?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Every cohort works under the Chatham House Rule and every member signs The Round Charter. Sitting members review each candidate, and direct competitors are never admitted to the same cohort."
+          }
+        }
+      ]
     }
-   }
-  },
-  {
-   "@type": "FAQPage",
-   "@id": "https://www.kuma.partners/round/city-partner#faq",
-   "mainEntity": [
-    {
-     "@type": "Question",
-     "name": "How much time does it take?",
-     "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "A cohort runs on a monthly rhythm: one half-day board, sparring between boards and two retreats a year, plus recruiting and preparation. We agree what that means for your calendar in the first conversation."
-     }
-    },
-    {
-     "@type": "Question",
-     "name": "Do I have to give up my other work?",
-     "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "Not necessarily. The monthly rhythm needs protected time, and the first conversation is where we work out whether it fits alongside what you do today."
-     }
-    },
-    {
-     "@type": "Question",
-     "name": "Can I work with my own members as a coach?",
-     "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "Yes, with the same transparency the Charter asks of every member. You tell the cohort about any work you do with a member, and you never sell to the room."
-     }
-    },
-    {
-     "@type": "Question",
-     "name": "Which cities are available?",
-     "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "Open cities are confirmed in the first conversation. Tell us yours in the form below."
-     }
-    },
-    {
-     "@type": "Question",
-     "name": "What does the licence cover?",
-     "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "The right to run The Round in your city, together with the Charter, the membership agreement, the facilitation protocols, the ledger, the candidate review process, your city page and onboarding with Sven."
-     }
-    },
-    {
-     "@type": "Question",
-     "name": "How is confidentiality protected?",
-     "acceptedAnswer": {
-      "@type": "Answer",
-      "text": "Every cohort works under the Chatham House Rule and every member signs The Round Charter. Sitting members review each candidate, and direct competitors are never admitted to the same cohort."
-     }
-    }
-   ]
-  }
- ]
+  ]
 }
 </script>
 </head>
