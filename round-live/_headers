@@ -1,0 +1,32 @@
+# No site-wide X-Robots-Tag: Netlify adds /* headers to the 301s from
+# theround.kuma.partners too, and a noindex on a redirect tells Google to drop
+# the URL instead of passing it on. The ledger pages carry their own noindex
+# (meta tag plus the rules below).
+/*
+  X-Frame-Options: DENY
+  X-XSS-Protection: 1; mode=block
+  X-Content-Type-Options: nosniff
+  Referrer-Policy: strict-origin-when-cross-origin
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), interest-cohort=()
+
+/assets/*
+  Cache-Control: public, max-age=604800
+
+/round/assets/*
+  Cache-Control: public, max-age=604800
+
+/ledger.html
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-cache
+
+/ledger
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-cache
+
+/ledger-data/*
+  X-Robots-Tag: noindex, nofollow
+  Cache-Control: no-store
+
+/tools/*
+  X-Robots-Tag: noindex, nofollow
