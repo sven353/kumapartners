@@ -19,9 +19,9 @@
 /offsite/index.html   /new.html   200!
 
 # The Round lives at /round/ (moved 28 Oct 2026 from theround.kuma.partners, then from /the-round/
-# on 30 Oct 2026). The old addresses and the convenience alias 301 to the new page. Do not add a
+# on 30 Oct 2026). The old addresses and the convenience alias 301 to the new page. Deep paths under the old folders also land on /round/, because the old subpages no longer exist. Do not add a
 # rule from /round to /round/: Netlify treats both as the same path, so it would redirect to itself.
 /the-round     /round/          301!
-/the-round/*   /round/:splat    301!
+/the-round/*   /round/          301!
 /theround      /round/          301!
-/theround/*    /round/:splat    301!
+/theround/*    /round/          301!
