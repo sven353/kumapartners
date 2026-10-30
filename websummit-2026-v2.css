@@ -86,3 +86,5 @@
 .ws-panel p{margin-top:10px}
 .ws-body>p:not(.ws-kicker){margin-top:10px}
 @media (max-width:720px){.ws-top{flex-direction:row;align-items:center}.ws-off{font-size:11px}.ws-dot{display:none}.ws-top .chip{flex-direction:column;align-items:flex-start;gap:2px;border-radius:18px;padding:8px 14px}}
+
+.ws-vtop{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%}
