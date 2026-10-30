@@ -31,3 +31,9 @@
 /the-round/*   /round/          301!
 /theround      /round/          301!
 /theround/*    /round/          301!
+
+# Partners page in the new design (go-live 30 Oct 2026). The file partners-v2.html (with partners-v2.css,
+# index-v2.css, index-v2.js and kuma.css) is shown at /partners and /partners.html; the address stays the same.
+# To go back: delete these two lines, the old partners.html is still in the repo and serves itself again.
+/partners        /partners-v2.html    200!
+/partners.html   /partners-v2.html    200!

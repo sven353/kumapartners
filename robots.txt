@@ -5,6 +5,7 @@ Allow: /
 Disallow: /new.html
 Disallow: /offsite-v2.html
 Disallow: /offsite-partners-v2.html
+Disallow: /partners-v2.html
 
 # Explicit AI Search & Assistant Crawlers
 User-agent: GPTBot
