@@ -37,3 +37,30 @@
 # To go back: delete these two lines, the old partners.html is still in the repo and serves itself again.
 /partners        /partners-v2.html    200!
 /partners.html   /partners-v2.html    200!
+
+# Main site in the new design (go-live 30 Oct 2026). Each public address shows its -v2 file (internal rewrite, the
+# address does not change). The old files (index.html, friction-scan.html, alignment-sprint.html, privacy.html,
+# legal.html, partners.html, KOS.html, leadership-friction-scan.html, coordination-tax.html, cofounder-alignment.html)
+# stay in the repo for rollback only. To go back for one page, delete its two lines.
+/                           /index-v2.html                       200!
+/index.html                 /index-v2.html                       200!
+/friction-scan              /friction-scan-v2.html               200!
+/friction-scan.html         /friction-scan-v2.html               200!
+/alignment-sprint           /alignment-sprint-v2.html            200!
+/alignment-sprint.html      /alignment-sprint-v2.html            200!
+/privacy                    /privacy-v2.html                     200!
+/privacy.html               /privacy-v2.html                     200!
+/legal                      /legal-v2.html                       200!
+/legal.html                 /legal-v2.html                       200!
+/KOS                        /KOS-v2.html                         200!
+/KOS.html                   /KOS-v2.html                         200!
+/leadership-friction-scan       /leadership-friction-scan-v2.html    200!
+/leadership-friction-scan.html  /leadership-friction-scan-v2.html    200!
+/coordination-tax           /coordination-tax-v2.html            200!
+/coordination-tax.html      /coordination-tax-v2.html            200!
+/cofounder-alignment        /cofounder-alignment-v2.html         200!
+/cofounder-alignment.html   /cofounder-alignment-v2.html         200!
+
+# The Spanish pages were removed on 30 Oct 2026. Old addresses go to the home page.
+/es         /    301!
+/es/*       /    301!

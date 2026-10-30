@@ -15,7 +15,7 @@ import { fileURLToPath } from 'node:url';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const lockPath = join(root, 'design-lock.json');
-const LOCKED = ['index.html', 'styles.css', 'site.js'];
+const LOCKED = ['index-v2.html', 'index-v2.css', 'index-v2.js', 'kuma.css'];
 const sha = (f) => createHash('sha256').update(readFileSync(join(root, f))).digest('hex');
 
 if (process.argv.includes('--update')) {

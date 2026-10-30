@@ -6,6 +6,15 @@ Disallow: /new.html
 Disallow: /offsite-v2.html
 Disallow: /offsite-partners-v2.html
 Disallow: /partners-v2.html
+Disallow: /index-v2.html
+Disallow: /friction-scan-v2.html
+Disallow: /alignment-sprint-v2.html
+Disallow: /privacy-v2.html
+Disallow: /legal-v2.html
+Disallow: /KOS-v2.html
+Disallow: /leadership-friction-scan-v2.html
+Disallow: /coordination-tax-v2.html
+Disallow: /cofounder-alignment-v2.html
 
 # Explicit AI Search & Assistant Crawlers
 User-agent: GPTBot
