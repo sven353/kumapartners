@@ -13,6 +13,9 @@
 /assets/*
   Cache-Control: public, max-age=604800
 
+/round/assets/*
+  Cache-Control: public, max-age=604800
+
 /ledger.html
   X-Robots-Tag: noindex, nofollow
   Cache-Control: no-cache

@@ -92,8 +92,13 @@
     <priority>0.6</priority>
   </url>
   <url>
-    <loc>https://www.kuma.partners/the-round/</loc>
+    <loc>https://www.kuma.partners/round/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://www.kuma.partners/round/city-partner</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
   </url>
 </urlset>

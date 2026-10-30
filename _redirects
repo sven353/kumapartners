@@ -18,9 +18,10 @@
 /offsite/             /new.html   200!
 /offsite/index.html   /new.html   200!
 
-# The Round (moved 28 Oct 2026 from theround.kuma.partners, which now 301s here).
-# The page lives in the /the-round/ folder and is served directly. The address without
-# a hyphen is a convenience alias. Do not add a rule from /the-round to /the-round/:
-# Netlify treats both as the same path, so it would redirect to itself.
-/theround     /the-round/          301!
-/theround/*   /the-round/:splat    301!
+# The Round lives at /round/ (moved 28 Oct 2026 from theround.kuma.partners, then from /the-round/
+# on 30 Oct 2026). The old addresses and the convenience alias 301 to the new page. Do not add a
+# rule from /round to /round/: Netlify treats both as the same path, so it would redirect to itself.
+/the-round     /round/          301!
+/the-round/*   /round/:splat    301!
+/theround      /round/          301!
+/theround/*    /round/:splat    301!
