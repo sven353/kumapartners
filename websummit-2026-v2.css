@@ -1,0 +1,43 @@
+/* Web Summit Lisbon 2026 landing page (staged as websummit-2026-v2.html). */
+.ws-hero .h1{font-size:72px;max-width:12em}
+.ws-hero .hero-copy{max-width:820px}
+.ws-cta{margin-top:36px}
+.ws-prog,.ws-info,.ws-hosts{padding-block:112px}
+.ws-head{display:grid;justify-items:start;gap:20px;margin-bottom:48px}
+.ws-sub{font-size:18px;max-width:36em;color:var(--muted-l)}
+.dark .ws-sub{color:var(--muted-d)}
+.ws-list{list-style:none;margin:0;padding:0;display:grid;gap:0}
+.ws-row{display:grid;grid-template-columns:150px 1fr auto;gap:32px;align-items:start;padding:32px;border-radius:28px;background:color-mix(in srgb,var(--paper) 35%,#fff);border:1px solid var(--line-l)}
+.ws-time{font-size:15px;color:var(--muted-l);line-height:1.5}
+.ws-time span{display:block;font-family:var(--font-display);font-weight:700;font-size:40px;letter-spacing:-0.03em;color:var(--ink);line-height:1}
+.ws-kicker{font-size:14px;font-weight:600;letter-spacing:.04em;text-transform:uppercase;color:var(--lav-deep);margin-bottom:10px}
+.ws-body .h3{font-size:30px;line-height:1.1;letter-spacing:-0.02em}
+.ws-body>p:not(.ws-kicker){margin-top:14px;font-size:17px;color:var(--muted-l);max-width:42em;line-height:1.55}
+.ws-who{display:flex;align-items:center;gap:16px;margin-top:22px}
+.ws-who p{font-size:15px;color:var(--muted-l);line-height:1.4}
+.ws-who strong,.ws-hostcard strong{display:block;font-family:var(--font-display);font-weight:600;font-size:17px;color:var(--ink);letter-spacing:-0.01em}
+.ws-ph{width:72px;height:72px;min-width:72px;aspect-ratio:1;border-radius:50%;object-fit:cover;object-position:50% 20%;filter:grayscale(1);flex:none;background:var(--lav)}
+.ws-act{align-self:center}
+.ws-soon{display:inline-flex;align-items:center;height:52px;padding:0 22px;border-radius:100px;border:1px dashed var(--line-l);color:var(--muted-l);font-size:15px;white-space:nowrap}
+.ws-break{padding:14px 0;text-align:center;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted-l)}
+.ws-row.ws-eve{margin-top:20px;background:var(--ink);border-color:transparent;color:var(--white)}
+.ws-eve .ws-time{color:var(--muted-d)}.ws-eve .ws-time span{color:var(--white)}
+.ws-eve .ws-kicker{color:var(--lav)}
+.ws-eve .ws-body>p:not(.ws-kicker){color:var(--muted-d)}
+.ws-eve .ws-host{font-size:15px}
+.ws-cols{display:grid;grid-template-columns:1.1fr .9fr;gap:72px}
+.ws-cols>div{display:grid;gap:20px;justify-items:start;align-content:start}
+.ws-cols .h2{font-size:52px}
+.ws-ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:0;width:100%}
+.ws-ul li{padding:16px 0;border-top:1px solid var(--line-d);font-size:19px}
+.ws-ul li:last-child{border-bottom:1px solid var(--line-d)}
+.ws-venue{padding:36px;border-radius:28px;background:var(--card);border:1px solid var(--line-d)}
+.ws-venue p{color:var(--muted-d);font-size:17px;line-height:1.55}
+.ws-link{color:var(--white);text-underline-offset:4px}
+.ws-hostgrid{display:flex;flex-wrap:wrap;gap:20px}
+.ws-hostcard{display:flex;align-items:center;gap:18px;padding:20px 28px 20px 20px;border-radius:100px;background:color-mix(in srgb,var(--paper) 35%,#fff);border:1px solid var(--line-l)}
+.ws-hostcard p{font-size:15px;color:var(--muted-l);line-height:1.4}
+.ws-about{margin-top:36px;max-width:40em;font-size:17px;color:var(--muted-l);line-height:1.6}
+.ws-about a{color:var(--ink);text-underline-offset:4px}
+@media (max-width:1000px){.ws-row{grid-template-columns:1fr;gap:18px;padding:26px}.ws-act{align-self:start}.ws-cols{grid-template-columns:1fr;gap:48px}.ws-time span{display:inline;margin-right:8px;font-size:30px}}
+@media (max-width:720px){.ws-hero .h1{font-size:44px}.ws-prog,.ws-info,.ws-hosts{padding-block:72px}.ws-body .h3{font-size:25px}.ws-cols .h2{font-size:38px}.ws-venue{padding:26px}.ws-hostcard{border-radius:28px}.ws-act .btn{width:100%;justify-content:space-between}}

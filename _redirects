@@ -19,6 +19,9 @@ http://www.kumapartners.eu/*     https://www.kuma.partners/:splat    301!
 /privacy.html                     /privacy                  301!
 /legal-v2.html                    /legal                    301!
 /legal.html                       /legal                    301!
+/websummit-2026-v2.html           /websummit-2026           301!
+/websummit-2026.html              /websummit-2026           301!
+/websummit                        /websummit-2026           301!
 /KOS-v2.html                      /KOS                      301!
 /KOS.html                         /KOS                      301!
 /kos.html                         /KOS                      301!
@@ -89,6 +92,7 @@ http://www.kumapartners.eu/*     https://www.kuma.partners/:splat    301!
 /alignment-sprint           /alignment-sprint-v2.html            200!
 /privacy                    /privacy-v2.html                     200!
 /legal                      /legal-v2.html                       200!
+/websummit-2026             /websummit-2026-v2.html              200!
 /KOS                        /KOS-v2.html                         200!
 /kos                        /KOS-v2.html                         200!
 /leadership-friction-scan       /leadership-friction-scan-v2.html    200!
