@@ -13,5 +13,6 @@
 # contact, friction-scan, partner-debrief (index.html), constellr-debrief-v5
 # (constellr-review.html), offsite-blueprint (offsite/index.html and
 # offsite/configurator.html, hidden copies because app.js renders the real
-# form), discovery-call (offsite/partners.html) and sanctuary-application
-# (next-offsites.html, es/index.html).
+# form), offsite-conversation (offsite-v2.html and new.html), offsite-partners-conversation
+# (offsite-partners-v2.html), discovery-call (offsite/partners.html, no longer served) and
+# sanctuary-application (next-offsites.html, es/index.html).

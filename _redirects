@@ -9,14 +9,20 @@
 # rewrite to a file, never a redirect, so it cannot loop.
 /offsite/configurator   /offsite/configurator.html   200
 
-# Offsite page. The page file sits at the top level of the repo (new.html, new.css) and is
-# shown at /offsite/ through forced 200 rewrites (internal, the address stays /offsite/).
+# Offsite pages. The new design sits at the top level of the repo (offsite-v2.html with
+# offsite-v2.css and offsite-v2.js, and offsite-partners-v2.html with offsite-partners-v2.css
+# and offsite-partners-v2.js). Forced 200 rewrites show them at /offsite/ and
+# /offsite/partners.html (internal, the address stays the same). The old files
+# (new.html, offsite/index.html, offsite/partners.html) stay in the repo for now and are not served.
 # The old draft address /offsite/new sends people to /offsite/ for good.
-# To bring back the previous page (offsite/index.html), delete the two /offsite/ rewrite lines.
-/offsite/new          /offsite/   301!
-/offsite/new.html     /offsite/   301!
-/offsite/             /new.html   200!
-/offsite/index.html   /new.html   200!
+# To go back to the previous design: point the /offsite/ rules at /new.html and delete the two
+# partners rules, so /offsite/partners.html serves its own file again.
+/offsite/new                /offsite/                    301!
+/offsite/new.html           /offsite/                    301!
+/offsite/                   /offsite-v2.html             200!
+/offsite/index.html         /offsite-v2.html             200!
+/offsite/partners           /offsite-partners-v2.html    200!
+/offsite/partners.html      /offsite-partners-v2.html    200!
 
 # The Round lives at /round/ (moved 28 Oct 2026 from theround.kuma.partners, then from /the-round/
 # on 30 Oct 2026). The old addresses and the convenience alias 301 to the new page. Deep paths under the old folders also land on /round/, because the old subpages no longer exist. Do not add a

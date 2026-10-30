@@ -45,6 +45,8 @@ Why this is enough: the landing page loads only `styles.css` and `site.js`. A pa
 
 `offsite/`, `es/` and `round/` have their own stylesheets. Do not change them in a landing or subpage task.
 
+The offsite pages in the new design live at the top level of the repo: `offsite-v2.html` (shown at `/offsite/`) and `offsite-partners-v2.html` (shown at `/offsite/partners.html`), with their own `offsite-v2.css`, `offsite-v2.js`, `offsite-partners-v2.css` and `offsite-partners-v2.js`. Forced 200 rewrites in `_redirects` do the mapping, and `robots.txt` keeps the storage names out of the index. `new.html`, `offsite/index.html` and `offsite/partners.html` are the previous versions, kept only for rollback and not served. Offsite insight pages and the configurator still use `offsite/styles.css`.
+
 `round/` is The Round by Kuma Partners (at `/round/` since 30 Oct 2026; it moved here on 28 Oct 2026 from theround.kuma.partners and from `/the-round/`, both of which 301 here). Its pages (`index.html`, `city-partner.html`) use only files inside the folder, with absolute `/round/...` paths, one shared `round.css` and one `round.js`. Its member ledger is a separate Netlify project at ledger.kuma.partners, code in the private repo sven353/theround. Never copy ledger code, functions or ledger data into this public repo. Not linked from the landing page yet, on purpose.
 
 ## Fonts

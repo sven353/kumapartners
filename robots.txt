@@ -1,7 +1,10 @@
 User-agent: *
 Allow: /
-# The offsite page is served at /offsite/; /new.html is the same file under its storage name.
+# The offsite pages are served at /offsite/ and /offsite/partners.html; the files below are the same
+# pages under their storage names.
 Disallow: /new.html
+Disallow: /offsite-v2.html
+Disallow: /offsite-partners-v2.html
 
 # Explicit AI Search & Assistant Crawlers
 User-agent: GPTBot
