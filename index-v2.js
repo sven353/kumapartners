@@ -40,8 +40,9 @@
     return {select: select, tabs: tabs};
   }
   var groups = $$('[role=tablist]').map(tabGroup);
-  var engage = groups[0];
+  var engage = document.getElementById('et-lead') ? groups[0] : null;
   function routeHash(){
+    if (!engage) return;
     var h = location.hash, map = {'#offsites': 1, '#ai-transition': 2, '#engagements': 0};
     if (map.hasOwnProperty(h)){
       engage.select(engage.tabs[map[h]]);
@@ -61,10 +62,10 @@
   var COOKIE_KEY = 'kuma_cookie_consent', cookie = document.getElementById('cookie');
   function stored(){ try { return localStorage.getItem(COOKIE_KEY); } catch (e) { return null; } }
   function choose(v){ try { localStorage.setItem(COOKIE_KEY, v); } catch (e) {} cookie.classList.remove('show'); }
-  if (!stored()) setTimeout(function(){ cookie.classList.add('show'); }, 400);
-  document.getElementById('cookie-accept').addEventListener('click', function(){ choose('all'); });
-  document.getElementById('cookie-essential').addEventListener('click', function(){ choose('essential'); });
-  $$('[data-cookie-prefs]').forEach(function(b){ b.addEventListener('click', function(){ cookie.classList.add('show'); }); });
+  if (cookie && !stored()) setTimeout(function(){ cookie.classList.add('show'); }, 400);
+  if (cookie) document.getElementById('cookie-accept').addEventListener('click', function(){ choose('all'); });
+  if (cookie) document.getElementById('cookie-essential').addEventListener('click', function(){ choose('essential'); });
+  $$('[data-cookie-prefs]').forEach(function(b){ b.addEventListener('click', function(){ if (cookie) cookie.classList.add('show'); }); });
 
   /* shared form helpers */
   var MIN_FILL_MS = 2500;
@@ -121,11 +122,12 @@
   /* contact form: intake track relabels the button */
   var contact = document.getElementById('contact-form');
   function setTrack(track){
+    if (!contact) return;
     $$('input[name=intake_track]', contact).forEach(function(r){ r.checked = r.getAttribute('data-track') === track; });
     var l = $('[data-btn-label]', contact), b = $('[data-submit]', contact);
     if (l && !b.disabled) l.textContent = LABELS[track] || LABELS.scan;
   }
-  $$('input[name=intake_track]', contact).forEach(function(r){
+  if (contact) $$('input[name=intake_track]', contact).forEach(function(r){
     r.addEventListener('change', function(){ if (r.checked) setTrack(r.getAttribute('data-track')); });
   });
   $$('a[data-track]').forEach(function(a){ a.addEventListener('click', function(){ setTrack(a.getAttribute('data-track')); }); });

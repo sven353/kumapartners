@@ -1,0 +1,15 @@
+/* Partners page (staged as partners-v2.html). Loads after kuma.css, index-v2.css and offsite-partners-v2.css. */
+.pexp{display:flex;flex-wrap:wrap;align-items:center;gap:8px 18px;margin-top:16px;padding-top:14px;border-top:1px solid var(--line-l)}
+.pexp>span:first-child{flex-basis:100%;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--muted-l)}
+.pexp img{height:16px;width:auto;max-width:90px;object-fit:contain;filter:grayscale(1);opacity:.7}
+.pexp .pn{font-family:var(--font-display);font-weight:600;font-size:13px;color:var(--muted-l)}
+.bcard .pexp{margin-inline:10px}
+.bench-dark .bcard{background:var(--paper)}
+.mlight .mcard{background:#fff;border:1px solid var(--line-l);color:var(--ink)}
+.mlight .mcard:hover{background:#fff;transform:none}
+.mlight .mcard p:not(.mmeta){color:var(--muted-l)}
+.mlight .mcard .chip{background:color-mix(in srgb,var(--lav-deep) 13%,transparent);color:var(--lav-deep)}
+.matching.lp-sec .head-split{padding-bottom:48px}
+.conviction.lp-sec{padding:120px 0}
+.conviction .sub{max-width:44em}
+@media (max-width:720px){.conviction.lp-sec{padding:88px 0}}
