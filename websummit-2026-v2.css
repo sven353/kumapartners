@@ -27,7 +27,7 @@
 .ws-act{align-self:start;padding-top:6px}
 .ws-soon{display:inline-flex;align-items:center;height:52px;padding:0 22px;border-radius:100px;border:1px dashed var(--line-l);color:var(--muted-l);font-size:15px;white-space:nowrap}
 .ws-break{padding:14px 0;text-align:center;font-size:13px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted-l)}
-.ws-row.ws-eve{margin-top:20px;background:var(--ink);border-color:transparent;color:var(--white)}
+.ws-row.ws-eve{margin-top:20px;background:linear-gradient(90deg,rgba(15,14,19,.93) 0%,rgba(15,14,19,.84) 60%,rgba(15,14,19,.74) 100%),url(/assets/websummit-evening.jpg) center 30%/cover,var(--ink);border-color:transparent;color:var(--white)}
 .ws-eve .ws-time{color:var(--muted-d)}.ws-eve .ws-time span{color:var(--white)}
 .ws-eve .ws-kicker{color:var(--lav)}
 .ws-eve .ws-body>p:not(.ws-kicker){color:var(--muted-d)}
