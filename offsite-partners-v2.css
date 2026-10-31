@@ -55,3 +55,5 @@
   .clead{font-size:21px}
 }
 @media (max-width:520px){.bgrid{grid-template-columns:1fr}}
+
+@media (max-width:720px){.hero.hero-sm .hero-bg img{object-position:74% 50%}}
