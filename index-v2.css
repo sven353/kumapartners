@@ -264,5 +264,6 @@ body.dlg-open{overflow:hidden}
 .lp-q blockquote p{font-size:17px;line-height:1.5;color:var(--ink)}
 .lp-q figcaption{display:grid;gap:3px;padding-top:16px;border-top:1px solid var(--line-l)}
 .lp-q figcaption b{font-family:var(--font-display);font-weight:600;font-size:16px}
-.lp-q figcaption span{font-size:14px;line-height:1.4;color:var(--muted-l)}
+.lp-q figcaption span{font-size:14px;line-height:1.4;color:var(--muted-l);min-height:2.8em}
 @media (max-width:1000px){.lp-qgrid{grid-template-columns:1fr}.lp-q{padding:22px}}
+#voices .wrap{display:flow-root}
