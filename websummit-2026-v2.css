@@ -106,3 +106,23 @@
 .ws-prog{padding-top:96px}
 @media (max-width:1000px){.ws-whygrid{grid-template-columns:1fr;gap:48px}.ws-fig1{justify-self:center}}
 @media (max-width:720px){.ws-why{padding-block:72px}.ws-whytext .h2{font-size:38px}.ws-prog{padding-top:72px}}
+
+/* Compact infographic preview and lightbox */
+.ws-panel h4{margin-top:28px}
+.ws-zoom{position:relative;display:block;width:100%;padding:0;margin:0;border:1px solid var(--line-l);border-radius:16px;overflow:hidden;background:#fff;cursor:zoom-in;box-shadow:0 4px 12px rgba(15,14,19,.06);font:inherit;transition:transform .25s}
+.ws-zoom:hover{transform:translateY(-2px)}
+.ws-zoom:focus-visible{outline:2px solid var(--lav-deep);outline-offset:4px}
+.ws-zoom img{display:block;width:100%;height:auto}
+.ws-panel .ws-fig2{max-width:360px;margin:16px 0 4px}
+.ws-panel .ws-fig2 .ws-zoom{max-height:380px}
+.ws-panel .ws-fig2 .ws-zoom img{height:380px;object-fit:cover;object-position:top}
+.ws-zoom-badge{position:absolute;right:10px;bottom:10px;display:inline-flex;align-items:center;gap:6px;padding:7px 13px;border-radius:100px;background:rgba(15,14,19,.88);color:#fff;font-size:12px;font-weight:500;line-height:1}
+.ws-zoom-badge svg{width:12px;height:12px}
+.ws-lb{border:0;padding:0;background:transparent;max-width:none;max-height:none;width:100%;height:100%;color:#fff}
+.ws-lb::backdrop{background:rgba(15,14,19,.92);backdrop-filter:blur(4px)}
+.ws-lb[open]{display:block}
+.ws-lb-scroll{position:absolute;inset:0;overflow:auto;display:flex;justify-content:center;align-items:flex-start;padding:64px 16px 32px;touch-action:pan-x pan-y pinch-zoom;-webkit-overflow-scrolling:touch}
+.ws-lb-scroll img{display:block;width:100%;max-width:760px;height:auto;border-radius:12px;background:#fff}
+.ws-lb-x{position:fixed;top:14px;right:16px;z-index:2;width:44px;height:44px;border-radius:50%;border:1px solid rgba(255,255,255,.3);background:rgba(15,14,19,.85);color:#fff;font-size:18px;cursor:pointer;line-height:1}
+.ws-lb-x:hover{background:var(--lav);color:var(--ink)}
+@media (max-width:720px){.ws-panel .ws-fig2{max-width:none}}
