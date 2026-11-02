@@ -88,3 +88,23 @@
 @media (max-width:720px){.ws-top{flex-direction:row;align-items:center}.ws-off{font-size:11px}.ws-dot{display:none}.ws-top .chip{flex-direction:column;align-items:flex-start;gap:2px;border-radius:18px;padding:8px 14px}}
 
 .ws-vtop{display:flex;align-items:center;justify-content:space-between;gap:16px;width:100%}
+
+/* Infographics */
+.ws-why{padding-block:112px;border-bottom:1px solid var(--line-l)}
+.ws-whygrid{display:grid;grid-template-columns:1.05fr .95fr;gap:72px;align-items:center}
+.ws-whytext{display:grid;gap:22px;justify-items:start}
+.ws-whytext .h2{font-size:52px}
+.ws-whytext p{font-size:18px;line-height:1.6;color:var(--muted-l);max-width:34em}
+.ws-fig{margin:0}
+.ws-fig a{display:block;border-radius:24px;overflow:hidden;border:1px solid var(--line-l);background:#fff;transition:transform .25s}
+.ws-fig a:hover{transform:translateY(-2px)}
+.ws-fig img{display:block;width:100%;height:auto}
+.ws-fig1{max-width:480px;justify-self:end;width:100%}
+.ws-figrow{list-style:none;margin:20px 0 0;display:flex;justify-content:center}
+.ws-fig2{max-width:640px;width:100%}
+.ws-fig2 figcaption{margin:0 0 14px;font-size:15px;line-height:1.5;color:var(--muted-l)}
+.ws-fig2 figcaption strong{display:block;font-family:var(--font-display);font-weight:600;font-size:17px;color:var(--ink);letter-spacing:-0.01em;margin-bottom:2px}
+.ws-prog{padding-top:96px}
+.ws-figrow+.ws-break{padding-top:34px}
+@media (max-width:1000px){.ws-whygrid{grid-template-columns:1fr;gap:48px}.ws-fig1{justify-self:center}}
+@media (max-width:720px){.ws-why{padding-block:72px}.ws-whytext .h2{font-size:38px}.ws-prog{padding-top:72px}}
