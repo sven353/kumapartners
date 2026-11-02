@@ -1,5 +1,5 @@
 /* Web Summit Lisbon 2026 landing page (staged as websummit-2026-v2.html). */
-.hero.lp-hero.ws-hero{background:linear-gradient(180deg,rgba(15,14,19,.78),rgba(15,14,19,.9)),url(/assets/websummit-strip-hd2.webp) center 35%/cover,var(--ink)}
+.hero.lp-hero.ws-hero{background:linear-gradient(180deg,rgba(15,14,19,.78),rgba(15,14,19,.9)),url(/assets/websummit-strip-hd3.webp) center 35%/cover,var(--ink)}
 .ws-top{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-bottom:26px}
 .ws-top .chip{display:inline-flex;align-items:center;gap:12px}
 .ws-off{font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:12px}
