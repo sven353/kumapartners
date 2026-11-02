@@ -251,3 +251,6 @@ body.dlg-open{overflow:hidden}
 /* subpages */
 .hero.sub-hero{min-height:clamp(480px,66svh,680px)}
 .sub-hero .hero-inner{padding-top:150px}
+
+/* partner strip: lavender band to separate it from the approach strip */
+#partners.sec.light{background:color-mix(in srgb,var(--lav) 24%,var(--paper))}
