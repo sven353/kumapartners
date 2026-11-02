@@ -100,11 +100,9 @@
 .ws-fig a:hover{transform:translateY(-2px)}
 .ws-fig img{display:block;width:100%;height:auto}
 .ws-fig1{max-width:480px;justify-self:end;width:100%}
-.ws-figrow{list-style:none;margin:20px 0 0;display:flex;justify-content:center}
-.ws-fig2{max-width:640px;width:100%}
+.ws-panel .ws-fig2{max-width:560px;width:100%;margin:24px 0 4px}
 .ws-fig2 figcaption{margin:0 0 14px;font-size:15px;line-height:1.5;color:var(--muted-l)}
 .ws-fig2 figcaption strong{display:block;font-family:var(--font-display);font-weight:600;font-size:17px;color:var(--ink);letter-spacing:-0.01em;margin-bottom:2px}
 .ws-prog{padding-top:96px}
-.ws-figrow+.ws-break{padding-top:34px}
 @media (max-width:1000px){.ws-whygrid{grid-template-columns:1fr;gap:48px}.ws-fig1{justify-self:center}}
 @media (max-width:720px){.ws-why{padding-block:72px}.ws-whytext .h2{font-size:38px}.ws-prog{padding-top:72px}}
