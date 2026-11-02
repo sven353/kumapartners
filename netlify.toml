@@ -10,7 +10,7 @@
 # Netlify Forms: every form on the site is detected at deploy time from the
 # static HTML (form detection is on). Submissions land under Forms in the
 # Netlify dashboard. Form names must stay unique across the whole site:
-# contact, friction-scan, partner-debrief (index.html), constellr-debrief-v5
+# contact, friction-scan, partner-debrief (index.html), constellr-debrief-v6
 # (constellr-review.html), offsite-blueprint (offsite/index.html and
 # offsite/configurator.html, hidden copies because app.js renders the real
 # form), offsite-conversation (offsite-v2.html and new.html), offsite-partners-conversation
