@@ -254,3 +254,15 @@ body.dlg-open{overflow:hidden}
 
 /* partner strip: lavender band to separate it from the approach strip */
 #partners.sec.light{background:color-mix(in srgb,var(--lav) 24%,var(--paper))}
+
+/* quotes strip */
+.lp-quotes{margin-top:16px}
+.lp-quotes>h3{font-size:24px;margin:28px 4px 16px;color:var(--ink)}
+.lp-qgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.lp-q{margin:0;padding:28px;border-radius:24px;background:#fff;border:1px solid var(--line-l);display:flex;flex-direction:column;justify-content:space-between;gap:22px;color:var(--ink)}
+.lp-q blockquote{margin:0}
+.lp-q blockquote p{font-size:17px;line-height:1.5;color:var(--ink)}
+.lp-q figcaption{display:grid;gap:3px;padding-top:16px;border-top:1px solid var(--line-l)}
+.lp-q figcaption b{font-family:var(--font-display);font-weight:600;font-size:16px}
+.lp-q figcaption span{font-size:14px;line-height:1.4;color:var(--muted-l)}
+@media (max-width:1000px){.lp-qgrid{grid-template-columns:1fr}.lp-q{padding:22px}}
