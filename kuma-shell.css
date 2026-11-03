@@ -3,13 +3,12 @@
 @font-face{font-family:"Inter";font-style:normal;font-weight:100 900;font-display:swap;src:url(/assets/offsite-v2/fonts/inter-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:"Inter Tight";font-style:normal;font-weight:100 900;font-display:swap;src:url(/assets/offsite-v2/fonts/inter-tight-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 :root{
-  --kx-ink:#0F0E13;--kx-paper:#F1F0F6;--kx-lav:#B0A6DF;--kx-lav-deep:color-mix(in srgb,#B0A6DF 60%,#0F0E13);
+  --kx-ink:#0B1523;--kx-paper:#F8F9FA;--kx-lav:#74BCCD;--kx-lav-deep:#17677B;
   --kx-display:"Inter Tight",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
   --kx-body:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
-  --kx-muted:color-mix(in srgb,#F1F0F6 70%,#0F0E13);--kx-line:color-mix(in srgb,#F1F0F6 10%,transparent);
-  --kx-card-2:color-mix(in srgb,#0F0E13 80%,#B0A6DF);
+  --kx-muted:color-mix(in srgb,#F8F9FA 70%,#0B1523);--kx-line:color-mix(in srgb,#F8F9FA 10%,transparent);
+  --kx-card-2:color-mix(in srgb,#0B1523 80%,#74BCCD);
 }
-@supports (color:oklch(from red l c h)){:root{--kx-lav-deep:oklch(from #B0A6DF calc(l - .27) calc(c * 1.9) h)}}
 body.kx-page main{padding-top:88px}
 body.kx-menu-open{overflow:hidden}
 .kx-vh{position:absolute!important;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;margin:-1px;padding:0;border:0}

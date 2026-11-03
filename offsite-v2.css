@@ -6,25 +6,22 @@
   --font-display:"Inter Tight",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
   --font-body:"Inter",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Helvetica,Arial,sans-serif;
   /* palette */
-  --ink:#0F0E13;
-  --paper:#F1F0F6;
-  --lav:#B0A6DF;
+  --ink:#0B1523;
+  --paper:#F8F9FA;
+  --lav:#74BCCD;
   /* derived */
   --white:var(--paper);
   --card:color-mix(in srgb,var(--ink) 92%,var(--paper));
   --card-2:color-mix(in srgb,var(--ink) 80%,var(--lav));
   --card-3:color-mix(in srgb,var(--ink) 88%,var(--lav));
   --muted-d:color-mix(in srgb,var(--paper) 70%,var(--ink));
-  --muted-l:color-mix(in srgb,var(--ink) 70%,var(--paper));
+  --muted-l:#4C4B4E;
   --line-d:color-mix(in srgb,var(--paper) 10%,transparent);
   --line-l:color-mix(in srgb,var(--ink) 9%,transparent);
-  --lav-deep:color-mix(in srgb,var(--lav) 60%,var(--ink));
-  --lav-ic:color-mix(in srgb,var(--lav) 72%,var(--ink));
+  --lav-deep:#17677B;
+  --lav-ic:#17677B;
   --shade:var(--ink);
   --pad:72px;
-}
-@supports (color:oklch(from red l c h)){
-  :root{--lav-deep:oklch(from var(--lav) calc(l - .27) calc(c * 1.9) h);--lav-ic:oklch(from var(--lav) calc(l - .14) calc(c * 1.5) h)}
 }
 *,*::before,*::after{box-sizing:border-box}
 html{scroll-behavior:smooth;scroll-padding-top:96px}

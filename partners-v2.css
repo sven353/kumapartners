@@ -13,3 +13,20 @@
 .conviction.lp-sec{padding:120px 0}
 .conviction .sub{max-width:44em}
 @media (max-width:720px){.conviction.lp-sec{padding:88px 0}}
+
+/* client quotes inside Sven's profile */
+.pq{margin-top:16px;border-top:1px solid var(--line-l);padding-top:14px}
+.pq summary{display:flex;align-items:center;justify-content:space-between;gap:12px;cursor:pointer;list-style:none;font-family:var(--font-display);font-weight:600;font-size:15px;color:var(--ink)}
+.pq summary::-webkit-details-marker{display:none}
+.pq .pm{position:relative;flex:none;width:22px;height:22px;border-radius:50%;background:var(--lav)}
+.pq .pm::before,.pq .pm::after{content:"";position:absolute;left:50%;top:50%;width:10px;height:2px;background:var(--ink);transform:translate(-50%,-50%)}
+.pq .pm::after{transform:translate(-50%,-50%) rotate(90deg);transition:transform .2s}
+.pq[open] .pm::after{transform:translate(-50%,-50%) rotate(0)}
+.pq summary:focus-visible{outline:2px solid var(--lav-deep);outline-offset:4px;border-radius:6px}
+.pq-list{display:grid;gap:18px;margin-top:16px}
+.pq-i{margin:0;padding-left:16px;border-left:3px solid var(--lav)}
+.pq-i blockquote{margin:0}
+.pq-i blockquote p{font-size:15px;line-height:1.55;color:var(--ink)}
+.pq-i figcaption{margin-top:6px;font-size:13.5px;line-height:1.4;color:var(--muted-l)}
+.pq-i figcaption b{font-family:var(--font-display);font-weight:600;color:var(--ink)}
+@media (min-width:721px){#sven-mulfinger .ph{align-self:start;min-height:0;aspect-ratio:3/4}}
