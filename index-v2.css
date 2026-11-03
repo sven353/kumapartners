@@ -279,3 +279,26 @@ body.dlg-open{overflow:hidden}
 @media (max-width:640px){.lp-prs{grid-template-columns:1fr}.lp-fo{padding:22px 20px}.lp-pr{grid-template-columns:80px 1fr}.lp-bridge{font-size:21px}}
 .lp-fo .pill-link,.lp-prcta .pill-link{background:var(--ink);color:var(--white)}
 .lp-fo .pill-link:hover,.lp-prcta .pill-link:hover{background:var(--lav-deep)}
+
+/* one light canvas: dark only at the hero, The Round island and the contact anchor */
+.light .lp-tool{background:var(--ink);color:var(--paper);border-color:transparent}
+.light .lp-tool:hover{background:color-mix(in srgb,var(--ink) 86%,var(--lav))}
+.light .lp-tool .chip{background:color-mix(in srgb,var(--paper) 10%,transparent);color:var(--lav)}
+.light .lp-tool h3{color:var(--paper)}
+.light .lp-fit .no li::before{background:var(--muted-l)}
+.light .lp-sc{border:1px solid var(--line-l);box-shadow:0 2px 8px rgba(11,21,35,.04)}
+.sec.dark.island{background:var(--paper)}
+.island>.wrap{background:var(--ink);color:var(--paper);border-radius:32px;padding:0 56px 64px}
+.island.lp-sec .head-split{padding-top:72px}
+@media (max-width:640px){.island>.wrap{padding:0 22px 40px;border-radius:24px;width:calc(100% - 24px)}.island.lp-sec .head-split{padding-top:48px}}
+/* contact form: slate surface instead of a white card on navy */
+#contact .form-card{background:#132235;color:var(--paper);border:1px solid rgba(255,255,255,.10)}
+#contact .form-card .h3,#contact .form-card .field label,#contact .form-card .track legend{color:var(--paper)}
+#contact .form-card .note,#contact .form-card .form-status,#contact .form-card .thanks p,#contact .form-card .field .opt{color:color-mix(in srgb,var(--paper) 70%,transparent)}
+#contact .form-card .field input,#contact .form-card .field textarea{background:rgba(255,255,255,.04);border-color:rgba(255,255,255,.14);color:var(--paper)}
+#contact .form-card .field input:focus,#contact .form-card .field textarea:focus{background:rgba(255,255,255,.07);border-color:var(--lav);box-shadow:0 0 0 3px color-mix(in srgb,var(--lav) 30%,transparent)}
+#contact .form-card .field textarea::placeholder,#contact .form-card .field input::placeholder{color:color-mix(in srgb,var(--paper) 45%,transparent)}
+#contact .form-card .track span{background:transparent;border-color:rgba(255,255,255,.18);color:var(--paper)}
+#contact .form-card .track input:checked+span{background:var(--lav);color:var(--ink);border-color:var(--lav)}
+#contact .form-card .btn-ink{background:var(--lav);color:var(--ink)}
+#contact .form-card .btn-ink .ic{background:var(--ink);color:var(--lav)}
