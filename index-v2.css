@@ -253,7 +253,7 @@ body.dlg-open{overflow:hidden}
 .sub-hero .hero-inner{padding-top:150px}
 
 /* partner strip: same canvas, separated by hairlines */
-#partners.sec.light{background:var(--paper);border-top:1px solid color-mix(in srgb,var(--ink) 12%,transparent);border-bottom:1px solid color-mix(in srgb,var(--ink) 12%,transparent)}
+#partners.sec.light{background:var(--paper)}
 
 /* senior team: founders band + practitioner grid */
 .lp-fo{display:grid;grid-template-columns:1fr;gap:20px;padding:28px 32px;border-radius:24px;background:#fff;border:1px solid var(--line-l);color:var(--ink)}
@@ -352,3 +352,19 @@ body.dlg-open{overflow:hidden}
 #scorecard .head-c .sub{margin:0;text-align:left;max-width:34em}
 #scorecard .lp-sc{margin:0;max-width:none;width:100%}
 @media (max-width:900px){#scorecard>.wrap{grid-template-columns:1fr;gap:28px;padding:28px 20px;border-radius:24px}}
+
+/* hairline between neighbouring light sections */
+.sec.light+.sec.light{border-top:1px solid color-mix(in srgb,var(--ink) 11%,transparent)}
+
+/* forms: calmer fields, thin chevron, top-aligned dialogs */
+.field{gap:6px}
+.field label{font-family:var(--font-body);font-weight:600;font-size:14px;letter-spacing:0}
+.field input,.field textarea,.field select{height:48px;border:1px solid color-mix(in srgb,var(--ink) 16%,transparent);background:#fff;border-radius:12px;padding:0 14px;font-size:16px;color:var(--ink)}
+.field textarea{height:auto;min-height:112px;padding:12px 14px}
+.field select{-webkit-appearance:none;appearance:none;padding-right:40px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14' fill='none' stroke='%230B1523' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 5l4 4 4-4'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;background-size:14px;cursor:pointer}
+.field input:focus,.field textarea:focus,.field select:focus{outline:none;border-color:var(--lav-deep);background-color:#fff;box-shadow:0 0 0 3px color-mix(in srgb,var(--lav-deep) 14%,transparent)}
+#contact .form-card .field select{background-color:rgba(255,255,255,.04);border-color:rgba(255,255,255,.16);color:var(--paper);background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 14 14' fill='none' stroke='%23F8F9FA' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M3 5l4 4 4-4'/%3E%3C/svg%3E")}
+#contact .form-card .field select option{color:var(--ink)}
+dialog.lp-dlg{margin:max(12px,5svh) auto auto;max-height:calc(100svh - max(12px,5svh) - 12px)}
+.lp-dlg .form-card{max-height:calc(100svh - max(12px,5svh) - 12px);padding:40px 32px 28px}
+@media (max-width:640px){.lp-dlg .form-card{padding:40px 20px 22px}}
