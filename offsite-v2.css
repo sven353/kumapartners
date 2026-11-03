@@ -412,3 +412,21 @@ body.menu-open{overflow:hidden}
 .calls .head-split{padding-top:88px}
 .hero-copy .h1 .chip{word-spacing:0}
 .sec::before,.hero-grid,.overlay::before,.rule{display:none}
+
+/* light canvas: dark only at the hero, the contact anchor and the footer */
+.light .scard{background:#fff;border-color:color-mix(in srgb,var(--ink) 14%,transparent);color:var(--ink)}
+.light .scard:hover{background:#fff;border-color:var(--lav-deep)}
+.light .scard p{color:var(--muted-l)}
+.light .scard .more{color:var(--lav-deep);border-top-color:color-mix(in srgb,var(--ink) 14%,transparent)}
+.light .cap{color:var(--ink)}
+.light .tile .photo,.light .gcard .photo,.light .why-photo{background:color-mix(in srgb,var(--ink) 8%,var(--paper))}
+.light .gallery-arrow{background:#fff;border-color:color-mix(in srgb,var(--ink) 18%,transparent);color:var(--ink)}
+.light .gallery-arrow:hover:not(:disabled){background:var(--ink);color:var(--paper)}
+.light .point,.light .speaker{background:#fff;border:1px solid color-mix(in srgb,var(--ink) 12%,transparent)}
+.light .point .dot{background:var(--lav-deep);box-shadow:0 0 0 6px color-mix(in srgb,var(--lav-deep) 14%,transparent)}
+.light .point p,.light .speaker .role{color:var(--muted-l)}
+.light .pill-link{background:#fff;border-color:color-mix(in srgb,var(--ink) 18%,transparent);color:var(--ink)}
+.light .pill-link:hover{background:var(--ink);color:var(--paper)}
+.sec.dark.island{background:var(--paper)}
+.island>.wrap{background:var(--ink);color:var(--white);border-radius:32px;padding:72px 56px}
+@media (max-width:640px){.island>.wrap{padding:48px 22px;border-radius:24px;width:calc(100% - 24px)}}

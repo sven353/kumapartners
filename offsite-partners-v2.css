@@ -60,3 +60,12 @@
 .hero.hero-sm .lede{max-width:46em}
 .hero.hero-sm .hero-copy{max-width:900px}
 .hero.hero-sm .h1 .lav{display:block}
+
+/* light canvas: matching cards on light, conviction as a dark island */
+.light .mcard{background:#fff;border-color:color-mix(in srgb,var(--ink) 14%,transparent);color:var(--ink)}
+.light .mcard:hover{background:#fff;border-color:var(--lav-deep)}
+.light .mcard p:not(.mmeta){color:var(--muted-l)}
+.light .mmeta{color:var(--muted-l)}
+.light .mcard .more{color:var(--lav-deep);border-top-color:color-mix(in srgb,var(--ink) 14%,transparent)}
+.island.conviction{padding:0 0 120px}
+@media (max-width:720px){.island.conviction{padding:0 0 88px}}

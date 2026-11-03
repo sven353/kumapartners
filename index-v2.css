@@ -311,3 +311,12 @@ body.dlg-open{overflow:hidden}
 .light .lp-tool .num{color:var(--lav-deep)}
 .light .lp-tool p{color:var(--muted-l)}
 .light .lp-tool .metric{color:var(--lav-deep);border-top-color:color-mix(in srgb,var(--ink) 14%,transparent)}
+
+/* inner pages: light canvas, dark only at hero, statement islands and the contact and footer anchor */
+.sec.light .lp-card p[style]{color:var(--ink)!important}
+.sec.light .lp-card{background:#fff}
+.sec.light .tlink{color:var(--lav-deep)}
+.light.bench-dark .bcard{background:#fff;border:1px solid color-mix(in srgb,var(--ink) 12%,transparent)}
+.island.conviction>.wrap{padding:72px 56px}
+.island.ws-info>.wrap{padding:72px 56px}
+@media (max-width:640px){.island.conviction>.wrap,.island.ws-info>.wrap{padding:48px 22px}}
