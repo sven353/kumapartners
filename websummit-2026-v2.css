@@ -117,3 +117,5 @@
 .ws-split .ws-side{position:sticky;top:96px;margin:0}
 @media (max-width:1000px){.ws-row.ws-wide>.ws-more summary,.ws-row.ws-wide .ws-panel.ws-split{margin-left:0}.ws-row.ws-wide .ws-panel.ws-split{grid-template-columns:1fr;gap:28px}.ws-split .ws-side{position:static;max-width:460px}}
 .ws-pcard .ws-link{color:var(--lav-deep);font-weight:600}
+.ws-plogo{flex:none}
+.ws-plogo img{display:block;width:96px;height:auto;max-width:none}
