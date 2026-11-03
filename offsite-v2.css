@@ -438,3 +438,8 @@ body.menu-open{overflow:hidden}
 .field input,.field textarea{height:48px;border:1px solid color-mix(in srgb,var(--ink) 16%,transparent);background:#fff;border-radius:12px;padding:0 14px}
 .field textarea{height:auto;min-height:112px;padding:12px 14px}
 .field input:focus,.field textarea:focus{border-color:var(--lav-deep);box-shadow:0 0 0 3px color-mix(in srgb,var(--lav-deep) 14%,transparent)}
+
+/* buttons and links: body font, normal spacing */
+.btn,.tlink,.pill-link,.menu-btn{font-family:var(--font-body);font-weight:600;letter-spacing:0}
+.btn,.menu-btn,.tlink,.pill-link{font-size:15px}
+:focus-visible{outline-width:1.5px}

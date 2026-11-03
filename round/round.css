@@ -613,3 +613,8 @@ dialog.charter::backdrop{background:color-mix(in srgb,var(--ink) 72%,transparent
 .terms .rhead.sub2{padding:72px 0 24px}
 .terms .rhead.sub2 .h2{font-size:clamp(30px,4vw,44px)}
 @media (max-width:720px){.terms .rhead.sub2{padding:56px 0 20px}}
+
+/* buttons and links: body font, normal spacing */
+.btn,.tlink,.pill-link,.menu-btn{font-family:var(--font-body);font-weight:600;letter-spacing:0}
+.btn,.menu-btn,.tlink,.pill-link{font-size:15px}
+:focus-visible{outline-width:1.5px}

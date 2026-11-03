@@ -71,3 +71,6 @@ body.kx-menu-open{overflow:hidden}
   .kx-foot{padding-top:72px}
   .kx-fabout{font-size:21px}
 }
+
+/* buttons: body font, normal spacing */
+.kx-btn,.kx-menu-btn{font-family:var(--kx-body);font-weight:600;letter-spacing:0;font-size:15px}
