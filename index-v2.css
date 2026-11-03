@@ -268,3 +268,28 @@ body.dlg-open{overflow:hidden}
 @media (max-width:1000px){.lp-qgrid{grid-template-columns:1fr}.lp-q{padding:22px}}
 #voices .wrap{display:flow-root}
 .lp-q figcaption span.rel{min-height:0;margin-top:4px;color:var(--lav-deep);font-weight:500}
+
+/* senior team: founders band + practitioner grid */
+.lp-fo{display:grid;grid-template-columns:1fr;gap:20px;padding:28px 32px;border-radius:24px;background:#fff;border:1px solid var(--line-l);color:var(--ink)}
+.lp-fo .lead{font-family:var(--font-display);font-weight:600;font-size:22px;letter-spacing:-0.012em}
+.lp-fo .people{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.lp-fo .p{display:grid;grid-template-columns:72px 1fr;gap:16px;align-items:start}
+.lp-fo .p img{width:72px;height:72px;border-radius:14px;object-fit:cover;filter:grayscale(1);background:var(--lav)}
+.lp-fo .p b{display:block;font-family:var(--font-display);font-weight:600;font-size:17px}
+.lp-fo .p span{display:block;font-size:14px;color:var(--lav-deep);font-family:var(--font-display);font-weight:600;margin:2px 0 4px}
+.lp-fo .p p{font-size:15px;line-height:1.45;color:var(--muted-l)}
+.lp-fo .pill-link{justify-self:start}
+.lp-bridge{margin:40px 4px 20px;font-family:var(--font-display);font-weight:600;font-size:24px;line-height:1.25;letter-spacing:-0.014em;color:var(--ink);max-width:34ch}
+.lp-prs{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.lp-pr{display:grid;grid-template-columns:96px 1fr;gap:18px;padding:14px;border-radius:24px;background:#fff;border:1px solid var(--line-l);color:var(--ink);align-items:start}
+.lp-pr .ph{aspect-ratio:1/1;border-radius:16px;overflow:hidden;background:var(--lav)}
+.lp-pr .ph img{width:100%;height:100%;object-fit:cover;object-position:center 22%;filter:grayscale(1)}
+.lp-pr .tx{padding:6px 6px 8px 0;display:grid;gap:6px;align-content:start}
+.lp-pr h4{font-size:19px;margin:0}
+.lp-pr .spec{font-size:14.5px;line-height:1.35;color:var(--lav-deep);font-family:var(--font-display);font-weight:600}
+.lp-pr .exp{font-size:13.5px;line-height:1.4;color:var(--muted-l)}
+.lp-prcta{margin-top:22px}
+@media (max-width:1000px){.lp-prs{grid-template-columns:repeat(2,1fr)}.lp-fo .people{grid-template-columns:1fr}}
+@media (max-width:640px){.lp-prs{grid-template-columns:1fr}.lp-fo{padding:22px 20px}.lp-pr{grid-template-columns:80px 1fr}.lp-bridge{font-size:21px}}
+.lp-fo .pill-link,.lp-prcta .pill-link{background:var(--ink);color:var(--white)}
+.lp-fo .pill-link:hover,.lp-prcta .pill-link:hover{background:var(--lav-deep)}
