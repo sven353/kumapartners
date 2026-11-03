@@ -252,8 +252,8 @@ body.dlg-open{overflow:hidden}
 .hero.sub-hero{min-height:clamp(480px,66svh,680px)}
 .sub-hero .hero-inner{padding-top:150px}
 
-/* partner strip: lavender band to separate it from the approach strip */
-#partners.sec.light{background:color-mix(in srgb,var(--lav) 24%,var(--paper))}
+/* partner strip: same canvas, separated by hairlines */
+#partners.sec.light{background:var(--paper);border-top:1px solid color-mix(in srgb,var(--ink) 12%,transparent);border-bottom:1px solid color-mix(in srgb,var(--ink) 12%,transparent)}
 
 /* senior team: founders band + practitioner grid */
 .lp-fo{display:grid;grid-template-columns:1fr;gap:20px;padding:28px 32px;border-radius:24px;background:#fff;border:1px solid var(--line-l);color:var(--ink)}
@@ -302,3 +302,12 @@ body.dlg-open{overflow:hidden}
 #contact .form-card .track input:checked+span{background:var(--lav);color:var(--ink);border-color:var(--lav)}
 #contact .form-card .btn-ink{background:var(--lav);color:var(--ink)}
 #contact .form-card .btn-ink .ic{background:var(--ink);color:var(--lav)}
+
+/* KOS tools: light cards with hairline border on the light canvas */
+.light .lp-tool{background:#fff;color:var(--ink);border:1px solid color-mix(in srgb,var(--ink) 14%,transparent)}
+.light .lp-tool:hover{background:#fff;border-color:var(--lav-deep)}
+.light .lp-tool .chip{background:color-mix(in srgb,var(--lav-deep) 10%,transparent);color:var(--lav-deep)}
+.light .lp-tool h3{color:var(--ink)}
+.light .lp-tool .num{color:var(--lav-deep)}
+.light .lp-tool p{color:var(--muted-l)}
+.light .lp-tool .metric{color:var(--lav-deep);border-top-color:color-mix(in srgb,var(--ink) 14%,transparent)}

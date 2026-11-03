@@ -287,7 +287,7 @@ body.menu-open{overflow:hidden}
 .flinks a{text-decoration:none;color:var(--white);transition:color .2s}
 .flinks a:hover{color:var(--lav)}
 .flinks .sep{color:var(--muted-d);margin-inline:6px}
-.wordmark{border-radius:24px;background:var(--lav);color:var(--ink);padding:clamp(20px,4.4vw,64px) clamp(16px,3.6vw,52px)}
+.wordmark{border-radius:24px;background:transparent;border:1px solid color-mix(in srgb,var(--lav) 55%,transparent);color:var(--lav);padding:clamp(20px,4.4vw,64px) clamp(16px,3.6vw,52px)}
 .wordmark svg{display:block;width:100%;height:auto}
 .fsig{display:flex;align-items:center;gap:16px;padding:22px 0 40px;color:var(--muted-d)}
 .fsig .frule{flex:1;height:1px;background:var(--line-d)}

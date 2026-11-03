@@ -52,7 +52,7 @@ body.kx-menu-open{overflow:hidden}
 .kx-flinks{display:flex;flex-wrap:wrap;gap:6px 20px}
 .kx-flinks a,.kx-linkbtn{color:var(--kx-paper);text-decoration:none;background:none;border:0;padding:0;cursor:pointer;font:inherit}
 .kx-flinks a:hover,.kx-linkbtn:hover{color:var(--kx-lav)}
-.kx-wordmark{border-radius:24px;background:var(--kx-lav);color:var(--kx-ink);padding:clamp(20px,4.4vw,64px) clamp(16px,3.6vw,52px)}
+.kx-wordmark{border-radius:24px;background:transparent;border:1px solid color-mix(in srgb,var(--kx-lav) 55%,transparent);color:var(--kx-lav);padding:clamp(20px,4.4vw,64px) clamp(16px,3.6vw,52px)}
 .kx-wordmark svg{display:block;width:100%;height:auto}
 .kx-fsig{display:flex;align-items:center;gap:16px;padding:22px 0 40px;color:var(--kx-muted)}
 .kx-frule{flex:1;height:1px;background:var(--kx-line)}
