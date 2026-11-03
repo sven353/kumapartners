@@ -618,3 +618,27 @@ dialog.charter::backdrop{background:color-mix(in srgb,var(--ink) 72%,transparent
 .btn,.tlink,.pill-link,.menu-btn{font-family:var(--font-body);font-weight:600;letter-spacing:0}
 .btn,.menu-btn,.tlink,.pill-link{font-size:15px}
 :focus-visible{outline-width:1.5px}
+
+/* thinner lines, light glance strip, glass hero tiles */
+:root{--line-d:color-mix(in srgb,var(--paper) 8%,transparent);--line-l:color-mix(in srgb,var(--ink) 8%,transparent)}
+.menu-btn .bars,.menu-btn .bars::before,.menu-btn .bars::after{height:1.5px}
+:focus-visible{outline-width:1.5px}
+.sec.light+.sec.light{border-top:1px solid color-mix(in srgb,var(--ink) 11%,transparent)}
+.glance .fcard{background:#fff;border-color:color-mix(in srgb,var(--ink) 11%,transparent)}
+.glance .fcard .fnum{color:var(--lav-deep)}
+.glance .fcard .h3{color:var(--ink)}
+.glance .fcard p:not(.fnum){color:var(--muted-l)}
+.info{background:color-mix(in srgb,var(--ink) 40%,transparent);-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);border-color:color-mix(in srgb,var(--paper) 12%,transparent)}
+.info li{background:color-mix(in srgb,var(--paper) 8%,transparent);color:var(--paper);border:1px solid color-mix(in srgb,var(--paper) 12%,transparent);align-items:center;min-height:68px;font-size:16px}
+.info li:hover{background:var(--lav);border-color:var(--lav);color:var(--ink)}
+/* buttons and links: body font, normal spacing */
+.btn,.tlink,.pill-link,.menu-btn{font-family:var(--font-body);font-weight:600;letter-spacing:0}
+.btn,.menu-btn,.tlink,.pill-link{font-size:15px}
+
+/* city partner card: a quiet light card, not a dark bar */
+.citycard{background:#fff;color:var(--ink);border:1px solid color-mix(in srgb,var(--ink) 11%,transparent);margin-bottom:0}
+.citycard .chip{background:color-mix(in srgb,var(--lav-deep) 12%,transparent);color:var(--lav-deep)}
+.citycard .h3x{color:var(--ink)}
+.citycard p:not(.chip){color:var(--muted-l)}
+.citycard{width:min(1296px,calc(100% - 2*var(--pad)));margin-inline:auto;margin-top:72px;padding:36px 44px}
+@media (max-width:960px){.citycard{margin-top:48px;padding:28px 24px}}
