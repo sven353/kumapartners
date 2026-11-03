@@ -394,3 +394,7 @@ dialog.lp-dlg{margin:max(12px,5svh) auto auto;max-height:calc(100svh - max(12px,
 .lp-more[open]>summary span::after{content:"Hide the six tools";font-size:15px}
 .lp-more[open]>.lp-tools{margin-top:28px}
 .lp-loop{margin-bottom:24px}
+
+/* hairlines around dark islands, and softer line tones everywhere */
+:root{--line-l:color-mix(in srgb,var(--ink) 8%,transparent);--line-d:color-mix(in srgb,var(--paper) 8%,transparent)}
+.sec.light+.sec.island,.sec.island+.sec.light{border-top:1px solid color-mix(in srgb,var(--ink) 11%,transparent)}
