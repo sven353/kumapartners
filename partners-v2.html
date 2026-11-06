@@ -149,22 +149,23 @@
 
 <dialog class="lp-dlg" id="scan-dialog" aria-labelledby="scan-h">
   <div class="form-card"><button class="x" type="button" data-close aria-label="Close">×</button>
-    <div data-formhead><span class="chip kicker">Confidential, operator to operator</span><h3 class="h3" id="scan-h">Request a confidential diagnostic call</h3>
-    <p class="note">Tell us your stage and leadership inflection point so we can connect you with the right partner.</p></div>
+    <div data-formhead><span class="chip kicker">Operator to operator</span><h3 class="h3" id="scan-h">Book a confidential diagnostic call</h3>
+    <p class="note">Tell us about your company and the main issue, so we can connect you with the right partner.</p></div>
     <form class="contact-form" name="friction-scan" method="POST" action="/#engagements" data-netlify="true" netlify-honeypot="bot-field" id="scan-form" data-ajax data-free-email-check>
       <input type="hidden" name="form-name" value="friction-scan">
       <p class="hp" hidden><label>Don't fill this out if you're human: <input name="bot-field" tabindex="-1" autocomplete="off"></label></p>
-      <div class="field"><label for="scan-name">Full name</label><input type="text" id="scan-name" name="name" required></div>
-      <div class="field"><label for="scan-email">Work email</label><input type="email" id="scan-email" name="email" required><span class="err" data-email-error hidden>Please use your business email address, not a personal inbox.</span></div>
-      <div class="field"><label for="scan-company">Company name and website</label><input type="text" id="scan-company" name="company" placeholder="Acme Inc., acme.com" required></div>
-      <div class="field"><label for="scan-stage">Headcount and funding stage</label><select id="scan-stage" name="stage"><option>Series A (25–50 headcount)</option><option>Series B–C (50–150+ headcount)</option><option>Enterprise Scale (150–400+ headcount)</option><option>Post-M&amp;A / PE-Backed Portfolio Company</option><option>Investor / Operating Partner (Portfolio Triage)</option></select></div>
-      <div class="field"><label for="scan-inflection">Primary inflection point</label><select id="scan-inflection" name="inflection"><option>Co-Founder / Executive Alignment Friction</option><option>Post-Merger Leadership &amp; Cultural Integration</option><option>Decision Drag &amp; Scaling Execution Bottlenecks</option><option>C-Suite Restructuring or Transition</option><option>Portfolio Company Diagnostic (For VCs/PE)</option></select></div>
+      <div class="field"><label for="scan-name">Full name</label><input type="text" id="scan-name" name="name" required autocomplete="name"></div>
+      <div class="field"><label for="scan-email">Work email</label><input type="email" id="scan-email" name="email" required autocomplete="email" inputmode="email"><span class="err" data-email-error hidden>Please use your business email address, not a personal inbox.</span></div>
+      <div class="field"><label for="scan-company">Company name and website <span class="opt">(optional)</span></label><input type="text" id="scan-company" name="company" placeholder="Acme Inc., acme.com" autocomplete="organization"></div>
+      <div class="field"><label for="scan-stage">Your company</label><select id="scan-stage" name="stage"><option>Series A, 25 to 50 people</option><option>Series B and C, 50 to 150 people</option><option>Enterprise, 150 to 400+ people</option><option>AI-first company</option><option>Post-M&amp;A or PE-backed company</option><option>Investor or operating partner</option></select></div>
+      <div class="field"><label for="scan-inflection">What is the main issue?</label><select id="scan-inflection" name="inflection"><option>Co-founder or executive alignment</option><option>Post-merger integration</option><option>Slow decisions and execution</option><option>C-suite restructuring</option><option>Portfolio diagnostic (VC and PE)</option></select></div>
       <div class="hp" aria-hidden="true"><label for="hp-tax-id-scan">Tax ID (do not fill)</label><input type="text" name="company_tax_id" id="hp-tax-id-scan" tabindex="-1" autocomplete="off" value=""></div>
       <button type="submit" class="btn btn-ink btn-block" data-submit><span data-btn-label>Book a diagnostic call</span><span class="ic"><svg aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></span></button>
+      <p class="note fnote">A partner replies within 24 business hours to confirm a time, in strict confidence.</p>
+      <p class="note fnote">We use your details only to reply. <a href="/privacy">Privacy policy</a></p>
       <p class="form-status" role="status" data-status></p>
-      <p class="note">A partner replies within 24 business hours, under strict discretion.</p>
     </form>
-    <div class="thanks" data-thanks hidden tabindex="-1"><span class="check" aria-hidden="true">✓</span><h3 class="h3">Request received.</h3><p>Your inquiry has been routed directly to a partner.</p><p>We will be in touch within 24 business hours, in strict confidence.</p><button class="btn btn-ink" type="button" data-close>Close window<span class="ic"><svg aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></span></button></div>
+    <div class="thanks" data-thanks hidden tabindex="-1"><span class="check" aria-hidden="true">✓</span><h3 class="h3">Call request received.</h3><p>Your request has been routed directly to a partner.</p><p>We will confirm a time within 24 business hours, in strict confidence.</p><button class="btn btn-ink" type="button" data-close>Close window<span class="ic"><svg aria-hidden="true" focusable="false"><use href="#i-arrow"/></svg></span></button></div>
   </div>
 </dialog>
 

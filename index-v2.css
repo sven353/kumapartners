@@ -540,3 +540,11 @@ a,.tlink,.lp-link,.consent a{text-decoration-thickness:1px;text-underline-offset
 .overlay{height:100vh;height:100dvh;place-items:start center;overflow-y:auto;overscroll-behavior:contain;padding:clamp(96px,16vh,168px) 0 48px}
 .overlay .ov-box{margin:0 auto}
 @media (max-width:480px){.nav-opt{display:none}}
+
+/* booking form: hairline fields, one thin focus line, quiet notes */
+.field .opt{font-weight:400;color:var(--muted-l)}
+.lp-dlg .form-card .fnote{margin:0;font-size:13.5px;line-height:1.5;color:var(--muted-l)}
+.lp-dlg .form-card .fnote+.fnote{margin-top:-6px}
+.lp-dlg .form-card .fnote a{color:#17677B}
+.lp-dlg .field :is(input,select,textarea):focus{box-shadow:none;border-color:#17677B;background-color:#fff}
+@media (min-resolution:2dppx){.lp-dlg .field :is(input,select,textarea):focus,.field :is(input,select,textarea):focus{border-color:transparent;box-shadow:0 0 0 .5px #17677B}}
