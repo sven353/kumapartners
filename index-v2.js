@@ -84,7 +84,7 @@
     return t > 0 && (Date.now() - t) < MIN_FILL_MS;
   }
   var FREE = ['gmail.com','yahoo.com','hotmail.com','outlook.com','icloud.com','aol.com','live.com','msn.com','proton.me','protonmail.com'];
-  var LABELS = {scan: 'Start a 14-Day Scan', advisory: 'Book a Partner Debrief'};
+  var LABELS = {scan: 'Book a diagnostic call', advisory: 'Book a Partner Debrief'};
 
   function wire(form){
     var card = form.closest('.form-card'), thanks = $('[data-thanks]', card), status = $('[data-status]', form);

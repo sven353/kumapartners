@@ -698,3 +698,8 @@ a,.tlink,.consent a{text-decoration-thickness:1px;text-underline-offset:4px}
 .citycard{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--ink) 11%,transparent)}
 }
 /* end hairlines */
+
+/* menu overlay: always starts below the bar and scrolls if short */
+.overlay{height:100vh;height:100dvh;place-items:start center;overflow-y:auto;overscroll-behavior:contain;padding:clamp(96px,16vh,168px) 0 48px}
+.overlay .ov-box{margin:0 auto}
+@media (max-width:480px){.nav-opt{display:none}}

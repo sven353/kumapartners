@@ -85,3 +85,7 @@ a,.tlink,.consent a{text-decoration-thickness:1px;text-underline-offset:4px}
 .kx-wordmark{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--kx-lav) 55%,transparent)}
 }
 /* end hairlines */
+
+@media (max-width:480px){.nav-opt{display:none}}
+
+.kx-overlay{height:100vh;height:100dvh;place-items:start center;overflow-y:auto;overscroll-behavior:contain;padding:clamp(96px,16vh,168px) 0 48px}
