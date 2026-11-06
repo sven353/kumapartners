@@ -74,3 +74,14 @@ body.kx-menu-open{overflow:hidden}
 
 /* buttons: body font, normal spacing */
 .kx-btn,.kx-menu-btn{font-family:var(--kx-body);font-weight:600;letter-spacing:0;font-size:15px}
+
+
+/* thin underlines */
+a,.tlink,.consent a{text-decoration-thickness:1px;text-underline-offset:4px}
+
+/* hairlines@2x */
+@media (min-resolution:2dppx){
+.kx-nav{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--kx-paper) 14%,transparent)}
+.kx-wordmark{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--kx-lav) 55%,transparent)}
+}
+/* end hairlines */

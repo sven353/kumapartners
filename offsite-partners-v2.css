@@ -69,3 +69,16 @@
 .light .mcard .more{color:var(--lav-deep);border-top-color:color-mix(in srgb,var(--ink) 14%,transparent)}
 .island.conviction{padding:0 0 120px}
 @media (max-width:720px){.island.conviction{padding:0 0 88px}}
+
+/* hairlines@2x */
+@media (min-resolution:2dppx){
+.pcard{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.plinks a{border-bottom-color:transparent;box-shadow:0 .5px 0 0 var(--line-l)}
+.plinks a:hover{border-color:transparent;box-shadow:0 0 0 .5px var(--ink)}
+.mcard{border-color:transparent;box-shadow:0 0 0 .5px var(--line-d)}
+.mcard .more{border-top-color:transparent;box-shadow:0 -.5px 0 0 var(--line-d)}
+.bcard{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.light .mcard{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--ink) 14%,transparent)}
+.light .mcard:hover{border-color:transparent;box-shadow:0 0 0 .5px var(--lav-deep)}
+}
+/* end hairlines */

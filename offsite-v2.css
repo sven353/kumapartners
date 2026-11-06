@@ -443,3 +443,37 @@ body.menu-open{overflow:hidden}
 .btn,.tlink,.pill-link,.menu-btn{font-family:var(--font-body);font-weight:600;letter-spacing:0}
 .btn,.menu-btn,.tlink,.pill-link{font-size:15px}
 :focus-visible{outline-width:1.5px}
+
+
+/* thin underlines */
+a,.tlink,.consent a{text-decoration-thickness:1px;text-underline-offset:4px}
+
+/* hairlines@2x */
+@media (min-resolution:2dppx){
+.nav{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--paper) 14%,transparent)}
+.hero-copy .chip{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--paper) 18%,transparent)}
+.info{border-color:transparent;box-shadow:0 0 0 .5px var(--line-d)}
+.scard{border-color:transparent;box-shadow:0 0 0 .5px var(--line-d)}
+.scard:hover{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--lav) 30%,transparent)}
+.scard .more{border-top-color:transparent;box-shadow:0 -.5px 0 0 var(--line-d)}
+.tier{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.tier[aria-selected="true"]{border-color:transparent;box-shadow:0 0 0 .5px var(--ink),0 30px 60px -30px color-mix(in srgb,var(--ink) 60%,transparent)}
+.prog .q{border-top-color:transparent;box-shadow:0 -.5px 0 0 var(--line-l)}
+.slot{border-top-color:transparent;box-shadow:0 -.5px 0 0 var(--line-l)}
+.gallery-arrow{border-color:transparent;box-shadow:0 0 0 .5px var(--line-d)}
+.pill-link{border-color:transparent;box-shadow:0 0 0 .5px var(--line-d)}
+.qa{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.field input,.field textarea{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.field input:focus,.field textarea:focus{border-color:transparent;box-shadow:0 0 0 .5px var(--lav-deep),0 0 0 3px color-mix(in srgb,var(--lav) 40%,transparent)}
+.btn-line{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.btn-line:hover{border-color:transparent;box-shadow:0 0 0 .5px var(--ink)}
+.light .scard{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--ink) 14%,transparent)}
+.light .scard:hover{border-color:transparent;box-shadow:0 0 0 .5px var(--lav-deep)}
+.light .gallery-arrow{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--ink) 18%,transparent)}
+.light .point,.light .speaker{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--ink) 12%,transparent)}
+.light .pill-link{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--ink) 18%,transparent)}
+.sec.light+.sec.light{border-top-color:transparent;box-shadow:0 -.5px 0 0 color-mix(in srgb,var(--ink) 11%,transparent)}
+.field input,.field textarea{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--ink) 16%,transparent)}
+.field input:focus,.field textarea:focus{border-color:transparent;box-shadow:0 0 0 .5px var(--lav-deep),0 0 0 3px color-mix(in srgb,var(--lav-deep) 14%,transparent)}
+}
+/* end hairlines */

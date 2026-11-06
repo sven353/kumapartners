@@ -30,3 +30,11 @@
 .pq-i figcaption{margin-top:6px;font-size:13.5px;line-height:1.4;color:var(--muted-l)}
 .pq-i figcaption b{font-family:var(--font-display);font-weight:600;color:var(--ink)}
 @media (min-width:721px){#sven-mulfinger .ph,#vincent-az .ph{align-self:start;min-height:0;aspect-ratio:5/9}}
+
+/* hairlines@2x */
+@media (min-resolution:2dppx){
+.pexp{border-top-color:transparent;box-shadow:0 -.5px 0 0 var(--line-l)}
+.mlight .mcard{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.pq{border-top-color:transparent;box-shadow:0 -.5px 0 0 var(--line-l)}
+}
+/* end hairlines */

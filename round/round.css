@@ -643,30 +643,58 @@ dialog.charter::backdrop{background:color-mix(in srgb,var(--ink) 72%,transparent
 .citycard{width:min(1296px,calc(100% - 2*var(--pad)));margin-inline:auto;margin-top:72px;padding:36px 44px}
 @media (max-width:960px){.citycard{margin-top:48px;padding:28px 24px}}
 
-/* ===== 5 Nov 2026 fixes ===== */
-/* Hero: the roll-up banner in the photo sat right behind the label and the
-   headline. A soft blur that is strongest on the left (gone by the middle)
-   plus a slightly deeper left shade make it recede, so the two texts no
-   longer compete. The group on the right stays sharp. */
-@media (min-width:721px){
-  .hero-shade::before{content:"";position:absolute;inset:0;
-    -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
-    -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 34%,rgba(0,0,0,.4) 46%,transparent 58%);
-    mask-image:linear-gradient(90deg,#000 0%,#000 34%,rgba(0,0,0,.4) 46%,transparent 58%)}
-  .hero-shade{background:
-    linear-gradient(0deg,var(--shade) 0%,color-mix(in srgb,var(--shade) 62%,transparent) 30%,transparent 64%),
-    linear-gradient(90deg,color-mix(in srgb,var(--shade) 84%,transparent) 0%,color-mix(in srgb,var(--shade) 58%,transparent) 36%,color-mix(in srgb,var(--shade) 22%,transparent) 54%,transparent 74%),
-    linear-gradient(180deg,color-mix(in srgb,var(--shade) 45%,transparent) 0%,transparent 18%)}
+
+/* thin underlines */
+a,.tlink,.consent a{text-decoration-thickness:1px;text-underline-offset:4px}
+
+/* hairlines@2x */
+@media (min-resolution:2dppx){
+.nav{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--paper) 14%,transparent)}
+.hero-copy .chip{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--paper) 18%,transparent)}
+.info{border-color:transparent;box-shadow:0 0 0 .5px var(--line-d)}
+.scard{border-color:transparent;box-shadow:0 0 0 .5px var(--line-d)}
+.scard:hover{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--lav) 30%,transparent)}
+.scard .more{border-top-color:transparent;box-shadow:0 -.5px 0 0 var(--line-d)}
+.tier{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.tier[aria-selected="true"]{border-color:transparent;box-shadow:0 0 0 .5px var(--ink),0 30px 60px -30px color-mix(in srgb,var(--ink) 60%,transparent)}
+.prog .q{border-top-color:transparent;box-shadow:0 -.5px 0 0 var(--line-l)}
+.slot{border-top-color:transparent;box-shadow:0 -.5px 0 0 var(--line-l)}
+.gallery-arrow{border-color:transparent;box-shadow:0 0 0 .5px var(--line-d)}
+.pill-link{border-color:transparent;box-shadow:0 0 0 .5px var(--line-d)}
+.qa{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.field input,.field textarea{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.field input:focus,.field textarea:focus{border-color:transparent;box-shadow:0 0 0 .5px var(--lav-deep),0 0 0 3px color-mix(in srgb,var(--lav) 40%,transparent)}
+.btn-line{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.btn-line:hover{border-color:transparent;box-shadow:0 0 0 .5px var(--ink)}
+.fcard{border-color:transparent;box-shadow:0 0 0 .5px var(--line-d)}
+.ccard{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.lquote{border-top-color:transparent;box-shadow:0 -.5px 0 0 var(--line-d)}
+.lterm{border-color:transparent;box-shadow:0 0 0 .5px var(--line-d)}
+.tent{border-color:transparent;box-shadow:0 0 0 .5px var(--line-d)}
+.incl{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.ifoot{border-top-color:transparent;box-shadow:0 -.5px 0 0 var(--line-l)}
+.stat{border-color:transparent;box-shadow:0 0 0 .5px var(--line-d)}
+.rstep{border-color:transparent;box-shadow:0 0 0 .5px var(--line-d)}
+.rstag{border-top-color:transparent;box-shadow:0 -.5px 0 0 var(--line-d)}
+.fitcol.in{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.fitcol li{border-top-color:transparent;box-shadow:0 -.5px 0 0 var(--line-l)}
+.fitcol.out li{border-color:transparent;box-shadow:0 0 0 .5px var(--line-d)}
+.guar>div{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.tcard{border-color:transparent;box-shadow:0 0 0 .5px var(--line-d)}
+.field select{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.field select:focus{border-color:transparent;box-shadow:0 0 0 .5px var(--lav-deep),0 0 0 3px color-mix(in srgb,var(--lav) 40%,transparent)}
+.field input[aria-invalid=true],.field select[aria-invalid=true]{border-color:transparent;box-shadow:0 0 0 .5px #B3261E}
+.cclose{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.clist li{border-top-color:transparent;box-shadow:0 -.5px 0 0 var(--line-l)}
+.toast{border-color:transparent;box-shadow:0 0 0 .5px var(--line-d)}
+.wcard{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.kcard{border-color:transparent;box-shadow:0 0 0 .5px var(--line-d)}
+.light .rstep{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.sec.light+.sec.light{border-top-color:transparent;box-shadow:0 -.5px 0 0 color-mix(in srgb,var(--ink) 11%,transparent)}
+.glance .fcard{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--ink) 11%,transparent)}
+.info{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--paper) 12%,transparent)}
+.info li{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--paper) 12%,transparent)}
+.info li:hover{border-color:transparent;box-shadow:0 0 0 .5px var(--lav)}
+.citycard{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--ink) 11%,transparent)}
 }
-/* Phones: the menu bar ran past the right edge (Menu + logo + "Candidate
-   review" did not fit in 366px). The button is tightened and kept on one
-   line; on the narrowest phones the word "Menu" is hidden visually and stays
-   readable for screen readers. */
-@media (max-width:720px){
-  .nav .btn{flex:none;padding:0 14px;font-size:14px;white-space:nowrap}
-  .nav .logo{min-width:0;flex:0 1 auto}
-}
-@media (max-width:420px){
-  .menu-btn{gap:0;padding:0 12px;font-size:0}
-  .menu-btn .bars{flex:none}
-}
+/* end hairlines */

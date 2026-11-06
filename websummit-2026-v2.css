@@ -119,3 +119,20 @@
 .ws-pcard .ws-link{color:var(--lav-deep);font-weight:600}
 .ws-plogo{flex:none}
 .ws-plogo img{display:block;width:96px;height:auto;max-width:none}
+
+/* hairlines@2x */
+@media (min-resolution:2dppx){
+.ws-row{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.ws-ul li{border-top-color:transparent;box-shadow:0 -.5px 0 0 var(--line-d)}
+.ws-ul li:last-child{border-bottom-color:transparent;box-shadow:0 .5px 0 0 var(--line-d)}
+.ws-venue{border-color:transparent;box-shadow:0 0 0 .5px var(--line-d)}
+.ws-hostcard{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.ws-chev{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.ws-panel{border-top-color:transparent;box-shadow:0 -.5px 0 0 var(--line-l)}
+.ws-eve .ws-chev,.ws-eve .ws-panel{border-color:transparent;box-shadow:0 0 0 .5px var(--line-d)}
+.ws-in{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.ws-pcard{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.ws-why{border-bottom-color:transparent;box-shadow:0 .5px 0 0 var(--line-l)}
+.ws-frame{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l),0 8px 24px rgba(15,14,19,.08)}
+}
+/* end hairlines */

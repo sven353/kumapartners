@@ -445,8 +445,93 @@ dialog.lp-dlg{margin:max(12px,5svh) auto auto;max-height:calc(100svh - max(12px,
 .lp-loopimg img{display:block;width:100%;height:auto}
 @media (max-width:720px){.lp-loopimg{margin-bottom:24px;overflow-x:auto;-webkit-overflow-scrolling:touch}.lp-loopimg img{min-width:620px}}
 
-.lp-fo .fo-acts{display:flex;flex-wrap:wrap;align-items:center;gap:12px 28px}
+.lp-fo .fo-acts{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px 28px}
 /* Sven and Vincent: same photo size and framing as the practitioner cards */
 .lp-fo .p{grid-template-columns:96px 1fr;gap:18px}
 .lp-fo .p img{width:96px;height:96px;border-radius:16px;object-position:center 22%}
 @media (max-width:640px){.lp-fo .p{grid-template-columns:80px 1fr}.lp-fo .p img{width:80px;height:80px}}
+
+
+/* thin underlines on every text link */
+a,.tlink,.lp-link,.consent a{text-decoration-thickness:1px;text-underline-offset:4px}
+/* scorecard band: breathing room above the separation line */
+#scorecard.sec{padding-top:96px}
+@media (max-width:640px){#scorecard.sec{padding-top:56px}}
+
+/* hairlines@2x */
+@media (min-resolution:2dppx){
+.nav{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--paper) 14%,transparent)}
+.hero-copy .chip{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--paper) 18%,transparent)}
+.info{border-color:transparent;box-shadow:0 0 0 .5px var(--line-d)}
+.scard{border-color:transparent;box-shadow:0 0 0 .5px var(--line-d)}
+.scard:hover{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--lav) 30%,transparent)}
+.scard .more{border-top-color:transparent;box-shadow:0 -.5px 0 0 var(--line-d)}
+.tier{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.tier[aria-selected="true"]{border-color:transparent;box-shadow:0 0 0 .5px var(--ink),0 30px 60px -30px color-mix(in srgb,var(--ink) 60%,transparent)}
+.prog .q{border-top-color:transparent;box-shadow:0 -.5px 0 0 var(--line-l)}
+.slot{border-top-color:transparent;box-shadow:0 -.5px 0 0 var(--line-l)}
+.gallery-arrow{border-color:transparent;box-shadow:0 0 0 .5px var(--line-d)}
+.pill-link{border-color:transparent;box-shadow:0 0 0 .5px var(--line-d)}
+.qa{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.field input,.field textarea{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.field input:focus,.field textarea:focus{border-color:transparent;box-shadow:0 0 0 .5px var(--lav-deep),0 0 0 3px color-mix(in srgb,var(--lav) 40%,transparent)}
+.btn-line{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.btn-line:hover{border-color:transparent;box-shadow:0 0 0 .5px var(--ink)}
+.wordmark{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--lav) 55%,transparent)}
+.lp-card{border-color:transparent;box-shadow:0 0 0 .5px var(--line-d)}
+.light .lp-card{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.lp-op{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.lp-tool{border-color:transparent;box-shadow:0 0 0 .5px var(--line-d)}
+.lp-tool .metric{border-top-color:transparent;box-shadow:0 -.5px 0 0 var(--line-d)}
+.lp-offer{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.lp-det{border-top-color:transparent;box-shadow:0 -.5px 0 0 var(--line-l)}
+.lp-conf p{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.lp-out{border-top-color:transparent;box-shadow:0 -.5px 0 0 var(--line-l)}
+.lp-round .main{border-color:transparent;box-shadow:0 0 0 .5px var(--line-d)}
+.lp-round ul.glance{border-color:transparent;box-shadow:0 0 0 .5px var(--line-d)}
+.lp-case .ctx{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.lp-opt{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.lp-opt:hover{border-color:transparent;box-shadow:0 0 0 .5px var(--lav-deep)}
+.lp-opt.selected{border-color:transparent;box-shadow:0 0 0 .5px var(--ink)}
+.track span{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.track input:checked+span{border-color:transparent;box-shadow:0 0 0 .5px var(--ink)}
+.field select{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.field select:focus{border-color:transparent;box-shadow:0 0 0 .5px var(--lav-deep),0 0 0 3px color-mix(in srgb,var(--lav) 40%,transparent)}
+.cookie{border-color:transparent;box-shadow:0 0 0 .5px var(--line-d)}
+.cookie button{border-color:transparent;box-shadow:0 0 0 .5px var(--line-d)}
+.cookie button.yes{border-color:transparent;box-shadow:0 0 0 .5px var(--lav)}
+.lp-fo{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.lp-pr{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.light .lp-sc{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l),0 2px 8px rgba(11,21,35,.04)}
+#contact .form-card{border-color:transparent;box-shadow:0 0 0 .5px rgba(255,255,255,.10)}
+#contact .form-card .field input,#contact .form-card .field textarea{border-color:transparent;box-shadow:0 0 0 .5px rgba(255,255,255,.14)}
+#contact .form-card .field input:focus,#contact .form-card .field textarea:focus{border-color:transparent;box-shadow:0 0 0 .5px var(--lav),0 0 0 3px color-mix(in srgb,var(--lav) 30%,transparent)}
+#contact .form-card .track span{border-color:transparent;box-shadow:0 0 0 .5px rgba(255,255,255,.18)}
+#contact .form-card .track input:checked+span{border-color:transparent;box-shadow:0 0 0 .5px var(--lav)}
+.light .lp-tool{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--ink) 14%,transparent)}
+.light .lp-tool:hover{border-color:transparent;box-shadow:0 0 0 .5px var(--lav-deep)}
+.light.bench-dark .bcard{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--ink) 12%,transparent)}
+.info li{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--paper) 14%,transparent)}
+.info li:hover{border-color:transparent;box-shadow:0 0 0 .5px var(--lav)}
+.lp-round ul.glance li{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--paper) 14%,transparent)}
+#problem .lp-card{border-top-color:transparent;box-shadow:0 -.5px 0 0 color-mix(in srgb,var(--ink) 40%,transparent)}
+.lp-loop{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--ink) 9%,transparent)}
+.lp-lp .n{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--lav-deep) 40%,transparent)}
+.lp-lp .n::before{border-top-color:transparent;border-right-color:transparent;box-shadow:0 -.5px 0 0 var(--lav-deep),.5px 0 0 0 var(--lav-deep)}
+#scorecard>.wrap{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--ink) 12%,transparent)}
+.sec.light+.sec.light{border-top-color:transparent;box-shadow:0 -.5px 0 0 color-mix(in srgb,var(--ink) 11%,transparent)}
+.field input,.field textarea,.field select{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--ink) 16%,transparent)}
+.field input:focus,.field textarea:focus,.field select:focus{border-color:transparent;box-shadow:0 0 0 .5px var(--lav-deep),0 0 0 3px color-mix(in srgb,var(--lav-deep) 14%,transparent)}
+#contact .form-card .field select{border-color:transparent;box-shadow:0 0 0 .5px rgba(255,255,255,.16)}
+.info li,.lp-round ul.glance li{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--paper) 10%,transparent)}
+.light .lp-tool,.light .lp-tool .metric{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--ink) 10%,transparent)}
+.light.bench-dark .bcard{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--ink) 9%,transparent)}
+.field input,.field textarea,.field select{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--ink) 14%,transparent)}
+.lp-more>summary{border-color:transparent;box-shadow:0 0 0 .5px color-mix(in srgb,var(--ink) 18%,transparent)}
+.lp-more>summary:hover{border-color:transparent;box-shadow:0 0 0 .5px var(--lav-deep)}
+.sec.light+.sec.island,.sec.island+.sec.light{border-top-color:transparent;box-shadow:0 -.5px 0 0 color-mix(in srgb,var(--ink) 11%,transparent)}
+.fs-note{border-color:transparent;box-shadow:0 0 0 .5px var(--line-l)}
+.fs-what{border-top-color:transparent;box-shadow:0 -.5px 0 0 var(--line-l)}
+.lp-teamhead .chip{border-color:transparent;box-shadow:0 0 0 .5px rgba(248,249,250,.22)}
+}
+/* end hairlines */
