@@ -446,3 +446,7 @@ dialog.lp-dlg{margin:max(12px,5svh) auto auto;max-height:calc(100svh - max(12px,
 @media (max-width:720px){.lp-loopimg{margin-bottom:24px;overflow-x:auto;-webkit-overflow-scrolling:touch}.lp-loopimg img{min-width:620px}}
 
 .lp-fo .fo-acts{display:flex;flex-wrap:wrap;align-items:center;gap:12px 28px}
+/* Sven and Vincent: same photo size and framing as the practitioner cards */
+.lp-fo .p{grid-template-columns:96px 1fr;gap:18px}
+.lp-fo .p img{width:96px;height:96px;border-radius:16px;object-position:center 22%}
+@media (max-width:640px){.lp-fo .p{grid-template-columns:80px 1fr}.lp-fo .p img{width:80px;height:80px}}
