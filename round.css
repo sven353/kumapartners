@@ -634,3 +634,39 @@ dialog.charter::backdrop{background:color-mix(in srgb,var(--ink) 72%,transparent
 /* buttons and links: body font, normal spacing */
 .btn,.tlink,.pill-link,.menu-btn{font-family:var(--font-body);font-weight:600;letter-spacing:0}
 .btn,.menu-btn,.tlink,.pill-link{font-size:15px}
+
+/* city partner card: a quiet light card, not a dark bar */
+.citycard{background:#fff;color:var(--ink);border:1px solid color-mix(in srgb,var(--ink) 11%,transparent);margin-bottom:0}
+.citycard .chip{background:color-mix(in srgb,var(--lav-deep) 12%,transparent);color:var(--lav-deep)}
+.citycard .h3x{color:var(--ink)}
+.citycard p:not(.chip){color:var(--muted-l)}
+.citycard{width:min(1296px,calc(100% - 2*var(--pad)));margin-inline:auto;margin-top:72px;padding:36px 44px}
+@media (max-width:960px){.citycard{margin-top:48px;padding:28px 24px}}
+
+/* ===== 5 Nov 2026 fixes ===== */
+/* Hero: the roll-up banner in the photo sat right behind the label and the
+   headline. A soft blur that is strongest on the left (gone by the middle)
+   plus a slightly deeper left shade make it recede, so the two texts no
+   longer compete. The group on the right stays sharp. */
+@media (min-width:721px){
+  .hero-shade::before{content:"";position:absolute;inset:0;
+    -webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);
+    -webkit-mask-image:linear-gradient(90deg,#000 0%,#000 34%,rgba(0,0,0,.4) 46%,transparent 58%);
+    mask-image:linear-gradient(90deg,#000 0%,#000 34%,rgba(0,0,0,.4) 46%,transparent 58%)}
+  .hero-shade{background:
+    linear-gradient(0deg,var(--shade) 0%,color-mix(in srgb,var(--shade) 62%,transparent) 30%,transparent 64%),
+    linear-gradient(90deg,color-mix(in srgb,var(--shade) 84%,transparent) 0%,color-mix(in srgb,var(--shade) 58%,transparent) 36%,color-mix(in srgb,var(--shade) 22%,transparent) 54%,transparent 74%),
+    linear-gradient(180deg,color-mix(in srgb,var(--shade) 45%,transparent) 0%,transparent 18%)}
+}
+/* Phones: the menu bar ran past the right edge (Menu + logo + "Candidate
+   review" did not fit in 366px). The button is tightened and kept on one
+   line; on the narrowest phones the word "Menu" is hidden visually and stays
+   readable for screen readers. */
+@media (max-width:720px){
+  .nav .btn{flex:none;padding:0 14px;font-size:14px;white-space:nowrap}
+  .nav .logo{min-width:0;flex:0 1 auto}
+}
+@media (max-width:420px){
+  .menu-btn{gap:0;padding:0 12px;font-size:0}
+  .menu-btn .bars{flex:none}
+}
