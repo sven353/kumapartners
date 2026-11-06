@@ -424,3 +424,19 @@ dialog.lp-dlg{margin:max(12px,5svh) auto auto;max-height:calc(100svh - max(12px,
 .lp-banner{margin:44px 0 0;border-radius:24px;overflow:hidden;aspect-ratio:5/2;background:color-mix(in srgb,var(--ink) 8%,var(--paper))}
 .lp-banner img{display:block;width:100%;height:100%;object-fit:cover;object-position:50% 35%}
 @media (max-width:720px){.lp-banner{margin-top:28px;border-radius:20px;aspect-ratio:4/3}.lp-banner img{object-position:42% 35%}}
+
+/* merged team header: photo with a slight gradient, as on The Round */
+.lp-teamhead{position:relative;isolation:isolate;overflow:hidden;border-radius:28px;min-height:460px;display:grid;grid-template-columns:7fr 5fr;gap:48px;align-items:end;padding:56px;margin-bottom:40px;color:#fff;background:var(--ink)}
+.lp-teamhead>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:50% 35%;z-index:-2}
+.lp-teamhead::before{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(11,21,35,.9) 0%,rgba(11,21,35,.66) 48%,rgba(11,21,35,.28) 100%),linear-gradient(0deg,rgba(11,21,35,.55) 0%,rgba(11,21,35,0) 55%)}
+.lp-teamhead .th-copy{display:grid;justify-items:start;gap:20px}
+.lp-teamhead .chip{background:rgba(248,249,250,.14);color:#F8F9FA;border:1px solid rgba(248,249,250,.22);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.lp-teamhead .h2{color:#F8F9FA}
+.lp-teamhead .h2 .lav{color:#74BCCD}
+.lp-teamhead .sub{margin:0;max-width:34em;color:rgba(248,249,250,.86);font-size:17px;line-height:1.55}
+@media (max-width:900px){.lp-teamhead{grid-template-columns:1fr;gap:24px;min-height:0;padding:36px 24px;border-radius:22px;margin-bottom:28px}.lp-teamhead>img{object-position:42% 35%}}
+/* The Round island: equal breathing room above and below */
+#round.sec.island{padding-top:96px;padding-bottom:96px}
+@media (max-width:640px){#round.sec.island{padding-top:56px;padding-bottom:56px}}
+#partners.sec{padding-top:96px}
+@media (max-width:640px){#partners.sec{padding-top:56px}}
