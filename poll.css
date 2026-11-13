@@ -82,7 +82,12 @@ textarea.pl-in{min-height:132px;resize:vertical}
 @media (prefers-reduced-motion:reduce){.pl-pulse{animation:none}.btn,.btn.go::after{transition:none}}
 .pl-done{display:grid;justify-items:center;gap:14px;text-align:center;padding:14px 0;color:var(--muted-l)}
 .pl-card{background:var(--pr-card);border-radius:22px;padding:22px 20px;box-shadow:0 0 0 1px var(--line-l)}
-.pl-foot{max-width:640px;margin:0 auto;padding:6px 24px max(28px,env(safe-area-inset-bottom));font-size:12.5px;color:var(--muted-l);text-align:center}
+.pl-foot{max-width:640px;margin:0 auto;padding:10px 24px max(28px,env(safe-area-inset-bottom));color:var(--muted-l);text-align:center;display:grid;gap:12px}
+.pl-privacy{font-size:14px;line-height:1.55;color:var(--ink)}
+.pl-privacy strong{font-family:var(--font-display);font-weight:700;color:var(--lav-deep)}
+.pl-small{font-size:12.5px}
+.pl-credit{font-size:12.5px;padding-top:14px;margin-top:4px;border-top:1px solid var(--line-l)}
+@media (min-resolution:2dppx){.pl-credit{border-top-width:.5px}}
 
 /* ---------- results renderers ---------- */
 .pr-n{font-size:14px;color:var(--pr-muted);margin-top:16px}
