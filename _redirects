@@ -131,7 +131,9 @@ http://www.kumapartners.eu/*     https://www.kuma.partners/:splat    301!
 /PPI-engagement/        /poll.html           200!
 /PPI-engagement/screen  /poll-screen.html    200!
 /PPI-engagement/admin   /poll-admin.html     200!
+/PPI-engagement/moderator /poll-mod.html     200!
 /ppi-engagement         /poll.html           200!
 /ppi-engagement/        /poll.html           200!
 /ppi-engagement/screen  /poll-screen.html    200!
 /ppi-engagement/admin   /poll-admin.html     200!
+/ppi-engagement/moderator /poll-mod.html     200!

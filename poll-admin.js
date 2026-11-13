@@ -9,7 +9,8 @@
   var model = null, dirty = false;
   var peek = null, peekOn = false;
   var timers = [];
-  var TYPE_LABEL = { single: 'Single choice', multiple: 'Multiple choice', scale: 'Rating 1 to 7', cloud: 'Word cloud', text: 'Open text' };
+  var qaFeed = null;
+  var TYPE_LABEL = { single: 'Single choice', multiple: 'Multiple choice', scale: 'Rating 1 to 7', cloud: 'Word cloud', text: 'Open text', qa: 'Live Q&A' };
 
   function h(tag, attrs, kids) {
     var e = document.createElement(tag);
@@ -21,7 +22,7 @@
     [].concat(kids == null ? [] : kids).forEach(function (c) { if (c != null && c !== false) e.appendChild(typeof c === 'string' ? document.createTextNode(c) : c); });
     return e;
   }
-  function clearTimers() { timers.forEach(clearInterval); timers = []; }
+  function clearTimers() { timers.forEach(clearInterval); timers = []; qaFeed = null; }
   function toast(msg) {
     var t = h('div', { class: 'pa-toast', role: 'status' }, msg);
     document.body.appendChild(t);
@@ -128,11 +129,30 @@
     panel.appendChild(h('span', { class: 'pa-chip ' + st.phase }, phaseText));
     panel.appendChild(h('p', { class: 'pa-q' }, cur.text));
     panel.appendChild(h('p', { class: 'pa-note' }, TYPE_LABEL[cur.type] + (cur.type === 'multiple' ? ', up to ' + cur.max + ' choices' : '')));
+    var isQa = cur.type === 'qa';
     var countB = h('b', {}, String(data.counts[cur.id] || 0));
-    panel.appendChild(h('div', { class: 'pa-big' }, [countB, h('span', { class: 'pa-note' }, 'answered')]));
+    panel.appendChild(h('div', { class: 'pa-big' }, [countB, h('span', { class: 'pa-note' }, isQa ? 'questions' : 'answered')]));
 
     var acts = h('div', { class: 'pa-acts' });
-    if (st.phase === 'ready') {
+    if (isQa) {
+      if (st.phase === 'ready') acts.appendChild(h('button', { class: 'btn go', type: 'button', onclick: function () { act({ action: 'open' }); } }, 'Open Q&A'));
+      else if (st.phase === 'open') acts.appendChild(h('button', { class: 'btn go', type: 'button', onclick: function () { act({ action: 'show' }); } }, 'Close Q&A'));
+      else {
+        acts.appendChild(h('button', { class: 'btn ghost', type: 'button', onclick: function () { act({ action: 'open' }); } }, 'Re-open Q&A'));
+        acts.appendChild(h('button', { class: 'btn go', type: 'button', onclick: function () { act({ action: 'next' }); } }, 'Next question'));
+      }
+      panel.appendChild(acts);
+      panel.appendChild(h('p', { class: 'pa-note' }, st.phase === 'ready' ? 'Phones switch to the Q&A within a few seconds of opening.' : 'Questions appear on the big screen at once. Each person can send up to three. Someone from HR can read them out on the moderator page.'));
+      panel.appendChild(h('p', { class: 'pa-note' }, ['Moderator page for HR: ', h('a', { href: '/PPI-engagement/moderator', target: '_blank', rel: 'noopener' }, 'kuma.partners/PPI-engagement/moderator')]));
+      if (st.phase !== 'ready') {
+        var qbox = h('div', { class: 'pa-sub' });
+        var qlist = h('div', { class: 'qa-list admin' });
+        qbox.appendChild(h('h3', {}, 'Live questions'));
+        qbox.appendChild(qlist);
+        panel.appendChild(qbox);
+        startQa(qlist, 'new');
+      }
+    } else if (st.phase === 'ready') {
       acts.appendChild(h('button', { class: 'btn go', type: 'button', onclick: function () { act({ action: 'open' }); } }, 'Open poll'));
       panel.appendChild(acts);
       panel.appendChild(h('p', { class: 'pa-note' }, 'Phones switch to this question within a few seconds of opening.'));
@@ -152,7 +172,7 @@
     }
 
     var box = h('div', { class: 'pa-sub' });
-    panel.appendChild(box);
+    if (!isQa) panel.appendChild(box);
     var drawPeek = function (res) {
       box.textContent = '';
       box.appendChild(h('h3', {}, st.phase === 'shown' ? 'Results, with moderation' : 'Live answers (only you see this)'));
@@ -161,7 +181,8 @@
       PollRender.render(holder, res, { admin: true, onHide: function (token, hid) { act({ action: 'hide', qid: cur.id, token: token, hidden: hid }); } });
     };
     var doPeek = function () { call({ action: 'peek', qid: cur.id }).then(function (r) { if (r.status === 200) drawPeek(r.body.result); }); };
-    if (st.phase === 'shown' || (st.phase === 'open' && peekOn)) { doPeek(); if (st.phase === 'open') timers.push(setInterval(doPeek, 4000)); }
+    if (isQa) { /* the live list above replaces the peek */ }
+    else if (st.phase === 'shown' || (st.phase === 'open' && peekOn)) { doPeek(); if (st.phase === 'open') timers.push(setInterval(doPeek, 4000)); }
     else box.hidden = true;
 
     if (st.phase === 'open' || st.phase === 'ready') {
@@ -180,12 +201,35 @@
     return h('div', { class: 'pa-run' }, [list, panel]);
   }
 
+  // live Q&A list inside the presenter page, refreshed every second
+  function startQa(box, order) {
+    var feed = PollQA.create({
+      keepHidden: true,
+      get: function (keys) { return call({ action: 'qa_get', keys: keys }).then(function (r) { return r.status === 200 ? r.body.items : []; }); },
+      onChange: function (items, curKey) {
+        PollQA.draw(box, items, curKey, {
+          order: order, controls: true, empty: 'No questions yet.',
+          onCur: function (k) { call({ action: 'qa_current', k: k }).then(function () { tickQa(); }); },
+          onDone: function (k, on) { call({ action: 'qa_done', k: k, on: on }).then(function () { tickQa(); }); },
+          onHide: function (k, on) { call({ action: 'qa_hide', k: k, on: !on ? false : true }).then(function () { tickQa(); }); }
+        });
+      }
+    });
+    function tickQa() {
+      return call({ action: 'qa_keys' }).then(function (r) { if (r.status === 200) return feed.update(r.body.keys, r.body.cur); });
+    }
+    qaFeed = feed;
+    tickQa();
+    timers.push(setInterval(tickQa, 1000));
+  }
+
   // ---------- editor ----------
   function newId() { return 'n' + Math.random().toString(16).slice(2, 8); }
   function blank(type) {
     var q = { id: newId(), type: type, text: '' };
     if (type === 'single' || type === 'multiple') { q.options = [{ id: newId(), label: '' }, { id: newId(), label: '' }]; if (type === 'multiple') q.max = 2; }
     if (type === 'scale') { q.low = ''; q.high = ''; }
+    if (type === 'qa') q.text = 'Your questions for us';
     return q;
   }
   function editView() {
@@ -237,6 +281,7 @@
         ]));
       }
       if (q.type === 'cloud') card.appendChild(h('p', { class: 'pa-note' }, 'Each person can enter up to three words.'));
+      if (q.type === 'qa') card.appendChild(h('p', { class: 'pa-note' }, 'Each person can send up to three questions, up to 280 characters each. They show on the big screen at once. Put this question last.'));
       if (q.type === 'text') card.appendChild(h('p', { class: 'pa-note' }, 'Answers are limited to 280 characters.'));
       if (votes > 0) card.appendChild(h('p', { class: 'pa-note' }, votes + ' answers are stored for this question in the current mode. After changing options or the scale, reset the question on the Run tab.'));
       wrap.appendChild(card);

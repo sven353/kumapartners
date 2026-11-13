@@ -7,6 +7,7 @@
 //   votes/<mode>/<qid>/<voter>     one record per voter and question (a repeat vote overwrites, never doubles)
 //   final/<mode>/<qid>             the results frozen when "Show results" is pressed
 //   hidden/<mode>/<qid>            answers or words the presenter has hidden
+//   qa/<mode>/<qid>/<who>~<slot>   one live Q&A question (at most 3 per person), with flags h (hidden) and d (answered)
 //
 // <mode> is "rehearsal" or "live", so test votes never mix with the real ones.
 //
@@ -15,7 +16,8 @@
 import { createHash, timingSafeEqual, randomBytes } from 'node:crypto';
 
 export const MODES = ['rehearsal', 'live'];
-export const TYPES = ['single', 'multiple', 'scale', 'cloud', 'text'];
+export const TYPES = ['single', 'multiple', 'scale', 'cloud', 'text', 'qa'];
+const QA_MAX = 3;
 const MAX_QUESTIONS = 20;
 const MAX_OPTIONS = 10;
 
@@ -54,10 +56,21 @@ export const DEFAULT_QUESTIONS = [
       { id: 'o4', label: 'It depends on the stakes' }
     ]
   },
-  { id: 'q6', type: 'text', text: 'What is one question about AI and wellbeing you would like answered today?' }
+  { id: 'q6', type: 'text', text: 'What is one question about AI and wellbeing you would like answered today?' },
+  { id: 'q7', type: 'qa', text: 'Your questions for us' }
 ];
 
-const DEFAULT_STATE = { rev: 0, mode: 'rehearsal', qid: null, phase: 'idle', phones: false, oid: null };
+function migrate(cfg) {
+  if (cfg.v >= 2) return cfg;
+  let questions = cfg.questions;
+  if (!questions.some((q) => q.type === 'qa') && questions.length < MAX_QUESTIONS) {
+    const ids = new Set(questions.map((q) => q.id));
+    questions = [...questions, { id: ids.has('q7') ? rid('q') : 'q7', type: 'qa', text: 'Your questions for us' }];
+  }
+  return { ...cfg, questions, v: 2 };
+}
+
+const DEFAULT_STATE = { rev: 0, mode: 'rehearsal', qid: null, phase: 'idle', phones: false, oid: null, qaCur: null };
 
 const bad = (message, status = 400) => Object.assign(new Error(message), { status });
 const clean = (s, n) => String(s ?? '').replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, n);
@@ -134,7 +147,8 @@ export function validateAnswer(q, a) {
       }
       return words.length ? words.slice(0, 3) : null;
     }
-    case 'text': {
+    case 'text':
+    case 'qa': {
       const s = clean(a, 280);
       return s || null;
     }
@@ -154,18 +168,25 @@ const K = {
   final: (m, q) => `final/${m}/${q}`,
   finalMode: (m) => `final/${m}/`,
   hidden: (m, q) => `hidden/${m}/${q}`,
-  hiddenMode: (m) => `hidden/${m}/`
+  hiddenMode: (m) => `hidden/${m}/`,
+  qa: (m, q, t) => `qa/${m}/${q}/${t}`,
+  qas: (m, q) => `qa/${m}/${q}/`,
+  qaMode: (m) => `qa/${m}/`
 };
+const who = (voter) => createHash('sha1').update('qa:' + voter).digest('hex').slice(0, 12);
 const getJSON = (store, key) => store.get(key, { type: 'json', consistency: 'strong' });
 
 async function loadConfig(store, { seed = false } = {}) {
   let cfg = await getJSON(store, K.config);
   if (!cfg || !Array.isArray(cfg.questions)) {
-    cfg = { questions: DEFAULT_QUESTIONS, seeded: false };
+    cfg = { questions: DEFAULT_QUESTIONS, seeded: false, v: 2 };
     if (seed) {
-      cfg = { questions: DEFAULT_QUESTIONS, seeded: true };
+      cfg = { questions: DEFAULT_QUESTIONS, seeded: true, v: 2 };
       await store.setJSON(K.config, cfg);
     }
+  } else if (!(cfg.v >= 2)) {
+    cfg = migrate(cfg);
+    if (seed) await store.setJSON(K.config, cfg);
   }
   return cfg;
 }
@@ -181,6 +202,23 @@ async function saveState(store, state) {
 async function keysUnder(store, prefix) {
   const res = await store.list({ prefix });
   return (res.blobs || []).map((b) => b.key);
+}
+async function keysEtags(store, prefix) {
+  const res = await store.list({ prefix });
+  return (res.blobs || []).map((b) => ({ k: b.key, e: b.etag || '' }));
+}
+// number of answers or questions for one poll question
+async function countFor(store, mode, q) {
+  return (await keysUnder(store, q.type === 'qa' ? K.qas(mode, q.id) : K.votes(mode, q.id))).length;
+}
+async function loadQa(store, mode, qid, keys) {
+  const prefix = K.qas(mode, qid);
+  const list = (keys || (await keysUnder(store, prefix))).filter((k) => typeof k === 'string' && k.startsWith(prefix) && k.length < prefix.length + 40);
+  const rows = await inChunks(list, 40, async (k) => {
+    const v = await getJSON(store, k);
+    return v ? { k, a: v.a, t: v.t || 0, h: v.h ? 1 : 0, d: v.d ? 1 : 0 } : null;
+  });
+  return rows.filter(Boolean);
 }
 async function inChunks(items, size, fn) {
   const out = [];
@@ -255,9 +293,15 @@ async function buildCsv(store, mode, cfg) {
   const rows = [['question_no', 'question', 'type', 'answer', 'count']];
   for (let i = 0; i < cfg.questions.length; i++) {
     const q = cfg.questions[i];
+    const head = [i + 1, q.text, q.type];
+    if (q.type === 'qa') {
+      const items = (await loadQa(store, mode, q.id)).sort((a, b) => a.t - b.t);
+      rows.push([...head, '(responses)', items.length]);
+      items.forEach((t) => rows.push([...head, t.a + (t.h ? ' (hidden)' : '') + (t.d ? ' (answered)' : ''), 1]));
+      continue;
+    }
     const [votes, hidden] = await Promise.all([loadVotes(store, mode, q.id), loadHidden(store, mode, q.id)]);
     const r = aggregate(q, votes, hidden, { admin: true });
-    const head = [i + 1, q.text, q.type];
     rows.push([...head, '(responses)', r.n]);
     if (r.options) r.options.forEach((o) => rows.push([...head, o.label, o.count]));
     if (r.dist) r.dist.forEach((c, k) => rows.push([...head, String(k + 1), c]));
@@ -293,8 +337,49 @@ async function overview(store, seed) {
   const cfg = await loadConfig(store, { seed });
   const state = await loadState(store);
   const counts = {};
-  await Promise.all(cfg.questions.map(async (q) => { counts[q.id] = (await keysUnder(store, K.votes(state.mode, q.id))).length; }));
+  await Promise.all(cfg.questions.map(async (q) => { counts[q.id] = await countFor(store, state.mode, q); }));
   return { config: { questions: cfg.questions }, state, counts };
+}
+
+// Live Q&A moderation. Used by the presenter page and by the optional moderator page.
+function qaTarget(cfg, state, qid) {
+  const qs = cfg.questions.filter((x) => x.type === 'qa');
+  return qs.find((x) => x.id === qid) || qs.find((x) => x.id === state.qid) || qs[0] || null;
+}
+async function qaAction(store, cfg, state, b) {
+  const q = qaTarget(cfg, state, b.qid);
+  if (!q) throw bad('There is no Q&A question yet. Add one in the Questions tab.', 409);
+  const mode = state.mode;
+  const prefix = K.qas(mode, q.id);
+  const okKey = (k) => typeof k === 'string' && k.startsWith(prefix) && k.length < prefix.length + 40;
+  switch (b.action) {
+    case 'qa_keys':
+      return { qid: q.id, mode, phase: state.qid === q.id ? state.phase : 'idle', cur: state.qaCur || null, keys: await keysEtags(store, prefix) };
+    case 'qa_get':
+      return { items: await loadQa(store, mode, q.id, Array.isArray(b.keys) ? b.keys.slice(0, 120) : []) };
+    case 'qa_hide':
+    case 'qa_done': {
+      if (!okKey(b.k)) throw bad('Unknown question.');
+      const v = await getJSON(store, b.k);
+      if (!v) throw bad('Unknown question.', 404);
+      const flag = b.action === 'qa_hide' ? 'h' : 'd';
+      if (b.on === false) delete v[flag]; else v[flag] = 1;
+      await store.setJSON(b.k, v);
+      if (flag === 'h' && v.h && state.qaCur === b.k) { state.qaCur = null; await saveState(store, state); }
+      return { ok: true };
+    }
+    default: { // qa_current
+      if (b.k && !okKey(b.k)) throw bad('Unknown question.');
+      const prev = state.qaCur;
+      if (prev && prev !== (b.k || null) && okKey(prev)) {
+        const pv = await getJSON(store, prev);
+        if (pv) { pv.d = 1; await store.setJSON(prev, pv); }
+      }
+      state.qaCur = b.k || null;
+      await saveState(store, state);
+      return { ok: true };
+    }
+  }
 }
 
 async function adminAction(store, b) {
@@ -309,19 +394,19 @@ async function adminAction(store, b) {
     case 'overview': return overview(store, true);
     case 'count': {
       const q = qOf(b.qid || state.qid);
-      return { n: q ? (await keysUnder(store, K.votes(mode, q.id))).length : 0, rev: state.rev, phase: state.phase };
+      return { n: q ? await countFor(store, mode, q) : 0, rev: state.rev, phase: state.phase };
     }
     case 'save': {
       const questions = sanitizeQuestions(b.questions);
-      await store.setJSON(K.config, { questions, seeded: true });
+      await store.setJSON(K.config, { questions, seeded: true, v: 2 });
       if (state.qid && !questions.some((x) => x.id === state.qid)) {
-        Object.assign(state, { qid: null, phase: 'idle', phones: false, oid: null });
+        Object.assign(state, { qid: null, phase: 'idle', phones: false, oid: null, qaCur: null });
       }
       await saveState(store, state);
       return overview(store, false);
     }
     case 'restore': {
-      await store.setJSON(K.config, { questions: DEFAULT_QUESTIONS, seeded: true });
+      await store.setJSON(K.config, { questions: DEFAULT_QUESTIONS, seeded: true, v: 2 });
       Object.assign(state, { qid: null, phase: 'idle', phones: false, oid: null });
       await saveState(store, state);
       return overview(store, false);
@@ -364,14 +449,15 @@ async function adminAction(store, b) {
     case 'show': {
       const q = need();
       if (state.phase !== 'open' && state.phase !== 'shown') throw bad('Open the poll first.', 409);
-      await freezeResults(store, mode, q);
+      if (q.type !== 'qa') await freezeResults(store, mode, q);
       Object.assign(state, { phase: 'shown' });
       await saveState(store, state);
       return overview(store, false);
     }
     case 'publish':
     case 'unpublish': {
-      need();
+      const pq = need();
+      if (pq.type === 'qa') throw bad('The Q&A list stays on the main screen.', 409);
       if (state.phase !== 'shown') throw bad('Show the results first.', 409);
       state.phones = act === 'publish';
       await saveState(store, state);
@@ -380,12 +466,13 @@ async function adminAction(store, b) {
     case 'peek': {
       const q = qOf(b.qid || state.qid);
       if (!q) throw bad('Unknown question.');
+      if (q.type === 'qa') return { qid: q.id, result: { type: 'qa', n: await countFor(store, mode, q) } };
       const [votes, hidden] = await Promise.all([loadVotes(store, mode, q.id), loadHidden(store, mode, q.id)]);
       return { qid: q.id, result: aggregate(q, votes, hidden, { admin: true }) };
     }
     case 'hide': {
       const q = qOf(b.qid);
-      if (!q) throw bad('Unknown question.');
+      if (!q || q.type === 'qa') throw bad('Unknown question.');
       const tok = (q.type === 'cloud' ? 'w:' : 'v:') + clean(b.token, 40).toLowerCase().slice(0, 40);
       const token = q.type === 'cloud' ? tok : 'v:' + idOf(b.token, 8);
       const set = await loadHidden(store, mode, q.id);
@@ -396,17 +483,24 @@ async function adminAction(store, b) {
     }
     case 'reset': {
       if (b.scope === 'all') {
-        const n = (await clearPrefix(store, K.votesMode(mode))) + (await clearPrefix(store, K.finalMode(mode))) + (await clearPrefix(store, K.hiddenMode(mode)));
+        const n = (await clearPrefix(store, K.votesMode(mode))) + (await clearPrefix(store, K.finalMode(mode))) + (await clearPrefix(store, K.hiddenMode(mode))) + (await clearPrefix(store, K.qaMode(mode)));
         if (state.qid) Object.assign(state, { phase: 'ready', phones: false, oid: null });
+        state.qaCur = null;
         await saveState(store, state);
         return { ...(await overview(store, false)), removed: n };
       }
       const q = qOf(b.qid);
       if (!q) throw bad('Unknown question.');
-      const n = (await clearPrefix(store, K.votes(mode, q.id))) + (await clearPrefix(store, K.final(mode, q.id))) + (await clearPrefix(store, K.hidden(mode, q.id)));
-      if (state.qid === q.id) { Object.assign(state, { phase: 'ready', phones: false, oid: null }); await saveState(store, state); }
+      const n = (await clearPrefix(store, K.votes(mode, q.id))) + (await clearPrefix(store, K.final(mode, q.id))) + (await clearPrefix(store, K.hidden(mode, q.id))) + (await clearPrefix(store, K.qas(mode, q.id)));
+      if (state.qid === q.id) { Object.assign(state, { phase: 'ready', phones: false, oid: null, qaCur: null }); await saveState(store, state); }
       return { ...(await overview(store, false)), removed: n };
     }
+    case 'qa_keys':
+    case 'qa_get':
+    case 'qa_hide':
+    case 'qa_done':
+    case 'qa_current':
+      return qaAction(store, cfg, state, b);
     case 'export': {
       const stamp = new Date().toISOString().slice(0, 10);
       return { csv: await buildCsv(store, mode, cfg), filename: `poll-${mode}-${stamp}.csv` };
@@ -431,6 +525,14 @@ export async function handle(req, store, env = {}) {
       const out = publicState(cfg, state);
       const q = state.qid && cfg.questions.find((x) => x.id === state.qid);
       if (q) out.question = q;
+      if (q && q.type === 'qa') {
+        if (state.phase === 'open' || state.phase === 'shown') {
+          out.cur = state.qaCur || null;
+          out.keys = await keysEtags(store, K.qas(state.mode, q.id));
+          out.n = out.keys.length;
+        }
+        return { status: 200, body: out };
+      }
       if (q && (state.phase === 'open' || state.phase === 'ready')) out.n = (await keysUnder(store, K.votes(state.mode, q.id))).length;
       if (q && state.phase === 'shown') {
         const f = await getJSON(store, K.final(state.mode, q.id));
@@ -457,8 +559,43 @@ export async function handle(req, store, env = {}) {
       if (!q || state.phase !== 'open' || b.qid !== q.id) return { status: 409, body: { error: 'closed' } };
       const a = validateAnswer(q, b.answer);
       if (a === null) throw bad('That answer does not fit the question.');
+      if (q.type === 'qa') {
+        const base = who(b.voter);
+        const key = K.qa(state.mode, q.id, base + '~' + Date.now().toString(36) + randomBytes(2).toString('hex'));
+        await store.setJSON(key, { a, t: Date.now() });
+        // limit per person: the first three keys (in sorted order) stay, a later one is taken back
+        const mine = (await keysUnder(store, K.qa(state.mode, q.id, base + '~'))).sort();
+        const at = mine.indexOf(key);
+        if (at >= QA_MAX) { await store.delete(key); return { status: 409, body: { error: 'limit', left: 0 } }; }
+        return { status: 200, body: { ok: true, left: QA_MAX - Math.min(mine.length, QA_MAX) } };
+      }
       await store.setJSON(K.vote(state.mode, q.id, b.voter), { a, t: Date.now() });
       return { status: 200, body: { ok: true } };
+    }
+
+    // public read of the live Q&A list: only the questions that are visible on the main screen
+    if (route === 'qa' && method === 'POST') {
+      const [cfg, state] = await Promise.all([loadConfig(store), loadState(store)]);
+      const q = state.qid && cfg.questions.find((x) => x.id === state.qid);
+      if (!q || q.type !== 'qa' || (state.phase !== 'open' && state.phase !== 'shown')) return { status: 404, body: { error: 'not_available' } };
+      const keys = Array.isArray((body || {}).keys) ? body.keys.slice(0, 120) : [];
+      const rows = await loadQa(store, state.mode, q.id, keys);
+      return { status: 200, body: { items: rows.map((r) => (r.h ? { k: r.k, h: 1 } : { k: r.k, a: r.a, t: r.t, d: r.d })) } };
+    }
+
+    // moderator page (someone from HR): same passphrase as the presenter, or POLL_MOD_KEY when it is set
+    if (route === 'mod' && method === 'POST') {
+      const b = body || {};
+      const modOk = env.POLL_MOD_KEY && !checkAdmin(req.adminKey, { POLL_ADMIN_KEY: env.POLL_MOD_KEY });
+      const denied = modOk ? null : checkAdmin(req.adminKey, env);
+      if (denied) {
+        if (denied.status === 401) await new Promise((r) => setTimeout(r, 400));
+        return denied;
+      }
+      if (b.action === 'verify') return { status: 200, body: { ok: true } };
+      if (!['qa_keys', 'qa_get', 'qa_hide', 'qa_done', 'qa_current'].includes(b.action)) throw bad('Unknown action.');
+      const [cfg, state] = await Promise.all([loadConfig(store), loadState(store)]);
+      return { status: 200, body: await qaAction(store, cfg, state, b) };
     }
 
     if (route === 'admin' && method === 'POST') {

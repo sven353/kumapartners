@@ -213,3 +213,30 @@ body.ps-body{background:var(--ink)}
 .pa-qrbox svg{width:240px;max-width:100%;height:auto}
 .pa-toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;border-radius:100px;padding:11px 20px;font-size:14px;z-index:9;max-width:90vw}
 .pa-err{color:var(--danger);font-size:14px}
+
+/* ---- live Q&A ---- */
+.pl-sub{font-family:var(--font-display);font-size:16px;font-weight:700;letter-spacing:-.01em;margin:26px 0 10px}
+.pl-mine{list-style:none;display:grid;gap:8px;margin:0;padding:0}
+.pl-mine li{background:var(--white);border-radius:16px;padding:12px 14px;font-size:15px;overflow-wrap:anywhere;box-shadow:0 0 0 1px var(--line-l)}
+.pl-hint{font-size:13px;color:var(--muted-l);text-align:center;margin-top:12px}
+.qa-list{display:grid;gap:10px;align-content:start}
+.qa-card{background:var(--pr-card,var(--white));border-radius:18px;padding:14px 16px;box-shadow:0 0 0 1px var(--pr-ring,var(--line-l));overflow-wrap:anywhere;color:var(--pr-fg,var(--ink))}
+.qa-text{font-size:1.05em;line-height:1.4}
+.qa-card.now{box-shadow:0 0 0 2px var(--lav);background:rgba(116,188,205,.14)}
+.qa-card.done{opacity:.5}
+.qa-card.hid{opacity:.45}
+.qa-tag{display:inline-block;font-family:var(--font-display);font-size:.72em;font-weight:700;text-transform:none;letter-spacing:.01em;padding:.2em .8em;border-radius:100px;background:var(--lav);color:var(--ink);margin-bottom:8px}
+.qa-sep{font-size:.8em;color:var(--pr-muted,var(--muted-l));padding:8px 2px 0}
+.qa-empty{color:var(--pr-muted,var(--muted-l));text-align:center;padding:1.5em 0}
+.qa-acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.qa-list.admin{--pr-card:var(--white);--pr-ring:var(--line-l);--pr-fg:var(--ink);--pr-muted:var(--muted-l)}
+.qa-list.admin .qa-card.now{background:var(--wash);box-shadow:0 0 0 2px var(--lav-deep)}
+.qa-list.admin .qa-tag{background:var(--lav-deep);color:#fff}
+.ps-panel.qa-list{align-content:start;overflow-y:auto;scrollbar-width:none;max-height:calc(100vh - 11em);max-height:calc(100dvh - 11em);font-size:1.15em}
+.ps-panel.qa-list::-webkit-scrollbar{display:none}
+.ps-count.small{align-items:flex-start;margin-top:1.2em}
+.ps-count.small b{font-size:4.5em}
+.ps-count.small span{font-size:1.1em}
+@media (max-width:700px){.qa-acts .btn{flex:1 1 auto}}
+.pa-note a{color:var(--lav-deep);text-decoration:underline;text-underline-offset:2px}
+.pa > .qa-list{margin-top:16px}

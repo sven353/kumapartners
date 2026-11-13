@@ -59,6 +59,7 @@
   function draw(force) {
     var key;
     if (!st) key = 'loading';
+    else if (st.phase === 'open' && st.question.type === 'qa') key = 'qa|' + st.oid + '|' + st.question.id + '|' + qaMine().length;
     else if (st.phase === 'open') key = 'open|' + st.oid + '|' + st.question.id + '|' + (sentAnswer() && !editing ? 'sent' : 'form');
     else if (st.phase === 'shown') key = 'shown|' + st.question.id + '|' + st.phones;
     else key = st.phase + '|' + st.index;
@@ -69,16 +70,71 @@
     if (!st) { app.appendChild(wait('Connecting', '', '')); return; }
     if (st.phase === 'idle') { app.appendChild(wait('You are in.', 'First question soon.', 'Keep this page open on your phone.')); return; }
     if (st.phase === 'ready') { app.appendChild(wait('Next question', 'coming up.', 'Keep this page open on your phone.')); return; }
-    if (st.phase === 'open') { if (sentAnswer() && !editing) drawSent(); else drawForm(); return; }
+    if (st.phase === 'open') { if (st.question.type === 'qa') drawQa(); else if (sentAnswer() && !editing) drawSent(); else drawForm(); return; }
     if (st.phase === 'shown') {
       if (st.phones) drawResults();
-      else {
+      else if (st.question && st.question.type === 'qa') {
+        setHead('Q&A is closed.', 'Thank you.', 'Your questions are on the main screen.');
+        var w2 = el('div', 'pl-wait');
+        w2.appendChild(el('p', '', 'The next question will appear here.'));
+        app.appendChild(w2);
+      } else {
         setHead('Voting is closed.', 'Thank you.', 'The results are on the main screen.');
         var w = el('div', 'pl-wait');
         w.appendChild(el('p', '', 'The next question will appear here.'));
         app.appendChild(w);
       }
     }
+  }
+
+  // Live Q&A: up to three questions per person, sent one by one. Own questions are kept on this phone only.
+  function qaKey() { return 'ppi_qa_' + (st.oid || '') + '_' + st.question.id; }
+  function qaMine() {
+    if (!st || !st.question) return [];
+    try { var v = JSON.parse(store(qaKey()) || '[]'); return Array.isArray(v) ? v : []; } catch (e) { return []; }
+  }
+  function drawQa() {
+    var mine = qaMine();
+    var left = 3 - mine.length;
+    setHead(st.question.text, '', left > 0 ? 'Ask up to three questions. They appear on the main screen as you send them.' : 'You have sent your three questions. Thank you.');
+    var card = el('div', 'pl-form');
+    if (left > 0) {
+      var ta = el('textarea', 'pl-in');
+      ta.maxLength = 280; ta.setAttribute('aria-label', 'Your question');
+      ta.placeholder = 'Your question';
+      var cnt = el('div', 'pl-count');
+      var send = el('button', 'btn go pl-send', 'Send question');
+      send.type = 'button';
+      var msg = el('div', 'pl-msg');
+      msg.hidden = true;
+      var upd = function () { cnt.textContent = ta.value.length + ' / 280. Questions left: ' + left; send.disabled = !ta.value.trim(); };
+      ta.oninput = upd;
+      card.appendChild(ta); card.appendChild(cnt); card.appendChild(send);
+      card.appendChild(el('p', 'pl-hint', 'Please do not name people or clients.'));
+      card.appendChild(msg);
+      upd();
+      send.onclick = function () {
+        send.disabled = true; msg.hidden = true;
+        var text = ta.value.trim();
+        api('vote', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ qid: st.question.id, voter: voter, answer: text }) })
+          .then(function (r) {
+            if (r.status === 200) { var m = qaMine(); m.push(text); store(qaKey(), JSON.stringify(m)); draw(true); return; }
+            msg.hidden = false;
+            if (r.status === 409 && r.body && r.body.error === 'limit') { store(qaKey(), JSON.stringify(['', '', ''].map(function (x, i) { return mine[i] || '(sent earlier)'; }))); draw(true); return; }
+            msg.textContent = r.status === 409 ? 'The Q&A has just closed. Your question did not arrive.' : 'That did not work. Please check your question and try again.';
+            send.disabled = false;
+            if (r.status === 409) tick();
+          })
+          .catch(function () { msg.hidden = false; msg.textContent = 'No connection. Please try again in a moment.'; send.disabled = false; });
+      };
+    }
+    if (mine.length) {
+      card.appendChild(el('h2', 'pl-sub', 'Your questions'));
+      var ul = el('ul', 'pl-mine');
+      mine.forEach(function (t) { ul.appendChild(el('li', '', t)); });
+      card.appendChild(ul);
+    }
+    app.appendChild(card);
   }
 
   function drawSent() {
