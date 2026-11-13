@@ -124,3 +124,14 @@ http://www.kumapartners.eu/*     https://www.kuma.partners/:splat    301!
 /offsite/insights/company-momentum-remote-teams    /insight-company-momentum-remote-teams-v2.html    200!
 /offsite/insights/corporate-retreat-teams-in-change.html    /insight-corporate-retreat-teams-in-change-v2.html    200!
 /offsite/insights/corporate-retreat-teams-in-change    /insight-corporate-retreat-teams-in-change-v2.html    200!
+
+# Live poll for the PPI engagement (18 Nov 2026). Unlisted, noindex, not in the sitemap, not in the nav.
+# Audience page, big-screen results and presenter admin. The API is the function netlify/functions/poll.mjs (/api/poll/*).
+/PPI-engagement         /poll.html           200!
+/PPI-engagement/        /poll.html           200!
+/PPI-engagement/screen  /poll-screen.html    200!
+/PPI-engagement/admin   /poll-admin.html     200!
+/ppi-engagement         /poll.html           200!
+/ppi-engagement/        /poll.html           200!
+/ppi-engagement/screen  /poll-screen.html    200!
+/ppi-engagement/admin   /poll-admin.html     200!
