@@ -58,8 +58,8 @@
     app.textContent = '';
     var input = h('input', { class: 'pl-in', type: 'password', autocomplete: 'current-password', 'aria-label': 'Passphrase', placeholder: 'Passphrase' });
     var err = h('div', { class: 'pa-err' }, msg || '');
-    var go = h('button', { class: 'btn', type: 'submit' }, 'Open poll control');
-    var form = h('form', { class: 'pl-card' }, [h('h1', { class: 'pl-q' }, 'Poll control'), h('p', { class: 'pl-hint' }, 'Presenter access only.'), input, go, err]);
+    var go = h('button', { class: 'btn go', type: 'submit' }, 'Open poll control');
+    var form = h('form', { class: 'pl-card' }, [h('h1', { class: 'pl-title' }, 'Poll control'), h('p', { class: 'pa-note' }, 'Presenter access only.'), input, go, err]);
     form.onsubmit = function (ev) {
       ev.preventDefault();
       key = input.value;
@@ -133,20 +133,20 @@
 
     var acts = h('div', { class: 'pa-acts' });
     if (st.phase === 'ready') {
-      acts.appendChild(h('button', { class: 'btn', type: 'button', onclick: function () { act({ action: 'open' }); } }, 'Open poll'));
+      acts.appendChild(h('button', { class: 'btn go', type: 'button', onclick: function () { act({ action: 'open' }); } }, 'Open poll'));
       panel.appendChild(acts);
       panel.appendChild(h('p', { class: 'pa-note' }, 'Phones switch to this question within a few seconds of opening.'));
     } else if (st.phase === 'open') {
-      acts.appendChild(h('button', { class: 'btn', type: 'button', onclick: function () { peekOn = false; act({ action: 'show' }); } }, 'Show results'));
+      acts.appendChild(h('button', { class: 'btn go', type: 'button', onclick: function () { peekOn = false; act({ action: 'show' }); } }, 'Show results'));
       acts.appendChild(h('button', { class: 'btn ghost', type: 'button', onclick: function () { peekOn = !peekOn; render(); } }, peekOn ? 'Hide live answers' : 'Peek at live answers'));
       panel.appendChild(acts);
       panel.appendChild(h('p', { class: 'pa-note' }, 'Show results closes the poll and puts the results on the big screen.'));
     } else {
       acts.appendChild(st.phones
         ? h('button', { class: 'btn ghost', type: 'button', onclick: function () { act({ action: 'unpublish' }); } }, 'Hide results from phones')
-        : h('button', { class: 'btn', type: 'button', onclick: function () { act({ action: 'publish' }); } }, 'Publish results to phones'));
+        : h('button', { class: 'btn go', type: 'button', onclick: function () { act({ action: 'publish' }); } }, 'Publish results to phones'));
       acts.appendChild(h('button', { class: 'btn ghost', type: 'button', onclick: function () { act({ action: 'open' }); } }, 'Re-open poll'));
-      acts.appendChild(h('button', { class: 'btn', type: 'button', onclick: function () { act({ action: 'next' }); } }, 'Next question'));
+      acts.appendChild(h('button', { class: 'btn go', type: 'button', onclick: function () { act({ action: 'next' }); } }, 'Next question'));
       panel.appendChild(acts);
       panel.appendChild(h('p', { class: 'pa-note' }, st.phones ? 'Phones are showing the results.' : 'Phones show "Voting is closed" until you publish.'));
     }
@@ -247,10 +247,11 @@
       addSel,
       h('button', { class: 'btn ghost', type: 'button', onclick: function () { if (model.length >= 20) { toast('At most 20 questions.'); return; } model.push(blank(addSel.value)); mark(); rebuild(); } }, 'Add question')
     ]);
-    addSel.style.cssText = 'max-width:220px;border:1px solid var(--line);border-radius:10px;padding:9px 11px;background:#fff';
+    addSel.className = 'pa-select';
+    addSel.style.maxWidth = '240px';
     wrap.appendChild(addRow);
 
-    var save = h('button', { class: 'btn', type: 'button', onclick: function () {
+    var save = h('button', { class: 'btn go', type: 'button', onclick: function () {
       for (var i = 0; i < model.length; i++) {
         var q = model[i];
         if (!q.text.trim()) { toast('Question ' + (i + 1) + ' has no text.'); return; }
@@ -286,7 +287,7 @@
     wrap.appendChild(h('div', { class: 'pa-panel' }, [
       h('h2', { class: 'pa-q' }, 'Export'),
       h('p', { class: 'pa-note' }, 'A CSV file with the totals for every question and every open text answer in the current mode. No names or IDs.'),
-      h('div', { class: 'pa-acts' }, h('button', { class: 'btn', type: 'button', onclick: function () { exportCsv(); } }, 'Download CSV'))
+      h('div', { class: 'pa-acts' }, h('button', { class: 'btn go', type: 'button', onclick: function () { exportCsv(); } }, 'Download CSV'))
     ]));
 
     var qrHolder = h('div', { class: 'pa-qrbox' });
@@ -296,7 +297,7 @@
       h('p', { class: 'pa-note' }, AUDIENCE),
       qrHolder,
       h('div', { class: 'pa-acts' }, [
-        h('button', { class: 'btn', type: 'button', onclick: function () { var a = h('a', { href: PollQR.png(AUDIENCE, 1200), download: 'ppi-engagement-qr.png' }); document.body.appendChild(a); a.click(); a.remove(); } }, 'Download PNG'),
+        h('button', { class: 'btn go', type: 'button', onclick: function () { var a = h('a', { href: PollQR.png(AUDIENCE, 1200), download: 'ppi-engagement-qr.png' }); document.body.appendChild(a); a.click(); a.remove(); } }, 'Download PNG'),
         h('button', { class: 'btn ghost', type: 'button', onclick: function () { download('ppi-engagement-qr.svg', 'image/svg+xml', PollQR.svg(AUDIENCE)); } }, 'Download SVG'),
         h('button', { class: 'btn ghost', type: 'button', onclick: function () { if (navigator.clipboard) navigator.clipboard.writeText(AUDIENCE).then(function () { toast('Link copied.'); }); } }, 'Copy link')
       ])

@@ -2,6 +2,8 @@
 (function () {
   var app = document.getElementById('app');
   var stepEl = document.getElementById('step');
+  var titleEl = document.getElementById('title');
+  var ledeEl = document.getElementById('lede');
   var memory = {};
   function store(k, v) {
     try { if (v === undefined) return localStorage.getItem(k); localStorage.setItem(k, v); } catch (e) { if (v === undefined) return memory[k] || null; memory[k] = v; }
@@ -36,11 +38,21 @@
   function answeredKey() { return 'ppi_a_' + (st.oid || '') + '_' + st.question.id; }
   function sentAnswer() { var v = store(answeredKey()); try { return v ? JSON.parse(v) : null; } catch (e) { return null; } }
 
-  function wait(title, text) {
-    var w = el('div', 'pl-card pl-wait');
+  // head: the dark header (title, optional accent in light petrol, one line under it)
+  function setHead(title, accent, lede) {
+    titleEl.textContent = title;
+    if (accent) {
+      titleEl.appendChild(document.createTextNode(' '));
+      var a = el('span', 'lav', accent);
+      titleEl.appendChild(a);
+    }
+    ledeEl.textContent = lede || '';
+  }
+  function wait(title, accent, text) {
+    setHead(title, accent, text);
+    var w = el('div', 'pl-wait');
     w.appendChild(el('div', 'pl-pulse'));
-    w.appendChild(el('h1', '', title));
-    if (text) w.appendChild(el('p', '', text));
+    w.appendChild(el('p', '', 'This page changes by itself.'));
     return w;
   }
 
@@ -54,20 +66,24 @@
     viewKey = key;
     app.textContent = '';
     stepEl.textContent = st && st.index ? 'Question ' + st.index + ' of ' + st.total : '';
-    if (!st) { app.appendChild(wait('Connecting')); return; }
-    if (st.phase === 'idle') { app.appendChild(wait('You are in', 'The first question will appear here in a moment. Keep this page open.')); return; }
-    if (st.phase === 'ready') { app.appendChild(wait('Next question coming up', 'Keep this page open. It changes by itself.')); return; }
+    if (!st) { app.appendChild(wait('Connecting', '', '')); return; }
+    if (st.phase === 'idle') { app.appendChild(wait('You are in.', 'First question soon.', 'Keep this page open on your phone.')); return; }
+    if (st.phase === 'ready') { app.appendChild(wait('Next question', 'coming up.', 'Keep this page open on your phone.')); return; }
     if (st.phase === 'open') { if (sentAnswer() && !editing) drawSent(); else drawForm(); return; }
     if (st.phase === 'shown') {
       if (st.phones) drawResults();
-      else app.appendChild(wait('Voting is closed', 'Thank you. The results are on the main screen.'));
+      else {
+        setHead('Voting is closed.', 'Thank you.', 'The results are on the main screen.');
+        var w = el('div', 'pl-wait');
+        w.appendChild(el('p', '', 'The next question will appear here.'));
+        app.appendChild(w);
+      }
     }
   }
 
   function drawSent() {
-    var c = el('div', 'pl-card pl-done');
-    c.appendChild(el('h2', '', 'Thank you. Your answer is in.'));
-    c.appendChild(el('p', '', 'Wait for the next question. This page updates by itself.'));
+    setHead('Thank you.', 'Your answer is in.', 'Wait for the next question. This page updates by itself.');
+    var c = el('div', 'pl-done');
     var b = el('button', 'btn ghost sm', 'Change my answer');
     b.type = 'button';
     b.onclick = function () { editing = true; draft = sentAnswer(); draw(true); };
@@ -77,9 +93,9 @@
 
   function drawForm() {
     var q = st.question;
-    var card = el('div', 'pl-card');
-    card.appendChild(el('h1', 'pl-q', q.text));
-    var send = el('button', 'btn pl-send', 'Send my answer');
+    var card = el('div', 'pl-form');
+    setHead(q.text, '', '');
+    var send = el('button', 'btn go pl-send', 'Send my answer');
     send.type = 'button';
     var msg = el('div', 'pl-msg');
     msg.hidden = true;
@@ -89,7 +105,7 @@
     function body() {
       if (q.type === 'single') {
         var sel = typeof prior === 'string' ? prior : null;
-        card.appendChild(el('p', 'pl-hint', 'Choose one.'));
+        ledeEl.textContent = 'Choose one.';
         var list = el('div', 'pl-opts');
         q.options.forEach(function (o) {
           var b = el('button', 'pl-opt');
@@ -109,8 +125,7 @@
         draft = sel; ready(!!sel);
       } else if (q.type === 'multiple') {
         var chosen = Array.isArray(prior) ? prior.slice() : [];
-        var hint = el('p', 'pl-hint');
-        card.appendChild(hint);
+        var hint = ledeEl;
         var list2 = el('div', 'pl-opts');
         var btns = [];
         var refresh = function () {
@@ -139,7 +154,7 @@
         refresh();
       } else if (q.type === 'scale') {
         var val = typeof prior === 'number' ? prior : null;
-        card.appendChild(el('p', 'pl-hint', 'Tap a number from 1 to 7.'));
+        ledeEl.textContent = 'Tap a number from 1 to 7.';
         var row = el('div', 'pl-scale');
         for (var i = 1; i <= 7; i++) (function (n) {
           var b = el('button', '', String(n));
@@ -158,7 +173,7 @@
         card.appendChild(ends);
         draft = val; ready(val !== null);
       } else if (q.type === 'cloud') {
-        card.appendChild(el('p', 'pl-hint', 'One to three words. Short is better.'));
+        ledeEl.textContent = 'One to three words. Short is better.';
         var ins = [];
         for (var k = 0; k < 3; k++) {
           var inp = el('input', 'pl-in');
@@ -171,7 +186,7 @@
         }
         draft = ins.map(function (x) { return x.value.trim(); }).filter(Boolean); ready(draft.length > 0);
       } else {
-        card.appendChild(el('p', 'pl-hint', 'Write a sentence or two. No names, please.'));
+        ledeEl.textContent = 'Write a sentence or two. No names, please.';
         var ta = el('textarea', 'pl-in');
         ta.maxLength = 280; ta.setAttribute('aria-label', 'Your answer');
         if (typeof prior === 'string') ta.value = prior;
@@ -209,14 +224,11 @@
   }
 
   function drawResults() {
+    setHead(st.question.text, '', 'Results');
     var card = el('div', 'pl-card');
-    card.appendChild(el('p', 'pl-step', 'Results'));
-    card.appendChild(el('h1', 'pl-q', st.question.text));
-    var box = el('div');
-    card.appendChild(box);
     app.appendChild(card);
     api('results?scope=phones').then(function (r) {
-      if (r.status === 200) PollRender.render(box, r.body.result);
+      if (r.status === 200) PollRender.render(card, r.body.result);
     });
   }
 

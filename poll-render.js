@@ -8,7 +8,7 @@
     if (text != null) e.textContent = text;
     return e;
   }
-  var COLOURS = ['#17677B', '#0B1523', '#2B8FA8', '#4C4B4E', '#0F4F5F'];
+  
 
   function bars(res) {
     var w = el('div', 'pr-bars');
@@ -65,8 +65,8 @@
     var max = Math.max.apply(null, res.words.map(function (x) { return x.c; }));
     res.words.slice(0, 60).forEach(function (x, i) {
       var s = el('span', 'pr-word' + (x.hidden ? ' hid' : ''), x.w);
-      s.style.fontSize = (1 + (max > 1 ? ((x.c - 1) / (max - 1)) * 2.6 : 0.4)).toFixed(2) + 'em';
-      s.style.color = COLOURS[i % COLOURS.length];
+      s.style.fontSize = (1.1 + (max > 1 ? ((x.c - 1) / (max - 1)) * 2.4 : 0.4)).toFixed(2) + 'em';
+      s.style.color = 'var(--cl' + (i % 5) + ')';
       s.title = x.c + (x.c === 1 ? ' mention' : ' mentions');
       if (opts.admin) {
         var b = el('button', 'link', x.hidden ? 'show' : 'hide');

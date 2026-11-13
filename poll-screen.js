@@ -4,7 +4,8 @@
   var main = document.getElementById('main');
   var stepEl = document.getElementById('step');
   var qrSmall = document.getElementById('qrsmall');
-  var st = null, key = '', countEl = null, resBox = null;
+  var urlPill = document.querySelector('.ps-bottom .ps-url');
+  var st = null, key = '', countEl = null, panel = null, scroller = null;
 
   function el(tag, cls, text) {
     var e = document.createElement(tag);
@@ -17,47 +18,81 @@
     d.innerHTML = PollQR.svg(URL_JOIN); // our own generated SVG, no user content
     return d;
   }
+  function question(text) {
+    var q = el('h1', 'ps-q', text);
+    return q;
+  }
+  function stopScroll() { if (scroller) { clearInterval(scroller); scroller = null; } }
+  // slow automatic scroll for long lists of answers, so a full room stays readable without touching the mouse
+  function autoScroll(box) {
+    stopScroll();
+    var wait = 0;
+    scroller = setInterval(function () {
+      if (box.scrollHeight <= box.clientHeight + 4) return;
+      if (wait > 0) { wait--; return; }
+      if (box.scrollTop + box.clientHeight >= box.scrollHeight - 1) { wait = 60; box.scrollTop = 0; return; }
+      box.scrollTop += 1;
+    }, 40);
+  }
 
   function draw() {
     var k = st ? st.phase + '|' + (st.question ? st.question.id : '') + '|' + (st.oid || '') : 'loading';
     stepEl.textContent = st && st.index ? 'Question ' + st.index + ' of ' + st.total : '';
+    urlPill.hidden = !st || st.phase === 'idle';
     qrSmall.textContent = '';
     if (st && st.phase === 'open') qrSmall.appendChild(qrBox(true));
 
     if (k !== key) {
       key = k;
+      stopScroll();
       main.textContent = '';
-      countEl = resBox = null;
+      main.className = 'ps-main';
+      countEl = panel = null;
       if (!st || st.phase === 'idle') {
+        main.classList.add('solo');
         var j = el('div', 'ps-join');
         j.appendChild(qrBox(false));
-        var t = el('div');
-        t.appendChild(el('div', 'ps-step', 'Live poll'));
-        t.appendChild(el('div', 'ps-q', 'Scan to join'));
-        t.appendChild(el('div', 'ps-url', 'kuma.partners/PPI-engagement'));
+        var t = el('div', 'ps-left');
+        var h = el('h1', 'ps-q');
+        h.appendChild(document.createTextNode('Scan to join the '));
+        h.appendChild(el('span', 'lav', 'live poll.'));
+        t.appendChild(h);
+        t.appendChild(el('p', 'ps-sub', 'Open the camera on your phone and point it at the code. Your answers are anonymous.'));
+        t.appendChild(el('span', 'ps-url', 'kuma.partners/PPI-engagement'));
         j.appendChild(t);
         main.appendChild(j);
         return;
       }
-      main.appendChild(el('div', 'ps-step', st.phase === 'ready' ? 'Coming up' : st.phase === 'open' ? 'Poll open' : 'Results'));
-      main.appendChild(el('div', 'ps-q', st.question.text));
+      var left = el('div', 'ps-left');
+      var lbl = { ready: 'Coming up', open: 'Poll open', shown: 'Results' }[st.phase];
+      left.appendChild(el('span', 'ps-status ' + st.phase, lbl));
+      left.appendChild(question(st.question.text));
+      var right = el('div', 'ps-right' + (st.phase === 'open' ? ' center' : ''));
       if (st.phase === 'ready') {
-        main.appendChild(el('div', 'ps-body', 'Opening shortly. Keep the page open on your phone.'));
+        main.classList.add('solo');
+        left.appendChild(el('p', 'ps-sub', 'Opening shortly. Keep the page open on your phone.'));
       } else if (st.phase === 'open') {
+        left.appendChild(el('p', 'ps-sub', 'Scan the code or open kuma.partners/PPI-engagement and answer on your phone.'));
         var c = el('div', 'ps-count');
         countEl = el('b', '', '0');
         c.appendChild(countEl);
         c.appendChild(el('span', '', 'answered'));
-        main.appendChild(c);
+        right.appendChild(c);
       } else {
-        resBox = el('div', 'ps-body');
-        main.appendChild(resBox);
+        panel = el('div', 'ps-panel' + (st.question.type === 'text' || st.question.type === 'cloud' ? ' scroll' : ''));
+        right.appendChild(panel);
       }
+      main.appendChild(left);
+      if (right.childNodes.length) main.appendChild(right);
     }
     if (countEl && st.n != null && countEl.textContent !== String(st.n)) countEl.textContent = st.n;
-    if (resBox && st.result) {
+    if (panel && st.result) {
       var rk = JSON.stringify(st.result);
-      if (resBox.dataset.k !== rk) { resBox.dataset.k = rk; PollRender.render(resBox, st.result); }
+      if (panel.dataset.k !== rk) {
+        panel.dataset.k = rk;
+        PollRender.render(panel, st.result);
+        if (panel.classList.contains('scroll')) { panel.scrollTop = 0; autoScroll(panel); }
+      }
     }
   }
 

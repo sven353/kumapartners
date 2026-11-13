@@ -2,19 +2,24 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Live poll | Kuma Partners</title>
 <meta name="robots" content="noindex,nofollow">
-<meta name="theme-color" content="#F8F9FA">
+<meta name="theme-color" content="#0B1523">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<link rel="preload" href="/assets/offsite-v2/fonts/inter-tight-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/poll.css">
 </head>
 <body>
-<div class="pl-wrap">
-  <div class="pl-top"><span class="pl-brand">Kuma Partners</span><span id="step"></span></div>
-  <main id="app" aria-live="polite"></main>
-  <p class="pl-foot">Anonymous: this poll stores your answer only, with no name, email address or IP address. Our host keeps standard technical request logs.</p>
-</div>
+<header class="pl-hero">
+  <div class="pl-in-hero">
+    <div class="pl-bar"><img src="/assets/kuma-partners-logo-white.png" width="130" height="20" alt="Kuma Partners"><span class="chip" id="step"></span></div>
+    <h1 class="pl-title" id="title">Connecting</h1>
+    <p class="pl-lede" id="lede"></p>
+  </div>
+</header>
+<main class="pl-sheet" id="app" aria-live="polite"></main>
+<p class="pl-foot">Anonymous: this poll stores your answer only, with no name, email address or IP address. Our host keeps standard technical request logs.</p>
 <noscript><p style="padding:20px">This poll needs JavaScript.</p></noscript>
 <script src="/poll-render.js"></script>
 <script src="/poll.js"></script>
