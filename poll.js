@@ -59,7 +59,7 @@
   function draw(force) {
     var key;
     if (!st) key = 'loading';
-    else if (st.phase === 'open' && st.question.type === 'qa') key = 'qa|' + st.oid + '|' + st.question.id + '|' + qaMine().length;
+    else if (st.phase === 'open' && isFeed()) key = 'qa|' + st.oid + '|' + st.question.id + '|' + qaMine().length;
     else if (st.phase === 'open') key = 'open|' + st.oid + '|' + st.question.id + '|' + (sentAnswer() && !editing ? 'sent' : 'form');
     else if (st.phase === 'shown') key = 'shown|' + st.question.id + '|' + st.phones;
     else key = st.phase + '|' + st.index;
@@ -70,11 +70,12 @@
     if (!st) { app.appendChild(wait('Connecting', '', '')); return; }
     if (st.phase === 'idle') { app.appendChild(wait('You are in.', 'First question soon.', 'Keep this page open on your phone.')); return; }
     if (st.phase === 'ready') { app.appendChild(wait('Next question', 'coming up.', 'Keep this page open on your phone.')); return; }
-    if (st.phase === 'open') { if (st.question.type === 'qa') drawQa(); else if (sentAnswer() && !editing) drawSent(); else drawForm(); return; }
+    if (st.phase === 'open') { if (isFeed()) drawQa(); else if (sentAnswer() && !editing) drawSent(); else drawForm(); return; }
     if (st.phase === 'shown') {
       if (st.phones) drawResults();
-      else if (st.question && st.question.type === 'qa') {
-        setHead('Q&A is closed.', 'Thank you.', 'Your questions are on the main screen.');
+      else if (isFeed()) {
+        if (st.question.type === 'wall') setHead('Thank you.', '', 'The answers are on the main screen.');
+        else setHead('Q&A is closed.', 'Thank you.', 'Your questions are on the main screen.');
         var w2 = el('div', 'pl-wait');
         w2.appendChild(el('p', '', 'The next question will appear here.'));
         app.appendChild(w2);
@@ -88,6 +89,7 @@
   }
 
   // Live Q&A: up to three questions per person, sent one by one. Own questions are kept on this phone only.
+  function isFeed() { return !!(st && st.question && (st.question.type === 'qa' || st.question.type === 'wall')); }
   function qaKey() { return 'ppi_qa_' + (st.oid || '') + '_' + st.question.id; }
   function qaMine() {
     if (!st || !st.question) return [];
@@ -95,22 +97,24 @@
   }
   function drawQa() {
     var mine = qaMine();
-    var left = 3 - mine.length;
-    setHead(st.question.text, '', left > 0 ? 'Ask up to three questions. They appear on the main screen as you send them.' : 'You have sent your three questions. Thank you.');
+    var wall = st.question.type === 'wall';
+    var left = (wall ? 1 : 3) - mine.length;
+    if (wall) setHead(left > 0 ? st.question.text : 'Thank you.', '', left > 0 ? 'One sentence is enough. It appears on the main screen as you send it.' : 'Your answer is on the main screen.');
+    else setHead(st.question.text, '', left > 0 ? 'Ask up to three questions. They appear on the main screen as you send them.' : 'You have sent your three questions. Thank you.');
     var card = el('div', 'pl-form');
     if (left > 0) {
       var ta = el('textarea', 'pl-in');
       ta.maxLength = 280; ta.setAttribute('aria-label', 'Your question');
-      ta.placeholder = 'Your question';
+      ta.placeholder = wall ? 'Your answer' : 'Your question';
       var cnt = el('div', 'pl-count');
-      var send = el('button', 'btn go pl-send', 'Send question');
+      var send = el('button', 'btn go pl-send', wall ? 'Send my answer' : 'Send question');
       send.type = 'button';
       var msg = el('div', 'pl-msg');
       msg.hidden = true;
-      var upd = function () { cnt.textContent = ta.value.length + ' / 280. Questions left: ' + left; send.disabled = !ta.value.trim(); };
+      var upd = function () { cnt.textContent = ta.value.length + ' / 280' + (wall ? '' : '. Questions left: ' + left); send.disabled = !ta.value.trim(); };
       ta.oninput = upd;
       card.appendChild(ta); card.appendChild(cnt); card.appendChild(send);
-      card.appendChild(el('p', 'pl-hint', 'Please do not name people or clients.'));
+      card.appendChild(el('p', 'pl-hint', wall ? 'Please do not name people or clients.' : 'Please do not name people or clients.'));
       card.appendChild(msg);
       upd();
       send.onclick = function () {
@@ -121,7 +125,7 @@
             if (r.status === 200) { var m = qaMine(); m.push(text); store(qaKey(), JSON.stringify(m)); draw(true); return; }
             msg.hidden = false;
             if (r.status === 409 && r.body && r.body.error === 'limit') { store(qaKey(), JSON.stringify(['', '', ''].map(function (x, i) { return mine[i] || '(sent earlier)'; }))); draw(true); return; }
-            msg.textContent = r.status === 409 ? 'The Q&A has just closed. Your question did not arrive.' : 'That did not work. Please check your question and try again.';
+            msg.textContent = r.status === 409 ? 'This has just closed. Your answer did not arrive.' : 'That did not work. Please check your question and try again.';
             send.disabled = false;
             if (r.status === 409) tick();
           })
@@ -129,7 +133,7 @@
       };
     }
     if (mine.length) {
-      card.appendChild(el('h2', 'pl-sub', 'Your questions'));
+      card.appendChild(el('h2', 'pl-sub', wall ? 'Your answer' : 'Your questions'));
       var ul = el('ul', 'pl-mine');
       mine.forEach(function (t) { ul.appendChild(el('li', '', t)); });
       card.appendChild(ul);

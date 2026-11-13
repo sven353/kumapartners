@@ -16,12 +16,24 @@
 import { createHash, timingSafeEqual, randomBytes } from 'node:crypto';
 
 export const MODES = ['rehearsal', 'live'];
-export const TYPES = ['single', 'multiple', 'scale', 'cloud', 'text', 'qa'];
-const QA_MAX = 3;
+export const TYPES = ['single', 'multiple', 'scale', 'cloud', 'text', 'qa', 'wall'];
+// qa: live questions, 3 per person, moderated. wall: live answers, 1 per person, shown as they arrive.
+const isFeed = (q) => !!q && (q.type === 'qa' || q.type === 'wall');
+const perPerson = (q) => (q.type === 'wall' ? 1 : 3);
 const MAX_QUESTIONS = 20;
 const MAX_OPTIONS = 10;
 
 export const DEFAULT_QUESTIONS = [
+  {
+    id: 'q8', type: 'single', text: 'Which kind of AI user are you?',
+    options: [
+      { id: 'o1', label: 'AI rookie' },
+      { id: 'o2', label: 'AI beginner' },
+      { id: 'o3', label: 'AI advanced' },
+      { id: 'o4', label: 'AI expert' },
+      { id: 'o5', label: 'Recovering vibe coder' }
+    ]
+  },
   {
     id: 'q1', type: 'single', text: 'How often do you use AI in your working day?',
     options: [
@@ -57,17 +69,24 @@ export const DEFAULT_QUESTIONS = [
     ]
   },
   { id: 'q6', type: 'text', text: 'What is one question about AI and wellbeing you would like answered today?' },
-  { id: 'q7', type: 'qa', text: 'Your questions for us' }
+  { id: 'q7', type: 'qa', text: 'Your questions for us' },
+  { id: 'q9', type: 'wall', text: 'What is your takeaway from today?' },
+  { id: 'q10', type: 'wall', text: 'What is the one thing you will try tomorrow?' }
 ];
 
 function migrate(cfg) {
-  if (cfg.v >= 2) return cfg;
-  let questions = cfg.questions;
-  if (!questions.some((q) => q.type === 'qa') && questions.length < MAX_QUESTIONS) {
-    const ids = new Set(questions.map((q) => q.id));
-    questions = [...questions, { id: ids.has('q7') ? rid('q') : 'q7', type: 'qa', text: 'Your questions for us' }];
+  if (cfg.v >= 3) return cfg;
+  let questions = cfg.questions.slice();
+  const ids = new Set(questions.map((q) => q.id));
+  const room = () => questions.length < MAX_QUESTIONS;
+  if (!(cfg.v >= 2)) {
+    if (!questions.some((q) => q.type === 'qa') && room()) questions.push({ id: ids.has('q7') ? rid('q') : 'q7', type: 'qa', text: 'Your questions for us' });
   }
-  return { ...cfg, questions, v: 2 };
+  // v3: the AI user question goes first, the two takeaway questions go last
+  const add = (id) => DEFAULT_QUESTIONS.find((q) => q.id === id);
+  if (!ids.has('q8') && room()) questions.unshift(add('q8'));
+  for (const id of ['q9', 'q10']) if (!ids.has(id) && room()) questions.push(add(id));
+  return { ...cfg, questions, v: 3 };
 }
 
 const DEFAULT_STATE = { rev: 0, mode: 'rehearsal', qid: null, phase: 'idle', phones: false, oid: null, qaCur: null };
@@ -148,7 +167,8 @@ export function validateAnswer(q, a) {
       return words.length ? words.slice(0, 3) : null;
     }
     case 'text':
-    case 'qa': {
+    case 'qa':
+    case 'wall': {
       const s = clean(a, 280);
       return s || null;
     }
@@ -179,12 +199,12 @@ const getJSON = (store, key) => store.get(key, { type: 'json', consistency: 'str
 async function loadConfig(store, { seed = false } = {}) {
   let cfg = await getJSON(store, K.config);
   if (!cfg || !Array.isArray(cfg.questions)) {
-    cfg = { questions: DEFAULT_QUESTIONS, seeded: false, v: 2 };
+    cfg = { questions: DEFAULT_QUESTIONS, seeded: false, v: 3 };
     if (seed) {
-      cfg = { questions: DEFAULT_QUESTIONS, seeded: true, v: 2 };
+      cfg = { questions: DEFAULT_QUESTIONS, seeded: true, v: 3 };
       await store.setJSON(K.config, cfg);
     }
-  } else if (!(cfg.v >= 2)) {
+  } else if (!(cfg.v >= 3)) {
     cfg = migrate(cfg);
     if (seed) await store.setJSON(K.config, cfg);
   }
@@ -209,7 +229,7 @@ async function keysEtags(store, prefix) {
 }
 // number of answers or questions for one poll question
 async function countFor(store, mode, q) {
-  return (await keysUnder(store, q.type === 'qa' ? K.qas(mode, q.id) : K.votes(mode, q.id))).length;
+  return (await keysUnder(store, isFeed(q) ? K.qas(mode, q.id) : K.votes(mode, q.id))).length;
 }
 async function loadQa(store, mode, qid, keys) {
   const prefix = K.qas(mode, qid);
@@ -294,7 +314,7 @@ async function buildCsv(store, mode, cfg) {
   for (let i = 0; i < cfg.questions.length; i++) {
     const q = cfg.questions[i];
     const head = [i + 1, q.text, q.type];
-    if (q.type === 'qa') {
+    if (isFeed(q)) {
       const items = (await loadQa(store, mode, q.id)).sort((a, b) => a.t - b.t);
       rows.push([...head, '(responses)', items.length]);
       items.forEach((t) => rows.push([...head, t.a + (t.h ? ' (hidden)' : '') + (t.d ? ' (answered)' : ''), 1]));
@@ -343,8 +363,8 @@ async function overview(store, seed) {
 
 // Live Q&A moderation. Used by the presenter page and by the optional moderator page.
 function qaTarget(cfg, state, qid) {
-  const qs = cfg.questions.filter((x) => x.type === 'qa');
-  return qs.find((x) => x.id === qid) || qs.find((x) => x.id === state.qid) || qs[0] || null;
+  const qs = cfg.questions.filter(isFeed);
+  return qs.find((x) => x.id === qid) || qs.find((x) => x.id === state.qid) || qs.find((x) => x.type === 'qa') || qs[0] || null;
 }
 async function qaAction(store, cfg, state, b) {
   const q = qaTarget(cfg, state, b.qid);
@@ -354,7 +374,7 @@ async function qaAction(store, cfg, state, b) {
   const okKey = (k) => typeof k === 'string' && k.startsWith(prefix) && k.length < prefix.length + 40;
   switch (b.action) {
     case 'qa_keys':
-      return { qid: q.id, mode, phase: state.qid === q.id ? state.phase : 'idle', cur: state.qaCur || null, keys: await keysEtags(store, prefix) };
+      return { qid: q.id, type: q.type, mode, phase: state.qid === q.id ? state.phase : 'idle', cur: state.qaCur || null, keys: await keysEtags(store, prefix) };
     case 'qa_get':
       return { items: await loadQa(store, mode, q.id, Array.isArray(b.keys) ? b.keys.slice(0, 120) : []) };
     case 'qa_hide':
@@ -398,7 +418,7 @@ async function adminAction(store, b) {
     }
     case 'save': {
       const questions = sanitizeQuestions(b.questions);
-      await store.setJSON(K.config, { questions, seeded: true, v: 2 });
+      await store.setJSON(K.config, { questions, seeded: true, v: 3 });
       if (state.qid && !questions.some((x) => x.id === state.qid)) {
         Object.assign(state, { qid: null, phase: 'idle', phones: false, oid: null, qaCur: null });
       }
@@ -406,7 +426,7 @@ async function adminAction(store, b) {
       return overview(store, false);
     }
     case 'restore': {
-      await store.setJSON(K.config, { questions: DEFAULT_QUESTIONS, seeded: true, v: 2 });
+      await store.setJSON(K.config, { questions: DEFAULT_QUESTIONS, seeded: true, v: 3 });
       Object.assign(state, { qid: null, phase: 'idle', phones: false, oid: null });
       await saveState(store, state);
       return overview(store, false);
@@ -449,7 +469,7 @@ async function adminAction(store, b) {
     case 'show': {
       const q = need();
       if (state.phase !== 'open' && state.phase !== 'shown') throw bad('Open the poll first.', 409);
-      if (q.type !== 'qa') await freezeResults(store, mode, q);
+      if (!isFeed(q)) await freezeResults(store, mode, q);
       Object.assign(state, { phase: 'shown' });
       await saveState(store, state);
       return overview(store, false);
@@ -457,7 +477,7 @@ async function adminAction(store, b) {
     case 'publish':
     case 'unpublish': {
       const pq = need();
-      if (pq.type === 'qa') throw bad('The Q&A list stays on the main screen.', 409);
+      if (isFeed(pq)) throw bad('The live list stays on the main screen.', 409);
       if (state.phase !== 'shown') throw bad('Show the results first.', 409);
       state.phones = act === 'publish';
       await saveState(store, state);
@@ -466,13 +486,13 @@ async function adminAction(store, b) {
     case 'peek': {
       const q = qOf(b.qid || state.qid);
       if (!q) throw bad('Unknown question.');
-      if (q.type === 'qa') return { qid: q.id, result: { type: 'qa', n: await countFor(store, mode, q) } };
+      if (isFeed(q)) return { qid: q.id, result: { type: q.type, n: await countFor(store, mode, q) } };
       const [votes, hidden] = await Promise.all([loadVotes(store, mode, q.id), loadHidden(store, mode, q.id)]);
       return { qid: q.id, result: aggregate(q, votes, hidden, { admin: true }) };
     }
     case 'hide': {
       const q = qOf(b.qid);
-      if (!q || q.type === 'qa') throw bad('Unknown question.');
+      if (!q || isFeed(q)) throw bad('Unknown question.');
       const tok = (q.type === 'cloud' ? 'w:' : 'v:') + clean(b.token, 40).toLowerCase().slice(0, 40);
       const token = q.type === 'cloud' ? tok : 'v:' + idOf(b.token, 8);
       const set = await loadHidden(store, mode, q.id);
@@ -525,7 +545,7 @@ export async function handle(req, store, env = {}) {
       const out = publicState(cfg, state);
       const q = state.qid && cfg.questions.find((x) => x.id === state.qid);
       if (q) out.question = q;
-      if (q && q.type === 'qa') {
+      if (isFeed(q)) {
         if (state.phase === 'open' || state.phase === 'shown') {
           out.cur = state.qaCur || null;
           out.keys = await keysEtags(store, K.qas(state.mode, q.id));
@@ -559,15 +579,15 @@ export async function handle(req, store, env = {}) {
       if (!q || state.phase !== 'open' || b.qid !== q.id) return { status: 409, body: { error: 'closed' } };
       const a = validateAnswer(q, b.answer);
       if (a === null) throw bad('That answer does not fit the question.');
-      if (q.type === 'qa') {
+      if (isFeed(q)) {
         const base = who(b.voter);
         const key = K.qa(state.mode, q.id, base + '~' + Date.now().toString(36) + randomBytes(2).toString('hex'));
         await store.setJSON(key, { a, t: Date.now() });
         // limit per person: the first three keys (in sorted order) stay, a later one is taken back
         const mine = (await keysUnder(store, K.qa(state.mode, q.id, base + '~'))).sort();
         const at = mine.indexOf(key);
-        if (at >= QA_MAX) { await store.delete(key); return { status: 409, body: { error: 'limit', left: 0 } }; }
-        return { status: 200, body: { ok: true, left: QA_MAX - Math.min(mine.length, QA_MAX) } };
+        if (at >= perPerson(q)) { await store.delete(key); return { status: 409, body: { error: 'limit', left: 0 } }; }
+        return { status: 200, body: { ok: true, left: perPerson(q) - Math.min(mine.length, perPerson(q)) } };
       }
       await store.setJSON(K.vote(state.mode, q.id, b.voter), { a, t: Date.now() });
       return { status: 200, body: { ok: true } };
@@ -577,7 +597,7 @@ export async function handle(req, store, env = {}) {
     if (route === 'qa' && method === 'POST') {
       const [cfg, state] = await Promise.all([loadConfig(store), loadState(store)]);
       const q = state.qid && cfg.questions.find((x) => x.id === state.qid);
-      if (!q || q.type !== 'qa' || (state.phase !== 'open' && state.phase !== 'shown')) return { status: 404, body: { error: 'not_available' } };
+      if (!isFeed(q) || (state.phase !== 'open' && state.phase !== 'shown')) return { status: 404, body: { error: 'not_available' } };
       const keys = Array.isArray((body || {}).keys) ? body.keys.slice(0, 120) : [];
       const rows = await loadQa(store, state.mode, q.id, keys);
       return { status: 200, body: { items: rows.map((r) => (r.h ? { k: r.k, h: 1 } : { k: r.k, a: r.a, t: r.t, d: r.d })) } };

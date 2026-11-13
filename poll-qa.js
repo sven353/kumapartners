@@ -54,15 +54,17 @@
     var live = list.filter(function (x) { return !x.d && x.k !== cur; });
     var done = list.filter(function (x) { return x.d && x.k !== cur; });
     var now = list.filter(function (x) { return x.k === cur; });
+    var seen = box._seen || null, now2 = {};
     box.textContent = '';
     if (!list.length) { box.appendChild(el('p', 'qa-empty', o.empty || 'No questions yet.')); return; }
     function card(x, kind) {
-      var c = el('div', 'qa-card' + (kind ? ' ' + kind : '') + (x.h ? ' hid' : ''));
+      now2[x.k] = 1;
+      var c = el('div', 'qa-card' + (kind ? ' ' + kind : '') + (x.h ? ' hid' : '') + (seen && !seen[x.k] ? ' fresh' : ''));
       c.appendChild(el('p', 'qa-text', x.a || '(hidden)'));
       if (o.controls) {
         var r = el('div', 'qa-acts');
         var b = function (t, fn, cls) { var e = el('button', 'btn ghost sm' + (cls ? ' ' + cls : ''), t); e.type = 'button'; e.onclick = fn; r.appendChild(e); };
-        if (!x.h) {
+        if (!x.h && !o.simple) {
           if (x.k === cur) b('Stop', function () { o.onCur(null); });
           else b('Now answering', function () { o.onCur(x.k); });
           b(x.d ? 'Mark as open' : 'Answered', function () { o.onDone(x.k, !x.d); });
@@ -78,6 +80,7 @@
       box.appendChild(el('p', 'qa-sep', 'Answered (' + done.length + ')'));
       done.forEach(function (x) { box.appendChild(card(x, 'done')); });
     }
+    box._seen = now2;
     box.scrollTop = top;
   }
 

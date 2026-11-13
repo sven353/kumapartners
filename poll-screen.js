@@ -17,7 +17,7 @@
   function paintQa() {
     if (!qaBox) return;
     var items = qa.items();
-    PollQA.draw(qaBox, items, qa.current(), { order: 'new', empty: 'Questions from the room appear here.' });
+    PollQA.draw(qaBox, items, qa.current(), { order: 'new', simple: true, empty: 'Answers from the room appear here.' });
     if (qaCount) qaCount.textContent = items.length;
   }
 
@@ -50,7 +50,7 @@
   }
 
   function draw() {
-    var isQa = !!(st && st.question && st.question.type === 'qa' && (st.phase === 'open' || st.phase === 'shown'));
+    var isQa = !!(st && st.question && (st.question.type === 'qa' || st.question.type === 'wall') && (st.phase === 'open' || st.phase === 'shown'));
     var k = st ? (isQa ? 'qa' : st.phase) + '|' + (st.question ? st.question.id : '') + '|' + (st.oid || '') + (isQa ? '' : '') : 'loading';
     stepEl.textContent = st && st.index ? 'Question ' + st.index + ' of ' + st.total : '';
     urlPill.hidden = !st || st.phase === 'idle';
@@ -81,13 +81,14 @@
       }
       if (isQa) {
         var ql = el('div', 'ps-left');
-        ql.appendChild(el('span', 'ps-status ' + st.phase, st.phase === 'open' ? 'Q&A open' : 'Q&A closed'));
+        var wall = st.question.type === 'wall';
+        ql.appendChild(el('span', 'ps-status ' + st.phase, st.phase === 'open' ? (wall ? 'Live answers' : 'Q&A open') : (wall ? 'Closed' : 'Q&A closed')));
         ql.appendChild(question(st.question.text));
-        ql.appendChild(el('p', 'ps-sub', st.phase === 'open' ? 'Scan the code or open kuma.partners/PPI-engagement and send your questions. Up to three each, anonymous.' : 'The Q&A is closed. Thank you for your questions.'));
+        ql.appendChild(el('p', 'ps-sub', st.phase === 'open' ? (wall ? 'Scan the code or open kuma.partners/PPI-engagement and write your answer. It appears here at once, anonymous.' : 'Scan the code or open kuma.partners/PPI-engagement and send your questions. Up to three each, anonymous.') : (wall ? 'Thank you for your answers.' : 'The Q&A is closed. Thank you for your questions.')));
         var qc = el('div', 'ps-count small');
         qaCount = el('b', '', '0');
         qc.appendChild(qaCount);
-        qc.appendChild(el('span', '', 'questions'));
+        qc.appendChild(el('span', '', wall ? 'answers' : 'questions'));
         ql.appendChild(qc);
         var qr = el('div', 'ps-right');
         qaBox = el('div', 'ps-panel qa-list');
@@ -135,10 +136,10 @@
       .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
       .then(function (b) {
         st = b; draw();
-        if (b.question && b.question.type === 'qa' && b.keys) qa.update(b.keys, b.cur || null);
+        if (b.question && (b.question.type === 'qa' || b.question.type === 'wall') && b.keys) qa.update(b.keys, b.cur || null);
       })
       .catch(function () {})
-      .then(function () { setTimeout(tick, st && st.question && st.question.type === 'qa' && st.phase !== 'ready' ? 1000 : 2000); });
+      .then(function () { setTimeout(tick, st && st.question && (st.question.type === 'qa' || st.question.type === 'wall') && st.phase !== 'ready' ? 1000 : 2000); });
   }
   draw();
   tick();

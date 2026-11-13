@@ -3,7 +3,7 @@
   var app = document.getElementById('app');
   var key = '';
   try { key = sessionStorage.getItem('ppi_mod_key') || ''; } catch (e) {}
-  var timer = null, feed = null, order = 'old', box = null, headEl = null, last = null;
+  var timer = null, feed = null, order = 'old', box = null, headEl = null, last = null, simple = false;
 
   function h(tag, attrs, kids) {
     var e = document.createElement(tag);
@@ -40,7 +40,8 @@
 
   function head(info) {
     if (!headEl) return;
-    var phase = info.phase === 'open' ? 'Q&A open' : info.phase === 'shown' ? 'Q&A closed' : 'Q&A not open yet';
+    var nm = info.type === 'wall' ? 'Answers' : 'Q&A';
+    var phase = info.phase === 'open' ? nm + ' open' : info.phase === 'shown' ? nm + ' closed' : nm + ' not open yet';
     headEl.textContent = '';
     headEl.appendChild(h('span', { class: 'pa-chip ' + (info.phase === 'open' ? 'open' : 'idle') }, phase));
     headEl.appendChild(h('span', { class: 'pa-note' }, ' ' + (info.mode === 'live' ? 'Live session' : 'Rehearsal')));
@@ -68,7 +69,7 @@
   }
   function repaint() {
     PollQA.draw(box, feed.items(), feed.current(), {
-      order: order, controls: true, empty: 'No questions yet. They show up here as people send them.',
+      order: order, controls: true, simple: simple, empty: 'No questions yet. They show up here as people send them.',
       onCur: function (k) { call({ action: 'qa_current', k: k }).then(tick); },
       onDone: function (k, on) { call({ action: 'qa_done', k: k, on: on }).then(tick); },
       onHide: function (k, on) { call({ action: 'qa_hide', k: k, on: on }).then(tick); }
@@ -79,6 +80,7 @@
       if (r.status === 401) { logout(); return; }
       if (r.status !== 200) { if (r.body && r.body.message) box.textContent = r.body.message; return; }
       head(r.body);
+      simple = r.body.type === 'wall';
       return feed.update(r.body.keys, r.body.cur);
     }).catch(function () {});
   }
