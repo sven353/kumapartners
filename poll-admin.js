@@ -1,6 +1,6 @@
 /* Presenter page: run the poll, edit the questions, export and reset. Protected by the POLL_ADMIN_KEY passphrase. */
 (function () {
-  var AUDIENCE = 'https://www.kuma.partners/PPI-engagement';
+  var AUDIENCE = 'https://www.kuma.partners/PPI-engagement/';
   var app = document.getElementById('app');
   var key = '';
   try { key = sessionStorage.getItem('ppi_admin_key') || ''; } catch (e) {}

@@ -48,6 +48,22 @@
     }
     ledeEl.textContent = lede || '';
   }
+  var DONT = 'Please do not enter personal, client or confidential information.';
+  function notice() {
+    var c = el('div', 'pl-notice');
+    c.appendChild(el('h2', '', 'Before you answer'));
+    var ul = el('ul', '');
+    ul.appendChild(el('li', '', 'Anonymous. No name, no email, no sign-in.'));
+    ul.appendChild(el('li', '', DONT));
+    ul.appendChild(el('li', '', 'To let each person answer once per question, your browser generates a random voter ID and sends it with your answers. It contains nothing about you and is not linked to your name or any account.'));
+    var li = el('li', '');
+    var a = el('a', '', 'Privacy policy');
+    a.href = '/privacy'; a.target = '_blank'; a.rel = 'noopener';
+    li.appendChild(a);
+    ul.appendChild(li);
+    c.appendChild(ul);
+    return c;
+  }
   function wait(title, accent, text) {
     setHead(title, accent, text);
     var w = el('div', 'pl-wait');
@@ -68,8 +84,8 @@
     app.textContent = '';
     stepEl.textContent = st && st.index ? 'Question ' + st.index + ' of ' + st.total : '';
     if (!st) { app.appendChild(wait('Connecting', '', '')); return; }
-    if (st.phase === 'idle') { app.appendChild(wait('You are in.', 'First question soon.', 'Keep this page open on your phone.')); return; }
-    if (st.phase === 'ready') { app.appendChild(wait('Next question', 'coming up.', 'Keep this page open on your phone.')); return; }
+    if (st.phase === 'idle') { app.appendChild(wait('You are in.', 'First question soon.', 'Keep this page open on your phone.')); app.appendChild(notice()); return; }
+    if (st.phase === 'ready') { app.appendChild(wait('Next question', 'coming up.', 'Keep this page open on your phone.')); app.appendChild(notice()); return; }
     if (st.phase === 'open') { if (isFeed()) drawQa(); else if (sentAnswer() && !editing) drawSent(); else drawForm(); return; }
     if (st.phase === 'shown') {
       if (st.phones) drawResults();
@@ -104,6 +120,7 @@
     var card = el('div', 'pl-form');
     if (left > 0) {
       var ta = el('textarea', 'pl-in');
+      card.appendChild(el('p', 'pl-note', DONT));
       ta.maxLength = 280; ta.setAttribute('aria-label', 'Your question');
       ta.placeholder = wall ? 'Your answer' : 'Your question';
       var cnt = el('div', 'pl-count');
@@ -114,7 +131,6 @@
       var upd = function () { cnt.textContent = ta.value.length + ' / 280' + (wall ? '' : '. Questions left: ' + left); send.disabled = !ta.value.trim(); };
       ta.oninput = upd;
       card.appendChild(ta); card.appendChild(cnt); card.appendChild(send);
-      card.appendChild(el('p', 'pl-hint', wall ? 'Please do not name people or clients.' : 'Please do not name people or clients.'));
       card.appendChild(msg);
       upd();
       send.onclick = function () {
@@ -235,6 +251,7 @@
       } else if (q.type === 'cloud') {
         ledeEl.textContent = 'One to three words. Short is better.';
         var ins = [];
+        card.appendChild(el('p', 'pl-note', DONT));
         for (var k = 0; k < 3; k++) {
           var inp = el('input', 'pl-in');
           inp.type = 'text'; inp.maxLength = 24; inp.autocomplete = 'off';
@@ -248,6 +265,7 @@
       } else {
         ledeEl.textContent = 'Write a sentence or two. No names, please.';
         var ta = el('textarea', 'pl-in');
+        card.appendChild(el('p', 'pl-note', DONT));
         ta.maxLength = 280; ta.setAttribute('aria-label', 'Your answer');
         if (typeof prior === 'string') ta.value = prior;
         var cnt = el('div', 'pl-count');

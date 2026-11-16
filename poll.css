@@ -243,3 +243,10 @@ body.ps-body{background:var(--ink)}
 @keyframes qa-in{from{opacity:0;transform:translateY(-14px) scale(.98)}to{opacity:1;transform:none}}
 .qa-card.fresh{animation:qa-in .5s ease-out}
 @media (prefers-reduced-motion:reduce){.qa-card.fresh{animation:none}}
+
+/* ---- notice for participants ---- */
+.pl-notice{background:var(--white);border-radius:22px;padding:20px 22px;margin:8px 0 0;box-shadow:0 0 0 1px var(--line-l);text-align:left}
+.pl-notice h2{font-family:var(--font-display);font-size:17px;font-weight:700;letter-spacing:-.01em;margin:0 0 10px}
+.pl-notice ul{margin:0;padding-left:18px;display:grid;gap:8px;font-size:14.5px;line-height:1.5;color:var(--ink)}
+.pl-notice a,.pl-small a{color:var(--lav-deep);text-decoration:underline;text-underline-offset:2px}
+.pl-note{font-size:13.5px;color:var(--muted-l);margin:0 0 10px}

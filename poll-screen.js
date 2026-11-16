@@ -1,6 +1,6 @@
 /* Big screen: shows the live counter while the poll is open and the results after "Show results". */
 (function () {
-  var URL_JOIN = 'https://www.kuma.partners/PPI-engagement';
+  var URL_JOIN = 'https://www.kuma.partners/PPI-engagement/';
   var main = document.getElementById('main');
   var stepEl = document.getElementById('step');
   var qrSmall = document.getElementById('qrsmall');
@@ -74,7 +74,7 @@
         h.appendChild(el('span', 'lav', 'live poll.'));
         t.appendChild(h);
         t.appendChild(el('p', 'ps-sub', 'Open the camera on your phone and point it at the code. Your answers are anonymous.'));
-        t.appendChild(el('span', 'ps-url', 'kuma.partners/PPI-engagement'));
+        t.appendChild(el('span', 'ps-url', 'www.kuma.partners/PPI-engagement/'));
         j.appendChild(t);
         main.appendChild(j);
         return;
@@ -84,7 +84,7 @@
         var wall = st.question.type === 'wall';
         ql.appendChild(el('span', 'ps-status ' + st.phase, st.phase === 'open' ? (wall ? 'Live answers' : 'Q&A open') : (wall ? 'Closed' : 'Q&A closed')));
         ql.appendChild(question(st.question.text));
-        ql.appendChild(el('p', 'ps-sub', st.phase === 'open' ? (wall ? 'Scan the code or open kuma.partners/PPI-engagement and write your answer. It appears here at once, anonymous.' : 'Scan the code or open kuma.partners/PPI-engagement and send your questions. Up to three each, anonymous.') : (wall ? 'Thank you for your answers.' : 'The Q&A is closed. Thank you for your questions.')));
+        ql.appendChild(el('p', 'ps-sub', st.phase === 'open' ? (wall ? 'Scan the code or open www.kuma.partners/PPI-engagement/ and write your answer. It appears here at once, anonymous.' : 'Scan the code or open www.kuma.partners/PPI-engagement/ and send your questions. Up to three each, anonymous.') : (wall ? 'Thank you for your answers.' : 'The Q&A is closed. Thank you for your questions.')));
         var qc = el('div', 'ps-count small');
         qaCount = el('b', '', '0');
         qc.appendChild(qaCount);
@@ -107,7 +107,7 @@
         main.classList.add('solo');
         left.appendChild(el('p', 'ps-sub', 'Opening shortly. Keep the page open on your phone.'));
       } else if (st.phase === 'open') {
-        left.appendChild(el('p', 'ps-sub', 'Scan the code or open kuma.partners/PPI-engagement and answer on your phone.'));
+        left.appendChild(el('p', 'ps-sub', 'Scan the code or open www.kuma.partners/PPI-engagement/ and answer on your phone.'));
         var c = el('div', 'ps-count');
         countEl = el('b', '', '0');
         c.appendChild(countEl);
