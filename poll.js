@@ -91,13 +91,14 @@
       if (st.phones && isFeed()) drawFeedList();
       else if (st.phones) drawResults();
       else if (isFeed()) {
-        if (st.question.type === 'wall') setHead('Thank you.', '', 'The answers are on the main screen.');
-        else setHead('Q&A is closed.', 'Thank you.', 'Your questions are on the main screen.');
+        if (st.question.type === 'wall') setHead('Thank you.', '', 'The next question will appear here.');
+        else setHead('Q&A is closed.', 'Thank you.', 'Your questions will be answered live.');
         var w2 = el('div', 'pl-wait');
         w2.appendChild(el('p', '', 'The next question will appear here.'));
         app.appendChild(w2);
       } else {
-        setHead('Voting is closed.', 'Thank you.', 'The results are on the main screen.');
+        if (st.question && st.question.type === 'text') setHead('Thank you.', '', 'The next question will appear here.');
+        else setHead('Voting is closed.', 'Thank you.', 'The results will appear here in a moment.');
         var w = el('div', 'pl-wait');
         w.appendChild(el('p', '', 'The next question will appear here.'));
         app.appendChild(w);
@@ -116,8 +117,8 @@
     var mine = qaMine();
     var wall = st.question.type === 'wall';
     var left = (wall ? 1 : 3) - mine.length;
-    if (wall) setHead(left > 0 ? st.question.text : 'Thank you.', '', left > 0 ? 'One sentence is enough. It appears on the main screen as you send it.' : 'Your answer is on the main screen.');
-    else setHead(st.question.text, '', left > 0 ? 'Ask up to three questions. They appear on the main screen as you send them.' : 'You have sent your three questions. Thank you.');
+    if (wall) setHead(left > 0 ? st.question.text : 'Thank you.', '', left > 0 ? 'One sentence is enough. Everyone\'s answers appear here after you send yours.' : 'Your answer is in. The answers of the others appear below as they arrive.');
+    else setHead(st.question.text, '', left > 0 ? 'Ask up to three questions. They are read out and answered live.' : 'You have sent your three questions. Thank you.');
     var card = el('div', 'pl-form');
     if (left > 0) {
       var ta = el('textarea', 'pl-in');
@@ -149,7 +150,19 @@
           .catch(function () { msg.hidden = false; msg.textContent = 'No connection. Please try again in a moment.'; send.disabled = false; });
       };
     }
-    if (mine.length) {
+    if (wall && mine.length) {
+      var live = el('div', 'qa-list phone');
+      live.style.marginTop = '18px';
+      card.appendChild(live);
+      phoneFeed = PollQA.create({
+        get: function (keys) {
+          return fetch('/api/poll/qa', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ keys: keys }), cache: 'no-store' })
+            .then(function (r) { return r.ok ? r.json() : { items: [] }; }).then(function (b) { return b.items || []; });
+        },
+        onChange: function (items, cur) { PollQA.draw(live, items, cur, { order: 'new', simple: true, empty: 'Answers appear here.' }); }
+      });
+      refreshFeed();
+    } else if (mine.length) {
       card.appendChild(el('h2', 'pl-sub', wall ? 'Your answer' : 'Your questions'));
       var ul = el('ul', 'pl-mine');
       mine.forEach(function (t) { ul.appendChild(el('li', '', t)); });
@@ -159,8 +172,12 @@
   }
 
   function drawSent() {
-    setHead('Thank you.', 'Your answer is in.', 'Wait for the next question. This page updates by itself.');
+    setHead('Thank you.', 'Your answer is in.', st.question.type === 'text' ? 'Please wait a few seconds. The next question will appear here.' : 'Please wait a few seconds. The results will be shown as soon as the poll closes.');
     var c = el('div', 'pl-done');
+    var wt = el('div', 'pl-wait');
+    wt.appendChild(el('div', 'pl-pulse'));
+    wt.appendChild(el('p', '', 'This page changes by itself. You do not need to do anything.'));
+    c.appendChild(wt);
     var b = el('button', 'btn ghost sm', 'Change my answer');
     b.type = 'button';
     b.onclick = function () { editing = true; draft = sentAnswer(); draw(true); };
@@ -250,14 +267,14 @@
         card.appendChild(ends);
         draft = val; ready(val !== null);
       } else if (q.type === 'cloud') {
-        ledeEl.textContent = 'One to three words. Short is better.';
+        ledeEl.textContent = 'Up to three answers, one or more words each. Short is better.';
         var ins = [];
         card.appendChild(el('p', 'pl-note', DONT));
         for (var k = 0; k < 3; k++) {
           var inp = el('input', 'pl-in');
-          inp.type = 'text'; inp.maxLength = 24; inp.autocomplete = 'off';
-          inp.placeholder = 'Word ' + (k + 1);
-          inp.setAttribute('aria-label', 'Word ' + (k + 1));
+          inp.type = 'text'; inp.maxLength = 40; inp.autocomplete = 'off';
+          inp.placeholder = 'Answer ' + (k + 1);
+          inp.setAttribute('aria-label', 'Answer ' + (k + 1));
           if (Array.isArray(prior) && prior[k]) inp.value = prior[k];
           inp.oninput = function () { draft = ins.map(function (x) { return x.value.trim(); }).filter(Boolean); ready(draft.length > 0); };
           ins.push(inp); card.appendChild(inp);
@@ -318,7 +335,8 @@
     refreshFeed();
   }
   function refreshFeed() {
-    if (!phoneFeed || !st || st.phase !== 'shown' || !st.phones) return;
+    var live = st && st.question && ((st.phase === 'shown' && st.phones) || (st.phase === 'open' && st.question.type === 'wall' && qaMine().length));
+    if (!phoneFeed || !live) return;
     fetch('/api/poll/screen', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; })
       .then(function (b) { if (b && b.keys && phoneFeed) phoneFeed.update(b.keys, b.cur || null); }).catch(function () {});
   }

@@ -161,7 +161,7 @@ export function validateAnswer(q, a) {
       if (!Array.isArray(a)) return null;
       const words = [];
       for (const w of a.slice(0, 6)) {
-        const v = clean(w, 24).toLowerCase().replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, '');
+        const v = clean(w, 40).toLowerCase().replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, '');
         if (v && !words.includes(v)) words.push(v);
       }
       return words.length ? words.slice(0, 3) : null;
@@ -266,7 +266,20 @@ async function clearPrefix(store, prefix) {
 
 // ---------- results ----------
 
-export function aggregate(q, votes, hidden = new Set(), { admin = false } = {}) {
+export const STOP = new Set(['a', 'an', 'the', 'it', 'its', 'of', 'to', 'and', 'or', 'is', 'are', 'am', 'was', 'be', 'in', 'on', 'at', 'for', 'with', 'as', 'by', 'i', 'me', 'my', 'we', 'you', 'your', 'this', 'that', 'so', 'too', 'very', 'just', 'but']);
+// one person counts a word once, however often they type it
+function wordsOf(entries) {
+  const out = new Set();
+  for (const e of entries) {
+    for (const raw of String(e).toLowerCase().split(/\s+/)) {
+      const w = raw.replace(/^[^\p{L}\p{N}]+|[^\p{L}\p{N}]+$/gu, '');
+      if (w.length > 1 && !STOP.has(w)) out.add(w);
+    }
+  }
+  if (!out.size) for (const e of entries) { const w = String(e).toLowerCase().trim(); if (w) out.add(w); }
+  return out;
+}
+function aggregate(q, votes, hidden = new Set(), { admin = false } = {}) {
   const n = votes.length;
   if (q.type === 'single' || q.type === 'multiple') {
     const counts = Object.fromEntries(q.options.map((o) => [o.id, 0]));
@@ -283,8 +296,9 @@ export function aggregate(q, votes, hidden = new Set(), { admin = false } = {}) 
     return { type: 'scale', n, avg: n ? Math.round((sum / n) * 100) / 100 : 0, dist, low: q.low || '', high: q.high || '' };
   }
   if (q.type === 'cloud') {
+    // every answer is split into single words, so "it sure" and "not sure" both count for "sure"
     const m = new Map();
-    for (const v of votes) for (const w of v.a) m.set(w, (m.get(w) || 0) + 1);
+    for (const v of votes) for (const w of wordsOf(v.a)) m.set(w, (m.get(w) || 0) + 1);
     let words = [...m].map(([w, c]) => ({ w, c, hidden: hidden.has('w:' + w) }));
     if (!admin) words = words.filter((x) => !x.hidden);
     words.sort((a, b) => b.c - a.c || a.w.localeCompare(b.w));
