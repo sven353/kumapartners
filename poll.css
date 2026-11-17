@@ -179,7 +179,7 @@ body.ps-body{background:var(--ink)}
 .pa-tabs button{border:0;background:transparent;padding:11px 16px;cursor:pointer;font-weight:600;color:var(--muted-l);border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap}
 .pa-tabs button[aria-selected=true]{color:var(--lav-deep);border-bottom-color:var(--lav-deep)}
 .pa-run{display:grid;grid-template-columns:minmax(280px,380px) 1fr;gap:22px;align-items:start}
-@media (max-width:860px){.pa-run{grid-template-columns:1fr}}
+@media (max-width:860px){.pa-run{grid-template-columns:1fr}.pa-run .pa-panel{order:-1;scroll-margin-top:12px}}
 .pa-list{display:grid;gap:8px}
 .pa-row{display:grid;grid-template-columns:28px 1fr auto;gap:10px;align-items:center;background:var(--white);border:0;border-radius:18px;padding:13px 15px;cursor:pointer;text-align:left;width:100%}
 .pa-row.on{box-shadow:0 0 0 1.5px var(--lav-deep);background:var(--wash)}

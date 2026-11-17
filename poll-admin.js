@@ -9,6 +9,7 @@
   var model = null, dirty = false;
   var peek = null, peekOn = false;
   var timers = [];
+  var jump = false; // after choosing a question, bring the controls into view on narrow screens (iPad portrait)
   var qaFeed = null;
   var TYPE_LABEL = { single: 'Single choice', multiple: 'Multiple choice', scale: 'Rating 1 to 7', cloud: 'Word cloud', text: 'Open text', qa: 'Live Q&A', wall: 'Live answers (shown as they arrive)' };
 
@@ -105,6 +106,11 @@
     }));
     app.appendChild(tabs);
     app.appendChild(tab === 'run' ? runView() : tab === 'edit' ? editView() : dataView());
+    if (jump) {
+      jump = false;
+      var pn = app.querySelector('.pa-panel');
+      if (pn && window.matchMedia('(max-width:860px)').matches) { try { pn.scrollIntoView({ block: 'start' }); } catch (e) { pn.scrollIntoView(); } }
+    }
   }
 
   // ---------- run ----------
@@ -112,7 +118,7 @@
     var st = data.state, qs = data.config.questions;
     var cur = st.qid && qs.filter(function (q) { return q.id === st.qid; })[0];
     var list = h('div', { class: 'pa-list' }, qs.map(function (q, i) {
-      return h('button', { type: 'button', class: 'pa-row' + (cur && cur.id === q.id ? ' on' : ''), onclick: function () { if (!cur || cur.id !== q.id) act({ action: 'select', qid: q.id }); } }, [
+      return h('button', { type: 'button', class: 'pa-row' + (cur && cur.id === q.id ? ' on' : ''), onclick: function () { if (!cur || cur.id !== q.id) act({ action: 'select', qid: q.id }, function () { jump = true; }); } }, [
         h('span', { class: 'no' }, String(i + 1)),
         h('span', {}, [q.text, h('small', {}, TYPE_LABEL[q.type])]),
         h('span', { class: 'ct' }, String(data.counts[q.id] || 0))
@@ -121,7 +127,7 @@
     var panel = h('div', { class: 'pa-panel' });
     if (!cur) {
       panel.appendChild(h('span', { class: 'pa-chip idle' }, 'No question selected'));
-      panel.appendChild(h('p', { class: 'pa-q' }, 'Choose a question on the left.'));
+      panel.appendChild(h('p', { class: 'pa-q' }, 'Choose a question in the list.'));
       panel.appendChild(h('p', { class: 'pa-note' }, 'Phones show a waiting screen until you open a poll.'));
       return h('div', { class: 'pa-run' }, [list, panel]);
     }
