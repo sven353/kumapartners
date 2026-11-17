@@ -114,6 +114,11 @@
   }
 
   // ---------- run ----------
+  function autoRow() {
+    var on = data.state.autoPhones !== false;
+    var b = h('button', { type: 'button', class: 'pa-switch', role: 'switch', 'aria-checked': on ? 'true' : 'false', onclick: function () { act({ action: 'autophones', on: !on }); } }, [h('span', { class: 'knob' })]);
+    return h('div', { class: 'pa-auto' }, [b, h('span', {}, 'Show results on the phones when I press Show results (open text stays on the main screen)')]);
+  }
   function runView() {
     var st = data.state, qs = data.config.questions;
     var cur = st.qid && qs.filter(function (q) { return q.id === st.qid; })[0];
@@ -129,7 +134,7 @@
       panel.appendChild(h('span', { class: 'pa-chip idle' }, 'No question selected'));
       panel.appendChild(h('p', { class: 'pa-q' }, 'Choose a question in the list.'));
       panel.appendChild(h('p', { class: 'pa-note' }, 'Phones show a waiting screen until you open a poll.'));
-      return h('div', { class: 'pa-run' }, [list, panel]);
+      return h('div', {}, [autoRow(), h('div', { class: 'pa-run' }, [list, panel])]);
     }
     var phaseText = { ready: 'Ready, not open yet', open: 'Poll open', shown: 'Results shown' }[st.phase];
     panel.appendChild(h('span', { class: 'pa-chip ' + st.phase }, phaseText));
@@ -145,8 +150,12 @@
       if (st.phase === 'ready') acts.appendChild(h('button', { class: 'btn go', type: 'button', onclick: function () { act({ action: 'open' }); } }, wallQ ? 'Open answers' : 'Open Q&A'));
       else if (st.phase === 'open') acts.appendChild(h('button', { class: 'btn go', type: 'button', onclick: function () { act({ action: 'show' }); } }, wallQ ? 'Close answers' : 'Close Q&A'));
       else {
+        acts.appendChild(st.phones
+          ? h('button', { class: 'btn ghost', type: 'button', onclick: function () { act({ action: 'unpublish' }); } }, 'Hide list from phones')
+          : h('button', { class: 'btn go', type: 'button', onclick: function () { act({ action: 'publish' }); } }, 'Show list on phones'));
         acts.appendChild(h('button', { class: 'btn ghost', type: 'button', onclick: function () { act({ action: 'open' }); } }, wallQ ? 'Re-open answers' : 'Re-open Q&A'));
-        acts.appendChild(h('button', { class: 'btn go', type: 'button', onclick: function () { act({ action: 'next' }); } }, 'Next question'));
+        acts.appendChild(h('button', { class: 'btn go', type: 'button', onclick: function () { act({ action: 'nextopen' }); } }, 'Next question and open'));
+        acts.appendChild(h('button', { class: 'btn ghost', type: 'button', onclick: function () { act({ action: 'next' }); } }, 'Next question'));
       }
       panel.appendChild(acts);
       panel.appendChild(h('p', { class: 'pa-note' }, st.phase === 'ready' ? 'Phones switch to this question within a few seconds of opening.' : (wallQ ? 'Answers appear on the big screen at once, one per person. You can hide any answer below.' : 'Questions appear on the big screen at once. Each person can send up to three. Someone from HR can read them out on the moderator page.')));
@@ -167,15 +176,16 @@
       acts.appendChild(h('button', { class: 'btn go', type: 'button', onclick: function () { peekOn = false; act({ action: 'show' }); } }, 'Show results'));
       acts.appendChild(h('button', { class: 'btn ghost', type: 'button', onclick: function () { peekOn = !peekOn; render(); } }, peekOn ? 'Hide live answers' : 'Peek at live answers'));
       panel.appendChild(acts);
-      panel.appendChild(h('p', { class: 'pa-note' }, 'Show results closes the poll and puts the results on the big screen.'));
+      panel.appendChild(h('p', { class: 'pa-note' }, 'Show results closes the poll and puts the results on the big screen' + (st.autoPhones !== false && cur.type !== 'text' ? ' and on the phones.' : '. Phones show "Voting is closed" until you publish.')));
     } else {
       acts.appendChild(st.phones
         ? h('button', { class: 'btn ghost', type: 'button', onclick: function () { act({ action: 'unpublish' }); } }, 'Hide results from phones')
         : h('button', { class: 'btn go', type: 'button', onclick: function () { act({ action: 'publish' }); } }, 'Publish results to phones'));
       acts.appendChild(h('button', { class: 'btn ghost', type: 'button', onclick: function () { act({ action: 'open' }); } }, 'Re-open poll'));
-      acts.appendChild(h('button', { class: 'btn go', type: 'button', onclick: function () { act({ action: 'next' }); } }, 'Next question'));
+      acts.appendChild(h('button', { class: 'btn go', type: 'button', onclick: function () { act({ action: 'nextopen' }); } }, 'Next question and open'));
+      acts.appendChild(h('button', { class: 'btn ghost', type: 'button', onclick: function () { act({ action: 'next' }); } }, 'Next question'));
       panel.appendChild(acts);
-      panel.appendChild(h('p', { class: 'pa-note' }, st.phones ? 'Phones are showing the results.' : 'Phones show "Voting is closed" until you publish.'));
+      panel.appendChild(h('p', { class: 'pa-note' }, st.phones ? 'Phones are showing the results. They switch to the next question when you open it.' : (cur.type === 'text' ? 'Open text answers stay off the phones unless you publish them.' : 'Phones show "Voting is closed" until you publish.')));
     }
 
     var box = h('div', { class: 'pa-sub' });
@@ -205,7 +215,7 @@
     tail.appendChild(document.createTextNode(' '));
     tail.appendChild(h('button', { class: 'btn ghost sm', type: 'button', onclick: function () { act({ action: 'idle' }); } }, 'Back to waiting screen'));
     panel.appendChild(tail);
-    return h('div', { class: 'pa-run' }, [list, panel]);
+    return h('div', {}, [autoRow(), h('div', { class: 'pa-run' }, [list, panel])]);
   }
 
   // live Q&A list inside the presenter page, refreshed every second

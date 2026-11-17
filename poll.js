@@ -88,7 +88,8 @@
     if (st.phase === 'ready') { app.appendChild(wait('Next question', 'coming up.', 'Keep this page open on your phone.')); app.appendChild(notice()); return; }
     if (st.phase === 'open') { if (isFeed()) drawQa(); else if (sentAnswer() && !editing) drawSent(); else drawForm(); return; }
     if (st.phase === 'shown') {
-      if (st.phones) drawResults();
+      if (st.phones && isFeed()) drawFeedList();
+      else if (st.phones) drawResults();
       else if (isFeed()) {
         if (st.question.type === 'wall') setHead('Thank you.', '', 'The answers are on the main screen.');
         else setHead('Q&A is closed.', 'Thank you.', 'Your questions are on the main screen.');
@@ -301,6 +302,27 @@
     app.appendChild(card);
   }
 
+  // Q&A and live answers, shown read-only on the phones after the presenter closes them
+  var phoneFeed = null;
+  function drawFeedList() {
+    setHead(st.question.text, '', 'The list updates by itself.');
+    var box = el('div', 'qa-list phone');
+    app.appendChild(box);
+    phoneFeed = PollQA.create({
+      get: function (keys) {
+        return fetch('/api/poll/qa', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ keys: keys }), cache: 'no-store' })
+          .then(function (r) { return r.ok ? r.json() : { items: [] }; }).then(function (b) { return b.items || []; });
+      },
+      onChange: function (items, cur) { PollQA.draw(box, items, cur, { order: 'new', simple: true, empty: 'Nothing here yet.' }); }
+    });
+    refreshFeed();
+  }
+  function refreshFeed() {
+    if (!phoneFeed || !st || st.phase !== 'shown' || !st.phones) return;
+    fetch('/api/poll/screen', { cache: 'no-store' }).then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (b) { if (b && b.keys && phoneFeed) phoneFeed.update(b.keys, b.cur || null); }).catch(function () {});
+  }
+
   function drawResults() {
     setHead(st.question.text, '', 'Results');
     var card = el('div', 'pl-card');
@@ -322,6 +344,7 @@
       st = r.body;
       if (st.phase !== 'open' || st.oid !== prevOid || (st.question && st.question.id !== prevQ)) { editing = false; }
       draw(false);
+      refreshFeed();
     }).catch(function () { fails++; }).then(next);
   }
   document.addEventListener('visibilitychange', function () { if (!document.hidden) tick(); });

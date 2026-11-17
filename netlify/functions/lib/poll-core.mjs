@@ -89,7 +89,7 @@ function migrate(cfg) {
   return { ...cfg, questions, v: 3 };
 }
 
-const DEFAULT_STATE = { rev: 0, mode: 'rehearsal', qid: null, phase: 'idle', phones: false, oid: null, qaCur: null };
+const DEFAULT_STATE = { rev: 0, mode: 'rehearsal', qid: null, phase: 'idle', phones: false, oid: null, qaCur: null, autoPhones: true };
 
 const bad = (message, status = 400) => Object.assign(new Error(message), { status });
 const clean = (s, n) => String(s ?? '').replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, n);
@@ -452,6 +452,20 @@ async function adminAction(store, b) {
       await saveState(store, state);
       return overview(store, false);
     }
+    case 'autophones': {
+      state.autoPhones = b.on !== false;
+      await saveState(store, state);
+      return overview(store, false);
+    }
+    case 'nextopen': {
+      const i = state.qid ? cfg.questions.findIndex((x) => x.id === state.qid) : -1;
+      const q = cfg.questions[i + 1];
+      if (!q) throw bad('That was the last question.', 409);
+      await store.delete(K.final(mode, q.id));
+      Object.assign(state, { qid: q.id, phase: 'open', phones: false, oid: rid('p') });
+      await saveState(store, state);
+      return overview(store, false);
+    }
     case 'idle': {
       Object.assign(state, { qid: null, phase: 'idle', phones: false, oid: null });
       await saveState(store, state);
@@ -470,14 +484,14 @@ async function adminAction(store, b) {
       const q = need();
       if (state.phase !== 'open' && state.phase !== 'shown') throw bad('Open the poll first.', 409);
       if (!isFeed(q)) await freezeResults(store, mode, q);
-      Object.assign(state, { phase: 'shown' });
+      // results go to the phones at once, except for open text (that stays on the main screen unless published by hand)
+      Object.assign(state, { phase: 'shown', phones: state.autoPhones !== false && q.type !== 'text' });
       await saveState(store, state);
       return overview(store, false);
     }
     case 'publish':
     case 'unpublish': {
-      const pq = need();
-      if (isFeed(pq)) throw bad('The live list stays on the main screen.', 409);
+      need();
       if (state.phase !== 'shown') throw bad('Show the results first.', 409);
       state.phones = act === 'publish';
       await saveState(store, state);
