@@ -89,7 +89,17 @@ function migrate(cfg) {
   return { ...cfg, questions, v: 3 };
 }
 
-const DEFAULT_STATE = { rev: 0, mode: 'rehearsal', qid: null, phase: 'idle', phones: false, oid: null, qaCur: null, autoPhones: true };
+const DEFAULT_STATE = { rev: 0, mode: 'rehearsal', qid: null, phase: 'idle', phones: false, oid: null, qaCur: null, autoPhones: true, endsAt: null };
+
+// Timer: seconds to answer per question (0 = no timer). A question without its own value gets the default for its type.
+const DEFAULT_SECS = { single: 30, multiple: 30, scale: 30, cloud: 60, text: 90, wall: 90, qa: 0 };
+const GRACE_MS = 2000;
+export const secsOf = (q) => {
+  const n = q && Number.isFinite(q.secs) ? q.secs : (q && DEFAULT_SECS[q.type]) || 0;
+  return Math.max(0, Math.min(n, 600));
+};
+const autoOf = (q) => !q || q.auto !== false;
+const deadline = (q) => (secsOf(q) ? Date.now() + secsOf(q) * 1000 : null);
 
 const bad = (message, status = 400) => Object.assign(new Error(message), { status });
 const clean = (s, n) => String(s ?? '').replace(/[\u0000-\u001f\u007f]/g, ' ').replace(/\s+/g, ' ').trim().slice(0, n);
@@ -138,6 +148,9 @@ export function sanitizeQuestions(list) {
       out.high = clean(q.high, 30);
     }
     if (q.type === 'cloud') out.words = 3;
+    const secs = parseInt(q.secs, 10);
+    if (Number.isFinite(secs)) out.secs = Math.min(Math.max(secs, 0), 600);
+    if (q.auto === false) out.auto = false;
     return out;
   });
 }
@@ -316,6 +329,25 @@ async function freezeResults(store, mode, q) {
   return res;
 }
 
+// Closes an open question by itself once its time (plus a short grace period for late taps) has run out.
+// It runs lazily on every request, so no clock is needed on the server.
+async function tick(store, cfg, state) {
+  if (state.phase !== 'open' || !state.endsAt || !state.qid) return state;
+  const q = cfg.questions.find((x) => x.id === state.qid);
+  if (!q || !autoOf(q) || Date.now() < state.endsAt + GRACE_MS) return state;
+  const fresh = await loadState(store);
+  if (fresh.phase !== 'open' || fresh.oid !== state.oid || fresh.endsAt !== state.endsAt) return fresh;
+  if (!isFeed(q)) await freezeResults(store, fresh.mode, q);
+  Object.assign(fresh, { phase: 'shown', phones: fresh.autoPhones !== false && q.type !== 'text', endsAt: null });
+  await saveState(store, fresh);
+  return fresh;
+}
+
+async function loadBoth(store) {
+  const [cfg, st] = await Promise.all([loadConfig(store), loadState(store)]);
+  return [cfg, await tick(store, cfg, st)];
+}
+
 // ---------- CSV ----------
 
 const csvCell = (v) => {
@@ -351,7 +383,8 @@ function publicState(cfg, state) {
   const q = state.qid ? cfg.questions.find((x) => x.id === state.qid) : null;
   const out = {
     rev: state.rev, phase: q ? state.phase : 'idle', phones: !!state.phones && state.phase === 'shown',
-    oid: state.oid || null, index: q ? cfg.questions.indexOf(q) + 1 : 0, total: cfg.questions.length
+    oid: state.oid || null, index: q ? cfg.questions.indexOf(q) + 1 : 0, total: cfg.questions.length,
+    now: Date.now(), endsAt: q && state.phase === 'open' && state.endsAt ? state.endsAt : null, secs: q ? secsOf(q) : 0
   };
   if (q && (state.phase === 'open' || state.phase === 'shown')) out.question = q;
   return out;
@@ -369,10 +402,10 @@ function checkAdmin(key, env) {
 
 async function overview(store, seed) {
   const cfg = await loadConfig(store, { seed });
-  const state = await loadState(store);
+  const state = await tick(store, cfg, await loadState(store));
   const counts = {};
   await Promise.all(cfg.questions.map(async (q) => { counts[q.id] = await countFor(store, state.mode, q); }));
-  return { config: { questions: cfg.questions }, state, counts };
+  return { config: { questions: cfg.questions }, state, counts, now: Date.now() };
 }
 
 // Live Q&A moderation. Used by the presenter page and by the optional moderator page.
@@ -419,7 +452,7 @@ async function qaAction(store, cfg, state, b) {
 async function adminAction(store, b) {
   const act = b && b.action;
   const cfg = await loadConfig(store, { seed: true });
-  const state = await loadState(store);
+  const state = await tick(store, cfg, await loadState(store));
   const mode = state.mode;
   const qOf = (id) => cfg.questions.find((x) => x.id === id);
   const need = () => { const q = state.qid && qOf(state.qid); if (!q) throw bad('Choose a question first.', 409); return q; };
@@ -428,7 +461,7 @@ async function adminAction(store, b) {
     case 'overview': return overview(store, true);
     case 'count': {
       const q = qOf(b.qid || state.qid);
-      return { n: q ? await countFor(store, mode, q) : 0, rev: state.rev, phase: state.phase };
+      return { n: q ? await countFor(store, mode, q) : 0, rev: state.rev, phase: state.phase, now: Date.now() };
     }
     case 'save': {
       const questions = sanitizeQuestions(b.questions);
@@ -476,7 +509,7 @@ async function adminAction(store, b) {
       const q = cfg.questions[i + 1];
       if (!q) throw bad('That was the last question.', 409);
       await store.delete(K.final(mode, q.id));
-      Object.assign(state, { qid: q.id, phase: 'open', phones: false, oid: rid('p') });
+      Object.assign(state, { qid: q.id, phase: 'open', phones: false, oid: rid('p'), endsAt: deadline(q) });
       await saveState(store, state);
       return overview(store, false);
     }
@@ -490,7 +523,7 @@ async function adminAction(store, b) {
       if (state.phase === 'open') return overview(store, false);
       const keep = state.phase === 'shown' && state.oid;
       await store.delete(K.final(mode, q.id));
-      Object.assign(state, { phase: 'open', phones: false, oid: keep ? state.oid : rid('p') });
+      Object.assign(state, { phase: 'open', phones: false, oid: keep ? state.oid : rid('p'), endsAt: deadline(q) });
       await saveState(store, state);
       return overview(store, false);
     }
@@ -499,7 +532,16 @@ async function adminAction(store, b) {
       if (state.phase !== 'open' && state.phase !== 'shown') throw bad('Open the poll first.', 409);
       if (!isFeed(q)) await freezeResults(store, mode, q);
       // results go to the phones at once, except for open text (that stays on the main screen unless published by hand)
-      Object.assign(state, { phase: 'shown', phones: state.autoPhones !== false && q.type !== 'text' });
+      Object.assign(state, { phase: 'shown', phones: state.autoPhones !== false && q.type !== 'text', endsAt: null });
+      await saveState(store, state);
+      return overview(store, false);
+    }
+    case 'extend': {
+      need();
+      if (state.phase !== 'open') throw bad('The poll is not open.', 409);
+      const add = Math.min(Math.max(parseInt(b.secs, 10) || 15, 5), 300) * 1000;
+      const base = state.endsAt && state.endsAt > Date.now() ? state.endsAt : Date.now();
+      state.endsAt = base + add;
       await saveState(store, state);
       return overview(store, false);
     }
@@ -564,12 +606,12 @@ export async function handle(req, store, env = {}) {
   const { method, route, query = {}, body } = req;
   try {
     if (route === 'state' && method === 'GET') {
-      const [cfg, state] = await Promise.all([loadConfig(store), loadState(store)]);
+      const [cfg, state] = await loadBoth(store);
       return { status: 200, body: publicState(cfg, state) };
     }
 
     if (route === 'screen' && method === 'GET') {
-      const [cfg, state] = await Promise.all([loadConfig(store), loadState(store)]);
+      const [cfg, state] = await loadBoth(store);
       const out = publicState(cfg, state);
       const q = state.qid && cfg.questions.find((x) => x.id === state.qid);
       if (q) out.question = q;
@@ -590,7 +632,7 @@ export async function handle(req, store, env = {}) {
     }
 
     if (route === 'results' && method === 'GET') {
-      const [cfg, state] = await Promise.all([loadConfig(store), loadState(store)]);
+      const [cfg, state] = await loadBoth(store);
       const q = state.qid && cfg.questions.find((x) => x.id === state.qid);
       const allowed = q && state.phase === 'shown' && (query.scope === 'screen' || (query.scope === 'phones' && state.phones));
       if (!allowed) return { status: 404, body: { error: 'not_available' } };
@@ -602,7 +644,7 @@ export async function handle(req, store, env = {}) {
     if (route === 'vote' && method === 'POST') {
       const b = body || {};
       if (!VOTER_RE.test(String(b.voter || ''))) throw bad('Invalid voter.');
-      const [cfg, state] = await Promise.all([loadConfig(store), loadState(store)]);
+      const [cfg, state] = await loadBoth(store);
       const q = state.qid && cfg.questions.find((x) => x.id === state.qid);
       if (!q || state.phase !== 'open' || b.qid !== q.id) return { status: 409, body: { error: 'closed' } };
       const a = validateAnswer(q, b.answer);
@@ -623,7 +665,7 @@ export async function handle(req, store, env = {}) {
 
     // public read of the live Q&A list: only the questions that are visible on the main screen
     if (route === 'qa' && method === 'POST') {
-      const [cfg, state] = await Promise.all([loadConfig(store), loadState(store)]);
+      const [cfg, state] = await loadBoth(store);
       const q = state.qid && cfg.questions.find((x) => x.id === state.qid);
       if (!isFeed(q) || (state.phase !== 'open' && state.phase !== 'shown')) return { status: 404, body: { error: 'not_available' } };
       const keys = Array.isArray((body || {}).keys) ? body.keys.slice(0, 120) : [];
@@ -642,7 +684,7 @@ export async function handle(req, store, env = {}) {
       }
       if (b.action === 'verify') return { status: 200, body: { ok: true } };
       if (!['qa_keys', 'qa_get', 'qa_hide', 'qa_done', 'qa_current'].includes(b.action)) throw bad('Unknown action.');
-      const [cfg, state] = await Promise.all([loadConfig(store), loadState(store)]);
+      const [cfg, state] = await loadBoth(store);
       return { status: 200, body: await qaAction(store, cfg, state, b) };
     }
 

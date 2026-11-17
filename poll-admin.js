@@ -11,6 +11,10 @@
   var timers = [];
   var jump = false; // after choosing a question, bring the controls into view on narrow screens (iPad portrait)
   var qaFeed = null;
+  var skew = 0; // server time minus this device's time, so the countdown follows the server clock
+  var DEFAULT_SECS = { single: 30, multiple: 30, scale: 30, cloud: 60, text: 90, wall: 90, qa: 0 };
+  function secsOf(q) { var n = typeof q.secs === 'number' ? q.secs : (DEFAULT_SECS[q.type] || 0); return Math.max(0, Math.min(n, 600)); }
+  function mmss(ms) { var t = Math.max(0, Math.ceil(ms / 1000)); return Math.floor(t / 60) + ':' + ('0' + (t % 60)).slice(-2); }
   var TYPE_LABEL = { single: 'Single choice', multiple: 'Multiple choice', scale: 'Rating 1 to 7', cloud: 'Word cloud', text: 'Open text', qa: 'Live Q&A', wall: 'Live answers (shown as they arrive)' };
 
   function h(tag, attrs, kids) {
@@ -31,7 +35,7 @@
   }
   function call(body) {
     return fetch('/api/poll/admin', { method: 'POST', headers: { 'content-type': 'application/json', 'x-poll-key': key }, body: JSON.stringify(body) })
-      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (b) { return { status: r.status, body: b }; }); });
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (b) { if (b && b.now) skew = b.now - Date.now(); return { status: r.status, body: b }; }); });
   }
   function twoStep(btn, armedText, fn) {
     var orig = btn.textContent, armed = false, t;
@@ -139,13 +143,27 @@
     var phaseText = { ready: 'Ready, not open yet', open: 'Poll open', shown: 'Results shown' }[st.phase];
     panel.appendChild(h('span', { class: 'pa-chip ' + st.phase }, phaseText));
     panel.appendChild(h('p', { class: 'pa-q' }, cur.text));
-    panel.appendChild(h('p', { class: 'pa-note' }, TYPE_LABEL[cur.type] + (cur.type === 'multiple' ? ', up to ' + cur.max + ' choices' : '')));
+    panel.appendChild(h('p', { class: 'pa-note' }, TYPE_LABEL[cur.type] + (cur.type === 'multiple' ? ', up to ' + cur.max + ' choices' : '') + (secsOf(cur) ? '. Timer: ' + secsOf(cur) + ' seconds' + (cur.auto === false ? ', closes by hand' : ', closes by itself') : '. No timer')));
     var isQa = cur.type === 'qa' || cur.type === 'wall';
     var wallQ = cur.type === 'wall';
     var countB = h('b', {}, String(data.counts[cur.id] || 0));
     panel.appendChild(h('div', { class: 'pa-big' }, [countB, h('span', { class: 'pa-note' }, isQa && !wallQ ? 'questions' : 'answered')]));
 
     var acts = h('div', { class: 'pa-acts' });
+    if (st.phase === 'open' && st.endsAt) {
+      var tBox = h('div', { class: 'pa-timer' });
+      panel.appendChild(tBox);
+      var autoOn = cur.auto !== false, asked = false;
+      var drawT = function () {
+        var left = st.endsAt - (Date.now() + skew);
+        tBox.className = 'pa-timer' + (left <= 0 ? ' up' : left <= 10000 ? ' low' : '');
+        tBox.textContent = left > 0 ? mmss(left) + ' left' : (autoOn ? 'Time is up. Closing' : 'Time is up. Close the poll when you are ready');
+        if (left < -2500 && autoOn && !asked) { asked = true; act({ action: 'overview' }); }
+      };
+      drawT();
+      timers.push(setInterval(drawT, 250));
+      acts.appendChild(h('button', { class: 'btn ghost', type: 'button', onclick: function () { act({ action: 'extend', secs: 15 }); } }, '+15 s'));
+    }
     if (isQa) {
       if (st.phase === 'ready') acts.appendChild(h('button', { class: 'btn go', type: 'button', onclick: function () { act({ action: 'open' }); } }, wallQ ? 'Open answers' : 'Open Q&A'));
       else if (st.phase === 'open') acts.appendChild(h('button', { class: 'btn go', type: 'button', onclick: function () { act({ action: 'show' }); } }, wallQ ? 'Close answers' : 'Close Q&A'));
@@ -204,7 +222,7 @@
 
     if (st.phase === 'open' || st.phase === 'ready') {
       timers.push(setInterval(function () {
-        call({ action: 'count', qid: cur.id }).then(function (r) { if (r.status === 200) countB.textContent = r.body.n; });
+        call({ action: 'count', qid: cur.id }).then(function (r) { if (r.status !== 200) return; countB.textContent = r.body.n; if (r.body.phase !== st.phase) act({ action: 'overview' }); });
       }, 2000));
     }
 
@@ -248,6 +266,7 @@
     if (type === 'scale') { q.low = ''; q.high = ''; }
     if (type === 'qa') q.text = 'Your questions for us';
     if (type === 'wall') q.text = 'What is your takeaway from today?';
+    q.secs = DEFAULT_SECS[type] || 0;
     return q;
   }
   function editView() {
@@ -302,6 +321,12 @@
       if (q.type === 'qa') card.appendChild(h('p', { class: 'pa-note' }, 'Each person can send up to three questions, up to 280 characters each. They show on the big screen at once. Put this question near the end.'));
       if (q.type === 'wall') card.appendChild(h('p', { class: 'pa-note' }, 'Each person sends one answer, up to 280 characters. Answers pop up on the big screen one after the other.'));
       if (q.type === 'text') card.appendChild(h('p', { class: 'pa-note' }, 'Answers are limited to 280 characters.'));
+      var secsIn = h('input', { type: 'number', min: '0', max: '600', step: '5', value: String(secsOf(q)), oninput: function (ev) { var n = parseInt(ev.target.value, 10); q.secs = isFinite(n) ? Math.min(Math.max(n, 0), 600) : 0; mark(); } });
+      var autoIn = h('input', { type: 'checkbox', checked: q.auto !== false, onchange: function (ev) { if (ev.target.checked) delete q.auto; else q.auto = false; mark(); } });
+      card.appendChild(h('div', { class: 'pa-two' }, [
+        h('label', {}, ['Time to answer, in seconds (0 = no timer)', secsIn]),
+        h('label', { class: 'pa-check' }, [autoIn, ' Close by itself when the time is up'])
+      ]));
       if (votes > 0) card.appendChild(h('p', { class: 'pa-note' }, votes + ' answers are stored for this question in the current mode. After changing options or the scale, reset the question on the Run tab.'));
       wrap.appendChild(card);
     });

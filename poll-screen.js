@@ -131,15 +131,33 @@
     }
   }
 
+  // countdown above the question, on the server clock
+  var tbar = el('div', 'ps-timer'), tlab = el('span'), tTrack = el('span', 'tb'), tfill = el('i'), skew = 0, kicked = '', pt = null;
+  tTrack.appendChild(tfill); tbar.appendChild(tlab); tbar.appendChild(tTrack); tbar.hidden = true;
+  main.parentNode.insertBefore(tbar, main);
+  setInterval(function () {
+    if (!st || st.phase !== 'open' || !st.endsAt) { tbar.hidden = true; return; }
+    var total = Math.max(1000, (st.secs || 30) * 1000);
+    var left = st.endsAt - (Date.now() + skew);
+    tbar.hidden = false;
+    tbar.className = 'ps-timer' + (left <= 10000 ? ' low' : '');
+    var t = Math.ceil(left / 1000);
+    tlab.textContent = left > 0 ? Math.floor(t / 60) + ':' + ('0' + (t % 60)).slice(-2) : 'Time is up';
+    tfill.style.transform = 'scaleX(' + Math.max(0, Math.min(1, left / total)) + ')';
+    var k = st.oid + '|' + st.endsAt;
+    if (left < -2200 && kicked !== k) { kicked = k; tick(); }
+  }, 250);
+
   function tick() {
+    clearTimeout(pt);
     fetch('/api/poll/screen', { cache: 'no-store' })
       .then(function (r) { return r.ok ? r.json() : Promise.reject(); })
       .then(function (b) {
-        st = b; draw();
+        st = b; if (b.now) skew = b.now - Date.now(); draw();
         if (b.question && (b.question.type === 'qa' || b.question.type === 'wall') && b.keys) qa.update(b.keys, b.cur || null);
       })
       .catch(function () {})
-      .then(function () { setTimeout(tick, st && st.question && (st.question.type === 'qa' || st.question.type === 'wall') && st.phase !== 'ready' ? 1000 : 2000); });
+      .then(function () { pt = setTimeout(tick, st && st.question && (st.question.type === 'qa' || st.question.type === 'wall') && st.phase !== 'ready' ? 1000 : 2000); });
   }
   draw();
   tick();

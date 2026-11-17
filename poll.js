@@ -82,6 +82,7 @@
     if (!force && key === viewKey) return;
     viewKey = key;
     app.textContent = '';
+    app.appendChild(tbar);
     stepEl.textContent = st && st.index ? 'Question ' + st.index + ' of ' + st.total : '';
     if (!st) { app.appendChild(wait('Connecting', '', '')); return; }
     if (st.phase === 'idle') { app.appendChild(wait('You are in.', 'First question soon.', 'Keep this page open on your phone.')); app.appendChild(notice()); return; }
@@ -350,6 +351,21 @@
     });
   }
 
+  // countdown: follows the server clock, is the first thing in the sheet and is put back after every redraw
+  var tbar = el('div', 'pl-timer'), tfill = el('i'), tlab = el('span'), tTrack = el('span', 'tb'), skew = 0, kicked = '';
+  tTrack.appendChild(tfill); tbar.appendChild(tlab); tbar.appendChild(tTrack); tbar.hidden = true;
+  setInterval(function () {
+    if (!st || st.phase !== 'open' || !st.endsAt) { tbar.hidden = true; return; }
+    var total = Math.max(1000, st.endsAt - (st.startAt || st.endsAt - 30000));
+    var left = st.endsAt - (Date.now() + skew);
+    tbar.hidden = false;
+    tbar.className = 'pl-timer' + (left <= 10000 ? ' low' : '');
+    tlab.textContent = left > 0 ? Math.floor(Math.ceil(left / 1000) / 60) + ':' + ('0' + (Math.ceil(left / 1000) % 60)).slice(-2) + ' left' : 'Time is up';
+    tfill.style.transform = 'scaleX(' + Math.max(0, Math.min(1, left / total)) + ')';
+    var k = st.oid + '|' + st.endsAt;
+    if (left < -2200 && kicked !== k) { kicked = k; tick(); }
+  }, 250);
+
   var timer = null, fails = 0;
   function tick() {
     clearTimeout(timer);
@@ -360,6 +376,8 @@
       fails = 0;
       var prevOid = st && st.oid, prevQ = st && st.question && st.question.id;
       st = r.body;
+      if (st.now) skew = st.now - Date.now();
+      if (st.endsAt && st.secs) st.startAt = st.endsAt - st.secs * 1000;
       if (st.phase !== 'open' || st.oid !== prevOid || (st.question && st.question.id !== prevQ)) { editing = false; }
       draw(false);
       refreshFeed();

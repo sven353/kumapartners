@@ -257,3 +257,21 @@ body.ps-body{background:var(--ink)}
 .pa-switch .knob{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;background:#fff;transition:transform .15s}
 .pa-switch[aria-checked=true]{background:var(--lav-deep)}
 .pa-switch[aria-checked=true] .knob{transform:translateX(18px)}
+
+/* countdown */
+.pa-timer{display:inline-block;margin:0 0 12px;padding:6px 14px;border-radius:100px;background:var(--wash);color:var(--lav-dd);font-weight:650;font-variant-numeric:tabular-nums}
+.pa-timer.low{background:#fdecc8;color:#6b4a00}
+.pa-timer.up{background:rgba(11,21,35,.08);color:var(--ink)}
+.pa-qc label.pa-check{display:flex;align-items:center;gap:8px;align-self:end;color:var(--ink)}
+.pa-qc label.pa-check input{width:auto}
+.pl-timer{display:flex;align-items:center;gap:10px;margin:0 0 14px;font-size:14px;font-weight:650;color:var(--lav-dd);font-variant-numeric:tabular-nums}
+.pl-timer .tb{flex:1;height:6px;border-radius:6px;background:rgba(11,21,35,.1);overflow:hidden}
+.pl-timer .tb i{display:block;height:100%;width:100%;background:var(--lav-deep);transform-origin:left;transition:transform .3s linear}
+.pl-timer.low{color:#8a5a00}
+.pl-timer.low .tb i{background:#d9981e}
+.ps-timer{display:flex;align-items:center;gap:18px;margin:0 0 22px;font-size:clamp(22px,2.6vw,38px);font-weight:650;color:#fff;font-variant-numeric:tabular-nums}
+.ps-timer .tb{flex:1;height:10px;border-radius:10px;background:rgba(255,255,255,.18);overflow:hidden}
+.ps-timer .tb i{display:block;height:100%;width:100%;background:#74BCCD;transform-origin:left;transition:transform .3s linear}
+.ps-timer.low{color:#f3c36b}
+.ps-timer.low .tb i{background:#f3c36b}
+.pl-timer[hidden],.ps-timer[hidden]{display:none}
