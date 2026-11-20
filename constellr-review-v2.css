@@ -1,0 +1,111 @@
+/* Private constellr debrief (staged as constellr-review-v2.html, shown at /constellr-review).
+   Loads after kuma.css and index-v2.css. Every class here starts with cr-, review-, scale-, intro-, protocol-, etc. and is local to this page. */
+.hero.cr-hero{min-height:clamp(380px,50svh,520px)}
+.cr-hero .h1{font-size:56px}
+.cr-hero .hero-copy{display:grid;justify-items:start;gap:18px}
+.cr-hero .lede{max-width:34em}
+.cr-client{display:inline-flex;align-items:center;padding:9px 16px;border-radius:100px;background:var(--paper)}
+.cr-client img{display:block;height:22px;width:auto}
+.cr-wrap{max-width:820px;padding-top:72px;padding-bottom:40px;display:grid;gap:28px}
+
+/* intro */
+.intro-message-card{padding:28px 30px;border-radius:24px;background:var(--ink);color:var(--paper);display:grid;gap:14px}
+.intro-lead{font-family:'Inter Tight','Inter',sans-serif;font-size:24px;line-height:1.2;letter-spacing:-.02em;font-weight:600;color:var(--paper);margin:0}
+.intro-body{margin:0;font-size:16px;line-height:1.6;color:var(--muted-d)}
+.anonymity-protocol-card{padding:24px 28px;border-radius:24px;border:1px solid var(--line-l);background:color-mix(in srgb,var(--lav) 10%,var(--paper));display:grid;gap:10px}
+.protocol-header{display:flex;align-items:center;gap:10px;color:var(--lav-deep)}
+.protocol-icon{width:22px;height:22px;flex:none}
+.protocol-title{font-weight:700;font-size:15px;letter-spacing:.01em;color:var(--ink)}
+.protocol-text{margin:0;font-size:15px;line-height:1.6;color:var(--muted-l)}
+.protocol-text.protocol-emphasis{color:var(--ink)}
+
+/* form card */
+.review-card-container{padding:34px;border-radius:28px;background:#fff;border:1px solid var(--line-l);box-shadow:0 24px 60px -36px rgba(11,21,35,.28)}
+.review-honeypot{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.review-identity-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px 20px;padding-bottom:30px;border-bottom:1px solid var(--line-l)}
+.identity-field:last-child{grid-column:1/-1}
+.label-row,.review-question-row{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+.input-label,.micro-probe-label,.review-question-label{font-family:'Inter Tight','Inter',sans-serif;font-weight:650;letter-spacing:-.01em;color:var(--ink)}
+.input-label{font-size:15px}
+.field-micro-hint,.optional-tag{font-size:12px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted-l)}
+.form-input,.form-textarea,.form-select{width:100%;box-sizing:border-box;margin-top:8px;padding:13px 15px;border:1px solid color-mix(in srgb,var(--ink) 18%,transparent);border-radius:14px;background:var(--paper);font:inherit;font-size:16px;color:var(--ink);transition:border-color .15s,box-shadow .15s}
+.form-textarea{resize:vertical;min-height:120px;line-height:1.5}
+.form-input:focus,.form-textarea:focus,.form-select:focus{outline:none;border-color:var(--lav-deep);box-shadow:0 0 0 3px color-mix(in srgb,var(--lav) 40%,transparent)}
+.form-input::placeholder,.form-textarea::placeholder{color:color-mix(in srgb,var(--ink) 45%,var(--paper))}
+.form-select{appearance:none;-webkit-appearance:none;padding-right:42px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1.5 7 7.5l6-6' fill='none' stroke='%230B1523' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 16px center}
+
+/* questions */
+fieldset.review-field-group{min-width:0;margin:0;padding:30px 0;border:0;border-bottom:1px solid var(--line-l)}
+.review-field-group.review-field-last{border-bottom:0;padding-bottom:6px}
+.review-field-group legend{float:left;width:100%;padding:0}
+.review-field-group legend + *{clear:both}
+.review-question-label{display:block;margin:0 0 6px;font-size:21px;line-height:1.2}
+.review-question-row .review-question-label{margin:0}
+.question-explainer{margin:6px 0 18px;font-size:15px;line-height:1.55;color:var(--muted-l)}
+.scale-selector-strip{display:grid;grid-template-columns:repeat(10,1fr);gap:6px}
+.scale-selector-strip.scale-11{grid-template-columns:repeat(11,1fr)}
+.scale-option{position:relative;display:block}
+.scale-option input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer;z-index:1}
+.scale-num{display:grid;place-items:center;height:48px;border-radius:12px;border:1px solid color-mix(in srgb,var(--ink) 16%,transparent);background:var(--paper);font-weight:650;font-size:15px;color:var(--ink);transition:background .15s,color .15s,border-color .15s,transform .15s}
+.scale-option:hover .scale-num{border-color:var(--lav-deep)}
+.scale-option input:checked + .scale-num{background:var(--ink);color:var(--lav);border-color:var(--ink)}
+.scale-option input:focus-visible + .scale-num{outline:2px solid var(--lav-deep);outline-offset:2px}
+.scale-anchor-labels{display:flex;justify-content:space-between;gap:16px;margin-top:10px;font-size:12.5px;line-height:1.4;color:var(--muted-l)}
+.scale-anchor-labels span:last-child{text-align:right}
+.micro-probe-group{margin-top:26px;padding-top:22px;border-top:1px dashed var(--line-l)}
+.micro-probe-label{font-size:16px}
+.micro-probe-hint{margin:4px 0 0;font-size:14px;color:var(--muted-l)}
+.priority-checkbox-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.checkbox-pill{position:relative;display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:14px;border:1px solid color-mix(in srgb,var(--ink) 16%,transparent);background:var(--paper);transition:border-color .15s,background .15s}
+.checkbox-pill input{position:absolute;inset:0;width:100%;height:100%;margin:0;opacity:0;cursor:pointer;z-index:1}
+.pill-check{flex:none;width:20px;height:20px;border-radius:6px;border:1.5px solid color-mix(in srgb,var(--ink) 40%,transparent);background:#fff;display:grid;place-items:center}
+.pill-label{font-size:15px;line-height:1.4;color:var(--ink)}
+.checkbox-pill:hover{border-color:var(--lav-deep)}
+.checkbox-pill:has(input:checked){border-color:var(--lav-deep);background:color-mix(in srgb,var(--lav) 16%,var(--paper))}
+.checkbox-pill input:checked ~ .pill-check{background:var(--lav-deep);border-color:var(--lav-deep)}
+.checkbox-pill input:checked ~ .pill-check::after{content:"";width:5px;height:9px;border:solid #fff;border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.checkbox-pill input:focus-visible ~ .pill-check{outline:2px solid var(--lav-deep);outline-offset:2px}
+
+/* publishing permissions */
+.review-consent{min-width:0;margin:30px 0 24px;padding:22px 22px 18px;border:1px solid var(--line-l);border-radius:20px;background:color-mix(in srgb,var(--lav) 10%,var(--paper))}
+.review-consent .consent-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;float:none}
+.review-consent .consent-title{margin:0 0 8px;font-family:'Inter Tight','Inter',sans-serif;font-weight:650;font-size:19px;letter-spacing:-.01em;color:var(--ink)}
+.review-consent .consent-intro{margin:0 0 16px;font-size:14.5px;line-height:1.55;color:var(--muted-l)}
+.review-consent label.consent-row{display:flex;align-items:flex-start;gap:12px;margin:0 0 12px;cursor:pointer;font-size:15px;line-height:1.5;color:var(--ink)}
+.review-consent label.consent-row input{flex:none;width:20px;height:20px;margin:2px 0 0;accent-color:var(--lav-deep)}
+.review-consent .consent-note{margin:8px 0 0;font-size:13.5px;line-height:1.6;color:var(--muted-l)}
+.review-consent a{color:var(--ink);text-underline-offset:3px}
+
+/* submit and states */
+.review-error{margin:0 0 14px;padding:12px 14px;border-radius:12px;background:#fbe9e7;color:#8a2a1c;font-size:14.5px}
+.review-error a{color:inherit}
+.review-privacy-note{margin:16px 0 0;font-size:13px;line-height:1.55;color:var(--muted-l);text-align:center}
+.review-privacy-note .lock-icon{display:inline-block;width:14px;height:14px;margin:0 6px -2px 0}
+.review-privacy-note a{color:var(--ink);text-underline-offset:3px}
+.review-success-panel[hidden]{display:none}
+.review-success-panel{display:grid;gap:14px;justify-items:start;outline:none}
+.success-icon-badge{display:grid;place-items:center;width:52px;height:52px;border-radius:50%;background:var(--ink);color:var(--lav);font-size:24px}
+.success-title{margin:0;font-family:'Inter Tight','Inter',sans-serif;font-size:34px;line-height:1.08;letter-spacing:-.03em;font-weight:700;color:var(--ink)}
+.success-message{margin:0;font-size:17px;line-height:1.6;color:var(--muted-l)}
+.upsell-bridge-block{margin-top:14px;padding:26px;border-radius:22px;background:var(--ink);color:var(--paper);display:grid;gap:12px;justify-items:start}
+.bridge-tag{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--lav)}
+.bridge-heading{margin:0;font-family:'Inter Tight','Inter',sans-serif;font-size:24px;line-height:1.15;letter-spacing:-.02em;color:var(--paper)}
+.bridge-text{margin:0;font-size:15.5px;line-height:1.6;color:var(--muted-d)}
+.bridge-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin-top:6px}
+.upsell-bridge-block .btn-ink{background:var(--lav);color:var(--ink)}
+.cr-link{color:var(--paper);text-underline-offset:4px}
+
+@media (max-width:760px){
+  .cr-hero .h1{font-size:40px}
+  .cr-wrap{padding-top:44px;gap:22px}
+  .intro-message-card{padding:22px}
+  .intro-lead{font-size:21px}
+  .review-card-container{padding:22px 18px}
+  .review-identity-grid{grid-template-columns:1fr}
+  .review-question-label{font-size:19px}
+  .scale-selector-strip,.scale-selector-strip.scale-11{grid-template-columns:repeat(5,1fr)}
+  .scale-selector-strip.scale-11{grid-template-columns:repeat(6,1fr)}
+  .scale-num{height:46px}
+  .priority-checkbox-grid{grid-template-columns:1fr}
+  .success-title{font-size:28px}
+}

@@ -137,3 +137,9 @@ http://www.kumapartners.eu/*     https://www.kuma.partners/:splat    301!
 /ppi-engagement/screen  /poll-screen.html    200!
 /ppi-engagement/admin   /poll-admin.html     200!
 /ppi-engagement/moderator /poll-mod.html     200!
+
+# constellr debrief (private, unlisted, noindex): new design. The address and the personalised links
+# (/constellr-review?name=...&role=...&coach=...) stay the same. constellr-review.html is the old file, kept for rollback.
+/constellr-review-v2.html /constellr-review         301!
+/constellr-review        /constellr-review-v2.html    200!
+/constellr-review.html   /constellr-review-v2.html    200!
