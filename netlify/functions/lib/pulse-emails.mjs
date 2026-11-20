@@ -34,7 +34,8 @@ export function buildPulseAlert(formName, fields) {
   const company = clip(f['Company'] || f['Client Account'], 80) || 'Unknown company';
   const person = clip(f['Executive Name'], 80);
   const role = clip(f['Role or Domain'], 80);
-  const subject = clip(label + ': ' + company + (person ? ', ' + person : '') + (role ? ' (' + role + ')' : ''), 200);
+  const engagement = clip(f['Engagement'], 60);
+  const subject = clip(label + ': ' + company + (person ? ', ' + person : '') + (role ? ' (' + role + ')' : '') + (engagement ? ', ' + engagement : ''), 200);
 
   const publishWords = yes(f[PUBLISH_WORDS]);
   const publishName = yes(f[PUBLISH_NAME]);
@@ -57,6 +58,7 @@ export function buildPulseAlert(formName, fields) {
   const text = [
     label + ' received',
     'Company: ' + company,
+    engagement ? 'Engagement: ' + engagement : null,
     '',
     'Publishing: ' + permission,
     '',
@@ -75,7 +77,8 @@ export function buildPulseAlert(formName, fields) {
     '<!doctype html><html><body style="margin:0;padding:24px;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif">' +
     '<div style="max-width:620px;margin:0 auto;background:#ffffff;border-radius:12px;padding:24px 28px">' +
     '<p style="margin:0 0 4px;color:#64748b;font-size:12px;letter-spacing:.06em;text-transform:uppercase">' + esc(label) + ' received</p>' +
-    '<h1 style="margin:0 0 16px;color:#0B1523;font-size:22px">' + esc(company) + '</h1>' +
+    '<h1 style="margin:0 0 4px;color:#0B1523;font-size:22px">' + esc(company) + '</h1>' +
+    (engagement ? '<p style="margin:0 0 16px;color:#17677B;font-size:14px">' + esc(engagement) + '</p>' : '<p style="margin:0 0 12px"></p>') +
     '<p style="margin:0 0 18px;padding:10px 14px;border-radius:8px;background:' + (publishWords ? '#ecfdf5' : '#f8fafc') + ';color:#1e293b;font-size:14px">Publishing: ' + esc(permission) + '</p>' +
     '<table role="presentation" style="width:100%;border-collapse:collapse">' + rows.map(tr).join('') + '</table>' +
     (submitted ? '<p style="margin:18px 0 0;color:#94a3b8;font-size:12px">Submitted ' + esc(submitted) + '</p>' : '') +

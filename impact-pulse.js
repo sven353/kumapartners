@@ -55,24 +55,31 @@ document.addEventListener('DOMContentLoaded', function () {
     return { sync: sync, boxes: boxes, field: field };
   }
   var nextSteps = bindGroup('data-next-step', 'field-next-steps');
-  var engagement = bindGroup('data-engagement', 'field-engagement');
+
+  // Engagement: one choice. Its block of questions is shown, the others are hidden and disabled,
+  // so they are neither required nor sent.
+  var engRadios = form.querySelectorAll('input[name="Engagement"]');
+  var blocks = form.querySelectorAll('.eng-block');
   var engError = form.querySelector('[data-engagement-error]');
-  Array.prototype.forEach.call(engagement.boxes, function (b) {
-    b.addEventListener('change', function () { if (engError && engagement.field.value) engError.hidden = true; });
+  function showEngagement() {
+    var chosen = '';
+    Array.prototype.forEach.call(engRadios, function (r) { if (r.checked) chosen = r.value; });
+    Array.prototype.forEach.call(blocks, function (blk) {
+      var on = blk.getAttribute('data-eng') === chosen;
+      blk.hidden = !on;
+      Array.prototype.forEach.call(blk.querySelectorAll('input, textarea'), function (el) { el.disabled = !on; });
+    });
+    if (chosen && engError) engError.hidden = true;
+  }
+  Array.prototype.forEach.call(engRadios, function (r) {
+    r.addEventListener('change', showEngagement);
+    r.addEventListener('invalid', function () { if (engError) engError.hidden = false; });
   });
+  showEngagement();
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
     nextSteps.sync();
-    engagement.sync();
-    // At least one engagement must be ticked
-    if (!engagement.field.value) {
-      if (engError) engError.hidden = false;
-      var group = document.getElementById('engagement-group');
-      if (group) group.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      if (engagement.boxes[0]) engagement.boxes[0].focus({ preventScroll: true });
-      return;
-    }
     if (timeInput) timeInput.value = new Date().toISOString();
     if (errorEl) errorEl.hidden = true;
     var original = submitBtn ? submitBtn.innerHTML : '';

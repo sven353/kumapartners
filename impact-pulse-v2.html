@@ -74,9 +74,9 @@
 </section>
 <section class="sec light lp-sec"><div class="wrap cr-wrap">
       <div class="intro-message-card">
-          <p class="intro-lead">Thank you for the focus, rigour and openness you brought to our sessions.</p>
+          <p class="intro-lead">Thank you for the focus, rigour and openness you brought to our work together.</p>
           <p class="intro-body">Leadership is an evolving discipline. As a company scales, the behaviours that unlocked early milestones inevitably create friction at the next order of magnitude. Scaling effectively means continuously adapting how you think, decide and align.</p>
-          <p class="intro-body">This 90-second pulse evaluates the return for your role and pinpoints where leadership execution must adapt next. Your perspective directly shapes our synthesis for the executive team.</p>
+          <p class="intro-body">This 90-second pulse looks at what our work together has changed for you and where leadership execution must adapt next. Your perspective directly shapes our synthesis for the executive team.</p>
         </div>
 
         <div class="anonymity-protocol-card">
@@ -98,12 +98,6 @@
           <div class="review-identity-grid">
             <div class="identity-field">
               <div class="label-row">
-                <label for="field-company" class="input-label">Company</label>
-              </div>
-              <input type="text" id="field-company" name="Company" required autocomplete="organization" placeholder="Your company name" class="form-input" maxlength="120">
-            </div>
-            <div class="identity-field">
-              <div class="label-row">
                 <label for="field-name" class="input-label">Executive Name</label>
                 <span class="field-micro-hint">Confidential verification</span>
               </div>
@@ -115,110 +109,397 @@
               </div>
               <input type="text" id="field-role" name="Role or Domain" required autocomplete="organization-title" placeholder="e.g. CEO, CTO, CPO" class="form-input">
             </div>
+            <div class="identity-field identity-wide">
+              <div class="label-row">
+                <label for="field-company" class="input-label">Company</label>
+              </div>
+              <input type="text" id="field-company" name="Company" required autocomplete="organization" placeholder="Your company name" class="form-input" maxlength="120">
+            </div>
             <div class="identity-field">
               <div class="label-row">
-                <label for="field-coach" class="input-label">Lead Coach</label>
+                <label for="field-coach" class="input-label">Lead executive coach</label>
               </div>
-              <select id="field-coach" name="Lead Coach" required class="form-input form-select">
+              <select id="field-coach" name="Lead executive coach" required class="form-input form-select">
                 <option value="" disabled selected>Select coach</option>
                 <option value="Sven Mulfinger">Sven Mulfinger</option>
                 <option value="Vincent Az&eacute;">Vincent Az&eacute;</option>
                 <option value="M&aacute;rcio Marcos">M&aacute;rcio Marcos</option>
                 <option value="Adrian Perreau de Pinninck">Adrian Perreau de Pinninck</option>
+                <option value="Bree Aesie">Bree Aesie</option>
+                <option value="Daniel Pascual">Daniel Pascual</option>
+                <option value="Andrea Ross">Andrea Ross</option>
+                <option value="Farid Chaouki">Farid Chaouki</option>
+                <option value="Tiffany Missiha">Tiffany Missiha</option>
+                <option value="Colleen Connors">Colleen Connors</option>
+                <option value="Other or not applicable">Other or not applicable</option>
               </select>
             </div>
           </div>
 
       <fieldset class="review-field-group" id="engagement-group">
         <legend class="review-question-label" id="eng-label">Which engagement are you giving feedback on?</legend>
-        <p class="question-explainer">Select all that apply.</p>
-        <input type="hidden" name="Engagement" id="field-engagement" value="">
-        <div class="priority-checkbox-grid" role="group" aria-labelledby="eng-label">
-          <span class="checkbox-pill"><input type="checkbox" id="eng-offsite" value="Executive offsite" data-engagement aria-labelledby="eng-offsite-t"><span class="pill-check" aria-hidden="true"></span><span class="pill-label" id="eng-offsite-t">Executive offsite</span></span>
-          <span class="checkbox-pill"><input type="checkbox" id="eng-coaching" value="Executive coaching" data-engagement aria-labelledby="eng-coaching-t"><span class="pill-check" aria-hidden="true"></span><span class="pill-label" id="eng-coaching-t">Executive coaching</span></span>
-          <span class="checkbox-pill"><input type="checkbox" id="eng-scan" value="14-Day Scan" data-engagement aria-labelledby="eng-scan-t"><span class="pill-check" aria-hidden="true"></span><span class="pill-label" id="eng-scan-t">14-Day Scan</span></span>
-          <span class="checkbox-pill"><input type="checkbox" id="eng-training" value="In-company training" data-engagement aria-labelledby="eng-training-t"><span class="pill-check" aria-hidden="true"></span><span class="pill-label" id="eng-training-t">In-company training</span></span>
-          <span class="checkbox-pill"><input type="checkbox" id="eng-alignment" value="Executive alignment" data-engagement aria-labelledby="eng-alignment-t"><span class="pill-check" aria-hidden="true"></span><span class="pill-label" id="eng-alignment-t">Executive alignment</span></span>
+        <p class="question-explainer">Select the most relevant one. If you took part in more than one, you can complete this page again for the other.</p>
+        <div class="priority-checkbox-grid" role="radiogroup" aria-labelledby="eng-label">
+          <span class="checkbox-pill radio-pill"><input type="radio" id="eng-offsite" name="Engagement" value="Executive offsite" required aria-labelledby="eng-offsite-t"><span class="pill-check" aria-hidden="true"></span><span class="pill-label" id="eng-offsite-t">Executive offsite</span></span>
+          <span class="checkbox-pill radio-pill"><input type="radio" id="eng-coaching" name="Engagement" value="Executive coaching" required aria-labelledby="eng-coaching-t"><span class="pill-check" aria-hidden="true"></span><span class="pill-label" id="eng-coaching-t">Executive coaching</span></span>
+          <span class="checkbox-pill radio-pill"><input type="radio" id="eng-scan" name="Engagement" value="14-Day Scan" required aria-labelledby="eng-scan-t"><span class="pill-check" aria-hidden="true"></span><span class="pill-label" id="eng-scan-t">14-Day Scan</span></span>
+          <span class="checkbox-pill radio-pill"><input type="radio" id="eng-training" name="Engagement" value="In-company training" required aria-labelledby="eng-training-t"><span class="pill-check" aria-hidden="true"></span><span class="pill-label" id="eng-training-t">In-company training</span></span>
+          <span class="checkbox-pill radio-pill"><input type="radio" id="eng-alignment" name="Engagement" value="Executive alignment" required aria-labelledby="eng-alignment-t"><span class="pill-check" aria-hidden="true"></span><span class="pill-label" id="eng-alignment-t">Executive alignment</span></span>
+          <span class="checkbox-pill radio-pill"><input type="radio" id="eng-keynote" name="Engagement" value="Keynote" required aria-labelledby="eng-keynote-t"><span class="pill-check" aria-hidden="true"></span><span class="pill-label" id="eng-keynote-t">Keynote</span></span>
         </div>
-        <p class="review-error eng-error" data-engagement-error role="alert" hidden>Please select at least one engagement.</p>
+        <p class="review-error eng-error" data-engagement-error role="alert" hidden>Please select one engagement.</p>
       </fieldset>
 
-      <fieldset class="review-field-group">
-        <legend class="review-question-label" id="q1-label">1. Strategic clarity and decision-making</legend>
-        <p class="question-explainer">To what extent has this engagement improved your ability to make clear, timely, high-stakes decisions?</p>
-        <div class="scale-selector-strip" role="radiogroup" aria-labelledby="q1-label">
-          <span class="scale-option"><input type="radio" id="q1-1" name="1. Strategic clarity &amp; decision-making (1-10)" value="1" required aria-labelledby="q1-1-t"><span class="scale-num" id="q1-1-t">1</span></span>
-          <span class="scale-option"><input type="radio" id="q1-2" name="1. Strategic clarity &amp; decision-making (1-10)" value="2" aria-labelledby="q1-2-t"><span class="scale-num" id="q1-2-t">2</span></span>
-          <span class="scale-option"><input type="radio" id="q1-3" name="1. Strategic clarity &amp; decision-making (1-10)" value="3" aria-labelledby="q1-3-t"><span class="scale-num" id="q1-3-t">3</span></span>
-          <span class="scale-option"><input type="radio" id="q1-4" name="1. Strategic clarity &amp; decision-making (1-10)" value="4" aria-labelledby="q1-4-t"><span class="scale-num" id="q1-4-t">4</span></span>
-          <span class="scale-option"><input type="radio" id="q1-5" name="1. Strategic clarity &amp; decision-making (1-10)" value="5" aria-labelledby="q1-5-t"><span class="scale-num" id="q1-5-t">5</span></span>
-          <span class="scale-option"><input type="radio" id="q1-6" name="1. Strategic clarity &amp; decision-making (1-10)" value="6" aria-labelledby="q1-6-t"><span class="scale-num" id="q1-6-t">6</span></span>
-          <span class="scale-option"><input type="radio" id="q1-7" name="1. Strategic clarity &amp; decision-making (1-10)" value="7" aria-labelledby="q1-7-t"><span class="scale-num" id="q1-7-t">7</span></span>
-          <span class="scale-option"><input type="radio" id="q1-8" name="1. Strategic clarity &amp; decision-making (1-10)" value="8" aria-labelledby="q1-8-t"><span class="scale-num" id="q1-8-t">8</span></span>
-          <span class="scale-option"><input type="radio" id="q1-9" name="1. Strategic clarity &amp; decision-making (1-10)" value="9" aria-labelledby="q1-9-t"><span class="scale-num" id="q1-9-t">9</span></span>
-          <span class="scale-option"><input type="radio" id="q1-10" name="1. Strategic clarity &amp; decision-making (1-10)" value="10" aria-labelledby="q1-10-t"><span class="scale-num" id="q1-10-t">10</span></span>
+      <div class="eng-questions">
+      <div class="eng-block" data-eng="Executive offsite" hidden>
+        <fieldset class="review-field-group">
+          <legend class="review-question-label" id="offsite-q1-label">1. Clarity of decisions and priorities</legend>
+          <p class="question-explainer">How clear were the decisions and priorities the team left the offsite with?</p>
+          <div class="scale-selector-strip" role="radiogroup" aria-labelledby="offsite-q1-label">
+            <span class="scale-option"><input type="radio" id="offsite-q1-1" name="Offsite 1. Clarity of decisions and priorities (1-10)" value="1" required disabled aria-labelledby="offsite-q1-1-t"><span class="scale-num" id="offsite-q1-1-t">1</span></span>
+            <span class="scale-option"><input type="radio" id="offsite-q1-2" name="Offsite 1. Clarity of decisions and priorities (1-10)" value="2" required disabled aria-labelledby="offsite-q1-2-t"><span class="scale-num" id="offsite-q1-2-t">2</span></span>
+            <span class="scale-option"><input type="radio" id="offsite-q1-3" name="Offsite 1. Clarity of decisions and priorities (1-10)" value="3" required disabled aria-labelledby="offsite-q1-3-t"><span class="scale-num" id="offsite-q1-3-t">3</span></span>
+            <span class="scale-option"><input type="radio" id="offsite-q1-4" name="Offsite 1. Clarity of decisions and priorities (1-10)" value="4" required disabled aria-labelledby="offsite-q1-4-t"><span class="scale-num" id="offsite-q1-4-t">4</span></span>
+            <span class="scale-option"><input type="radio" id="offsite-q1-5" name="Offsite 1. Clarity of decisions and priorities (1-10)" value="5" required disabled aria-labelledby="offsite-q1-5-t"><span class="scale-num" id="offsite-q1-5-t">5</span></span>
+            <span class="scale-option"><input type="radio" id="offsite-q1-6" name="Offsite 1. Clarity of decisions and priorities (1-10)" value="6" required disabled aria-labelledby="offsite-q1-6-t"><span class="scale-num" id="offsite-q1-6-t">6</span></span>
+            <span class="scale-option"><input type="radio" id="offsite-q1-7" name="Offsite 1. Clarity of decisions and priorities (1-10)" value="7" required disabled aria-labelledby="offsite-q1-7-t"><span class="scale-num" id="offsite-q1-7-t">7</span></span>
+            <span class="scale-option"><input type="radio" id="offsite-q1-8" name="Offsite 1. Clarity of decisions and priorities (1-10)" value="8" required disabled aria-labelledby="offsite-q1-8-t"><span class="scale-num" id="offsite-q1-8-t">8</span></span>
+            <span class="scale-option"><input type="radio" id="offsite-q1-9" name="Offsite 1. Clarity of decisions and priorities (1-10)" value="9" required disabled aria-labelledby="offsite-q1-9-t"><span class="scale-num" id="offsite-q1-9-t">9</span></span>
+            <span class="scale-option"><input type="radio" id="offsite-q1-10" name="Offsite 1. Clarity of decisions and priorities (1-10)" value="10" required disabled aria-labelledby="offsite-q1-10-t"><span class="scale-num" id="offsite-q1-10-t">10</span></span>
+          </div>
+          <div class="scale-anchor-labels" aria-hidden="true"><span>1 = Unclear, still open</span><span>10 = Very clear, ready to act</span></div>
+        </fieldset>
+        <fieldset class="review-field-group">
+          <legend class="review-question-label" id="offsite-q2-label">2. Preparation and facilitation</legend>
+          <p class="question-explainer">How well did the preparation and facilitation fit your team's real issues?</p>
+          <div class="scale-selector-strip" role="radiogroup" aria-labelledby="offsite-q2-label">
+            <span class="scale-option"><input type="radio" id="offsite-q2-1" name="Offsite 2. Preparation and facilitation (1-10)" value="1" required disabled aria-labelledby="offsite-q2-1-t"><span class="scale-num" id="offsite-q2-1-t">1</span></span>
+            <span class="scale-option"><input type="radio" id="offsite-q2-2" name="Offsite 2. Preparation and facilitation (1-10)" value="2" required disabled aria-labelledby="offsite-q2-2-t"><span class="scale-num" id="offsite-q2-2-t">2</span></span>
+            <span class="scale-option"><input type="radio" id="offsite-q2-3" name="Offsite 2. Preparation and facilitation (1-10)" value="3" required disabled aria-labelledby="offsite-q2-3-t"><span class="scale-num" id="offsite-q2-3-t">3</span></span>
+            <span class="scale-option"><input type="radio" id="offsite-q2-4" name="Offsite 2. Preparation and facilitation (1-10)" value="4" required disabled aria-labelledby="offsite-q2-4-t"><span class="scale-num" id="offsite-q2-4-t">4</span></span>
+            <span class="scale-option"><input type="radio" id="offsite-q2-5" name="Offsite 2. Preparation and facilitation (1-10)" value="5" required disabled aria-labelledby="offsite-q2-5-t"><span class="scale-num" id="offsite-q2-5-t">5</span></span>
+            <span class="scale-option"><input type="radio" id="offsite-q2-6" name="Offsite 2. Preparation and facilitation (1-10)" value="6" required disabled aria-labelledby="offsite-q2-6-t"><span class="scale-num" id="offsite-q2-6-t">6</span></span>
+            <span class="scale-option"><input type="radio" id="offsite-q2-7" name="Offsite 2. Preparation and facilitation (1-10)" value="7" required disabled aria-labelledby="offsite-q2-7-t"><span class="scale-num" id="offsite-q2-7-t">7</span></span>
+            <span class="scale-option"><input type="radio" id="offsite-q2-8" name="Offsite 2. Preparation and facilitation (1-10)" value="8" required disabled aria-labelledby="offsite-q2-8-t"><span class="scale-num" id="offsite-q2-8-t">8</span></span>
+            <span class="scale-option"><input type="radio" id="offsite-q2-9" name="Offsite 2. Preparation and facilitation (1-10)" value="9" required disabled aria-labelledby="offsite-q2-9-t"><span class="scale-num" id="offsite-q2-9-t">9</span></span>
+            <span class="scale-option"><input type="radio" id="offsite-q2-10" name="Offsite 2. Preparation and facilitation (1-10)" value="10" required disabled aria-labelledby="offsite-q2-10-t"><span class="scale-num" id="offsite-q2-10-t">10</span></span>
+          </div>
+          <div class="scale-anchor-labels" aria-hidden="true"><span>1 = Did not fit</span><span>10 = Fitted very well</span></div>
+        </fieldset>
+        <fieldset class="review-field-group">
+          <legend class="review-question-label" id="offsite-q3-label">3. Team alignment</legend>
+          <p class="question-explainer">How aligned is the team on what was agreed?</p>
+          <div class="scale-selector-strip" role="radiogroup" aria-labelledby="offsite-q3-label">
+            <span class="scale-option"><input type="radio" id="offsite-q3-1" name="Offsite 3. Team alignment (1-10)" value="1" required disabled aria-labelledby="offsite-q3-1-t"><span class="scale-num" id="offsite-q3-1-t">1</span></span>
+            <span class="scale-option"><input type="radio" id="offsite-q3-2" name="Offsite 3. Team alignment (1-10)" value="2" required disabled aria-labelledby="offsite-q3-2-t"><span class="scale-num" id="offsite-q3-2-t">2</span></span>
+            <span class="scale-option"><input type="radio" id="offsite-q3-3" name="Offsite 3. Team alignment (1-10)" value="3" required disabled aria-labelledby="offsite-q3-3-t"><span class="scale-num" id="offsite-q3-3-t">3</span></span>
+            <span class="scale-option"><input type="radio" id="offsite-q3-4" name="Offsite 3. Team alignment (1-10)" value="4" required disabled aria-labelledby="offsite-q3-4-t"><span class="scale-num" id="offsite-q3-4-t">4</span></span>
+            <span class="scale-option"><input type="radio" id="offsite-q3-5" name="Offsite 3. Team alignment (1-10)" value="5" required disabled aria-labelledby="offsite-q3-5-t"><span class="scale-num" id="offsite-q3-5-t">5</span></span>
+            <span class="scale-option"><input type="radio" id="offsite-q3-6" name="Offsite 3. Team alignment (1-10)" value="6" required disabled aria-labelledby="offsite-q3-6-t"><span class="scale-num" id="offsite-q3-6-t">6</span></span>
+            <span class="scale-option"><input type="radio" id="offsite-q3-7" name="Offsite 3. Team alignment (1-10)" value="7" required disabled aria-labelledby="offsite-q3-7-t"><span class="scale-num" id="offsite-q3-7-t">7</span></span>
+            <span class="scale-option"><input type="radio" id="offsite-q3-8" name="Offsite 3. Team alignment (1-10)" value="8" required disabled aria-labelledby="offsite-q3-8-t"><span class="scale-num" id="offsite-q3-8-t">8</span></span>
+            <span class="scale-option"><input type="radio" id="offsite-q3-9" name="Offsite 3. Team alignment (1-10)" value="9" required disabled aria-labelledby="offsite-q3-9-t"><span class="scale-num" id="offsite-q3-9-t">9</span></span>
+            <span class="scale-option"><input type="radio" id="offsite-q3-10" name="Offsite 3. Team alignment (1-10)" value="10" required disabled aria-labelledby="offsite-q3-10-t"><span class="scale-num" id="offsite-q3-10-t">10</span></span>
+          </div>
+          <div class="scale-anchor-labels" aria-hidden="true"><span>1 = Not aligned</span><span>10 = Fully aligned</span></div>
+        </fieldset>
+        <div class="review-field-group">
+          <div class="review-question-row"><label for="offsite-q4" class="review-question-label">4. What could stall the follow-through</label><span class="optional-tag">optional</span></div>
+          <p class="question-explainer">Where, if anywhere, is the follow-through most likely to stall?</p>
+          <input type="text" id="offsite-q4" name="Offsite 4. What could stall the follow-through" placeholder="e.g. Competing priorities next quarter" class="form-input micro-input" maxlength="300" disabled>
         </div>
-        <div class="scale-anchor-labels" aria-hidden="true"><span>1 = No meaningful improvement</span><span>10 = Transformational improvement</span></div>
-      </fieldset>
-
-      <fieldset class="review-field-group">
-        <legend class="review-question-label" id="q2-label">2. Leadership behaviour</legend>
-        <p class="question-explainer">To what extent have you changed how you lead, communicate or work with your executive peers as a result of this engagement?</p>
-        <div class="scale-selector-strip" role="radiogroup" aria-labelledby="q2-label">
-          <span class="scale-option"><input type="radio" id="q2-1" name="2. Leadership behaviour change (1-10)" value="1" required aria-labelledby="q2-1-t"><span class="scale-num" id="q2-1-t">1</span></span>
-          <span class="scale-option"><input type="radio" id="q2-2" name="2. Leadership behaviour change (1-10)" value="2" aria-labelledby="q2-2-t"><span class="scale-num" id="q2-2-t">2</span></span>
-          <span class="scale-option"><input type="radio" id="q2-3" name="2. Leadership behaviour change (1-10)" value="3" aria-labelledby="q2-3-t"><span class="scale-num" id="q2-3-t">3</span></span>
-          <span class="scale-option"><input type="radio" id="q2-4" name="2. Leadership behaviour change (1-10)" value="4" aria-labelledby="q2-4-t"><span class="scale-num" id="q2-4-t">4</span></span>
-          <span class="scale-option"><input type="radio" id="q2-5" name="2. Leadership behaviour change (1-10)" value="5" aria-labelledby="q2-5-t"><span class="scale-num" id="q2-5-t">5</span></span>
-          <span class="scale-option"><input type="radio" id="q2-6" name="2. Leadership behaviour change (1-10)" value="6" aria-labelledby="q2-6-t"><span class="scale-num" id="q2-6-t">6</span></span>
-          <span class="scale-option"><input type="radio" id="q2-7" name="2. Leadership behaviour change (1-10)" value="7" aria-labelledby="q2-7-t"><span class="scale-num" id="q2-7-t">7</span></span>
-          <span class="scale-option"><input type="radio" id="q2-8" name="2. Leadership behaviour change (1-10)" value="8" aria-labelledby="q2-8-t"><span class="scale-num" id="q2-8-t">8</span></span>
-          <span class="scale-option"><input type="radio" id="q2-9" name="2. Leadership behaviour change (1-10)" value="9" aria-labelledby="q2-9-t"><span class="scale-num" id="q2-9-t">9</span></span>
-          <span class="scale-option"><input type="radio" id="q2-10" name="2. Leadership behaviour change (1-10)" value="10" aria-labelledby="q2-10-t"><span class="scale-num" id="q2-10-t">10</span></span>
+      </div>
+      <div class="eng-block" data-eng="Executive coaching" hidden>
+        <fieldset class="review-field-group">
+          <legend class="review-question-label" id="coaching-q1-label">1. Clarity in decisions</legend>
+          <p class="question-explainer">How much clearer are your decisions on high-stakes questions since we started?</p>
+          <div class="scale-selector-strip" role="radiogroup" aria-labelledby="coaching-q1-label">
+            <span class="scale-option"><input type="radio" id="coaching-q1-1" name="Coaching 1. Clarity in decisions (1-10)" value="1" required disabled aria-labelledby="coaching-q1-1-t"><span class="scale-num" id="coaching-q1-1-t">1</span></span>
+            <span class="scale-option"><input type="radio" id="coaching-q1-2" name="Coaching 1. Clarity in decisions (1-10)" value="2" required disabled aria-labelledby="coaching-q1-2-t"><span class="scale-num" id="coaching-q1-2-t">2</span></span>
+            <span class="scale-option"><input type="radio" id="coaching-q1-3" name="Coaching 1. Clarity in decisions (1-10)" value="3" required disabled aria-labelledby="coaching-q1-3-t"><span class="scale-num" id="coaching-q1-3-t">3</span></span>
+            <span class="scale-option"><input type="radio" id="coaching-q1-4" name="Coaching 1. Clarity in decisions (1-10)" value="4" required disabled aria-labelledby="coaching-q1-4-t"><span class="scale-num" id="coaching-q1-4-t">4</span></span>
+            <span class="scale-option"><input type="radio" id="coaching-q1-5" name="Coaching 1. Clarity in decisions (1-10)" value="5" required disabled aria-labelledby="coaching-q1-5-t"><span class="scale-num" id="coaching-q1-5-t">5</span></span>
+            <span class="scale-option"><input type="radio" id="coaching-q1-6" name="Coaching 1. Clarity in decisions (1-10)" value="6" required disabled aria-labelledby="coaching-q1-6-t"><span class="scale-num" id="coaching-q1-6-t">6</span></span>
+            <span class="scale-option"><input type="radio" id="coaching-q1-7" name="Coaching 1. Clarity in decisions (1-10)" value="7" required disabled aria-labelledby="coaching-q1-7-t"><span class="scale-num" id="coaching-q1-7-t">7</span></span>
+            <span class="scale-option"><input type="radio" id="coaching-q1-8" name="Coaching 1. Clarity in decisions (1-10)" value="8" required disabled aria-labelledby="coaching-q1-8-t"><span class="scale-num" id="coaching-q1-8-t">8</span></span>
+            <span class="scale-option"><input type="radio" id="coaching-q1-9" name="Coaching 1. Clarity in decisions (1-10)" value="9" required disabled aria-labelledby="coaching-q1-9-t"><span class="scale-num" id="coaching-q1-9-t">9</span></span>
+            <span class="scale-option"><input type="radio" id="coaching-q1-10" name="Coaching 1. Clarity in decisions (1-10)" value="10" required disabled aria-labelledby="coaching-q1-10-t"><span class="scale-num" id="coaching-q1-10-t">10</span></span>
+          </div>
+          <div class="scale-anchor-labels" aria-hidden="true"><span>1 = No change</span><span>10 = Much clearer</span></div>
+        </fieldset>
+        <fieldset class="review-field-group">
+          <legend class="review-question-label" id="coaching-q2-label">2. Change in how you lead</legend>
+          <p class="question-explainer">How much have you changed how you lead and work with your peers?</p>
+          <div class="scale-selector-strip" role="radiogroup" aria-labelledby="coaching-q2-label">
+            <span class="scale-option"><input type="radio" id="coaching-q2-1" name="Coaching 2. Change in how you lead (1-10)" value="1" required disabled aria-labelledby="coaching-q2-1-t"><span class="scale-num" id="coaching-q2-1-t">1</span></span>
+            <span class="scale-option"><input type="radio" id="coaching-q2-2" name="Coaching 2. Change in how you lead (1-10)" value="2" required disabled aria-labelledby="coaching-q2-2-t"><span class="scale-num" id="coaching-q2-2-t">2</span></span>
+            <span class="scale-option"><input type="radio" id="coaching-q2-3" name="Coaching 2. Change in how you lead (1-10)" value="3" required disabled aria-labelledby="coaching-q2-3-t"><span class="scale-num" id="coaching-q2-3-t">3</span></span>
+            <span class="scale-option"><input type="radio" id="coaching-q2-4" name="Coaching 2. Change in how you lead (1-10)" value="4" required disabled aria-labelledby="coaching-q2-4-t"><span class="scale-num" id="coaching-q2-4-t">4</span></span>
+            <span class="scale-option"><input type="radio" id="coaching-q2-5" name="Coaching 2. Change in how you lead (1-10)" value="5" required disabled aria-labelledby="coaching-q2-5-t"><span class="scale-num" id="coaching-q2-5-t">5</span></span>
+            <span class="scale-option"><input type="radio" id="coaching-q2-6" name="Coaching 2. Change in how you lead (1-10)" value="6" required disabled aria-labelledby="coaching-q2-6-t"><span class="scale-num" id="coaching-q2-6-t">6</span></span>
+            <span class="scale-option"><input type="radio" id="coaching-q2-7" name="Coaching 2. Change in how you lead (1-10)" value="7" required disabled aria-labelledby="coaching-q2-7-t"><span class="scale-num" id="coaching-q2-7-t">7</span></span>
+            <span class="scale-option"><input type="radio" id="coaching-q2-8" name="Coaching 2. Change in how you lead (1-10)" value="8" required disabled aria-labelledby="coaching-q2-8-t"><span class="scale-num" id="coaching-q2-8-t">8</span></span>
+            <span class="scale-option"><input type="radio" id="coaching-q2-9" name="Coaching 2. Change in how you lead (1-10)" value="9" required disabled aria-labelledby="coaching-q2-9-t"><span class="scale-num" id="coaching-q2-9-t">9</span></span>
+            <span class="scale-option"><input type="radio" id="coaching-q2-10" name="Coaching 2. Change in how you lead (1-10)" value="10" required disabled aria-labelledby="coaching-q2-10-t"><span class="scale-num" id="coaching-q2-10-t">10</span></span>
+          </div>
+          <div class="scale-anchor-labels" aria-hidden="true"><span>1 = No meaningful change</span><span>10 = Significant, sustained change</span></div>
+        </fieldset>
+        <fieldset class="review-field-group">
+          <legend class="review-question-label" id="coaching-q3-label">3. Quality of the sparring</legend>
+          <p class="question-explainer">How useful were the sparring and the trust in the room?</p>
+          <div class="scale-selector-strip" role="radiogroup" aria-labelledby="coaching-q3-label">
+            <span class="scale-option"><input type="radio" id="coaching-q3-1" name="Coaching 3. Quality of the sparring (1-10)" value="1" required disabled aria-labelledby="coaching-q3-1-t"><span class="scale-num" id="coaching-q3-1-t">1</span></span>
+            <span class="scale-option"><input type="radio" id="coaching-q3-2" name="Coaching 3. Quality of the sparring (1-10)" value="2" required disabled aria-labelledby="coaching-q3-2-t"><span class="scale-num" id="coaching-q3-2-t">2</span></span>
+            <span class="scale-option"><input type="radio" id="coaching-q3-3" name="Coaching 3. Quality of the sparring (1-10)" value="3" required disabled aria-labelledby="coaching-q3-3-t"><span class="scale-num" id="coaching-q3-3-t">3</span></span>
+            <span class="scale-option"><input type="radio" id="coaching-q3-4" name="Coaching 3. Quality of the sparring (1-10)" value="4" required disabled aria-labelledby="coaching-q3-4-t"><span class="scale-num" id="coaching-q3-4-t">4</span></span>
+            <span class="scale-option"><input type="radio" id="coaching-q3-5" name="Coaching 3. Quality of the sparring (1-10)" value="5" required disabled aria-labelledby="coaching-q3-5-t"><span class="scale-num" id="coaching-q3-5-t">5</span></span>
+            <span class="scale-option"><input type="radio" id="coaching-q3-6" name="Coaching 3. Quality of the sparring (1-10)" value="6" required disabled aria-labelledby="coaching-q3-6-t"><span class="scale-num" id="coaching-q3-6-t">6</span></span>
+            <span class="scale-option"><input type="radio" id="coaching-q3-7" name="Coaching 3. Quality of the sparring (1-10)" value="7" required disabled aria-labelledby="coaching-q3-7-t"><span class="scale-num" id="coaching-q3-7-t">7</span></span>
+            <span class="scale-option"><input type="radio" id="coaching-q3-8" name="Coaching 3. Quality of the sparring (1-10)" value="8" required disabled aria-labelledby="coaching-q3-8-t"><span class="scale-num" id="coaching-q3-8-t">8</span></span>
+            <span class="scale-option"><input type="radio" id="coaching-q3-9" name="Coaching 3. Quality of the sparring (1-10)" value="9" required disabled aria-labelledby="coaching-q3-9-t"><span class="scale-num" id="coaching-q3-9-t">9</span></span>
+            <span class="scale-option"><input type="radio" id="coaching-q3-10" name="Coaching 3. Quality of the sparring (1-10)" value="10" required disabled aria-labelledby="coaching-q3-10-t"><span class="scale-num" id="coaching-q3-10-t">10</span></span>
+          </div>
+          <div class="scale-anchor-labels" aria-hidden="true"><span>1 = Not useful</span><span>10 = Very useful</span></div>
+        </fieldset>
+        <div class="review-field-group">
+          <div class="review-question-row"><label for="coaching-q4" class="review-question-label">4. What you now do differently</label><span class="optional-tag">optional</span></div>
+          <p class="question-explainer">What is the one thing you now do differently as a leader?</p>
+          <input type="text" id="coaching-q4" name="Coaching 4. What you now do differently" placeholder="e.g. I decide earlier and say what I need" class="form-input micro-input" maxlength="300" disabled>
         </div>
-        <div class="scale-anchor-labels" aria-hidden="true"><span>1 = No meaningful change</span><span>10 = Significant, sustained change</span></div>
-      </fieldset>
-
-      <fieldset class="review-field-group">
-        <legend class="review-question-label" id="q3-label">3. Value of the engagement</legend>
-        <p class="question-explainer">Considering the time and effort you invested, how valuable has this engagement been to you as a leader?</p>
-        <div class="scale-selector-strip" role="radiogroup" aria-labelledby="q3-label">
-          <span class="scale-option"><input type="radio" id="q3-1" name="3. Value of engagement (1-10)" value="1" required aria-labelledby="q3-1-t"><span class="scale-num" id="q3-1-t">1</span></span>
-          <span class="scale-option"><input type="radio" id="q3-2" name="3. Value of engagement (1-10)" value="2" aria-labelledby="q3-2-t"><span class="scale-num" id="q3-2-t">2</span></span>
-          <span class="scale-option"><input type="radio" id="q3-3" name="3. Value of engagement (1-10)" value="3" aria-labelledby="q3-3-t"><span class="scale-num" id="q3-3-t">3</span></span>
-          <span class="scale-option"><input type="radio" id="q3-4" name="3. Value of engagement (1-10)" value="4" aria-labelledby="q3-4-t"><span class="scale-num" id="q3-4-t">4</span></span>
-          <span class="scale-option"><input type="radio" id="q3-5" name="3. Value of engagement (1-10)" value="5" aria-labelledby="q3-5-t"><span class="scale-num" id="q3-5-t">5</span></span>
-          <span class="scale-option"><input type="radio" id="q3-6" name="3. Value of engagement (1-10)" value="6" aria-labelledby="q3-6-t"><span class="scale-num" id="q3-6-t">6</span></span>
-          <span class="scale-option"><input type="radio" id="q3-7" name="3. Value of engagement (1-10)" value="7" aria-labelledby="q3-7-t"><span class="scale-num" id="q3-7-t">7</span></span>
-          <span class="scale-option"><input type="radio" id="q3-8" name="3. Value of engagement (1-10)" value="8" aria-labelledby="q3-8-t"><span class="scale-num" id="q3-8-t">8</span></span>
-          <span class="scale-option"><input type="radio" id="q3-9" name="3. Value of engagement (1-10)" value="9" aria-labelledby="q3-9-t"><span class="scale-num" id="q3-9-t">9</span></span>
-          <span class="scale-option"><input type="radio" id="q3-10" name="3. Value of engagement (1-10)" value="10" aria-labelledby="q3-10-t"><span class="scale-num" id="q3-10-t">10</span></span>
+      </div>
+      <div class="eng-block" data-eng="14-Day Scan" hidden>
+        <fieldset class="review-field-group">
+          <legend class="review-question-label" id="scan-q1-label">1. Accuracy of the findings</legend>
+          <p class="question-explainer">How accurately did the findings reflect what is really happening?</p>
+          <div class="scale-selector-strip" role="radiogroup" aria-labelledby="scan-q1-label">
+            <span class="scale-option"><input type="radio" id="scan-q1-1" name="Scan 1. Accuracy of the findings (1-10)" value="1" required disabled aria-labelledby="scan-q1-1-t"><span class="scale-num" id="scan-q1-1-t">1</span></span>
+            <span class="scale-option"><input type="radio" id="scan-q1-2" name="Scan 1. Accuracy of the findings (1-10)" value="2" required disabled aria-labelledby="scan-q1-2-t"><span class="scale-num" id="scan-q1-2-t">2</span></span>
+            <span class="scale-option"><input type="radio" id="scan-q1-3" name="Scan 1. Accuracy of the findings (1-10)" value="3" required disabled aria-labelledby="scan-q1-3-t"><span class="scale-num" id="scan-q1-3-t">3</span></span>
+            <span class="scale-option"><input type="radio" id="scan-q1-4" name="Scan 1. Accuracy of the findings (1-10)" value="4" required disabled aria-labelledby="scan-q1-4-t"><span class="scale-num" id="scan-q1-4-t">4</span></span>
+            <span class="scale-option"><input type="radio" id="scan-q1-5" name="Scan 1. Accuracy of the findings (1-10)" value="5" required disabled aria-labelledby="scan-q1-5-t"><span class="scale-num" id="scan-q1-5-t">5</span></span>
+            <span class="scale-option"><input type="radio" id="scan-q1-6" name="Scan 1. Accuracy of the findings (1-10)" value="6" required disabled aria-labelledby="scan-q1-6-t"><span class="scale-num" id="scan-q1-6-t">6</span></span>
+            <span class="scale-option"><input type="radio" id="scan-q1-7" name="Scan 1. Accuracy of the findings (1-10)" value="7" required disabled aria-labelledby="scan-q1-7-t"><span class="scale-num" id="scan-q1-7-t">7</span></span>
+            <span class="scale-option"><input type="radio" id="scan-q1-8" name="Scan 1. Accuracy of the findings (1-10)" value="8" required disabled aria-labelledby="scan-q1-8-t"><span class="scale-num" id="scan-q1-8-t">8</span></span>
+            <span class="scale-option"><input type="radio" id="scan-q1-9" name="Scan 1. Accuracy of the findings (1-10)" value="9" required disabled aria-labelledby="scan-q1-9-t"><span class="scale-num" id="scan-q1-9-t">9</span></span>
+            <span class="scale-option"><input type="radio" id="scan-q1-10" name="Scan 1. Accuracy of the findings (1-10)" value="10" required disabled aria-labelledby="scan-q1-10-t"><span class="scale-num" id="scan-q1-10-t">10</span></span>
+          </div>
+          <div class="scale-anchor-labels" aria-hidden="true"><span>1 = Not accurate</span><span>10 = Very accurate</span></div>
+        </fieldset>
+        <fieldset class="review-field-group">
+          <legend class="review-question-label" id="scan-q2-label">2. Usefulness of the readout</legend>
+          <p class="question-explainer">How useful was the readout for deciding what to do next?</p>
+          <div class="scale-selector-strip" role="radiogroup" aria-labelledby="scan-q2-label">
+            <span class="scale-option"><input type="radio" id="scan-q2-1" name="Scan 2. Usefulness of the readout (1-10)" value="1" required disabled aria-labelledby="scan-q2-1-t"><span class="scale-num" id="scan-q2-1-t">1</span></span>
+            <span class="scale-option"><input type="radio" id="scan-q2-2" name="Scan 2. Usefulness of the readout (1-10)" value="2" required disabled aria-labelledby="scan-q2-2-t"><span class="scale-num" id="scan-q2-2-t">2</span></span>
+            <span class="scale-option"><input type="radio" id="scan-q2-3" name="Scan 2. Usefulness of the readout (1-10)" value="3" required disabled aria-labelledby="scan-q2-3-t"><span class="scale-num" id="scan-q2-3-t">3</span></span>
+            <span class="scale-option"><input type="radio" id="scan-q2-4" name="Scan 2. Usefulness of the readout (1-10)" value="4" required disabled aria-labelledby="scan-q2-4-t"><span class="scale-num" id="scan-q2-4-t">4</span></span>
+            <span class="scale-option"><input type="radio" id="scan-q2-5" name="Scan 2. Usefulness of the readout (1-10)" value="5" required disabled aria-labelledby="scan-q2-5-t"><span class="scale-num" id="scan-q2-5-t">5</span></span>
+            <span class="scale-option"><input type="radio" id="scan-q2-6" name="Scan 2. Usefulness of the readout (1-10)" value="6" required disabled aria-labelledby="scan-q2-6-t"><span class="scale-num" id="scan-q2-6-t">6</span></span>
+            <span class="scale-option"><input type="radio" id="scan-q2-7" name="Scan 2. Usefulness of the readout (1-10)" value="7" required disabled aria-labelledby="scan-q2-7-t"><span class="scale-num" id="scan-q2-7-t">7</span></span>
+            <span class="scale-option"><input type="radio" id="scan-q2-8" name="Scan 2. Usefulness of the readout (1-10)" value="8" required disabled aria-labelledby="scan-q2-8-t"><span class="scale-num" id="scan-q2-8-t">8</span></span>
+            <span class="scale-option"><input type="radio" id="scan-q2-9" name="Scan 2. Usefulness of the readout (1-10)" value="9" required disabled aria-labelledby="scan-q2-9-t"><span class="scale-num" id="scan-q2-9-t">9</span></span>
+            <span class="scale-option"><input type="radio" id="scan-q2-10" name="Scan 2. Usefulness of the readout (1-10)" value="10" required disabled aria-labelledby="scan-q2-10-t"><span class="scale-num" id="scan-q2-10-t">10</span></span>
+          </div>
+          <div class="scale-anchor-labels" aria-hidden="true"><span>1 = Not useful</span><span>10 = Very useful</span></div>
+        </fieldset>
+        <fieldset class="review-field-group">
+          <legend class="review-question-label" id="scan-q3-label">3. Clarity of priorities</legend>
+          <p class="question-explainer">How clear are the priorities that came out of it?</p>
+          <div class="scale-selector-strip" role="radiogroup" aria-labelledby="scan-q3-label">
+            <span class="scale-option"><input type="radio" id="scan-q3-1" name="Scan 3. Clarity of priorities (1-10)" value="1" required disabled aria-labelledby="scan-q3-1-t"><span class="scale-num" id="scan-q3-1-t">1</span></span>
+            <span class="scale-option"><input type="radio" id="scan-q3-2" name="Scan 3. Clarity of priorities (1-10)" value="2" required disabled aria-labelledby="scan-q3-2-t"><span class="scale-num" id="scan-q3-2-t">2</span></span>
+            <span class="scale-option"><input type="radio" id="scan-q3-3" name="Scan 3. Clarity of priorities (1-10)" value="3" required disabled aria-labelledby="scan-q3-3-t"><span class="scale-num" id="scan-q3-3-t">3</span></span>
+            <span class="scale-option"><input type="radio" id="scan-q3-4" name="Scan 3. Clarity of priorities (1-10)" value="4" required disabled aria-labelledby="scan-q3-4-t"><span class="scale-num" id="scan-q3-4-t">4</span></span>
+            <span class="scale-option"><input type="radio" id="scan-q3-5" name="Scan 3. Clarity of priorities (1-10)" value="5" required disabled aria-labelledby="scan-q3-5-t"><span class="scale-num" id="scan-q3-5-t">5</span></span>
+            <span class="scale-option"><input type="radio" id="scan-q3-6" name="Scan 3. Clarity of priorities (1-10)" value="6" required disabled aria-labelledby="scan-q3-6-t"><span class="scale-num" id="scan-q3-6-t">6</span></span>
+            <span class="scale-option"><input type="radio" id="scan-q3-7" name="Scan 3. Clarity of priorities (1-10)" value="7" required disabled aria-labelledby="scan-q3-7-t"><span class="scale-num" id="scan-q3-7-t">7</span></span>
+            <span class="scale-option"><input type="radio" id="scan-q3-8" name="Scan 3. Clarity of priorities (1-10)" value="8" required disabled aria-labelledby="scan-q3-8-t"><span class="scale-num" id="scan-q3-8-t">8</span></span>
+            <span class="scale-option"><input type="radio" id="scan-q3-9" name="Scan 3. Clarity of priorities (1-10)" value="9" required disabled aria-labelledby="scan-q3-9-t"><span class="scale-num" id="scan-q3-9-t">9</span></span>
+            <span class="scale-option"><input type="radio" id="scan-q3-10" name="Scan 3. Clarity of priorities (1-10)" value="10" required disabled aria-labelledby="scan-q3-10-t"><span class="scale-num" id="scan-q3-10-t">10</span></span>
+          </div>
+          <div class="scale-anchor-labels" aria-hidden="true"><span>1 = Unclear</span><span>10 = Very clear</span></div>
+        </fieldset>
+        <div class="review-field-group">
+          <div class="review-question-row"><label for="scan-q4" class="review-question-label">4. Where friction still hits execution</label><span class="optional-tag">optional</span></div>
+          <p class="question-explainer">Where, if anywhere, does remaining friction have the greatest impact on execution?</p>
+          <input type="text" id="scan-q4" name="Scan 4. Where friction still hits execution" placeholder="e.g. Product to commercial hand-offs" class="form-input micro-input" maxlength="300" disabled>
         </div>
-        <div class="scale-anchor-labels" aria-hidden="true"><span>1 = Limited value</span><span>10 = Exceptional value</span></div>
-      </fieldset>
-
-      <fieldset class="review-field-group">
-        <legend class="review-question-label" id="q4-label">4. Executive alignment</legend>
-        <p class="question-explainer">How aligned and friction-free is leadership execution today?</p>
-        <div class="scale-selector-strip" role="radiogroup" aria-labelledby="q4-label">
-          <span class="scale-option"><input type="radio" id="q4-1" name="4. Executive alignment (1-10)" value="1" required aria-labelledby="q4-1-t"><span class="scale-num" id="q4-1-t">1</span></span>
-          <span class="scale-option"><input type="radio" id="q4-2" name="4. Executive alignment (1-10)" value="2" aria-labelledby="q4-2-t"><span class="scale-num" id="q4-2-t">2</span></span>
-          <span class="scale-option"><input type="radio" id="q4-3" name="4. Executive alignment (1-10)" value="3" aria-labelledby="q4-3-t"><span class="scale-num" id="q4-3-t">3</span></span>
-          <span class="scale-option"><input type="radio" id="q4-4" name="4. Executive alignment (1-10)" value="4" aria-labelledby="q4-4-t"><span class="scale-num" id="q4-4-t">4</span></span>
-          <span class="scale-option"><input type="radio" id="q4-5" name="4. Executive alignment (1-10)" value="5" aria-labelledby="q4-5-t"><span class="scale-num" id="q4-5-t">5</span></span>
-          <span class="scale-option"><input type="radio" id="q4-6" name="4. Executive alignment (1-10)" value="6" aria-labelledby="q4-6-t"><span class="scale-num" id="q4-6-t">6</span></span>
-          <span class="scale-option"><input type="radio" id="q4-7" name="4. Executive alignment (1-10)" value="7" aria-labelledby="q4-7-t"><span class="scale-num" id="q4-7-t">7</span></span>
-          <span class="scale-option"><input type="radio" id="q4-8" name="4. Executive alignment (1-10)" value="8" aria-labelledby="q4-8-t"><span class="scale-num" id="q4-8-t">8</span></span>
-          <span class="scale-option"><input type="radio" id="q4-9" name="4. Executive alignment (1-10)" value="9" aria-labelledby="q4-9-t"><span class="scale-num" id="q4-9-t">9</span></span>
-          <span class="scale-option"><input type="radio" id="q4-10" name="4. Executive alignment (1-10)" value="10" aria-labelledby="q4-10-t"><span class="scale-num" id="q4-10-t">10</span></span>
+      </div>
+      <div class="eng-block" data-eng="In-company training" hidden>
+        <fieldset class="review-field-group">
+          <legend class="review-question-label" id="training-q1-label">1. Relevance to your role</legend>
+          <p class="question-explainer">How relevant was the content to your role?</p>
+          <div class="scale-selector-strip" role="radiogroup" aria-labelledby="training-q1-label">
+            <span class="scale-option"><input type="radio" id="training-q1-1" name="Training 1. Relevance to your role (1-10)" value="1" required disabled aria-labelledby="training-q1-1-t"><span class="scale-num" id="training-q1-1-t">1</span></span>
+            <span class="scale-option"><input type="radio" id="training-q1-2" name="Training 1. Relevance to your role (1-10)" value="2" required disabled aria-labelledby="training-q1-2-t"><span class="scale-num" id="training-q1-2-t">2</span></span>
+            <span class="scale-option"><input type="radio" id="training-q1-3" name="Training 1. Relevance to your role (1-10)" value="3" required disabled aria-labelledby="training-q1-3-t"><span class="scale-num" id="training-q1-3-t">3</span></span>
+            <span class="scale-option"><input type="radio" id="training-q1-4" name="Training 1. Relevance to your role (1-10)" value="4" required disabled aria-labelledby="training-q1-4-t"><span class="scale-num" id="training-q1-4-t">4</span></span>
+            <span class="scale-option"><input type="radio" id="training-q1-5" name="Training 1. Relevance to your role (1-10)" value="5" required disabled aria-labelledby="training-q1-5-t"><span class="scale-num" id="training-q1-5-t">5</span></span>
+            <span class="scale-option"><input type="radio" id="training-q1-6" name="Training 1. Relevance to your role (1-10)" value="6" required disabled aria-labelledby="training-q1-6-t"><span class="scale-num" id="training-q1-6-t">6</span></span>
+            <span class="scale-option"><input type="radio" id="training-q1-7" name="Training 1. Relevance to your role (1-10)" value="7" required disabled aria-labelledby="training-q1-7-t"><span class="scale-num" id="training-q1-7-t">7</span></span>
+            <span class="scale-option"><input type="radio" id="training-q1-8" name="Training 1. Relevance to your role (1-10)" value="8" required disabled aria-labelledby="training-q1-8-t"><span class="scale-num" id="training-q1-8-t">8</span></span>
+            <span class="scale-option"><input type="radio" id="training-q1-9" name="Training 1. Relevance to your role (1-10)" value="9" required disabled aria-labelledby="training-q1-9-t"><span class="scale-num" id="training-q1-9-t">9</span></span>
+            <span class="scale-option"><input type="radio" id="training-q1-10" name="Training 1. Relevance to your role (1-10)" value="10" required disabled aria-labelledby="training-q1-10-t"><span class="scale-num" id="training-q1-10-t">10</span></span>
+          </div>
+          <div class="scale-anchor-labels" aria-hidden="true"><span>1 = Not relevant</span><span>10 = Highly relevant</span></div>
+        </fieldset>
+        <fieldset class="review-field-group">
+          <legend class="review-question-label" id="training-q2-label">2. Applying it day to day</legend>
+          <p class="question-explainer">How easily can you apply it in your daily work?</p>
+          <div class="scale-selector-strip" role="radiogroup" aria-labelledby="training-q2-label">
+            <span class="scale-option"><input type="radio" id="training-q2-1" name="Training 2. Applying it day to day (1-10)" value="1" required disabled aria-labelledby="training-q2-1-t"><span class="scale-num" id="training-q2-1-t">1</span></span>
+            <span class="scale-option"><input type="radio" id="training-q2-2" name="Training 2. Applying it day to day (1-10)" value="2" required disabled aria-labelledby="training-q2-2-t"><span class="scale-num" id="training-q2-2-t">2</span></span>
+            <span class="scale-option"><input type="radio" id="training-q2-3" name="Training 2. Applying it day to day (1-10)" value="3" required disabled aria-labelledby="training-q2-3-t"><span class="scale-num" id="training-q2-3-t">3</span></span>
+            <span class="scale-option"><input type="radio" id="training-q2-4" name="Training 2. Applying it day to day (1-10)" value="4" required disabled aria-labelledby="training-q2-4-t"><span class="scale-num" id="training-q2-4-t">4</span></span>
+            <span class="scale-option"><input type="radio" id="training-q2-5" name="Training 2. Applying it day to day (1-10)" value="5" required disabled aria-labelledby="training-q2-5-t"><span class="scale-num" id="training-q2-5-t">5</span></span>
+            <span class="scale-option"><input type="radio" id="training-q2-6" name="Training 2. Applying it day to day (1-10)" value="6" required disabled aria-labelledby="training-q2-6-t"><span class="scale-num" id="training-q2-6-t">6</span></span>
+            <span class="scale-option"><input type="radio" id="training-q2-7" name="Training 2. Applying it day to day (1-10)" value="7" required disabled aria-labelledby="training-q2-7-t"><span class="scale-num" id="training-q2-7-t">7</span></span>
+            <span class="scale-option"><input type="radio" id="training-q2-8" name="Training 2. Applying it day to day (1-10)" value="8" required disabled aria-labelledby="training-q2-8-t"><span class="scale-num" id="training-q2-8-t">8</span></span>
+            <span class="scale-option"><input type="radio" id="training-q2-9" name="Training 2. Applying it day to day (1-10)" value="9" required disabled aria-labelledby="training-q2-9-t"><span class="scale-num" id="training-q2-9-t">9</span></span>
+            <span class="scale-option"><input type="radio" id="training-q2-10" name="Training 2. Applying it day to day (1-10)" value="10" required disabled aria-labelledby="training-q2-10-t"><span class="scale-num" id="training-q2-10-t">10</span></span>
+          </div>
+          <div class="scale-anchor-labels" aria-hidden="true"><span>1 = Hard to apply</span><span>10 = Easy to apply</span></div>
+        </fieldset>
+        <fieldset class="review-field-group">
+          <legend class="review-question-label" id="training-q3-label">3. Quality of delivery</legend>
+          <p class="question-explainer">How well was the training delivered?</p>
+          <div class="scale-selector-strip" role="radiogroup" aria-labelledby="training-q3-label">
+            <span class="scale-option"><input type="radio" id="training-q3-1" name="Training 3. Quality of delivery (1-10)" value="1" required disabled aria-labelledby="training-q3-1-t"><span class="scale-num" id="training-q3-1-t">1</span></span>
+            <span class="scale-option"><input type="radio" id="training-q3-2" name="Training 3. Quality of delivery (1-10)" value="2" required disabled aria-labelledby="training-q3-2-t"><span class="scale-num" id="training-q3-2-t">2</span></span>
+            <span class="scale-option"><input type="radio" id="training-q3-3" name="Training 3. Quality of delivery (1-10)" value="3" required disabled aria-labelledby="training-q3-3-t"><span class="scale-num" id="training-q3-3-t">3</span></span>
+            <span class="scale-option"><input type="radio" id="training-q3-4" name="Training 3. Quality of delivery (1-10)" value="4" required disabled aria-labelledby="training-q3-4-t"><span class="scale-num" id="training-q3-4-t">4</span></span>
+            <span class="scale-option"><input type="radio" id="training-q3-5" name="Training 3. Quality of delivery (1-10)" value="5" required disabled aria-labelledby="training-q3-5-t"><span class="scale-num" id="training-q3-5-t">5</span></span>
+            <span class="scale-option"><input type="radio" id="training-q3-6" name="Training 3. Quality of delivery (1-10)" value="6" required disabled aria-labelledby="training-q3-6-t"><span class="scale-num" id="training-q3-6-t">6</span></span>
+            <span class="scale-option"><input type="radio" id="training-q3-7" name="Training 3. Quality of delivery (1-10)" value="7" required disabled aria-labelledby="training-q3-7-t"><span class="scale-num" id="training-q3-7-t">7</span></span>
+            <span class="scale-option"><input type="radio" id="training-q3-8" name="Training 3. Quality of delivery (1-10)" value="8" required disabled aria-labelledby="training-q3-8-t"><span class="scale-num" id="training-q3-8-t">8</span></span>
+            <span class="scale-option"><input type="radio" id="training-q3-9" name="Training 3. Quality of delivery (1-10)" value="9" required disabled aria-labelledby="training-q3-9-t"><span class="scale-num" id="training-q3-9-t">9</span></span>
+            <span class="scale-option"><input type="radio" id="training-q3-10" name="Training 3. Quality of delivery (1-10)" value="10" required disabled aria-labelledby="training-q3-10-t"><span class="scale-num" id="training-q3-10-t">10</span></span>
+          </div>
+          <div class="scale-anchor-labels" aria-hidden="true"><span>1 = Poorly</span><span>10 = Very well</span></div>
+        </fieldset>
+        <div class="review-field-group">
+          <div class="review-question-row"><label for="training-q4" class="review-question-label">4. What you have already used</label><span class="optional-tag">optional</span></div>
+          <p class="question-explainer">What have you already used since the training?</p>
+          <input type="text" id="training-q4" name="Training 4. What you have already used" placeholder="e.g. A new way to run my one-to-ones" class="form-input micro-input" maxlength="300" disabled>
         </div>
-        <div class="scale-anchor-labels" aria-hidden="true"><span>1 = Not aligned, frictions still unspoken</span><span>10 = Very aligned, no friction</span></div>
-        <div class="micro-probe-group">
-          <div class="review-question-row"><label for="field-friction-location" class="micro-probe-label">4b. Where friction most affects execution</label><span class="optional-tag">optional</span></div>
-          <p class="micro-probe-hint">Where, if anywhere, does remaining friction have the greatest impact on execution?</p>
-          <input type="text" id="field-friction-location" name="4b. Where friction most affects execution" placeholder="e.g. Product to programme hand-offs" class="form-input micro-input">
+      </div>
+      <div class="eng-block" data-eng="Executive alignment" hidden>
+        <fieldset class="review-field-group">
+          <legend class="review-question-label" id="alignment-q1-label">1. Shared priorities</legend>
+          <p class="question-explainer">How clear are the shared priorities across the executive team?</p>
+          <div class="scale-selector-strip" role="radiogroup" aria-labelledby="alignment-q1-label">
+            <span class="scale-option"><input type="radio" id="alignment-q1-1" name="Alignment 1. Shared priorities (1-10)" value="1" required disabled aria-labelledby="alignment-q1-1-t"><span class="scale-num" id="alignment-q1-1-t">1</span></span>
+            <span class="scale-option"><input type="radio" id="alignment-q1-2" name="Alignment 1. Shared priorities (1-10)" value="2" required disabled aria-labelledby="alignment-q1-2-t"><span class="scale-num" id="alignment-q1-2-t">2</span></span>
+            <span class="scale-option"><input type="radio" id="alignment-q1-3" name="Alignment 1. Shared priorities (1-10)" value="3" required disabled aria-labelledby="alignment-q1-3-t"><span class="scale-num" id="alignment-q1-3-t">3</span></span>
+            <span class="scale-option"><input type="radio" id="alignment-q1-4" name="Alignment 1. Shared priorities (1-10)" value="4" required disabled aria-labelledby="alignment-q1-4-t"><span class="scale-num" id="alignment-q1-4-t">4</span></span>
+            <span class="scale-option"><input type="radio" id="alignment-q1-5" name="Alignment 1. Shared priorities (1-10)" value="5" required disabled aria-labelledby="alignment-q1-5-t"><span class="scale-num" id="alignment-q1-5-t">5</span></span>
+            <span class="scale-option"><input type="radio" id="alignment-q1-6" name="Alignment 1. Shared priorities (1-10)" value="6" required disabled aria-labelledby="alignment-q1-6-t"><span class="scale-num" id="alignment-q1-6-t">6</span></span>
+            <span class="scale-option"><input type="radio" id="alignment-q1-7" name="Alignment 1. Shared priorities (1-10)" value="7" required disabled aria-labelledby="alignment-q1-7-t"><span class="scale-num" id="alignment-q1-7-t">7</span></span>
+            <span class="scale-option"><input type="radio" id="alignment-q1-8" name="Alignment 1. Shared priorities (1-10)" value="8" required disabled aria-labelledby="alignment-q1-8-t"><span class="scale-num" id="alignment-q1-8-t">8</span></span>
+            <span class="scale-option"><input type="radio" id="alignment-q1-9" name="Alignment 1. Shared priorities (1-10)" value="9" required disabled aria-labelledby="alignment-q1-9-t"><span class="scale-num" id="alignment-q1-9-t">9</span></span>
+            <span class="scale-option"><input type="radio" id="alignment-q1-10" name="Alignment 1. Shared priorities (1-10)" value="10" required disabled aria-labelledby="alignment-q1-10-t"><span class="scale-num" id="alignment-q1-10-t">10</span></span>
+          </div>
+          <div class="scale-anchor-labels" aria-hidden="true"><span>1 = Unclear</span><span>10 = Very clear</span></div>
+        </fieldset>
+        <fieldset class="review-field-group">
+          <legend class="review-question-label" id="alignment-q2-label">2. Speed and quality of decisions</legend>
+          <p class="question-explainer">How much faster or cleaner are decisions now?</p>
+          <div class="scale-selector-strip" role="radiogroup" aria-labelledby="alignment-q2-label">
+            <span class="scale-option"><input type="radio" id="alignment-q2-1" name="Alignment 2. Speed and quality of decisions (1-10)" value="1" required disabled aria-labelledby="alignment-q2-1-t"><span class="scale-num" id="alignment-q2-1-t">1</span></span>
+            <span class="scale-option"><input type="radio" id="alignment-q2-2" name="Alignment 2. Speed and quality of decisions (1-10)" value="2" required disabled aria-labelledby="alignment-q2-2-t"><span class="scale-num" id="alignment-q2-2-t">2</span></span>
+            <span class="scale-option"><input type="radio" id="alignment-q2-3" name="Alignment 2. Speed and quality of decisions (1-10)" value="3" required disabled aria-labelledby="alignment-q2-3-t"><span class="scale-num" id="alignment-q2-3-t">3</span></span>
+            <span class="scale-option"><input type="radio" id="alignment-q2-4" name="Alignment 2. Speed and quality of decisions (1-10)" value="4" required disabled aria-labelledby="alignment-q2-4-t"><span class="scale-num" id="alignment-q2-4-t">4</span></span>
+            <span class="scale-option"><input type="radio" id="alignment-q2-5" name="Alignment 2. Speed and quality of decisions (1-10)" value="5" required disabled aria-labelledby="alignment-q2-5-t"><span class="scale-num" id="alignment-q2-5-t">5</span></span>
+            <span class="scale-option"><input type="radio" id="alignment-q2-6" name="Alignment 2. Speed and quality of decisions (1-10)" value="6" required disabled aria-labelledby="alignment-q2-6-t"><span class="scale-num" id="alignment-q2-6-t">6</span></span>
+            <span class="scale-option"><input type="radio" id="alignment-q2-7" name="Alignment 2. Speed and quality of decisions (1-10)" value="7" required disabled aria-labelledby="alignment-q2-7-t"><span class="scale-num" id="alignment-q2-7-t">7</span></span>
+            <span class="scale-option"><input type="radio" id="alignment-q2-8" name="Alignment 2. Speed and quality of decisions (1-10)" value="8" required disabled aria-labelledby="alignment-q2-8-t"><span class="scale-num" id="alignment-q2-8-t">8</span></span>
+            <span class="scale-option"><input type="radio" id="alignment-q2-9" name="Alignment 2. Speed and quality of decisions (1-10)" value="9" required disabled aria-labelledby="alignment-q2-9-t"><span class="scale-num" id="alignment-q2-9-t">9</span></span>
+            <span class="scale-option"><input type="radio" id="alignment-q2-10" name="Alignment 2. Speed and quality of decisions (1-10)" value="10" required disabled aria-labelledby="alignment-q2-10-t"><span class="scale-num" id="alignment-q2-10-t">10</span></span>
+          </div>
+          <div class="scale-anchor-labels" aria-hidden="true"><span>1 = No change</span><span>10 = Much faster and cleaner</span></div>
+        </fieldset>
+        <fieldset class="review-field-group">
+          <legend class="review-question-label" id="alignment-q3-label">3. Openness in the team</legend>
+          <p class="question-explainer">How openly can the team now raise issues?</p>
+          <div class="scale-selector-strip" role="radiogroup" aria-labelledby="alignment-q3-label">
+            <span class="scale-option"><input type="radio" id="alignment-q3-1" name="Alignment 3. Openness in the team (1-10)" value="1" required disabled aria-labelledby="alignment-q3-1-t"><span class="scale-num" id="alignment-q3-1-t">1</span></span>
+            <span class="scale-option"><input type="radio" id="alignment-q3-2" name="Alignment 3. Openness in the team (1-10)" value="2" required disabled aria-labelledby="alignment-q3-2-t"><span class="scale-num" id="alignment-q3-2-t">2</span></span>
+            <span class="scale-option"><input type="radio" id="alignment-q3-3" name="Alignment 3. Openness in the team (1-10)" value="3" required disabled aria-labelledby="alignment-q3-3-t"><span class="scale-num" id="alignment-q3-3-t">3</span></span>
+            <span class="scale-option"><input type="radio" id="alignment-q3-4" name="Alignment 3. Openness in the team (1-10)" value="4" required disabled aria-labelledby="alignment-q3-4-t"><span class="scale-num" id="alignment-q3-4-t">4</span></span>
+            <span class="scale-option"><input type="radio" id="alignment-q3-5" name="Alignment 3. Openness in the team (1-10)" value="5" required disabled aria-labelledby="alignment-q3-5-t"><span class="scale-num" id="alignment-q3-5-t">5</span></span>
+            <span class="scale-option"><input type="radio" id="alignment-q3-6" name="Alignment 3. Openness in the team (1-10)" value="6" required disabled aria-labelledby="alignment-q3-6-t"><span class="scale-num" id="alignment-q3-6-t">6</span></span>
+            <span class="scale-option"><input type="radio" id="alignment-q3-7" name="Alignment 3. Openness in the team (1-10)" value="7" required disabled aria-labelledby="alignment-q3-7-t"><span class="scale-num" id="alignment-q3-7-t">7</span></span>
+            <span class="scale-option"><input type="radio" id="alignment-q3-8" name="Alignment 3. Openness in the team (1-10)" value="8" required disabled aria-labelledby="alignment-q3-8-t"><span class="scale-num" id="alignment-q3-8-t">8</span></span>
+            <span class="scale-option"><input type="radio" id="alignment-q3-9" name="Alignment 3. Openness in the team (1-10)" value="9" required disabled aria-labelledby="alignment-q3-9-t"><span class="scale-num" id="alignment-q3-9-t">9</span></span>
+            <span class="scale-option"><input type="radio" id="alignment-q3-10" name="Alignment 3. Openness in the team (1-10)" value="10" required disabled aria-labelledby="alignment-q3-10-t"><span class="scale-num" id="alignment-q3-10-t">10</span></span>
+          </div>
+          <div class="scale-anchor-labels" aria-hidden="true"><span>1 = Not openly</span><span>10 = Very openly</span></div>
+        </fieldset>
+        <div class="review-field-group">
+          <div class="review-question-row"><label for="alignment-q4" class="review-question-label">4. Where friction most affects execution</label><span class="optional-tag">optional</span></div>
+          <p class="question-explainer">Where, if anywhere, does remaining friction have the greatest impact on execution?</p>
+          <input type="text" id="alignment-q4" name="Alignment 4. Where friction most affects execution" placeholder="e.g. Product to programme hand-offs" class="form-input micro-input" maxlength="300" disabled>
         </div>
-      </fieldset>
+      </div>
+      <div class="eng-block" data-eng="Keynote" hidden>
+        <fieldset class="review-field-group">
+          <legend class="review-question-label" id="keynote-q1-label">1. Relevance of the message</legend>
+          <p class="question-explainer">How relevant was the message to your challenges?</p>
+          <div class="scale-selector-strip" role="radiogroup" aria-labelledby="keynote-q1-label">
+            <span class="scale-option"><input type="radio" id="keynote-q1-1" name="Keynote 1. Relevance of the message (1-10)" value="1" required disabled aria-labelledby="keynote-q1-1-t"><span class="scale-num" id="keynote-q1-1-t">1</span></span>
+            <span class="scale-option"><input type="radio" id="keynote-q1-2" name="Keynote 1. Relevance of the message (1-10)" value="2" required disabled aria-labelledby="keynote-q1-2-t"><span class="scale-num" id="keynote-q1-2-t">2</span></span>
+            <span class="scale-option"><input type="radio" id="keynote-q1-3" name="Keynote 1. Relevance of the message (1-10)" value="3" required disabled aria-labelledby="keynote-q1-3-t"><span class="scale-num" id="keynote-q1-3-t">3</span></span>
+            <span class="scale-option"><input type="radio" id="keynote-q1-4" name="Keynote 1. Relevance of the message (1-10)" value="4" required disabled aria-labelledby="keynote-q1-4-t"><span class="scale-num" id="keynote-q1-4-t">4</span></span>
+            <span class="scale-option"><input type="radio" id="keynote-q1-5" name="Keynote 1. Relevance of the message (1-10)" value="5" required disabled aria-labelledby="keynote-q1-5-t"><span class="scale-num" id="keynote-q1-5-t">5</span></span>
+            <span class="scale-option"><input type="radio" id="keynote-q1-6" name="Keynote 1. Relevance of the message (1-10)" value="6" required disabled aria-labelledby="keynote-q1-6-t"><span class="scale-num" id="keynote-q1-6-t">6</span></span>
+            <span class="scale-option"><input type="radio" id="keynote-q1-7" name="Keynote 1. Relevance of the message (1-10)" value="7" required disabled aria-labelledby="keynote-q1-7-t"><span class="scale-num" id="keynote-q1-7-t">7</span></span>
+            <span class="scale-option"><input type="radio" id="keynote-q1-8" name="Keynote 1. Relevance of the message (1-10)" value="8" required disabled aria-labelledby="keynote-q1-8-t"><span class="scale-num" id="keynote-q1-8-t">8</span></span>
+            <span class="scale-option"><input type="radio" id="keynote-q1-9" name="Keynote 1. Relevance of the message (1-10)" value="9" required disabled aria-labelledby="keynote-q1-9-t"><span class="scale-num" id="keynote-q1-9-t">9</span></span>
+            <span class="scale-option"><input type="radio" id="keynote-q1-10" name="Keynote 1. Relevance of the message (1-10)" value="10" required disabled aria-labelledby="keynote-q1-10-t"><span class="scale-num" id="keynote-q1-10-t">10</span></span>
+          </div>
+          <div class="scale-anchor-labels" aria-hidden="true"><span>1 = Not relevant</span><span>10 = Highly relevant</span></div>
+        </fieldset>
+        <fieldset class="review-field-group">
+          <legend class="review-question-label" id="keynote-q2-label">2. Clarity and delivery</legend>
+          <p class="question-explainer">How clear and well delivered was the keynote?</p>
+          <div class="scale-selector-strip" role="radiogroup" aria-labelledby="keynote-q2-label">
+            <span class="scale-option"><input type="radio" id="keynote-q2-1" name="Keynote 2. Clarity and delivery (1-10)" value="1" required disabled aria-labelledby="keynote-q2-1-t"><span class="scale-num" id="keynote-q2-1-t">1</span></span>
+            <span class="scale-option"><input type="radio" id="keynote-q2-2" name="Keynote 2. Clarity and delivery (1-10)" value="2" required disabled aria-labelledby="keynote-q2-2-t"><span class="scale-num" id="keynote-q2-2-t">2</span></span>
+            <span class="scale-option"><input type="radio" id="keynote-q2-3" name="Keynote 2. Clarity and delivery (1-10)" value="3" required disabled aria-labelledby="keynote-q2-3-t"><span class="scale-num" id="keynote-q2-3-t">3</span></span>
+            <span class="scale-option"><input type="radio" id="keynote-q2-4" name="Keynote 2. Clarity and delivery (1-10)" value="4" required disabled aria-labelledby="keynote-q2-4-t"><span class="scale-num" id="keynote-q2-4-t">4</span></span>
+            <span class="scale-option"><input type="radio" id="keynote-q2-5" name="Keynote 2. Clarity and delivery (1-10)" value="5" required disabled aria-labelledby="keynote-q2-5-t"><span class="scale-num" id="keynote-q2-5-t">5</span></span>
+            <span class="scale-option"><input type="radio" id="keynote-q2-6" name="Keynote 2. Clarity and delivery (1-10)" value="6" required disabled aria-labelledby="keynote-q2-6-t"><span class="scale-num" id="keynote-q2-6-t">6</span></span>
+            <span class="scale-option"><input type="radio" id="keynote-q2-7" name="Keynote 2. Clarity and delivery (1-10)" value="7" required disabled aria-labelledby="keynote-q2-7-t"><span class="scale-num" id="keynote-q2-7-t">7</span></span>
+            <span class="scale-option"><input type="radio" id="keynote-q2-8" name="Keynote 2. Clarity and delivery (1-10)" value="8" required disabled aria-labelledby="keynote-q2-8-t"><span class="scale-num" id="keynote-q2-8-t">8</span></span>
+            <span class="scale-option"><input type="radio" id="keynote-q2-9" name="Keynote 2. Clarity and delivery (1-10)" value="9" required disabled aria-labelledby="keynote-q2-9-t"><span class="scale-num" id="keynote-q2-9-t">9</span></span>
+            <span class="scale-option"><input type="radio" id="keynote-q2-10" name="Keynote 2. Clarity and delivery (1-10)" value="10" required disabled aria-labelledby="keynote-q2-10-t"><span class="scale-num" id="keynote-q2-10-t">10</span></span>
+          </div>
+          <div class="scale-anchor-labels" aria-hidden="true"><span>1 = Unclear</span><span>10 = Very clear</span></div>
+        </fieldset>
+        <fieldset class="review-field-group">
+          <legend class="review-question-label" id="keynote-q3-label">3. Takeaways</legend>
+          <p class="question-explainer">How much could you take away and use?</p>
+          <div class="scale-selector-strip" role="radiogroup" aria-labelledby="keynote-q3-label">
+            <span class="scale-option"><input type="radio" id="keynote-q3-1" name="Keynote 3. Takeaways (1-10)" value="1" required disabled aria-labelledby="keynote-q3-1-t"><span class="scale-num" id="keynote-q3-1-t">1</span></span>
+            <span class="scale-option"><input type="radio" id="keynote-q3-2" name="Keynote 3. Takeaways (1-10)" value="2" required disabled aria-labelledby="keynote-q3-2-t"><span class="scale-num" id="keynote-q3-2-t">2</span></span>
+            <span class="scale-option"><input type="radio" id="keynote-q3-3" name="Keynote 3. Takeaways (1-10)" value="3" required disabled aria-labelledby="keynote-q3-3-t"><span class="scale-num" id="keynote-q3-3-t">3</span></span>
+            <span class="scale-option"><input type="radio" id="keynote-q3-4" name="Keynote 3. Takeaways (1-10)" value="4" required disabled aria-labelledby="keynote-q3-4-t"><span class="scale-num" id="keynote-q3-4-t">4</span></span>
+            <span class="scale-option"><input type="radio" id="keynote-q3-5" name="Keynote 3. Takeaways (1-10)" value="5" required disabled aria-labelledby="keynote-q3-5-t"><span class="scale-num" id="keynote-q3-5-t">5</span></span>
+            <span class="scale-option"><input type="radio" id="keynote-q3-6" name="Keynote 3. Takeaways (1-10)" value="6" required disabled aria-labelledby="keynote-q3-6-t"><span class="scale-num" id="keynote-q3-6-t">6</span></span>
+            <span class="scale-option"><input type="radio" id="keynote-q3-7" name="Keynote 3. Takeaways (1-10)" value="7" required disabled aria-labelledby="keynote-q3-7-t"><span class="scale-num" id="keynote-q3-7-t">7</span></span>
+            <span class="scale-option"><input type="radio" id="keynote-q3-8" name="Keynote 3. Takeaways (1-10)" value="8" required disabled aria-labelledby="keynote-q3-8-t"><span class="scale-num" id="keynote-q3-8-t">8</span></span>
+            <span class="scale-option"><input type="radio" id="keynote-q3-9" name="Keynote 3. Takeaways (1-10)" value="9" required disabled aria-labelledby="keynote-q3-9-t"><span class="scale-num" id="keynote-q3-9-t">9</span></span>
+            <span class="scale-option"><input type="radio" id="keynote-q3-10" name="Keynote 3. Takeaways (1-10)" value="10" required disabled aria-labelledby="keynote-q3-10-t"><span class="scale-num" id="keynote-q3-10-t">10</span></span>
+          </div>
+          <div class="scale-anchor-labels" aria-hidden="true"><span>1 = Very little</span><span>10 = A great deal</span></div>
+        </fieldset>
+        <div class="review-field-group">
+          <div class="review-question-row"><label for="keynote-q4" class="review-question-label">4. One thing you will do differently</label><span class="optional-tag">optional</span></div>
+          <p class="question-explainer">What is the one thing you will do differently after the keynote?</p>
+          <input type="text" id="keynote-q4" name="Keynote 4. One thing you will do differently" placeholder="e.g. Name the decision before the meeting" class="form-input micro-input" maxlength="300" disabled>
+        </div>
+      </div>
+      </div>
 
       <fieldset class="review-field-group">
         <legend class="review-question-label" id="q5-label">5. Potential next steps</legend>
@@ -230,6 +511,8 @@
           <span class="checkbox-pill"><input type="checkbox" id="q5-decision-rights" value="Decision-making rights and clarity of accountability" data-next-step aria-labelledby="q5-decision-rights-t"><span class="pill-check" aria-hidden="true"></span><span class="pill-label" id="q5-decision-rights-t">Decision-making rights and clarity of accountability</span></span>
           <span class="checkbox-pill"><input type="checkbox" id="q5-sparring" value="Continued one-to-one executive sparring for key leaders" data-next-step aria-labelledby="q5-sparring-t"><span class="pill-check" aria-hidden="true"></span><span class="pill-label" id="q5-sparring-t">Continued one-to-one executive sparring for key leaders</span></span>
           <span class="checkbox-pill"><input type="checkbox" id="q5-middle-mgmt" value="Developing leadership capabilities across middle management" data-next-step aria-labelledby="q5-middle-mgmt-t"><span class="pill-check" aria-hidden="true"></span><span class="pill-label" id="q5-middle-mgmt-t">Developing leadership capabilities across middle management</span></span>
+          <span class="checkbox-pill"><input type="checkbox" id="q5-offsite" value="Another executive offsite" data-next-step aria-labelledby="q5-offsite-t"><span class="pill-check" aria-hidden="true"></span><span class="pill-label" id="q5-offsite-t">Another executive offsite</span></span>
+          <span class="checkbox-pill"><input type="checkbox" id="q5-training" value="Training for more of the team" data-next-step aria-labelledby="q5-training-t"><span class="pill-check" aria-hidden="true"></span><span class="pill-label" id="q5-training-t">Training for more of the team</span></span>
           <span class="checkbox-pill"><input type="checkbox" id="q5-none" value="No immediate need for further external support" data-next-step aria-labelledby="q5-none-t"><span class="pill-check" aria-hidden="true"></span><span class="pill-label" id="q5-none-t">No immediate need for further external support</span></span>
         </div>
       </fieldset>

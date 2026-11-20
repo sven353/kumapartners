@@ -1,4 +1,7 @@
-/* Impact Pulse: additions on top of constellr-review-v2.css. Company field on its own row, engagement ticks. */
-.review-identity-grid .identity-field:first-child{grid-column:1/-1}
+/* Impact Pulse: additions on top of constellr-review-v2.css. */
+.review-identity-grid .identity-wide{grid-column:1/-1}
 #engagement-group{margin-top:30px}
 .eng-error{margin:12px 0 0}
+.eng-block[hidden]{display:none}
+.radio-pill .pill-check{border-radius:50%}
+.radio-pill input:checked ~ .pill-check::after{width:8px;height:8px;border:0;border-radius:50%;background:#fff;transform:none}
