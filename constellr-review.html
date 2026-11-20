@@ -16,8 +16,8 @@
 <meta property="og:site_name" content="Kuma Partners">
 <meta property="og:title" content="Executive debrief for the constellr leadership team · Kuma Partners">
 <meta property="og:description" content="A confidential 90-second debrief. Individual answers are never attributed.">
-<meta property="og:image" content="https://www.kuma.partners/assets/og-constellr-review-v2.jpg">
-<meta property="og:image:secure_url" content="https://www.kuma.partners/assets/og-constellr-review-v2.jpg">
+<meta property="og:image" content="https://www.kuma.partners/assets/og-constellr-review-v3.jpg">
+<meta property="og:image:secure_url" content="https://www.kuma.partners/assets/og-constellr-review-v3.jpg">
 <meta property="og:image:type" content="image/jpeg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -25,7 +25,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Executive debrief for the constellr leadership team · Kuma Partners">
 <meta name="twitter:description" content="A confidential 90-second debrief. Individual answers are never attributed.">
-<meta name="twitter:image" content="https://www.kuma.partners/assets/og-constellr-review-v2.jpg">
+<meta name="twitter:image" content="https://www.kuma.partners/assets/og-constellr-review-v3.jpg">
 <meta name="twitter:image:alt" content="Your view of the engagement. 90 seconds, in confidence. Executive debrief for constellr by Kuma Partners.">
 <link rel="icon" href="/favicon.ico" sizes="48x48">
   <link rel="icon" type="image/png" href="assets/logo-icon.png">
@@ -33,6 +33,15 @@
 <link rel="preload" href="assets/fonts/montserrat-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="assets/fonts/lato-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="styles.css">
+<style>
+.review-consent{margin:26px 0 22px;padding:20px 20px 18px;border:1px solid var(--hairline-color,rgba(11,21,35,.14));border-radius:var(--radius-md,12px);background:var(--cream,#faf8f4)}
+.review-consent .consent-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.review-consent .consent-title{margin:0 0 8px;font-weight:700;font-size:1.05rem;color:var(--navy,#0B1523)}
+.review-consent .consent-intro{margin:0 0 14px;font-size:.9rem;line-height:1.5;color:#475569}
+.review-consent label.consent-row{display:flex;align-items:flex-start;gap:12px;margin:0 0 12px;cursor:pointer;font-size:.95rem;line-height:1.5;color:var(--navy,#0B1523)}
+.review-consent label.consent-row input{flex:none;width:20px;height:20px;margin:2px 0 0;accent-color:var(--navy,#0B1523)}
+.review-consent .consent-note{margin:6px 0 0;font-size:.85rem;line-height:1.55;color:#475569}
+</style>
 </head>
 <body class="review-portal-body">
 <a href="#main-content" class="skip-link">Skip to main content</a>
@@ -69,7 +78,7 @@
             <span class="protocol-title">Executive discretion and anonymity protocol</span>
           </div>
           <p class="protocol-text">Individual responses are held in strict confidence by the Kuma Partners managing partners. Results are synthesised into an aggregated, anonymous readout for constellr leadership that highlights systemic patterns, decision velocity and team alignment.</p>
-          <p class="protocol-text protocol-emphasis">Your name and role are recorded only to verify participation and prevent duplicate submissions. Individual scores and private reflections are never attributed.</p>
+          <p class="protocol-text protocol-emphasis">Your name and role are recorded only to verify participation and prevent duplicate submissions. Individual scores and private reflections are never attributed. The only exception is question 7, and only if you tick the optional publishing boxes at the end.</p>
         </div>
       </div>
 
@@ -226,6 +235,15 @@
             <textarea id="field-qualitative" name="7. What you would tell a peer" rows="4" placeholder="The concrete difference it made: a decision unblocked, a habit shifted, a dynamic resolved." class="form-textarea"></textarea>
           </div>
 
+          <fieldset class="review-consent">
+            <legend class="consent-sr">Publishing your words (optional)</legend>
+            <p class="consent-title" aria-hidden="true">Publishing your words (optional)</p>
+            <p class="consent-intro">Your answers above stay confidential whatever you choose here. These two boxes only cover what you wrote in question 7. Leave them empty and nothing is published.</p>
+            <label class="consent-row"><input type="checkbox" name="Permission: publish my words" value="Yes"><span>You may publish my words from question 7 on kuma.partners and in Kuma Partners materials. You may shorten them but not change their meaning.</span></label>
+            <label class="consent-row"><input type="checkbox" name="Permission: use my name and company" value="Yes"><span>You may show my name and company next to my words. If I leave this empty, my words appear without a name.</span></label>
+            <p class="consent-note">You can withdraw either permission at any time by writing to <a href="mailto:privacy@kuma.partners">privacy@kuma.partners</a>. We will then remove your words and name from our site and materials. How we handle your data is described in our <a href="/privacy">privacy policy</a>.</p>
+          </fieldset>
+
           <p class="review-error" data-review-error role="alert" hidden>Something went wrong sending your debrief. Please try again, or email <a href="mailto:sven@kuma.partners">sven@kuma.partners</a>.</p>
           <button type="submit" class="btn-submit-debrief" data-review-submit>Submit debrief &rarr;</button>
           <p class="review-privacy-note"><svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Sent over an encrypted connection and handled in strict confidence by the Kuma Partners managing partners, under our <a href="privacy.html">privacy policy</a>.</p>
@@ -234,7 +252,7 @@
         <div id="review-success-panel" class="review-success-panel" tabindex="-1" hidden>
           <div class="success-icon-badge" aria-hidden="true">&#10003;</div>
           <h2 class="success-title">Thank you for the candid perspective.</h2>
-          <p class="success-message">Your reflection has been recorded. Individual entries stay strictly confidential with Kuma Partners. Observations reach the constellr executive team only in an aggregated, anonymous readout of systemic patterns and momentum.</p>
+          <p class="success-message">Your reflection has been recorded. Individual entries stay strictly confidential with Kuma Partners, unless you gave permission to publish your words in question 7. Observations reach the constellr executive team only in an aggregated, anonymous readout of systemic patterns and momentum.</p>
           <div class="upsell-bridge-block">
             <span class="bridge-tag">Continuous leadership practice</span>
             <h3 class="bridge-heading">Sustaining your personal edge as complexity grows</h3>
