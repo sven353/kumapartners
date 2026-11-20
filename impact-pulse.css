@@ -1,0 +1,4 @@
+/* Impact Pulse: additions on top of constellr-review-v2.css. Company field on its own row, engagement ticks. */
+.review-identity-grid .identity-field:first-child{grid-column:1/-1}
+#engagement-group{margin-top:30px}
+.eng-error{margin:12px 0 0}

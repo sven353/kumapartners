@@ -4,6 +4,10 @@
 // For the Leadership Friction Scan form only, it sends two emails in parallel:
 //   1. the executive report to the respondent
 //   2. a triage alert to Sven
+//
+// It also sends one alert email to Sven for each Impact Pulse (impact-pulse-v1) and constellr debrief
+// (constellr-debrief-v6) submission, with the company in the subject (see lib/pulse-emails.mjs).
+// It uses the same two required variables below. Optional: PULSE_ALERT_TO (default: SCAN_ALERT_TO, then sven@kuma.partners).
 // Every other form on the site is ignored here and keeps its normal Netlify handling.
 //
 // Environment variables (Netlify site settings, Environment variables):
@@ -20,6 +24,7 @@
 // If a required variable is missing the function logs the reason and does nothing. It never throws,
 // so a problem here can never affect the visitor or the stored submission.
 
+import { PULSE_FORMS, buildPulseAlert } from './lib/pulse-emails.mjs';
 import { FORM_NAME, buildReport, renderRespondentEmail, renderTriageEmail, oneLine } from './lib/scan-emails.mjs';
 
 const NETLIFY_API = 'https://api.netlify.com/api/v1';
@@ -56,10 +61,40 @@ async function sendEmail(fetchImpl, apiKey, message, idempotencyKey) {
 // Factory so tests can inject fetch and the environment.
 export function createHandler({ fetchImpl = fetch, env = process.env, log = console } = {}) {
   return async function handler(event) {
+    // Impact Pulse and constellr debrief: one alert email to Sven. Same verification as the scan.
+    async function handlePulse(payload) {
+      const claimed = payload.data || {};
+      if (oneLine(claimed.company_tax_id) !== '' || oneLine(claimed['bot-field']) !== '') return ok({ skipped: 'honeypot' });
+      if (!env.RESEND_API_KEY) { log.warn('[pulse-alert] RESEND_API_KEY is not set, no email sent'); return ok({ skipped: 'no email provider' }); }
+      if (!env.NETLIFY_API_TOKEN) { log.warn('[pulse-alert] NETLIFY_API_TOKEN is not set, cannot verify the submission, no email sent'); return ok({ skipped: 'no verification token' }); }
+      if (!payload.id) return ok({ skipped: 'no submission id' });
+
+      let stored;
+      try { stored = await fetchVerified(payload.id, env.NETLIFY_API_TOKEN, fetchImpl); }
+      catch (e) { log.warn('[pulse-alert] could not verify submission ' + payload.id + ': ' + e.message); return ok({ skipped: 'unverified' }); }
+      if (!stored || stored.form_name !== payload.form_name || !stored.data) { log.warn('[pulse-alert] submission ' + payload.id + ' does not match its form'); return ok({ skipped: 'unverified' }); }
+      if (oneLine(stored.data.company_tax_id) !== '' || oneLine(stored.data['bot-field']) !== '') return ok({ skipped: 'honeypot' });
+
+      const alert = buildPulseAlert(stored.form_name, stored.data);
+      if (alert.error) return ok({ skipped: alert.error });
+
+      const from = env.SCAN_FROM || 'Sven Mulfinger • Kuma Partners <sven@kuma.partners>';
+      const to = env.PULSE_ALERT_TO || env.SCAN_ALERT_TO || 'sven@kuma.partners';
+      const replyTo = env.SCAN_REPLY_TO || 'sven@kuma.partners';
+      try {
+        await sendEmail(fetchImpl, env.RESEND_API_KEY, { from, to: [to], reply_to: replyTo, subject: alert.subject, html: alert.html, text: alert.text }, 'pulse-alert-' + payload.id);
+      } catch (e) {
+        log.error('[pulse-alert] alert failed for submission ' + payload.id + ': ' + e.message);
+        return ok({ sent: [false] });
+      }
+      return ok({ sent: [true] });
+    }
+
     try {
       let payload;
       try { payload = JSON.parse(event.body || '{}').payload || {}; } catch (e) { return ok({ skipped: 'unreadable body' }); }
 
+      if (PULSE_FORMS[payload.form_name]) return await handlePulse(payload);
       if (payload.form_name !== FORM_NAME) return ok({ skipped: 'other form' });
 
       const claimed = payload.data || {};

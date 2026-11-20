@@ -143,3 +143,9 @@ http://www.kumapartners.eu/*     https://www.kuma.partners/:splat    301!
 /constellr-review-v2.html /constellr-review         301!
 /constellr-review        /constellr-review-v2.html    200!
 /constellr-review.html   /constellr-review-v2.html    200!
+
+# Impact Pulse (private, unlisted, noindex): one link for every client, no prefill needed.
+# Optional prefill: /impact-pulse?company=...&name=...&role=...&coach=...
+/impact-pulse-v2.html /impact-pulse         301!
+/impact-pulse        /impact-pulse-v2.html    200!
+/impact-pulse.html   /impact-pulse-v2.html    200!
