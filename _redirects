@@ -149,3 +149,16 @@ http://www.kumapartners.eu/*     https://www.kuma.partners/:splat    301!
 /impact-pulse-v2.html /impact-pulse         301!
 /impact-pulse        /impact-pulse-v2.html    200!
 /impact-pulse.html   /impact-pulse-v2.html    200!
+
+# Founders offsite for the Norrsken community (private, unlisted, noindex): link shared by Farid.
+# Public address /offsite/norrsken-community, with a free worksheet at /offsite/norrsken-community/worksheet.
+# Not in the nav, sitemap or robots. Netlify redirects are case-sensitive, so common variants send people to the canonical address.
+/norrsken-community-v2.html            /offsite/norrsken-community            301!
+/norrsken-community-worksheet-v2.html  /offsite/norrsken-community/worksheet  301!
+/offsite/norrsken-community            /norrsken-community-v2.html            200!
+/offsite/norrsken-community/           /norrsken-community-v2.html            200!
+/offsite/norrsken-community/worksheet  /norrsken-community-worksheet-v2.html  200!
+/offsite/norrsken-community/worksheet/ /norrsken-community-worksheet-v2.html  200!
+/offsite/Norrsken-community            /offsite/norrsken-community            301!
+/ofsite/Norrsken-community             /offsite/norrsken-community            301!
+/ofsite/norrsken-community             /offsite/norrsken-community            301!

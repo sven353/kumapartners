@@ -6,7 +6,7 @@
 //   2. a triage alert to Sven
 //
 // It also sends one alert email to Sven for each Impact Pulse (impact-pulse-v1) and constellr debrief
-// (constellr-debrief-v6) submission, with the company in the subject (see lib/pulse-emails.mjs).
+// (constellr-debrief-v6) submission, and for each January offsite registration (norrsken-community-v1), which also sends the registrant a short confirmation, with the company in the subject (see lib/pulse-emails.mjs).
 // It uses the same two required variables below. Optional: PULSE_ALERT_TO (default: SCAN_ALERT_TO, then sven@kuma.partners).
 // Every other form on the site is ignored here and keeps its normal Netlify handling.
 //
@@ -24,7 +24,7 @@
 // If a required variable is missing the function logs the reason and does nothing. It never throws,
 // so a problem here can never affect the visitor or the stored submission.
 
-import { PULSE_FORMS, buildPulseAlert } from './lib/pulse-emails.mjs';
+import { PULSE_FORMS, OFFSITE_FORM, buildPulseAlert, buildOffsiteConfirmation, offsiteTier } from './lib/pulse-emails.mjs';
 import { FORM_NAME, buildReport, renderRespondentEmail, renderTriageEmail, oneLine } from './lib/scan-emails.mjs';
 
 const NETLIFY_API = 'https://api.netlify.com/api/v1';
@@ -75,19 +75,24 @@ export function createHandler({ fetchImpl = fetch, env = process.env, log = cons
       if (!stored || stored.form_name !== payload.form_name || !stored.data) { log.warn('[pulse-alert] submission ' + payload.id + ' does not match its form'); return ok({ skipped: 'unverified' }); }
       if (oneLine(stored.data.company_tax_id) !== '' || oneLine(stored.data['bot-field']) !== '') return ok({ skipped: 'honeypot' });
 
-      const alert = buildPulseAlert(stored.form_name, stored.data);
+      const isOffsite = stored.form_name === OFFSITE_FORM;
+      const tier = isOffsite ? offsiteTier(stored.created_at || payload.created_at) : '';
+      const alert = buildPulseAlert(stored.form_name, stored.data, { tier });
       if (alert.error) return ok({ skipped: alert.error });
 
       const from = env.SCAN_FROM || 'Sven Mulfinger • Kuma Partners <sven@kuma.partners>';
       const to = env.PULSE_ALERT_TO || env.SCAN_ALERT_TO || 'sven@kuma.partners';
       const replyTo = env.SCAN_REPLY_TO || 'sven@kuma.partners';
-      try {
-        await sendEmail(fetchImpl, env.RESEND_API_KEY, { from, to: [to], reply_to: replyTo, subject: alert.subject, html: alert.html, text: alert.text }, 'pulse-alert-' + payload.id);
-      } catch (e) {
-        log.error('[pulse-alert] alert failed for submission ' + payload.id + ': ' + e.message);
-        return ok({ sent: [false] });
+      const jobs = [sendEmail(fetchImpl, env.RESEND_API_KEY, { from, to: [to], reply_to: replyTo, subject: alert.subject, html: alert.html, text: alert.text }, 'pulse-alert-' + payload.id)];
+      // Offsite registrants also get a short confirmation, sent only to the address they typed.
+      const registrant = isOffsite ? oneLine(stored.data['Email']) : '';
+      if (registrant && /^[^\s@,;<>]+@[^\s@,;<>]+\.[^\s@,;<>]+$/.test(registrant)) {
+        const conf = buildOffsiteConfirmation(stored.data, tier);
+        jobs.push(sendEmail(fetchImpl, env.RESEND_API_KEY, { from, to: [registrant], reply_to: replyTo, subject: conf.subject, html: conf.html, text: conf.text }, 'offsite-confirm-' + payload.id));
       }
-      return ok({ sent: [true] });
+      const results = await Promise.allSettled(jobs);
+      results.forEach((r, i) => { if (r.status === 'rejected') log.error('[pulse-alert] ' + (i === 0 ? 'alert' : 'confirmation') + ' failed for submission ' + payload.id + ': ' + r.reason.message); });
+      return ok({ sent: results.map((r) => r.status === 'fulfilled') });
     }
 
     try {

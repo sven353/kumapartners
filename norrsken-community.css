@@ -1,0 +1,82 @@
+/* Founders offsite, 7 and 8 January 2027 (staged as norrsken-community-v2.html, shown at /norrsken-community).
+   Loads after kuma.css, index-v2.css and constellr-review-v2.css. Local classes start with jo-. */
+.cr-hero .cr-client{color:var(--ink);font-size:14.5px;font-weight:600;line-height:1.2}
+.jo-hero-btns{display:flex;flex-wrap:wrap;align-items:center;gap:14px 24px;margin-top:6px}
+.jo-hero-link{color:var(--paper);text-underline-offset:4px}
+
+.jo-facts{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.jo-fact{padding:22px 24px;border-radius:22px;border:1px solid var(--line-l);background:#fff;display:grid;gap:8px;align-content:start}
+.jo-fact p{margin:0;font-size:16px;line-height:1.55;color:var(--ink)}
+.jo-fact-k{font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--lav-deep)}
+.jo-fact-price{background:color-mix(in srgb,var(--lav) 12%,var(--paper))}
+.jo-fact p.jo-price-now{font-family:'Inter Tight','Inter',sans-serif;font-size:32px;line-height:1.05;letter-spacing:-.03em;font-weight:700}
+.jo-fact p.jo-price-note,.jo-fact p.jo-price-inc{font-size:14.5px;color:var(--muted-l)}
+.jo-urgency{margin:-8px 0 0;font-size:15px;line-height:1.5;font-weight:600;color:var(--lav-deep)}
+
+.jo-block{display:grid;gap:18px}
+.jo-h2{margin:0;font-family:'Inter Tight','Inter',sans-serif;font-size:30px;line-height:1.1;letter-spacing:-.03em;font-weight:700;color:var(--ink)}
+.jo-days{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.jo-day{padding:24px;border-radius:22px;border:1px solid var(--line-l);background:#fff}
+.jo-day-t{margin:0 0 14px;font-family:'Inter Tight','Inter',sans-serif;font-size:19px;font-weight:650;letter-spacing:-.01em;color:var(--ink)}
+.jo-steps{list-style:none;margin:0;padding:0;display:grid;gap:16px}
+.jo-steps li{display:grid;gap:3px;padding-left:16px;border-left:2px solid var(--lav)}
+.jo-step-t{font-weight:650;font-size:16px;color:var(--ink)}
+.jo-step-d{font-size:15px;line-height:1.55;color:var(--muted-l)}
+
+.jo-people{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.jo-person{border-radius:22px;border:1px solid var(--line-l);background:#fff;overflow:hidden;display:grid;align-content:start}
+.jo-person img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:50% 20%}
+.jo-person-tx{padding:20px 22px 24px;display:grid;gap:6px}
+.jo-person-n{margin:0;font-family:'Inter Tight','Inter',sans-serif;font-size:21px;letter-spacing:-.02em;color:var(--ink)}
+.jo-person-r{margin:0;font-size:14px;font-weight:600;color:var(--lav-deep)}
+.jo-person-b{margin:4px 0 0;font-size:15px;line-height:1.6;color:var(--muted-l)}
+
+.jo-gift{padding:28px 30px;border-radius:24px;background:var(--ink);color:var(--paper);display:grid;gap:12px;justify-items:start}
+.jo-gift-k{margin:0;font-size:12px;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--lav)}
+.jo-gift-h{margin:0;font-family:'Inter Tight','Inter',sans-serif;font-size:28px;line-height:1.1;letter-spacing:-.03em;color:var(--paper)}
+.jo-gift-p{margin:0;font-size:16px;line-height:1.6;color:var(--muted-d);max-width:36em}
+.jo-gift .btn-ink{background:var(--lav);color:var(--ink)}
+
+.jo-terms{margin:0;display:grid;gap:0;border-top:1px solid var(--line-l)}
+.jo-terms>div{display:grid;grid-template-columns:170px 1fr;gap:6px 24px;padding:16px 0;border-bottom:1px solid var(--line-l)}
+.jo-terms dt{font-weight:650;color:var(--ink)}
+.jo-terms dd{margin:0;font-size:15.5px;line-height:1.6;color:var(--muted-l)}
+.jo-terms a{color:var(--ink);text-underline-offset:3px}
+
+/* form additions */
+.jo-form-h{margin-bottom:4px}
+#norrsken-community-form .review-identity-grid .identity-field:last-child{grid-column:auto}
+#norrsken-community-form .review-identity-grid .identity-field.identity-wide{grid-column:1/-1}
+#norrsken-community-form .review-field-group{padding-top:26px}
+.jo-commit{padding:26px 0 28px;border-bottom:1px solid var(--line-l)}
+.review-consent.jo-invoice .jo-invoice-grid{padding:0;border-bottom:0}
+.jo-notes{min-height:84px}
+
+@media (max-width:760px){
+  .jo-facts,.jo-days,.jo-people{grid-template-columns:1fr}
+  .jo-terms>div{grid-template-columns:1fr}
+  .jo-h2{font-size:26px}
+  .jo-fact p.jo-price-now{font-size:28px}
+  .jo-gift{padding:24px}
+  .jo-person img{aspect-ratio:1/1}
+}
+
+/* worksheet (norrsken-community-worksheet-v2.html) */
+.ws-card .ws-q:last-of-type{border-bottom:0}
+.ws-q{padding:24px 0;border-bottom:1px solid var(--line-l)}
+.ws-q:first-child{padding-top:0}
+.ws-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin-top:26px}
+.ws-clear{background:none;border:0;padding:0;font:inherit;font-size:14.5px;color:var(--muted-l);cursor:pointer;text-underline-offset:4px;text-decoration:underline}
+@media print{
+  .nav,.overlay,.foot,.cookie,.cookie-banner,.ws-actions,.jo-gift,.hero{display:none!important}
+  .review-card-container{border:0;box-shadow:none;padding:0}
+  .form-textarea{border:1px solid #999;min-height:140px;background:#fff}
+}
+
+/* Two dates */
+.jo-lead{margin:10px 0 0;font-size:16px;line-height:1.5;color:color-mix(in srgb,var(--ink) 72%,transparent)}
+.jo-dates{border:0;margin:0;padding:0;min-width:0}
+.jo-dates legend{padding:0}
+.jo-dates .priority-checkbox-grid{margin-top:12px}
+.jo-dates .checkbox-pill:has(input:disabled){opacity:.5}
+@media (max-width:640px){.jo-dates .priority-checkbox-grid{grid-template-columns:1fr}}
