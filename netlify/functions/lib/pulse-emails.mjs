@@ -9,10 +9,12 @@ import { esc, oneLine } from './scan-emails.mjs';
 export const PULSE_FORMS = {
   'impact-pulse-v1': 'Impact Pulse',
   'constellr-debrief-v6': 'constellr debrief',
-  'norrsken-community-v1': 'Founders offsite'
+  'norrsken-community-v1': 'Founders offsite',
+  'norrsken-community-worksheet-v1': 'Founders worksheet'
 };
 
 export const OFFSITE_FORM = 'norrsken-community-v1';
+export const WORKSHEET_FORM = 'norrsken-community-worksheet-v1';
 
 // Never shown in the alert: plumbing and honeypots.
 const HIDDEN = new Set(['form-name', 'bot-field', 'company_tax_id', 'Submission Timestamp', 'Price tier shown', 'ip', 'user_agent', 'referrer']);
@@ -47,7 +49,10 @@ export function buildPulseAlert(formName, fields, opts = {}) {
   const permission = publishWords
     ? 'You may publish the words from question 7' + (publishName ? ', with name and company.' : ', without a name.')
     : 'No permission to publish. Keep question 7 private.';
-  const topLine = isOffsite
+  const isWorksheet = formName === WORKSHEET_FORM;
+  const topLine = isWorksheet
+    ? 'Copy sent for information. Match it to the registration by email address.'
+    : isOffsite
     ? 'Dates: ' + (oneLine(f['Dates that work']) || 'not stated') + '. Price tier: ' + (tier || 'unknown') + (oneLine(f['Price tier shown']) ? ' (the page showed: ' + oneLine(f['Price tier shown']) + ')' : '') + '. ' + offsiteDeadline(f['Dates that work']) + '.'
     : 'Publishing: ' + permission;
 
@@ -87,7 +92,7 @@ export function buildPulseAlert(formName, fields, opts = {}) {
     '<p style="margin:0 0 4px;color:#64748b;font-size:12px;letter-spacing:.06em;text-transform:uppercase">' + esc(label) + ' received</p>' +
     '<h1 style="margin:0 0 4px;color:#0B1523;font-size:22px">' + esc(company) + '</h1>' +
     (engagement ? '<p style="margin:0 0 16px;color:#17677B;font-size:14px">' + esc(engagement) + '</p>' : '<p style="margin:0 0 12px"></p>') +
-    '<p style="margin:0 0 18px;padding:10px 14px;border-radius:8px;background:' + ((publishWords || isOffsite) ? '#ecfdf5' : '#f8fafc') + ';color:#1e293b;font-size:14px">' + esc(topLine) + '</p>' +
+    '<p style="margin:0 0 18px;padding:10px 14px;border-radius:8px;background:' + ((publishWords || isOffsite || isWorksheet) ? '#ecfdf5' : '#f8fafc') + ';color:#1e293b;font-size:14px">' + esc(topLine) + '</p>' +
     '<table role="presentation" style="width:100%;border-collapse:collapse">' + rows.map(tr).join('') + '</table>' +
     (submitted ? '<p style="margin:18px 0 0;color:#94a3b8;font-size:12px">Submitted ' + esc(submitted) + '</p>' : '') +
     '</div></body></html>';
@@ -133,10 +138,10 @@ export function buildOffsiteConfirmation(fields, tier) {
     'We have your registration for the founders offsite on ' + when + ', one night in nature near Barcelona.',
     '',
     'Price: ' + (tier || 'see the page') + '.',
-    'An invoice from Kuma Partners follows with a clear deadline. ' + deadline + '. Your place is confirmed when we receive it.',
+    'We email you next for your invoice details, then send the invoice from Kuma Partners. ' + deadline + '. Your place is confirmed when we receive it.',
     'If the offsite does not take place for any reason, you get back everything you paid.',
     '',
-    'While you wait, start your year review. Eight private questions about where you are and where you want to go: ' + worksheet,
+    'While you wait, start your year review. Nine private questions about where you are and where you want to go: ' + worksheet,
     '',
     'Sven Mulfinger and Farid Chaouki'
   ];
@@ -144,8 +149,8 @@ export function buildOffsiteConfirmation(fields, tier) {
   const html = '<!doctype html><html><body style="margin:0;padding:24px;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif"><div style="max-width:560px;margin:0 auto;background:#fff;border-radius:12px;padding:26px 28px;color:#1e293b;font-size:15px;line-height:1.6">' +
     '<p style="margin:0 0 14px">Hello ' + esc(first) + ',</p>' +
     '<p style="margin:0 0 14px">We have your registration for the founders offsite on ' + when + ', one night in nature near Barcelona.</p>' +
-    '<p style="margin:0 0 14px">Price: ' + esc(tier || 'see the page') + '.<br>An invoice from Kuma Partners follows with a clear deadline. ' + deadline + '. Your place is confirmed when we receive it.<br>If the offsite does not take place for any reason, you get back everything you paid.</p>' +
-    '<p style="margin:0 0 14px">While you wait, start your year review. Eight private questions about where you are and where you want to go: <a href="' + worksheet + '" style="color:#17677B">open the worksheet</a>.</p>' +
+    '<p style="margin:0 0 14px">Price: ' + esc(tier || 'see the page') + '.<br>We email you next for your invoice details, then send the invoice from Kuma Partners. ' + deadline + '. Your place is confirmed when we receive it.<br>If the offsite does not take place for any reason, you get back everything you paid.</p>' +
+    '<p style="margin:0 0 14px">While you wait, start your year review. Nine private questions about where you are and where you want to go: <a href="' + worksheet + '" style="color:#17677B">open the worksheet</a>.</p>' +
     '<p style="margin:0">Sven Mulfinger and Farid Chaouki</p></div></body></html>';
   return { subject, html, text };
 }

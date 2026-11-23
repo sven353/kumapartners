@@ -25,7 +25,7 @@
 
 .jo-people{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .jo-person{border-radius:22px;border:1px solid var(--line-l);background:#fff;overflow:hidden;display:grid;align-content:start}
-.jo-person img{display:block;width:100%;height:auto;aspect-ratio:4/3;object-fit:cover;object-position:50% 20%}
+.jo-person img{display:block;width:100%;height:auto;aspect-ratio:5/4;object-fit:cover;object-position:50% 42%}
 .jo-person-tx{padding:20px 22px 24px;display:grid;gap:6px}
 .jo-person-n{margin:0;font-family:'Inter Tight','Inter',sans-serif;font-size:21px;letter-spacing:-.02em;color:var(--ink)}
 .jo-person-r{margin:0;font-size:14px;font-weight:600;color:var(--lav-deep)}
@@ -55,10 +55,12 @@
 @media (max-width:760px){
   .jo-facts,.jo-days,.jo-people{grid-template-columns:1fr}
   .jo-terms>div{grid-template-columns:1fr}
+  .jo-person img{aspect-ratio:1/1}
+  .jo-a{padding-right:0}
+  .jo-q summary{font-size:17px}
   .jo-h2{font-size:26px}
   .jo-fact p.jo-price-now{font-size:28px}
   .jo-gift{padding:24px}
-  .jo-person img{aspect-ratio:1/1}
 }
 
 /* worksheet (norrsken-community-worksheet-v2.html) */
@@ -68,7 +70,7 @@
 .ws-actions{display:flex;flex-wrap:wrap;align-items:center;gap:14px 22px;margin-top:26px}
 .ws-clear{background:none;border:0;padding:0;font:inherit;font-size:14.5px;color:var(--muted-l);cursor:pointer;text-underline-offset:4px;text-decoration:underline}
 @media print{
-  .nav,.overlay,.foot,.cookie,.cookie-banner,.ws-actions,.jo-gift,.hero{display:none!important}
+  .nav,.overlay,.foot,.cookie,.cookie-banner,.ws-actions,.ws-send,.jo-gift,.hero{display:none!important}
   .review-card-container{border:0;box-shadow:none;padding:0}
   .form-textarea{border:1px solid #999;min-height:140px;background:#fff}
 }
@@ -80,3 +82,32 @@
 .jo-dates .priority-checkbox-grid{margin-top:12px}
 .jo-dates .checkbox-pill:has(input:disabled){opacity:.5}
 @media (max-width:640px){.jo-dates .priority-checkbox-grid{grid-template-columns:1fr}}
+
+/* Buttons without an icon: centred label, slimmer pill */
+.jo-hero-btns .btn,.jo-gift .btn,.bridge-actions .btn,.ws-actions .btn,.btn-block[data-review-submit],.btn[data-ws-send]{justify-content:center;height:46px;padding:0 26px;gap:0;font-size:15px}
+.btn-block[data-review-submit]{width:100%}
+
+/* Date pills: slimmer */
+.jo-dates .checkbox-pill{padding:9px 14px;border-radius:12px;gap:10px;min-height:0}
+.jo-dates .pill-label{font-size:14.5px;line-height:1.3}
+.jo-dates .pill-check{width:18px;height:18px}
+
+/* FAQ */
+.jo-faq{border-top:1px solid var(--line-l)}
+.jo-q{border-bottom:1px solid var(--line-l)}
+.jo-q summary{list-style:none;cursor:pointer;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:18px 0;font-family:'Inter Tight','Inter',sans-serif;font-size:18px;font-weight:600;letter-spacing:-.015em;color:var(--ink)}
+.jo-q summary::-webkit-details-marker{display:none}
+.jo-q summary::after{content:"";flex:none;width:9px;height:9px;border:solid var(--lav-deep);border-width:0 2px 2px 0;transform:rotate(45deg) translateY(-2px);transition:transform .2s}
+.jo-q[open] summary::after{transform:rotate(-135deg) translateY(-2px)}
+.jo-q summary:focus-visible{outline:2px solid var(--lav-deep);outline-offset:3px;border-radius:6px}
+.jo-a{padding:0 40px 20px 0}
+.jo-a p{margin:0;font-size:15.5px;line-height:1.65;color:var(--muted-l)}
+.jo-a a{color:var(--ink);text-underline-offset:3px}
+
+/* Worksheet: send a copy */
+.ws-send{margin-top:8px;padding:22px;border-radius:18px;border:1px solid var(--line-l);background:color-mix(in srgb,var(--lav) 9%,var(--paper));display:grid;gap:14px}
+.ws-send-t{margin:0;font-family:'Inter Tight','Inter',sans-serif;font-size:19px;font-weight:650;letter-spacing:-.02em;color:var(--ink)}
+.ws-send-p{margin:0;font-size:15px;line-height:1.6;color:var(--muted-l)}
+.ws-send .review-identity-grid{padding:0;border:0}
+.ws-sent{margin:0;padding:12px 14px;border-radius:12px;background:color-mix(in srgb,var(--lav) 22%,var(--paper));font-size:15px;line-height:1.5;color:var(--ink)}
+.ws-tick{padding:10px 14px;border-radius:12px;background:#fff}

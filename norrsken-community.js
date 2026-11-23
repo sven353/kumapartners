@@ -89,6 +89,8 @@ document.addEventListener('DOMContentLoaded', function () {
     return picked;
   }
   syncDates();
+  var wsField = document.getElementById('field-worksheet');
+  try { var sent = localStorage.getItem('jo-worksheet-sent'); if (wsField && sent) wsField.value = 'Yes, sent ' + sent.slice(0, 10); } catch (x) { /* ignore */ }
   if (tierField) tierField.value = tier === 'early' ? 'Early €990 + VAT' : 'Standard €1,450 + VAT';
 
   form.addEventListener('submit', function (e) {
