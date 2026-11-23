@@ -111,3 +111,8 @@
 .ws-send .review-identity-grid{padding:0;border:0}
 .ws-sent{margin:0;padding:12px 14px;border-radius:12px;background:color-mix(in srgb,var(--lav) 22%,var(--paper));font-size:15px;line-height:1.5;color:var(--ink)}
 .ws-tick{padding:10px 14px;border-radius:12px;background:#fff}
+
+/* Closing links */
+.jo-more{margin-top:48px;padding-top:24px;border-top:1px solid var(--line-l);display:grid;gap:10px}
+.jo-more p{margin:0;font-size:15px;line-height:1.6;color:var(--muted-l)}
+.jo-more a{color:var(--ink);font-weight:600;text-underline-offset:3px}
