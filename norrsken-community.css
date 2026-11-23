@@ -25,7 +25,7 @@
 
 .jo-people{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .jo-person{border-radius:22px;border:1px solid var(--line-l);background:#fff;overflow:hidden;display:grid;align-content:start}
-.jo-person img{display:block;width:100%;height:auto;aspect-ratio:5/4;object-fit:cover;object-position:50% 42%}
+.jo-person img{display:block;width:100%;height:auto;aspect-ratio:1/1;object-fit:cover;object-position:50% 40%}
 .jo-person-tx{padding:20px 22px 24px;display:grid;gap:6px}
 .jo-person-n{margin:0;font-family:'Inter Tight','Inter',sans-serif;font-size:21px;letter-spacing:-.02em;color:var(--ink)}
 .jo-person-r{margin:0;font-size:14px;font-weight:600;color:var(--lav-deep)}
