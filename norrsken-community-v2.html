@@ -71,7 +71,7 @@
     <span class="chip kicker">Founders offsite · January 2027</span>
     <h1 class="h1" id="jo-h1">What do you want to have decided for 2027?</h1>
     <p class="lede">Two days and one night in nature near Barcelona, on 7 and 8 January or 28 and 29 January. Fifteen founders per date, one room each and two facilitators who have built companies themselves.</p>
-    <div class="jo-hero-btns"><a class="btn btn-lav" href="#register"><span class="lbl">Reserve your place</span></a><a class="cr-link jo-hero-link" href="/offsite/norrsken-community/worksheet">Take the free year review first</a></div>
+    <div class="jo-hero-btns"><a class="btn btn-lav" href="#register"><span class="lbl">Request your place</span></a><a class="cr-link jo-hero-link" href="#call">Talk to us first</a><a class="cr-link jo-hero-link" href="/offsite/norrsken-community/worksheet">Take the free year review</a></div>
   </div></div>
 </section>
 <section class="sec light lp-sec"><div class="wrap cr-wrap">
@@ -162,16 +162,45 @@
       <details class="jo-q"><summary>What will I leave with?</summary><div class="jo-a"><p>Your objectives for 2027, written down, the things you have decided to stop and your first commitments. You also spend two days with founders who carry the same weight as you.</p></div></details>
       <details class="jo-q"><summary>Why do this with other founders and not alone?</summary><div class="jo-a"><p>Peers who carry the same weight see your situation clearly and ask the questions you may have stopped asking yourself. Everyone signs a confidentiality pledge at the start, so what is said in the room stays in the room.</p></div></details>
       <details class="jo-q"><summary>Who will be in the room?</summary><div class="jo-a"><p>Founders from the Norrsken community, mostly pre-seed and seed, and the two facilitators. Each date runs with at least 10 and at most 15 founders, and you have your own room.</p></div></details>
+      <details class="jo-q"><summary>Does everyone who registers get a place?</summary><div class="jo-a"><p>We confirm every place personally. The room works when everyone is curious, open to learn and ready to be honest about their own situation, so we may ask for a short call first, or decline a request. If we decline, we write to you and you pay nothing.</p></div></details>
       <details class="jo-q"><summary>What if I cannot spare two days?</summary><div class="jo-a"><p>Two dates are on offer so you can pick the one that fits your calendar, or tick both and we confirm one with the invoice. You can also start with the free year review and decide afterwards.</p></div></details>
       <details class="jo-q"><summary>What is The Round, and what has it got to do with this?</summary><div class="jo-a"><p>The Round is the year-round peer board of Kuma Partners. This offsite is also a test for building it, and we say so openly. Nobody is assessed in secret and nothing from the room is repeated. Whether you hear more about it afterwards is your choice. <a href="/round/">Read about The Round</a>.</p></div></details>
       <details class="jo-q"><summary>When are the dates and where is it?</summary><div class="jo-a"><p>Thursday 7 and Friday 8 January, or Thursday 28 and Friday 29 January 2027, with one night. The place is in nature, one to two hours by car from Barcelona. We confirm the exact place once the group is set and organise shared rides with you.</p></div></details>
       <details class="jo-q"><summary>What does it cost and what is included?</summary><div class="jo-a"><p>€990 + VAT if you register by 10 December. €1,450 + VAT from 11 December. The price is the same for both dates and includes your room, all meals and both facilitators.</p></div></details>
+      <details class="jo-q"><summary>Can I talk to someone before I decide?</summary><div class="jo-a"><p>Yes. <a href="#call">Request a 30-minute call</a> with Sven or Farid. Ask anything, including whether the offsite fits where you are.</p></div></details>
       <details class="jo-q"><summary>Until when can I register?</summary><div class="jo-a"><p>Registration for 7 and 8 January closes on 18 December. Registration for 28 and 29 January stays open until 15 January.</p></div></details>
       <details class="jo-q"><summary>How and when do I pay?</summary><div class="jo-a"><p>There is no payment on this page. After you register we email you to collect your invoice details, then send an invoice from Kuma Partners. The full amount is due within 7 days of the invoice. The last day to pay is 21 December for 7 and 8 January and 15 January for 28 and 29 January, because we need it to organise the place.</p></div></details>
       <details class="jo-q"><summary>What if the offsite does not run?</summary><div class="jo-a"><p>Each date runs with at least 10 founders. We decide on 22 December for 7 and 8 January and on 18 January for 28 and 29 January. If an offsite does not take place for any reason, you get back everything you paid.</p></div></details>
       <details class="jo-q"><summary>What if I cannot come after I have registered?</summary><div class="jo-a"><p>Cancel by 31 December for a full refund. From 1 January you get 50% back. You can hand your place to another founder at any time, free of charge.</p></div></details>
       <details class="jo-q"><summary>What happens to my data?</summary><div class="jo-a"><p>Kuma Partners holds your registration details. With your consent we share them with Farid Chaouki for logistics and follow-up. See our <a href="/privacy">privacy policy</a>.</p></div></details>
     </div>
+  </div>
+
+  <div class="jo-call" id="call" data-jo-call>
+    <h2 class="jo-h2">Not sure yet? Talk to us for 30 minutes.</h2>
+    <p class="jo-lead">A short call with Sven or Farid. You ask your questions and we get to know you, so we both know whether the room is right for you.</p>
+    <form name="norrsken-community-call-v1" method="POST" action="/offsite/norrsken-community?call=1" data-netlify="true" netlify-honeypot="bot-field" id="norrsken-community-call-form" class="review-form jo-call-form">
+      <input type="hidden" name="form-name" value="norrsken-community-call-v1">
+      <p class="review-honeypot" aria-hidden="true"><input name="bot-field" tabindex="-1" autocomplete="off" aria-label="Leave this empty"></p>
+      <div class="review-identity-grid">
+        <div class="identity-field"><div class="label-row"><label for="jc-name" class="input-label">Full name</label></div><input type="text" id="jc-name" name="Full name" required autocomplete="name" class="form-input" maxlength="120"></div>
+        <div class="identity-field"><div class="label-row"><label for="jc-email" class="input-label">Email</label></div><input type="email" id="jc-email" name="Email" required autocomplete="email" class="form-input" maxlength="160"></div>
+        <div class="identity-field"><div class="label-row"><label for="jc-company" class="input-label">Company</label></div><input type="text" id="jc-company" name="Company" required autocomplete="organization" class="form-input" maxlength="120"></div>
+        <div class="identity-field"><div class="label-row"><label for="jc-phone" class="input-label">Phone or WhatsApp</label></div><input type="tel" id="jc-phone" name="Phone or WhatsApp" required autocomplete="tel" class="form-input" maxlength="40"></div>
+      </div>
+      <div class="review-field-group">
+        <div class="review-question-row"><label for="jc-times" class="review-question-label">When suits you?</label></div>
+        <textarea id="jc-times" name="Best times" rows="2" required class="form-textarea" maxlength="400" placeholder="e.g. weekday mornings, or Tuesday and Thursday after 17:00"></textarea>
+      </div>
+      <div class="review-field-group review-field-last">
+        <div class="review-question-row"><label for="jc-q" class="review-question-label">Anything you want to ask us?</label><span class="optional-tag">optional</span></div>
+        <textarea id="jc-q" name="Question" rows="2" class="form-textarea" maxlength="600"></textarea>
+      </div>
+      <p class="review-error" data-call-error role="alert" hidden>Something went wrong sending your request. Please try again, or email <a href="mailto:sven@kuma.partners">sven@kuma.partners</a>.</p>
+      <button type="submit" class="btn btn-lav" data-call-submit><span class="lbl">Request a call</span></button>
+      <p class="consent-note">We use your details only to arrange the call. See our <a href="/privacy">privacy policy</a>.</p>
+    </form>
+    <p class="ws-sent" data-call-sent role="status" tabindex="-1" hidden>Thank you. We will write to you with a time that suits you.</p>
   </div>
 
   <div class="review-card-container" id="register">
@@ -185,8 +214,8 @@
       <input type="hidden" name="Submission Timestamp" id="field-submission-time">
       <input type="hidden" name="Worksheet copy sent" id="field-worksheet" value=""><input type="hidden" name="Price tier shown" id="field-price-tier">
 
-      <h2 class="jo-h2 jo-form-h">Reserve your place</h2>
-      <p class="question-explainer">No payment on this page. After you register we email you for your invoice details, then send the invoice.</p>
+      <h2 class="jo-h2 jo-form-h">Request your place</h2>
+      <p class="question-explainer">No payment on this page. We confirm every place personally, then email you for your invoice details and send the invoice.</p>
 
       <div class="review-identity-grid">
         <div class="identity-field">
@@ -252,15 +281,15 @@
         <p class="consent-note">You can withdraw any consent by writing to <a href="mailto:privacy@kuma.partners">privacy@kuma.partners</a>. How we handle your data is described in our <a href="/privacy">privacy policy</a>.</p>
       </fieldset>
 
-      <p class="review-error" data-review-error role="alert" hidden>Something went wrong sending your registration. Please try again, or email <a href="mailto:sven@kuma.partners">sven@kuma.partners</a>.</p>
-      <button type="submit" class="btn btn-ink btn-block" data-review-submit>Reserve my place &rarr;</button>
+      <p class="review-error" data-review-error role="alert" hidden>Something went wrong sending your request. Please try again, or email <a href="mailto:sven@kuma.partners">sven@kuma.partners</a>.</p>
+      <button type="submit" class="btn btn-ink btn-block" data-review-submit>Request my place &rarr;</button>
       <p class="review-privacy-note"><svg class="lock-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"></rect><path d="M8 11V7a4 4 0 0 1 8 0v4"></path></svg>Sent over an encrypted connection and handled by Kuma Partners under our <a href="/privacy">privacy policy</a>.</p>
     </form>
 
     <div id="review-success-panel" class="review-success-panel" tabindex="-1" hidden>
       <div class="success-icon-badge" aria-hidden="true">&#10003;</div>
-      <h2 class="success-title">You are on the list.</h2>
-      <p class="success-message">We have your registration. We email you next for your invoice details, then send the invoice with a clear payment deadline. The full amount is due within 7 days of the invoice. The last day to pay is 21 December for 7 and 8 January and 15 January for 28 and 29 January. Your place is confirmed when we receive it.</p>
+      <h2 class="success-title">Thank you. We have your request.</h2>
+      <p class="success-message">We confirm every place personally. If it is a fit, we email you for your invoice details and then send the invoice with a clear payment deadline. The full amount is due within 7 days of the invoice. The last day to pay is 21 December for 7 and 8 January and 15 January for 28 and 29 January. Your place is confirmed when we receive it.</p>
       <div class="upsell-bridge-block">
         <span class="bridge-tag">While you wait</span>
         <h3 class="bridge-heading">Start your year review</h3>

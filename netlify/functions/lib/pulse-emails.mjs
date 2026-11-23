@@ -10,11 +10,13 @@ export const PULSE_FORMS = {
   'impact-pulse-v1': 'Impact Pulse',
   'constellr-debrief-v6': 'constellr debrief',
   'norrsken-community-v1': 'Founders offsite',
-  'norrsken-community-worksheet-v1': 'Founders worksheet'
+  'norrsken-community-worksheet-v1': 'Founders worksheet',
+  'norrsken-community-call-v1': 'Founders call request'
 };
 
 export const OFFSITE_FORM = 'norrsken-community-v1';
 export const WORKSHEET_FORM = 'norrsken-community-worksheet-v1';
+export const CALL_FORM = 'norrsken-community-call-v1';
 
 // Never shown in the alert: plumbing and honeypots.
 const HIDDEN = new Set(['form-name', 'bot-field', 'company_tax_id', 'Submission Timestamp', 'Price tier shown', 'ip', 'user_agent', 'referrer']);
@@ -50,7 +52,10 @@ export function buildPulseAlert(formName, fields, opts = {}) {
     ? 'You may publish the words from question 7' + (publishName ? ', with name and company.' : ', without a name.')
     : 'No permission to publish. Keep question 7 private.';
   const isWorksheet = formName === WORKSHEET_FORM;
-  const topLine = isWorksheet
+  const isCall = formName === CALL_FORM;
+  const topLine = isCall
+    ? 'Call request, 30 minutes with Sven or Farid. Reply with a time or your booking link.'
+    : isWorksheet
     ? 'Copy sent for information. Match it to the registration by email address.'
     : isOffsite
     ? 'Dates: ' + (oneLine(f['Dates that work']) || 'not stated') + '. Price tier: ' + (tier || 'unknown') + (oneLine(f['Price tier shown']) ? ' (the page showed: ' + oneLine(f['Price tier shown']) + ')' : '') + '. ' + offsiteDeadline(f['Dates that work']) + '.'
@@ -92,7 +97,7 @@ export function buildPulseAlert(formName, fields, opts = {}) {
     '<p style="margin:0 0 4px;color:#64748b;font-size:12px;letter-spacing:.06em;text-transform:uppercase">' + esc(label) + ' received</p>' +
     '<h1 style="margin:0 0 4px;color:#0B1523;font-size:22px">' + esc(company) + '</h1>' +
     (engagement ? '<p style="margin:0 0 16px;color:#17677B;font-size:14px">' + esc(engagement) + '</p>' : '<p style="margin:0 0 12px"></p>') +
-    '<p style="margin:0 0 18px;padding:10px 14px;border-radius:8px;background:' + ((publishWords || isOffsite || isWorksheet) ? '#ecfdf5' : '#f8fafc') + ';color:#1e293b;font-size:14px">' + esc(topLine) + '</p>' +
+    '<p style="margin:0 0 18px;padding:10px 14px;border-radius:8px;background:' + ((publishWords || isOffsite || isWorksheet || isCall) ? '#ecfdf5' : '#f8fafc') + ';color:#1e293b;font-size:14px">' + esc(topLine) + '</p>' +
     '<table role="presentation" style="width:100%;border-collapse:collapse">' + rows.map(tr).join('') + '</table>' +
     (submitted ? '<p style="margin:18px 0 0;color:#94a3b8;font-size:12px">Submitted ' + esc(submitted) + '</p>' : '') +
     '</div></body></html>';
@@ -130,15 +135,15 @@ export function buildOffsiteConfirmation(fields, tier) {
     : picked.includes('28 and 29') ? 'Thursday 28 and Friday 29 January 2027'
     : 'Thursday 7 and Friday 8 January 2027';
   const deadline = offsiteDeadline(picked).replace('Invoice due', 'The full amount is due').replace(/^The full amount is due within 7 days and by/, 'The full amount is due within 7 days of the invoice and no later than').replace(' (7 and 8 January) or ', ' for 7 and 8 January or ').replace(' (28 and 29 January)', ' for 28 and 29 January');
-  const subject = 'Your place at the founders offsite in January';
+  const subject = 'Your request for a place at the founders offsite';
   const worksheet = 'https://www.kuma.partners/offsite/norrsken-community/worksheet';
   const lines = [
     'Hello ' + first + ',',
     '',
-    'We have your registration for the founders offsite on ' + when + ', one night in nature near Barcelona.',
+    'We have your request for a place at the founders offsite on ' + when + ', one night in nature near Barcelona. We confirm every place personally and come back to you shortly.',
     '',
     'Price: ' + (tier || 'see the page') + '.',
-    'We email you next for your invoice details, then send the invoice from Kuma Partners. ' + deadline + '. Your place is confirmed when we receive it.',
+    'If it is a fit, we email you for your invoice details and then send the invoice from Kuma Partners. ' + deadline + '. Your place is confirmed when we receive it.',
     'If the offsite does not take place for any reason, you get back everything you paid.',
     '',
     'While you wait, start your year review. Nine private questions about where you are and where you want to go: ' + worksheet,
@@ -148,8 +153,8 @@ export function buildOffsiteConfirmation(fields, tier) {
   const text = lines.join('\n');
   const html = '<!doctype html><html><body style="margin:0;padding:24px;background:#f1f5f9;font-family:Arial,Helvetica,sans-serif"><div style="max-width:560px;margin:0 auto;background:#fff;border-radius:12px;padding:26px 28px;color:#1e293b;font-size:15px;line-height:1.6">' +
     '<p style="margin:0 0 14px">Hello ' + esc(first) + ',</p>' +
-    '<p style="margin:0 0 14px">We have your registration for the founders offsite on ' + when + ', one night in nature near Barcelona.</p>' +
-    '<p style="margin:0 0 14px">Price: ' + esc(tier || 'see the page') + '.<br>We email you next for your invoice details, then send the invoice from Kuma Partners. ' + deadline + '. Your place is confirmed when we receive it.<br>If the offsite does not take place for any reason, you get back everything you paid.</p>' +
+    '<p style="margin:0 0 14px">We have your request for a place at the founders offsite on ' + when + ', one night in nature near Barcelona. We confirm every place personally and come back to you shortly.</p>' +
+    '<p style="margin:0 0 14px">Price: ' + esc(tier || 'see the page') + '.<br>If it is a fit, we email you for your invoice details and then send the invoice from Kuma Partners. ' + deadline + '. Your place is confirmed when we receive it.<br>If the offsite does not take place for any reason, you get back everything you paid.</p>' +
     '<p style="margin:0 0 14px">While you wait, start your year review. Nine private questions about where you are and where you want to go: <a href="' + worksheet + '" style="color:#17677B">open the worksheet</a>.</p>' +
     '<p style="margin:0">Sven Mulfinger and Farid Chaouki</p></div></body></html>';
   return { subject, html, text };

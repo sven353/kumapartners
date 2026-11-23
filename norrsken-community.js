@@ -49,16 +49,24 @@ document.addEventListener('DOMContentLoaded', function () {
 
   function showSuccess() {
     if (form) form.hidden = true;
+    var cb = document.querySelector('[data-jo-call]'); if (cb) cb.hidden = true;
     if (successPanel) {
       successPanel.hidden = false;
       successPanel.focus({ preventScroll: true });
       successPanel.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
+  // Back from the no-JavaScript fallback POST of the call form
+  if (params.get('call') === '1') {
+    var cf = document.getElementById('norrsken-community-call-form'), co = document.querySelector('[data-call-sent]');
+    if (cf) cf.hidden = true; if (co) co.hidden = false;
+  }
   // Back from the no-JavaScript fallback POST
   if (params.get('submitted') === '1') { showSuccess(); return; }
 
+  var callBox = document.querySelector('[data-jo-call]');
   if (tier === 'closed') {
+    if (callBox) callBox.hidden = true;
     if (form) form.hidden = true;
     if (closedPanel) closedPanel.hidden = false;
     return;
@@ -117,4 +125,30 @@ document.addEventListener('DOMContentLoaded', function () {
       if (errorEl) errorEl.hidden = false;
     });
   });
+
+  // Call request form
+  var callForm = document.getElementById('norrsken-community-call-form');
+  if (callForm) {
+    var callErr = callForm.querySelector('[data-call-error]');
+    var callOk = document.querySelector('[data-call-sent]');
+    var callBtn = callForm.querySelector('[data-call-submit]');
+    callForm.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (callErr) callErr.hidden = true;
+      var label = callBtn ? callBtn.innerHTML : '';
+      if (callBtn) { callBtn.disabled = true; callBtn.textContent = 'Sending…'; }
+      fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(callForm)).toString()
+      }).then(function (r) {
+        if (!r.ok) throw new Error('Status ' + r.status);
+        callForm.hidden = true;
+        if (callOk) { callOk.hidden = false; callOk.focus({ preventScroll: true }); }
+      }).catch(function () {
+        if (callBtn) { callBtn.disabled = false; callBtn.innerHTML = label; }
+        if (callErr) callErr.hidden = false;
+      });
+    });
+  }
 });
